@@ -1,0 +1,27 @@
+project:
+  name: HH520 Stable V2
+  version: "1.5"
+
+source:
+  base_url: "https://www.hh520.com/tx/10023s.php"
+  threshold: 1
+  bankroll: 5000
+
+firecrawl:
+  endpoint: "https://api.firecrawl.dev/v2/scrape"
+  formats: ["markdown"]
+  only_main_content: true
+  proxy: "basic"
+  store_in_cache: true
+  max_age_ms: 0
+  one_request_per_date: true
+
+prediction:
+  use_probability_layer: true
+  use_value_layer: true
+  use_decision_filter: true
+  allow_pass: true
+
+research:
+  enabled: true
+  auto_tune_stable: false
