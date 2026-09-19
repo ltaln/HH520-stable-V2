@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+cache/*
+!cache/.gitkeep
+__pycache__/
+.pytest_cache/
+.venv/
+.firecrawl/
+reports/
+*.pyc
