@@ -9,7 +9,7 @@ def _ratio(hits, total):
 
 
 def _actual_score(label):
-    text = str(label.get("full_score") or "")
+    text = str(label.get("actual_score") or label.get("full_score") or "")
     m = re.fullmatch(r"\s*(\d+)\s*[-:：]\s*(\d+)\s*", text)
     return (int(m.group(1)), int(m.group(2))) if m else None
 
@@ -120,6 +120,30 @@ def _normalize_goal_prediction(raw):
     return None
 
 
+def _derived_goal_prediction_from_scores(prediction):
+    """Derive predicted total-goal choices from predicted score choices."""
+    scores = _parse_scores(prediction)
+    if not scores:
+        return None
+    values = []
+    for home, away in scores:
+        total = home + away
+        if total not in values:
+            values.append(total)
+    if len(values) == 1:
+        return {"type": "exact", "value": values[0], "source": "predicted_score"}
+    return {"type": "set", "values": values, "source": "predicted_score"}
+
+
+def _goal_prediction_rule(item):
+    _, prediction = _prediction_payload(item)
+    explicit = _normalize_goal_prediction(prediction.get("total_goals"))
+    if explicit is not None:
+        explicit["source"] = "explicit_total_goals"
+        return explicit
+    return _derived_goal_prediction_from_scores(prediction)
+
+
 def _goal_prediction_hit(item, actual_goals):
     if actual_goals is None:
         return None
@@ -129,8 +153,7 @@ def _goal_prediction_hit(item, actual_goals):
     except (TypeError, ValueError):
         return None
 
-    _, prediction = _prediction_payload(item)
-    rule = _normalize_goal_prediction(prediction.get("total_goals"))
+    rule = _goal_prediction_rule(item)
     if rule is None:
         return None
 
@@ -164,7 +187,7 @@ def evaluate(joined):
         label = item["result_label"]
 
         predicted = _predicted_outcome(item)
-        actual = str(label.get("result") or "").upper()
+        actual = str(label.get("actual_outcome") or label.get("result") or "").upper()
         if predicted and actual in {"HOME", "DRAW", "AWAY"}:
             wdl_total += 1
             wdl_hits += int(predicted == actual)
@@ -176,7 +199,7 @@ def evaluate(joined):
             exact_hits += int(actual_score == options[0])
             top2_hits += int(actual_score in options[:2])
 
-        goal_hit = _goal_prediction_hit(item, label.get("goals"))
+        goal_hit = _goal_prediction_hit(item, label.get("actual_total_goals", label.get("goals")))
         if goal_hit is not None:
             goals_total += 1
             goals_hits += int(goal_hit)
@@ -203,7 +226,10 @@ def evaluate(joined):
                 "exact_accuracy": _ratio(exact_hits, score_total),
                 "top2_hits": top2_hits,
                 "top2_accuracy": _ratio(top2_hits, score_total),
-                "note": None if score_total else "No score-prediction field is present in the collected source payload.",
+                "label_field": "actual_score",
+                "prediction_field": "predicted_score",
+                "actual_labels_available": len(matched),
+                "note": None if score_total else "Actual scores are available, but no predicted-score choices are present for accuracy evaluation.",
             },
             "half_time": half_time_metric,
             "goals": {
@@ -211,7 +237,11 @@ def evaluate(joined):
                 "sample_count": goals_total,
                 "hits": goals_hits,
                 "accuracy": _ratio(goals_hits, goals_total),
-                "note": None if goals_total else "No total-goals prediction field is present in the collected source payload.",
+                "label_field": "actual_total_goals",
+                "prediction_field": "predicted_total_goals",
+                "actual_labels_available": len(matched),
+                "prediction_fallback": "derive from predicted_score when available",
+                "note": None if goals_total else "Actual total goals are available from the full-time score, but no total-goals prediction or predicted-score choices are present for accuracy evaluation.",
             },
         },
         "note": "Result labels and prediction snapshots are isolated from Stable. No automatic promotion to Stable.",
