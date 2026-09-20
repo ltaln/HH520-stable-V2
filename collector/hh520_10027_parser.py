@@ -110,8 +110,8 @@ def _get(row, indexes, key):
 
 def parse_10027s_markdown(markdown: str) -> List[Dict]:
     lines = [x.strip() for x in str(markdown or "").splitlines() if x.strip()]
-    result = []
-    seen = set()
+    records = {}
+    order = []
 
     i = 0
     while i < len(lines):
@@ -152,12 +152,7 @@ def parse_10027s_markdown(markdown: str) -> List[Dict]:
             full_score = _score(_get(row, indexes, "full_score"))
             half_score = _score(_get(row, indexes, "half_score"))
             scores_raw = _get(row, indexes, "scores")
-            key = (mid or "", home, away, _get(row, indexes, "date"))
-            if key in seen:
-                j += 1
-                continue
-            seen.add(key)
-
+            key = ("id", mid) if mid else ("teams", home.strip().lower(), away.strip().lower())
             item = {
                 "match_id": mid or str(len(result) + 1),
                 "date": _get(row, indexes, "date"),
@@ -192,11 +187,26 @@ def parse_10027s_markdown(markdown: str) -> List[Dict]:
                     "total_goals": _get(row, indexes, "total_goals") or None,
                 },
             }
-            result.append(item)
+            if key not in records:
+                records[key] = item
+                order.append(key)
+            else:
+                current = records[key]
+                for field in ("date", "home_team", "away_team", "league", "kickoff", "result", "half_score"):
+                    if not current.get(field) and item.get(field):
+                        current[field] = item[field]
+                for section in ("market", "value", "team_dna", "page_prediction"):
+                    current.setdefault(section, {})
+                    for field, value in (item.get(section) or {}).items():
+                        if current[section].get(field) in (None, "", [], {}) and value not in (None, "", [], {}):
+                            current[section][field] = value
+                if current.get("page_probability") is None and item.get("page_probability") is not None:
+                    current["page_probability"] = item["page_probability"]
             j += 1
 
         i = max(i + 1, j)
 
+    result = [records[key] for key in order]
     if not result:
         raise ValueError("10027s 页面未解析到比赛数据")
     return result
