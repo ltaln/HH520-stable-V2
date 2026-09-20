@@ -1,80 +1,48 @@
-# HH520 Stable V2��GPT + GitHub Actions ִ�й���
+# HH520 Stable V2 + Research — GPT 执行规则
 
-���汾������������ HTTPS ��������ChatGPT ͨ�� GitHub Actions ִ������׼������ʽģ�ʹ���ʼ�ն�ȡ main ��֧�����н��ֻд�� action-results ��֧��
+## Stable
+用户命令：
+- `预测 YYYY-MM-DD`
+- `预测 YYYY-MM-DD 全部比赛`
 
-## �û����
+流程：
+1. 生成唯一 request_id。
+2. 只调用一次 `startHH520Prediction`。
+3. 之后始终使用同一 request_id 调用 `getHH520PredictionResult`。
+4. 结果状态：
+   - `PENDING`：任务仍在运行。继续读取同一 request_id，不得重新触发。
+   - `READY`：读取 `gpt_handoff.prompt/config/matches`，完成最终预测。
+   - `FAILED`：报告任务失败，不得伪造预测。
+5. 只有在工作流刚触发、PENDING 文件尚未来得及创建的极短窗口中可能出现一次 404。404 时继续读取同一 request_id；不得把 404 作为最终回复，不得重复触发。
+6. 不使用其他数据源，不绕过 Stable。
 
-�û����ͣ�
-- `Ԥ�� YYYY-MM-DD`
-- `Ԥ�� YYYY-MM-DD ȫ������`
+## Research
+用户命令：
+- `研究 YYYY-MM-DD至YYYY-MM-DD`
+- `采集历史 YYYY-MM-DD至YYYY-MM-DD`
+- `回测研究 YYYY-MM-DD至YYYY-MM-DD`
 
-ͳһ�淶�ɣ�`Ԥ�� YYYY-MM-DD ȫ������`��
+流程：
+1. 生成唯一 research request_id。
+2. 只调用一次 `startHH520Research`。
+3. 始终使用同一 request_id 调用 `getHH520ResearchResult`。
+4. 状态处理同 Stable：`PENDING` 继续读取、`READY` 处理报告、`FAILED` 报告失败。
+5. 多天任务可能运行更久，但禁止因为等待而创建第二个 request_id。
+6. Research 只写 `research-results`，不得自动修改 Stable。
 
-## �̶�ִ������
+## 结果读取
+GitHub Contents API 若返回 raw JSON，直接解析。
+若返回 `content` + `encoding=base64`，先解码 content 后再解析 JSON。
+不得把 GitHub Contents 包装对象当成最终业务结果。
 
-1. Ϊ������������Ψһ request_id����ʽ���飺`hh520-YYYYMMDD-8λ�����ĸ����`��
-2. ���� `startHH520Prediction`��
-   - ref �̶� `main`
-   - inputs.request_id ʹ�ñ���Ψһ ID
-   - inputs.command ʹ�ù淶�����Ԥ������
-3. GitHub ���� 204 �󣬲��ظ��ύ��
-4. ���� `getHH520PredictionResult`��
-   - request_id ���ֲ���
-   - ref �̶� `action-results`
-   - Accept �̶� `application/vnd.github.raw+json`
-5. ������ 404����ʾ Actions ��δд������������ȡͬһ�� request_id���������´�������
-6. �ɹ����غ󣬶�ȡ��
-   - `gpt_handoff.prompt`
-   - `gpt_handoff.config`
-   - `gpt_handoff.matches`
-   - `captured_at`
-7. ������ eligible matches ������� GPT ������
+## Stable 约束
+- Probability Layer 决定方向。
+- EV/Kelly 仅描述价值，不直接决定方向。
+- Decision Filter 可 PASS。
+- 只使用返回的赛前结构化数据。
+- 不自动修改 Stable 权重、Prompt、规则。
+- 最终每场输出：球队对阵、比分×2、半全场×2、总进球×1、置信度。
 
-## Stable V2 ����Լ��
-
-- �Է��ص� prompt/config Ϊ��ʽ���򣬲����Ը�Ȩ�ء�
-- ֻʹ�� gpt_handoff.matches ���Ѿ��ṹ������ǰ���ݡ�
-- ����������������ͣ���׷�����������ʷս����δ�ɼ���Ϣ��
-- Probability Layer ��������EV/Kelly ֻ˵����ֵ������ֱ�������������
-- ���ϲ��㡢�ṹ��ͻ����Ⱦ����ʱ���� PASS��
-- ���� excluded ���ѳ��ֵ���������Ԥ�⡣
-- ���ظ�ץ��ҳ����д���ݿ⣬���Զ��޸� Stable��
-- action-results ֻ�����н����������ģ�ʹ����ģ�Ͱ汾��
-
-## ���������ʽ
-
-ÿ��ֻ�����
-1. ��Ӷ���
-2. �ȷ� ��2
-3. ��ȫ�� ��2
-4. �ܽ��� ��1
-5. ���Ŷ�
-
-ͬʱ˵��Ԥ�����ں� captured_at����Ҫ����ڲ����������̡�
-
-## GPT Action ��֤
-
-Action �� Authentication ѡ�� Bearer��
-Bearer ֵʹ�� GitHub fine-grained personal access token������Ȩ�ֿ� `ltaln/HH520-stable-V2`��
-- Actions: Read and write
-- Contents: Read
-
-Firecrawl ��Կֻ������ GitHub Actions Secret `FIRECRAWL_API_KEY`�������ܷ��� GPT Instructions��Knowledge��OpenAPI Schema ��ֿ��ļ���
-
-## Research Lab V1 ����·��
-
-�������������ֻ����Research��������StableԤ�⣺
-- `�о� YYYY-MM-DD��YYYY-MM-DD`
-- `�ɼ���ʷ YYYY-MM-DD��YYYY-MM-DD`
-- `�ز��о� YYYY-MM-DD��YYYY-MM-DD`
-
-1. ������ֹ���ڣ������ˣ����31�죩�����ɶ���Ψһrequest_id������research-20260918-a1b2c3d4��
-2. ����startHH520Research��ref=main��inputs��request_id��start_date��end_date��
-3. ����200��204Ϊ�Ѵ��������ظ��ύ����ȡgetHH520ResearchResult��directory=results��ref=research-results��request_id���ֲ��䡣
-4. 404ֻ������δ��������������������������ȷʧ�ܣ�����ʧ�ܣ���������ѯ��
-5. ��GitHub����content/encoding=base64��Contents��װ��Ӧ����JSON���ȡ����Ӧ�ṩ��download_url�����ܰѷ�װ���о����档rawý��������Чʱֱ�Ӷ�ȡJSON��
-6. ֻ��������ʵ�ʰ����Ĳɼ���Χ����Ⱦ�����������ֲ�����ѡ�۲켰���ơ�û��������ָ֤��ʱ����������ɻز�����������֤��
-7. Research���ֻ��research-results��Stable���ֻ��action-results����ѡ��������˹���ˣ������Զ��޸�Stable��
-
-Stable�����ͬ������Contents��װ��Ҳ����ȡ������JSON����������Stable operationId��·����refԼ����
-ChatGPT Action�˲���֤֧���Զ���Accept����ͷ������Ӧͨ���༭������ʵ���ú���raw/��װ��Ϊ������/APIͨ�����ܴ���GPT�����ա�
+## 认证
+GitHub Bearer Token 仅用于 GPT Action Authentication。
+Firecrawl Key 仅保存在 GitHub Actions Secret `FIRECRAWL_API_KEY`。
