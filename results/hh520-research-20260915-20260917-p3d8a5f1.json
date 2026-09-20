@@ -1,8 +1,513 @@
 {
-  "status": "PENDING",
-  "kind": "research",
-  "request_id": "hh520-research-20260915-20260917-p3d8a5f1",
-  "message": "Workflow accepted and is still running.",
+  "system": "HH520 Research Lab V2.5",
+  "stable_access": "READ_ONLY",
+  "source": "HH520_10027s",
+  "window": {
+    "from": "2026-09-15",
+    "to": "2026-09-17"
+  },
+  "input_count": 36,
+  "clean_count": 36,
+  "sanitizer": {
+    "pollution_events": 36,
+    "audit": [
+      {
+        "index": 0,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 1,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 2,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 3,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 4,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 5,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 6,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 7,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 8,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 9,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 10,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 11,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 12,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 13,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 14,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 15,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 16,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 17,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 18,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 19,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 20,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 21,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 22,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 23,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 24,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 25,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 26,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 27,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 28,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 29,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 30,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 31,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 32,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 33,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 34,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 35,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores"
+        ]
+      }
+    ]
+  },
+  "league_dna": {
+    "UNKNOWN": {
+      "matches": 36,
+      "ready": 0
+    }
+  },
+  "team_dna": [
+    {
+      "team": "欧罗巴",
+      "sample_count": 11
+    },
+    {
+      "team": "西甲",
+      "sample_count": 7
+    },
+    {
+      "team": "亚冠精英",
+      "sample_count": 6
+    },
+    {
+      "team": "解放者杯",
+      "sample_count": 4
+    },
+    {
+      "team": "**10**",
+      "sample_count": 3
+    },
+    {
+      "team": "**11**",
+      "sample_count": 3
+    },
+    {
+      "team": "英联赛杯",
+      "sample_count": 3
+    },
+    {
+      "team": "**2**",
+      "sample_count": 3
+    },
+    {
+      "team": "**4**",
+      "sample_count": 3
+    },
+    {
+      "team": "**5**",
+      "sample_count": 3
+    },
+    {
+      "team": "**6**",
+      "sample_count": 3
+    },
+    {
+      "team": "**7**",
+      "sample_count": 3
+    },
+    {
+      "team": "**1**",
+      "sample_count": 2
+    },
+    {
+      "team": "**12**",
+      "sample_count": 2
+    },
+    {
+      "team": "**14**",
+      "sample_count": 2
+    },
+    {
+      "team": "**3**",
+      "sample_count": 2
+    },
+    {
+      "team": "亚运男足",
+      "sample_count": 2
+    },
+    {
+      "team": "**8**",
+      "sample_count": 2
+    },
+    {
+      "team": "**9**",
+      "sample_count": 2
+    },
+    {
+      "team": "英冠",
+      "sample_count": 1
+    },
+    {
+      "team": "**15**",
+      "sample_count": 1
+    },
+    {
+      "team": "**16**",
+      "sample_count": 1
+    },
+    {
+      "team": "巴甲",
+      "sample_count": 1
+    },
+    {
+      "team": "**17**",
+      "sample_count": 1
+    },
+    {
+      "team": "亚冠乙",
+      "sample_count": 1
+    }
+  ],
+  "backtest": {
+    "status": "RESEARCH_ONLY",
+    "sample_count": 36,
+    "matched_results": 0,
+    "metrics": {
+      "win_draw_loss": {
+        "status": "RESEARCH_ONLY",
+        "sample_count": 0,
+        "hits": 0,
+        "accuracy": null,
+        "direction_source": "probability_or_single_or_primary_score"
+      },
+      "score": {
+        "status": "RESEARCH_ONLY",
+        "sample_count": 0,
+        "exact_hits": 0,
+        "exact_accuracy": null,
+        "top2_hits": 0,
+        "top2_accuracy": null
+      },
+      "half_time": {
+        "status": "RESEARCH_ONLY",
+        "sample_count": 0,
+        "hits": 0,
+        "accuracy": null,
+        "note": "No verified external half-time labels matched HT/FT predictions."
+      },
+      "goals": {
+        "status": "RESEARCH_ONLY",
+        "sample_count": 0,
+        "hits": 0,
+        "accuracy": null
+      }
+    },
+    "note": "Result labels and prediction snapshots are isolated from Stable. No automatic promotion to Stable."
+  },
+  "prediction_snapshot_layer": {
+    "enabled": true,
+    "count": 36,
+    "isolation": "RESEARCH_ONLY",
+    "contains_actual_results": false,
+    "stable_access": "FORBIDDEN"
+  },
+  "result_label_layer": {
+    "enabled": true,
+    "collected": 0,
+    "matched": 0,
+    "unmatched": 36,
+    "isolation": "RESEARCH_ONLY",
+    "stable_access": "FORBIDDEN"
+  },
+  "hidden_model_reverse": {
+    "status": "RESEARCH_ONLY"
+  },
+  "risk_analysis": {
+    "status": "RESEARCH_ONLY"
+  },
+  "causal_analysis": {
+    "status": "HYPOTHESIS_ONLY"
+  },
+  "confidence_analysis": {
+    "status": "RESEARCH_ONLY",
+    "sample_count": 36
+  },
+  "candidate_rules": [
+    {
+      "id": "CR-SAMPLE-001",
+      "status": "CANDIDATE_ONLY",
+      "statement": "Sample supports segmented review only; no Stable change authorized.",
+      "evidence_count": 36
+    }
+  ],
+  "promotion_policy": "MANUAL_REVIEW_REQUIRED",
+  "collection": [
+    {
+      "date": "2026-09-15",
+      "captured_at": "2026-09-20T15:39:19.049542+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-15&riqi_end=2026-09-15&threshold=1&bankroll=5000",
+      "match_count": 12
+    },
+    {
+      "date": "2026-09-16",
+      "captured_at": "2026-09-20T15:39:22.341241+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-16&riqi_end=2026-09-16&threshold=1&bankroll=5000",
+      "match_count": 14
+    },
+    {
+      "date": "2026-09-17",
+      "captured_at": "2026-09-20T15:39:26.878460+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-17&riqi_end=2026-09-17&threshold=1&bankroll=5000",
+      "match_count": 10
+    }
+  ],
+  "result_collection": {
+    "source": "HH520_10027s_RESULT_LABEL",
+    "collected": 0,
+    "stable_access": "FORBIDDEN"
+  },
+  "status": "READY",
   "_action": {
     "request_id": "hh520-research-20260915-20260917-p3d8a5f1",
     "repository": "ltaln/HH520-stable-V2",
