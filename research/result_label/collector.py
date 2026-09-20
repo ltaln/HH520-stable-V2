@@ -68,11 +68,11 @@ def collect_result_labels(records):
                 league=str(record.get("league") or ""),
                 home_team=str(record.get("home_team") or record.get("home") or ""),
                 away_team=str(record.get("away_team") or record.get("away") or ""),
-                half_score=None,
+                half_score=(f"{_score(record.get('half_score'))[0]}-{_score(record.get('half_score'))[1]}" if _score(record.get("half_score")) else None),
                 full_score=f"{home_goals}-{away_goals}",
                 result=_outcome(home_goals, away_goals),
                 goals=home_goals + away_goals,
-                source="HH520_10023s_RESULT_LABEL",
+                source="HH520_RESULT_LABEL",
                 verified=True,
             )
         )
