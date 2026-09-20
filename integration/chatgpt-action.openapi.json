@@ -53,7 +53,7 @@
                       },
                       "command": {
                         "type": "string",
-                        "description": "Use exactly: Ԥ�� YYYY-MM-DD ȫ������"
+                        "description": "Use exactly: 预测 YYYY-MM-DD 全部比赛"
                       }
                     }
                   }
@@ -115,7 +115,18 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true
+                  "additionalProperties": true,
+                  "properties": {
+                    "content": {
+                      "type": "string"
+                    },
+                    "encoding": {
+                      "type": "string"
+                    },
+                    "download_url": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -241,7 +252,18 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true
+                  "additionalProperties": true,
+                  "properties": {
+                    "content": {
+                      "type": "string"
+                    },
+                    "encoding": {
+                      "type": "string"
+                    },
+                    "download_url": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -260,6 +282,7 @@
         "scheme": "bearer",
         "description": "Fine-grained GitHub personal access token with repository access to ltaln/HH520-stable-V2, Actions read/write, Contents read."
       }
-    }
+    },
+    "schemas": {}
   }
 }
