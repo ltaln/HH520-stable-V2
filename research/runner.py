@@ -6,6 +6,7 @@ from pathlib import Path
 from collector.service import collect_date
 from research.lab import date_range, build_research_report
 from research.result_label.collector import collect_result_labels
+from research.score_inference import attach_research_score_predictions
 
 
 def _present(value):
@@ -21,6 +22,8 @@ def _prediction_coverage(records):
         "predicted_total_goals": 0,
         "predicted_total_goals_explicit": 0,
         "predicted_total_goals_derived_from_score": 0,
+        "research_derived_score": 0,
+        "research_derived_total_goals": 0,
         "page_probability": 0,
         "actual_half_score": 0,
         "actual_score": 0,
@@ -36,6 +39,10 @@ def _prediction_coverage(records):
         coverage["predicted_total_goals_explicit"] += int(has_explicit_total_goals)
         coverage["predicted_total_goals_derived_from_score"] += int(has_predicted_score and not has_explicit_total_goals)
         coverage["predicted_total_goals"] += int(has_explicit_total_goals or has_predicted_score)
+        coverage["research_derived_score"] += int(prediction.get("score_source") == "RESEARCH_DERIVED")
+        coverage["research_derived_total_goals"] += int(
+            prediction.get("total_goals_source") == "RESEARCH_DERIVED_FROM_SCORE"
+        )
         coverage["page_probability"] += int(_present(record.get("page_probability")))
         coverage["actual_half_score"] += int(_present(record.get("half_score")))
         coverage["actual_score"] += int(_present(record.get("result")))
@@ -51,8 +58,9 @@ def _prediction_coverage(records):
     }
     coverage["source_note"] = (
         "actual_score and actual_total_goals are Result Labels. predicted_score and predicted_total_goals "
-        "are Prediction fields used only for accuracy evaluation. predicted_total_goals is derived from "
-        "predicted_score when no explicit total-goals prediction exists."
+        "are Prediction fields used only for accuracy evaluation. If raw predicted_score is absent, Research "
+        "may derive it from pre-match 1X2 probabilities using the RESEARCH_POISSON_1X2 layer. "
+        "predicted_total_goals is derived from predicted_score when no explicit total-goals prediction exists."
     )
     return coverage
 
@@ -81,6 +89,11 @@ def collect_window(start, end):
     # Extract post-match labels before sanitizer removes result/scores.
     # Labels stay separate and are only re-joined inside Research.
     result_labels = collect_result_labels(records)
+
+    # Add Research-only score predictions from pre-match 1X2 information.
+    # This layer never changes Stable and never overwrites explicit raw predictions.
+    records = attach_research_score_predictions(records)
+
     report = build_research_report(
         records, start, end, result_labels=result_labels
     )
@@ -111,6 +124,7 @@ def main(argv=None):
             if isinstance(record, dict) and not record.get("date") and args.start == end:
                 record["date"] = args.start
         labels = collect_result_labels(records)
+        records = attach_research_score_predictions(records)
         report = build_research_report(
             records, args.start, end, source="OFFLINE_INPUT", result_labels=labels
         )
