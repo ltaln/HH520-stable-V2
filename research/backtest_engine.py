@@ -12,33 +12,75 @@ def _actual_score(label):
     return (int(m.group(1)), int(m.group(2))) if m else None
 
 
+def _prediction_payload(item):
+    research = item.get("research_prediction") or {}
+    return (
+        research.get("page_probability"),
+        research.get("page_prediction") or {},
+    )
+
+
+def _parse_scores(prediction):
+    """Parse ordered score choices from the raw 10023s prediction text."""
+    options = prediction.get("score_options") or []
+    parsed = []
+    for option in options:
+        try:
+            parsed.append((int(option["home"]), int(option["away"])))
+        except (KeyError, TypeError, ValueError):
+            pass
+
+    if parsed:
+        return parsed
+
+    raw = str(prediction.get("scores") or "")
+    for home, away in re.findall(r"(\d+)\s*[-:：]\s*(\d+)", raw):
+        pair = (int(home), int(away))
+        if pair not in parsed:
+            parsed.append(pair)
+    return parsed
+
+
 def _predicted_outcome(item):
-    probs = item.get("page_probability") or {}
+    probs, prediction = _prediction_payload(item)
+    probs = probs or {}
+
     if all(k in probs for k in ("home", "draw", "away")):
         return max(("home", "draw", "away"), key=lambda k: probs.get(k, -1)).upper()
 
-    single = str((item.get("page_prediction") or {}).get("single") or "").strip()
+    single = str(prediction.get("single") or "").strip()
     mapping = {
         "主": "HOME", "主胜": "HOME", "home": "HOME",
         "平": "DRAW", "平局": "DRAW", "draw": "DRAW",
         "客": "AWAY", "客胜": "AWAY", "away": "AWAY",
     }
-    return mapping.get(single.lower()) or mapping.get(single)
+    mapped = mapping.get(single.lower()) or mapping.get(single)
+    if mapped:
+        return mapped
+
+    # Current 10023s parser may not expose fused probability/single.
+    # Use the first predicted score as a Research-only direction fallback.
+    scores = _parse_scores(prediction)
+    if scores:
+        home, away = scores[0]
+        if home > away:
+            return "HOME"
+        if home < away:
+            return "AWAY"
+        return "DRAW"
+    return None
 
 
 def _score_options(item):
-    options = (item.get("page_prediction") or {}).get("score_options") or []
-    out = []
-    for option in options:
-        try:
-            out.append((int(option["home"]), int(option["away"])))
-        except (KeyError, TypeError, ValueError):
-            pass
-    return out
+    _, prediction = _prediction_payload(item)
+    return _parse_scores(prediction)
 
 
 def _goal_prediction_hit(item, actual_goals):
-    raw = str((item.get("page_prediction") or {}).get("total_goals") or "").strip()
+    if actual_goals is None:
+        return None
+    _, prediction = _prediction_payload(item)
+    raw = str(prediction.get("total_goals") or "").strip()
     if not raw:
         return None
 
@@ -57,7 +99,10 @@ def _goal_prediction_hit(item, actual_goals):
 
 
 def evaluate(joined):
-    matched = [x for x in joined if x.get("label_status") == "MATCHED" and x.get("result_label")]
+    matched = [
+        x for x in joined
+        if x.get("label_status") == "MATCHED" and x.get("result_label")
+    ]
 
     wdl_total = wdl_hits = 0
     score_total = exact_hits = top2_hits = 0
@@ -85,9 +130,9 @@ def evaluate(joined):
             goals_total += 1
             goals_hits += int(goal_hit)
 
-        # 10023s base result currently gives full-time score only.
-        # Keep HT/FT unavailable rather than inventing a half-time label.
-        if label.get("half_score") and (item.get("page_prediction") or {}).get("htft"):
+        _, prediction = _prediction_payload(item)
+        # Keep HT/FT unavailable until an independent half-time result source exists.
+        if label.get("half_score") and prediction.get("htft"):
             half_total += 1
 
     return {
@@ -100,6 +145,7 @@ def evaluate(joined):
                 "sample_count": wdl_total,
                 "hits": wdl_hits,
                 "accuracy": _ratio(wdl_hits, wdl_total),
+                "direction_source": "probability_or_single_or_primary_score",
             },
             "score": {
                 "status": "READY" if score_total else "RESEARCH_ONLY",
@@ -123,5 +169,5 @@ def evaluate(joined):
                 "accuracy": _ratio(goals_hits, goals_total),
             },
         },
-        "note": "Result labels are isolated from Stable. No automatic promotion to Stable.",
+        "note": "Result labels and prediction snapshots are isolated from Stable. No automatic promotion to Stable.",
     }
