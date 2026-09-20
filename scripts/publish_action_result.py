@@ -16,6 +16,8 @@ def publish(result_file, branch, request_id):
         raise ValueError("Invalid request_id")
     source=Path(result_file).resolve()
     data=json.loads(source.read_text(encoding="utf-8"))
+    if "status" not in data:
+        data["status"]="READY"
     data["_action"]={key:os.getenv(env,"") for key,env in (
         ("request_id","REQUEST_ID"),("repository","GITHUB_REPOSITORY"),
         ("run_id","GITHUB_RUN_ID"),("run_attempt","GITHUB_RUN_ATTEMPT"),
@@ -46,7 +48,12 @@ def publish(result_file, branch, request_id):
             if git("diff","--cached","--quiet",cwd=target,check=False).returncode==0:
                 return
             git("commit","-m",f"{branch}: {request_id}",cwd=target)
-            git("push","origin",f"HEAD:{branch}",cwd=target)
+            # Result branches may be updated by another serialized workflow between fetch/push.
+            # Retry once after rebasing to avoid transient non-fast-forward failures.
+            first=git("push","origin",f"HEAD:{branch}",cwd=target,check=False)
+            if first.returncode != 0:
+                git("pull","--rebase","origin",branch,cwd=target)
+                git("push","origin",f"HEAD:{branch}",cwd=target)
         finally:
             git("worktree","remove","--force",str(target),cwd=root,check=False)
 
@@ -55,5 +62,4 @@ if __name__=="__main__":
     try:
         publish(*sys.argv[1:])
     except subprocess.CalledProcessError as exc:
-        # Never echo Git headers or credential-bearing command output.
         raise SystemExit(f"Git result publication failed, exit {exc.returncode}")
