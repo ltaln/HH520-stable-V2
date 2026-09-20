@@ -22,6 +22,7 @@ def _prediction_coverage(records):
         "page_probability": 0,
         "actual_half_score": 0,
         "actual_full_score": 0,
+        "actual_total_goals": 0,
     }
     for record in records:
         prediction = (record.get("page_prediction") or {}) if isinstance(record, dict) else {}
@@ -32,10 +33,16 @@ def _prediction_coverage(records):
         coverage["page_probability"] += int(_present(record.get("page_probability")))
         coverage["actual_half_score"] += int(_present(record.get("half_score")))
         coverage["actual_full_score"] += int(_present(record.get("result")))
+        result_text = str(record.get("result") or "")
+        import re
+        match = re.search(r"(\d+)\s*[-:：]\s*(\d+)", result_text)
+        if match:
+            coverage["actual_total_goals"] += 1
     coverage["source_note"] = (
-        "10027s exposes actual HT/FT scores and fusion WDL/HTFT fields. "
-        "Its page and 10024 copy-prediction payload do not expose score-prediction "
-        "or total-goals-prediction fields; zero coverage is a source limitation, not a matcher failure."
+        "10027s exposes actual HT/FT scores; actual total goals are derived from the full-time score. "
+        "It also exposes fusion WDL/HTFT fields. Its page and 10024 copy-prediction payload do not "
+        "expose score-prediction or total-goals-prediction fields; zero prediction coverage is a source "
+        "limitation, not a matcher failure."
     )
     return coverage
 
