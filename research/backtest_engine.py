@@ -23,7 +23,7 @@ def _prediction_payload(item):
 
 
 def _parse_scores(prediction):
-    """Parse ordered score choices from the raw 10023s prediction text."""
+    """Parse ordered score choices from the collected prediction payload."""
     options = prediction.get("score_options") or []
     parsed = []
     for option in options:
@@ -203,6 +203,7 @@ def evaluate(joined):
                 "exact_accuracy": _ratio(exact_hits, score_total),
                 "top2_hits": top2_hits,
                 "top2_accuracy": _ratio(top2_hits, score_total),
+                "note": None if score_total else "No score-prediction field is present in the collected source payload.",
             },
             "half_time": half_time_metric,
             "goals": {
@@ -210,6 +211,7 @@ def evaluate(joined):
                 "sample_count": goals_total,
                 "hits": goals_hits,
                 "accuracy": _ratio(goals_hits, goals_total),
+                "note": None if goals_total else "No total-goals prediction field is present in the collected source payload.",
             },
         },
         "note": "Result labels and prediction snapshots are isolated from Stable. No automatic promotion to Stable.",
