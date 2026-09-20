@@ -1,4 +1,4 @@
-"""HH520 Research Lab V2.2. Stable is read-only; outputs are candidate research only."""
+"""HH520 Research Lab V2.3. Stable is read-only; outputs are candidate research only."""
 from collections import Counter, defaultdict
 from datetime import date, timedelta
 from copy import deepcopy
@@ -33,9 +33,13 @@ def _prediction_snapshots(records):
     for record in records:
         if not isinstance(record, dict):
             continue
-        prediction = deepcopy(record.get("page_prediction") or {})
+        source_prediction = deepcopy(record.get("research_source_prediction") or {})
+        prediction = deepcopy(source_prediction.get("page_prediction") or record.get("page_prediction") or {})
+        probability = deepcopy(source_prediction.get("page_probability"))
+        if probability is None:
+            probability = deepcopy(record.get("page_probability"))
         snapshots[_key(record)] = {
-            "page_probability": deepcopy(record.get("page_probability")),
+            "page_probability": probability,
             "page_prediction": prediction,
         }
     return snapshots
