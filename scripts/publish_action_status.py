@@ -4,7 +4,7 @@ import os
 import sys
 import tempfile
 from pathlib import Path
-from scripts.publish_action_result import publish
+from publish_action_result import publish
 
 def main():
     if len(sys.argv) != 5:
