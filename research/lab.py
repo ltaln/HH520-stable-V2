@@ -1,4 +1,4 @@
-"""HH520 Research Lab V2.5. Stable is read-only; outputs are candidate research only."""
+"""HH520 Research Lab V2.6. Stable is read-only; outputs are candidate research only."""
 from collections import Counter, defaultdict
 from datetime import date, timedelta
 from copy import deepcopy
@@ -104,6 +104,13 @@ def build_research_report(records, start=None, end=None, source="HH520_10027s", 
         "sanitizer": {"pollution_events": len(audit), "audit": audit},
         "league_dna": _league_dna(joined),
         "team_dna": _team_dna(clean),
+        "data_contract": {
+            "actual_score": "RESULT_LABEL_ONLY",
+            "actual_total_goals": "DERIVED_FROM_ACTUAL_SCORE",
+            "predicted_score": "PREDICTION_ONLY",
+            "predicted_total_goals": "EXPLICIT_OR_DERIVED_FROM_PREDICTED_SCORE",
+            "stable_access": "FORBIDDEN",
+        },
         "backtest": backtest,
         "prediction_snapshot_layer": {
             "enabled": True,
