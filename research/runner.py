@@ -7,6 +7,7 @@ from collector.service import collect_date
 from research.lab import date_range, build_research_report
 from research.result_label.collector import collect_result_labels
 from research.fusion_extractor import attach_research_predictions
+from research.result_label.half_time_source import enrich_half_time_labels
 
 
 def collect_window(start, end):
@@ -39,11 +40,13 @@ def collect_window(start, end):
     # Extract post-match labels before sanitizer removes result/scores.
     # Labels stay separate and are only re-joined inside Research.
     result_labels = collect_result_labels(records)
+    result_labels, half_time_debug = enrich_half_time_labels(records, result_labels)
     report = build_research_report(
         records, start, end, result_labels=result_labels
     )
     report["collection"] = collection
     report["prediction_debug"] = prediction_debug
+    report["half_time_collection"] = half_time_debug
     report["result_collection"] = {
         "source": "HH520_10023s_RESULT_LABEL",
         "collected": len(result_labels),
