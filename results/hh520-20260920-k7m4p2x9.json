@@ -1,0 +1,3135 @@
+{
+  "date": "2026-09-20",
+  "url": "https://www.hh520.com/tx/10023s.php?riqi=2026-09-20&threshold=1&bankroll=5000",
+  "captured_at": "2026-09-20T09:48:05.097554+00:00",
+  "predictions": [
+    {
+      "match_id": "1",
+      "home_team": "伊朗亚",
+      "away_team": "中国亚",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "SKIP",
+      "reason": "已有比分，不作为赛前预测",
+      "direction": null
+    },
+    {
+      "match_id": "2",
+      "home_team": "町田泽维",
+      "away_team": "柏太阳神",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "主胜"
+    },
+    {
+      "match_id": "3",
+      "home_team": "大阪钢巴",
+      "away_team": "神户胜利",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "客胜"
+    },
+    {
+      "match_id": "4",
+      "home_team": "仁川联",
+      "away_team": "大田市民",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "客胜"
+    },
+    {
+      "match_id": "6",
+      "home_team": "佛罗伦萨",
+      "away_team": "那不勒斯",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "主胜"
+    },
+    {
+      "match_id": "7",
+      "home_team": "伍尔弗",
+      "away_team": "西布罗姆",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "主胜"
+    },
+    {
+      "match_id": "8",
+      "home_team": "赫塔费",
+      "away_team": "马拉加",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "主胜"
+    },
+    {
+      "match_id": "9",
+      "home_team": "特温特",
+      "away_team": "埃因霍温",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "客胜"
+    },
+    {
+      "match_id": "10",
+      "home_team": "利兹联",
+      "away_team": "水晶宫",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "主胜"
+    },
+    {
+      "match_id": "11",
+      "home_team": "伯恩茅斯",
+      "away_team": "利物浦",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "客胜"
+    },
+    {
+      "match_id": "12",
+      "home_team": "曼城",
+      "away_team": "桑德兰",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "主胜"
+    },
+    {
+      "match_id": "13",
+      "home_team": "帕尔马",
+      "away_team": "热那亚",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "客胜"
+    },
+    {
+      "match_id": "14",
+      "home_team": "弗洛西诺",
+      "away_team": "科莫",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "客胜"
+    },
+    {
+      "match_id": "15",
+      "home_team": "勒沃库森",
+      "away_team": "莱红牛",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "主胜"
+    },
+    {
+      "match_id": "16",
+      "home_team": "马竞",
+      "away_team": "皇马",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "客胜"
+    },
+    {
+      "match_id": "17",
+      "home_team": "米亚尔比",
+      "away_team": "盖斯",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "主胜"
+    },
+    {
+      "match_id": "18",
+      "home_team": "维京",
+      "away_team": "利勒斯特",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "主胜"
+    },
+    {
+      "match_id": "19",
+      "home_team": "尼斯",
+      "away_team": "里尔",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "客胜"
+    },
+    {
+      "match_id": "20",
+      "home_team": "富勒姆",
+      "away_team": "曼联",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "客胜"
+    },
+    {
+      "match_id": "21",
+      "home_team": "沙尔克04",
+      "away_team": "埃沃斯堡",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "主胜"
+    },
+    {
+      "match_id": "22",
+      "home_team": "尤文图斯",
+      "away_team": "亚特兰大",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "主胜"
+    },
+    {
+      "match_id": "23",
+      "home_team": "比利亚雷",
+      "away_team": "莱万特",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "主胜"
+    },
+    {
+      "match_id": "24",
+      "home_team": "拉科",
+      "away_team": "贝蒂斯",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "客胜"
+    },
+    {
+      "match_id": "25",
+      "home_team": "帕德博恩",
+      "away_team": "霍芬海姆",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "客胜"
+    },
+    {
+      "match_id": "26",
+      "home_team": "AC米兰",
+      "away_team": "莱切",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "主胜"
+    },
+    {
+      "match_id": "27",
+      "home_team": "马赛",
+      "away_team": "巴黎圣曼",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "客胜"
+    },
+    {
+      "match_id": "28",
+      "home_team": "巴伦西亚",
+      "away_team": "皇家社会",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "客胜"
+    },
+    {
+      "match_id": "29",
+      "home_team": "波尔图",
+      "away_team": "本菲卡",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "客胜"
+    },
+    {
+      "match_id": "30",
+      "home_team": "巴竞技",
+      "away_team": "巴伊亚",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "READY_FOR_GPT",
+      "reason": "结构化分析已准备；等待GPT最终推理",
+      "direction": "主胜"
+    }
+  ],
+  "gpt_handoff": {
+    "prompt": "# HH520 Stable V2 Prediction Prompt V1.5\n\n你是 HH520 Stable V2 的分析与最终决策引擎。\n\n## 固定数据源\n正式预测只使用 HH520 10023s 结构化数据。\n禁止自行补充未采集到的比赛事实。\n\n## 执行顺序\n1. Market Baseline\n2. Probability Layer\n3. Value Layer\n4. Decision Filter\n5. Final Prediction\n\n## 核心原则\n- Probability Layer 决定比赛方向。\n- Value Layer 中 EV / Kelly 只描述价值，不直接决定胜负。\n- Decision Filter 负责识别概率分散、DNA冲突和冷门风险。\n- 未经离线验证的特征不得被赋予固定高权重。\n- 如果信号明显冲突，可以 PASS / 不建议，不强行输出高置信方向。\n- 不因为球队名气、单一赔率或高EV自动做决定。\n\n## 比分与半全场\n比分和半全场必须与胜平负方向、进攻/防守结构一致。\n当数据不足以支撑精细比分时，降低置信度，不伪造确定性。\n\n## 最终输出\n比赛：\n主队 vs 客队\n\n比分预测：\n1.\n2.\n\n半全场：\n1.\n2.\n\n总进球：\nX球\n\n置信度：\nXX%\n",
+    "config": {
+      "project": {
+        "name": "HH520 Stable V2",
+        "version": "1.5"
+      },
+      "source": {
+        "base_url": "https://www.hh520.com/tx/10023s.php",
+        "threshold": 1,
+        "bankroll": 5000
+      },
+      "firecrawl": {
+        "endpoint": "https://api.firecrawl.dev/v2/scrape",
+        "formats": [
+          "markdown"
+        ],
+        "only_main_content": true,
+        "proxy": "basic",
+        "store_in_cache": true,
+        "max_age_ms": 0,
+        "one_request_per_date": true
+      },
+      "prediction": {
+        "use_probability_layer": true,
+        "use_value_layer": true,
+        "use_decision_filter": true,
+        "allow_pass": true
+      },
+      "research": {
+        "enabled": true,
+        "auto_tune_stable": false
+      }
+    },
+    "matches": [
+      {
+        "match_id": "2",
+        "home_team": "町田泽维",
+        "away_team": "柏太阳神",
+        "league": "日职",
+        "kickoff": "16:00",
+        "market": {
+          "home_odds": 2.28,
+          "draw_odds": 3.2,
+          "away_odds": 2.65
+        },
+        "page_probability": {
+          "home": 0.37755102040816324,
+          "draw": 0.2755102040816326,
+          "away": 0.3469387755102041
+        },
+        "team_dna": {
+          "attack": {
+            "home": 14.0,
+            "away": 9.0
+          },
+          "defense": {
+            "home": 2.0,
+            "away": 1.17
+          },
+          "head_to_head": {
+            "home": 13.0,
+            "away": 4.0
+          },
+          "form": {
+            "home": 0.67,
+            "away": 1.5
+          }
+        },
+        "page_context": {
+          "home_possession": 47.67,
+          "away_possession": 58.5,
+          "difference": -10.8,
+          "interval": "<0",
+          "smoothed_p": 0.6154,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "1-0、2-1、1-1",
+          "score_options": [
+            {
+              "home": 1,
+              "away": 0
+            },
+            {
+              "home": 2,
+              "away": 1
+            },
+            {
+              "home": 1,
+              "away": 1
+            }
+          ],
+          "htft": "不建议",
+          "total_goals": "2—3球",
+          "single": "**主胜**"
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.38866990558254655,
+              "draw": 0.2769273077275644,
+              "away": 0.3344027866898891,
+              "overround": 0.12845498179410786
+            },
+            "probabilities": {
+              "home": 0.37755102040816324,
+              "draw": 0.2755102040816326,
+              "away": 0.3469387755102041
+            },
+            "direction": "home",
+            "concentration": 0.030612244897959162,
+            "valid": true
+          },
+          "value": {
+            "ev": 0.4031,
+            "kelly": 0.02,
+            "page_signal": "✅ 下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "high",
+            "reasons": [
+              "概率高度分散",
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 30
+        },
+        "direction": "主胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "3",
+        "home_team": "大阪钢巴",
+        "away_team": "神户胜利",
+        "league": "日职",
+        "kickoff": "16:00",
+        "market": {
+          "home_odds": 3.05,
+          "draw_odds": 3.25,
+          "away_odds": 2.03
+        },
+        "page_probability": {
+          "home": 0.3163265306122449,
+          "draw": 0.2755102040816326,
+          "away": 0.40816326530612246
+        },
+        "team_dna": {
+          "attack": {
+            "home": 8.0,
+            "away": 18.0
+          },
+          "defense": {
+            "home": 1.33,
+            "away": 2.0
+          },
+          "head_to_head": {
+            "home": 6.0,
+            "away": 9.0
+          },
+          "form": {
+            "home": 1.17,
+            "away": 0.67
+          }
+        },
+        "page_context": {
+          "home_possession": 54.67,
+          "away_possession": 49.33,
+          "difference": -5.3,
+          "interval": "<0",
+          "smoothed_p": 0.6154,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "0-1、1-2、1-1",
+          "score_options": [
+            {
+              "home": 0,
+              "away": 1
+            },
+            {
+              "home": 1,
+              "away": 2
+            },
+            {
+              "home": 1,
+              "away": 1
+            }
+          ],
+          "htft": "平/客胜",
+          "total_goals": "2—3球",
+          "single": "**客胜**"
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.29061956258397026,
+              "draw": 0.27273528180957207,
+              "away": 0.4366451556064578,
+              "overround": 0.12817199758974773
+            },
+            "probabilities": {
+              "home": 0.3163265306122449,
+              "draw": 0.2755102040816326,
+              "away": 0.40816326530612246
+            },
+            "direction": "away",
+            "concentration": 0.09183673469387754,
+            "valid": true
+          },
+          "value": {
+            "ev": 0.2493,
+            "kelly": 0.02,
+            "page_signal": "✅ 下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "medium",
+            "reasons": [
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 41
+        },
+        "direction": "客胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "4",
+        "home_team": "仁川联",
+        "away_team": "大田市民",
+        "league": "韩职",
+        "kickoff": "18:00",
+        "market": {
+          "home_odds": 2.82,
+          "draw_odds": 3.12,
+          "away_odds": 2.2
+        },
+        "page_probability": {
+          "home": 0.30303030303030304,
+          "draw": 0.2828282828282828,
+          "away": 0.41414141414141414
+        },
+        "team_dna": {
+          "attack": {
+            "home": 7.0,
+            "away": 13.0
+          },
+          "defense": {
+            "home": 1.0,
+            "away": 2.33
+          },
+          "head_to_head": {
+            "home": 7.0,
+            "away": 10.0
+          },
+          "form": {
+            "home": 1.17,
+            "away": 1.33
+          }
+        },
+        "page_context": {
+          "home_possession": 51.33,
+          "away_possession": 49.67,
+          "difference": -1.7,
+          "interval": "<0",
+          "smoothed_p": 0.6154,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "0-1、1-2、1-1",
+          "score_options": [
+            {
+              "home": 0,
+              "away": 1
+            },
+            {
+              "home": 1,
+              "away": 2
+            },
+            {
+              "home": 1,
+              "away": 1
+            }
+          ],
+          "htft": "平/客胜（观察）",
+          "total_goals": "2—3球",
+          "single": "**客胜**"
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.31390626714959935,
+              "draw": 0.2837229722313686,
+              "away": 0.4023707606190319,
+              "overround": 0.12966820413628932
+            },
+            "probabilities": {
+              "home": 0.30303030303030304,
+              "draw": 0.2828282828282828,
+              "away": 0.41414141414141414
+            },
+            "direction": "away",
+            "concentration": 0.1111111111111111,
+            "valid": true
+          },
+          "value": {
+            "ev": 0.3539,
+            "kelly": 0.02,
+            "page_signal": "✅ 下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "medium",
+            "reasons": [
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 41
+        },
+        "direction": "客胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "6",
+        "home_team": "佛罗伦萨",
+        "away_team": "那不勒斯",
+        "league": "意甲",
+        "kickoff": "18:30",
+        "market": {
+          "home_odds": 3.02,
+          "draw_odds": 3.2,
+          "away_odds": 2.06
+        },
+        "page_probability": {
+          "home": 0.37755102040816324,
+          "draw": 0.2653061224489796,
+          "away": 0.35714285714285715
+        },
+        "team_dna": {
+          "attack": {
+            "home": 9.0,
+            "away": 9.0
+          },
+          "defense": {
+            "home": 2.0,
+            "away": 2.0
+          },
+          "head_to_head": {
+            "home": 1.0,
+            "away": 16.0
+          },
+          "form": {
+            "home": 2.0,
+            "away": 1.33
+          }
+        },
+        "page_context": {
+          "home_possession": 49.33,
+          "away_possession": 47.33,
+          "difference": -2.0,
+          "interval": "<0",
+          "smoothed_p": 0.6154,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "1-0、2-1、1-1",
+          "score_options": [
+            {
+              "home": 1,
+              "away": 0
+            },
+            {
+              "home": 2,
+              "away": 1
+            },
+            {
+              "home": 1,
+              "away": 1
+            }
+          ],
+          "htft": "不建议",
+          "total_goals": "2—3球",
+          "single": "**主胜**"
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.29327496307369244,
+              "draw": 0.27677824640079723,
+              "away": 0.42994679052551027,
+              "overround": 0.12906272101845317
+            },
+            "probabilities": {
+              "home": 0.37755102040816324,
+              "draw": 0.2653061224489796,
+              "away": 0.35714285714285715
+            },
+            "direction": "home",
+            "concentration": 0.02040816326530609,
+            "valid": true
+          },
+          "value": {
+            "ev": 0.2677,
+            "kelly": 0.02,
+            "page_signal": "✅ 下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "high",
+            "reasons": [
+              "概率高度分散",
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 30
+        },
+        "direction": "主胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "7",
+        "home_team": "伍尔弗",
+        "away_team": "西布罗姆",
+        "league": "英冠",
+        "kickoff": "19:00",
+        "market": {
+          "home_odds": 1.72,
+          "draw_odds": 3.4,
+          "away_odds": 3.95
+        },
+        "page_probability": null,
+        "team_dna": {
+          "attack": {
+            "home": 10.0,
+            "away": 8.0
+          },
+          "defense": {
+            "home": 1.83,
+            "away": 1.17
+          },
+          "head_to_head": {
+            "home": 7.0,
+            "away": 10.0
+          },
+          "form": {
+            "home": 1.33,
+            "away": 1.33
+          }
+        },
+        "page_context": {
+          "home_possession": 51.5,
+          "away_possession": 57.5,
+          "difference": -6.0,
+          "interval": "<0",
+          "smoothed_p": 0.6154,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "",
+          "htft": null,
+          "total_goals": null
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.5151119975452593,
+              "draw": 0.2605860693464253,
+              "away": 0.2243019331083154,
+              "overround": 0.12867755285805815
+            },
+            "probabilities": {
+              "home": 0.5151119975452593,
+              "draw": 0.2605860693464253,
+              "away": 0.2243019331083154
+            },
+            "direction": "home",
+            "concentration": 0.25452592819883396,
+            "valid": true
+          },
+          "value": {
+            "ev": 0.0585,
+            "kelly": 0.02,
+            "page_signal": "✅ 下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "low",
+            "reasons": [
+              "概率集中度较高",
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 55
+        },
+        "direction": "主胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "8",
+        "home_team": "赫塔费",
+        "away_team": "马拉加",
+        "league": "西甲",
+        "kickoff": "20:00",
+        "market": {
+          "home_odds": 1.95,
+          "draw_odds": 2.8,
+          "away_odds": 3.85
+        },
+        "page_probability": null,
+        "team_dna": {
+          "attack": {
+            "home": 5.0,
+            "away": 3.0
+          },
+          "defense": {
+            "home": 0.67,
+            "away": 0.5
+          },
+          "head_to_head": {
+            "home": 12.0,
+            "away": 6.0
+          },
+          "form": {
+            "home": 1.0,
+            "away": 1.83
+          }
+        },
+        "page_context": {
+          "home_possession": 38.33,
+          "away_possession": 47.67,
+          "difference": -9.3,
+          "interval": "<0",
+          "smoothed_p": 0.6154,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "",
+          "htft": null,
+          "total_goals": null
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.4539425202652911,
+              "draw": 0.316138540899042,
+              "away": 0.22991893883566686,
+              "overround": 0.1297036297036298
+            },
+            "probabilities": {
+              "home": 0.4539425202652911,
+              "draw": 0.316138540899042,
+              "away": 0.22991893883566686
+            },
+            "direction": "home",
+            "concentration": 0.1378039793662491,
+            "valid": true
+          },
+          "value": {
+            "ev": 0.2,
+            "kelly": 0.02,
+            "page_signal": "✅ 下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "medium",
+            "reasons": [
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 45
+        },
+        "direction": "主胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "9",
+        "home_team": "特温特",
+        "away_team": "埃因霍温",
+        "league": "荷甲",
+        "kickoff": "20:30",
+        "market": {
+          "home_odds": 2.61,
+          "draw_odds": 3.95,
+          "away_odds": 2.03
+        },
+        "page_probability": {
+          "home": 0.2857142857142857,
+          "draw": 0.22448979591836735,
+          "away": 0.4897959183673469
+        },
+        "team_dna": {
+          "attack": {
+            "home": 13.0,
+            "away": 16.0
+          },
+          "defense": {
+            "home": 1.83,
+            "away": 3.5
+          },
+          "head_to_head": {
+            "home": 0.0,
+            "away": 18.0
+          },
+          "form": {
+            "home": 0.83,
+            "away": 1.0
+          }
+        },
+        "page_context": {
+          "home_possession": 54.83,
+          "away_possession": 56.17,
+          "difference": 1.3,
+          "interval": "0-5",
+          "smoothed_p": 0.5385,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "0-1、1-2、1-1",
+          "score_options": [
+            {
+              "home": 0,
+              "away": 1
+            },
+            {
+              "home": 1,
+              "away": 2
+            },
+            {
+              "home": 1,
+              "away": 1
+            }
+          ],
+          "htft": "不建议",
+          "total_goals": "2—3球",
+          "single": "**客胜**"
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.33938873204860687,
+              "draw": 0.22425432674604145,
+              "away": 0.43635694120535173,
+              "overround": 0.12891715685255623
+            },
+            "probabilities": {
+              "home": 0.2857142857142857,
+              "draw": 0.22448979591836735,
+              "away": 0.4897959183673469
+            },
+            "direction": "away",
+            "concentration": 0.20408163265306123,
+            "valid": true
+          },
+          "value": {
+            "ev": 0.0932,
+            "kelly": 0.02,
+            "page_signal": "✅ 下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "low",
+            "reasons": [
+              "概率集中度较高",
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 52
+        },
+        "direction": "客胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "10",
+        "home_team": "利兹联",
+        "away_team": "水晶宫",
+        "league": "英超",
+        "kickoff": "21:00",
+        "market": {
+          "home_odds": 1.69,
+          "draw_odds": 3.5,
+          "away_odds": 3.98
+        },
+        "page_probability": {
+          "home": 0.5,
+          "draw": 0.25510204081632654,
+          "away": 0.24489795918367346
+        },
+        "team_dna": {
+          "attack": {
+            "home": 11.0,
+            "away": 9.0
+          },
+          "defense": {
+            "home": 2.0,
+            "away": 2.17
+          },
+          "head_to_head": {
+            "home": 6.0,
+            "away": 9.0
+          },
+          "form": {
+            "home": 1.5,
+            "away": 1.83
+          }
+        },
+        "page_context": {
+          "home_possession": 43.83,
+          "away_possession": 44.67,
+          "difference": -0.8,
+          "interval": "<0",
+          "smoothed_p": 0.6154,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "1-0、2-1、1-1",
+          "score_options": [
+            {
+              "home": 1,
+              "away": 0
+            },
+            {
+              "home": 2,
+              "away": 1
+            },
+            {
+              "home": 1,
+              "away": 1
+            }
+          ],
+          "htft": "不建议",
+          "total_goals": "2—3球",
+          "single": "**主胜**"
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.5242518215210453,
+              "draw": 0.25313873667730474,
+              "away": 0.22260944180164988,
+              "overround": 0.12868654345268182
+            },
+            "probabilities": {
+              "home": 0.5,
+              "draw": 0.25510204081632654,
+              "away": 0.24489795918367346
+            },
+            "direction": "home",
+            "concentration": 0.24489795918367346,
+            "valid": true
+          },
+          "value": {
+            "ev": 0.04,
+            "kelly": 0.014499999999999999,
+            "page_signal": "✅ 下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "low",
+            "reasons": [
+              "概率集中度较高",
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 53
+        },
+        "direction": "主胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "11",
+        "home_team": "伯恩茅斯",
+        "away_team": "利物浦",
+        "league": "英超",
+        "kickoff": "21:00",
+        "market": {
+          "home_odds": 2.92,
+          "draw_odds": 3.62,
+          "away_odds": 1.96
+        },
+        "page_probability": null,
+        "team_dna": {
+          "attack": {
+            "home": 9.0,
+            "away": 12.0
+          },
+          "defense": {
+            "home": 2.0,
+            "away": 1.83
+          },
+          "head_to_head": {
+            "home": 3.0,
+            "away": 15.0
+          },
+          "form": {
+            "home": 1.33,
+            "away": 1.0
+          }
+        },
+        "page_context": {
+          "home_possession": 49.17,
+          "away_possession": 56.67,
+          "difference": 7.5,
+          "interval": "5-10",
+          "smoothed_p": 0.6,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "",
+          "htft": null,
+          "total_goals": null
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.3033588726227938,
+              "draw": 0.24469831714324808,
+              "away": 0.45194281023395816,
+              "overround": 0.12891292897996243
+            },
+            "probabilities": {
+              "home": 0.3033588726227938,
+              "draw": 0.24469831714324808,
+              "away": 0.45194281023395816
+            },
+            "direction": "away",
+            "concentration": 0.14858393761116434,
+            "valid": true
+          },
+          "value": {
+            "ev": 0.176,
+            "kelly": 0.02,
+            "page_signal": "✅ 下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "medium",
+            "reasons": [
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 45
+        },
+        "direction": "客胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "12",
+        "home_team": "曼城",
+        "away_team": "桑德兰",
+        "league": "英超",
+        "kickoff": "21:00",
+        "market": {
+          "home_odds": 1.18,
+          "draw_odds": 5.55,
+          "away_odds": 9.8
+        },
+        "page_probability": {
+          "home": 0.7448979591836735,
+          "draw": 0.17346938775510204,
+          "away": 0.08163265306122448
+        },
+        "team_dna": {
+          "attack": {
+            "home": 18.0,
+            "away": 10.0
+          },
+          "defense": {
+            "home": 2.5,
+            "away": 0.83
+          },
+          "head_to_head": {
+            "home": 16.0,
+            "away": 1.0
+          },
+          "form": {
+            "home": 0.33,
+            "away": 0.83
+          }
+        },
+        "page_context": {
+          "home_possession": 59.17,
+          "away_possession": 50.17,
+          "difference": 9.0,
+          "interval": "5-10",
+          "smoothed_p": 0.6,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "2-0、1-0、2-1",
+          "score_options": [
+            {
+              "home": 2,
+              "away": 0
+            },
+            {
+              "home": 1,
+              "away": 0
+            },
+            {
+              "home": 2,
+              "away": 1
+            }
+          ],
+          "htft": "不建议",
+          "total_goals": "2—4球",
+          "single": "**主胜**"
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.7501758547922156,
+              "draw": 0.15949684840627287,
+              "away": 0.09032729680151165,
+              "overround": 0.12967862362535487
+            },
+            "probabilities": {
+              "home": 0.7448979591836735,
+              "draw": 0.17346938775510204,
+              "away": 0.08163265306122448
+            },
+            "direction": "home",
+            "concentration": 0.5714285714285715,
+            "valid": true
+          },
+          "value": {
+            "ev": -0.292,
+            "kelly": 0.0,
+            "page_signal": "❌ 不下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "low",
+            "reasons": [
+              "概率集中度较高",
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 77
+        },
+        "direction": "主胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "13",
+        "home_team": "帕尔马",
+        "away_team": "热那亚",
+        "league": "意甲",
+        "kickoff": "21:00",
+        "market": {
+          "home_odds": 3.05,
+          "draw_odds": 2.8,
+          "away_odds": 2.25
+        },
+        "page_probability": null,
+        "team_dna": {
+          "attack": {
+            "home": 4.0,
+            "away": 7.0
+          },
+          "defense": {
+            "home": 0.67,
+            "away": 1.17
+          },
+          "head_to_head": {
+            "home": 6.0,
+            "away": 9.0
+          },
+          "form": {
+            "home": 1.33,
+            "away": 1.5
+          }
+        },
+        "page_context": {
+          "home_possession": 45.67,
+          "away_possession": 44.33,
+          "difference": -1.3,
+          "interval": "<0",
+          "smoothed_p": 0.6154,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "",
+          "htft": null,
+          "total_goals": null
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.2902891371961756,
+              "draw": 0.31620781016011984,
+              "away": 0.3935030526437046,
+              "overround": 0.12945615404631794
+            },
+            "probabilities": {
+              "home": 0.2902891371961756,
+              "draw": 0.31620781016011984,
+              "away": 0.3935030526437046
+            },
+            "direction": "away",
+            "concentration": 0.07729524248358477,
+            "valid": true
+          },
+          "value": {
+            "ev": 0.3847,
+            "kelly": 0.02,
+            "page_signal": "✅ 下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "high",
+            "reasons": [
+              "概率高度分散",
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 31
+        },
+        "direction": "客胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "14",
+        "home_team": "弗洛西诺",
+        "away_team": "科莫",
+        "league": "意甲",
+        "kickoff": "21:00",
+        "market": {
+          "home_odds": 5.4,
+          "draw_odds": 4.35,
+          "away_odds": 1.4
+        },
+        "page_probability": null,
+        "team_dna": {
+          "attack": {
+            "home": 11.0,
+            "away": 13.0
+          },
+          "defense": {
+            "home": 2.0,
+            "away": 2.17
+          },
+          "head_to_head": {
+            "home": 13.0,
+            "away": 4.0
+          },
+          "form": {
+            "home": 1.0,
+            "away": 1.17
+          }
+        },
+        "page_context": {
+          "home_possession": 51.5,
+          "away_possession": 55.83,
+          "difference": 4.3,
+          "interval": "0-5",
+          "smoothed_p": 0.5385,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "",
+          "htft": null,
+          "total_goals": null
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.1639741518578352,
+              "draw": 0.20355411954765754,
+              "away": 0.6324717285945073,
+              "overround": 0.12935595694216384
+            },
+            "probabilities": {
+              "home": 0.1639741518578352,
+              "draw": 0.20355411954765754,
+              "away": 0.6324717285945073
+            },
+            "direction": "away",
+            "concentration": 0.4289176090468497,
+            "valid": true
+          },
+          "value": {
+            "ev": -0.2461,
+            "kelly": 0.0,
+            "page_signal": "❌ 不下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "low",
+            "reasons": [
+              "概率集中度较高",
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 66
+        },
+        "direction": "客胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "15",
+        "home_team": "勒沃库森",
+        "away_team": "莱红牛",
+        "league": "德甲",
+        "kickoff": "21:30",
+        "market": {
+          "home_odds": 1.95,
+          "draw_odds": 3.95,
+          "away_odds": 2.75
+        },
+        "page_probability": {
+          "home": 0.4444444444444444,
+          "draw": 0.23232323232323232,
+          "away": 0.32323232323232326
+        },
+        "team_dna": {
+          "attack": {
+            "home": 13.0,
+            "away": 9.0
+          },
+          "defense": {
+            "home": 2.67,
+            "away": 2.83
+          },
+          "head_to_head": {
+            "home": 13.0,
+            "away": 4.0
+          },
+          "form": {
+            "home": 1.0,
+            "away": 1.67
+          }
+        },
+        "page_context": {
+          "home_possession": 56.67,
+          "away_possession": 61.0,
+          "difference": -4.3,
+          "interval": "<0",
+          "smoothed_p": 0.6154,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "1-0、2-1、1-1",
+          "score_options": [
+            {
+              "home": 1,
+              "away": 0
+            },
+            {
+              "home": 2,
+              "away": 1
+            },
+            {
+              "home": 1,
+              "away": 1
+            }
+          ],
+          "htft": "不建议",
+          "total_goals": "2—3球",
+          "single": "**主胜**"
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.4539755511440811,
+              "draw": 0.22411451259011592,
+              "away": 0.32190993626580294,
+              "overround": 0.12962143341890187
+            },
+            "probabilities": {
+              "home": 0.4444444444444444,
+              "draw": 0.23232323232323232,
+              "away": 0.32323232323232326
+            },
+            "direction": "home",
+            "concentration": 0.12121212121212116,
+            "valid": true
+          },
+          "value": {
+            "ev": 0.2,
+            "kelly": 0.02,
+            "page_signal": "✅ 下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "medium",
+            "reasons": [
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 44
+        },
+        "direction": "主胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "16",
+        "home_team": "马竞",
+        "away_team": "皇马",
+        "league": "西甲",
+        "kickoff": "22:15",
+        "market": {
+          "home_odds": 3.4,
+          "draw_odds": 3.8,
+          "away_odds": 1.75
+        },
+        "page_probability": {
+          "home": 0.23469387755102042,
+          "draw": 0.23469387755102042,
+          "away": 0.5306122448979592
+        },
+        "team_dna": {
+          "attack": {
+            "home": 10.0,
+            "away": 15.0
+          },
+          "defense": {
+            "home": 2.17,
+            "away": 2.83
+          },
+          "head_to_head": {
+            "home": 7.0,
+            "away": 10.0
+          },
+          "form": {
+            "home": 1.33,
+            "away": 1.0
+          }
+        },
+        "page_context": {
+          "home_possession": 53.33,
+          "away_possession": 52.83,
+          "difference": -0.5,
+          "interval": "<0",
+          "smoothed_p": 0.6154,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "0-1、0-2、1-2",
+          "score_options": [
+            {
+              "home": 0,
+              "away": 1
+            },
+            {
+              "home": 0,
+              "away": 2
+            },
+            {
+              "home": 1,
+              "away": 2
+            }
+          ],
+          "htft": "不建议",
+          "total_goals": "2—4球",
+          "single": "**客胜**"
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.26057993730407525,
+              "draw": 0.23315047021943572,
+              "away": 0.5062695924764891,
+              "overround": 0.12870411322423703
+            },
+            "probabilities": {
+              "home": 0.23469387755102042,
+              "draw": 0.23469387755102042,
+              "away": 0.5306122448979592
+            },
+            "direction": "away",
+            "concentration": 0.29591836734693877,
+            "valid": true
+          },
+          "value": {
+            "ev": 0.0769,
+            "kelly": 0.02,
+            "page_signal": "✅ 下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "low",
+            "reasons": [
+              "概率集中度较高",
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 56
+        },
+        "direction": "客胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "17",
+        "home_team": "米亚尔比",
+        "away_team": "盖斯",
+        "league": "瑞超",
+        "kickoff": "22:30",
+        "market": {
+          "home_odds": 2.45,
+          "draw_odds": 3.28,
+          "away_odds": 2.4
+        },
+        "page_probability": {
+          "home": 0.3877551020408163,
+          "draw": 0.2653061224489796,
+          "away": 0.3469387755102041
+        },
+        "team_dna": {
+          "attack": {
+            "home": 2.0,
+            "away": 7.0
+          },
+          "defense": {
+            "home": 0.5,
+            "away": 1.83
+          },
+          "head_to_head": {
+            "home": 9.0,
+            "away": 6.0
+          },
+          "form": {
+            "home": 2.5,
+            "away": 0.83
+          }
+        },
+        "page_context": {
+          "home_possession": 40.17,
+          "away_possession": 55.17,
+          "difference": 15.0,
+          "interval": ">=15",
+          "smoothed_p": 0.4667,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "1-0、2-1、1-1",
+          "score_options": [
+            {
+              "home": 1,
+              "away": 0
+            },
+            {
+              "home": 2,
+              "away": 1
+            },
+            {
+              "home": 1,
+              "away": 1
+            }
+          ],
+          "htft": "不建议",
+          "total_goals": "2—3球",
+          "single": "**主胜**"
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.36129979805397466,
+              "draw": 0.26987332476592624,
+              "away": 0.36882687718009916,
+              "overround": 0.12970798075327683
+            },
+            "probabilities": {
+              "home": 0.3877551020408163,
+              "draw": 0.2653061224489796,
+              "away": 0.3469387755102041
+            },
+            "direction": "home",
+            "concentration": 0.040816326530612235,
+            "valid": true
+          },
+          "value": {
+            "ev": 0.1201,
+            "kelly": 0.02,
+            "page_signal": "✅ 下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "high",
+            "reasons": [
+              "概率高度分散",
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 31
+        },
+        "direction": "主胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "18",
+        "home_team": "维京",
+        "away_team": "利勒斯特",
+        "league": "挪超",
+        "kickoff": "23:00",
+        "market": {
+          "home_odds": 1.34,
+          "draw_odds": 4.9,
+          "away_odds": 5.6
+        },
+        "page_probability": null,
+        "team_dna": {
+          "attack": {
+            "home": 13.0,
+            "away": 10.0
+          },
+          "defense": {
+            "home": 3.0,
+            "away": 1.67
+          },
+          "head_to_head": {
+            "home": 13.0,
+            "away": 4.0
+          },
+          "form": {
+            "home": 1.33,
+            "away": 1.33
+          }
+        },
+        "page_context": {
+          "home_possession": 54.33,
+          "away_possession": 50.67,
+          "difference": 3.7,
+          "interval": "0-5",
+          "smoothed_p": 0.5385,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "",
+          "htft": null,
+          "total_goals": null
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.6610455311973018,
+              "draw": 0.18077571669477233,
+              "away": 0.1581787521079258,
+              "overround": 0.12892171794090768
+            },
+            "probabilities": {
+              "home": 0.6610455311973018,
+              "draw": 0.18077571669477233,
+              "away": 0.1581787521079258
+            },
+            "direction": "home",
+            "concentration": 0.4802698145025295,
+            "valid": true
+          },
+          "value": {
+            "ev": -0.2784,
+            "kelly": 0.0,
+            "page_signal": "❌ 不下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "low",
+            "reasons": [
+              "概率集中度较高",
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 69
+        },
+        "direction": "主胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "19",
+        "home_team": "尼斯",
+        "away_team": "里尔",
+        "league": "法甲",
+        "kickoff": "23:15",
+        "market": {
+          "home_odds": 3.45,
+          "draw_odds": 3.32,
+          "away_odds": 1.86
+        },
+        "page_probability": {
+          "home": 0.2653061224489796,
+          "draw": 0.2653061224489796,
+          "away": 0.46938775510204084
+        },
+        "team_dna": {
+          "attack": {
+            "home": 4.0,
+            "away": 11.0
+          },
+          "defense": {
+            "home": 0.17,
+            "away": 1.67
+          },
+          "head_to_head": {
+            "home": 7.0,
+            "away": 7.0
+          },
+          "form": {
+            "home": 0.83,
+            "away": 1.0
+          }
+        },
+        "page_context": {
+          "home_possession": 56.33,
+          "away_possession": 52.0,
+          "difference": -4.3,
+          "interval": "<0",
+          "smoothed_p": 0.6154,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "0-1、1-2、1-1",
+          "score_options": [
+            {
+              "home": 0,
+              "away": 1
+            },
+            {
+              "home": 1,
+              "away": 2
+            },
+            {
+              "home": 1,
+              "away": 1
+            }
+          ],
+          "htft": "不建议",
+          "total_goals": "2—3球",
+          "single": "**客胜**"
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.2568056491254335,
+              "draw": 0.26686129201287523,
+              "away": 0.4763330588616912,
+              "overround": 0.1286943003430272
+            },
+            "probabilities": {
+              "home": 0.2653061224489796,
+              "draw": 0.2653061224489796,
+              "away": 0.46938775510204084
+            },
+            "direction": "away",
+            "concentration": 0.20408163265306123,
+            "valid": true
+          },
+          "value": {
+            "ev": 0.1446,
+            "kelly": 0.02,
+            "page_signal": "✅ 下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "low",
+            "reasons": [
+              "概率集中度较高",
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 50
+        },
+        "direction": "客胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "20",
+        "home_team": "富勒姆",
+        "away_team": "曼联",
+        "league": "英超",
+        "kickoff": "23:30",
+        "market": {
+          "home_odds": 3.37,
+          "draw_odds": 3.65,
+          "away_odds": 1.79
+        },
+        "page_probability": {
+          "home": 0.3163265306122449,
+          "draw": 0.24489795918367346,
+          "away": 0.4387755102040816
+        },
+        "team_dna": {
+          "attack": {
+            "home": 7.0,
+            "away": 7.0
+          },
+          "defense": {
+            "home": 1.67,
+            "away": 2.17
+          },
+          "head_to_head": {
+            "home": 5.0,
+            "away": 11.0
+          },
+          "form": {
+            "home": 1.5,
+            "away": 1.67
+          }
+        },
+        "page_context": {
+          "home_possession": 59.5,
+          "away_possession": 51.33,
+          "difference": -8.2,
+          "interval": "<0",
+          "smoothed_p": 0.6154,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "0-1、1-2、1-1",
+          "score_options": [
+            {
+              "home": 0,
+              "away": 1
+            },
+            {
+              "home": 1,
+              "away": 2
+            },
+            {
+              "home": 1,
+              "away": 1
+            }
+          ],
+          "htft": "不建议",
+          "total_goals": "2—3球",
+          "single": "**客胜**"
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.2627451611216787,
+              "draw": 0.24258936793974176,
+              "away": 0.49466547093857954,
+              "overround": 0.12936772566133126
+            },
+            "probabilities": {
+              "home": 0.3163265306122449,
+              "draw": 0.24489795918367346,
+              "away": 0.4387755102040816
+            },
+            "direction": "away",
+            "concentration": 0.1224489795918367,
+            "valid": true
+          },
+          "value": {
+            "ev": 0.1016,
+            "kelly": 0.02,
+            "page_signal": "✅ 下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "medium",
+            "reasons": [
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 44
+        },
+        "direction": "客胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "21",
+        "home_team": "沙尔克04",
+        "away_team": "埃沃斯堡",
+        "league": "德甲",
+        "kickoff": "23:30",
+        "market": {
+          "home_odds": 1.95,
+          "draw_odds": 3.57,
+          "away_odds": 2.97
+        },
+        "page_probability": {
+          "home": 0.3877551020408163,
+          "draw": 0.24489795918367346,
+          "away": 0.3673469387755102
+        },
+        "team_dna": {
+          "attack": {
+            "home": 5.0,
+            "away": 13.0
+          },
+          "defense": {
+            "home": 0.83,
+            "away": 2.67
+          },
+          "head_to_head": {
+            "home": 10.0,
+            "away": 7.0
+          },
+          "form": {
+            "home": 2.0,
+            "away": 1.67
+          }
+        },
+        "page_context": {
+          "home_possession": 38.67,
+          "away_possession": 43.67,
+          "difference": -5.0,
+          "interval": "<0",
+          "smoothed_p": 0.6154,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "1-0、2-1、1-1",
+          "score_options": [
+            {
+              "home": 1,
+              "away": 0
+            },
+            {
+              "home": 2,
+              "away": 1
+            },
+            {
+              "home": 1,
+              "away": 1
+            }
+          ],
+          "htft": "不建议",
+          "total_goals": "2—3球",
+          "single": "**主胜**"
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.4539709452429579,
+              "draw": 0.24796732303186775,
+              "away": 0.2980617317251743,
+              "overround": 0.12963289433877678
+            },
+            "probabilities": {
+              "home": 0.3877551020408163,
+              "draw": 0.24489795918367346,
+              "away": 0.3673469387755102
+            },
+            "direction": "home",
+            "concentration": 0.02040816326530609,
+            "valid": true
+          },
+          "value": {
+            "ev": 0.2,
+            "kelly": 0.02,
+            "page_signal": "✅ 下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "high",
+            "reasons": [
+              "概率高度分散",
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 31
+        },
+        "direction": "主胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "22",
+        "home_team": "尤文图斯",
+        "away_team": "亚特兰大",
+        "league": "意甲",
+        "kickoff": "00:00",
+        "market": {
+          "home_odds": 1.55,
+          "draw_odds": 3.7,
+          "away_odds": 4.7
+        },
+        "page_probability": null,
+        "team_dna": {
+          "attack": {
+            "home": 13.0,
+            "away": 10.0
+          },
+          "defense": {
+            "home": 2.17,
+            "away": 1.0
+          },
+          "head_to_head": {
+            "home": 8.0,
+            "away": 8.0
+          },
+          "form": {
+            "home": 0.67,
+            "away": 0.83
+          }
+        },
+        "page_context": {
+          "home_possession": 45.83,
+          "away_possession": 53.17,
+          "difference": -7.3,
+          "interval": "<0",
+          "smoothed_p": 0.6154,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "",
+          "htft": null,
+          "total_goals": null
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.5718513646826703,
+              "draw": 0.23955935547517263,
+              "away": 0.1885892798421572,
+              "overround": 0.1281975180396593
+            },
+            "probabilities": {
+              "home": 0.5718513646826703,
+              "draw": 0.23955935547517263,
+              "away": 0.1885892798421572
+            },
+            "direction": "home",
+            "concentration": 0.3322920092074977,
+            "valid": true
+          },
+          "value": {
+            "ev": -0.0461,
+            "kelly": 0.0,
+            "page_signal": "❌ 不下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "low",
+            "reasons": [
+              "概率集中度较高",
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 60
+        },
+        "direction": "主胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "23",
+        "home_team": "比利亚雷",
+        "away_team": "莱万特",
+        "league": "西甲",
+        "kickoff": "00:30",
+        "market": {
+          "home_odds": 1.41,
+          "draw_odds": 4.4,
+          "away_odds": 5.18
+        },
+        "page_probability": {
+          "home": 0.5510204081632653,
+          "draw": 0.21428571428571427,
+          "away": 0.23469387755102042
+        },
+        "team_dna": {
+          "attack": {
+            "home": 4.0,
+            "away": 8.0
+          },
+          "defense": {
+            "home": 1.67,
+            "away": 1.67
+          },
+          "head_to_head": {
+            "home": 15.0,
+            "away": 3.0
+          },
+          "form": {
+            "home": 2.0,
+            "away": 1.67
+          }
+        },
+        "page_context": {
+          "home_possession": 57.0,
+          "away_possession": 44.33,
+          "difference": 12.7,
+          "interval": "10-15",
+          "smoothed_p": 0.4667,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "2-0、1-0、2-1",
+          "score_options": [
+            {
+              "home": 2,
+              "away": 0
+            },
+            {
+              "home": 1,
+              "away": 0
+            },
+            {
+              "home": 2,
+              "away": 1
+            }
+          ],
+          "htft": "不建议",
+          "total_goals": "2—4球",
+          "single": "**主胜**"
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.627882247285109,
+              "draw": 0.20120772015272811,
+              "away": 0.1709100325621629,
+              "overround": 0.12954277847894868
+            },
+            "probabilities": {
+              "home": 0.5510204081632653,
+              "draw": 0.21428571428571427,
+              "away": 0.23469387755102042
+            },
+            "direction": "home",
+            "concentration": 0.3163265306122448,
+            "valid": true
+          },
+          "value": {
+            "ev": -0.342,
+            "kelly": 0.0,
+            "page_signal": "❌ 不下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "low",
+            "reasons": [
+              "概率集中度较高",
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 58
+        },
+        "direction": "主胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "24",
+        "home_team": "拉科",
+        "away_team": "贝蒂斯",
+        "league": "西甲",
+        "kickoff": "00:30",
+        "market": {
+          "home_odds": 3.3,
+          "draw_odds": 3.5,
+          "away_odds": 1.85
+        },
+        "page_probability": null,
+        "team_dna": {
+          "attack": {
+            "home": 9.0,
+            "away": 15.0
+          },
+          "defense": {
+            "home": 1.5,
+            "away": 1.67
+          },
+          "head_to_head": {
+            "home": 7.0,
+            "away": 10.0
+          },
+          "form": {
+            "home": 1.17,
+            "away": 1.33
+          }
+        },
+        "page_context": {
+          "home_possession": 51.0,
+          "away_possession": 50.0,
+          "difference": -1.0,
+          "interval": "<0",
+          "smoothed_p": 0.6154,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "",
+          "htft": null,
+          "total_goals": null
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.2683381682552839,
+              "draw": 0.25300455864069626,
+              "away": 0.4786572731040199,
+              "overround": 0.12928512928512914
+            },
+            "probabilities": {
+              "home": 0.2683381682552839,
+              "draw": 0.25300455864069626,
+              "away": 0.4786572731040199
+            },
+            "direction": "away",
+            "concentration": 0.210319104848736,
+            "valid": true
+          },
+          "value": {
+            "ev": 0.1385,
+            "kelly": 0.02,
+            "page_signal": "✅ 下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "low",
+            "reasons": [
+              "概率集中度较高",
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 51
+        },
+        "direction": "客胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "25",
+        "home_team": "帕德博恩",
+        "away_team": "霍芬海姆",
+        "league": "德甲",
+        "kickoff": "01:30",
+        "market": {
+          "home_odds": 4.1,
+          "draw_odds": 4.1,
+          "away_odds": 1.56
+        },
+        "page_probability": {
+          "home": 0.18181818181818182,
+          "draw": 0.21212121212121213,
+          "away": 0.6060606060606061
+        },
+        "team_dna": {
+          "attack": {
+            "home": 8.0,
+            "away": 7.0
+          },
+          "defense": {
+            "home": 1.33,
+            "away": 2.0
+          },
+          "head_to_head": {
+            "home": 2.0,
+            "away": 14.0
+          },
+          "form": {
+            "home": 1.33,
+            "away": 1.83
+          }
+        },
+        "page_context": {
+          "home_possession": 54.0,
+          "away_possession": 57.83,
+          "difference": 3.8,
+          "interval": "0-5",
+          "smoothed_p": 0.5385,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "0-1、0-2、1-2",
+          "score_options": [
+            {
+              "home": 0,
+              "away": 1
+            },
+            {
+              "home": 0,
+              "away": 2
+            },
+            {
+              "home": 1,
+              "away": 2
+            }
+          ],
+          "htft": "不建议",
+          "total_goals": "2—4球",
+          "single": "**客胜**"
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.21606648199445988,
+              "draw": 0.21606648199445988,
+              "away": 0.5678670360110804,
+              "overround": 0.12883051907442145
+            },
+            "probabilities": {
+              "home": 0.18181818181818182,
+              "draw": 0.21212121212121213,
+              "away": 0.6060606060606061
+            },
+            "direction": "away",
+            "concentration": 0.3939393939393939,
+            "valid": true
+          },
+          "value": {
+            "ev": -0.1599,
+            "kelly": 0.0,
+            "page_signal": "❌ 不下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "low",
+            "reasons": [
+              "概率集中度较高",
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 64
+        },
+        "direction": "客胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "26",
+        "home_team": "AC米兰",
+        "away_team": "莱切",
+        "league": "意甲",
+        "kickoff": "02:45",
+        "market": {
+          "home_odds": 1.19,
+          "draw_odds": 5.3,
+          "away_odds": 10.0
+        },
+        "page_probability": {
+          "home": 0.7272727272727273,
+          "draw": 0.18181818181818182,
+          "away": 0.09090909090909091
+        },
+        "team_dna": {
+          "attack": {
+            "home": 11.0,
+            "away": 9.0
+          },
+          "defense": {
+            "home": 1.83,
+            "away": 1.0
+          },
+          "head_to_head": {
+            "home": 18.0,
+            "away": 0.0
+          },
+          "form": {
+            "home": 1.33,
+            "away": 1.5
+          }
+        },
+        "page_context": {
+          "home_possession": 63.0,
+          "away_possession": 45.67,
+          "difference": 17.3,
+          "interval": ">=15",
+          "smoothed_p": 0.4667,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "2-0、1-0、2-1",
+          "score_options": [
+            {
+              "home": 2,
+              "away": 0
+            },
+            {
+              "home": 1,
+              "away": 0
+            },
+            {
+              "home": 2,
+              "away": 1
+            }
+          ],
+          "htft": "不建议",
+          "total_goals": "2—4球",
+          "single": "**主胜**"
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.7443088460404175,
+              "draw": 0.167118401280773,
+              "away": 0.08857275267880968,
+              "overround": 0.12901537973680033
+            },
+            "probabilities": {
+              "home": 0.7272727272727273,
+              "draw": 0.18181818181818182,
+              "away": 0.09090909090909091
+            },
+            "direction": "home",
+            "concentration": 0.5454545454545454,
+            "valid": true
+          },
+          "value": {
+            "ev": -0.4446,
+            "kelly": 0.0,
+            "page_signal": "❌ 不下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "low",
+            "reasons": [
+              "概率集中度较高",
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 76
+        },
+        "direction": "主胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "27",
+        "home_team": "马赛",
+        "away_team": "巴黎圣曼",
+        "league": "法甲",
+        "kickoff": "02:45",
+        "market": {
+          "home_odds": 5.75,
+          "draw_odds": 4.9,
+          "away_odds": 1.33
+        },
+        "page_probability": {
+          "home": 0.12244897959183673,
+          "draw": 0.19387755102040816,
+          "away": 0.6836734693877551
+        },
+        "team_dna": {
+          "attack": {
+            "home": 3.0,
+            "away": 8.0
+          },
+          "defense": {
+            "home": 1.33,
+            "away": 2.0
+          },
+          "head_to_head": {
+            "home": 4.0,
+            "away": 13.0
+          },
+          "form": {
+            "home": 2.0,
+            "away": 1.33
+          }
+        },
+        "page_context": {
+          "home_possession": 54.83,
+          "away_possession": 69.17,
+          "difference": 14.3,
+          "interval": "10-15",
+          "smoothed_p": 0.4667,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "0-1、0-2、1-2",
+          "score_options": [
+            {
+              "home": 0,
+              "away": 1
+            },
+            {
+              "home": 0,
+              "away": 2
+            },
+            {
+              "home": 1,
+              "away": 2
+            }
+          ],
+          "htft": "不建议",
+          "total_goals": "2—4球",
+          "single": "**客胜**"
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.1539224601140779,
+              "draw": 0.1806232950318261,
+              "away": 0.6654542448540961,
+              "overround": 0.12987437537944224
+            },
+            "probabilities": {
+              "home": 0.12244897959183673,
+              "draw": 0.19387755102040816,
+              "away": 0.6836734693877551
+            },
+            "direction": "away",
+            "concentration": 0.4897959183673469,
+            "valid": true
+          },
+          "value": {
+            "ev": -0.3793,
+            "kelly": 0.0,
+            "page_signal": "❌ 不下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "low",
+            "reasons": [
+              "概率集中度较高",
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 71
+        },
+        "direction": "客胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "28",
+        "home_team": "巴伦西亚",
+        "away_team": "皇家社会",
+        "league": "西甲",
+        "kickoff": "03:00",
+        "market": {
+          "home_odds": 2.65,
+          "draw_odds": 3.25,
+          "away_odds": 2.26
+        },
+        "page_probability": null,
+        "team_dna": {
+          "attack": {
+            "home": 4.0,
+            "away": 7.0
+          },
+          "defense": {
+            "home": 0.33,
+            "away": 1.17
+          },
+          "head_to_head": {
+            "home": 7.0,
+            "away": 10.0
+          },
+          "form": {
+            "home": 1.67,
+            "away": 2.0
+          }
+        },
+        "page_context": {
+          "home_possession": 43.83,
+          "away_possession": 49.5,
+          "difference": 5.7,
+          "interval": "5-10",
+          "smoothed_p": 0.6,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "",
+          "htft": null,
+          "total_goals": null
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.334677511220468,
+              "draw": 0.2728908937643816,
+              "away": 0.3924315950151505,
+              "overround": 0.12752867436454007
+            },
+            "probabilities": {
+              "home": 0.334677511220468,
+              "draw": 0.2728908937643816,
+              "away": 0.3924315950151505
+            },
+            "direction": "away",
+            "concentration": 0.0577540837946825,
+            "valid": true
+          },
+          "value": {
+            "ev": 0.356,
+            "kelly": 0.02,
+            "page_signal": "✅ 下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "high",
+            "reasons": [
+              "概率高度分散",
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 31
+        },
+        "direction": "客胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "29",
+        "home_team": "波尔图",
+        "away_team": "本菲卡",
+        "league": "葡超",
+        "kickoff": "03:30",
+        "market": {
+          "home_odds": 2.62,
+          "draw_odds": 3.16,
+          "away_odds": 2.32
+        },
+        "page_probability": {
+          "home": 0.336734693877551,
+          "draw": 0.2755102040816326,
+          "away": 0.3877551020408163
+        },
+        "team_dna": {
+          "attack": {
+            "home": 15.0,
+            "away": 18.0
+          },
+          "defense": {
+            "home": 2.17,
+            "away": 2.83
+          },
+          "head_to_head": {
+            "home": 8.0,
+            "away": 8.0
+          },
+          "form": {
+            "home": 0.67,
+            "away": 0.5
+          }
+        },
+        "page_context": {
+          "home_possession": 50.83,
+          "away_possession": 60.5,
+          "difference": 9.7,
+          "interval": "5-10",
+          "smoothed_p": 0.6,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "0-1、1-2、1-1",
+          "score_options": [
+            {
+              "home": 0,
+              "away": 1
+            },
+            {
+              "home": 1,
+              "away": 2
+            },
+            {
+              "home": 1,
+              "away": 1
+            }
+          ],
+          "htft": "不建议",
+          "total_goals": "2—3球",
+          "single": "**客胜**"
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.33801777876138833,
+              "draw": 0.28025524694773335,
+              "away": 0.38172697429087826,
+              "overround": 0.1291695682741294
+            },
+            "probabilities": {
+              "home": 0.336734693877551,
+              "draw": 0.2755102040816326,
+              "away": 0.3877551020408163
+            },
+            "direction": "away",
+            "concentration": 0.05102040816326531,
+            "valid": true
+          },
+          "value": {
+            "ev": 0.392,
+            "kelly": 0.02,
+            "page_signal": "✅ 下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "high",
+            "reasons": [
+              "概率高度分散",
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 31
+        },
+        "direction": "客胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      },
+      {
+        "match_id": "30",
+        "home_team": "巴竞技",
+        "away_team": "巴伊亚",
+        "league": "巴甲",
+        "kickoff": "06:30",
+        "market": {
+          "home_odds": 1.98,
+          "draw_odds": 3.3,
+          "away_odds": 3.12
+        },
+        "page_probability": {
+          "home": 0.45918367346938777,
+          "draw": 0.2653061224489796,
+          "away": 0.2755102040816326
+        },
+        "team_dna": {
+          "attack": {
+            "home": 9.0,
+            "away": 14.0
+          },
+          "defense": {
+            "home": 2.17,
+            "away": 2.17
+          },
+          "head_to_head": {
+            "home": 8.0,
+            "away": 8.0
+          },
+          "form": {
+            "home": 2.0,
+            "away": 1.33
+          }
+        },
+        "page_context": {
+          "home_possession": 48.67,
+          "away_possession": 56.33,
+          "difference": -7.7,
+          "interval": "<0",
+          "smoothed_p": 0.6154,
+          "smoothed_p_target": "未确认，不参与胜平负方向"
+        },
+        "page_prediction": {
+          "scores": "1-0、2-1、1-1",
+          "score_options": [
+            {
+              "home": 1,
+              "away": 0
+            },
+            {
+              "home": 2,
+              "away": 1
+            },
+            {
+              "home": 1,
+              "away": 1
+            }
+          ],
+          "htft": "不建议",
+          "total_goals": "2—3球",
+          "single": "**主胜**"
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.4475043029259897,
+              "draw": 0.26850258175559377,
+              "away": 0.2839931153184165,
+              "overround": 0.12859362859362866
+            },
+            "probabilities": {
+              "home": 0.45918367346938777,
+              "draw": 0.2653061224489796,
+              "away": 0.2755102040816326
+            },
+            "direction": "home",
+            "concentration": 0.18367346938775514,
+            "valid": true
+          },
+          "value": {
+            "ev": 0.2185,
+            "kelly": 0.02,
+            "page_signal": "✅ 下注",
+            "used_for_direction": false
+          },
+          "decision": {
+            "risk": "medium",
+            "reasons": [
+              "球队DNA已读取，但权重待离线验证"
+            ],
+            "allow_prediction": true
+          },
+          "confidence": 46
+        },
+        "direction": "主胜",
+        "data_limitations": [
+          "球队特征统计口径未验证，不得自行给固定高权重",
+          "页面比分是候选预测而非已发生事实",
+          "平滑p对应事件未知，不得作为完整1X2概率"
+        ]
+      }
+    ]
+  },
+  "_action": {
+    "request_id": "hh520-20260920-k7m4p2x9",
+    "repository": "ltaln/HH520-stable-V2",
+    "run_id": "35503284094",
+    "run_attempt": "1",
+    "source_sha": "202095ff1d10a306ea40c30fcbbc147c1f5ecfaa"
+  }
+}
