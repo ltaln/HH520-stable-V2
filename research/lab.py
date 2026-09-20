@@ -1,4 +1,4 @@
-"""HH520 Research Lab V2.7. Stable is read-only; outputs are candidate research only."""
+"""HH520 Research Lab V2.8. Stable is read-only; outputs are candidate research only."""
 from collections import Counter, defaultdict
 from datetime import date, timedelta
 from copy import deepcopy
@@ -110,6 +110,7 @@ def build_research_report(records, start=None, end=None, source="HH520_10027s", 
             "predicted_score": "RAW_SOURCE_OR_RESEARCH_POISSON_1X2",
             "predicted_total_goals": "EXPLICIT_OR_DERIVED_FROM_PREDICTED_SCORE",
             "research_derived_predictions": "RESEARCH_ONLY",
+            "predicted_htft": "HH520_RAW_OR_RESEARCH_POISSON_HTFT",
             "stable_access": "FORBIDDEN",
         },
         "backtest": backtest,
