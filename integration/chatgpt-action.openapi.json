@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "HH520 Stable V2 - GitHub Actions Bridge",
-    "version": "2.0",
+    "version": "2.1",
     "description": "Trigger HH520 Stable V2 on GitHub Actions and read the prepared GPT handoff. No standalone server is required."
   },
   "servers": [
@@ -110,13 +110,34 @@
         ],
         "responses": {
           "200": {
-            "description": "Prepared result JSON. Use gpt_handoff.prompt, gpt_handoff.config and all gpt_handoff.matches for final reasoning.",
+            "description": "State/result JSON. status=PENDING means keep polling the same request_id; status=READY means consume gpt_handoff; status=FAILED means stop and report failure.",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": true,
                   "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "PENDING",
+                        "READY",
+                        "FAILED"
+                      ]
+                    },
+                    "request_id": {
+                      "type": "string"
+                    },
+                    "kind": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "gpt_handoff": {
+                      "type": "object",
+                      "additionalProperties": true
+                    },
                     "content": {
                       "type": "string"
                     },
@@ -247,13 +268,30 @@
         ],
         "responses": {
           "200": {
-            "description": "Research Lab report only. No automatic promotion into Stable.",
+            "description": "Research state/result JSON. status=PENDING means keep polling the same request_id; status=READY means consume the research report; status=FAILED means stop and report failure.",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": true,
                   "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "PENDING",
+                        "READY",
+                        "FAILED"
+                      ]
+                    },
+                    "request_id": {
+                      "type": "string"
+                    },
+                    "kind": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
                     "content": {
                       "type": "string"
                     },
