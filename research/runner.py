@@ -6,14 +6,21 @@ from pathlib import Path
 from collector.service import collect_date
 from research.lab import date_range, build_research_report
 from research.result_label.collector import collect_result_labels
+from research.fusion_extractor import attach_research_predictions
 
 
 def collect_window(start, end):
     records = []
     collection = []
+    prediction_debug = []
     for day in date_range(start, end):
         data = collect_date(day)
         matches = data.get("matches", [])
+        raw = data.get("raw") or {}
+        markdown = ((raw.get("data") or {}).get("markdown") if isinstance(raw, dict) else None) or ""
+        matches, day_debug = attach_research_predictions(matches, markdown)
+        day_debug["date"] = day
+        prediction_debug.append(day_debug)
         for match in matches:
             if not isinstance(match, dict):
                 raise ValueError("collector returned a non-object match")
@@ -36,6 +43,7 @@ def collect_window(start, end):
         records, start, end, result_labels=result_labels
     )
     report["collection"] = collection
+    report["prediction_debug"] = prediction_debug
     report["result_collection"] = {
         "source": "HH520_10023s_RESULT_LABEL",
         "collected": len(result_labels),
