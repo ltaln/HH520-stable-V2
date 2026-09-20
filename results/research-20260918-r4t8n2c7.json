@@ -1,8 +1,741 @@
 {
-  "status": "PENDING",
-  "kind": "research",
-  "request_id": "research-20260918-r4t8n2c7",
-  "message": "Workflow accepted and is still running.",
+  "system": "HH520 Research Lab V1",
+  "stable_access": "READ_ONLY",
+  "source": "HH520_10023s",
+  "window": {
+    "from": "2026-09-18",
+    "to": "2026-09-19"
+  },
+  "input_count": 40,
+  "clean_count": 40,
+  "sanitizer": {
+    "pollution_events": 40,
+    "audit": [
+      {
+        "index": 0,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 1,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 2,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 3,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 4,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 5,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 6,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 7,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 8,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 9,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 10,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 11,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 12,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 13,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 14,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 15,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 16,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 17,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 18,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 19,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 20,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 21,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 22,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 23,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 24,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 25,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 26,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 27,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 28,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 29,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 30,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 31,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 32,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 33,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 34,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 35,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 36,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 37,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 38,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      },
+      {
+        "index": 39,
+        "removed_fields": [
+          "result",
+          "scores"
+        ]
+      }
+    ]
+  },
+  "status_counts": {
+    "UNKNOWN": 40
+  },
+  "league_dna": {
+    "亚运男足": {
+      "matches": 1,
+      "ready": 0
+    },
+    "芬超": {
+      "matches": 1,
+      "ready": 0
+    },
+    "德乙": {
+      "matches": 1,
+      "ready": 0
+    },
+    "挪超": {
+      "matches": 2,
+      "ready": 0
+    },
+    "法乙": {
+      "matches": 1,
+      "ready": 0
+    },
+    "荷甲": {
+      "matches": 1,
+      "ready": 0
+    },
+    "荷乙": {
+      "matches": 1,
+      "ready": 0
+    },
+    "意甲": {
+      "matches": 5,
+      "ready": 0
+    },
+    "法甲": {
+      "matches": 4,
+      "ready": 0
+    },
+    "英超": {
+      "matches": 5,
+      "ready": 0
+    },
+    "英冠": {
+      "matches": 2,
+      "ready": 0
+    },
+    "西甲": {
+      "matches": 4,
+      "ready": 0
+    },
+    "美职": {
+      "matches": 1,
+      "ready": 0
+    },
+    "日职": {
+      "matches": 2,
+      "ready": 0
+    },
+    "日乙": {
+      "matches": 1,
+      "ready": 0
+    },
+    "韩职": {
+      "matches": 1,
+      "ready": 0
+    },
+    "瑞超": {
+      "matches": 1,
+      "ready": 0
+    },
+    "德甲": {
+      "matches": 5,
+      "ready": 0
+    },
+    "巴甲": {
+      "matches": 1,
+      "ready": 0
+    }
+  },
+  "team_dna": [
+    {
+      "team": "沙特亚",
+      "sample_count": 1
+    },
+    {
+      "team": "卡塔尔亚",
+      "sample_count": 1
+    },
+    {
+      "team": "赫尔火花",
+      "sample_count": 1
+    },
+    {
+      "team": "赫尔辛基",
+      "sample_count": 1
+    },
+    {
+      "team": "沃夫斯堡",
+      "sample_count": 1
+    },
+    {
+      "team": "达姆施塔",
+      "sample_count": 1
+    },
+    {
+      "team": "萨普斯堡",
+      "sample_count": 1
+    },
+    {
+      "team": "奥斯KFUM",
+      "sample_count": 1
+    },
+    {
+      "team": "兰斯",
+      "sample_count": 1
+    },
+    {
+      "team": "蒙彼利埃",
+      "sample_count": 1
+    },
+    {
+      "team": "格罗宁根",
+      "sample_count": 1
+    },
+    {
+      "team": "兹沃勒",
+      "sample_count": 1
+    },
+    {
+      "team": "登博思",
+      "sample_count": 1
+    },
+    {
+      "team": "海尔蒙特",
+      "sample_count": 1
+    },
+    {
+      "team": "蒙扎",
+      "sample_count": 1
+    },
+    {
+      "team": "萨索洛",
+      "sample_count": 1
+    },
+    {
+      "team": "摩纳哥",
+      "sample_count": 1
+    },
+    {
+      "team": "朗斯",
+      "sample_count": 1
+    },
+    {
+      "team": "布伦特",
+      "sample_count": 1
+    },
+    {
+      "team": "切尔西",
+      "sample_count": 1
+    },
+    {
+      "team": "布城",
+      "sample_count": 1
+    },
+    {
+      "team": "沃特福德",
+      "sample_count": 1
+    },
+    {
+      "team": "西班牙人",
+      "sample_count": 1
+    },
+    {
+      "team": "埃尔切",
+      "sample_count": 1
+    },
+    {
+      "team": "纽约城",
+      "sample_count": 1
+    },
+    {
+      "team": "纽约红牛",
+      "sample_count": 1
+    },
+    {
+      "team": "长崎航海",
+      "sample_count": 1
+    },
+    {
+      "team": "大阪樱花",
+      "sample_count": 1
+    },
+    {
+      "team": "藤枝MYFC",
+      "sample_count": 1
+    },
+    {
+      "team": "大宫松鼠",
+      "sample_count": 1
+    },
+    {
+      "team": "安养FC",
+      "sample_count": 1
+    },
+    {
+      "team": "蔚山现代",
+      "sample_count": 1
+    },
+    {
+      "team": "横滨水手",
+      "sample_count": 1
+    },
+    {
+      "team": "水户蜀葵",
+      "sample_count": 1
+    },
+    {
+      "team": "热刺",
+      "sample_count": 1
+    },
+    {
+      "team": "维拉",
+      "sample_count": 1
+    },
+    {
+      "team": "斯托克城",
+      "sample_count": 1
+    },
+    {
+      "team": "谢菲联",
+      "sample_count": 1
+    },
+    {
+      "team": "奥萨苏纳",
+      "sample_count": 1
+    },
+    {
+      "team": "巴列卡诺",
+      "sample_count": 1
+    },
+    {
+      "team": "乌迪内斯",
+      "sample_count": 1
+    },
+    {
+      "team": "卡利亚里",
+      "sample_count": 1
+    },
+    {
+      "team": "博洛尼亚",
+      "sample_count": 1
+    },
+    {
+      "team": "都灵",
+      "sample_count": 1
+    },
+    {
+      "team": "韦斯特罗",
+      "sample_count": 1
+    },
+    {
+      "team": "马尔默",
+      "sample_count": 1
+    },
+    {
+      "team": "法兰克福",
+      "sample_count": 1
+    },
+    {
+      "team": "弗赖堡",
+      "sample_count": 1
+    },
+    {
+      "team": "汉堡",
+      "sample_count": 1
+    },
+    {
+      "team": "科隆",
+      "sample_count": 1
+    },
+    {
+      "team": "门兴",
+      "sample_count": 1
+    },
+    {
+      "team": "美因茨",
+      "sample_count": 1
+    },
+    {
+      "team": "不来梅",
+      "sample_count": 1
+    },
+    {
+      "team": "奥格斯堡",
+      "sample_count": 1
+    },
+    {
+      "team": "埃弗顿",
+      "sample_count": 1
+    },
+    {
+      "team": "伊普斯",
+      "sample_count": 1
+    },
+    {
+      "team": "纽卡斯尔",
+      "sample_count": 1
+    },
+    {
+      "team": "赫尔城",
+      "sample_count": 1
+    },
+    {
+      "team": "克里斯蒂",
+      "sample_count": 1
+    },
+    {
+      "team": "罗森博格",
+      "sample_count": 1
+    },
+    {
+      "team": "毕尔巴鄂",
+      "sample_count": 1
+    },
+    {
+      "team": "阿拉维斯",
+      "sample_count": 1
+    },
+    {
+      "team": "巴黎FC",
+      "sample_count": 1
+    },
+    {
+      "team": "斯特拉斯",
+      "sample_count": 1
+    },
+    {
+      "team": "罗马",
+      "sample_count": 1
+    },
+    {
+      "team": "国际米兰",
+      "sample_count": 1
+    },
+    {
+      "team": "诺丁汉",
+      "sample_count": 1
+    },
+    {
+      "team": "考文垂",
+      "sample_count": 1
+    },
+    {
+      "team": "斯图加特",
+      "sample_count": 1
+    },
+    {
+      "team": "多特蒙德",
+      "sample_count": 1
+    },
+    {
+      "team": "塞尔塔",
+      "sample_count": 1
+    },
+    {
+      "team": "桑坦德",
+      "sample_count": 1
+    },
+    {
+      "team": "威尼斯",
+      "sample_count": 1
+    },
+    {
+      "team": "拉齐奥",
+      "sample_count": 1
+    },
+    {
+      "team": "昂热",
+      "sample_count": 1
+    },
+    {
+      "team": "特鲁瓦",
+      "sample_count": 1
+    },
+    {
+      "team": "里昂",
+      "sample_count": 1
+    },
+    {
+      "team": "雷恩",
+      "sample_count": 1
+    },
+    {
+      "team": "米拉索尔",
+      "sample_count": 1
+    },
+    {
+      "team": "博塔弗戈",
+      "sample_count": 1
+    }
+  ],
+  "hidden_model_reverse": {
+    "status": "RESEARCH_ONLY",
+    "note": "Produces observations only; never writes Stable parameters."
+  },
+  "risk_analysis": {
+    "status": "RESEARCH_ONLY",
+    "pass_or_unknown_count": 40
+  },
+  "causal_analysis": {
+    "status": "HYPOTHESIS_ONLY",
+    "note": "Associations are not promoted to causal claims without controlled evidence."
+  },
+  "confidence_analysis": {
+    "status": "RESEARCH_ONLY",
+    "sample_count": 40
+  },
+  "candidate_rules": [
+    {
+      "id": "CR-SAMPLE-001",
+      "status": "CANDIDATE_ONLY",
+      "statement": "Sample size is sufficient for segmented review; no Stable change is authorized.",
+      "evidence_count": 40
+    }
+  ],
+  "promotion_policy": "MANUAL_REVIEW_REQUIRED",
+  "collection": [
+    {
+      "date": "2026-09-18",
+      "captured_at": "2026-09-20T03:58:12.445914+00:00",
+      "source_url": "https://www.hh520.com/tx/10023s.php?riqi=2026-09-18&threshold=1&bankroll=5000",
+      "match_count": 13
+    },
+    {
+      "date": "2026-09-19",
+      "captured_at": "2026-09-20T03:58:54.301989+00:00",
+      "source_url": "https://www.hh520.com/tx/10023s.php?riqi=2026-09-19&threshold=1&bankroll=5000",
+      "match_count": 27
+    }
+  ],
+  "status": "READY",
   "_action": {
     "request_id": "research-20260918-r4t8n2c7",
     "repository": "ltaln/HH520-stable-V2",
