@@ -8,6 +8,38 @@ from research.lab import date_range, build_research_report
 from research.result_label.collector import collect_result_labels
 
 
+def _present(value):
+    return value not in (None, "", [], {}, "-", "--", "—")
+
+
+def _prediction_coverage(records):
+    coverage = {
+        "records": len(records),
+        "single": 0,
+        "htft": 0,
+        "scores": 0,
+        "total_goals": 0,
+        "page_probability": 0,
+        "actual_half_score": 0,
+        "actual_full_score": 0,
+    }
+    for record in records:
+        prediction = (record.get("page_prediction") or {}) if isinstance(record, dict) else {}
+        coverage["single"] += int(_present(prediction.get("single")))
+        coverage["htft"] += int(_present(prediction.get("htft")))
+        coverage["scores"] += int(bool(prediction.get("score_options")) or _present(prediction.get("scores")))
+        coverage["total_goals"] += int(_present(prediction.get("total_goals")))
+        coverage["page_probability"] += int(_present(record.get("page_probability")))
+        coverage["actual_half_score"] += int(_present(record.get("half_score")))
+        coverage["actual_full_score"] += int(_present(record.get("result")))
+    coverage["source_note"] = (
+        "10027s exposes actual HT/FT scores and fusion WDL/HTFT fields. "
+        "Its page and 10024 copy-prediction payload do not expose score-prediction "
+        "or total-goals-prediction fields; zero coverage is a source limitation, not a matcher failure."
+    )
+    return coverage
+
+
 def collect_window(start, end):
     records = []
     collection = []
@@ -36,6 +68,7 @@ def collect_window(start, end):
         records, start, end, result_labels=result_labels
     )
     report["collection"] = collection
+    report["prediction_coverage"] = _prediction_coverage(records)
     report["result_collection"] = {
         "source": "HH520_10027s_RESULT_LABEL",
         "collected": len(result_labels),
