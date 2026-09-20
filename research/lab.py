@@ -3,6 +3,7 @@ from collections import Counter, defaultdict
 from datetime import date, timedelta
 from research.sanitizer import sanitize_records
 from research.backtest_engine import evaluate
+from research.result_label.matcher import match_results
 
 MAX_DAYS = 31
 
@@ -45,6 +46,7 @@ def _candidate_rules(records):
 
 def build_research_report(records, start=None, end=None, source="HH520_10023s", result_labels=None):
     clean, audit = sanitize_records(records)
+    joined = match_results(clean, result_labels or [])
     return {
         "system": "HH520 Research Lab V2",
         "stable_access": "READ_ONLY",
@@ -55,7 +57,11 @@ def build_research_report(records, start=None, end=None, source="HH520_10023s", 
         "sanitizer": {"pollution_events": len(audit), "audit": audit},
         "league_dna": _league_dna(clean),
         "team_dna": _team_dna(clean),
-        "backtest": evaluate([] if result_labels is None else clean),
+        "backtest": evaluate(joined),
+        "result_label_layer": {
+            "enabled": True,
+            "matched": len([x for x in joined if x.get("label_status") == "MATCHED"])
+        },
         "hidden_model_reverse": {"status": "RESEARCH_ONLY"},
         "risk_analysis": {"status": "RESEARCH_ONLY"},
         "causal_analysis": {"status": "HYPOTHESIS_ONLY"},
