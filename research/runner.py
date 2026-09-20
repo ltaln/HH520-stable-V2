@@ -17,32 +17,42 @@ def _prediction_coverage(records):
         "records": len(records),
         "single": 0,
         "htft": 0,
-        "scores": 0,
-        "total_goals": 0,
+        "predicted_score": 0,
+        "predicted_total_goals": 0,
+        "predicted_total_goals_explicit": 0,
+        "predicted_total_goals_derived_from_score": 0,
         "page_probability": 0,
         "actual_half_score": 0,
-        "actual_full_score": 0,
+        "actual_score": 0,
         "actual_total_goals": 0,
     }
     for record in records:
         prediction = (record.get("page_prediction") or {}) if isinstance(record, dict) else {}
         coverage["single"] += int(_present(prediction.get("single")))
         coverage["htft"] += int(_present(prediction.get("htft")))
-        coverage["scores"] += int(bool(prediction.get("score_options")) or _present(prediction.get("scores")))
-        coverage["total_goals"] += int(_present(prediction.get("total_goals")))
+        has_predicted_score = bool(prediction.get("score_options")) or _present(prediction.get("scores"))
+        has_explicit_total_goals = _present(prediction.get("total_goals"))
+        coverage["predicted_score"] += int(has_predicted_score)
+        coverage["predicted_total_goals_explicit"] += int(has_explicit_total_goals)
+        coverage["predicted_total_goals_derived_from_score"] += int(has_predicted_score and not has_explicit_total_goals)
+        coverage["predicted_total_goals"] += int(has_explicit_total_goals or has_predicted_score)
         coverage["page_probability"] += int(_present(record.get("page_probability")))
         coverage["actual_half_score"] += int(_present(record.get("half_score")))
-        coverage["actual_full_score"] += int(_present(record.get("result")))
+        coverage["actual_score"] += int(_present(record.get("result")))
         result_text = str(record.get("result") or "")
         import re
         match = re.search(r"(\d+)\s*[-:：]\s*(\d+)", result_text)
         if match:
             coverage["actual_total_goals"] += 1
+    coverage["legacy_aliases"] = {
+        "scores": coverage["predicted_score"],
+        "total_goals": coverage["predicted_total_goals"],
+        "actual_full_score": coverage["actual_score"],
+    }
     coverage["source_note"] = (
-        "10027s exposes actual HT/FT scores; actual total goals are derived from the full-time score. "
-        "It also exposes fusion WDL/HTFT fields. Its page and 10024 copy-prediction payload do not "
-        "expose score-prediction or total-goals-prediction fields; zero prediction coverage is a source "
-        "limitation, not a matcher failure."
+        "actual_score and actual_total_goals are Result Labels. predicted_score and predicted_total_goals "
+        "are Prediction fields used only for accuracy evaluation. predicted_total_goals is derived from "
+        "predicted_score when no explicit total-goals prediction exists."
     )
     return coverage
 
