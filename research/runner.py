@@ -11,7 +11,14 @@ def collect_window(start, end):
     for day in date_range(start, end):
         data = collect_date(day)
         matches = data.get("matches", [])
-        records.extend(matches)
+        for match in matches:
+            if not isinstance(match, dict):
+                raise ValueError("collector returned a non-object match")
+            # The requested collection day is the authoritative date source;
+            # never trust a date embedded in page content.
+            record = dict(match)
+            record["date"] = day
+            records.append(record)
         collection.append({
             "date": day,
             "captured_at": data.get("captured_at"),
@@ -30,6 +37,8 @@ def main(argv=None):
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
     end = args.end or args.start
+    # Validate both online and offline requests through the same bounded path.
+    date_range(args.start, end)
 
     if args.input:
         payload = json.loads(args.input.read_text(encoding="utf-8"))

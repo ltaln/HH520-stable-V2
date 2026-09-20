@@ -1,30 +1,25 @@
 name: HH520 Research Lab V1
-
+run-name: "research - ${{ inputs.request_id }}"
 on:
   workflow_dispatch:
     inputs:
       request_id:
-        description: "Unique research request id"
         required: true
         type: string
       start_date:
-        description: "YYYY-MM-DD"
         required: true
         type: string
       end_date:
-        description: "YYYY-MM-DD"
         required: true
         type: string
-
 permissions:
   contents: write
-
 concurrency:
-  group: hh520-research
+  # Both workflows share the collector cache. Serialize to avoid duplicate dates.
+  group: hh520-collection-main
   cancel-in-progress: false
-
 jobs:
-  research:
+  run:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
@@ -32,42 +27,46 @@ jobs:
       PYTHONUTF8: "1"
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
           cache: pip
       - run: python -m pip install -r requirements.txt
-      - name: Run Research Lab
+      - name: Validate request
         env:
           REQUEST_ID: ${{ inputs.request_id }}
           START_DATE: ${{ inputs.start_date }}
           END_DATE: ${{ inputs.end_date }}
         run: |
           set -euo pipefail
-          [[ "$REQUEST_ID" =~ ^[A-Za-z0-9_-]{8,80}$ ]]
-          mkdir -p _research_out
-          python -m research.runner "$START_DATE" "$END_DATE" --output "_research_out/$REQUEST_ID.json"
+          [[ "$REQUEST_ID" =~ ^[A-Za-z0-9_-]{8,80}$ ]] || exit 2
+          test -n "$FIRECRAWL_API_KEY" || { echo "FIRECRAWL_API_KEY secret is missing"; exit 3; }
+          python -c 'import os; from research.lab import date_range; date_range(os.environ["START_DATE"],os.environ["END_DATE"])'
+      - name: Restore collection cache
+        id: restore
+        uses: actions/cache/restore@v4
+        with:
+          path: cache
+          key: hh520-collection-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: hh520-collection-v1-
+      - name: Run research
+        env:
+          REQUEST_ID: ${{ inputs.request_id }}
+          START_DATE: ${{ inputs.start_date }}
+          END_DATE: ${{ inputs.end_date }}
+        run: |
+          set -euo pipefail
+          mkdir -p _action_out
+          python -m research.runner "$START_DATE" "$END_DATE" --output "_action_out/$REQUEST_ID.json"
+      - name: Preserve cache and request ledger even after failure
+        if: always() && steps.restore.outcome == 'success'
+        uses: actions/cache/save@v4
+        with:
+          path: cache
+          key: hh520-collection-v1-${{ github.run_id }}-${{ github.run_attempt }}
       - name: Publish isolated research result
         env:
           REQUEST_ID: ${{ inputs.request_id }}
-        run: |
-          set -euo pipefail
-          result_file="$GITHUB_WORKSPACE/_research_out/$REQUEST_ID.json"
-          test -f "$result_file"
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          workdir="$(mktemp -d)"
-          if git ls-remote --exit-code --heads origin research-results >/dev/null 2>&1; then
-            git clone --depth 1 --branch research-results "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git" "$workdir"
-          else
-            git clone --depth 1 "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git" "$workdir"
-            cd "$workdir"
-            git checkout --orphan research-results
-            git rm -rf . >/dev/null 2>&1 || true
-          fi
-          cd "$workdir"
-          mkdir -p results
-          cp "$result_file" "results/$REQUEST_ID.json"
-          git add "results/$REQUEST_ID.json"
-          git commit -m "research: $REQUEST_ID"
-          git push origin HEAD:research-results
+        run: python scripts/publish_action_result.py "_action_out/$REQUEST_ID.json" "research-results" "$REQUEST_ID"

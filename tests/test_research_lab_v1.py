@@ -12,6 +12,15 @@ def test_sanitizer_removes_post_match_fields():
     assert set(removed) == {"final_score", "result"}
     assert clean["home_team"] == "A"
 
+def test_sanitizer_removes_nested_post_match_fields():
+    clean, removed = sanitize_record({
+        "home_team": "A",
+        "market": {"home_odds": 2.0, "result": "2:1"},
+        "page_prediction": {"scores": "2-1", "post_match_note": "final"},
+    })
+    assert clean == {"home_team": "A", "market": {"home_odds": 2.0}, "page_prediction": {}}
+    assert set(removed) == {"result", "scores", "post_match_note"}
+
 def test_research_report_never_promotes_to_stable():
     records = [{"league": "L", "home_team": "A", "away_team": "B", "status": "READY_FOR_GPT"}]
     report = build_research_report(records, "2026-09-01", "2026-09-01")

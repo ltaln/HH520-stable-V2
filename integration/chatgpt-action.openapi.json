@@ -27,16 +27,24 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["ref", "inputs"],
+                "required": [
+                  "ref",
+                  "inputs"
+                ],
                 "properties": {
                   "ref": {
                     "type": "string",
-                    "enum": ["main"],
+                    "enum": [
+                      "main"
+                    ],
                     "default": "main"
                   },
                   "inputs": {
                     "type": "object",
-                    "required": ["request_id", "command"],
+                    "required": [
+                      "request_id",
+                      "command"
+                    ],
                     "properties": {
                       "request_id": {
                         "type": "string",
@@ -45,7 +53,7 @@
                       },
                       "command": {
                         "type": "string",
-                        "description": "Use exactly: 预测 YYYY-MM-DD 全部比赛"
+                        "description": "Use exactly: Ԥ�� YYYY-MM-DD ȫ������"
                       }
                     }
                   }
@@ -81,7 +89,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["action-results"],
+              "enum": [
+                "action-results"
+              ],
               "default": "action-results"
             }
           },
@@ -91,7 +101,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["application/vnd.github.raw+json"],
+              "enum": [
+                "application/vnd.github.raw+json"
+              ],
               "default": "application/vnd.github.raw+json"
             }
           }
@@ -99,6 +111,132 @@
         "responses": {
           "200": {
             "description": "Prepared result JSON. Use gpt_handoff.prompt, gpt_handoff.config and all gpt_handoff.matches for final reasoning.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Result is not ready yet. Retry this GET; do not dispatch a duplicate workflow."
+          }
+        }
+      }
+    },
+    "/repos/ltaln/HH520-stable-V2/actions/workflows/hh520-research.yml/dispatches": {
+      "post": {
+        "operationId": "startHH520Research",
+        "summary": "Collect a date range for isolated Research Lab V1",
+        "x-openai-isConsequential": false,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "ref",
+                  "inputs"
+                ],
+                "properties": {
+                  "ref": {
+                    "type": "string",
+                    "enum": [
+                      "main"
+                    ],
+                    "default": "main"
+                  },
+                  "inputs": {
+                    "type": "object",
+                    "required": [
+                      "request_id",
+                      "start_date",
+                      "end_date"
+                    ],
+                    "properties": {
+                      "request_id": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9_-]{8,80}$",
+                        "description": "Generate a unique id, for example hh520-20260920-a1b2c3d4."
+                      },
+                      "start_date": {
+                        "type": "string",
+                        "format": "date"
+                      },
+                      "end_date": {
+                        "type": "string",
+                        "format": "date"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Workflow accepted by GitHub Actions."
+          }
+        }
+      }
+    },
+    "/repos/ltaln/HH520-stable-V2/contents/{directory}/{request_id}.json": {
+      "get": {
+        "operationId": "getHH520ResearchResult",
+        "summary": "Read isolated Research JSON without modifying Stable",
+        "parameters": [
+          {
+            "name": "directory",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "results"
+              ]
+            }
+          },
+          {
+            "name": "request_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{8,80}$"
+            }
+          },
+          {
+            "name": "ref",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "research-results"
+              ],
+              "default": "research-results"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "application/vnd.github.raw+json"
+              ],
+              "default": "application/vnd.github.raw+json"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Research Lab report only. No automatic promotion into Stable.",
             "content": {
               "application/json": {
                 "schema": {
