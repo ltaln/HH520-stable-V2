@@ -1,12 +1,22 @@
-"""Robust parser for HH520 10027s comprehensive pages.
+"""Parser for HH520 10027s comprehensive page.
 
-Research-facing parser only. It uses tolerant header matching and merges
-multiple table sections for the same match so prediction/result fields can
-live in different blocks.
+Uses the actual 10027s page structure:
+1) settlement/base table with match identity + HT/FT actual scores;
+2) fusion summary tables with single/probability/HTFT prediction fields.
+The two sections are merged by match_id.
 """
 import math
 import re
 from typing import Dict, List
+
+
+BASE_HEADER = [
+    "日期", "场次", "联赛", "时间", "比分", "胜", "平", "负",
+    "主队", "主控球率", "客控球率", "客队", "半场比分", "全场比分",
+    "差值", "区间", "平滑p", "EV", "凯利比例", "建议下注", "是否下注",
+]
+
+FUSION_PREFIX = ["日期", "排名", "场次", "对阵", "比赛结果"]
 
 
 def _cells(line):
@@ -15,36 +25,34 @@ def _cells(line):
     return [x.strip().replace("<br>", " ") for x in str(line).strip().strip("|").split("|")]
 
 
-def _norm_header(value):
-    text = re.sub(r"\s+", "", str(value or "")).strip().lower()
-    text = text.replace("（", "(").replace("）", ")")
-    return text
+def _strip_md(value):
+    return re.sub(r"\*\*", "", str(value or "")).strip()
 
 
 def _num(value):
-    raw = str(value or "").replace("%", "").strip()
+    raw = _strip_md(value).replace("%", "")
     if raw in {"", "-", "--", "—"}:
         return None
     try:
-        parsed = float(raw)
+        v = float(raw)
     except Exception:
         return None
-    return parsed if math.isfinite(parsed) else None
+    return v if math.isfinite(v) else None
 
 
 def _match_id(value):
-    m = re.search(r"(\d+)", str(value or ""))
+    m = re.search(r"(\d+)", _strip_md(value))
     return str(int(m.group(1))) if m else None
 
 
 def _score(value):
-    m = re.search(r"(\d+)\s*[-:：]\s*(\d+)", str(value or ""))
+    m = re.search(r"(\d+)\s*[-:：]\s*(\d+)", _strip_md(value))
     return f"{int(m.group(1))}-{int(m.group(2))}" if m else None
 
 
 def _score_options(value):
     out = []
-    for home, away in re.findall(r"(\d+)\s*[-:：]\s*(\d+)", str(value or "")):
+    for home, away in re.findall(r"(\d+)\s*[-:：]\s*(\d+)", _strip_md(value)):
         item = {"home": int(home), "away": int(away)}
         if item not in out:
             out.append(item)
@@ -52,7 +60,7 @@ def _score_options(value):
 
 
 def _probability(value):
-    nums = [float(x) for x in re.findall(r"\d+(?:\.\d+)?", str(value or "").replace("%", ""))]
+    nums = [float(x) for x in re.findall(r"\d+(?:\.\d+)?", _strip_md(value).replace("%", ""))]
     if len(nums) < 3:
         return None
     nums = nums[:3]
@@ -63,248 +71,152 @@ def _probability(value):
 
 
 def _split_pair(value):
-    raw = str(value or "").strip()
-    parts = re.split(r"\s*(?:vs|VS|v|V|—|–)\s*", raw, maxsplit=1)
-    if len(parts) != 2:
-        parts = re.split(r"\s+-\s+", raw, maxsplit=1)
-    if len(parts) == 2 and parts[0] and parts[1]:
+    raw = _strip_md(value).replace("<br>", " ")
+    parts = re.split(r"\s*(?:vs|VS|v|V)\s*", raw, maxsplit=1)
+    if len(parts) == 2:
         return parts[0].strip(), parts[1].strip()
     return "", ""
 
 
-ALIASES = {
-    "match_id": ["场次", "编号", "赛事编号", "序号"],
-    "date": ["日期", "比赛日期", "riqi"],
-    "league": ["联赛", "赛事", "联赛名称"],
-    "kickoff": ["时间", "开赛时间", "比赛时间", "开球时间"],
-    "home_team": ["主队", "主队名称"],
-    "away_team": ["客队", "客队名称"],
-    "matchup": ["对阵", "比赛对阵", "主客队"],
-    "full_score": ["全场比分", "最终比分", "比赛结果", "赛果", "实际比分", "完场比分", "比分"],
-    "half_score": ["半场比分", "上半场比分", "半场赛果", "半场结果", "半场"],
-    "home_odds": ["主胜赔率", "主胜", "胜"],
-    "draw_odds": ["平局赔率", "平赔率", "平局", "平"],
-    "away_odds": ["客胜赔率", "客胜", "负"],
-    "ev": ["ev", "期望值", "价值"],
-    "kelly": ["凯利比例", "凯利"],
-    "signal": ["是否下注", "建议下注", "下注建议", "建议"],
-    "probability": ["融合真实概率", "真实概率", "胜平负概率", "概率"],
-    "single": ["单选", "胜平负预测", "胜平负推荐", "预测方向", "推荐方向"],
-    "htft": ["半全场预测", "半全场推荐", "半全场"],
-    "scores": ["最可能比分", "预测比分", "比分预测", "推荐比分", "比分推荐", "参考比分"],
-    "total_goals": ["总进球预测", "总进球推荐", "预测总进球", "总进球", "进球数", "进球数预测"],
-    "attack": ["进攻", "进攻值"],
-    "defense": ["防守", "防守值"],
-    "head_to_head": ["交锋", "交锋值"],
-    "form": ["状态", "状态值"],
-}
+def _header_starts(cells, expected):
+    normalized = [_strip_md(x) for x in cells]
+    return normalized[:len(expected)] == expected
 
 
-def _header_matches(header, alias):
-    h = _norm_header(header)
-    a = _norm_header(alias)
-    if not h or not a:
-        return False
-    if h == a:
-        return True
-    # Prediction/result fields often carry prefixes/suffixes on 10027s.
-    return a in h or h in a
-
-
-def _alias_index(headers):
-    result = {}
-    for key, names in ALIASES.items():
-        for pos, header in enumerate(headers):
-            if any(_header_matches(header, name) for name in names):
-                result[key] = pos
-                break
-    return result
-
-
-def _get(row, indexes, key):
-    pos = indexes.get(key)
-    if pos is None or pos >= len(row):
-        return ""
-    return row[pos].strip()
-
-
-def _looks_like_separator(row):
-    if not row:
-        return True
-    return all(re.fullmatch(r"[:\- ]*", cell or "") for cell in row)
-
-
-def _prediction_score_value(row, headers, indexes):
-    direct = _get(row, indexes, "scores")
-    if _score_options(direct):
-        return direct
-
-    # Do not steal actual/full-time score columns.
-    for pos, value in enumerate(row):
-        if not _score_options(value):
-            continue
-        header = _norm_header(headers[pos]) if pos < len(headers) else ""
-        if any(token in header for token in ("预测", "推荐", "最可能", "参考")) and "半场" not in header:
-            return value
-    return ""
-
-
-def _total_goals_value(row, headers, indexes):
-    direct = _get(row, indexes, "total_goals")
-    if direct and direct not in {"-", "--", "—"}:
-        return direct
-
-    for pos, value in enumerate(row):
-        raw = str(value or "").strip()
-        if not raw or raw in {"-", "--", "—"}:
-            continue
-        header = _norm_header(headers[pos]) if pos < len(headers) else ""
-        if ("总进球" in header or "进球数" in header) and any(
-            token in header for token in ("预测", "推荐", "参考", "总进球", "进球数")
-        ):
-            return raw
-    return ""
-
-
-def _htft_value(row, headers, indexes):
-    direct = _get(row, indexes, "htft")
-    if direct and direct not in {"-", "--", "—"}:
-        return direct
-    for pos, value in enumerate(row):
-        raw = str(value or "").strip()
-        header = _norm_header(headers[pos]) if pos < len(headers) else ""
-        if raw and "半全场" in header and any(token in header for token in ("预测", "推荐", "半全场")):
-            return raw
-    return ""
-
-
-def _merge(current, item):
-    for field in ("date", "home_team", "away_team", "league", "kickoff", "result", "half_score"):
-        if not current.get(field) and item.get(field):
-            current[field] = item[field]
-
-    for section in ("market", "value", "team_dna", "page_prediction"):
-        current.setdefault(section, {})
-        for field, value in (item.get(section) or {}).items():
-            if current[section].get(field) in (None, "", [], {}) and value not in (None, "", [], {}):
-                current[section][field] = value
-
-    if current.get("page_probability") is None and item.get("page_probability") is not None:
-        current["page_probability"] = item["page_probability"]
+def _empty_prediction():
+    return {
+        "single": None,
+        "htft": None,
+        "scores": "",
+        "score_options": [],
+        "total_goals": None,
+    }
 
 
 def parse_10027s_markdown(markdown: str) -> List[Dict]:
     lines = [x.strip() for x in str(markdown or "").splitlines() if x.strip()]
+
+    base_header_index = None
+    for i, line in enumerate(lines):
+        cells = _cells(line)
+        if _header_starts(cells, BASE_HEADER):
+            base_header_index = i
+            break
+    if base_header_index is None:
+        raise ValueError("10027s 缺少结算基础表")
+
     records = {}
     order = []
-    fallback_id = 0
 
-    i = 0
+    # The first 21 fields are stable even though later grouped headers expand
+    # into separate home/away cells in markdown.
+    i = base_header_index + 1
     while i < len(lines):
-        headers = _cells(lines[i])
-        if not headers:
+        cells = _cells(lines[i])
+        if not cells:
+            break
+        if all(re.fullmatch(r"[:\- ]*", x or "") for x in cells):
             i += 1
             continue
 
-        indexes = _alias_index(headers)
-        has_identity = "match_id" in indexes or "matchup" in indexes or (
-            "home_team" in indexes and "away_team" in indexes
-        )
-        if not has_identity:
+        day = _strip_md(cells[0]) if len(cells) > 0 else ""
+        mid = _match_id(cells[1]) if len(cells) > 1 else None
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", day) or mid is None:
             i += 1
             continue
 
+        league = _strip_md(cells[2]) if len(cells) > 2 else ""
+        kickoff = _strip_md(cells[3]) if len(cells) > 3 else ""
+        combined_score = _strip_md(cells[4]) if len(cells) > 4 else ""
+        home = _strip_md(cells[8]) if len(cells) > 8 else ""
+        away = _strip_md(cells[11]) if len(cells) > 11 else ""
+        half_score = _score(cells[12]) if len(cells) > 12 else None
+        full_score = _score(cells[13]) if len(cells) > 13 else None
+
+        # Defensive fallback: combined "HT / FT" column.
+        if (half_score is None or full_score is None) and "/" in combined_score:
+            parts = combined_score.split("/", 1)
+            half_score = half_score or _score(parts[0])
+            full_score = full_score or _score(parts[1])
+
+        item = {
+            "match_id": mid,
+            "date": day,
+            "home_team": home,
+            "away_team": away,
+            "league": league,
+            "kickoff": kickoff,
+            "result": full_score,
+            "half_score": half_score,
+            "market": {
+                "home_odds": _num(cells[5]) if len(cells) > 5 else None,
+                "draw_odds": _num(cells[6]) if len(cells) > 6 else None,
+                "away_odds": _num(cells[7]) if len(cells) > 7 else None,
+            },
+            "page_probability": None,
+            "value": {
+                "ev": _num(cells[17]) if len(cells) > 17 else None,
+                "kelly": _num(cells[18]) if len(cells) > 18 else None,
+                "signal": _strip_md(cells[20]) if len(cells) > 20 else "",
+            },
+            "team_dna": {},
+            "page_prediction": _empty_prediction(),
+        }
+        key = (day, mid)
+        records[key] = item
+        order.append(key)
+        i += 1
+
+    # Merge every fusion summary table into the settlement/base records.
+    for i, line in enumerate(lines):
+        header = _cells(line)
+        if not _header_starts(header, FUSION_PREFIX):
+            continue
+
+        h = [_strip_md(x).replace("\n", "") for x in header]
+        index = {name: pos for pos, name in enumerate(h)}
         j = i + 1
         while j < len(lines):
             row = _cells(lines[j])
             if not row:
                 break
-
-            # A new recognizable table header starts another section.
-            next_indexes = _alias_index(row)
-            if next_indexes and (
-                "match_id" in next_indexes
-                or "matchup" in next_indexes
-                or ("home_team" in next_indexes and "away_team" in next_indexes)
-            ):
+            if all(re.fullmatch(r"[:\- ]*", x or "") for x in row):
+                j += 1
+                continue
+            if _header_starts(row, FUSION_PREFIX):
                 break
 
-            if _looks_like_separator(row):
+            day = _strip_md(row[index["日期"]]) if index.get("日期") is not None and index["日期"] < len(row) else ""
+            mid = _match_id(row[index["场次"]]) if index.get("场次") is not None and index["场次"] < len(row) else None
+            if not day or mid is None:
                 j += 1
                 continue
 
-            mid = _match_id(_get(row, indexes, "match_id"))
-            home = _get(row, indexes, "home_team")
-            away = _get(row, indexes, "away_team")
-
-            if (not home or not away) and "matchup" in indexes:
-                pair_home, pair_away = _split_pair(_get(row, indexes, "matchup"))
-                home = home or pair_home
-                away = away or pair_away
-
-            if not mid and not (home and away):
+            key = (day[:10], mid)
+            item = records.get(key)
+            if item is None:
+                # Team fallback only if base row could not be keyed.
+                matchup = row[index["对阵"]] if index.get("对阵") is not None and index["对阵"] < len(row) else ""
+                home, away = _split_pair(matchup)
+                for candidate in records.values():
+                    if candidate["date"] == day[:10] and candidate["home_team"] == home and candidate["away_team"] == away:
+                        item = candidate
+                        break
+            if item is None:
                 j += 1
                 continue
 
-            full_raw = _get(row, indexes, "full_score")
-            half_raw = _get(row, indexes, "half_score")
-            full_score = _score(full_raw)
-            half_score = _score(half_raw)
+            def value(name):
+                pos = index.get(name)
+                return _strip_md(row[pos]) if pos is not None and pos < len(row) else ""
 
-            scores_raw = _prediction_score_value(row, headers, indexes)
-            total_goals_raw = _total_goals_value(row, headers, indexes)
-            htft_raw = _htft_value(row, headers, indexes)
-
-            if mid:
-                key = ("id", mid)
-            else:
-                key = ("teams", home.strip().lower(), away.strip().lower())
-
-            fallback_id += 1
-            item = {
-                "match_id": mid or str(fallback_id),
-                "date": _get(row, indexes, "date"),
-                "home_team": home,
-                "away_team": away,
-                "league": _get(row, indexes, "league"),
-                "kickoff": _get(row, indexes, "kickoff"),
-                "result": full_score or full_raw,
-                "half_score": half_score,
-                "market": {
-                    "home_odds": _num(_get(row, indexes, "home_odds")),
-                    "draw_odds": _num(_get(row, indexes, "draw_odds")),
-                    "away_odds": _num(_get(row, indexes, "away_odds")),
-                },
-                "page_probability": _probability(_get(row, indexes, "probability")),
-                "value": {
-                    "ev": _num(_get(row, indexes, "ev")),
-                    "kelly": _num(_get(row, indexes, "kelly")),
-                    "signal": _get(row, indexes, "signal"),
-                },
-                "team_dna": {
-                    "attack": _get(row, indexes, "attack"),
-                    "defense": _get(row, indexes, "defense"),
-                    "head_to_head": _get(row, indexes, "head_to_head"),
-                    "form": _get(row, indexes, "form"),
-                },
-                "page_prediction": {
-                    "single": _get(row, indexes, "single") or None,
-                    "htft": htft_raw or None,
-                    "scores": scores_raw,
-                    "score_options": _score_options(scores_raw),
-                    "total_goals": total_goals_raw or None,
-                },
-            }
-
-            if key not in records:
-                records[key] = item
-                order.append(key)
-            else:
-                _merge(records[key], item)
+            item["page_prediction"]["single"] = value("单选") or item["page_prediction"].get("single")
+            item["page_prediction"]["htft"] = value("半全场") or item["page_prediction"].get("htft")
+            probability = _probability(value("融合真实概率"))
+            if probability is not None:
+                item["page_probability"] = probability
 
             j += 1
-
-        i = j if j > i else i + 1
 
     result = [records[key] for key in order]
     if not result:
