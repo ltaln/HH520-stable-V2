@@ -1,25 +1,25 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "HH520 Stable V2",
-    "version": "1.5",
-    "description": "10023s数据准备，GPT在ChatGPT对话中完成最终推理。"
+    "title": "HH520 Stable V2 - GitHub Actions Bridge",
+    "version": "2.0",
+    "description": "Trigger HH520 Stable V2 on GitHub Actions and read the prepared GPT handoff. No standalone server is required."
   },
   "servers": [
     {
-      "url": "https://REPLACE-WITH-YOUR-DEPLOYED-HOST"
+      "url": "https://api.github.com"
     }
   ],
   "security": [
     {
-      "bearerAuth": []
+      "githubToken": []
     }
   ],
   "paths": {
-    "/prepare": {
+    "/repos/ltaln/HH520-stable-V2/actions/workflows/hh520-predict.yml/dispatches": {
       "post": {
-        "operationId": "preparePrediction",
-        "summary": "准备指定日期的10023s结构化分析",
+        "operationId": "startHH520Prediction",
+        "summary": "Start one HH520 prediction preparation run",
         "x-openai-isConsequential": false,
         "requestBody": {
           "required": true,
@@ -27,13 +27,27 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "command"
-                ],
+                "required": ["ref", "inputs"],
                 "properties": {
-                  "command": {
+                  "ref": {
                     "type": "string",
-                    "description": "预测 YYYY-MM-DD 全部比赛"
+                    "enum": ["main"],
+                    "default": "main"
+                  },
+                  "inputs": {
+                    "type": "object",
+                    "required": ["request_id", "command"],
+                    "properties": {
+                      "request_id": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9_-]{8,80}$",
+                        "description": "Generate a unique id, for example hh520-20260920-a1b2c3d4."
+                      },
+                      "command": {
+                        "type": "string",
+                        "description": "Use exactly: 预测 YYYY-MM-DD 全部比赛"
+                      }
+                    }
                   }
                 }
               }
@@ -41,64 +55,61 @@
           }
         },
         "responses": {
-          "202": {
-            "description": "已排队，读取prepared接口",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Job"
-                }
-              }
-            }
+          "204": {
+            "description": "Workflow accepted by GitHub Actions."
           }
         }
       }
     },
-    "/prepared/{date}": {
+    "/repos/ltaln/HH520-stable-V2/contents/results/{request_id}.json": {
       "get": {
-        "operationId": "getPreparedPrediction",
-        "summary": "获取准备状态及每页最多10场分析",
+        "operationId": "getHH520PredictionResult",
+        "summary": "Read the prepared HH520 result after the workflow finishes",
         "parameters": [
           {
-            "name": "date",
+            "name": "request_id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "format": "date"
+              "pattern": "^[A-Za-z0-9_-]{8,80}$"
             }
           },
           {
-            "name": "offset",
+            "name": "ref",
             "in": "query",
-            "required": false,
+            "required": true,
             "schema": {
-              "type": "integer",
-              "minimum": 0,
-              "default": 0
+              "type": "string",
+              "enum": ["action-results"],
+              "default": "action-results"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["application/vnd.github.raw+json"],
+              "default": "application/vnd.github.raw+json"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "数据就绪；next_offset非空时继续获取",
+            "description": "Prepared result JSON. Use gpt_handoff.prompt, gpt_handoff.config and all gpt_handoff.matches for final reasoning.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Prepared"
+                  "type": "object",
+                  "additionalProperties": true
                 }
               }
             }
           },
-          "202": {
-            "description": "采集仍进行中",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Job"
-                }
-              }
-            }
+          "404": {
+            "description": "Result is not ready yet. Retry this GET; do not dispatch a duplicate workflow."
           }
         }
       }
@@ -106,75 +117,10 @@
   },
   "components": {
     "securitySchemes": {
-      "bearerAuth": {
+      "githubToken": {
         "type": "http",
-        "scheme": "bearer"
-      }
-    },
-    "schemas": {
-      "Job": {
-        "type": "object",
-        "properties": {
-          "date": {
-            "type": "string"
-          },
-          "status": {
-            "type": "string"
-          },
-          "result_path": {
-            "type": "string"
-          }
-        }
-      },
-      "Prepared": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string"
-          },
-          "date": {
-            "type": "string"
-          },
-          "captured_at": {
-            "type": "string"
-          },
-          "source_url": {
-            "type": "string"
-          },
-          "match_count": {
-            "type": "integer"
-          },
-          "eligible_count": {
-            "type": "integer"
-          },
-          "excluded": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "additionalProperties": true
-            }
-          },
-          "prompt": {
-            "type": "string"
-          },
-          "config": {
-            "type": "object",
-            "additionalProperties": true
-          },
-          "matches": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "additionalProperties": true
-            }
-          },
-          "next_offset": {
-            "type": [
-              "integer",
-              "null"
-            ]
-          }
-        }
+        "scheme": "bearer",
+        "description": "Fine-grained GitHub personal access token with repository access to ltaln/HH520-stable-V2, Actions read/write, Contents read."
       }
     }
   }
