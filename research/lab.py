@@ -1,6 +1,7 @@
-"""HH520 Research Lab V2. Stable is read-only; outputs are candidate research only."""
+"""HH520 Research Lab V2.1. Stable is read-only; outputs are candidate research only."""
 from collections import Counter, defaultdict
 from datetime import date, timedelta
+
 from research.sanitizer import sanitize_records
 from research.backtest_engine import evaluate
 from research.result_label.matcher import match_results
@@ -23,6 +24,8 @@ def _league_dna(records):
     for r in records:
         league = str(r.get("league") or r.get("competition") or "UNKNOWN")
         leagues[league]["matches"] += 1
+        if r.get("label_status") == "MATCHED":
+            leagues[league]["ready"] += 1
     return dict(leagues)
 
 
@@ -47,20 +50,27 @@ def _candidate_rules(records):
 def build_research_report(records, start=None, end=None, source="HH520_10023s", result_labels=None):
     clean, audit = sanitize_records(records)
     joined = match_results(clean, result_labels or [])
+    backtest = evaluate(joined)
+    matched_count = backtest.get("matched_results", 0)
+
     return {
-        "system": "HH520 Research Lab V2",
+        "system": "HH520 Research Lab V2.1",
         "stable_access": "READ_ONLY",
         "source": source,
         "window": {"from": start, "to": end},
         "input_count": len(records),
         "clean_count": len(clean),
         "sanitizer": {"pollution_events": len(audit), "audit": audit},
-        "league_dna": _league_dna(clean),
+        "league_dna": _league_dna(joined),
         "team_dna": _team_dna(clean),
-        "backtest": evaluate(joined),
+        "backtest": backtest,
         "result_label_layer": {
             "enabled": True,
-            "matched": len([x for x in joined if x.get("label_status") == "MATCHED"])
+            "collected": len(result_labels or []),
+            "matched": matched_count,
+            "unmatched": max(0, len(clean) - matched_count),
+            "isolation": "RESEARCH_ONLY",
+            "stable_access": "FORBIDDEN",
         },
         "hidden_model_reverse": {"status": "RESEARCH_ONLY"},
         "risk_analysis": {"status": "RESEARCH_ONLY"},
