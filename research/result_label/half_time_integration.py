@@ -1,9 +1,22 @@
-"""Research-only half-time integration helper.
-
-Keeps half-time labels isolated from Stable. Used by Research reports only.
-"""
+"""Research-only half-time integration helper."""
+import re
 
 from research.result_label.half_time_collector import build_htft
+
+
+def _normalize_htft(value):
+    raw = str(value or "").strip()
+    if not raw:
+        return None
+    upper = raw.upper().replace("-", "_").replace("/", "_").replace(" ", "")
+    if re.fullmatch(r"(HOME|DRAW|AWAY)_(HOME|DRAW|AWAY)", upper):
+        return upper
+
+    token_map = {"主": "HOME", "胜": "HOME", "平": "DRAW", "客": "AWAY", "负": "AWAY"}
+    chars = [c for c in raw if c in token_map]
+    if len(chars) >= 2:
+        return f"{token_map[chars[0]]}_{token_map[chars[1]]}"
+    return None
 
 
 def evaluate_half_time(predictions):
@@ -15,7 +28,7 @@ def evaluate_half_time(predictions):
         prediction = item.get("research_prediction") or {}
         page_prediction = prediction.get("page_prediction") or {}
 
-        predicted_htft = page_prediction.get("htft")
+        predicted_htft = _normalize_htft(page_prediction.get("htft"))
         half_score = label.get("half_score")
         full_score = label.get("full_score")
 
@@ -27,11 +40,12 @@ def evaluate_half_time(predictions):
             continue
 
         total += 1
-        hits += int(str(predicted_htft).upper() == str(actual_htft).upper())
+        hits += int(predicted_htft == actual_htft)
 
     return {
         "status": "READY" if total else "RESEARCH_ONLY",
         "sample_count": total,
         "hits": hits,
         "accuracy": hits / total if total else None,
+        "note": None if total else "No verified external half-time labels matched HT/FT predictions.",
     }
