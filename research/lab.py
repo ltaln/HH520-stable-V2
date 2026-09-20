@@ -1,4 +1,4 @@
-"""HH520 Research Lab V2.4. Stable is read-only; outputs are candidate research only."""
+"""HH520 Research Lab V2.5. Stable is read-only; outputs are candidate research only."""
 from collections import Counter, defaultdict
 from datetime import date, timedelta
 from copy import deepcopy
@@ -86,7 +86,7 @@ def _candidate_rules(records):
     }] if len(records) >= 20 else []
 
 
-def build_research_report(records, start=None, end=None, source="HH520_10023s", result_labels=None):
+def build_research_report(records, start=None, end=None, source="HH520_10027s", result_labels=None):
     prediction_snapshots = _prediction_snapshots(records)
     clean, audit = sanitize_records(records)
     joined = match_results(clean, result_labels or [])
@@ -95,7 +95,7 @@ def build_research_report(records, start=None, end=None, source="HH520_10023s", 
     matched_count = backtest.get("matched_results", 0)
 
     return {
-        "system": "HH520 Research Lab V2.4",
+        "system": "HH520 Research Lab V2.5",
         "stable_access": "READ_ONLY",
         "source": source,
         "window": {"from": start, "to": end},
