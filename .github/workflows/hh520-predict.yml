@@ -12,7 +12,6 @@ on:
 permissions:
   contents: write
 concurrency:
-  # Both workflows share the collector cache. Serialize to avoid duplicate dates.
   group: hh520-collection-main
   cancel-in-progress: false
 jobs:
@@ -22,24 +21,26 @@ jobs:
     env:
       FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
       PYTHONUTF8: "1"
+      REQUEST_ID: ${{ inputs.request_id }}
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: pip
-      - run: python -m pip install -r requirements.txt
       - name: Validate request
         env:
-          REQUEST_ID: ${{ inputs.request_id }}
           COMMAND: ${{ inputs.command }}
         run: |
           set -euo pipefail
           [[ "$REQUEST_ID" =~ ^[A-Za-z0-9_-]{8,80}$ ]] || exit 2
           test -n "$FIRECRAWL_API_KEY" || { echo "FIRECRAWL_API_KEY secret is missing"; exit 3; }
           python -c 'import os; from controller.command_router import parse_command; parse_command(os.environ["COMMAND"])'
+      - name: Publish PENDING immediately
+        run: python scripts/publish_action_status.py action-results "$REQUEST_ID" PENDING stable
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r requirements.txt
       - name: Restore collection cache
         id: restore
         uses: actions/cache/restore@v4
@@ -48,8 +49,8 @@ jobs:
           key: hh520-collection-v1-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: hh520-collection-v1-
       - name: Run stable
+        id: execute
         env:
-          REQUEST_ID: ${{ inputs.request_id }}
           COMMAND: ${{ inputs.command }}
         run: |
           set -euo pipefail
@@ -61,7 +62,9 @@ jobs:
         with:
           path: cache
           key: hh520-collection-v1-${{ github.run_id }}-${{ github.run_attempt }}
-      - name: Publish isolated stable result
-        env:
-          REQUEST_ID: ${{ inputs.request_id }}
+      - name: Publish READY result
+        if: steps.execute.outcome == 'success'
         run: python scripts/publish_action_result.py "_action_out/$REQUEST_ID.json" "action-results" "$REQUEST_ID"
+      - name: Publish FAILED state
+        if: failure() && steps.execute.outcome != 'success'
+        run: python scripts/publish_action_status.py action-results "$REQUEST_ID" FAILED stable
