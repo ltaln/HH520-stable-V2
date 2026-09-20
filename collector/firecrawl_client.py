@@ -30,3 +30,25 @@ def scrape_markdown(url: str, timeout: int = 60):
     if not isinstance(data, dict) or data.get("success") is not True:
         raise FirecrawlError("Firecrawl 未返回成功结果；未自动重试")
     return data
+
+def search_web(query: str, limit: int = 5, timeout: int = 60):
+    """Search the public web through Firecrawl v2.
+
+    Research-only callers should cache results and avoid repeated queries.
+    """
+    key = require_key()
+    payload = {"query": query, "limit": max(1, min(int(limit), 10))}
+    try:
+        response = requests.post(
+            "https://api.firecrawl.dev/v2/search",
+            headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
+            json=payload, timeout=timeout, allow_redirects=False,
+        )
+        if response.status_code != 200:
+            raise FirecrawlError(f"Firecrawl search HTTP {response.status_code}；未自动重试")
+        data = response.json()
+    except (requests.RequestException, ValueError) as exc:
+        raise FirecrawlError("Firecrawl search 请求失败或返回无效 JSON；未自动重试") from exc
+    if not isinstance(data, dict) or data.get("success") is not True:
+        raise FirecrawlError("Firecrawl search 未返回成功结果；未自动重试")
+    return data
