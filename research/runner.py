@@ -7,6 +7,7 @@ from collector.service import collect_date
 from research.lab import date_range, build_research_report
 from research.result_label.collector import collect_result_labels
 from research.score_inference import attach_research_score_predictions
+from research.htft_inference import attach_research_htft_predictions
 
 
 def _present(value):
@@ -24,6 +25,8 @@ def _prediction_coverage(records):
         "predicted_total_goals_derived_from_score": 0,
         "research_derived_score": 0,
         "research_derived_total_goals": 0,
+        "research_derived_htft": 0,
+        "raw_actionable_htft": 0,
         "page_probability": 0,
         "actual_half_score": 0,
         "actual_score": 0,
@@ -33,6 +36,12 @@ def _prediction_coverage(records):
         prediction = (record.get("page_prediction") or {}) if isinstance(record, dict) else {}
         coverage["single"] += int(_present(prediction.get("single")))
         coverage["htft"] += int(_present(prediction.get("htft")))
+        coverage["research_derived_htft"] += int(
+            prediction.get("htft_source") == "RESEARCH_DERIVED_POISSON"
+        )
+        coverage["raw_actionable_htft"] += int(
+            prediction.get("htft_source") == "HH520_RAW"
+        )
         has_predicted_score = bool(prediction.get("score_options")) or _present(prediction.get("scores"))
         has_explicit_total_goals = _present(prediction.get("total_goals"))
         coverage["predicted_score"] += int(has_predicted_score)
@@ -93,6 +102,7 @@ def collect_window(start, end):
     # Add Research-only score predictions from pre-match 1X2 information.
     # This layer never changes Stable and never overwrites explicit raw predictions.
     records = attach_research_score_predictions(records)
+    records = attach_research_htft_predictions(records)
 
     report = build_research_report(
         records, start, end, result_labels=result_labels
@@ -125,6 +135,7 @@ def main(argv=None):
                 record["date"] = args.start
         labels = collect_result_labels(records)
         records = attach_research_score_predictions(records)
+        records = attach_research_htft_predictions(records)
         report = build_research_report(
             records, args.start, end, source="OFFLINE_INPUT", result_labels=labels
         )
