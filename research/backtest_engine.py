@@ -26,12 +26,11 @@ def _parse_scores(prediction):
     parsed = []
     for option in options:
         try:
-            parsed.append((int(option["home"]), int(option["away"])))
+            pair = (int(option["home"]), int(option["away"]))
+            if pair not in parsed:
+                parsed.append(pair)
         except (KeyError, TypeError, ValueError):
             pass
-
-    if parsed:
-        return parsed
 
     raw = str(prediction.get("scores") or "")
     for home, away in re.findall(r"(\d+)\s*[-:：]\s*(\d+)", raw):
@@ -58,8 +57,6 @@ def _predicted_outcome(item):
     if mapped:
         return mapped
 
-    # Current 10023s parser may not expose fused probability/single.
-    # Use the first predicted score as a Research-only direction fallback.
     scores = _parse_scores(prediction)
     if scores:
         home, away = scores[0]
@@ -76,25 +73,78 @@ def _score_options(item):
     return _parse_scores(prediction)
 
 
+def _normalize_goal_prediction(raw):
+    """Normalize common HH520 total-goals formats into a research rule."""
+    text = str(raw or "").strip().replace(" ", "")
+    if not text or text in {"-", "--", "—"}:
+        return None
+
+    # 3+, 3球以上, 3及以上, >=3
+    m = re.search(r"(\d+(?:\.\d+)?)\s*(?:\+|球?以上|及以上)", text)
+    if m:
+        value = float(m.group(1))
+        return {"type": "over_equal", "value": value}
+
+    m = re.search(r"(?:大|over|>)\s*(\d+(?:\.\d+)?)", text, re.I)
+    if m:
+        line = float(m.group(1))
+        return {"type": "over_line", "value": line}
+
+    m = re.search(r"(?:小|under|<)\s*(\d+(?:\.\d+)?)", text, re.I)
+    if m:
+        line = float(m.group(1))
+        return {"type": "under_line", "value": line}
+
+    # 2-3, 2~3, 2～3, 2至3, 2到3
+    m = re.search(r"(\d+)\s*(?:-|~|～|至|到)\s*(\d+)", text)
+    if m:
+        lo, hi = sorted((int(m.group(1)), int(m.group(2))))
+        return {"type": "range", "min": lo, "max": hi}
+
+    # Alternatives such as 2/3球, 2或3球, 2,3球, 2、3球.
+    nums = [int(x) for x in re.findall(r"\d+", text)]
+    if len(nums) >= 2 and any(token in text for token in ("/", "或", ",", "，", "、")):
+        values = []
+        for value in nums:
+            if value not in values:
+                values.append(value)
+        return {"type": "set", "values": values}
+
+    # Exact totals such as 3 or 3球.
+    m = re.fullmatch(r"(\d+)球?", text)
+    if m:
+        return {"type": "exact", "value": int(m.group(1))}
+
+    return None
+
+
 def _goal_prediction_hit(item, actual_goals):
     if actual_goals is None:
         return None
+
+    try:
+        actual = int(actual_goals)
+    except (TypeError, ValueError):
+        return None
+
     _, prediction = _prediction_payload(item)
-    raw = str(prediction.get("total_goals") or "").strip()
-    if not raw:
+    rule = _normalize_goal_prediction(prediction.get("total_goals"))
+    if rule is None:
         return None
 
-    nums = [int(x) for x in re.findall(r"\d+", raw)]
-    if not nums:
-        return None
-
-    if any(token in raw for token in ("+", "以上", "及以上")):
-        return actual_goals >= nums[0]
-    if any(token in raw for token in ("-", "~", "～", "至")) and len(nums) >= 2:
-        lo, hi = min(nums[0], nums[1]), max(nums[0], nums[1])
-        return lo <= actual_goals <= hi
-    if len(nums) == 1:
-        return actual_goals == nums[0]
+    kind = rule["type"]
+    if kind == "exact":
+        return actual == rule["value"]
+    if kind == "range":
+        return rule["min"] <= actual <= rule["max"]
+    if kind == "set":
+        return actual in rule["values"]
+    if kind == "over_equal":
+        return actual >= rule["value"]
+    if kind == "over_line":
+        return actual > rule["value"]
+    if kind == "under_line":
+        return actual < rule["value"]
     return None
 
 
@@ -131,7 +181,6 @@ def evaluate(joined):
             goals_hits += int(goal_hit)
 
         _, prediction = _prediction_payload(item)
-        # Keep HT/FT unavailable until an independent half-time result source exists.
         if label.get("half_score") and prediction.get("htft"):
             half_total += 1
 
