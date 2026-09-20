@@ -1,6 +1,8 @@
 """Research-only backtest metrics. Never writes Stable parameters."""
 import re
 
+from research.result_label.half_time_integration import evaluate_half_time
+
 
 def _ratio(hits, total):
     return hits / total if total else None
@@ -157,7 +159,6 @@ def evaluate(joined):
     wdl_total = wdl_hits = 0
     score_total = exact_hits = top2_hits = 0
     goals_total = goals_hits = 0
-    half_total = half_hits = 0
 
     for item in matched:
         label = item["result_label"]
@@ -180,9 +181,8 @@ def evaluate(joined):
             goals_total += 1
             goals_hits += int(goal_hit)
 
-        _, prediction = _prediction_payload(item)
-        if label.get("half_score") and prediction.get("htft"):
-            half_total += 1
+
+    half_time_metric = evaluate_half_time(matched)
 
     return {
         "status": "BACKTEST_READY" if matched else "RESEARCH_ONLY",
@@ -204,13 +204,7 @@ def evaluate(joined):
                 "top2_hits": top2_hits,
                 "top2_accuracy": _ratio(top2_hits, score_total),
             },
-            "half_time": {
-                "status": "READY" if half_total else "RESEARCH_ONLY",
-                "sample_count": half_total,
-                "hits": half_hits,
-                "accuracy": _ratio(half_hits, half_total),
-                "note": None if half_total else "No independent half-time result label available.",
-            },
+            "half_time": half_time_metric,
             "goals": {
                 "status": "READY" if goals_total else "RESEARCH_ONLY",
                 "sample_count": goals_total,
