@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "HH520 Stable V2 - GitHub Actions Bridge",
-    "version": "2.1",
-    "description": "Trigger HH520 Stable V2 on GitHub Actions and read the prepared GPT handoff. No standalone server is required."
+    "version": "2.2",
+    "description": "Trigger HH520 Stable V2 / Research on GitHub Actions and read state/results. Result polling uses a changing poll query token to prevent stale PENDING responses."
   },
   "servers": [
     {
@@ -105,6 +105,16 @@
                 "application/vnd.github.raw+json"
               ],
               "default": "application/vnd.github.raw+json"
+            }
+          },
+          {
+            "name": "poll",
+            "in": "query",
+            "required": true,
+            "description": "Cache-busting poll token. Change on every GET for the same request_id, e.g. 1,2,3... Never reuse the same poll value.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,40}$"
             }
           }
         ],
@@ -263,6 +273,16 @@
                 "application/vnd.github.raw+json"
               ],
               "default": "application/vnd.github.raw+json"
+            }
+          },
+          {
+            "name": "poll",
+            "in": "query",
+            "required": true,
+            "description": "Cache-busting poll token. Change on every GET for the same request_id, e.g. 1,2,3... Never reuse the same poll value.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,40}$"
             }
           }
         ],
