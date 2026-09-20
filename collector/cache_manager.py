@@ -6,13 +6,20 @@ from .url_builder import validate_date
 
 CACHE_DIR = Path(__file__).resolve().parents[1] / "cache"
 
-def cache_path(date: str) -> Path:
-    validate_date(date)
-    CACHE_DIR.mkdir(parents=True, exist_ok=True)
-    return CACHE_DIR / f"10023s_{date}.json"
+def _source_token(source: str) -> str:
+    value = str(source or "10023s").strip().lower()
+    if value not in {"10023s", "10027s"}:
+        raise ValueError("未知 HH520 缓存源")
+    return value
 
-def load_cache(date: str):
-    path = cache_path(date)
+def cache_path(date: str, source: str = "10023s") -> Path:
+    validate_date(date)
+    source = _source_token(source)
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    return CACHE_DIR / f"{source}_{date}.json"
+
+def load_cache(date: str, source: str = "10023s"):
+    path = cache_path(date, source)
     if not path.exists():
         return None
     try:
@@ -23,8 +30,8 @@ def load_cache(date: str):
     except (ValueError, OSError) as exc:
         raise ValueError("本地缓存损坏；停止抓取以避免重复扣费，请恢复缓存") from exc
 
-def save_cache(date: str, payload):
-    path = cache_path(date)
+def save_cache(date: str, payload, source: str = "10023s"):
+    path = cache_path(date, source)
     if payload.get("date") != date:
         raise ValueError("缓存日期不匹配")
     fd, temporary = tempfile.mkstemp(dir=path.parent, suffix=".tmp")
@@ -37,11 +44,11 @@ def save_cache(date: str, payload):
             os.unlink(temporary)
     return path
 
-def claim_request(date: str):
-    """Permanent exclusive ledger: uncertainty/failure must not cause a second call."""
-    path = cache_path(date).with_suffix(".requested")
+def claim_request(date: str, source: str = "10023s"):
+    """Permanent exclusive ledger per source/date."""
+    path = cache_path(date, source).with_suffix(".requested")
     try:
         with path.open("x", encoding="utf-8") as stream:
-            stream.write("Request reserved; do not delete to retry. Restore/import captured raw data.\n")
+            stream.write(f"Request reserved for {source}; do not delete to retry. Restore/import captured raw data.\n")
     except FileExistsError as exc:
-        raise RuntimeError("此日期已抓取或有未完成请求；禁止重复抓取。可导入已保存的响应。") from exc
+        raise RuntimeError("此日期和数据源已抓取或有未完成请求；禁止重复抓取。可导入已保存的响应。") from exc
