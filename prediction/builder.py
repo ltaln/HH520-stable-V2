@@ -29,8 +29,14 @@ def prepare_match(match):
         return result
     analysis = analyze_match(match)
     result["direction"] = DIRECTIONS.get(analysis["probability"]["direction"])
+    result["decision_filter"] = analysis["decision"]
+    result["stable_v2_direction"] = result["direction"]
+    result["stable_v21_decision"] = analysis["decision"].get("decision", "PASS")
     if analysis["decision"]["allow_prediction"]:
-        result.update(status="READY_FOR_GPT", reason="结构化分析已准备；等待GPT最终推理")
+        result.update(status="READY_FOR_GPT", reason="Decision Filter V2已放行；等待GPT最终推理")
+    else:
+        reasons = analysis["decision"].get("reasons") or ["Decision Filter V2未放行"]
+        result.update(status="PASS", reason="；".join(reasons))
     return result
 
 def build_model_input(matches):
@@ -50,9 +56,12 @@ def build_model_input(matches):
             "page_context": match.get("page_context", {}),
             "page_prediction": match.get("page_prediction", {}),
             "analysis": analysis, "direction": prepared["direction"],
+            "decision_filter": analysis["decision"],
+            "stable_version": "HH520 Stable V2.1",
+            "source_contract": "HH520_10027s",
             "data_limitations": ["球队特征统计口径未验证，不得自行给固定高权重",
-                                 "页面比分是候选预测而非已发生事实",
-                                 "平滑p对应事件未知，不得作为完整1X2概率"],
+                                 "10027s基础表比分字段是赛果标签，历史比赛不得进入赛前推理",
+                                 "比分/总进球若非页面原始预测必须明确标记为派生结果"],
         })
     return payload
 
