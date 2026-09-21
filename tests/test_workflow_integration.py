@@ -1,12 +1,10 @@
-import copy
 import json
-import os
 from pathlib import Path
 import subprocess
-import sys
 import yaml
 
 ROOT=Path(__file__).resolve().parents[1]
+
 
 def test_dispatch_schema_preserves_stable_and_adds_research():
     schema=json.loads((ROOT/'integration/chatgpt-action.openapi.json').read_text(encoding='utf-8'))
@@ -20,6 +18,7 @@ def test_dispatch_schema_preserves_stable_and_adds_research():
     r=paths['/repos/ltaln/HH520-stable-V2/contents/{directory}/{request_id}.json']['get']
     assert next(x for x in r['parameters'] if x['name']=='ref')['schema']['enum']==['research-results']
 
+
 def test_workflows_share_cache_lock_and_preserve_on_failure():
     for file,branch in [('hh520-predict.yml','action-results'),('hh520-research.yml','research-results')]:
         data=yaml.safe_load((ROOT/'.github/workflows'/file).read_text(encoding='utf-8'))
@@ -30,6 +29,7 @@ def test_workflows_share_cache_lock_and_preserve_on_failure():
         assert 'always()' in save['if']
         assert branch in steps[-1]['run']
         assert not any('clone' in s.get('run','') for s in steps)
+
 
 def test_publish_to_isolated_branch_and_repeat_request(tmp_path,monkeypatch):
     def git(*args,cwd=None):
@@ -50,6 +50,9 @@ def test_publish_to_isolated_branch_and_repeat_request(tmp_path,monkeypatch):
     for branch in ('action-results','research-results'):
         publish(str(report),branch,'test-request-123')
         publish(str(report),branch,'test-request-123')
-        names=git('--git-dir',str(remote),'ls-tree','--name-only','-r',branch)
-        assert names=='results/test-request-123.json'
+        names=git('--git-dir',str(remote),'ls-tree','--name-only','-r',branch).splitlines()
+        assert 'results/test-request-123.json' in names
+        if branch == 'research-results':
+            assert 'archive/test-request-123.json' in names
+            assert 'pages/test-request-123/manifest.json' in names
     assert git('--git-dir',str(remote),'show','main:model.txt')=='frozen'
