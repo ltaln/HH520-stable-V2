@@ -63,3 +63,20 @@ def test_v3_passes_balanced_low_concentration():
     decision = decision_filter(match, probability, value)
     assert decision["decision"] == "PASS"
     assert decision["allow_prediction"] is False
+
+def test_risk_engine_v31_version_and_balanced_penalty():
+    from engine.risk_engine import assess_risk_v3
+    match = {
+        "match_id": "3", "home_team": "A", "away_team": "B", "league": "联赛",
+        "market": {"home_odds": 2.4, "draw_odds": 3.1, "away_odds": 2.8},
+        "page_probability": {"home": 0.39, "draw": 0.33, "away": 0.28},
+        "research_factors": {"risk": "低"},
+    }
+    p = probability_layer(match)
+    v = value_layer(match, p)
+    q = data_quality_gate(match, p)
+    c = classify_match(match, p)
+    old = assess_risk_v3(match, p, v, q, c)
+    new = assess_risk(match, p, v, q, c)
+    assert new["version"] == "HH520 Risk Engine V3.1"
+    assert new["score"] >= old["score"]

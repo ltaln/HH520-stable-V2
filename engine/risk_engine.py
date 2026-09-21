@@ -1,9 +1,12 @@
-"""Stable V3 independent risk engine.
+"""HH520 Risk Engine V3.1.
 
-It never reads HH520 '建议下注' / '是否下注' fields.
+Only the risk module changes. Probability, Value and Decision Filter contracts
+remain unchanged. HH520 advice fields are never read.
 """
 from .match_classifier import classify_match
 from .data_quality import data_quality_gate
+
+VERSION = "HH520 Risk Engine V3.1"
 
 
 def _selected_odds(match, direction):
@@ -11,20 +14,12 @@ def _selected_odds(match, direction):
     return market.get({"home": "home_odds", "draw": "draw_odds", "away": "away_odds"}.get(direction, ""))
 
 
-def assess_risk(match: dict, probability: dict, value: dict, quality=None, classification=None) -> dict:
-    quality = quality or data_quality_gate(match, probability)
-    classification = classification or classify_match(match, probability)
+def _base_risk(match, probability, value, quality, classification, *, v31=False):
+    if not quality["valid"]:
+        return 100, ["数据质量门禁失败"] + quality["errors"]
+
     score = 0
     reasons = []
-
-    if not quality["valid"]:
-        return {
-            "score": 100,
-            "level": "high",
-            "reasons": ["数据质量门禁失败"] + quality["errors"],
-            "hard_pass": True,
-        }
-
     top = classification["top_probability"]
     margin = classification["probability_margin"]
 
@@ -42,12 +37,27 @@ def assess_risk(match: dict, probability: dict, value: dict, quality=None, class
         score += 16
         reasons.append("概率集中度偏低")
 
-    if classification["type"] == "balanced":
-        score += 15
-        reasons.append("均衡型比赛")
-    elif classification["type"] == "cup":
-        score += 8
-        reasons.append("杯赛/淘汰赛波动修正")
+    # V3 legacy modifiers are preserved for exact comparison.
+    if not v31:
+        if classification["type"] == "balanced":
+            score += 15
+            reasons.append("均衡型比赛")
+        elif classification["type"] == "cup":
+            score += 8
+            reasons.append("杯赛/淘汰赛波动修正")
+    else:
+        # V3.1: explicit dispersion + balance + match-type modifiers.
+        if margin < 0.10:
+            score += 15
+            reasons.append("V3.1概率分散风险")
+        if classification["type"] == "balanced":
+            score += 15
+            reasons.append("V3.1均衡比赛风险")
+        modifiers = {"strong_favorite": -5, "standard": 0, "cup": 5, "balanced": 15}
+        modifier = modifiers.get(classification["type"], 0)
+        score += modifier
+        if modifier:
+            reasons.append(f"V3.1比赛类型修正:{modifier:+d}")
 
     edge = value.get("directional_edge")
     if edge is not None:
@@ -83,11 +93,29 @@ def assess_risk(match: dict, probability: dict, value: dict, quality=None, class
         score += 15
         reasons.append("边缘结构")
 
-    score = min(100, score)
+    return max(0, min(100, score)), reasons
+
+
+def _format(score, reasons, version):
     level = "low" if score < 25 else "medium" if score < 55 else "high"
     return {
+        "version": version,
         "score": score,
         "level": level,
         "reasons": reasons,
         "hard_pass": score >= 70,
     }
+
+
+def assess_risk_v3(match: dict, probability: dict, value: dict, quality=None, classification=None) -> dict:
+    quality = quality or data_quality_gate(match, probability)
+    classification = classification or classify_match(match, probability)
+    score, reasons = _base_risk(match, probability, value, quality, classification, v31=False)
+    return _format(score, reasons, "HH520 Risk Engine V3.0")
+
+
+def assess_risk(match: dict, probability: dict, value: dict, quality=None, classification=None) -> dict:
+    quality = quality or data_quality_gate(match, probability)
+    classification = classification or classify_match(match, probability)
+    score, reasons = _base_risk(match, probability, value, quality, classification, v31=True)
+    return _format(score, reasons, VERSION)

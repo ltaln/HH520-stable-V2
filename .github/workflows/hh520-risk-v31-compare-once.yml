@@ -1,0 +1,37 @@
+name: HH520 Risk V3.1 Compare
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/hh520-risk-v31-compare-once.yml"
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+      PYTHONUTF8: "1"
+      HH520_ALLOW_INCOMPLETE_REQUEST_RESUME: "1"
+      FIRECRAWL_MIN_INTERVAL_SECONDS: "2.5"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12", cache: pip}
+      - run: python -m pip install -r requirements.txt
+      - uses: actions/cache/restore@v4
+        with:
+          path: cache
+          key: hh520-risk-v31-${{ github.run_id }}
+          restore-keys: |
+            hh520-calibration-20260801-20260920-
+            hh520-collection-v1-
+      - run: |
+          mkdir -p _risk_out
+          python -m research.calibration.risk_v31_compare --json _risk_out/risk_v31_compare.json --md _risk_out/risk_v31_compare.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: HH520-Risk-V31-Compare
+          path: _risk_out/
+          if-no-files-found: error
