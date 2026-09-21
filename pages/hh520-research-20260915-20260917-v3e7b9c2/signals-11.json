@@ -1,0 +1,53 @@
+{
+  "status": "READY",
+  "kind": "research_hidden_signal_page",
+  "request_id": "hh520-research-20260915-20260917-v3e7b9c2",
+  "page": 11,
+  "page_size": 20,
+  "items": [
+    {
+      "factor": "draw_odds_bucket",
+      "value": ">=3.00",
+      "metric": "score_top2",
+      "sample_count": 33,
+      "accuracy": 0.12121212121212122,
+      "baseline_accuracy": 0.1111111111111111,
+      "delta_vs_baseline": 0.01010101010101011,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "draw_odds_bucket",
+      "value": ">=3.00",
+      "metric": "goals",
+      "sample_count": 33,
+      "accuracy": 0.21212121212121213,
+      "baseline_accuracy": 0.2222222222222222,
+      "delta_vs_baseline": -0.010101010101010083,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "home_odds_bucket",
+      "value": ">=3.00",
+      "metric": "htft",
+      "sample_count": 10,
+      "accuracy": 0.3,
+      "baseline_accuracy": 0.3055555555555556,
+      "delta_vs_baseline": -0.005555555555555591,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "draw_odds_bucket",
+      "value": ">=3.00",
+      "metric": "score_exact",
+      "sample_count": 33,
+      "accuracy": 0.06060606060606061,
+      "baseline_accuracy": 0.05555555555555555,
+      "delta_vs_baseline": 0.005050505050505055,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    }
+  ]
+}

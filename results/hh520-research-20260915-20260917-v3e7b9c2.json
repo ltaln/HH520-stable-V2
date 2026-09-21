@@ -1,8 +1,558 @@
 {
-  "status": "PENDING",
+  "status": "READY",
   "kind": "research",
   "request_id": "hh520-research-20260915-20260917-v3e7b9c2",
-  "message": "Workflow accepted and is still running.",
+  "system": "HH520 Research Lab V2.5",
+  "stable_access": "READ_ONLY",
+  "source": "HH520_10027s",
+  "window": {
+    "from": "2026-09-15",
+    "to": "2026-09-17"
+  },
+  "input_count": 36,
+  "clean_count": 36,
+  "sanitizer": {
+    "pollution_events": 36
+  },
+  "backtest": {
+    "status": "BACKTEST_READY",
+    "sample_count": 36,
+    "matched_results": 36,
+    "metrics": {
+      "win_draw_loss": {
+        "status": "READY",
+        "sample_count": 36,
+        "hits": 17,
+        "accuracy": 0.4722222222222222,
+        "direction_source": "probability_or_single_or_primary_score"
+      },
+      "score": {
+        "status": "READY",
+        "sample_count": 36,
+        "exact_hits": 2,
+        "exact_accuracy": 0.05555555555555555,
+        "top2_hits": 4,
+        "top2_accuracy": 0.1111111111111111,
+        "label_field": "actual_score",
+        "prediction_field": "predicted_score",
+        "actual_labels_available": 36,
+        "note": null
+      },
+      "half_time": {
+        "status": "READY",
+        "sample_count": 36,
+        "hits": 11,
+        "accuracy": 0.3055555555555556,
+        "top2_hits": 15,
+        "top2_accuracy": 0.4166666666666667,
+        "source_counts": {
+          "hh520_raw": 3,
+          "research_derived_poisson": 33
+        },
+        "note": null
+      },
+      "goals": {
+        "status": "READY",
+        "sample_count": 36,
+        "hits": 8,
+        "accuracy": 0.2222222222222222,
+        "label_field": "actual_total_goals",
+        "prediction_field": "predicted_total_goals",
+        "actual_labels_available": 36,
+        "prediction_fallback": "derive from predicted_score when available",
+        "note": null
+      }
+    },
+    "note": "Result labels and prediction snapshots are isolated from Stable. No automatic promotion to Stable."
+  },
+  "prediction_coverage": {
+    "records": 36,
+    "single": 16,
+    "htft": 16,
+    "predicted_score": 0,
+    "predicted_total_goals": 0,
+    "predicted_total_goals_explicit": 0,
+    "predicted_total_goals_derived_from_score": 0,
+    "research_derived_score": 0,
+    "research_derived_total_goals": 0,
+    "research_derived_htft": 0,
+    "raw_actionable_htft": 0,
+    "page_probability": 16,
+    "actual_half_score": 36,
+    "actual_score": 36,
+    "actual_total_goals": 36,
+    "legacy_aliases": {
+      "scores": 0,
+      "total_goals": 0,
+      "actual_full_score": 36
+    },
+    "source_note": "actual_score and actual_total_goals are Result Labels. predicted_score and predicted_total_goals are Prediction fields used only for accuracy evaluation. If raw predicted_score is absent, Research may derive it from pre-match 1X2 probabilities using the RESEARCH_POISSON_1X2 layer. predicted_total_goals is derived from predicted_score when no explicit total-goals prediction exists."
+  },
+  "result_collection": {
+    "source": "HH520_10027s_RESULT_LABEL",
+    "collected": 36,
+    "stable_access": "FORBIDDEN"
+  },
+  "prediction_snapshot_layer": {
+    "enabled": true,
+    "count": 36,
+    "isolation": "RESEARCH_ONLY",
+    "contains_actual_results": false,
+    "stable_access": "FORBIDDEN"
+  },
+  "result_label_layer": {
+    "enabled": true,
+    "collected": 36,
+    "matched": 36,
+    "unmatched": 0,
+    "isolation": "RESEARCH_ONLY",
+    "stable_access": "FORBIDDEN"
+  },
+  "error_attribution": {
+    "summary": {
+      "matches": 36,
+      "wdl": {
+        "evaluable": 36,
+        "hits": 17,
+        "accuracy": 0.4722222222222222
+      },
+      "score_exact": {
+        "evaluable": 36,
+        "hits": 2,
+        "accuracy": 0.05555555555555555
+      },
+      "score_top2": {
+        "evaluable": 36,
+        "hits": 4,
+        "accuracy": 0.1111111111111111
+      },
+      "htft": {
+        "evaluable": 36,
+        "hits": 11,
+        "accuracy": 0.3055555555555556
+      },
+      "htft_top2": {
+        "evaluable": 36,
+        "hits": 15,
+        "accuracy": 0.4166666666666667
+      },
+      "goals": {
+        "evaluable": 36,
+        "hits": 8,
+        "accuracy": 0.2222222222222222
+      }
+    },
+    "detail_pages": 2
+  },
+  "hidden_model_reverse": {
+    "status": "RESEARCH_ONLY",
+    "stable_access": "FORBIDDEN",
+    "baseline": {
+      "wdl": 0.4722222222222222,
+      "score_exact": 0.05555555555555555,
+      "score_top2": 0.1111111111111111,
+      "htft": 0.3055555555555556,
+      "htft_top2": 0.4166666666666667,
+      "goals": 0.2222222222222222
+    },
+    "min_bucket_sample": 3,
+    "top_signals": [
+      {
+        "factor": "league",
+        "value": "英联赛杯",
+        "metric": "htft",
+        "sample_count": 3,
+        "accuracy": 1.0,
+        "baseline_accuracy": 0.3055555555555556,
+        "delta_vs_baseline": 0.6944444444444444,
+        "direction": "ABOVE_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "league",
+        "value": "英联赛杯",
+        "metric": "htft_top2",
+        "sample_count": 3,
+        "accuracy": 1.0,
+        "baseline_accuracy": 0.4166666666666667,
+        "delta_vs_baseline": 0.5833333333333333,
+        "direction": "ABOVE_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "draw_odds_bucket",
+        "value": "2.20-2.99",
+        "metric": "wdl",
+        "sample_count": 3,
+        "accuracy": 0.0,
+        "baseline_accuracy": 0.4722222222222222,
+        "delta_vs_baseline": -0.4722222222222222,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "away_odds_bucket",
+        "value": "1.80-2.19",
+        "metric": "wdl",
+        "sample_count": 3,
+        "accuracy": 0.0,
+        "baseline_accuracy": 0.4722222222222222,
+        "delta_vs_baseline": -0.4722222222222222,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "pattern",
+        "value": "🔶风控赔率",
+        "metric": "goals",
+        "sample_count": 3,
+        "accuracy": 0.6666666666666666,
+        "baseline_accuracy": 0.2222222222222222,
+        "delta_vs_baseline": 0.4444444444444444,
+        "direction": "ABOVE_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "probability_concentration",
+        "value": ">=60%",
+        "metric": "goals",
+        "sample_count": 3,
+        "accuracy": 0.6666666666666666,
+        "baseline_accuracy": 0.2222222222222222,
+        "delta_vs_baseline": 0.4444444444444444,
+        "direction": "ABOVE_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "rating",
+        "value": "B",
+        "metric": "htft_top2",
+        "sample_count": 5,
+        "accuracy": 0.0,
+        "baseline_accuracy": 0.4166666666666667,
+        "delta_vs_baseline": -0.4166666666666667,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "probability_concentration",
+        "value": "40-49%",
+        "metric": "htft_top2",
+        "sample_count": 5,
+        "accuracy": 0.0,
+        "baseline_accuracy": 0.4166666666666667,
+        "delta_vs_baseline": -0.4166666666666667,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "league",
+        "value": "解放者杯",
+        "metric": "htft_top2",
+        "sample_count": 4,
+        "accuracy": 0.0,
+        "baseline_accuracy": 0.4166666666666667,
+        "delta_vs_baseline": -0.4166666666666667,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "risk",
+        "value": "中高",
+        "metric": "htft_top2",
+        "sample_count": 4,
+        "accuracy": 0.0,
+        "baseline_accuracy": 0.4166666666666667,
+        "delta_vs_baseline": -0.4166666666666667,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "handicap",
+        "value": "客让平半低水/半球高水",
+        "metric": "htft_top2",
+        "sample_count": 4,
+        "accuracy": 0.0,
+        "baseline_accuracy": 0.4166666666666667,
+        "delta_vs_baseline": -0.4166666666666667,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "handicap",
+        "value": "主让平半低水/半球高水",
+        "metric": "htft_top2",
+        "sample_count": 4,
+        "accuracy": 0.0,
+        "baseline_accuracy": 0.4166666666666667,
+        "delta_vs_baseline": -0.4166666666666667,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "away_odds_bucket",
+        "value": "1.50-1.79",
+        "metric": "htft_top2",
+        "sample_count": 4,
+        "accuracy": 0.0,
+        "baseline_accuracy": 0.4166666666666667,
+        "delta_vs_baseline": -0.4166666666666667,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "draw_odds_bucket",
+        "value": "2.20-2.99",
+        "metric": "htft_top2",
+        "sample_count": 3,
+        "accuracy": 0.0,
+        "baseline_accuracy": 0.4166666666666667,
+        "delta_vs_baseline": -0.4166666666666667,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "away_odds_bucket",
+        "value": "<1.50",
+        "metric": "htft",
+        "sample_count": 3,
+        "accuracy": 0.6666666666666666,
+        "baseline_accuracy": 0.3055555555555556,
+        "delta_vs_baseline": 0.36111111111111105,
+        "direction": "ABOVE_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "home_odds_bucket",
+        "value": "2.20-2.99",
+        "metric": "wdl",
+        "sample_count": 6,
+        "accuracy": 0.16666666666666666,
+        "baseline_accuracy": 0.4722222222222222,
+        "delta_vs_baseline": -0.3055555555555556,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "rating",
+        "value": "B",
+        "metric": "htft",
+        "sample_count": 5,
+        "accuracy": 0.0,
+        "baseline_accuracy": 0.3055555555555556,
+        "delta_vs_baseline": -0.3055555555555556,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "probability_concentration",
+        "value": "40-49%",
+        "metric": "htft",
+        "sample_count": 5,
+        "accuracy": 0.0,
+        "baseline_accuracy": 0.3055555555555556,
+        "delta_vs_baseline": -0.3055555555555556,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "league",
+        "value": "解放者杯",
+        "metric": "htft",
+        "sample_count": 4,
+        "accuracy": 0.0,
+        "baseline_accuracy": 0.3055555555555556,
+        "delta_vs_baseline": -0.3055555555555556,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "risk",
+        "value": "中高",
+        "metric": "htft",
+        "sample_count": 4,
+        "accuracy": 0.0,
+        "baseline_accuracy": 0.3055555555555556,
+        "delta_vs_baseline": -0.3055555555555556,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      }
+    ],
+    "signal_count": 204,
+    "detail_pages": 11
+  },
+  "league_dna": {
+    "亚冠精英": {
+      "matches": 6,
+      "ready": 6
+    },
+    "英冠": {
+      "matches": 1,
+      "ready": 1
+    },
+    "英联赛杯": {
+      "matches": 3,
+      "ready": 3
+    },
+    "解放者杯": {
+      "matches": 4,
+      "ready": 4
+    },
+    "亚运男足": {
+      "matches": 2,
+      "ready": 2
+    },
+    "西甲": {
+      "matches": 7,
+      "ready": 7
+    },
+    "欧罗巴": {
+      "matches": 11,
+      "ready": 11
+    },
+    "巴甲": {
+      "matches": 1,
+      "ready": 1
+    },
+    "亚冠乙": {
+      "matches": 1,
+      "ready": 1
+    }
+  },
+  "team_dna": [
+    {
+      "team": "叻武里",
+      "sample_count": 1
+    },
+    {
+      "team": "上海海港",
+      "sample_count": 1
+    },
+    {
+      "team": "米堡",
+      "sample_count": 1
+    },
+    {
+      "team": "米尔沃尔",
+      "sample_count": 1
+    },
+    {
+      "team": "利物浦",
+      "sample_count": 1
+    },
+    {
+      "team": "热刺",
+      "sample_count": 1
+    },
+    {
+      "team": "伊普斯",
+      "sample_count": 1
+    },
+    {
+      "team": "阿森纳",
+      "sample_count": 1
+    },
+    {
+      "team": "普拉滕斯",
+      "sample_count": 1
+    },
+    {
+      "team": "弗鲁米嫩",
+      "sample_count": 1
+    },
+    {
+      "team": "大田市民",
+      "sample_count": 1
+    },
+    {
+      "team": "京都",
+      "sample_count": 1
+    },
+    {
+      "team": "卡塔尔亚",
+      "sample_count": 1
+    },
+    {
+      "team": "韩国亚",
+      "sample_count": 1
+    },
+    {
+      "team": "柔佛",
+      "sample_count": 1
+    },
+    {
+      "team": "布里兰",
+      "sample_count": 1
+    },
+    {
+      "team": "北京国安",
+      "sample_count": 1
+    },
+    {
+      "team": "浦项制铁",
+      "sample_count": 1
+    },
+    {
+      "team": "阿布艾因",
+      "sample_count": 1
+    },
+    {
+      "team": "利雅胜利",
+      "sample_count": 1
+    },
+    {
+      "team": "巴列卡诺",
+      "sample_count": 1
+    },
+    {
+      "team": "西班牙人",
+      "sample_count": 1
+    },
+    {
+      "team": "阿拉维斯",
+      "sample_count": 1
+    },
+    {
+      "team": "巴伦西亚",
+      "sample_count": 1
+    },
+    {
+      "team": "中国亚",
+      "sample_count": 1
+    },
+    {
+      "team": "朝鲜亚",
+      "sample_count": 1
+    },
+    {
+      "team": "格风暴",
+      "sample_count": 1
+    },
+    {
+      "team": "雷恩",
+      "sample_count": 1
+    },
+    {
+      "team": "安德莱",
+      "sample_count": 1
+    },
+    {
+      "team": "里昂",
+      "sample_count": 1
+    }
+  ],
+  "candidate_rules": [
+    {
+      "id": "CR-SAMPLE-001",
+      "status": "CANDIDATE_ONLY",
+      "statement": "Sample supports segmented review only; no Stable change authorized.",
+      "evidence_count": 36
+    }
+  ],
+  "promotion_policy": "MANUAL_REVIEW_REQUIRED",
+  "detail_manifest_path": "pages/hh520-research-20260915-20260917-v3e7b9c2/manifest.json",
+  "archive_path": "archive/hh520-research-20260915-20260917-v3e7b9c2.json",
+  "message": "Research READY. This polling payload is compact; use detail_manifest_path for paged details.",
   "_action": {
     "request_id": "hh520-research-20260915-20260917-v3e7b9c2",
     "repository": "ltaln/HH520-stable-V2",
