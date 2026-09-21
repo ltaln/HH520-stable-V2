@@ -93,59 +93,32 @@ def _header_starts(cells, expected):
 
 
 def _detect_grouped_factor_columns(lines, header_index):
-    """Detect 2-level grouped headers such as 进攻/防守/交锋/状态 -> 主/客.
+    """Map the actual 10027s grouped base-table factors.
 
-    Returns canonical factor names mapped to absolute column positions.
-    Supports markdown emitted from HTML tables with colspan, where the group
-    label may appear once and the companion column may be blank.
+    Firecrawl flattens the HTML two-row header unusually:
+      top: ... | 进攻 | 防守 | 交锋 | 状态 | ...
+      sub: | | 主 | 客 | 主 | 客 | 主 | 客 | 主 | 客 | | | |
+
+    The eight data cells after the base fields are sequential:
+      Attack H/A, Defense H/A, H2H H/A, Form H/A.
+    Therefore mapping by top-header positions is wrong; use the first grouped
+    factor position as the start of an 8-cell block.
     """
-    groups = {"进攻": ("home_attack", "away_attack"),
-              "防守": ("home_defense", "away_defense"),
-              "交锋": ("home_h2h", "away_h2h"),
-              "状态": ("home_form", "away_form")}
-
     top = _cells(lines[header_index]) if 0 <= header_index < len(lines) else []
-    top_clean = [_clean_header(x) for x in top]
-    mapping = {}
+    clean = [_clean_header(x) for x in top]
+    required = ["进攻", "防守", "交锋", "状态"]
+    if not all(name in clean for name in required):
+        return {}
 
-    # First try a proper second header row with 主/客 labels.
-    for offset in (1, 2, 3):
-        if header_index + offset >= len(lines):
-            break
-        sub = _cells(lines[header_index + offset])
-        if not sub or len(sub) < 2:
-            continue
-        sub_clean = [_clean_header(x) for x in sub]
-        if sum(x in {"主", "客"} for x in sub_clean) < 4:
-            continue
-
-        current_group = None
-        seen = {}
-        for pos in range(max(len(top_clean), len(sub_clean))):
-            if pos < len(top_clean) and top_clean[pos] in groups:
-                current_group = top_clean[pos]
-                seen[current_group] = 0
-            sub_name = sub_clean[pos] if pos < len(sub_clean) else ""
-            if current_group in groups and sub_name in {"主", "客"}:
-                home_key, away_key = groups[current_group]
-                mapping[home_key if sub_name == "主" else away_key] = pos
-                seen[current_group] += 1
-                if seen[current_group] >= 2:
-                    current_group = None
-        if len(mapping) >= 6:
-            return mapping
-
-    # Fallback for flattened markdown: locate each group and assume adjacent
-    # home/away columns. This matches the actual visual 10027s layout.
-    for group, (home_key, away_key) in groups.items():
-        try:
-            pos = top_clean.index(group)
-        except ValueError:
-            continue
-        mapping[home_key] = pos
-        mapping[away_key] = pos + 1
-    return mapping
-
+    start = clean.index("进攻")
+    # The source layout is a fixed 8-cell grouped block beginning at 进攻.
+    names = [
+        "home_attack", "away_attack",
+        "home_defense", "away_defense",
+        "home_h2h", "away_h2h",
+        "home_form", "away_form",
+    ]
+    return {name: start + offset for offset, name in enumerate(names)}
 
 def _parse_handicap(value):
     raw = _strip_md(value)

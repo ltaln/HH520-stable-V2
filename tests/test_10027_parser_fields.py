@@ -39,3 +39,23 @@ def test_10027_parser_reads_two_level_grouped_base_factors():
     assert f["away_h2h"] == 7
     assert f["home_form"] == 1.17
     assert f["away_form"] == 0.83
+
+
+def test_10027_parser_real_firecrawl_grouped_layout():
+    md = """
+| 日期 | 场次 | 联赛 | 时间 | 比分 | 胜 | 平 | 负 | 主队 | 主控球率 | 客控球率 | 客队 | 半场比分 | 全场比分 | 差值 | 区间 | 平滑p | EV | 凯利比例 | 建议下注 | 是否下注 | 进攻 | 防守 | 交锋 | 状态 | 打出 | 图形 | 首发 | 复制 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+|  | 主 | 客 | 主 | 客 | 主 | 客 | 主 | 客 |  |  |  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| **2026-08-01** | **1** | 韩职 | 18:30 | 0:1 / 0:3 | 1.44 | 3.75 | 5.95 | 江原FC | 51.00 | 42.17 | 富川FC | 0:1 | 0:3 | 8.8 | 5-10 | 60.00% | -0.1360 | 0.00% | 0.00 | ❌ 不下注 | 8 | 6 | 1.17 | 1.67 | 7 | 10 | 1.00 | 1.67 |  | 📊 查看 | 查看首发 | 复制预测 |
+"""
+    m = parse_10027s_markdown(md)[0]
+    f = m["research_factors"]
+    assert f["home_attack"] == 8
+    assert f["away_attack"] == 6
+    assert f["home_defense"] == 1.17
+    assert f["away_defense"] == 1.67
+    assert f["home_h2h"] == 7
+    assert f["away_h2h"] == 10
+    assert f["home_form"] == 1.00
+    assert f["away_form"] == 1.67
