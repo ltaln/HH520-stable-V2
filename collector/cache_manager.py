@@ -7,18 +7,18 @@ from .url_builder import validate_date
 CACHE_DIR = Path(__file__).resolve().parents[1] / "cache"
 
 def _source_token(source: str) -> str:
-    value = str(source or "10023s").strip().lower()
+    value = str(source or "10027s").strip().lower()
     if value not in {"10023s", "10027s"}:
         raise ValueError("未知 HH520 缓存源")
     return value
 
-def cache_path(date: str, source: str = "10023s") -> Path:
+def cache_path(date: str, source: str = "10027s") -> Path:
     validate_date(date)
     source = _source_token(source)
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
     return CACHE_DIR / f"{source}_{date}.json"
 
-def load_cache(date: str, source: str = "10023s"):
+def load_cache(date: str, source: str = "10027s"):
     path = cache_path(date, source)
     if not path.exists():
         return None
@@ -30,7 +30,7 @@ def load_cache(date: str, source: str = "10023s"):
     except (ValueError, OSError) as exc:
         raise ValueError("本地缓存损坏；停止抓取以避免重复扣费，请恢复缓存") from exc
 
-def save_cache(date: str, payload, source: str = "10023s"):
+def save_cache(date: str, payload, source: str = "10027s"):
     path = cache_path(date, source)
     if payload.get("date") != date:
         raise ValueError("缓存日期不匹配")
@@ -44,7 +44,7 @@ def save_cache(date: str, payload, source: str = "10023s"):
             os.unlink(temporary)
     return path
 
-def claim_request(date: str, source: str = "10023s", allow_resume_incomplete: bool = False):
+def claim_request(date: str, source: str = "10027s", allow_resume_incomplete: bool = False):
     """Exclusive ledger per source/date.
 
     A successful cache always wins. An existing .requested marker may only be
