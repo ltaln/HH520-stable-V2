@@ -68,6 +68,12 @@ def _research_summary(data, request_id):
         },
         "league_dna": data.get("league_dna"),
         "team_dna": (data.get("team_dna") or [])[:30],
+        "candidate_rule_engine": {
+            "status": (data.get("candidate_rule_engine") or {}).get("status"),
+            "candidate_count": (data.get("candidate_rule_engine") or {}).get("candidate_count"),
+            "thresholds": (data.get("candidate_rule_engine") or {}).get("thresholds"),
+            "rejected_signal_count": (data.get("candidate_rule_engine") or {}).get("rejected_signal_count"),
+        },
         "candidate_rules": data.get("candidate_rules"),
         "promotion_policy": data.get("promotion_policy"),
         "detail_manifest_path": f"pages/{request_id}/manifest.json",
