@@ -1,8 +1,228 @@
 {
-  "status": "PENDING",
-  "kind": "stable",
-  "request_id": "gpt-start-20260921-c85c5b15",
-  "message": "Workflow accepted and is still running.",
+  "date": "2026-09-18",
+  "url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-18&riqi_end=2026-09-18&threshold=1&bankroll=5000",
+  "captured_at": "2026-09-21T04:20:27.829444+00:00",
+  "predictions": [
+    {
+      "match_id": "1",
+      "home_team": "沙特亚",
+      "away_team": "卡塔尔亚",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "SKIP",
+      "reason": "已有比分，不作为赛前预测",
+      "direction": null
+    },
+    {
+      "match_id": "10",
+      "home_team": "摩纳哥",
+      "away_team": "朗斯",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "SKIP",
+      "reason": "已有比分，不作为赛前预测",
+      "direction": null
+    },
+    {
+      "match_id": "11",
+      "home_team": "布伦特",
+      "away_team": "切尔西",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "SKIP",
+      "reason": "已有比分，不作为赛前预测",
+      "direction": null
+    },
+    {
+      "match_id": "12",
+      "home_team": "布城",
+      "away_team": "沃特福德",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "SKIP",
+      "reason": "已有比分，不作为赛前预测",
+      "direction": null
+    },
+    {
+      "match_id": "13",
+      "home_team": "西班牙人",
+      "away_team": "埃尔切",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "SKIP",
+      "reason": "已有比分，不作为赛前预测",
+      "direction": null
+    },
+    {
+      "match_id": "14",
+      "home_team": "纽约城",
+      "away_team": "纽约红牛",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "SKIP",
+      "reason": "已有比分，不作为赛前预测",
+      "direction": null
+    },
+    {
+      "match_id": "2",
+      "home_team": "赫尔火花",
+      "away_team": "赫尔辛基",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "SKIP",
+      "reason": "已有比分，不作为赛前预测",
+      "direction": null
+    },
+    {
+      "match_id": "3",
+      "home_team": "沃夫斯堡",
+      "away_team": "达姆施塔",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "SKIP",
+      "reason": "已有比分，不作为赛前预测",
+      "direction": null
+    },
+    {
+      "match_id": "4",
+      "home_team": "萨普斯堡",
+      "away_team": "奥斯KFUM",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "SKIP",
+      "reason": "已有比分，不作为赛前预测",
+      "direction": null
+    },
+    {
+      "match_id": "5",
+      "home_team": "兰斯",
+      "away_team": "蒙彼利埃",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "SKIP",
+      "reason": "已有比分，不作为赛前预测",
+      "direction": null
+    },
+    {
+      "match_id": "6",
+      "home_team": "格罗宁根",
+      "away_team": "兹沃勒",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "SKIP",
+      "reason": "已有比分，不作为赛前预测",
+      "direction": null
+    },
+    {
+      "match_id": "7",
+      "home_team": "登博思",
+      "away_team": "海尔蒙特",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "SKIP",
+      "reason": "已有比分，不作为赛前预测",
+      "direction": null
+    },
+    {
+      "match_id": "9",
+      "home_team": "蒙扎",
+      "away_team": "萨索洛",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "SKIP",
+      "reason": "已有比分，不作为赛前预测",
+      "direction": null
+    }
+  ],
+  "gpt_handoff": {
+    "prompt": "# HH520 Stable V2 Prediction Prompt V1.5\n\n你是 HH520 Stable V2 的分析与最终决策引擎。\n\n## 固定数据源\n正式预测只使用 HH520 10023s 结构化数据。\n禁止自行补充未采集到的比赛事实。\n\n## 执行顺序\n1. Market Baseline\n2. Probability Layer\n3. Value Layer\n4. Decision Filter\n5. Final Prediction\n\n## 核心原则\n- Probability Layer 决定比赛方向。\n- Value Layer 中 EV / Kelly 只描述价值，不直接决定胜负。\n- Decision Filter 负责识别概率分散、DNA冲突和冷门风险。\n- 未经离线验证的特征不得被赋予固定高权重。\n- 如果信号明显冲突，可以 PASS / 不建议，不强行输出高置信方向。\n- 不因为球队名气、单一赔率或高EV自动做决定。\n\n## 比分与半全场\n比分和半全场必须与胜平负方向、进攻/防守结构一致。\n当数据不足以支撑精细比分时，降低置信度，不伪造确定性。\n\n## 最终输出\n比赛：\n主队 vs 客队\n\n比分预测：\n1.\n2.\n\n半全场：\n1.\n2.\n\n总进球：\nX球\n\n置信度：\nXX%\n",
+    "config": {
+      "project": {
+        "name": "HH520 Stable V2",
+        "version": "1.5"
+      },
+      "source": {
+        "base_url": "https://www.hh520.com/tx/10023s.php",
+        "threshold": 1,
+        "bankroll": 5000
+      },
+      "firecrawl": {
+        "endpoint": "https://api.firecrawl.dev/v2/scrape",
+        "formats": [
+          "markdown"
+        ],
+        "only_main_content": true,
+        "proxy": "basic",
+        "store_in_cache": true,
+        "max_age_ms": 0,
+        "one_request_per_date": true
+      },
+      "prediction": {
+        "use_probability_layer": true,
+        "use_value_layer": true,
+        "use_decision_filter": true,
+        "allow_pass": true
+      },
+      "research": {
+        "enabled": true,
+        "auto_tune_stable": false
+      }
+    },
+    "matches": []
+  },
+  "status": "READY",
   "_action": {
     "request_id": "gpt-start-20260921-c85c5b15",
     "repository": "ltaln/HH520-stable-V2",
