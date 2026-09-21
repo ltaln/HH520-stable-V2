@@ -160,6 +160,7 @@ def parse_10027s_markdown(markdown: str) -> List[Dict]:
                 "signal": _strip_md(cells[20]) if len(cells) > 20 else "",
             },
             "team_dna": {},
+            "research_factors": {},
             "page_prediction": _empty_prediction(),
         }
         key = (day, mid)
@@ -215,6 +216,24 @@ def parse_10027s_markdown(markdown: str) -> List[Dict]:
             probability = _probability(value("融合真实概率"))
             if probability is not None:
                 item["page_probability"] = probability
+
+            factors = item.setdefault("research_factors", {})
+            factors.update({
+                "odds_judgement": value("赔率判断"),
+                "draw_odds": _num(value("平赔率")),
+                "fusion_draw": _num(value("融合平值")),
+                "advantage_diff": _num(value("优势差")),
+                "draw_composite_score": _num(value("平局综合分")),
+                "advantage_side": value("优势方"),
+                "structure": value("结构"),
+                "consistency": value("一致"),
+                "pattern": value("规律"),
+                "rating_score": _num(value("评分")),
+                "rating": value("评级"),
+                "risk": value("风险"),
+                "handicap": value("盘口"),
+                "ignore": value("忽略"),
+            })
 
             j += 1
 
