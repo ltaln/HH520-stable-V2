@@ -1,4 +1,4 @@
-"""HH520 Research Lab V2.8. Stable is read-only; outputs are candidate research only."""
+"""HH520 Research Lab V3.0. Stable is read-only; outputs are candidate research only."""
 from collections import Counter, defaultdict
 from datetime import date, timedelta
 from copy import deepcopy
@@ -6,6 +6,8 @@ from copy import deepcopy
 from research.sanitizer import sanitize_records
 from research.backtest_engine import evaluate
 from research.result_label.matcher import match_results
+from research.error_attribution import attribute_errors
+from research.hidden_model_reverse import build_hidden_model_reverse
 
 MAX_DAYS = 31
 
@@ -92,6 +94,8 @@ def build_research_report(records, start=None, end=None, source="HH520_10027s", 
     joined = match_results(clean, result_labels or [])
     joined = _restore_research_predictions(joined, prediction_snapshots)
     backtest = evaluate(joined)
+    error_attribution = attribute_errors(joined)
+    hidden_model_reverse = build_hidden_model_reverse(joined, error_attribution)
     matched_count = backtest.get("matched_results", 0)
 
     return {
@@ -129,7 +133,8 @@ def build_research_report(records, start=None, end=None, source="HH520_10027s", 
             "isolation": "RESEARCH_ONLY",
             "stable_access": "FORBIDDEN",
         },
-        "hidden_model_reverse": {"status": "RESEARCH_ONLY"},
+        "error_attribution": error_attribution,
+        "hidden_model_reverse": hidden_model_reverse,
         "risk_analysis": {"status": "RESEARCH_ONLY"},
         "causal_analysis": {"status": "HYPOTHESIS_ONLY"},
         "confidence_analysis": {"status": "RESEARCH_ONLY", "sample_count": len(clean)},
