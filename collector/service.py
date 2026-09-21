@@ -1,3 +1,4 @@
+import os
 from datetime import datetime, timezone
 
 from .url_builder import build_10023s_url, build_10027s_url
@@ -73,7 +74,12 @@ def collect_date(date: str, force_refresh: bool = False, source: str = DEFAULT_S
     payload = load_cache(date, source=cfg["source"])
     if payload is None:
         require_key()
-        claim_request(date, source=cfg["source"])
+        allow_resume = os.getenv("HH520_ALLOW_INCOMPLETE_REQUEST_RESUME", "").strip() == "1"
+        claim_request(
+            date,
+            source=cfg["source"],
+            allow_resume_incomplete=allow_resume,
+        )
         raw = scrape_markdown(cfg["url"])
         payload = {
             "date": date,
