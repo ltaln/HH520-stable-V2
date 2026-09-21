@@ -1,0 +1,122 @@
+name: HH520 Research Forward Test
+run-name: "forward - ${{ inputs.request_id }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      request_id:
+        required: true
+        type: string
+      shadow_request_id:
+        required: true
+        type: string
+      validation_start:
+        required: true
+        type: string
+      validation_end:
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  status:
+    runs-on: ubuntu-latest
+    env:
+      REQUEST_ID: ${{ inputs.request_id }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Validate request ids
+        env:
+          SHADOW_REQUEST_ID: ${{ inputs.shadow_request_id }}
+        run: |
+          set -euo pipefail
+          [[ "$REQUEST_ID" =~ ^[A-Za-z0-9_-]{8,80}$ ]] || exit 2
+          [[ "$SHADOW_REQUEST_ID" =~ ^[A-Za-z0-9_-]{8,80}$ ]] || exit 2
+      - name: Publish PENDING immediately
+        run: python scripts/publish_action_status.py research-results "$REQUEST_ID" PENDING research
+
+  run:
+    needs: status
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    concurrency:
+      group: hh520-collection-main
+      cancel-in-progress: false
+    env:
+      FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+      PYTHONUTF8: "1"
+      REQUEST_ID: ${{ inputs.request_id }}
+      SHADOW_REQUEST_ID: ${{ inputs.shadow_request_id }}
+      HH520_ALLOW_INCOMPLETE_REQUEST_RESUME: "1"
+      FIRECRAWL_MIN_INTERVAL_SECONDS: "2.5"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+
+      - name: Validate dates
+        env:
+          VALIDATION_START: ${{ inputs.validation_start }}
+          VALIDATION_END: ${{ inputs.validation_end }}
+        run: |
+          set -euo pipefail
+          test -n "$FIRECRAWL_API_KEY" || { echo "FIRECRAWL_API_KEY secret is missing"; exit 3; }
+          python -c 'import os; from research.lab import date_range; from research.chronology import FORWARD_START; s=os.environ["VALIDATION_START"]; e=os.environ["VALIDATION_END"]; date_range(s,e); assert s >= FORWARD_START, "forward validation must start on/after FORWARD_START"'
+
+      - name: Load frozen shadow report
+        run: |
+          set -euo pipefail
+          mkdir -p _forward
+          git fetch --depth=1 origin research-results
+          git show "FETCH_HEAD:archive/$SHADOW_REQUEST_ID.json" > _forward/shadow.json
+          python - <<'PY'
+          import json
+          p=json.load(open("_forward/shadow.json",encoding="utf-8"))
+          rules=[x for x in (p.get("rules") or []) if x.get("status")=="SHADOW_PASS"]
+          if not rules:
+              raise SystemExit("shadow report has no SHADOW_PASS rules")
+          print(f"loaded {len(rules)} frozen SHADOW_PASS rules")
+          PY
+
+      - name: Restore collection cache
+        id: restore
+        uses: actions/cache/restore@v4
+        with:
+          path: cache
+          key: hh520-collection-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: hh520-collection-v1-
+
+      - name: Run forward test
+        id: execute
+        env:
+          VALIDATION_START: ${{ inputs.validation_start }}
+          VALIDATION_END: ${{ inputs.validation_end }}
+        run: |
+          set -euo pipefail
+          mkdir -p _action_out
+          python -m research.forward_runner             _forward/shadow.json             "$VALIDATION_START"             "$VALIDATION_END"             --output "_action_out/$REQUEST_ID.json"
+
+      - name: Preserve cache and request ledger even after failure
+        if: always() && steps.restore.outcome == 'success'
+        uses: actions/cache/save@v4
+        with:
+          path: cache
+          key: hh520-collection-v1-${{ github.run_id }}-${{ github.run_attempt }}
+
+      - name: Publish READY result
+        if: steps.execute.outcome == 'success'
+        run: python scripts/publish_action_result.py "_action_out/$REQUEST_ID.json" "research-results" "$REQUEST_ID"
+
+      - name: Publish FAILED state
+        if: failure() && steps.execute.outcome != 'success'
+        run: python scripts/publish_action_status.py research-results "$REQUEST_ID" FAILED research
