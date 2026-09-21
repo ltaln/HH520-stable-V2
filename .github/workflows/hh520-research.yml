@@ -78,13 +78,20 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p _action_out
-          python -m research.runner "$START_DATE" "$END_DATE" --output "_action_out/$REQUEST_ID.json"
+          python -m research.runner "$START_DATE" "$END_DATE" --output "_action_out/$REQUEST_ID.json" --calibration-md "_action_out/${REQUEST_ID}_calibration.md"
       - name: Preserve cache and request ledger even after failure
         if: always() && steps.restore.outcome == 'success'
         uses: actions/cache/save@v4
         with:
           path: cache
           key: hh520-collection-v1-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Upload calibration report artifact
+        if: steps.execute.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: "calibration-${{ inputs.request_id }}"
+          path: "_action_out/${{ inputs.request_id }}_calibration.md"
+          if-no-files-found: error
       - name: Publish READY result
         if: steps.execute.outcome == 'success'
         run: python scripts/publish_action_result.py "_action_out/$REQUEST_ID.json" "research-results" "$REQUEST_ID"
