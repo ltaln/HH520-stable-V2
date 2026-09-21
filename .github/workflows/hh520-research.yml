@@ -44,6 +44,8 @@ jobs:
       FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
       PYTHONUTF8: "1"
       REQUEST_ID: ${{ inputs.request_id }}
+      HH520_ALLOW_INCOMPLETE_REQUEST_RESUME: "1"
+      FIRECRAWL_MIN_INTERVAL_SECONDS: "2.5"
     steps:
       - uses: actions/checkout@v4
         with:
