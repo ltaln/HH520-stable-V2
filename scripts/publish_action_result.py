@@ -33,6 +33,28 @@ def _action_meta(request_id):
     return data
 
 
+def _shadow_summary(data, request_id):
+    rules = data.get("rules") or []
+    return {
+        "status": "READY",
+        "kind": "shadow_test",
+        "request_id": request_id,
+        "system": data.get("system"),
+        "stable_access": data.get("stable_access"),
+        "discovery": data.get("discovery"),
+        "validation_window": data.get("validation_window"),
+        "validation_input_count": data.get("validation_input_count"),
+        "validation_matched_count": data.get("validation_matched_count"),
+        "shadow_policy": data.get("shadow_policy"),
+        "shadow_pass_count": data.get("shadow_pass_count"),
+        "shadow_hold_count": data.get("shadow_hold_count"),
+        "rules": rules[:50],
+        "promotion_policy": data.get("promotion_policy"),
+        "archive_path": f"archive/{request_id}.json",
+        "message": "Shadow test READY. Frozen discovery rules were evaluated only on the later validation window.",
+    }
+
+
 def _research_summary(data, request_id):
     hidden = data.get("hidden_model_reverse") or {}
     error = data.get("error_attribution") or {}
@@ -191,7 +213,11 @@ def publish(result_file, branch, request_id):
                     raise ValueError("request_id already belongs to another workflow run")
 
             if branch == "research-results" and data.get("status") == "READY":
-                poll_data = _publish_research_files(target, data, request_id)
+                if data.get("kind") == "shadow_test":
+                    _write_json(target / "archive" / f"{request_id}.json", data)
+                    poll_data = _shadow_summary(data, request_id)
+                else:
+                    poll_data = _publish_research_files(target, data, request_id)
                 poll_data["_action"] = data["_action"]
             else:
                 poll_data = data
