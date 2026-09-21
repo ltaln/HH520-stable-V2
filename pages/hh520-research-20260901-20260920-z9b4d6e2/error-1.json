@@ -1,0 +1,488 @@
+{
+  "status": "READY",
+  "kind": "research_error_attribution_page",
+  "request_id": "hh520-research-20260901-20260920-z9b4d6e2",
+  "page": 1,
+  "page_size": 20,
+  "items": [
+    {
+      "date": "2026-09-01",
+      "match_id": "1",
+      "league": "沙职",
+      "home_team": "利雅新月",
+      "away_team": "吉达国民",
+      "sources": {
+        "score": "RESEARCH_DERIVED",
+        "htft": "HH520_RAW",
+        "goals": "RESEARCH_DERIVED_FROM_SCORE"
+      },
+      "errors": [
+        "SCORE_EXACT_MISS",
+        "SCORE_TOP2_MISS",
+        "HTFT_MISS",
+        "HTFT_TOP2_MISS"
+      ],
+      "wdl": "HIT",
+      "score_exact": "MISS",
+      "score_top2": "MISS",
+      "htft": "MISS",
+      "htft_top2": "MISS",
+      "goals": "HIT"
+    },
+    {
+      "date": "2026-09-01",
+      "match_id": "10",
+      "league": "意大利杯",
+      "home_team": "都灵",
+      "away_team": "蒙扎",
+      "sources": {
+        "score": "RESEARCH_DERIVED",
+        "htft": "RESEARCH_DERIVED_POISSON",
+        "goals": "RESEARCH_DERIVED_FROM_SCORE"
+      },
+      "errors": [
+        "WDL_MISS",
+        "SCORE_EXACT_MISS",
+        "SCORE_TOP2_MISS",
+        "HTFT_MISS",
+        "HTFT_TOP2_MISS"
+      ],
+      "wdl": "MISS",
+      "score_exact": "MISS",
+      "score_top2": "MISS",
+      "htft": "MISS",
+      "htft_top2": "MISS",
+      "goals": "HIT"
+    },
+    {
+      "date": "2026-09-01",
+      "match_id": "2",
+      "league": "英冠",
+      "home_team": "斯旺西",
+      "away_team": "沃特福德",
+      "sources": {
+        "score": "RESEARCH_DERIVED",
+        "htft": "RESEARCH_DERIVED_POISSON",
+        "goals": "RESEARCH_DERIVED_FROM_SCORE"
+      },
+      "errors": [
+        "SCORE_EXACT_MISS",
+        "SCORE_TOP2_MISS"
+      ],
+      "wdl": "HIT",
+      "score_exact": "MISS",
+      "score_top2": "MISS",
+      "htft": "HIT",
+      "htft_top2": "HIT",
+      "goals": "HIT"
+    },
+    {
+      "date": "2026-09-01",
+      "match_id": "3",
+      "league": "英冠",
+      "home_team": "西汉姆联",
+      "away_team": "伍尔弗",
+      "sources": {
+        "score": "RESEARCH_DERIVED",
+        "htft": "RESEARCH_DERIVED_POISSON",
+        "goals": "RESEARCH_DERIVED_FROM_SCORE"
+      },
+      "errors": [
+        "WDL_MISS",
+        "SCORE_EXACT_MISS",
+        "SCORE_TOP2_MISS",
+        "GOALS_MISS"
+      ],
+      "wdl": "MISS",
+      "score_exact": "MISS",
+      "score_top2": "MISS",
+      "htft": "HIT",
+      "htft_top2": "HIT",
+      "goals": "MISS"
+    },
+    {
+      "date": "2026-09-01",
+      "match_id": "4",
+      "league": "英冠",
+      "home_team": "朴次茅斯",
+      "away_team": "德比郡",
+      "sources": {
+        "score": "RESEARCH_DERIVED",
+        "htft": "RESEARCH_DERIVED_POISSON",
+        "goals": "RESEARCH_DERIVED_FROM_SCORE"
+      },
+      "errors": [
+        "WDL_MISS",
+        "SCORE_EXACT_MISS",
+        "SCORE_TOP2_MISS",
+        "HTFT_MISS",
+        "HTFT_TOP2_MISS",
+        "GOALS_MISS"
+      ],
+      "wdl": "MISS",
+      "score_exact": "MISS",
+      "score_top2": "MISS",
+      "htft": "MISS",
+      "htft_top2": "MISS",
+      "goals": "MISS"
+    },
+    {
+      "date": "2026-09-01",
+      "match_id": "5",
+      "league": "英冠",
+      "home_team": "林肯城",
+      "away_team": "布莱克本",
+      "sources": {
+        "score": "RESEARCH_DERIVED",
+        "htft": "RESEARCH_DERIVED_POISSON",
+        "goals": "RESEARCH_DERIVED_FROM_SCORE"
+      },
+      "errors": [
+        "WDL_MISS",
+        "SCORE_EXACT_MISS",
+        "SCORE_TOP2_MISS",
+        "HTFT_MISS",
+        "HTFT_TOP2_MISS",
+        "GOALS_MISS"
+      ],
+      "wdl": "MISS",
+      "score_exact": "MISS",
+      "score_top2": "MISS",
+      "htft": "MISS",
+      "htft_top2": "MISS",
+      "goals": "MISS"
+    },
+    {
+      "date": "2026-09-01",
+      "match_id": "6",
+      "league": "英冠",
+      "home_team": "普雷斯顿",
+      "away_team": "布城",
+      "sources": {
+        "score": "RESEARCH_DERIVED",
+        "htft": "RESEARCH_DERIVED_POISSON",
+        "goals": "RESEARCH_DERIVED_FROM_SCORE"
+      },
+      "errors": [
+        "WDL_MISS",
+        "SCORE_EXACT_MISS",
+        "SCORE_TOP2_MISS",
+        "GOALS_MISS"
+      ],
+      "wdl": "MISS",
+      "score_exact": "MISS",
+      "score_top2": "MISS",
+      "htft": "HIT",
+      "htft_top2": "HIT",
+      "goals": "MISS"
+    },
+    {
+      "date": "2026-09-01",
+      "match_id": "7",
+      "league": "英冠",
+      "home_team": "谢菲联",
+      "away_team": "博尔顿",
+      "sources": {
+        "score": "RESEARCH_DERIVED",
+        "htft": "RESEARCH_DERIVED_POISSON",
+        "goals": "RESEARCH_DERIVED_FROM_SCORE"
+      },
+      "errors": [
+        "SCORE_EXACT_MISS",
+        "SCORE_TOP2_MISS",
+        "HTFT_MISS",
+        "GOALS_MISS"
+      ],
+      "wdl": "HIT",
+      "score_exact": "MISS",
+      "score_top2": "MISS",
+      "htft": "MISS",
+      "htft_top2": "HIT",
+      "goals": "MISS"
+    },
+    {
+      "date": "2026-09-01",
+      "match_id": "8",
+      "league": "英冠",
+      "home_team": "伯明翰",
+      "away_team": "南安普敦",
+      "sources": {
+        "score": "RESEARCH_DERIVED",
+        "htft": "HH520_RAW",
+        "goals": "RESEARCH_DERIVED_FROM_SCORE"
+      },
+      "errors": [
+        "WDL_MISS",
+        "HTFT_MISS",
+        "HTFT_TOP2_MISS"
+      ],
+      "wdl": "MISS",
+      "score_exact": "HIT",
+      "score_top2": "HIT",
+      "htft": "MISS",
+      "htft_top2": "MISS",
+      "goals": "HIT"
+    },
+    {
+      "date": "2026-09-01",
+      "match_id": "9",
+      "league": "英冠",
+      "home_team": "斯托克城",
+      "away_team": "诺维奇",
+      "sources": {
+        "score": "RESEARCH_DERIVED",
+        "htft": "RESEARCH_DERIVED_POISSON",
+        "goals": "RESEARCH_DERIVED_FROM_SCORE"
+      },
+      "errors": [
+        "WDL_MISS",
+        "SCORE_EXACT_MISS",
+        "SCORE_TOP2_MISS",
+        "HTFT_MISS",
+        "GOALS_MISS"
+      ],
+      "wdl": "MISS",
+      "score_exact": "MISS",
+      "score_top2": "MISS",
+      "htft": "MISS",
+      "htft_top2": "HIT",
+      "goals": "MISS"
+    },
+    {
+      "date": "2026-09-02",
+      "match_id": "1",
+      "league": "日联赛杯",
+      "home_team": "八户南源",
+      "away_team": "枥木城",
+      "sources": {
+        "score": "RESEARCH_DERIVED",
+        "htft": "RESEARCH_DERIVED_POISSON",
+        "goals": "RESEARCH_DERIVED_FROM_SCORE"
+      },
+      "errors": [
+        "SCORE_EXACT_MISS",
+        "SCORE_TOP2_MISS"
+      ],
+      "wdl": "HIT",
+      "score_exact": "MISS",
+      "score_top2": "MISS",
+      "htft": "HIT",
+      "htft_top2": "HIT",
+      "goals": "HIT"
+    },
+    {
+      "date": "2026-09-02",
+      "match_id": "11",
+      "league": "英冠",
+      "home_team": "伯恩利",
+      "away_team": "米堡",
+      "sources": {
+        "score": "RESEARCH_DERIVED",
+        "htft": "HH520_RAW",
+        "goals": "RESEARCH_DERIVED_FROM_SCORE"
+      },
+      "errors": [
+        "WDL_MISS",
+        "HTFT_MISS",
+        "HTFT_TOP2_MISS"
+      ],
+      "wdl": "MISS",
+      "score_exact": "HIT",
+      "score_top2": "HIT",
+      "htft": "MISS",
+      "htft_top2": "MISS",
+      "goals": "HIT"
+    },
+    {
+      "date": "2026-09-02",
+      "match_id": "12",
+      "league": "巴甲",
+      "home_team": "弗拉门戈",
+      "away_team": "米拉索尔",
+      "sources": {
+        "score": "RESEARCH_DERIVED",
+        "htft": "RESEARCH_DERIVED_POISSON",
+        "goals": "RESEARCH_DERIVED_FROM_SCORE"
+      },
+      "errors": [],
+      "wdl": "HIT",
+      "score_exact": "HIT",
+      "score_top2": "HIT",
+      "htft": "HIT",
+      "htft_top2": "HIT",
+      "goals": "HIT"
+    },
+    {
+      "date": "2026-09-02",
+      "match_id": "13",
+      "league": "巴西杯",
+      "home_team": "桑托斯",
+      "away_team": "帕梅拉斯",
+      "sources": {
+        "score": "RESEARCH_DERIVED",
+        "htft": "HH520_RAW",
+        "goals": "RESEARCH_DERIVED_FROM_SCORE"
+      },
+      "errors": [
+        "WDL_MISS",
+        "SCORE_EXACT_MISS",
+        "SCORE_TOP2_MISS",
+        "HTFT_MISS",
+        "HTFT_TOP2_MISS",
+        "GOALS_MISS"
+      ],
+      "wdl": "MISS",
+      "score_exact": "MISS",
+      "score_top2": "MISS",
+      "htft": "MISS",
+      "htft_top2": "MISS",
+      "goals": "MISS"
+    },
+    {
+      "date": "2026-09-02",
+      "match_id": "2",
+      "league": "日职",
+      "home_team": "大阪樱花",
+      "away_team": "柏太阳神",
+      "sources": {
+        "score": "RESEARCH_DERIVED",
+        "htft": "RESEARCH_DERIVED_POISSON",
+        "goals": "RESEARCH_DERIVED_FROM_SCORE"
+      },
+      "errors": [
+        "WDL_MISS",
+        "SCORE_EXACT_MISS",
+        "SCORE_TOP2_MISS",
+        "HTFT_MISS",
+        "HTFT_TOP2_MISS"
+      ],
+      "wdl": "MISS",
+      "score_exact": "MISS",
+      "score_top2": "MISS",
+      "htft": "MISS",
+      "htft_top2": "MISS",
+      "goals": "HIT"
+    },
+    {
+      "date": "2026-09-02",
+      "match_id": "3",
+      "league": "日职",
+      "home_team": "水户蜀葵",
+      "away_team": "鹿岛鹿角",
+      "sources": {
+        "score": "RESEARCH_DERIVED",
+        "htft": "RESEARCH_DERIVED_POISSON",
+        "goals": "RESEARCH_DERIVED_FROM_SCORE"
+      },
+      "errors": [
+        "WDL_MISS",
+        "SCORE_EXACT_MISS",
+        "SCORE_TOP2_MISS",
+        "HTFT_MISS",
+        "HTFT_TOP2_MISS",
+        "GOALS_MISS"
+      ],
+      "wdl": "MISS",
+      "score_exact": "MISS",
+      "score_top2": "MISS",
+      "htft": "MISS",
+      "htft_top2": "MISS",
+      "goals": "MISS"
+    },
+    {
+      "date": "2026-09-02",
+      "match_id": "4",
+      "league": "日职",
+      "home_team": "町田泽维",
+      "away_team": "川崎前锋",
+      "sources": {
+        "score": "RESEARCH_DERIVED",
+        "htft": "HH520_RAW",
+        "goals": "RESEARCH_DERIVED_FROM_SCORE"
+      },
+      "errors": [
+        "SCORE_EXACT_MISS",
+        "SCORE_TOP2_MISS",
+        "GOALS_MISS"
+      ],
+      "wdl": "HIT",
+      "score_exact": "MISS",
+      "score_top2": "MISS",
+      "htft": "HIT",
+      "htft_top2": "HIT",
+      "goals": "MISS"
+    },
+    {
+      "date": "2026-09-02",
+      "match_id": "5",
+      "league": "意大利杯",
+      "home_team": "萨索洛",
+      "away_team": "弗洛西诺",
+      "sources": {
+        "score": "RESEARCH_DERIVED",
+        "htft": "RESEARCH_DERIVED_POISSON",
+        "goals": "RESEARCH_DERIVED_FROM_SCORE"
+      },
+      "errors": [
+        "HTFT_MISS",
+        "HTFT_TOP2_MISS"
+      ],
+      "wdl": "HIT",
+      "score_exact": "HIT",
+      "score_top2": "HIT",
+      "htft": "MISS",
+      "htft_top2": "MISS",
+      "goals": "HIT"
+    },
+    {
+      "date": "2026-09-02",
+      "match_id": "6",
+      "league": "意大利杯",
+      "home_team": "乌迪内斯",
+      "away_team": "威尼斯",
+      "sources": {
+        "score": "RESEARCH_DERIVED",
+        "htft": "RESEARCH_DERIVED_POISSON",
+        "goals": "RESEARCH_DERIVED_FROM_SCORE"
+      },
+      "errors": [
+        "SCORE_EXACT_MISS",
+        "SCORE_TOP2_MISS",
+        "HTFT_MISS",
+        "GOALS_MISS"
+      ],
+      "wdl": "HIT",
+      "score_exact": "MISS",
+      "score_top2": "MISS",
+      "htft": "MISS",
+      "htft_top2": "HIT",
+      "goals": "MISS"
+    },
+    {
+      "date": "2026-09-02",
+      "match_id": "7",
+      "league": "英冠",
+      "home_team": "米尔沃尔",
+      "away_team": "雷克斯",
+      "sources": {
+        "score": "RESEARCH_DERIVED",
+        "htft": "HH520_RAW",
+        "goals": "RESEARCH_DERIVED_FROM_SCORE"
+      },
+      "errors": [
+        "WDL_MISS",
+        "SCORE_EXACT_MISS",
+        "SCORE_TOP2_MISS",
+        "HTFT_MISS",
+        "HTFT_TOP2_MISS",
+        "GOALS_MISS"
+      ],
+      "wdl": "MISS",
+      "score_exact": "MISS",
+      "score_top2": "MISS",
+      "htft": "MISS",
+      "htft_top2": "MISS",
+      "goals": "MISS"
+    }
+  ]
+}
