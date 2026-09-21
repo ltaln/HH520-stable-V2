@@ -3,7 +3,7 @@ from concurrent.futures import ThreadPoolExecutor
 from unittest.mock import Mock
 import pytest
 from collector import cache_manager as cache, service
-from collector.url_builder import build_10023s_url
+from collector.url_builder import build_10027s_url
 from controller.command_router import parse_command
 from collector import firecrawl_client
 
@@ -16,7 +16,7 @@ def isolated_cache(tmp_path, monkeypatch):
 
 def raw():
     return {"success": True, "data": {"markdown": "sample", "metadata": {
-        "sourceURL": build_10023s_url(DATE), "title": DATE, "statusCode": 200}}}
+        "sourceURL": build_10027s_url(DATE, DATE), "title": DATE, "statusCode": 200}}}
 
 @pytest.mark.parametrize("value", ["2026-02-30", "../a", "2026-1-01", "2026-09-19&x=1"])
 def test_bad_dates(value):
@@ -26,7 +26,7 @@ def test_bad_dates(value):
         parse_command("预测 " + value)
 
 def test_fixed_url():
-    assert build_10023s_url(DATE) == "https://www.hh520.com/tx/10023s.php?riqi=2026-09-19&threshold=1&bankroll=5000"
+    assert build_10027s_url(DATE, DATE) == "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-19&riqi_end=2026-09-19&threshold=1&bankroll=5000"
     with pytest.raises(ValueError):
         build_10023s_url(DATE, 2)
 
@@ -47,7 +47,7 @@ def test_cache_first_and_parse_again(monkeypatch):
     scrape = Mock(return_value=raw())
     parser = Mock(return_value=[{"home_team": "A"}])
     monkeypatch.setattr(service, "scrape_markdown", scrape)
-    monkeypatch.setattr(service, "parse_10023s_markdown", parser)
+    monkeypatch.setattr(service, "parse_10027s_markdown", parser)
     assert service.collect_date(DATE)["matches"] == service.collect_date(DATE)["matches"]
     assert scrape.call_count == 1
     assert parser.call_count == 2
@@ -55,7 +55,7 @@ def test_cache_first_and_parse_again(monkeypatch):
 def test_parse_failure_preserves_raw(monkeypatch):
     scrape = Mock(return_value=raw())
     monkeypatch.setattr(service, "scrape_markdown", scrape)
-    monkeypatch.setattr(service, "parse_10023s_markdown", Mock(side_effect=ValueError("schema")))
+    monkeypatch.setattr(service, "parse_10027s_markdown", Mock(side_effect=ValueError("schema")))
     for _ in range(2):
         with pytest.raises(ValueError):
             service.collect_date(DATE)
@@ -99,7 +99,7 @@ def test_firecrawl_request_contract(monkeypatch):
     response.json.return_value = raw()
     post = Mock(return_value=response)
     monkeypatch.setattr(firecrawl_client.requests, "post", post)
-    assert firecrawl_client.scrape_markdown(build_10023s_url(DATE)) == raw()
+    assert firecrawl_client.scrape_markdown(build_10027s_url(DATE, DATE)) == raw()
     args, kwargs = post.call_args
     assert args == ("https://api.firecrawl.dev/v2/scrape",)
     assert kwargs["json"]["proxy"] == "basic"
