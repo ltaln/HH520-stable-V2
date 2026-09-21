@@ -7,7 +7,8 @@ from collector.service import collect_date
 from research.lab import date_range, build_research_report
 from research.result_label.collector import collect_result_labels
 from research.score_inference import attach_research_score_predictions
-from research.htft_inference import attach_research_htft_predictions\nfrom research.calibration.report import render_calibration_report
+from research.htft_inference import attach_research_htft_predictions
+from research.calibration.report import render_calibration_report
 
 
 def _present(value):

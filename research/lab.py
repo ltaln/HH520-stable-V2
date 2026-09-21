@@ -10,7 +10,8 @@ from research.error_attribution import attribute_errors
 from research.hidden_model_reverse import build_hidden_model_reverse
 from research.dna import build_dna
 from research.candidate_rules import generate_candidate_rules
-from research.chronology import classify_window, canonical_timeline\nfrom research.calibration import calibrate
+from research.chronology import classify_window, canonical_timeline
+from research.calibration import calibrate
 
 MAX_DAYS = 90
 
