@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "HH520 Stable V2 - GitHub Actions Bridge",
-    "version": "2.2",
-    "description": "Trigger HH520 Stable V2 / Research on GitHub Actions and read state/results. Result polling uses a changing poll query token to prevent stale PENDING responses."
+    "version": "2.3",
+    "description": "Trigger HH520 Stable V2 / Research on GitHub Actions and read compact state/results. Research READY responses are compact; detailed V3.0 outputs are available through bounded manifest/page endpoints."
   },
   "servers": [
     {
@@ -328,6 +328,150 @@
           },
           "404": {
             "description": "Result is not ready yet. Retry this GET; do not dispatch a duplicate workflow."
+          }
+        }
+      }
+    },
+    "/repos/ltaln/HH520-stable-V2/contents/pages/{request_id}/manifest.json": {
+      "get": {
+        "operationId": "getHH520ResearchDetailManifest",
+        "summary": "Read the paged Research detail manifest after READY",
+        "parameters": [
+          {
+            "name": "request_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{8,80}$"
+            }
+          },
+          {
+            "name": "ref",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "research-results"
+              ],
+              "default": "research-results"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "application/vnd.github.raw+json"
+              ],
+              "default": "application/vnd.github.raw+json"
+            }
+          },
+          {
+            "name": "poll",
+            "in": "query",
+            "required": true,
+            "description": "Cache-busting token; change on every GET.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,40}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Small manifest listing bounded detail page paths.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Manifest is not ready yet."
+          }
+        }
+      }
+    },
+    "/repos/ltaln/HH520-stable-V2/contents/pages/{request_id}/{page_file}": {
+      "get": {
+        "operationId": "getHH520ResearchDetailPage",
+        "summary": "Read one bounded Research detail page",
+        "parameters": [
+          {
+            "name": "request_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{8,80}$"
+            }
+          },
+          {
+            "name": "page_file",
+            "in": "path",
+            "required": true,
+            "description": "Use a filename returned by the manifest, for example error-1.json or signals-1.json.",
+            "schema": {
+              "type": "string",
+              "pattern": "^(error|signals)-[1-9][0-9]*\\.json$"
+            }
+          },
+          {
+            "name": "ref",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "research-results"
+              ],
+              "default": "research-results"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "application/vnd.github.raw+json"
+              ],
+              "default": "application/vnd.github.raw+json"
+            }
+          },
+          {
+            "name": "poll",
+            "in": "query",
+            "required": true,
+            "description": "Cache-busting token; change on every GET.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,40}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "One bounded page of Research detail data.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Page does not exist."
           }
         }
       }
