@@ -1,9 +1,11 @@
 project:
-  name: HH520 Stable V2
-  version: "1.5"
+  name: HH520 Stable V2.1
+  version: "2.1"
 
 source:
-  base_url: "https://www.hh520.com/tx/10023s.php"
+  page: "10027s"
+  base_url: "https://www.hh520.com/tx/10027s.php"
+  date_params: ["riqi_start", "riqi_end"]
   threshold: 1
   bankroll: 5000
 
@@ -20,6 +22,8 @@ prediction:
   use_probability_layer: true
   use_value_layer: true
   use_decision_filter: true
+  decision_filter_version: "2.0"
+  decision_filter_mode: "stable_v2_1"
   allow_pass: true
 
 research:
