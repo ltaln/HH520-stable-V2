@@ -46,7 +46,7 @@ def test_complete_inference_without_page_answers_and_cache(api):
     assert "result" not in payload["matches"][0]
     assert payload["matches"][0]["team_dna"]["attack"]["home"]==10
     assert payload["matches"][0]["analysis"]["value"]["used_for_direction"] is False
-    assert payload["config"]["project"]["version"]=="1.5"
+    assert payload["config"]["project"]["version"]=="2.1"
     assert body["store"] is False
 
 @pytest.mark.parametrize("changes",[
