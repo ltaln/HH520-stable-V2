@@ -35,11 +35,13 @@ def prepare_match(match):
     result["decision_filter"] = analysis["decision"]
     result["stable_v3_direction"] = result["direction"]
     result["stable_v3_decision"] = analysis["decision"].get("decision", "PASS")
-    if analysis["decision"]["allow_prediction"]:
-        result.update(status="READY_FOR_GPT", reason="Decision Filter V3已放行；等待GPT最终推理")
+    # Stable keeps the established GPT inference contract while recording the
+    # V3 decision as an advisory/audit signal. Calibration decides later whether
+    # V3 thresholds are safe enough to become a hard gate.
+    if analysis["probability"].get("valid") and result["direction"]:
+        result.update(status="READY_FOR_GPT", reason="有效概率；等待GPT最终推理")
     else:
-        reasons = analysis["decision"].get("reasons") or analysis["decision"].get("risk_reasons") or ["Decision Filter V3未放行"]
-        result.update(status="PASS", reason="；".join(reasons))
+        result.update(status="PASS", reason="无有效概率")
     return result
 
 
@@ -57,7 +59,12 @@ def build_model_input(matches):
             "kickoff": match.get("kickoff"), "market": match.get("market", {}),
             "page_probability": match.get("page_probability"),
             "team_dna": match.get("team_dna", {}),
-            "analysis": analysis, "direction": prepared["direction"],
+            "analysis": {
+                "probability": analysis["probability"],
+                "value": analysis["value"],
+                "decision": analysis["decision"],
+                "confidence": analysis["confidence"],
+            }, "direction": prepared["direction"],
             "decision_filter": analysis["decision"],
             "stable_version": "HH520 Stable V3",
             "source_contract": "HH520_10027s",
@@ -113,7 +120,7 @@ def validate_prediction(item, prepared, evidence):
         return _pass(prepared, "缺少进攻/防守结构数据，无法支持精细预测")
     result = dict(prepared)
     result.update(item)
-    result["confidence"] = min(item["confidence"], evidence["analysis"]["confidence"])
+    result["confidence"] = max(1, min(99, int(item["confidence"])))
     return result
 
 
