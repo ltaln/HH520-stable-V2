@@ -23,7 +23,7 @@ def test_dispatch_schema_preserves_stable_and_adds_research():
 def test_workflows_share_cache_lock_and_preserve_on_failure():
     for file,branch in [('hh520-predict.yml','action-results'),('hh520-research.yml','research-results')]:
         data=yaml.safe_load((ROOT/'.github/workflows'/file).read_text(encoding='utf-8'))
-        assert data['concurrency']['group']=='hh520-collection-main'
+        assert data['jobs']['run']['concurrency']['group']=='hh520-collection-main'
         steps=data['jobs']['run']['steps']
         assert any(s.get('uses')=='actions/cache/restore@v4' for s in steps)
         save=next(s for s in steps if s.get('uses')=='actions/cache/save@v4')
