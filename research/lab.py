@@ -10,9 +10,9 @@ from research.error_attribution import attribute_errors
 from research.hidden_model_reverse import build_hidden_model_reverse
 from research.dna import build_dna
 from research.candidate_rules import generate_candidate_rules
-from research.chronology import classify_window, canonical_timeline
+from research.chronology import classify_window, canonical_timeline\nfrom research.calibration import calibrate
 
-MAX_DAYS = 31
+MAX_DAYS = 90
 
 
 def date_range(start, end):
@@ -103,6 +103,7 @@ def build_research_report(records, start=None, end=None, source="HH520_10027s", 
     candidate_rule_engine = generate_candidate_rules(
         joined, error_attribution, hidden_model_reverse
     )
+    calibration = calibrate(joined, error_attribution)
     matched_count = backtest.get("matched_results", 0)
 
     return {
@@ -149,5 +150,6 @@ def build_research_report(records, start=None, end=None, source="HH520_10027s", 
         "confidence_analysis": {"status": "RESEARCH_ONLY", "sample_count": len(clean)},
         "candidate_rule_engine": candidate_rule_engine,
         "candidate_rules": candidate_rule_engine["rules"],
+        "stable_v3_calibration": calibration,
         "promotion_policy": "MANUAL_REVIEW_REQUIRED",
     }

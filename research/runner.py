@@ -7,7 +7,7 @@ from collector.service import collect_date
 from research.lab import date_range, build_research_report
 from research.result_label.collector import collect_result_labels
 from research.score_inference import attach_research_score_predictions
-from research.htft_inference import attach_research_htft_predictions
+from research.htft_inference import attach_research_htft_predictions\nfrom research.calibration.report import render_calibration_report
 
 
 def _present(value):
@@ -123,6 +123,7 @@ def main(argv=None):
     parser.add_argument("end", nargs="?")
     parser.add_argument("--input", type=Path, help="Optional offline JSON records instead of Firecrawl collection")
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--calibration-md", type=Path, help="Optional Stable V3 calibration Markdown report")
     args = parser.parse_args(argv)
     end = args.end or args.start
     date_range(args.start, end)
@@ -152,6 +153,12 @@ def main(argv=None):
         json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False),
         encoding="utf-8",
     )
+    if args.calibration_md:
+        args.calibration_md.parent.mkdir(parents=True, exist_ok=True)
+        args.calibration_md.write_text(
+            render_calibration_report(report.get("stable_v3_calibration") or {}, args.start, end),
+            encoding="utf-8",
+        )
     return 0
 
 
