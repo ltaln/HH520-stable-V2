@@ -114,8 +114,13 @@ def assess_risk_v3(match: dict, probability: dict, value: dict, quality=None, cl
     return _format(score, reasons, "HH520 Risk Engine V3.0")
 
 
-def assess_risk(match: dict, probability: dict, value: dict, quality=None, classification=None) -> dict:
+def assess_risk_v31(match: dict, probability: dict, value: dict, quality=None, classification=None) -> dict:
     quality = quality or data_quality_gate(match, probability)
     classification = classification or classify_match(match, probability)
     score, reasons = _base_risk(match, probability, value, quality, classification, v31=True)
     return _format(score, reasons, VERSION)
+
+
+def assess_risk(match: dict, probability: dict, value: dict, quality=None, classification=None) -> dict:
+    """Production default remains V3.0 until a candidate wins validation."""
+    return assess_risk_v3(match, probability, value, quality, classification)
