@@ -15,7 +15,7 @@ def main(argv=None):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8")
     load_dotenv(ROOT / ".env")
-    parser = argparse.ArgumentParser(description="HH520 Stable V2：按日期采集、分析，默认不调用GPT")
+    parser = argparse.ArgumentParser(description="HH520 Stable V2.1：10027s采集 + Decision Filter V2，默认不调用GPT")
     parser.add_argument("command", nargs="*", help="预测 YYYY-MM-DD 全部比赛")
     parser.add_argument("--gpt", action="store_true", help="显式启用可选GPT API分析")
     parser.add_argument("--import-response", type=Path, help="离线导入已保存的Firecrawl响应JSON")
