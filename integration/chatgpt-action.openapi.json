@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "HH520 Stable V2 - GitHub Actions Bridge",
-    "version": "2.3",
-    "description": "Trigger HH520 Stable V2 / Research on GitHub Actions and read compact state/results. Research READY responses are compact; detailed V3.0 outputs are available through bounded manifest/page endpoints."
+    "version": "2.4",
+    "description": "Trigger HH520 Stable prediction, Research, and frozen-rule Shadow Test on GitHub Actions. Research/Shadow READY responses are compact and safe for polling."
   },
   "servers": [
     {
@@ -472,6 +472,70 @@
           },
           "404": {
             "description": "Page does not exist."
+          }
+        }
+      }
+    },
+    "/repos/ltaln/HH520-stable-V2/actions/workflows/hh520-shadow.yml/dispatches": {
+      "post": {
+        "operationId": "startHH520ShadowTest",
+        "summary": "Run out-of-sample Shadow Test for frozen Research candidate rules",
+        "x-openai-isConsequential": false,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "ref",
+                  "inputs"
+                ],
+                "properties": {
+                  "ref": {
+                    "type": "string",
+                    "enum": [
+                      "main"
+                    ],
+                    "default": "main"
+                  },
+                  "inputs": {
+                    "type": "object",
+                    "required": [
+                      "request_id",
+                      "discovery_request_id",
+                      "validation_start",
+                      "validation_end"
+                    ],
+                    "properties": {
+                      "request_id": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9_-]{8,80}$",
+                        "description": "Unique shadow-test request id."
+                      },
+                      "discovery_request_id": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9_-]{8,80}$",
+                        "description": "Completed Research request id whose candidate rules must remain frozen."
+                      },
+                      "validation_start": {
+                        "type": "string",
+                        "format": "date"
+                      },
+                      "validation_end": {
+                        "type": "string",
+                        "format": "date"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Shadow Test workflow accepted by GitHub Actions."
           }
         }
       }
