@@ -1,4 +1,4 @@
-"""V1.5: probability -> value -> decision -> GPT final prediction."""
+"""Stable V3: probability -> value -> quality -> class -> risk -> decision -> optional GPT."""
 import re
 from analysis.match_analysis import analyze_match
 
@@ -8,6 +8,7 @@ SCORE = re.compile(r"(\d{1,2})[:：-](\d{1,2})")
 SIDE = {"主": "主胜", "胜": "主胜", "主胜": "主胜", "平": "平", "平局": "平",
         "客": "客胜", "负": "客胜", "客胜": "客胜"}
 
+
 def score_direction(text):
     match = SCORE.fullmatch(str(text).strip())
     if not match:
@@ -15,9 +16,11 @@ def score_direction(text):
     home, away = map(int, match.groups())
     return "主胜" if home > away else "客胜" if home < away else "平"
 
+
 def valid_htft(text, direction):
     parts = str(text).strip().split("/")
     return len(parts) == 2 and parts[0] in SIDE and SIDE.get(parts[1]) == direction
+
 
 def prepare_match(match):
     result = {"match_id": str(match.get("match_id", "")), "home_team": match["home_team"],
@@ -30,17 +33,18 @@ def prepare_match(match):
     analysis = analyze_match(match)
     result["direction"] = DIRECTIONS.get(analysis["probability"]["direction"])
     result["decision_filter"] = analysis["decision"]
-    result["stable_v2_direction"] = result["direction"]
-    result["stable_v21_decision"] = analysis["decision"].get("decision", "PASS")
+    result["stable_v3_direction"] = result["direction"]
+    result["stable_v3_decision"] = analysis["decision"].get("decision", "PASS")
     if analysis["decision"]["allow_prediction"]:
-        result.update(status="READY_FOR_GPT", reason="Decision Filter V2已放行；等待GPT最终推理")
+        result.update(status="READY_FOR_GPT", reason="Decision Filter V3已放行；等待GPT最终推理")
     else:
-        reasons = analysis["decision"].get("reasons") or ["Decision Filter V2未放行"]
+        reasons = analysis["decision"].get("reasons") or analysis["decision"].get("risk_reasons") or ["Decision Filter V3未放行"]
         result.update(status="PASS", reason="；".join(reasons))
     return result
 
+
 def build_model_input(matches):
-    """No results, settlements or raw page text may enter final inference."""
+    """Only pre-match evidence enters GPT; page betting/advice/recommendation fields are excluded."""
     payload = []
     for match in matches:
         prepared = prepare_match(match)
@@ -53,22 +57,25 @@ def build_model_input(matches):
             "kickoff": match.get("kickoff"), "market": match.get("market", {}),
             "page_probability": match.get("page_probability"),
             "team_dna": match.get("team_dna", {}),
-            "page_context": match.get("page_context", {}),
-            "page_prediction": match.get("page_prediction", {}),
             "analysis": analysis, "direction": prepared["direction"],
             "decision_filter": analysis["decision"],
-            "stable_version": "HH520 Stable V2.1",
+            "stable_version": "HH520 Stable V3",
             "source_contract": "HH520_10027s",
-            "data_limitations": ["球队特征统计口径未验证，不得自行给固定高权重",
-                                 "10027s基础表比分字段是赛果标签，历史比赛不得进入赛前推理",
-                                 "比分/总进球若非页面原始预测必须明确标记为派生结果"],
+            "excluded_source_fields": ["建议下注", "是否下注", "page_prediction"],
+            "data_limitations": [
+                "10027s建议下注/是否下注永不进入预测与GPT输入",
+                "10027s基础表比分字段是赛果标签，历史比赛不得进入赛前推理",
+                "比分/半全场/总进球必须由当前赛前证据推导，不能复制页面最终建议",
+            ],
         })
     return payload
+
 
 def _pass(prepared, reason):
     result = dict(prepared)
     result.update(status="PASS", confidence=0, reason=reason)
     return result
+
 
 def validate_prediction(item, prepared, evidence):
     if item["match_id"] != prepared["match_id"]:
@@ -106,10 +113,9 @@ def validate_prediction(item, prepared, evidence):
         return _pass(prepared, "缺少进攻/防守结构数据，无法支持精细预测")
     result = dict(prepared)
     result.update(item)
-    # Preserve the original confidence function as the evidence-derived ceiling;
-    # do not add the previous arbitrary 60% cap.
     result["confidence"] = min(item["confidence"], evidence["analysis"]["confidence"])
     return result
+
 
 def build_predictions(matches, use_gpt=False):
     prepared = [prepare_match(match) for match in matches]

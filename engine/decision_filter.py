@@ -1,169 +1,95 @@
-"""Stable V2.1 Decision Filter.
+"""HH520 Stable V3 Decision Filter.
 
-The upstream prediction/probability/value logic remains unchanged. This layer
-only gates whether a candidate may proceed to final prediction, using factors
-validated across Aug 2026 Discovery and Sep 1-20 Historical Shadow.
-
-Source contract: HH520 10027s.
+Inputs: probability + value + quality + match classification + independent risk.
+Forbidden inputs: HH520 '建议下注' and '是否下注'.
 """
+from .data_quality import data_quality_gate
+from .match_classifier import classify_match
+from .risk_engine import assess_risk
 
-VERSION = "HH520 Decision Filter V2.0"
-MIN_DECISION_SCORE = 0.12
-
-# Conservative WDL evidence. Weights are the weaker (minimum) uplift observed
-# across the two validation windows, so one strong month cannot dominate.
-POSITIVE = {
-    ("away_odds_bucket", "<1.50"): 0.2539,
-    ("probability_concentration", ">=60%"): 0.2357,
-    ("structure", "强优"): 0.2298,
-    ("pattern", "🔶风控赔率"): 0.1769,
-    ("home_odds_bucket", "<1.50"): 0.1707,
-    ("handicap", "客让半一低水/一球高水"): 0.1131,
-    ("rating", "B+"): 0.1109,
-    ("risk", "低"): 0.0985,
-}
-
-NEGATIVE = {
-    ("pattern", "⚡ 极端"): -0.2202,
-    ("probability_concentration", "<40%"): -0.1845,
-    ("pattern", "⚠️ 边缘"): -0.1731,
-    ("away_odds_bucket", "2.20-2.99"): -0.1605,
-    ("home_odds_bucket", "2.20-2.99"): -0.1516,
-    ("away_odds_bucket", "1.80-2.19"): -0.1452,
-    ("home_odds_bucket", "1.80-2.19"): -0.1312,
-    ("risk", "中高"): -0.1268,
-    ("handicap", "主让平半低水/半球高水"): -0.1240,
-}
-
-HARD_PASS = {
-    ("probability_concentration", "<40%"),
-    ("pattern", "⚡ 极端"),
-}
+VERSION = "HH520 Decision Filter V3.0"
+MIN_MARGIN = 0.08
+MAX_RISK_SCORE = 54
 
 
-def _bucket_odds(value):
-    try:
-        x = float(value)
-    except (TypeError, ValueError):
-        return None
-    if x < 1.5:
-        return "<1.50"
-    if x < 1.8:
-        return "1.50-1.79"
-    if x < 2.2:
-        return "1.80-2.19"
-    if x < 3.0:
-        return "2.20-2.99"
-    return ">=3.00"
-
-
-def _bucket_probability_concentration(match, probability):
-    probs = match.get("page_probability")
-    if not isinstance(probs, dict):
-        probs = probability.get("probabilities") or {}
-    vals = []
-    for key in ("home", "draw", "away"):
-        try:
-            vals.append(float(probs[key]))
-        except (KeyError, TypeError, ValueError):
-            return None
-    top = max(vals)
-    if top < 0.40:
-        return "<40%"
-    if top < 0.50:
-        return "40-49%"
-    if top < 0.60:
-        return "50-59%"
-    return ">=60%"
-
-
-def _factor_pairs(match, probability):
-    factors = match.get("research_factors") or {}
-    market = match.get("market") or {}
-    pairs = {
-        "risk": factors.get("risk"),
-        "rating": factors.get("rating"),
-        "structure": factors.get("structure"),
-        "pattern": factors.get("pattern"),
-        "handicap": factors.get("handicap"),
-        "probability_concentration": _bucket_probability_concentration(match, probability),
-        "home_odds_bucket": _bucket_odds(market.get("home_odds")),
-        "away_odds_bucket": _bucket_odds(market.get("away_odds")),
-    }
-    return {
-        key: str(value).strip()
-        for key, value in pairs.items()
-        if value not in (None, "", "-", "--", "—")
-    }
-
-
-def decision_filter(match: dict, probability: dict, value: dict) -> dict:
-    if not probability.get("valid"):
-        return {
-            "version": VERSION,
-            "risk": "high",
-            "reasons": ["无有效概率，PASS"],
-            "allow_prediction": False,
-            "decision": "PASS",
-            "decision_score": 0.0,
-            "positive_evidence": [],
-            "negative_evidence": [],
-            "hard_pass": True,
-        }
-
-    pairs = _factor_pairs(match, probability)
-    positive = []
-    negative = []
-    score = 0.0
-    hard_pass = False
-
-    for key, weight in POSITIVE.items():
-        if pairs.get(key[0]) == key[1]:
-            positive.append({"factor": key[0], "value": key[1], "weight": weight})
-            score += weight
-
-    for key, weight in NEGATIVE.items():
-        if pairs.get(key[0]) == key[1]:
-            negative.append({"factor": key[0], "value": key[1], "weight": weight})
-            score += weight
-            if key in HARD_PASS:
-                hard_pass = True
+def decision_filter(match: dict, probability: dict, value: dict,
+                    quality: dict = None, classification: dict = None,
+                    risk: dict = None) -> dict:
+    quality = quality or data_quality_gate(match, probability)
+    classification = classification or classify_match(match, probability)
+    risk = risk or assess_risk(match, probability, value, quality, classification)
 
     reasons = []
-    if positive:
-        reasons.append("跨8月/9月稳定正向证据: " + "、".join(
-            f"{x['factor']}={x['value']}" for x in positive
-        ))
-    if negative:
-        reasons.append("跨8月/9月稳定负向证据: " + "、".join(
-            f"{x['factor']}={x['value']}" for x in negative
-        ))
+    hard_pass = False
 
-    allow = bool(positive) and not hard_pass and score >= MIN_DECISION_SCORE
-    if hard_pass:
-        reasons.append("命中Hard PASS条件")
-    elif not positive:
-        reasons.append("无已验证正向证据")
-    elif score < MIN_DECISION_SCORE:
-        reasons.append("正负证据抵消后低于放行阈值")
+    if not quality["valid"]:
+        hard_pass = True
+        reasons.append("Data Quality Gate失败: " + ",".join(quality["errors"]))
 
-    if hard_pass:
-        risk = "high"
-    elif negative:
-        risk = "medium"
-    else:
-        risk = "low"
+    if not probability.get("valid"):
+        hard_pass = True
+        reasons.append("无有效概率")
+
+    margin = classification.get("probability_margin", 0.0)
+    top = classification.get("top_probability", 0.0)
+    edge = value.get("directional_edge")
+
+    if top < 0.40:
+        hard_pass = True
+        reasons.append("最高概率低于40%")
+    if margin < 0.03:
+        hard_pass = True
+        reasons.append("概率方向无法有效区分")
+    if risk.get("hard_pass") or risk.get("score", 100) > MAX_RISK_SCORE:
+        hard_pass = True
+        reasons.append("Risk Engine高风险")
+
+    evidence = []
+    if top >= 0.50:
+        evidence.append("top_probability>=50%")
+    if margin >= MIN_MARGIN:
+        evidence.append("probability_margin>=8%")
+    if edge is not None and edge >= 0.03:
+        evidence.append("directional_edge>=3%")
+    if classification.get("type") == "strong_favorite":
+        evidence.append("strong_favorite")
+
+    allow = (
+        not hard_pass
+        and margin >= MIN_MARGIN
+        and bool(evidence)
+        and risk.get("score", 100) <= MAX_RISK_SCORE
+    )
+
+    if not allow and not hard_pass:
+        if margin < MIN_MARGIN:
+            reasons.append("概率集中度不足8%")
+        if not evidence:
+            reasons.append("缺少有效放行证据")
+
+    decision_score = round(
+        max(0.0, min(1.0,
+            0.55 * top
+            + 0.25 * min(1.0, margin / 0.30)
+            + 0.20 * max(0.0, min(1.0, ((edge or 0.0) + 0.05) / 0.15))
+            - 0.35 * (risk.get("score", 100) / 100.0)
+        )),
+        4,
+    )
 
     return {
         "version": VERSION,
-        "risk": risk,
-        "reasons": reasons,
-        "allow_prediction": allow,
         "decision": "BET_CANDIDATE" if allow else "PASS",
-        "decision_score": round(score, 4),
-        "positive_evidence": positive,
-        "negative_evidence": negative,
+        "allow_prediction": allow,
+        "decision_score": decision_score,
         "hard_pass": hard_pass,
+        "risk": risk.get("level", "high"),
+        "risk_score": risk.get("score", 100),
+        "risk_reasons": risk.get("reasons", []),
+        "match_type": classification.get("type"),
+        "reasons": reasons,
+        "evidence": evidence,
         "source": "HH520_10027s",
+        "forbidden_advice_fields_used": False,
         "value_layer_used_for_direction": bool(value.get("used_for_direction")),
     }

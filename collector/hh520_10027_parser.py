@@ -162,7 +162,6 @@ def parse_10027s_markdown(markdown: str) -> List[Dict]:
             "value": {
                 "ev": _num(cells[17]) if len(cells) > 17 else None,
                 "kelly": _num(cells[18]) if len(cells) > 18 else None,
-                "signal": _strip_md(cells[20]) if len(cells) > 20 else "",
             },
             "team_dna": {},
             "research_factors": {},

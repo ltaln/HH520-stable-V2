@@ -18,10 +18,16 @@ def test_schema_and_normalization():
     assert match["match_id"] == "1"
     assert match["market"] == {"home_odds": 2, "draw_odds": 3, "away_odds": 4}
     assert sum(match["page_probability"].values()) == pytest.approx(1)
-    assert match["page_prediction"]["single"] == "主胜"
-    assert match["page_prediction"]["htft"] == "平/主"
     assert match["research_factors"]["structure"] == "强优"
-    assert match["research_factors"]["pattern"] == "🔶风控赔率"
+
+
+def test_betting_advice_columns_are_never_stored():
+    match = parse_10027s_markdown(sample())[0]
+    assert "signal" not in match["value"]
+    blob = repr(match)
+    assert "✅下注" not in blob
+    assert "建议下注" not in blob
+    assert "是否下注" not in blob
 
 
 def test_actual_score_is_result_label():

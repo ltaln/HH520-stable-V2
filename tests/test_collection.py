@@ -105,3 +105,9 @@ def test_firecrawl_request_contract(monkeypatch):
     assert kwargs["json"]["proxy"] == "basic"
     assert kwargs["json"]["formats"] == ["markdown"]
     assert kwargs["allow_redirects"] is False
+
+
+def test_stable_v3_rejects_legacy_10023_source():
+    from collector.service import collect_date
+    with pytest.raises(ValueError, match="只允许 HH520 10027s"):
+        collect_date("2026-09-19", source="10023s")
