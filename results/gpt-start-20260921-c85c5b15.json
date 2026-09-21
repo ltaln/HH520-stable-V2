@@ -1,0 +1,13 @@
+{
+  "status": "PENDING",
+  "kind": "stable",
+  "request_id": "gpt-start-20260921-c85c5b15",
+  "message": "Workflow accepted and is still running.",
+  "_action": {
+    "request_id": "gpt-start-20260921-c85c5b15",
+    "repository": "ltaln/HH520-stable-V2",
+    "run_id": "35566847313",
+    "run_attempt": "1",
+    "source_sha": "96db1f5147abafecf0a1f148604eaab50d0b9472"
+  }
+}
