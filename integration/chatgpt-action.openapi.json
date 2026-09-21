@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "HH520 Stable V2 - GitHub Actions Bridge",
-    "version": "2.4",
-    "description": "Trigger HH520 Stable prediction, Research, and frozen-rule Shadow Test on GitHub Actions. Research/Shadow READY responses are compact and safe for polling."
+    "version": "2.5",
+    "description": "Trigger HH520 Stable prediction, Research, frozen-rule Shadow Test, and forward validation on GitHub Actions. Research/Shadow/Forward READY responses are compact and safe for polling."
   },
   "servers": [
     {
@@ -536,6 +536,70 @@
         "responses": {
           "204": {
             "description": "Shadow Test workflow accepted by GitHub Actions."
+          }
+        }
+      }
+    },
+    "/repos/ltaln/HH520-stable-V2/actions/workflows/hh520-forward.yml/dispatches": {
+      "post": {
+        "operationId": "startHH520ForwardTest",
+        "summary": "Run forward validation for rules that passed Historical Shadow",
+        "x-openai-isConsequential": false,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "ref",
+                  "inputs"
+                ],
+                "properties": {
+                  "ref": {
+                    "type": "string",
+                    "enum": [
+                      "main"
+                    ],
+                    "default": "main"
+                  },
+                  "inputs": {
+                    "type": "object",
+                    "required": [
+                      "request_id",
+                      "shadow_request_id",
+                      "validation_start",
+                      "validation_end"
+                    ],
+                    "properties": {
+                      "request_id": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9_-]{8,80}$",
+                        "description": "Unique forward-test request id."
+                      },
+                      "shadow_request_id": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9_-]{8,80}$",
+                        "description": "Completed Shadow Test request id. Only SHADOW_PASS rules are eligible."
+                      },
+                      "validation_start": {
+                        "type": "string",
+                        "format": "date"
+                      },
+                      "validation_end": {
+                        "type": "string",
+                        "format": "date"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Forward Test workflow accepted by GitHub Actions."
           }
         }
       }
