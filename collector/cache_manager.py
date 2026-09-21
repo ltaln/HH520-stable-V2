@@ -44,11 +44,21 @@ def save_cache(date: str, payload, source: str = "10023s"):
             os.unlink(temporary)
     return path
 
-def claim_request(date: str, source: str = "10023s"):
-    """Permanent exclusive ledger per source/date."""
-    path = cache_path(date, source).with_suffix(".requested")
+def claim_request(date: str, source: str = "10023s", allow_resume_incomplete: bool = False):
+    """Exclusive ledger per source/date.
+
+    A successful cache always wins. An existing .requested marker may only be
+    resumed when explicitly allowed and when no cache exists. This is intended
+    for serialized GitHub Research recovery after a transient 429, not for
+    arbitrary force-refresh behavior.
+    """
+    data_path = cache_path(date, source)
+    path = data_path.with_suffix(".requested")
     try:
         with path.open("x", encoding="utf-8") as stream:
             stream.write(f"Request reserved for {source}; do not delete to retry. Restore/import captured raw data.\n")
+        return "CLAIMED"
     except FileExistsError as exc:
+        if allow_resume_incomplete and not data_path.exists():
+            return "RESUMED_INCOMPLETE"
         raise RuntimeError("此日期和数据源已抓取或有未完成请求；禁止重复抓取。可导入已保存的响应。") from exc
