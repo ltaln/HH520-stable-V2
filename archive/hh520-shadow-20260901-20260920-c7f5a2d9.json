@@ -1,8 +1,7 @@
 {
-  "status": "READY",
   "kind": "shadow_test",
-  "request_id": "hh520-shadow-20260901-20260920-c7f5a2d9",
   "system": "HH520 Research Lab V3.2 Shadow Test",
+  "status": "READY",
   "stable_access": "FORBIDDEN",
   "discovery": {
     "request_id": "hh520-research-20260801-20260831-a3f7c9d2",
@@ -18,6 +17,7 @@
   },
   "validation_input_count": 302,
   "validation_matched_count": 302,
+  "sanitizer_pollution_events": 302,
   "shadow_policy": {
     "strictly_after_discovery": true,
     "rules_frozen": true,
@@ -627,8 +627,128 @@
     }
   ],
   "promotion_policy": "MANUAL_REVIEW_REQUIRED",
-  "archive_path": "archive/hh520-shadow-20260901-20260920-c7f5a2d9.json",
-  "message": "Shadow test READY. Frozen discovery rules were evaluated only on the later validation window.",
+  "collection": [
+    {
+      "date": "2026-09-01",
+      "captured_at": "2026-09-21T04:14:42.371261+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-01&riqi_end=2026-09-01&threshold=1&bankroll=5000",
+      "match_count": 10
+    },
+    {
+      "date": "2026-09-02",
+      "captured_at": "2026-09-21T04:14:46.062251+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-02&riqi_end=2026-09-02&threshold=1&bankroll=5000",
+      "match_count": 12
+    },
+    {
+      "date": "2026-09-03",
+      "captured_at": "2026-09-21T04:14:49.212342+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-03&riqi_end=2026-09-03&threshold=1&bankroll=5000",
+      "match_count": 7
+    },
+    {
+      "date": "2026-09-04",
+      "captured_at": "2026-09-21T04:14:56.164892+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-04&riqi_end=2026-09-04&threshold=1&bankroll=5000",
+      "match_count": 13
+    },
+    {
+      "date": "2026-09-05",
+      "captured_at": "2026-09-21T04:14:59.494946+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-05&riqi_end=2026-09-05&threshold=1&bankroll=5000",
+      "match_count": 27
+    },
+    {
+      "date": "2026-09-06",
+      "captured_at": "2026-09-21T04:15:03.465334+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-06&riqi_end=2026-09-06&threshold=1&bankroll=5000",
+      "match_count": 24
+    },
+    {
+      "date": "2026-09-07",
+      "captured_at": "2026-09-21T04:15:06.699541+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-07&riqi_end=2026-09-07&threshold=1&bankroll=5000",
+      "match_count": 9
+    },
+    {
+      "date": "2026-09-08",
+      "captured_at": "2026-09-21T04:15:11.026312+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-08&riqi_end=2026-09-08&threshold=1&bankroll=5000",
+      "match_count": 12
+    },
+    {
+      "date": "2026-09-09",
+      "captured_at": "2026-09-21T04:15:13.769584+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-09&riqi_end=2026-09-09&threshold=1&bankroll=5000",
+      "match_count": 10
+    },
+    {
+      "date": "2026-09-10",
+      "captured_at": "2026-09-21T04:15:17.444006+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-10&riqi_end=2026-09-10&threshold=1&bankroll=5000",
+      "match_count": 5
+    },
+    {
+      "date": "2026-09-11",
+      "captured_at": "2026-09-21T04:20:10.673289+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-11&riqi_end=2026-09-11&threshold=1&bankroll=5000",
+      "match_count": 11
+    },
+    {
+      "date": "2026-09-12",
+      "captured_at": "2026-09-21T04:20:15.921810+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-12&riqi_end=2026-09-12&threshold=1&bankroll=5000",
+      "match_count": 29
+    },
+    {
+      "date": "2026-09-13",
+      "captured_at": "2026-09-21T04:20:22.189439+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-13&riqi_end=2026-09-13&threshold=1&bankroll=5000",
+      "match_count": 19
+    },
+    {
+      "date": "2026-09-14",
+      "captured_at": "2026-09-21T04:20:25.118977+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-14&riqi_end=2026-09-14&threshold=1&bankroll=5000",
+      "match_count": 9
+    },
+    {
+      "date": "2026-09-15",
+      "captured_at": "2026-09-20T15:39:19.049542+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-15&riqi_end=2026-09-15&threshold=1&bankroll=5000",
+      "match_count": 12
+    },
+    {
+      "date": "2026-09-16",
+      "captured_at": "2026-09-20T15:39:22.341241+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-16&riqi_end=2026-09-16&threshold=1&bankroll=5000",
+      "match_count": 14
+    },
+    {
+      "date": "2026-09-17",
+      "captured_at": "2026-09-20T15:39:26.878460+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-17&riqi_end=2026-09-17&threshold=1&bankroll=5000",
+      "match_count": 10
+    },
+    {
+      "date": "2026-09-18",
+      "captured_at": "2026-09-21T04:20:27.829444+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-18&riqi_end=2026-09-18&threshold=1&bankroll=5000",
+      "match_count": 13
+    },
+    {
+      "date": "2026-09-19",
+      "captured_at": "2026-09-21T04:20:32.910366+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-19&riqi_end=2026-09-19&threshold=1&bankroll=5000",
+      "match_count": 27
+    },
+    {
+      "date": "2026-09-20",
+      "captured_at": "2026-09-21T04:20:35.325100+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-20&riqi_end=2026-09-20&threshold=1&bankroll=5000",
+      "match_count": 29
+    }
+  ],
   "_action": {
     "request_id": "hh520-shadow-20260901-20260920-c7f5a2d9",
     "repository": "ltaln/HH520-stable-V2",
