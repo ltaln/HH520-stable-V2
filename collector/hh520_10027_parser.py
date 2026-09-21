@@ -40,6 +40,15 @@ def _num(value):
     return v if math.isfinite(v) else None
 
 
+def _percent(value):
+    """Parse percentage-like values to percentage points, e.g. 55% -> 55.0."""
+    return _num(value)
+
+
+def _clean_header(value):
+    return re.sub(r"\s+", "", _strip_md(value).replace("\n", ""))
+
+
 def _match_id(value):
     m = re.search(r"(\d+)", _strip_md(value))
     return str(int(m.group(1))) if m else None
@@ -158,6 +167,13 @@ def parse_10027s_markdown(markdown: str) -> List[Dict]:
                 "draw_odds": _num(cells[6]) if len(cells) > 6 else None,
                 "away_odds": _num(cells[7]) if len(cells) > 7 else None,
             },
+            "possession": {
+                "home": _percent(cells[9]) if len(cells) > 9 else None,
+                "away": _percent(cells[10]) if len(cells) > 10 else None,
+                "diff": _num(cells[14]) if len(cells) > 14 else None,
+                "interval": _strip_md(cells[15]) if len(cells) > 15 else "",
+                "smooth_p": _num(cells[16]) if len(cells) > 16 else None,
+            },
             "page_probability": None,
             "value": {
                 "ev": _num(cells[17]) if len(cells) > 17 else None,
@@ -178,7 +194,7 @@ def parse_10027s_markdown(markdown: str) -> List[Dict]:
         if not _header_starts(header, FUSION_PREFIX):
             continue
 
-        h = [_strip_md(x).replace("\n", "") for x in header]
+        h = [_clean_header(x) for x in header]
         index = {name: pos for pos, name in enumerate(h)}
         j = i + 1
         while j < len(lines):
@@ -222,6 +238,14 @@ def parse_10027s_markdown(markdown: str) -> List[Dict]:
                 item["page_probability"] = probability
 
             factors = item.setdefault("research_factors", {})
+
+            # Preserve every fusion column for reverse engineering. This keeps
+            # future source fields from being silently discarded.
+            raw_fusion = item.setdefault("raw_fusion_fields", {})
+            for pos, name in enumerate(h):
+                if pos < len(row) and name:
+                    raw_fusion[name] = _strip_md(row[pos])
+
             factors.update({
                 "odds_judgement": value("赔率判断"),
                 "draw_odds": _num(value("平赔率")),
@@ -237,6 +261,23 @@ def parse_10027s_markdown(markdown: str) -> List[Dict]:
                 "risk": value("风险"),
                 "handicap": value("盘口"),
                 "ignore": value("忽略"),
+                # Common 10027s model-factor columns. Empty when a particular
+                # fusion table/version does not expose them.
+                "home_attack": _num(value("主队进攻") or value("主进攻")),
+                "away_attack": _num(value("客队进攻") or value("客进攻")),
+                "home_defense": _num(value("主队防守") or value("主防守")),
+                "away_defense": _num(value("客队防守") or value("客防守")),
+                "home_h2h": _num(value("主队交锋") or value("主交锋")),
+                "away_h2h": _num(value("客队交锋") or value("客交锋")),
+                "home_form": _num(value("主队状态") or value("主状态")),
+                "away_form": _num(value("客队状态") or value("客状态")),
+                "attack": _num(value("进攻")),
+                "defense": _num(value("防守")),
+                "h2h": _num(value("交锋")),
+                "form": _num(value("状态")),
+                "water_level": value("水位") or value("水盘"),
+                "home_water": _num(value("主水") or value("主队水位")),
+                "away_water": _num(value("客水") or value("客队水位")),
             })
 
             j += 1
