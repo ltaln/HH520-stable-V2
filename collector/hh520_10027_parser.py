@@ -92,6 +92,61 @@ def _header_starts(cells, expected):
     return normalized[:len(expected)] == expected
 
 
+def _detect_grouped_factor_columns(lines, header_index):
+    """Detect 2-level grouped headers such as 进攻/防守/交锋/状态 -> 主/客.
+
+    Returns canonical factor names mapped to absolute column positions.
+    Supports markdown emitted from HTML tables with colspan, where the group
+    label may appear once and the companion column may be blank.
+    """
+    groups = {"进攻": ("home_attack", "away_attack"),
+              "防守": ("home_defense", "away_defense"),
+              "交锋": ("home_h2h", "away_h2h"),
+              "状态": ("home_form", "away_form")}
+
+    top = _cells(lines[header_index]) if 0 <= header_index < len(lines) else []
+    top_clean = [_clean_header(x) for x in top]
+    mapping = {}
+
+    # First try a proper second header row with 主/客 labels.
+    for offset in (1, 2, 3):
+        if header_index + offset >= len(lines):
+            break
+        sub = _cells(lines[header_index + offset])
+        if not sub or len(sub) < 2:
+            continue
+        sub_clean = [_clean_header(x) for x in sub]
+        if sum(x in {"主", "客"} for x in sub_clean) < 4:
+            continue
+
+        current_group = None
+        seen = {}
+        for pos in range(max(len(top_clean), len(sub_clean))):
+            if pos < len(top_clean) and top_clean[pos] in groups:
+                current_group = top_clean[pos]
+                seen[current_group] = 0
+            sub_name = sub_clean[pos] if pos < len(sub_clean) else ""
+            if current_group in groups and sub_name in {"主", "客"}:
+                home_key, away_key = groups[current_group]
+                mapping[home_key if sub_name == "主" else away_key] = pos
+                seen[current_group] += 1
+                if seen[current_group] >= 2:
+                    current_group = None
+        if len(mapping) >= 6:
+            return mapping
+
+    # Fallback for flattened markdown: locate each group and assume adjacent
+    # home/away columns. This matches the actual visual 10027s layout.
+    for group, (home_key, away_key) in groups.items():
+        try:
+            pos = top_clean.index(group)
+        except ValueError:
+            continue
+        mapping[home_key] = pos
+        mapping[away_key] = pos + 1
+    return mapping
+
+
 def _parse_handicap(value):
     raw = _strip_md(value)
     if not raw:
@@ -129,6 +184,8 @@ def parse_10027s_markdown(markdown: str) -> List[Dict]:
             break
     if base_header_index is None:
         raise ValueError("10027s 缺少结算基础表")
+
+    base_factor_columns = _detect_grouped_factor_columns(lines, base_header_index)
 
     records = {}
     order = []
@@ -196,7 +253,16 @@ def parse_10027s_markdown(markdown: str) -> List[Dict]:
                 "kelly": _num(cells[18]) if len(cells) > 18 else None,
             },
             "team_dna": {},
-            "research_factors": {},
+            "research_factors": {
+                "home_attack": _num(cells[base_factor_columns["home_attack"]]) if "home_attack" in base_factor_columns and base_factor_columns["home_attack"] < len(cells) else None,
+                "away_attack": _num(cells[base_factor_columns["away_attack"]]) if "away_attack" in base_factor_columns and base_factor_columns["away_attack"] < len(cells) else None,
+                "home_defense": _num(cells[base_factor_columns["home_defense"]]) if "home_defense" in base_factor_columns and base_factor_columns["home_defense"] < len(cells) else None,
+                "away_defense": _num(cells[base_factor_columns["away_defense"]]) if "away_defense" in base_factor_columns and base_factor_columns["away_defense"] < len(cells) else None,
+                "home_h2h": _num(cells[base_factor_columns["home_h2h"]]) if "home_h2h" in base_factor_columns and base_factor_columns["home_h2h"] < len(cells) else None,
+                "away_h2h": _num(cells[base_factor_columns["away_h2h"]]) if "away_h2h" in base_factor_columns and base_factor_columns["away_h2h"] < len(cells) else None,
+                "home_form": _num(cells[base_factor_columns["home_form"]]) if "home_form" in base_factor_columns and base_factor_columns["home_form"] < len(cells) else None,
+                "away_form": _num(cells[base_factor_columns["away_form"]]) if "away_form" in base_factor_columns and base_factor_columns["away_form"] < len(cells) else None,
+            },
             "page_prediction": _empty_prediction(),
         }
         key = (day, mid)
@@ -280,14 +346,14 @@ def parse_10027s_markdown(markdown: str) -> List[Dict]:
                 "ignore": value("忽略"),
                 # Common 10027s model-factor columns. Empty when a particular
                 # fusion table/version does not expose them.
-                "home_attack": _num(value("主队进攻") or value("主进攻")),
-                "away_attack": _num(value("客队进攻") or value("客进攻")),
-                "home_defense": _num(value("主队防守") or value("主防守")),
-                "away_defense": _num(value("客队防守") or value("客防守")),
-                "home_h2h": _num(value("主队交锋") or value("主交锋")),
-                "away_h2h": _num(value("客队交锋") or value("客交锋")),
-                "home_form": _num(value("主队状态") or value("主状态")),
-                "away_form": _num(value("客队状态") or value("客状态")),
+                "home_attack": _num(value("主队进攻") or value("主进攻")) if (value("主队进攻") or value("主进攻")) else factors.get("home_attack"),
+                "away_attack": _num(value("客队进攻") or value("客进攻")) if (value("客队进攻") or value("客进攻")) else factors.get("away_attack"),
+                "home_defense": _num(value("主队防守") or value("主防守")) if (value("主队防守") or value("主防守")) else factors.get("home_defense"),
+                "away_defense": _num(value("客队防守") or value("客防守")) if (value("客队防守") or value("客防守")) else factors.get("away_defense"),
+                "home_h2h": _num(value("主队交锋") or value("主交锋")) if (value("主队交锋") or value("主交锋")) else factors.get("home_h2h"),
+                "away_h2h": _num(value("客队交锋") or value("客交锋")) if (value("客队交锋") or value("客交锋")) else factors.get("away_h2h"),
+                "home_form": _num(value("主队状态") or value("主状态")) if (value("主队状态") or value("主状态")) else factors.get("home_form"),
+                "away_form": _num(value("客队状态") or value("客状态")) if (value("客队状态") or value("客状态")) else factors.get("away_form"),
                 "attack": _num(value("进攻")),
                 "defense": _num(value("防守")),
                 "h2h": _num(value("交锋")),

@@ -20,3 +20,22 @@ def test_10027_parser_preserves_possession_and_dynamic_fusion_fields():
     assert m["research_factors"]["away_defense"] == 50
     assert m["research_factors"]["home_water"] == 0.88
     assert m["raw_fusion_fields"]["主队状态"] == "70"
+
+
+def test_10027_parser_reads_two_level_grouped_base_factors():
+    md = """
+| 日期 | 场次 | 联赛 | 时间 | 比分 | 胜 | 平 | 负 | 主队 | 主控球率 | 客控球率 | 客队 | 半场比分 | 全场比分 | 差值 | 区间 | 平滑p | EV | 凯利比例 | 建议下注 | 是否下注 | 进攻 |  | 防守 |  | 交锋 |  | 状态 |  |
+|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | 主 | 客 | 主 | 客 | 主 | 客 | 主 | 客 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 2026-08-01 | 1 | 英超 | 20:00 | 1-0 / 2-1 | 1.80 | 3.40 | 4.20 | A | 58% | 42% | B | 1-0 | 2-1 | 16 | 15-20 | 0.64 | 0.12 | 0.08 | 主 | 是 | 10 | 13 | 1.50 | 1.83 | 7 | 7 | 1.17 | 0.83 |
+"""
+    m = parse_10027s_markdown(md)[0]
+    f = m["research_factors"]
+    assert f["home_attack"] == 10
+    assert f["away_attack"] == 13
+    assert f["home_defense"] == 1.50
+    assert f["away_defense"] == 1.83
+    assert f["home_h2h"] == 7
+    assert f["away_h2h"] == 7
+    assert f["home_form"] == 1.17
+    assert f["away_form"] == 0.83
