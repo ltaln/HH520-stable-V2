@@ -1,0 +1,229 @@
+{
+  "status": "READY",
+  "kind": "research_hidden_signal_page",
+  "request_id": "hh520-research-20260901-20260920-y7f2c5a9",
+  "page": 6,
+  "page_size": 20,
+  "items": [
+    {
+      "factor": "league",
+      "value": "英超",
+      "metric": "goals",
+      "sample_count": 26,
+      "accuracy": 0.07692307692307693,
+      "baseline_accuracy": 0.2185430463576159,
+      "delta_vs_baseline": -0.14161996943453897,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "英超",
+      "metric": "htft",
+      "sample_count": 26,
+      "accuracy": 0.15384615384615385,
+      "baseline_accuracy": 0.2947019867549669,
+      "delta_vs_baseline": -0.14085583290881304,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "probability_concentration",
+      "value": "40-49%",
+      "metric": "htft_top2",
+      "sample_count": 65,
+      "accuracy": 0.3230769230769231,
+      "baseline_accuracy": 0.46357615894039733,
+      "delta_vs_baseline": -0.14049923586347424,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "rating",
+      "value": "A-",
+      "metric": "goals",
+      "sample_count": 14,
+      "accuracy": 0.35714285714285715,
+      "baseline_accuracy": 0.2185430463576159,
+      "delta_vs_baseline": 0.13859981078524125,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "away_odds_bucket",
+      "value": "1.80-2.19",
+      "metric": "htft_top2",
+      "sample_count": 40,
+      "accuracy": 0.325,
+      "baseline_accuracy": 0.46357615894039733,
+      "delta_vs_baseline": -0.13857615894039732,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "日职",
+      "metric": "wdl",
+      "sample_count": 15,
+      "accuracy": 0.3333333333333333,
+      "baseline_accuracy": 0.47019867549668876,
+      "delta_vs_baseline": -0.13686534216335544,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "德乙",
+      "metric": "wdl",
+      "sample_count": 3,
+      "accuracy": 0.3333333333333333,
+      "baseline_accuracy": 0.47019867549668876,
+      "delta_vs_baseline": -0.13686534216335544,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "荷乙",
+      "metric": "wdl",
+      "sample_count": 3,
+      "accuracy": 0.3333333333333333,
+      "baseline_accuracy": 0.47019867549668876,
+      "delta_vs_baseline": -0.13686534216335544,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "日乙",
+      "metric": "wdl",
+      "sample_count": 3,
+      "accuracy": 0.3333333333333333,
+      "baseline_accuracy": 0.47019867549668876,
+      "delta_vs_baseline": -0.13686534216335544,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "芬超",
+      "metric": "wdl",
+      "sample_count": 3,
+      "accuracy": 0.3333333333333333,
+      "baseline_accuracy": 0.47019867549668876,
+      "delta_vs_baseline": -0.13686534216335544,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "rating",
+      "value": "A",
+      "metric": "wdl",
+      "sample_count": 3,
+      "accuracy": 0.3333333333333333,
+      "baseline_accuracy": 0.47019867549668876,
+      "delta_vs_baseline": -0.13686534216335544,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "德甲",
+      "metric": "goals",
+      "sample_count": 24,
+      "accuracy": 0.08333333333333333,
+      "baseline_accuracy": 0.2185430463576159,
+      "delta_vs_baseline": -0.13520971302428259,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "home_odds_bucket",
+      "value": "1.80-2.19",
+      "metric": "wdl",
+      "sample_count": 59,
+      "accuracy": 0.3389830508474576,
+      "baseline_accuracy": 0.47019867549668876,
+      "delta_vs_baseline": -0.13121562464923114,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "home_odds_bucket",
+      "value": "2.20-2.99",
+      "metric": "htft_top2",
+      "sample_count": 54,
+      "accuracy": 0.3333333333333333,
+      "baseline_accuracy": 0.46357615894039733,
+      "delta_vs_baseline": -0.13024282560706402,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "意大利杯",
+      "metric": "htft_top2",
+      "sample_count": 3,
+      "accuracy": 0.3333333333333333,
+      "baseline_accuracy": 0.46357615894039733,
+      "delta_vs_baseline": -0.13024282560706402,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "德乙",
+      "metric": "htft_top2",
+      "sample_count": 3,
+      "accuracy": 0.3333333333333333,
+      "baseline_accuracy": 0.46357615894039733,
+      "delta_vs_baseline": -0.13024282560706402,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "芬超",
+      "metric": "htft_top2",
+      "sample_count": 3,
+      "accuracy": 0.3333333333333333,
+      "baseline_accuracy": 0.46357615894039733,
+      "delta_vs_baseline": -0.13024282560706402,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "rating",
+      "value": "A",
+      "metric": "htft_top2",
+      "sample_count": 3,
+      "accuracy": 0.3333333333333333,
+      "baseline_accuracy": 0.46357615894039733,
+      "delta_vs_baseline": -0.13024282560706402,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "挪超",
+      "metric": "score_exact",
+      "sample_count": 8,
+      "accuracy": 0.0,
+      "baseline_accuracy": 0.1291390728476821,
+      "delta_vs_baseline": -0.1291390728476821,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "荷甲",
+      "metric": "score_exact",
+      "sample_count": 8,
+      "accuracy": 0.0,
+      "baseline_accuracy": 0.1291390728476821,
+      "delta_vs_baseline": -0.1291390728476821,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    }
+  ]
+}
