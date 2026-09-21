@@ -1,4 +1,4 @@
-"""HH520 Research Lab V3.1. Stable is read-only; outputs are candidate research only."""
+"""HH520 Research Lab V3.3. Stable is read-only; outputs are candidate research only."""
 from collections import Counter, defaultdict
 from datetime import date, timedelta
 from copy import deepcopy
@@ -10,6 +10,7 @@ from research.error_attribution import attribute_errors
 from research.hidden_model_reverse import build_hidden_model_reverse
 from research.dna import build_dna
 from research.candidate_rules import generate_candidate_rules
+from research.chronology import classify_window, canonical_timeline
 
 MAX_DAYS = 31
 
@@ -109,6 +110,8 @@ def build_research_report(records, start=None, end=None, source="HH520_10027s", 
         "stable_access": "READ_ONLY",
         "source": source,
         "window": {"from": start, "to": end},
+        "research_phase": classify_window(start, end) if start and end else "UNSPECIFIED",
+        "canonical_timeline": canonical_timeline(),
         "input_count": len(records),
         "clean_count": len(clean),
         "sanitizer": {"pollution_events": len(audit), "audit": audit},
