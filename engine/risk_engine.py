@@ -124,3 +124,47 @@ def assess_risk_v31(match: dict, probability: dict, value: dict, quality=None, c
 def assess_risk(match: dict, probability: dict, value: dict, quality=None, classification=None) -> dict:
     """Production default remains V3.0 until a candidate wins validation."""
     return assess_risk_v3(match, probability, value, quality, classification)
+
+
+def assess_risk_v32(match: dict, probability: dict, value: dict, quality=None, classification=None) -> dict:
+    """Research candidate: simplified 3-factor risk model.
+
+    Core factors only:
+    - top_probability
+    - odds_zone
+    - value_conflict
+    """
+    quality = quality or data_quality_gate(match, probability)
+    classification = classification or classify_match(match, probability)
+    if not quality["valid"]:
+        return _format(100, ["数据质量门禁失败"] + quality["errors"], "HH520 Risk Engine V3.2 Candidate")
+
+    score = 0
+    reasons = []
+    top = classification["top_probability"]
+    if top < 0.40:
+        score += 40
+        reasons.append("最高概率低于40%")
+    elif top < 0.50:
+        score += 18
+        reasons.append("最高概率不足50%")
+
+    edge = value.get("directional_edge")
+    if edge is not None:
+        if edge < -0.03:
+            score += 25
+            reasons.append("模型方向弱于市场基线")
+        elif edge < 0:
+            score += 10
+            reasons.append("模型方向无正价值")
+
+    try:
+        odds = float(_selected_odds(match, probability.get("direction")))
+    except (TypeError, ValueError):
+        odds = None
+    if odds is not None and 1.80 <= odds < 3.00:
+        score += 10
+        reasons.append("主方向处于中高赔率风险区")
+
+    score = max(0, min(100, score))
+    return _format(score, reasons, "HH520 Risk Engine V3.2 Candidate")
