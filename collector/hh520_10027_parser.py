@@ -92,6 +92,22 @@ def _header_starts(cells, expected):
     return normalized[:len(expected)] == expected
 
 
+def _parse_handicap(value):
+    raw = _strip_md(value)
+    if not raw:
+        return {"raw":"","side":None,"primary_line":None,"secondary_line":None,"primary_water":None,"secondary_water":None}
+    side = "home" if raw.startswith("主让") else "away" if raw.startswith("客让") else None
+    body = re.sub(r"^(主让|客让)", "", raw)
+    parts = [x.strip() for x in body.split("/") if x.strip()]
+    def one(text):
+        water = "low" if "低水" in text else "high" if "高水" in text else "mid" if "中水" in text else None
+        line = re.sub(r"(低水|高水|中水)", "", text).strip()
+        return line or None, water
+    p_line,p_water = one(parts[0]) if parts else (None,None)
+    s_line,s_water = one(parts[1]) if len(parts)>1 else (None,None)
+    return {"raw":raw,"side":side,"primary_line":p_line,"secondary_line":s_line,"primary_water":p_water,"secondary_water":s_water}
+
+
 def _empty_prediction():
     return {
         "single": None,
@@ -260,6 +276,7 @@ def parse_10027s_markdown(markdown: str) -> List[Dict]:
                 "rating": value("评级"),
                 "risk": value("风险"),
                 "handicap": value("盘口"),
+                "handicap_features": _parse_handicap(value("盘口")),
                 "ignore": value("忽略"),
                 # Common 10027s model-factor columns. Empty when a particular
                 # fusion table/version does not expose them.
