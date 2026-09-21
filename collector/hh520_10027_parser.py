@@ -115,6 +115,11 @@ def parse_10027s_markdown(markdown: str) -> List[Dict]:
         cells = _cells(lines[i])
         if not cells:
             break
+        # The comprehensive 10027s page contains subsequent fusion tables.
+        # Stop the base-table scan at the next fusion header so fusion rows
+        # cannot be misread as settlement/base rows.
+        if _header_starts(cells, FUSION_PREFIX):
+            break
         if all(re.fullmatch(r"[:\- ]*", x or "") for x in cells):
             i += 1
             continue
