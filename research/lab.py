@@ -1,4 +1,4 @@
-"""HH520 Research Lab V3.0. Stable is read-only; outputs are candidate research only."""
+"""HH520 Research Lab V3.1. Stable is read-only; outputs are candidate research only."""
 from collections import Counter, defaultdict
 from datetime import date, timedelta
 from copy import deepcopy
@@ -8,6 +8,8 @@ from research.backtest_engine import evaluate
 from research.result_label.matcher import match_results
 from research.error_attribution import attribute_errors
 from research.hidden_model_reverse import build_hidden_model_reverse
+from research.dna import build_dna
+from research.candidate_rules import generate_candidate_rules
 
 MAX_DAYS = 31
 
@@ -96,18 +98,22 @@ def build_research_report(records, start=None, end=None, source="HH520_10027s", 
     backtest = evaluate(joined)
     error_attribution = attribute_errors(joined)
     hidden_model_reverse = build_hidden_model_reverse(joined, error_attribution)
+    dna = build_dna(error_attribution)
+    candidate_rule_engine = generate_candidate_rules(
+        joined, error_attribution, hidden_model_reverse
+    )
     matched_count = backtest.get("matched_results", 0)
 
     return {
-        "system": "HH520 Research Lab V2.5",
+        "system": "HH520 Research Lab V3.1",
         "stable_access": "READ_ONLY",
         "source": source,
         "window": {"from": start, "to": end},
         "input_count": len(records),
         "clean_count": len(clean),
         "sanitizer": {"pollution_events": len(audit), "audit": audit},
-        "league_dna": _league_dna(joined),
-        "team_dna": _team_dna(clean),
+        "league_dna": dna["league_dna"],
+        "team_dna": dna["team_dna"],
         "data_contract": {
             "actual_score": "RESULT_LABEL_ONLY",
             "actual_total_goals": "DERIVED_FROM_ACTUAL_SCORE",
@@ -138,6 +144,7 @@ def build_research_report(records, start=None, end=None, source="HH520_10027s", 
         "risk_analysis": {"status": "RESEARCH_ONLY"},
         "causal_analysis": {"status": "HYPOTHESIS_ONLY"},
         "confidence_analysis": {"status": "RESEARCH_ONLY", "sample_count": len(clean)},
-        "candidate_rules": _candidate_rules(clean),
+        "candidate_rule_engine": candidate_rule_engine,
+        "candidate_rules": candidate_rule_engine["rules"],
         "promotion_policy": "MANUAL_REVIEW_REQUIRED",
     }
