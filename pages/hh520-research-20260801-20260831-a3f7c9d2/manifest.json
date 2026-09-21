@@ -1,0 +1,61 @@
+{
+  "status": "READY",
+  "kind": "research_detail_manifest",
+  "request_id": "hh520-research-20260801-20260831-a3f7c9d2",
+  "archive_path": "archive/hh520-research-20260801-20260831-a3f7c9d2.json",
+  "error_attribution": {
+    "item_count": 403,
+    "page_size": 20,
+    "pages": [
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/error-1.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/error-2.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/error-3.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/error-4.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/error-5.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/error-6.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/error-7.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/error-8.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/error-9.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/error-10.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/error-11.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/error-12.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/error-13.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/error-14.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/error-15.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/error-16.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/error-17.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/error-18.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/error-19.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/error-20.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/error-21.json"
+    ]
+  },
+  "hidden_model_signals": {
+    "item_count": 432,
+    "page_size": 20,
+    "pages": [
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/signals-1.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/signals-2.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/signals-3.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/signals-4.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/signals-5.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/signals-6.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/signals-7.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/signals-8.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/signals-9.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/signals-10.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/signals-11.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/signals-12.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/signals-13.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/signals-14.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/signals-15.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/signals-16.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/signals-17.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/signals-18.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/signals-19.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/signals-20.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/signals-21.json",
+      "pages/hh520-research-20260801-20260831-a3f7c9d2/signals-22.json"
+    ]
+  }
+}
