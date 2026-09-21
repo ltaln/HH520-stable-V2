@@ -21,14 +21,14 @@ def raw():
 @pytest.mark.parametrize("value", ["2026-02-30", "../a", "2026-1-01", "2026-09-19&x=1"])
 def test_bad_dates(value):
     with pytest.raises(ValueError):
-        build_10023s_url(value)
+        build_10027s_url(value, value)
     with pytest.raises(ValueError):
         parse_command("预测 " + value)
 
 def test_fixed_url():
     assert build_10027s_url(DATE, DATE) == "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-19&riqi_end=2026-09-19&threshold=1&bankroll=5000"
     with pytest.raises(ValueError):
-        build_10023s_url(DATE, 2)
+        build_10027s_url(DATE, DATE, 2)
 
 def test_roundtrip():
     payload = {"date": DATE, "x": "中文"}
