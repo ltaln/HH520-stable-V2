@@ -13,8 +13,12 @@ def _timing_signal(match):
     home = timing.get("home") or {}
     away = timing.get("away") or {}
     try:
-        home_signal = (float(home["first_half_gf_share"]) + float(away["first_half_ga_share"])) / 2
-        away_signal = (float(away["first_half_gf_share"]) + float(home["first_half_ga_share"])) / 2
+        home_gf = home.get("first_half_gf_signal", home.get("first_half_gf_share"))
+        away_ga = away.get("first_half_ga_signal", away.get("first_half_ga_share"))
+        away_gf = away.get("first_half_gf_signal", away.get("first_half_gf_share"))
+        home_ga = home.get("first_half_ga_signal", home.get("first_half_ga_share"))
+        home_signal = (float(home_gf) + float(away_ga)) / 2
+        away_signal = (float(away_gf) + float(home_ga)) / 2
     except (KeyError, TypeError, ValueError):
         return None
     if not (0 <= home_signal <= 1 and 0 <= away_signal <= 1):
@@ -72,5 +76,6 @@ def htft_layer(probability: dict, match: dict = None) -> dict:
         "timing_used": timing is not None,
         "timing_weight": weight,
         "timing_source": ((match or {}).get("goal_timing") or {}).get("source_domain"),
+        "timing_mode": ((match or {}).get("goal_timing") or {}).get("timing_mode"),
         "ft_marginal_preserved": True,
     }
