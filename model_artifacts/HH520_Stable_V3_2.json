@@ -1,0 +1,124 @@
+{
+  "version": "HH520 Stable V3.2",
+  "artifact_version": "HH520-Stable-V3.2-Frozen-20260920",
+  "training_period": {
+    "start": "2026-05-01",
+    "end": "2026-09-20",
+    "rows": 1432
+  },
+  "wdl": {
+    "model": "MARKET_PROPORTIONAL_DEVIG",
+    "direction_override": false,
+    "page_probability_for_direction": false
+  },
+  "confidence": {
+    "model": "MARKET_PMAX",
+    "s_threshold": 0.73,
+    "factor_vote_required": false,
+    "evidence": {
+      "development_2026_06_to_08": {"correct": 46, "n": 52, "accuracy": 0.8846153846153846},
+      "stress_2026_09_01_to_20": {"correct": 19, "n": 22, "accuracy": 0.8636363636363636}
+    }
+  },
+  "htft": {
+    "model": "CONDITIONAL_HT_GIVEN_FT",
+    "matrix": {
+      "HOME": {
+        "HOME": 0.5983739837398374,
+        "DRAW": 0.34959349593495936,
+        "AWAY": 0.05203252032520325
+      },
+      "DRAW": {
+        "HOME": 0.18716577540106952,
+        "DRAW": 0.6149732620320856,
+        "AWAY": 0.19786096256684493
+      },
+      "AWAY": {
+        "HOME": 0.06415929203539823,
+        "DRAW": 0.34292035398230086,
+        "AWAY": 0.5929203539823009
+      }
+    },
+    "laplace_prior": 1.0
+  },
+  "score": {
+    "model": "POOLED_POISSON",
+    "feature_columns": [
+      "p_home",
+      "p_draw",
+      "p_away",
+      "home_pos_diff",
+      "attack_diff",
+      "defense_diff",
+      "h2h_diff",
+      "form_diff",
+      "team_modules_missing"
+    ],
+    "median": {
+      "p_home": 0.43388632590341614,
+      "p_draw": 0.24965381360353395,
+      "p_away": 0.28379984290867133,
+      "home_pos_diff": 0.0,
+      "attack_diff": 0.0,
+      "defense_diff": 0.0,
+      "h2h_diff": 0.0,
+      "form_diff": 0.0,
+      "team_modules_missing": 0.0
+    },
+    "mean": {
+      "p_home": 0.43658227549020556,
+      "p_draw": 0.24549567043959708,
+      "p_away": 0.31792205407019736,
+      "home_pos_diff": -0.18518156424581006,
+      "attack_diff": -0.43854748603351956,
+      "defense_diff": -0.04486033519553073,
+      "h2h_diff": -0.32053072625698326,
+      "form_diff": 0.05509776536312849,
+      "team_modules_missing": 0.07332402234636871
+    },
+    "std": {
+      "p_home": 0.1751639829065954,
+      "p_draw": 0.04658247849399969,
+      "p_away": 0.16553088340824287,
+      "home_pos_diff": 8.069945517278736,
+      "attack_diff": 4.865097832969882,
+      "defense_diff": 0.8818618621203445,
+      "h2h_diff": 7.145677733440986,
+      "form_diff": 0.7208540756642162,
+      "team_modules_missing": 0.26075868672002467
+    },
+    "home_coef": [
+      0.4054842799796507,
+      0.11038190510899788,
+      -0.07308646975419322,
+      -0.09623846819192843,
+      0.0584967215602766,
+      -0.05077247037973232,
+      0.04285249284593259,
+      0.019423756006950184,
+      -0.02857110088736255,
+      -0.01389027080505915
+    ],
+    "away_coef": [
+      0.20958111520671457,
+      -0.13376500478203107,
+      -0.0779022187239591,
+      0.1634718154686866,
+      0.013573870431786806,
+      0.029151811875409234,
+      0.003423906856265195,
+      -0.0320174896213304,
+      0.004003603894906875,
+      -0.04595067941159727
+    ],
+    "max_goals": 10,
+    "l2": 1.0
+  },
+  "disabled": {
+    "draw_residual": true,
+    "factor_direction_override": true,
+    "league_hard_rules": true,
+    "water_weight": true,
+    "empirical_score_blend": true
+  }
+}

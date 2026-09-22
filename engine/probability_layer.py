@@ -16,12 +16,11 @@ def _valid_probabilities(value):
             continue
         if math.isfinite(number) and 0.0 <= number <= 1.0:
             out[key] = number
-    # A direction requires a complete probability distribution. Partial page
-    # values must not quietly replace the complete market baseline.
     if len(out) != 3 or sum(out.values()) <= 0:
         return {}
     total = sum(out.values())
     return {key: out[key] / total for key in _OUTCOMES}
+
 
 def probability_layer(match: dict) -> dict:
     market = match.get("market", {})
@@ -30,19 +29,28 @@ def probability_layer(match: dict) -> dict:
     except (KeyError, TypeError, ValueError):
         base = {}
 
+    # V3.2 research result: the full-coverage WDL anchor remains the de-vigged
+    # 1X2 market. Page/fusion probabilities are retained for audit only and
+    # cannot override the direction.
     page_prob = _valid_probabilities(match.get("page_probability"))
-    final = page_prob or ({k: base[k] for k in _OUTCOMES} if base else {})
+    final = {k: base[k] for k in _OUTCOMES} if base else {}
 
-    vals = [(k, final.get(k)) for k in ("home","draw","away") if final.get(k) is not None]
-    vals = sorted(vals, key=lambda x: x[1], reverse=True)
-    concentration = None
-    if len(vals) >= 2:
-        concentration = vals[0][1] - vals[1][1]
+    vals = sorted(
+        [(k, final.get(k)) for k in _OUTCOMES if final.get(k) is not None],
+        key=lambda x: x[1],
+        reverse=True,
+    )
+    concentration = vals[0][1] - vals[1][1] if len(vals) >= 2 else None
+    pmax = vals[0][1] if vals else None
 
     return {
         "baseline": base,
         "probabilities": final,
         "direction": vals[0][0] if vals else None,
         "concentration": concentration,
+        "pmax": pmax,
         "valid": bool(final),
+        "source": "market_proportional_devig",
+        "page_probability": page_prob,
+        "page_probability_used_for_direction": False,
     }

@@ -33,43 +33,51 @@ def test_value_fields_do_not_change_direction_or_use_advice():
     assert value["forbidden_advice_fields_used"] is False
 
 
-def test_v3_allows_strong_candidate():
+def test_page_probability_cannot_override_market_direction():
     match = {
-        "match_id": "1", "home_team": "A", "away_team": "B", "league": "联赛",
-        "market": {"home_odds": 1.4, "draw_odds": 4.5, "away_odds": 7.0},
-        "page_probability": {"home": 0.70, "draw": 0.18, "away": 0.12},
-        "research_factors": {"structure": "强优", "risk": "低"},
+        "market": {"home_odds": 1.50, "draw_odds": 4.0, "away_odds": 7.0},
+        "page_probability": {"home": 0.05, "draw": 0.05, "away": 0.90},
     }
-    probability = probability_layer(match)
-    value = value_layer(match, probability)
-    quality = data_quality_gate(match, probability)
-    classification = classify_match(match, probability)
-    risk = assess_risk(match, probability, value, quality, classification)
-    decision = decision_filter(match, probability, value, quality, classification, risk)
-    assert decision["version"] == "HH520 Decision Filter V3.0"
-    assert decision["decision"] == "BET_CANDIDATE"
-    assert decision["forbidden_advice_fields_used"] is False
+    p = probability_layer(match)
+    assert p["direction"] == "home"
+    assert p["page_probability_used_for_direction"] is False
 
 
-def test_v3_passes_balanced_low_concentration():
+def test_v32_allows_only_s_threshold_candidate():
+    strong = {
+        "match_id": "1", "home_team": "A", "away_team": "B", "league": "联赛",
+        "market": {"home_odds": 1.20, "draw_odds": 6.0, "away_odds": 13.0},
+        "research_factors": {"risk": "高"},
+    }
+    p = probability_layer(strong)
+    v = value_layer(strong, p)
+    q = data_quality_gate(strong, p)
+    c = classify_match(strong, p)
+    r = assess_risk(strong, p, v, q, c)
+    d = decision_filter(strong, p, v, q, c, r)
+    assert d["version"] == "HH520 Decision Filter V3.2"
+    assert d["decision"] == "BET_CANDIDATE"
+    assert d["risk_is_advisory"] is True
+
+
+def test_v32_passes_normal_market_even_with_valid_prediction():
     match = {
         "match_id": "2", "home_team": "A", "away_team": "B", "league": "联赛",
         "market": {"home_odds": 2.4, "draw_odds": 3.1, "away_odds": 2.8},
-        "page_probability": {"home": 0.39, "draw": 0.33, "away": 0.28},
-        "research_factors": {"risk": "中高"},
     }
-    probability = probability_layer(match)
-    value = value_layer(match, probability)
-    decision = decision_filter(match, probability, value)
-    assert decision["decision"] == "PASS"
-    assert decision["allow_prediction"] is False
+    p = probability_layer(match)
+    v = value_layer(match, p)
+    d = decision_filter(match, p, v)
+    assert p["valid"] is True
+    assert d["decision"] == "PASS"
+    assert confidence_from_probability(p, d) > 0
+
 
 def test_risk_engine_v31_version_and_balanced_penalty():
     from engine.risk_engine import assess_risk_v3, assess_risk_v31
     match = {
         "match_id": "3", "home_team": "A", "away_team": "B", "league": "联赛",
         "market": {"home_odds": 2.4, "draw_odds": 3.1, "away_odds": 2.8},
-        "page_probability": {"home": 0.39, "draw": 0.33, "away": 0.28},
         "research_factors": {"risk": "低"},
     }
     p = probability_layer(match)
@@ -89,7 +97,6 @@ def test_risk_engine_v32_is_research_candidate_only():
     match = {
         "match_id":"4","home_team":"A","away_team":"B","league":"联赛",
         "market":{"home_odds":1.6,"draw_odds":3.8,"away_odds":5.5},
-        "page_probability":{"home":0.62,"draw":0.23,"away":0.15},
         "research_factors":{"risk":"高","pattern":"极端"},
     }
     p=probability_layer(match); v=value_layer(match,p); q=data_quality_gate(match,p); c=classify_match(match,p)

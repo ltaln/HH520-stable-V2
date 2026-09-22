@@ -1,15 +1,17 @@
-"""Stable V3: probability -> value -> quality -> class -> risk -> decision -> optional GPT."""
+"""HH520 Stable V3.2 deterministic prediction assembly.
+
+WDL, HTFT and score are produced locally from the frozen V3.2 artifact.
+Optional GPT is explanation/review only and cannot alter model outputs.
+"""
 import re
 from analysis.match_analysis import analyze_match
 
 MISSING = "未提供"
 DIRECTIONS = {"home": "主胜", "draw": "平", "away": "客胜"}
 SCORE = re.compile(r"(\d{1,2})[:：-](\d{1,2})")
-SIDE = {"主": "主胜", "胜": "主胜", "主胜": "主胜", "平": "平", "平局": "平",
-        "客": "客胜", "负": "客胜", "客胜": "客胜"}
 
 
-def score_direction(text):
+def _score_direction(text):
     match = SCORE.fullmatch(str(text).strip())
     if not match:
         return None
@@ -17,118 +19,148 @@ def score_direction(text):
     return "主胜" if home > away else "客胜" if home < away else "平"
 
 
-def valid_htft(text, direction):
-    parts = str(text).strip().split("/")
-    return len(parts) == 2 and parts[0] in SIDE and SIDE.get(parts[1]) == direction
-
-
 def prepare_match(match):
-    result = {"match_id": str(match.get("match_id", "")), "home_team": match["home_team"],
-              "away_team": match["away_team"], "score1": MISSING, "score2": MISSING,
-              "htft1": MISSING, "htft2": MISSING, "total_goals": MISSING,
-              "confidence": 0, "status": "PASS", "reason": "无有效概率", "direction": None}
+    result = {
+        "match_id": str(match.get("match_id", "")),
+        "home_team": match["home_team"],
+        "away_team": match["away_team"],
+        "score1": MISSING,
+        "score2": MISSING,
+        "htft1": MISSING,
+        "htft2": MISSING,
+        "total_goals": MISSING,
+        "confidence": 0,
+        "confidence_tier": "PASS",
+        "status": "PASS",
+        "reason": "无有效市场概率",
+        "direction": None,
+        "stable_version": "HH520 Stable V3.2",
+    }
     if SCORE.search(str(match.get("result", ""))):
         result.update(status="SKIP", reason="已有比分，不作为赛前预测")
         return result
+
     analysis = analyze_match(match)
-    result["direction"] = DIRECTIONS.get(analysis["probability"]["direction"])
+    probability = analysis["probability"]
+    direction = DIRECTIONS.get(probability.get("direction"))
+    result["direction"] = direction
     result["decision_filter"] = analysis["decision"]
-    result["stable_v3_direction"] = result["direction"]
-    result["stable_v3_decision"] = analysis["decision"].get("decision", "PASS")
-    # Stable keeps the established GPT inference contract while recording the
-    # V3 decision as an advisory/audit signal. Calibration decides later whether
-    # V3 thresholds are safe enough to become a hard gate.
-    if analysis["probability"].get("valid") and result["direction"]:
-        result.update(status="READY_FOR_GPT", reason="有效概率；等待GPT最终推理")
+    result["stable_v32_direction"] = direction
+    result["stable_v32_decision"] = analysis["decision"].get("decision", "PASS")
+    result["confidence"] = analysis["confidence"]
+    result["confidence_tier"] = analysis["research_confidence"].get("tier", "PASS")
+    result["market_probability"] = analysis["research_confidence"].get("pmax", 0.0)
+    result["selection_status"] = analysis["decision"].get("decision", "PASS")
+
+    if not probability.get("valid") or not direction:
+        return result
+
+    htft_top = analysis["htft"].get("top", [])
+    score_top = analysis["score"].get("top_scores", [])
+    if len(htft_top) < 2 or len(score_top) < 2:
+        result.update(status="PASS", reason="冻结模型输出不完整")
+        return result
+
+    result.update(
+        score1=score_top[0]["score"],
+        score2=score_top[1]["score"],
+        score1_probability=score_top[0]["probability"],
+        score2_probability=score_top[1]["probability"],
+        htft1=htft_top[0]["selection"],
+        htft2=htft_top[1]["selection"],
+        htft1_probability=htft_top[0]["probability"],
+        htft2_probability=htft_top[1]["probability"],
+        total_goals=analysis["score"].get("total_goals_pick") or MISSING,
+        lambda_home=analysis["score"].get("lambda_home"),
+        lambda_away=analysis["score"].get("lambda_away"),
+        htft_model=analysis["htft"].get("model"),
+        score_model=analysis["score"].get("model"),
+        status="PREDICTED",
+        reason=(
+            "S级高置信市场方向"
+            if analysis["research_confidence"].get("high_confidence")
+            else "市场方向；未达到S级筛选阈值"
+        ),
+    )
+
+    score_dirs = {_score_direction(result["score1"]), _score_direction(result["score2"])}
+    if direction not in score_dirs:
+        result["consistency_warning"] = "比分Top2与WDL主方向未形成同向候选；保留各模型原始排序"
     else:
-        result.update(status="PASS", reason="无有效概率")
+        result["consistency_warning"] = None
     return result
 
 
 def build_model_input(matches):
-    """Only pre-match evidence enters GPT; page betting/advice/recommendation fields are excluded."""
+    """Build GPT review payload. Model outputs are locked and cannot be changed."""
     payload = []
     for match in matches:
         prepared = prepare_match(match)
-        if prepared["status"] != "READY_FOR_GPT":
+        if prepared["status"] != "PREDICTED":
             continue
         analysis = analyze_match(match)
         payload.append({
-            "match_id": prepared["match_id"], "home_team": prepared["home_team"],
-            "away_team": prepared["away_team"], "league": match.get("league"),
-            "kickoff": match.get("kickoff"), "market": match.get("market", {}),
-            "page_probability": match.get("page_probability"),
-            "team_dna": match.get("team_dna", {}),
+            "match_id": prepared["match_id"],
+            "home_team": prepared["home_team"],
+            "away_team": prepared["away_team"],
+            "league": match.get("league"),
+            "kickoff": match.get("kickoff"),
+            "market": match.get("market", {}),
+            "page_probability_audit_only": match.get("page_probability"),
+            "research_factors": match.get("research_factors", {}),
             "analysis": {
                 "probability": analysis["probability"],
-                "value": analysis["value"],
+                "research_confidence": analysis["research_confidence"],
                 "decision": analysis["decision"],
                 "confidence": analysis["confidence"],
-            }, "direction": prepared["direction"],
-            "decision_filter": analysis["decision"],
-            "stable_version": "HH520 Stable V3",
+                "htft": analysis["htft"],
+                "score": analysis["score"],
+            },
+            "locked_prediction": {
+                key: prepared[key] for key in (
+                    "direction", "score1", "score2", "htft1", "htft2",
+                    "total_goals", "confidence", "confidence_tier",
+                )
+            },
+            "stable_version": "HH520 Stable V3.2",
             "source_contract": "HH520_10027s",
             "excluded_source_fields": ["建议下注", "是否下注", "page_prediction"],
-            "data_limitations": [
-                "10027s建议下注/是否下注永不进入预测与GPT输入",
-                "10027s基础表比分字段是赛果标签，历史比赛不得进入赛前推理",
-                "比分/半全场/总进球必须由当前赛前证据推导，不能复制页面最终建议",
-            ],
+            "gpt_role": "EXPLANATION_ONLY",
         })
     return payload
-
-
-def _pass(prepared, reason):
-    result = dict(prepared)
-    result.update(status="PASS", confidence=0, reason=reason)
-    return result
 
 
 def validate_prediction(item, prepared, evidence):
     if item["match_id"] != prepared["match_id"]:
         raise ValueError("GPT 场次ID或顺序不匹配")
-    if item["status"] == "PASS":
-        return _pass(prepared, item["reason"])
-    if item["direction"] != prepared["direction"]:
-        return _pass(prepared, "GPT与Probability Layer方向冲突")
-    scores = [item["score1"], item["score2"]]
-    htft = [item["htft1"], item["htft2"]]
-    if len(set(scores)) != 2 or any(score_direction(x) != prepared["direction"] for x in scores):
-        return _pass(prepared, "GPT未提供两个不同且符合方向的比分")
-    if len(set(htft)) != 2 or any(not valid_htft(x, prepared["direction"]) for x in htft):
-        return _pass(prepared, "GPT未提供两个不同且符合方向的半全场")
-    goals = re.fullmatch(r"(\d+)(?:\s*[-—–~至]\s*(\d+))?\s*球?", item["total_goals"].strip())
-    if not goals:
-        return _pass(prepared, "GPT总进球格式无效")
-    low = int(goals.group(1))
-    high = int(goals.group(2) or low)
-    if low > high:
-        return _pass(prepared, "GPT总进球区间无效")
-    score_pairs = [tuple(map(int, SCORE.fullmatch(score).groups())) for score in scores]
-    if any(not low <= home + away <= high for home, away in score_pairs):
-        return _pass(prepared, "GPT总进球与比分冲突")
-    for pick in htft:
-        halftime = SIDE[pick.split("/")[0]]
-        feasible = any(
-            score_direction(f"{h}:{a}") == halftime
-            for home, away in score_pairs
-            for h in range(home + 1) for a in range(away + 1)
-        )
-        if not feasible:
-            return _pass(prepared, "GPT半场方向与最终比分不可能同时成立")
-    if not evidence.get("team_dna"):
-        return _pass(prepared, "缺少进攻/防守结构数据，无法支持精细预测")
+
+    # GPT is explanation-only. Any attempted change is ignored instead of
+    # invalidating the deterministic Stable prediction.
+    locked = ("direction", "score1", "score2", "htft1", "htft2", "total_goals")
+    rejected = [
+        key for key in locked
+        if item.get(key) != prepared.get(key)
+    ]
+
     result = dict(prepared)
-    result.update(item)
-    result["confidence"] = max(1, min(99, int(item["confidence"])))
+    result["gpt_review"] = item.get("reason", "")
+    result["gpt_status"] = item.get("status", "GPT")
+    result["gpt_rejected_changes"] = rejected
+    if item.get("status") == "PASS":
+        result["status"] = "PREDICTED_GPT_REVIEW_SKIPPED"
+    elif rejected:
+        result["status"] = "PREDICTED_GPT_REVIEW_REJECTED"
+    else:
+        result["status"] = "PREDICTED_GPT_REVIEWED"
     return result
 
 
 def build_predictions(matches, use_gpt=False):
     prepared = [prepare_match(match) for match in matches]
-    eligible = [i for i, row in enumerate(prepared) if row["status"] == "READY_FOR_GPT"]
+    eligible = [i for i, row in enumerate(prepared) if row["status"] == "PREDICTED"]
     if not use_gpt or not eligible:
         return prepared
+
     from .gpt import request_predictions
     payload = build_model_input(matches)
     enriched = request_predictions(payload)
