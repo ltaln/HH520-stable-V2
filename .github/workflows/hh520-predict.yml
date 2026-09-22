@@ -1,5 +1,5 @@
-name: HH520 Stable V3.2 Prediction
-run-name: "stable-v3.2 - ${{ inputs.request_id }}"
+name: HH520 Stable V3.3 Prediction
+run-name: "stable-v3.3 - ${{ inputs.request_id }}"
 on:
   workflow_dispatch:
     inputs:
@@ -31,7 +31,7 @@ jobs:
   run:
     needs: status
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     concurrency:
       group: hh520-collection-main
       cancel-in-progress: false
@@ -39,6 +39,9 @@ jobs:
       FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
       PYTHONUTF8: "1"
       REQUEST_ID: ${{ inputs.request_id }}
+      HH520_GOAL_TIMING_ENABLED: "1"
+      HH520_GOAL_TIMING_ONLY_UNCERTAIN: "1"
+      HH520_GOAL_TIMING_MAX_MATCHES: "30"
     steps:
       - uses: actions/checkout@v4
         with:
