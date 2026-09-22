@@ -30,5 +30,6 @@ def test_research_report_never_promotes_to_stable():
 
 def test_date_range_limits_window():
     assert date_range("2026-09-01", "2026-09-02") == ["2026-09-01", "2026-09-02"]
+    assert len(date_range("2026-05-01", "2026-06-15")) == 46
     with pytest.raises(ValueError):
-        date_range("2026-01-01", "2026-03-01")
+        date_range("2026-01-01", "2026-04-01")
