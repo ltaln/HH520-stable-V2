@@ -209,7 +209,13 @@ def publish(result_file, branch, request_id):
             destination.parent.mkdir(exist_ok=True)
             if destination.exists():
                 old = json.loads(destination.read_text(encoding="utf-8"))
-                if old.get("_action", {}).get("run_id") not in ("", os.getenv("GITHUB_RUN_ID", "")):
+                old_run_id = old.get("_action", {}).get("run_id")
+                current_run_id = os.getenv("GITHUB_RUN_ID", "")
+                # A FAILED request may be retried with the same request_id after
+                # the underlying cause is fixed. READY/PENDING ownership remains
+                # protected against accidental duplicate workflow dispatches.
+                retrying_failed = old.get("status") == "FAILED"
+                if old_run_id not in ("", current_run_id) and not retrying_failed:
                     raise ValueError("request_id already belongs to another workflow run")
 
             if branch == "research-results" and data.get("status") == "READY":
