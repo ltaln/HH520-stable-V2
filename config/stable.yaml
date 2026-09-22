@@ -25,7 +25,8 @@ goal_timing:
   cache: true
   max_matches: 30
   bins: ["0-15", "16-30", "31-45", "46-60", "61-75", "76-90"]
-  source_priority: ["soccerstats.com", "inplaywise.com"]
+  source_priority: ["soccerstats.com", "footystats.org", "inplaywise.com", "sofascore.com", "365scores.com"]
+  allow_half_aggregate_fallback: true
   failure_blocks_prediction: false
 
 prediction:
