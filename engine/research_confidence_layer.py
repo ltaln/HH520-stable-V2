@@ -1,7 +1,7 @@
-"""Research-derived confidence layer for HH520 Stable V3.2.
+"""Legacy pmax diagnostic retained inside HH520 Stable V3.3.
 
-This layer never changes WDL direction. It only separates the historically
-validated high-confidence market subset from ordinary predictions.
+V3.3 no longer exposes S/NORMAL in the formal table. The historical pmax
+threshold is preserved as internal evidence for the State Engine.
 """
 from __future__ import annotations
 from .model_artifact import load_model_artifact
@@ -34,4 +34,5 @@ def research_confidence_layer(probability: dict) -> dict:
         "factor_vote_required": bool(cfg.get("factor_vote_required", False)),
         "evidence": cfg.get("evidence", {}),
         "direction_override": False,
+        "formal_output": False,
     }
