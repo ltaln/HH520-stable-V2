@@ -151,7 +151,14 @@ def _empty_prediction():
 
 
 def parse_10027s_markdown(markdown: str) -> List[Dict]:
-    lines = [x.strip() for x in str(markdown or "").splitlines() if x.strip()]
+    raw_markdown = str(markdown or "")
+    lines = [x.strip() for x in raw_markdown.splitlines() if x.strip()]
+
+    # A valid 10027s page may contain no matches for the requested date.
+    # Treat the source's explicit no-data notice as an empty schedule rather
+    # than a schema failure so multi-day research can continue.
+    if "暂无赛事实力数据" in raw_markdown:
+        return []
 
     base_header_index = None
     for i, line in enumerate(lines):
