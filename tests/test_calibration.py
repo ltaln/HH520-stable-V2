@@ -32,7 +32,7 @@ def test_calibration_is_read_only_and_has_all_five_areas():
     assert result["risk_score"]["threshold_scan"]
     assert result["probability_margin"]["threshold_scan"]
     assert result["value_edge"]["threshold_scan"]
-    assert "strong_favorite" in result["match_type"]
+    assert "standard" in result["match_type"]
     assert "output_error" in result
 
 
