@@ -7,6 +7,9 @@ from engine.decision_filter import decision_filter
 from engine.research_confidence_layer import research_confidence_layer
 from engine.htft_layer import htft_layer
 from engine.score_layer import score_layer
+from engine.state_engine import build_state
+from engine.consistency_layer import consistency_layer
+from engine.calibration_layer import calibration_layer
 from .confidence import confidence_from_probability
 
 
@@ -17,10 +20,13 @@ def analyze_match(match: dict) -> dict:
     classification = classify_match(match, probability)
     risk = assess_risk(match, probability, value, quality, classification)
     research_confidence = research_confidence_layer(probability)
-    decision = decision_filter(match, probability, value, quality, classification, risk)
+    state = build_state(match, probability)
+    decision = decision_filter(match, probability, value, quality, classification, risk, state)
     confidence = confidence_from_probability(probability, decision)
-    htft = htft_layer(probability)
     score = score_layer(match, probability)
+    htft = htft_layer(probability, match)
+    consistency = consistency_layer(probability, state, htft, score)
+    calibration = calibration_layer(probability, state)
     return {
         "probability": probability,
         "value": value,
@@ -28,8 +34,11 @@ def analyze_match(match: dict) -> dict:
         "classification": classification,
         "risk": risk,
         "research_confidence": research_confidence,
+        "state": state,
         "decision": decision,
         "confidence": confidence,
         "htft": htft,
         "score": score,
+        "consistency": consistency,
+        "calibration": calibration,
     }
