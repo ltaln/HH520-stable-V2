@@ -1,81 +1,76 @@
-"""Conditional HTFT model with optional goal-timing reweight for Stable V3.3."""
+"""FT-conditioned HT/FT layer for HH520 Stable V3.4.
+
+The layer follows the verified structure:
+- FT home: H/H and D/H dominate;
+- FT away: A/A and D/A dominate;
+- FT draw: D/D is primary, with H/D or A/D secondary.
+External goal-timing data is no longer part of the formal production chain.
+"""
 from __future__ import annotations
-from .model_artifact import load_model_artifact
 
 FT_MAP = {"home": "HOME", "draw": "DRAW", "away": "AWAY"}
 ZH = {"HOME": "主", "DRAW": "平", "AWAY": "客"}
 
 
-def _timing_signal(match):
-    timing = (match or {}).get("goal_timing") or {}
-    if not timing.get("available"):
-        return None
-    home = timing.get("home") or {}
-    away = timing.get("away") or {}
+def _factor_diff(match, name, side):
+    f = (match or {}).get("research_factors") or {}
     try:
-        home_gf = home.get("first_half_gf_signal", home.get("first_half_gf_share"))
-        away_ga = away.get("first_half_ga_signal", away.get("first_half_ga_share"))
-        away_gf = away.get("first_half_gf_signal", away.get("first_half_gf_share"))
-        home_ga = home.get("first_half_ga_signal", home.get("first_half_ga_share"))
-        home_signal = (float(home_gf) + float(away_ga)) / 2
-        away_signal = (float(away_gf) + float(home_ga)) / 2
-    except (KeyError, TypeError, ValueError):
+        d = float(f.get("home_" + name)) - float(f.get("away_" + name))
+    except (TypeError, ValueError):
         return None
-    if not (0 <= home_signal <= 1 and 0 <= away_signal <= 1):
-        return None
-    return home_signal, away_signal
+    return d if side == "home" else -d
 
 
-def _conditional_row(base_row, timing, weight):
-    row = {k: float(v) for k, v in base_row.items()}
-    if timing is None:
-        total = sum(row.values())
-        return {k: v / total for k, v in row.items()}
-    home_signal, away_signal = timing
-    delta = max(-1.0, min(1.0, home_signal - away_signal))
-    multipliers = {
-        "HOME": max(0.5, 1.0 + weight * delta),
-        "AWAY": max(0.5, 1.0 - weight * delta),
-        "DRAW": max(0.5, 1.0 - weight * abs(delta) * 0.5),
+def _row(ft_key, ht_code, cond, p_ft):
+    ft = FT_MAP[ft_key]
+    return {
+        "selection": f"{ZH[ht_code]}/{ZH[ft]}",
+        "ht": ht_code, "ft": ft,
+        "conditional_probability": cond,
+        "probability": float(p_ft) * cond,
     }
-    adjusted = {k: row[k] * multipliers[k] for k in row}
-    total = sum(adjusted.values())
-    return {k: v / total for k, v in adjusted.items()}
 
 
-def htft_layer(probability: dict, match: dict = None) -> dict:
+def _conditional(ft_key, probability, match):
+    if ft_key == "draw":
+        hs = float(probability.get("home_share", 0.5))
+        if hs >= 0.5:
+            return [("DRAW", 0.50), ("HOME", 0.27), ("AWAY", 0.23)]
+        return [("DRAW", 0.50), ("AWAY", 0.27), ("HOME", 0.23)]
+
+    p_market = float((probability.get("market_probabilities") or {}).get(ft_key, 0.0))
+    defense = _factor_diff(match, "defense", ft_key)
+    strong = p_market >= 0.55 or (defense is not None and defense >= 0.5)
+    side = "HOME" if ft_key == "home" else "AWAY"
+    reverse = "AWAY" if side == "HOME" else "HOME"
+    if strong:
+        return [(side, 0.70), ("DRAW", 0.28), (reverse, 0.02)]
+    return [("DRAW", 0.46), (side, 0.50), (reverse, 0.04)]
+
+
+def htft_layer(probability: dict, match: dict = None, decision: dict = None) -> dict:
     probs = probability.get("probabilities") or {}
     if not probability.get("valid") or len(probs) != 3:
-        return {"valid": False, "model": "CONDITIONAL_HT_GIVEN_FT", "top": [], "distribution": []}
-
-    artifact = load_model_artifact()
-    matrix = artifact["htft"]["matrix"]
-    timing_cfg = artifact.get("timing") or {}
-    timing = _timing_signal(match)
-    weight = float(timing_cfg.get("weight", 0.0)) if timing is not None else 0.0
+        return {"valid": False, "model": "FT_CONDITIONAL_TEMPLATE_V1", "top": [], "distribution": []}
 
     rows = []
-    for ft_key, p_ft in probs.items():
-        ft = FT_MAP[ft_key]
-        cond = _conditional_row(matrix[ft], timing, weight)
-        for ht in ("HOME", "DRAW", "AWAY"):
-            p = float(p_ft) * float(cond[ht])
-            rows.append({
-                "selection": f"{ZH[ht]}/{ZH[ft]}",
-                "ht": ht,
-                "ft": ft,
-                "probability": p,
-            })
-
+    for ft_key in ("home", "draw", "away"):
+        for ht, cond in _conditional(ft_key, probability, match or {}):
+            rows.append(_row(ft_key, ht, cond, probs[ft_key]))
     rows.sort(key=lambda x: x["probability"], reverse=True)
+
+    primary = probability.get("direction")
+    primary_ft = FT_MAP.get(primary)
+    primary_rows = [r for r in rows if r["ft"] == primary_ft]
+    primary_rows.sort(key=lambda x: x["probability"], reverse=True)
     return {
         "valid": True,
-        "model": artifact["htft"]["model"] + ("+TIMING_REWEIGHT" if timing is not None else ""),
-        "top": rows[:3],
+        "model": "FT_CONDITIONAL_TEMPLATE_V1",
+        "top": primary_rows[:2],
         "distribution": rows,
-        "timing_used": timing is not None,
-        "timing_weight": weight,
-        "timing_source": ((match or {}).get("goal_timing") or {}).get("source_domain"),
-        "timing_mode": ((match or {}).get("goal_timing") or {}).get("timing_mode"),
+        "timing_used": False,
+        "timing_source": None,
+        "timing_mode": None,
         "ft_marginal_preserved": True,
+        "risk_tier": (decision or {}).get("decision"),
     }

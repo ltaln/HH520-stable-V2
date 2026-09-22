@@ -1,135 +1,78 @@
-"""Frozen pooled-Poisson score baseline for HH520 Stable V3.3."""
+"""HT/FT-conditioned score template layer for HH520 Stable V3.4."""
 from __future__ import annotations
-import math
-from .model_artifact import load_model_artifact
 
-_OUTCOME_ZH = {"HOME": "主胜", "DRAW": "平", "AWAY": "客胜"}
-
-
-def _finite(value):
-    try:
-        x = float(value)
-    except (TypeError, ValueError):
-        return None
-    return x if math.isfinite(x) else None
-
-
-def _diff(a, b):
-    a = _finite(a)
-    b = _finite(b)
-    return None if a is None or b is None else a - b
+TEMPLATES = {
+    ("HOME", "HOME"): [("2:1", .30), ("2:0", .25), ("3:0", .12), ("3:1", .12), ("1:0", .08), ("3:2", .08), ("4:0", .05)],
+    ("DRAW", "HOME"): [("2:1", .40), ("1:0", .32), ("3:2", .12), ("3:1", .08), ("3:0", .04), ("4:1", .04)],
+    ("AWAY", "AWAY"): [("1:3", .28), ("0:2", .18), ("1:2", .16), ("2:3", .12), ("2:4", .08), ("0:1", .08), ("1:4", .05), ("0:3", .05)],
+    ("DRAW", "AWAY"): [("0:1", .48), ("1:2", .20), ("0:2", .14), ("1:3", .06), ("0:3", .06), ("1:4", .03), ("0:4", .03)],
+    ("DRAW", "DRAW"): [("0:0", .476), ("1:1", .476), ("2:2", .048)],
+    ("HOME", "DRAW"): [("1:1", .636), ("2:2", .364)],
+    ("AWAY", "DRAW"): [("1:1", .60), ("2:2", .30), ("3:3", .10)],
+    ("AWAY", "HOME"): [("2:1", .60), ("1:0", .25), ("3:2", .15)],
+    ("HOME", "AWAY"): [("1:2", .60), ("0:1", .25), ("2:3", .15)],
+}
+OUTCOME_ZH = {"HOME": "主胜", "DRAW": "平", "AWAY": "客胜"}
 
 
-def _score_direction(home: int, away: int) -> str:
-    return "HOME" if home > away else "AWAY" if home < away else "DRAW"
+def _parse(score):
+    h, a = score.split(":")
+    return int(h), int(a)
 
 
-def _features(match: dict, probability: dict) -> dict:
-    probs = probability.get("probabilities") or {}
-    possession = match.get("possession") or {}
-    factors = match.get("research_factors") or {}
-
-    eight = [
-        factors.get("home_attack"), factors.get("away_attack"),
-        factors.get("home_defense"), factors.get("away_defense"),
-        factors.get("home_h2h"), factors.get("away_h2h"),
-        factors.get("home_form"), factors.get("away_form"),
-    ]
-    numeric = [_finite(x) for x in eight]
-    all_zero_or_missing = all(x is None or x == 0 for x in numeric)
-
-    return {
-        "p_home": _finite(probs.get("home")),
-        "p_draw": _finite(probs.get("draw")),
-        "p_away": _finite(probs.get("away")),
-        "home_pos_diff": _diff(possession.get("home"), possession.get("away")),
-        "attack_diff": None if all_zero_or_missing else _diff(factors.get("home_attack"), factors.get("away_attack")),
-        "defense_diff": None if all_zero_or_missing else _diff(factors.get("home_defense"), factors.get("away_defense")),
-        "h2h_diff": None if all_zero_or_missing else _diff(factors.get("home_h2h"), factors.get("away_h2h")),
-        "form_diff": None if all_zero_or_missing else _diff(factors.get("home_form"), factors.get("away_form")),
-        "team_modules_missing": 1.0 if all_zero_or_missing else 0.0,
-    }
+def _outcome(h, a):
+    return "HOME" if h > a else "AWAY" if h < a else "DRAW"
 
 
-def _poisson_pmf(k: int, lam: float) -> float:
-    if lam <= 0:
-        return 1.0 if k == 0 else 0.0
-    return math.exp(k * math.log(lam) - lam - math.lgamma(k + 1))
-
-
-def score_layer(match: dict, probability: dict) -> dict:
+def score_layer(match: dict, probability: dict, htft: dict = None) -> dict:
     if not probability.get("valid"):
-        return {"valid": False, "model": "POOLED_POISSON", "top_scores": [], "all_scores": []}
+        return {"valid": False, "model": "HTFT_SCORE_TEMPLATE_V1", "top_scores": [], "all_scores": []}
+    if not htft or not htft.get("valid"):
+        return {"valid": False, "model": "HTFT_SCORE_TEMPLATE_V1", "top_scores": [], "all_scores": []}
 
-    artifact = load_model_artifact()
-    cfg = artifact["score"]
-    raw = _features(match, probability)
-    z = []
-    for name in cfg["feature_columns"]:
-        value = raw.get(name)
-        if value is None or not math.isfinite(float(value)):
-            value = float(cfg["median"][name])
-        mean = float(cfg["mean"][name])
-        std = float(cfg["std"][name]) or 1.0
-        z.append((float(value) - mean) / std)
-
-    home_coef = [float(x) for x in cfg["home_coef"]]
-    away_coef = [float(x) for x in cfg["away_coef"]]
-    eta_home = home_coef[0] + sum(c * x for c, x in zip(home_coef[1:], z))
-    eta_away = away_coef[0] + sum(c * x for c, x in zip(away_coef[1:], z))
-    lambda_home = math.exp(max(-5.0, min(5.0, eta_home)))
-    lambda_away = math.exp(max(-5.0, min(5.0, eta_away)))
-
-    max_goals = int(cfg.get("max_goals", 10))
-    rows = []
-    total_mass = 0.0
+    score_mass = {}
     totals = {}
-    for home in range(max_goals + 1):
-        ph = _poisson_pmf(home, lambda_home)
-        for away in range(max_goals + 1):
-            p = ph * _poisson_pmf(away, lambda_away)
-            total_mass += p
-            totals[home + away] = totals.get(home + away, 0.0) + p
-            outcome = _score_direction(home, away)
-            rows.append({
-                "score": f"{home}:{away}",
-                "home": home,
-                "away": away,
-                "outcome": outcome,
-                "direction": _OUTCOME_ZH[outcome],
-                "probability": p,
-            })
+    for joint in htft.get("distribution", []):
+        template = TEMPLATES.get((joint["ht"], joint["ft"]), [])
+        for score, cond in template:
+            mass = float(joint["probability"]) * float(cond)
+            score_mass[score] = score_mass.get(score, 0.0) + mass
+            h, a = _parse(score)
+            totals[h + a] = totals.get(h + a, 0.0) + mass
 
-    if total_mass <= 0:
-        return {"valid": False, "model": cfg["model"], "top_scores": [], "all_scores": []}
-
-    for row in rows:
-        row["probability"] /= total_mass
-    for key in list(totals):
-        totals[key] /= total_mass
-
+    total_mass = sum(score_mass.values()) or 1.0
+    rows = []
+    for score, mass in score_mass.items():
+        h, a = _parse(score)
+        outcome = _outcome(h, a)
+        rows.append({
+            "score": score, "home": h, "away": a, "outcome": outcome,
+            "direction": OUTCOME_ZH[outcome],
+            "probability": mass / total_mass,
+        })
     rows.sort(key=lambda x: x["probability"], reverse=True)
-    total_ranked = sorted(
-        [{"goals": int(k), "probability": float(v)} for k, v in totals.items()],
-        key=lambda x: x["probability"],
-        reverse=True,
-    )
-    goal_pick = total_ranked[0]["goals"] if total_ranked else None
-    high_scores = [r for r in rows if (r["home"] + r["away"] >= 5 or max(r["home"], r["away"]) >= 3)]
-    high_score_mass = sum(r["probability"] for r in high_scores)
 
+    total_rows = [{"goals": g, "probability": m / total_mass} for g, m in totals.items()]
+    total_rows.sort(key=lambda x: x["probability"], reverse=True)
+    primary = probability.get("direction")
+    code = {"home": "HOME", "draw": "DRAW", "away": "AWAY"}.get(primary)
+    primary_rows = [r for r in rows if r["outcome"] == code]
+    primary_rows.sort(key=lambda x: x["probability"], reverse=True)
+
+    goal_pick = total_rows[0]["goals"] if total_rows else None
+    high = [r for r in rows if r["home"] + r["away"] >= 5 or max(r["home"], r["away"]) >= 3]
     return {
         "valid": True,
-        "model": cfg["model"],
-        "lambda_home": lambda_home,
-        "lambda_away": lambda_away,
-        "top_scores": rows[:5],
+        "model": "HTFT_SCORE_TEMPLATE_V1",
+        "top_scores": primary_rows[:5],
         "all_scores": rows,
-        "tail_scores": high_scores[:5],
-        "high_score_mass": high_score_mass,
-        "top_totals": total_ranked[:5],
+        "tail_scores": high[:5],
+        "high_score_mass": sum(r["probability"] for r in high),
+        "top_totals": total_rows[:5],
         "total_goals_pick": None if goal_pick is None else f"{goal_pick}球",
-        "total_goals_pick_probability": total_ranked[0]["probability"] if total_ranked else None,
-        "feature_snapshot": raw,
+        "total_goals_pick_probability": total_rows[0]["probability"] if total_rows else None,
+        "lambda_home": None,
+        "lambda_away": None,
+        "feature_snapshot": {"source": "htft_template"},
         "high_variance_challenger_promoted": False,
     }

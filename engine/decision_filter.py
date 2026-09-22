@@ -1,15 +1,14 @@
-"""HH520 Stable V3.3 Decision/Insurance layer.
+"""HH520 Stable V3.4 decision filter.
 
-The filter no longer equates pmax with correctness. It consumes the State
-Engine and preserves prediction output while distinguishing confirmed,
-balanced, conflict and tail-alert scenarios.
+Probability predicts. Market Failure Detector grades reliability. Value remains
+diagnostic and cannot change the selected direction.
 """
 from .data_quality import data_quality_gate
 from .match_classifier import classify_match
 from .risk_engine import assess_risk
-from .state_engine import build_state
+from .market_failure_detector import market_failure_detector
 
-VERSION = "HH520 Decision Filter V3.3"
+VERSION = "HH520 Decision Filter V3.4"
 
 
 def decision_filter(match: dict, probability: dict, value: dict,
@@ -18,45 +17,39 @@ def decision_filter(match: dict, probability: dict, value: dict,
     quality = quality or data_quality_gate(match, probability)
     classification = classification or classify_match(match, probability)
     risk = risk or assess_risk(match, probability, value, quality, classification)
-    state = state or build_state(match, probability)
+    failure = market_failure_detector(match, probability)
 
-    reasons = []
-    hard_pass = False
-    if not quality.get("valid"):
-        hard_pass = True
-        reasons.append("Data Quality Gate失败: " + ",".join(quality.get("errors", [])))
-    if not probability.get("valid"):
-        hard_pass = True
-        reasons.append("无有效市场概率")
+    hard_invalid = not quality.get("valid") or not probability.get("valid")
+    decision = "PASS" if hard_invalid else failure["tier"]
+    reasons = list(failure.get("signals", []))
+    if hard_invalid:
+        reasons = ["data_quality_or_probability_invalid"] + quality.get("errors", [])
 
-    if hard_pass:
-        decision = "PASS"
-    else:
-        decision = state.get("state", "STANDARD")
-        reasons.extend(state.get("confirmations", []))
-        reasons.extend(state.get("conflicts", []))
-
+    probs = probability.get("probabilities") or {}
+    ordered = sorted(probs, key=lambda k: float(probs[k]), reverse=True) if probs else []
     return {
         "version": VERSION,
         "decision": decision,
-        "allow_prediction": not hard_pass,
-        "decision_score": state.get("market_pmax"),
-        "hard_pass": hard_pass,
-        "state": state.get("state"),
-        "base_state": state.get("base_state"),
-        "primary_direction": state.get("primary_direction"),
-        "alternate_direction": state.get("alternate_direction"),
-        "tail_alert": bool(state.get("tail_alert")),
-        "draw_candidate": bool(state.get("draw_candidate")),
-        "risk": risk.get("level", "unknown"),
-        "risk_score": risk.get("score"),
-        "risk_reasons": risk.get("reasons", []),
+        "allow_prediction": not hard_invalid,
+        "strong_recommendation": decision == "CONFIRM",
+        "decision_score": probability.get("pmax"),
+        "hard_pass": hard_invalid,
+        "state": decision,
+        "base_state": decision,
+        "primary_direction": probability.get("direction"),
+        "alternate_direction": ordered[1] if len(ordered) > 1 else None,
+        "tail_alert": decision in {"TAIL_ALERT", "PASS"},
+        "draw_candidate": probability.get("direction") == "draw",
+        "risk": decision,
+        "risk_score": failure.get("risk_score"),
+        "risk_reasons": failure.get("signals", []),
         "risk_is_advisory": True,
+        "failure_detector": failure,
         "match_type": classification.get("type"),
         "reasons": reasons,
-        "source": "HH520_10027s+PUBLIC_GOAL_TIMING_OPTIONAL",
-        "selection_rule": "STATE_ENGINE_V3_3",
+        "source": "HH520_10027s_ONLY",
+        "selection_rule": "MARKET_FAILURE_DETECTOR_V1",
         "forbidden_advice_fields_used": False,
         "value_layer_used_for_direction": False,
-        "value_layer_used_for_confirmation": bool(value.get("used_for_confirmation")),
+        "value_layer_used_for_confirmation": False,
     }

@@ -20,12 +20,12 @@ def analyze_match(match: dict) -> dict:
     classification = classify_match(match, probability)
     risk = assess_risk(match, probability, value, quality, classification)
     research_confidence = research_confidence_layer(probability)
-    state = build_state(match, probability)
+    state = build_state(match, probability)  # legacy diagnostic only
     decision = decision_filter(match, probability, value, quality, classification, risk, state)
     confidence = confidence_from_probability(probability, decision)
-    score = score_layer(match, probability)
-    htft = htft_layer(probability, match)
-    consistency = consistency_layer(probability, state, htft, score)
+    htft = htft_layer(probability, match, decision)
+    score = score_layer(match, probability, htft)
+    consistency = consistency_layer(probability, state, htft, score, decision)
     calibration = calibration_layer(probability, state)
     return {
         "probability": probability,
