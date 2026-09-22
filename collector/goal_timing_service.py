@@ -1,8 +1,9 @@
 """Best-effort goal-timing enrichment for Stable V3.3.
 
-Uses Firecrawl search + structured scrape against public pages, prioritising
-SoccerSTATS and InPlayWise. Results are cached per date/match and never block
-the core 10027s prediction pipeline.
+Discovery is matchup-first so Chinese HH520 team names can resolve to public
+match pages. Exact six-bin timing is preferred. When unavailable, a clearly
+labelled first-half/second-half aggregate fallback may be used for HTFT
+reweighting. Enrichment never blocks the 10027s prediction pipeline.
 """
 from __future__ import annotations
 
@@ -17,7 +18,7 @@ from . import cache_manager
 from .firecrawl_client import search_web, scrape_json
 
 BINS = ("0-15", "16-30", "31-45", "46-60", "61-75", "76-90")
-PRIORITY = ("soccerstats.com", "inplaywise.com")
+PRIORITY = ("soccerstats.com", "footystats.org", "inplaywise.com", "sofascore.com", "365scores.com")
 
 
 def _cache_path(date: str, match: dict) -> Path:
@@ -30,6 +31,7 @@ def _cache_path(date: str, match: dict) -> Path:
 
 def _urls(value):
     found = []
+
     def walk(node):
         if isinstance(node, dict):
             for v in node.values():
@@ -39,12 +41,14 @@ def _urls(value):
                 walk(v)
         elif isinstance(node, str) and node.startswith(("http://", "https://")):
             found.append(node)
+
     walk(value)
     out = []
     seen = set()
     for url in found:
         if url not in seen:
-            seen.add(url); out.append(url)
+            seen.add(url)
+            out.append(url)
     return out
 
 
@@ -54,6 +58,11 @@ def _rank_url(url):
         if domain in host:
             return i
     return 99
+
+
+def _supported_url(url):
+    host = urlparse(url).netloc.lower()
+    return any(domain in host for domain in PRIORITY)
 
 
 def _shares(values):
@@ -71,6 +80,18 @@ def _shares(values):
     return [x / total for x in nums]
 
 
+def _rate(value):
+    try:
+        x = float(value)
+    except (TypeError, ValueError):
+        return None
+    if x > 1.0:
+        x /= 100.0
+    if not 0.0 <= x <= 1.0:
+        return None
+    return x
+
+
 def _team(raw):
     if not isinstance(raw, dict):
         return None
@@ -78,15 +99,109 @@ def _team(raw):
     ga = _shares(raw.get("goals_against"))
     if not gf or not ga:
         return None
+    first_gf = sum(gf[:3])
+    first_ga = sum(ga[:3])
     return {
         "goals_for_share": gf,
         "goals_against_share": ga,
-        "first_half_gf_share": sum(gf[:3]),
-        "first_half_ga_share": sum(ga[:3]),
+        "first_half_gf_share": first_gf,
+        "first_half_ga_share": first_ga,
         "second_half_gf_share": sum(gf[3:]),
         "second_half_ga_share": sum(ga[3:]),
+        "first_half_gf_signal": first_gf,
+        "first_half_ga_signal": first_ga,
         "scope": raw.get("scope") or "unknown",
     }
+
+
+def _team_half_rates(raw):
+    if not isinstance(raw, dict):
+        return None
+    fh_gf = _rate(raw.get("first_half_scoring_rate"))
+    fh_ga = _rate(raw.get("first_half_conceding_rate"))
+    sh_gf = _rate(raw.get("second_half_scoring_rate"))
+    sh_ga = _rate(raw.get("second_half_conceding_rate"))
+    if None in (fh_gf, fh_ga):
+        return None
+    return {
+        "first_half_gf_signal": fh_gf,
+        "first_half_ga_signal": fh_ga,
+        "second_half_gf_signal": sh_gf,
+        "second_half_ga_signal": sh_ga,
+        "scope": raw.get("scope") or "unknown",
+    }
+
+
+def _schemas():
+    six_bin = {
+        "type": "object",
+        "properties": {
+            side: {
+                "type": "object",
+                "properties": {
+                    "team": {"type": "string"},
+                    "goals_for": {"type": "array", "items": {"type": "number"}, "minItems": 6, "maxItems": 6},
+                    "goals_against": {"type": "array", "items": {"type": "number"}, "minItems": 6, "maxItems": 6},
+                    "scope": {"type": "string"},
+                },
+                "required": ["goals_for", "goals_against"],
+            }
+            for side in ("home", "away")
+        },
+        "required": ["home", "away"],
+    }
+    half = {
+        "type": "object",
+        "properties": {
+            side: {
+                "type": "object",
+                "properties": {
+                    "team": {"type": "string"},
+                    "first_half_scoring_rate": {"type": "number"},
+                    "first_half_conceding_rate": {"type": "number"},
+                    "second_half_scoring_rate": {"type": "number"},
+                    "second_half_conceding_rate": {"type": "number"},
+                    "scope": {"type": "string"},
+                },
+                "required": ["first_half_scoring_rate", "first_half_conceding_rate"],
+            }
+            for side in ("home", "away")
+        },
+        "required": ["home", "away"],
+    }
+    return six_bin, half
+
+
+def _discover(home, away):
+    queries = [
+        f'"{home}" "{away}" FootyStats SoccerSTATS',
+        f'"{home}" "{away}" football goal timing statistics',
+    ]
+    urls = []
+    for index, query in enumerate(queries):
+        try:
+            search = search_web(query, limit=8)
+        except Exception:
+            continue
+        urls.extend(_urls(search))
+        supported = [u for u in urls if _supported_url(u)]
+        if supported:
+            break
+        if index == 0:
+            continue
+    unique = []
+    seen = set()
+    for url in sorted(urls, key=_rank_url):
+        if url in seen or not _supported_url(url):
+            continue
+        seen.add(url)
+        unique.append(url)
+    return unique
+
+
+def _save(path, result):
+    path.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
+    return result
 
 
 def collect_goal_timing(date: str, match: dict) -> dict:
@@ -104,54 +219,40 @@ def collect_goal_timing(date: str, match: dict) -> dict:
     if not home or not away:
         return {"available": False, "reason": "missing_team_names"}
 
-    query = f'"{home}" "{away}" 0-15 16-30 31-45 46-60 61-75 76-90 goals scored conceded'
-    search = search_web(query, limit=5)
-    candidates = sorted(_urls(search), key=_rank_url)
+    candidates = _discover(home, away)
     if not candidates:
-        return {"available": False, "reason": "no_public_timing_source"}
+        return _save(path, {
+            "available": False,
+            "reason": "no_public_timing_source",
+            "captured_at": datetime.now(timezone.utc).isoformat(),
+            "cache_hit": False,
+        })
 
-    schema = {
-        "type": "object",
-        "properties": {
-            "home": {
-                "type": "object",
-                "properties": {
-                    "team": {"type": "string"},
-                    "goals_for": {"type": "array", "items": {"type": "number"}, "minItems": 6, "maxItems": 6},
-                    "goals_against": {"type": "array", "items": {"type": "number"}, "minItems": 6, "maxItems": 6},
-                    "scope": {"type": "string"}
-                },
-                "required": ["goals_for", "goals_against"]
-            },
-            "away": {
-                "type": "object",
-                "properties": {
-                    "team": {"type": "string"},
-                    "goals_for": {"type": "array", "items": {"type": "number"}, "minItems": 6, "maxItems": 6},
-                    "goals_against": {"type": "array", "items": {"type": "number"}, "minItems": 6, "maxItems": 6},
-                    "scope": {"type": "string"}
-                },
-                "required": ["goals_for", "goals_against"]
-            }
-        },
-        "required": ["home", "away"]
-    }
-    prompt = (
-        f"Extract pre-match goal scored/conceded timing distributions for {home} and {away}. "
+    six_schema, half_schema = _schemas()
+    six_prompt = (
+        f"Extract PRE-MATCH goal scored/conceded timing distributions for {home} and {away}. "
         "Return exactly six bins in this order: 0-15,16-30,31-45,46-60,61-75,76-90. "
-        "Numbers may be counts or percentages but must all use the same scale for one row. "
-        "Use only statistics visible on the page; do not infer missing bins."
+        "Numbers may be counts or percentages but must use one scale per row. "
+        "Use only statistics visible on the page and do not invent missing bins."
+    )
+    half_prompt = (
+        f"Extract PRE-MATCH first-half and second-half scoring/conceding rates for {home} and {away}. "
+        "Return rates as percentages or fractions. If the page shows first-half clean-sheet rate "
+        "instead of conceding rate, first_half_conceding_rate may be the exact complement. "
+        "Do not infer from unrelated full-time statistics."
     )
 
-    for url in candidates[:3]:
+    errors = []
+    for url in candidates[:5]:
         try:
-            raw = scrape_json(url, schema=schema, prompt=prompt)
+            raw = scrape_json(url, schema=six_schema, prompt=six_prompt)
             payload = raw.get("data", {}).get("json") if isinstance(raw, dict) else None
             h = _team((payload or {}).get("home"))
             a = _team((payload or {}).get("away"))
             if h and a:
-                result = {
+                return _save(path, {
                     "available": True,
+                    "timing_mode": "six_bin",
                     "source_url": url,
                     "source_domain": urlparse(url).netloc.lower(),
                     "captured_at": datetime.now(timezone.utc).isoformat(),
@@ -159,16 +260,41 @@ def collect_goal_timing(date: str, match: dict) -> dict:
                     "home": h,
                     "away": a,
                     "cache_hit": False,
-                }
-                path.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
-                return result
-        except Exception:
-            continue
-    return {"available": False, "reason": "timing_extract_failed"}
+                })
+        except Exception as exc:
+            errors.append(f"six_bin:{urlparse(url).netloc}:{type(exc).__name__}")
+
+        try:
+            raw = scrape_json(url, schema=half_schema, prompt=half_prompt)
+            payload = raw.get("data", {}).get("json") if isinstance(raw, dict) else None
+            h = _team_half_rates((payload or {}).get("home"))
+            a = _team_half_rates((payload or {}).get("away"))
+            if h and a:
+                return _save(path, {
+                    "available": True,
+                    "timing_mode": "half_aggregate_fallback",
+                    "source_url": url,
+                    "source_domain": urlparse(url).netloc.lower(),
+                    "captured_at": datetime.now(timezone.utc).isoformat(),
+                    "bins": None,
+                    "home": h,
+                    "away": a,
+                    "cache_hit": False,
+                })
+        except Exception as exc:
+            errors.append(f"half:{urlparse(url).netloc}:{type(exc).__name__}")
+
+    return _save(path, {
+        "available": False,
+        "reason": "timing_extract_failed",
+        "captured_at": datetime.now(timezone.utc).isoformat(),
+        "candidate_count": len(candidates),
+        "errors": errors[-5:],
+        "cache_hit": False,
+    })
 
 
 def _needs_timing(match: dict) -> bool:
-    """Spend timing lookups where HTFT uncertainty is most likely to matter."""
     if os.getenv("HH520_GOAL_TIMING_ONLY_UNCERTAIN", "1").strip() != "1":
         return True
 
@@ -217,7 +343,7 @@ def enrich_matches_with_goal_timing(date: str, matches: list[dict]) -> dict:
     candidates = [m for m in matches if _needs_timing(m)]
     selected = candidates[:max(0, max_matches)]
     selected_ids = {id(m) for m in selected}
-    attempted = available = 0
+    attempted = available = six_bin = half_fallback = 0
 
     for match in matches:
         if id(match) not in selected_ids:
@@ -230,12 +356,17 @@ def enrich_matches_with_goal_timing(date: str, matches: list[dict]) -> dict:
         except Exception as exc:
             timing = {"available": False, "reason": f"collector_error:{type(exc).__name__}"}
         match["goal_timing"] = timing
-        available += int(bool(timing.get("available")))
+        if timing.get("available"):
+            available += 1
+            six_bin += int(timing.get("timing_mode") == "six_bin")
+            half_fallback += int(timing.get("timing_mode") == "half_aggregate_fallback")
 
     return {
         "enabled": True,
         "attempted": attempted,
         "available": available,
+        "six_bin": six_bin,
+        "half_aggregate_fallback": half_fallback,
         "skipped_confirmed": sum(1 for m in matches if (m.get("goal_timing") or {}).get("reason") == "confirmed_skip"),
         "lookup_capped": max(0, len(candidates) - len(selected)),
     }
