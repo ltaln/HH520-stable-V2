@@ -1,6 +1,6 @@
 project:
-  name: HH520 Stable V2.1
-  version: "2.1"
+  name: HH520 Stable V3.2
+  version: "3.2"
 
 source:
   page: "10027s"
@@ -19,13 +19,22 @@ firecrawl:
   one_request_per_date: true
 
 prediction:
+  model_artifact: "model_artifacts/HH520_Stable_V3_2.json"
+  wdl_model: "MARKET_PROPORTIONAL_DEVIG"
+  page_probability_for_direction: false
+  confidence_model: "MARKET_PMAX"
+  confidence_s_threshold: 0.73
+  htft_model: "CONDITIONAL_HT_GIVEN_FT"
+  score_model: "POOLED_POISSON"
   use_probability_layer: true
   use_value_layer: true
   use_decision_filter: true
-  decision_filter_version: "2.0"
-  decision_filter_mode: "stable_v2_1"
+  decision_filter_version: "3.2"
+  decision_filter_mode: "stable_v3_2"
   allow_pass: true
+  gpt_role: "EXPLANATION_ONLY"
 
 research:
   enabled: true
   auto_tune_stable: false
+  frozen_through: "2026-09-20"
