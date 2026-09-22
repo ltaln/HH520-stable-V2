@@ -1,0 +1,229 @@
+{
+  "status": "READY",
+  "kind": "research_hidden_signal_page",
+  "request_id": "hh520-research-20260601-20260630-g2d8c5a1",
+  "page": 8,
+  "page_size": 20,
+  "items": [
+    {
+      "factor": "home_odds_bucket",
+      "value": "1.80-2.19",
+      "metric": "htft_top2",
+      "sample_count": 19,
+      "accuracy": 0.5789473684210527,
+      "baseline_accuracy": 0.52,
+      "delta_vs_baseline": 0.05894736842105264,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "pattern",
+      "value": "⚡ 极端",
+      "metric": "wdl",
+      "sample_count": 9,
+      "accuracy": 0.6666666666666666,
+      "baseline_accuracy": 0.608,
+      "delta_vs_baseline": 0.058666666666666645,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "risk",
+      "value": "中低",
+      "metric": "wdl",
+      "sample_count": 6,
+      "accuracy": 0.6666666666666666,
+      "baseline_accuracy": 0.608,
+      "delta_vs_baseline": 0.058666666666666645,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "probability_concentration",
+      "value": "40-49%",
+      "metric": "htft_top2",
+      "sample_count": 13,
+      "accuracy": 0.46153846153846156,
+      "baseline_accuracy": 0.52,
+      "delta_vs_baseline": -0.058461538461538454,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "世界杯",
+      "metric": "goals",
+      "sample_count": 62,
+      "accuracy": 0.2903225806451613,
+      "baseline_accuracy": 0.232,
+      "delta_vs_baseline": 0.0583225806451613,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "handicap",
+      "value": "主让半一低水/一球高水",
+      "metric": "wdl",
+      "sample_count": 20,
+      "accuracy": 0.55,
+      "baseline_accuracy": 0.608,
+      "delta_vs_baseline": -0.05799999999999994,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "home_odds_bucket",
+      "value": "<1.50",
+      "metric": "score_top2",
+      "sample_count": 36,
+      "accuracy": 0.2222222222222222,
+      "baseline_accuracy": 0.28,
+      "delta_vs_baseline": -0.05777777777777782,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "away_odds_bucket",
+      "value": "1.50-1.79",
+      "metric": "score_top2",
+      "sample_count": 9,
+      "accuracy": 0.2222222222222222,
+      "baseline_accuracy": 0.28,
+      "delta_vs_baseline": -0.05777777777777782,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "home_odds_bucket",
+      "value": "2.20-2.99",
+      "metric": "goals",
+      "sample_count": 14,
+      "accuracy": 0.2857142857142857,
+      "baseline_accuracy": 0.232,
+      "delta_vs_baseline": 0.05371428571428569,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "away_odds_bucket",
+      "value": "2.20-2.99",
+      "metric": "score_top2",
+      "sample_count": 15,
+      "accuracy": 0.3333333333333333,
+      "baseline_accuracy": 0.28,
+      "delta_vs_baseline": 0.05333333333333329,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "rating",
+      "value": "B",
+      "metric": "score_top2",
+      "sample_count": 9,
+      "accuracy": 0.3333333333333333,
+      "baseline_accuracy": 0.28,
+      "delta_vs_baseline": 0.05333333333333329,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "pattern",
+      "value": "⚠️ 边缘",
+      "metric": "score_top2",
+      "sample_count": 3,
+      "accuracy": 0.3333333333333333,
+      "baseline_accuracy": 0.28,
+      "delta_vs_baseline": 0.05333333333333329,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "draw_odds_bucket",
+      "value": "2.20-2.99",
+      "metric": "wdl",
+      "sample_count": 18,
+      "accuracy": 0.5555555555555556,
+      "baseline_accuracy": 0.608,
+      "delta_vs_baseline": -0.052444444444444405,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "away_odds_bucket",
+      "value": "1.50-1.79",
+      "metric": "wdl",
+      "sample_count": 9,
+      "accuracy": 0.5555555555555556,
+      "baseline_accuracy": 0.608,
+      "delta_vs_baseline": -0.052444444444444405,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "国际赛",
+      "metric": "goals",
+      "sample_count": 33,
+      "accuracy": 0.18181818181818182,
+      "baseline_accuracy": 0.232,
+      "delta_vs_baseline": -0.05018181818181819,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "probability_concentration",
+      "value": "50-59%",
+      "metric": "score_exact",
+      "sample_count": 18,
+      "accuracy": 0.1111111111111111,
+      "baseline_accuracy": 0.16,
+      "delta_vs_baseline": -0.0488888888888889,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "away_odds_bucket",
+      "value": ">=3.00",
+      "metric": "score_top2",
+      "sample_count": 77,
+      "accuracy": 0.23376623376623376,
+      "baseline_accuracy": 0.28,
+      "delta_vs_baseline": -0.046233766233766266,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "probability_concentration",
+      "value": "50-59%",
+      "metric": "goals",
+      "sample_count": 18,
+      "accuracy": 0.2777777777777778,
+      "baseline_accuracy": 0.232,
+      "delta_vs_baseline": 0.04577777777777778,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "away_odds_bucket",
+      "value": "<1.50",
+      "metric": "htft",
+      "sample_count": 19,
+      "accuracy": 0.42105263157894735,
+      "baseline_accuracy": 0.376,
+      "delta_vs_baseline": 0.045052631578947344,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "consistency",
+      "value": "⚠️部分",
+      "metric": "wdl",
+      "sample_count": 55,
+      "accuracy": 0.5636363636363636,
+      "baseline_accuracy": 0.608,
+      "delta_vs_baseline": -0.04436363636363638,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    }
+  ]
+}

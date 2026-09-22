@@ -1,0 +1,141 @@
+{
+  "status": "READY",
+  "kind": "research_hidden_signal_page",
+  "request_id": "hh520-research-20260601-20260630-g2d8c5a1",
+  "page": 13,
+  "page_size": 20,
+  "items": [
+    {
+      "factor": "pattern",
+      "value": "🔶风控赔率",
+      "metric": "goals",
+      "sample_count": 21,
+      "accuracy": 0.23809523809523808,
+      "baseline_accuracy": 0.232,
+      "delta_vs_baseline": 0.00609523809523807,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "draw_odds_bucket",
+      "value": ">=3.00",
+      "metric": "wdl",
+      "sample_count": 106,
+      "accuracy": 0.6132075471698113,
+      "baseline_accuracy": 0.608,
+      "delta_vs_baseline": 0.005207547169811311,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "consistency",
+      "value": "⚠️部分",
+      "metric": "goals",
+      "sample_count": 55,
+      "accuracy": 0.23636363636363636,
+      "baseline_accuracy": 0.232,
+      "delta_vs_baseline": 0.004363636363636347,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "risk",
+      "value": "中高",
+      "metric": "goals",
+      "sample_count": 17,
+      "accuracy": 0.23529411764705882,
+      "baseline_accuracy": 0.232,
+      "delta_vs_baseline": 0.0032941176470588085,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "structure",
+      "value": "均衡",
+      "metric": "goals",
+      "sample_count": 48,
+      "accuracy": 0.22916666666666666,
+      "baseline_accuracy": 0.232,
+      "delta_vs_baseline": -0.0028333333333333544,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "away_odds_bucket",
+      "value": ">=3.00",
+      "metric": "wdl",
+      "sample_count": 77,
+      "accuracy": 0.6103896103896104,
+      "baseline_accuracy": 0.608,
+      "delta_vs_baseline": 0.002389610389610386,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "home_odds_bucket",
+      "value": "1.80-2.19",
+      "metric": "score_exact",
+      "sample_count": 19,
+      "accuracy": 0.15789473684210525,
+      "baseline_accuracy": 0.16,
+      "delta_vs_baseline": -0.002105263157894749,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "国际赛",
+      "metric": "wdl",
+      "sample_count": 33,
+      "accuracy": 0.6060606060606061,
+      "baseline_accuracy": 0.608,
+      "delta_vs_baseline": -0.0019393939393939075,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "draw_odds_bucket",
+      "value": ">=3.00",
+      "metric": "htft",
+      "sample_count": 106,
+      "accuracy": 0.37735849056603776,
+      "baseline_accuracy": 0.376,
+      "delta_vs_baseline": 0.0013584905660377622,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "draw_odds_bucket",
+      "value": ">=3.00",
+      "metric": "htft_top2",
+      "sample_count": 106,
+      "accuracy": 0.5188679245283019,
+      "baseline_accuracy": 0.52,
+      "delta_vs_baseline": -0.0011320754716981352,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "risk",
+      "value": "低",
+      "metric": "htft",
+      "sample_count": 40,
+      "accuracy": 0.375,
+      "baseline_accuracy": 0.376,
+      "delta_vs_baseline": -0.0010000000000000009,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "芬超",
+      "metric": "htft",
+      "sample_count": 24,
+      "accuracy": 0.375,
+      "baseline_accuracy": 0.376,
+      "delta_vs_baseline": -0.0010000000000000009,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    }
+  ]
+}

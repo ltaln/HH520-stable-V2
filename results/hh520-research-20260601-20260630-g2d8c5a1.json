@@ -1,8 +1,1734 @@
 {
-  "status": "PENDING",
+  "status": "READY",
   "kind": "research",
   "request_id": "hh520-research-20260601-20260630-g2d8c5a1",
-  "message": "Workflow accepted and is still running.",
+  "system": "HH520 Research Lab V3.1",
+  "stable_access": "READ_ONLY",
+  "source": "HH520_10027s",
+  "window": {
+    "from": "2026-06-01",
+    "to": "2026-06-30"
+  },
+  "input_count": 125,
+  "clean_count": 125,
+  "sanitizer": {
+    "pollution_events": 125
+  },
+  "backtest": {
+    "status": "BACKTEST_READY",
+    "sample_count": 125,
+    "matched_results": 125,
+    "metrics": {
+      "win_draw_loss": {
+        "status": "READY",
+        "sample_count": 125,
+        "hits": 76,
+        "accuracy": 0.608,
+        "direction_source": "probability_or_single_or_primary_score"
+      },
+      "score": {
+        "status": "READY",
+        "sample_count": 125,
+        "exact_hits": 20,
+        "exact_accuracy": 0.16,
+        "top2_hits": 35,
+        "top2_accuracy": 0.28,
+        "label_field": "actual_score",
+        "prediction_field": "predicted_score",
+        "actual_labels_available": 125,
+        "note": null
+      },
+      "half_time": {
+        "status": "READY",
+        "sample_count": 125,
+        "hits": 47,
+        "accuracy": 0.376,
+        "top2_hits": 65,
+        "top2_accuracy": 0.52,
+        "source_counts": {
+          "hh520_raw": 14,
+          "research_derived_poisson": 111
+        },
+        "note": null
+      },
+      "goals": {
+        "status": "READY",
+        "sample_count": 125,
+        "hits": 29,
+        "accuracy": 0.232,
+        "label_field": "actual_total_goals",
+        "prediction_field": "predicted_total_goals",
+        "actual_labels_available": 125,
+        "prediction_fallback": "derive from predicted_score when available",
+        "note": null
+      }
+    },
+    "note": "Result labels and prediction snapshots are isolated from Stable. No automatic promotion to Stable."
+  },
+  "prediction_coverage": {
+    "records": 125,
+    "single": 65,
+    "htft": 65,
+    "predicted_score": 0,
+    "predicted_total_goals": 0,
+    "predicted_total_goals_explicit": 0,
+    "predicted_total_goals_derived_from_score": 0,
+    "research_derived_score": 0,
+    "research_derived_total_goals": 0,
+    "research_derived_htft": 0,
+    "raw_actionable_htft": 0,
+    "page_probability": 65,
+    "actual_half_score": 125,
+    "actual_score": 125,
+    "actual_total_goals": 125,
+    "legacy_aliases": {
+      "scores": 0,
+      "total_goals": 0,
+      "actual_full_score": 125
+    },
+    "source_note": "actual_score and actual_total_goals are Result Labels. predicted_score and predicted_total_goals are Prediction fields used only for accuracy evaluation. If raw predicted_score is absent, Research may derive it from pre-match 1X2 probabilities using the RESEARCH_POISSON_1X2 layer. predicted_total_goals is derived from predicted_score when no explicit total-goals prediction exists."
+  },
+  "result_collection": {
+    "source": "HH520_10027s_RESULT_LABEL",
+    "collected": 125,
+    "stable_access": "FORBIDDEN"
+  },
+  "prediction_snapshot_layer": {
+    "enabled": true,
+    "count": 125,
+    "isolation": "RESEARCH_ONLY",
+    "contains_actual_results": false,
+    "stable_access": "FORBIDDEN"
+  },
+  "result_label_layer": {
+    "enabled": true,
+    "collected": 125,
+    "matched": 125,
+    "unmatched": 0,
+    "isolation": "RESEARCH_ONLY",
+    "stable_access": "FORBIDDEN"
+  },
+  "error_attribution": {
+    "summary": {
+      "matches": 125,
+      "wdl": {
+        "evaluable": 125,
+        "hits": 76,
+        "accuracy": 0.608
+      },
+      "score_exact": {
+        "evaluable": 125,
+        "hits": 20,
+        "accuracy": 0.16
+      },
+      "score_top2": {
+        "evaluable": 125,
+        "hits": 35,
+        "accuracy": 0.28
+      },
+      "htft": {
+        "evaluable": 125,
+        "hits": 47,
+        "accuracy": 0.376
+      },
+      "htft_top2": {
+        "evaluable": 125,
+        "hits": 65,
+        "accuracy": 0.52
+      },
+      "goals": {
+        "evaluable": 125,
+        "hits": 29,
+        "accuracy": 0.232
+      }
+    },
+    "detail_pages": 7
+  },
+  "hidden_model_reverse": {
+    "status": "RESEARCH_ONLY",
+    "stable_access": "FORBIDDEN",
+    "baseline": {
+      "wdl": 0.608,
+      "score_exact": 0.16,
+      "score_top2": 0.28,
+      "htft": 0.376,
+      "htft_top2": 0.52,
+      "goals": 0.232
+    },
+    "min_bucket_sample": 3,
+    "top_signals": [
+      {
+        "factor": "rating",
+        "value": "C",
+        "metric": "htft_top2",
+        "sample_count": 4,
+        "accuracy": 0.0,
+        "baseline_accuracy": 0.52,
+        "delta_vs_baseline": -0.52,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "rating",
+        "value": "D-",
+        "metric": "wdl",
+        "sample_count": 4,
+        "accuracy": 1.0,
+        "baseline_accuracy": 0.608,
+        "delta_vs_baseline": 0.392,
+        "direction": "ABOVE_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "risk",
+        "value": "中低",
+        "metric": "score_top2",
+        "sample_count": 6,
+        "accuracy": 0.6666666666666666,
+        "baseline_accuracy": 0.28,
+        "delta_vs_baseline": 0.3866666666666666,
+        "direction": "ABOVE_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "rating",
+        "value": "C",
+        "metric": "htft",
+        "sample_count": 4,
+        "accuracy": 0.0,
+        "baseline_accuracy": 0.376,
+        "delta_vs_baseline": -0.376,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "rating",
+        "value": "C",
+        "metric": "wdl",
+        "sample_count": 4,
+        "accuracy": 0.25,
+        "baseline_accuracy": 0.608,
+        "delta_vs_baseline": -0.358,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "handicap",
+        "value": "客让平半低水/半球高水",
+        "metric": "score_top2",
+        "sample_count": 11,
+        "accuracy": 0.6363636363636364,
+        "baseline_accuracy": 0.28,
+        "delta_vs_baseline": 0.3563636363636363,
+        "direction": "ABOVE_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "probability_concentration",
+        "value": "<40%",
+        "metric": "htft_top2",
+        "sample_count": 10,
+        "accuracy": 0.2,
+        "baseline_accuracy": 0.52,
+        "delta_vs_baseline": -0.32,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "away_odds_bucket",
+        "value": "1.80-2.19",
+        "metric": "score_top2",
+        "sample_count": 5,
+        "accuracy": 0.6,
+        "baseline_accuracy": 0.28,
+        "delta_vs_baseline": 0.31999999999999995,
+        "direction": "ABOVE_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "probability_concentration",
+        "value": "50-59%",
+        "metric": "htft_top2",
+        "sample_count": 18,
+        "accuracy": 0.2222222222222222,
+        "baseline_accuracy": 0.52,
+        "delta_vs_baseline": -0.2977777777777778,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "pattern",
+        "value": "⚠️ 边缘",
+        "metric": "wdl",
+        "sample_count": 3,
+        "accuracy": 0.3333333333333333,
+        "baseline_accuracy": 0.608,
+        "delta_vs_baseline": -0.27466666666666667,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "handicap",
+        "value": "主让平半低水/半球高水",
+        "metric": "htft_top2",
+        "sample_count": 14,
+        "accuracy": 0.2857142857142857,
+        "baseline_accuracy": 0.52,
+        "delta_vs_baseline": -0.23428571428571432,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "rating",
+        "value": "C",
+        "metric": "goals",
+        "sample_count": 4,
+        "accuracy": 0.0,
+        "baseline_accuracy": 0.232,
+        "delta_vs_baseline": -0.232,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "rating",
+        "value": "B-",
+        "metric": "goals",
+        "sample_count": 4,
+        "accuracy": 0.0,
+        "baseline_accuracy": 0.232,
+        "delta_vs_baseline": -0.232,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "consistency",
+        "value": "✅一致",
+        "metric": "htft_top2",
+        "sample_count": 10,
+        "accuracy": 0.3,
+        "baseline_accuracy": 0.52,
+        "delta_vs_baseline": -0.22000000000000003,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "rating",
+        "value": "D-",
+        "metric": "score_top2",
+        "sample_count": 4,
+        "accuracy": 0.5,
+        "baseline_accuracy": 0.28,
+        "delta_vs_baseline": 0.21999999999999997,
+        "direction": "ABOVE_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "probability_concentration",
+        "value": "50-59%",
+        "metric": "wdl",
+        "sample_count": 18,
+        "accuracy": 0.3888888888888889,
+        "baseline_accuracy": 0.608,
+        "delta_vs_baseline": -0.2191111111111111,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "structure",
+        "value": "强优",
+        "metric": "htft",
+        "sample_count": 17,
+        "accuracy": 0.5882352941176471,
+        "baseline_accuracy": 0.376,
+        "delta_vs_baseline": 0.21223529411764708,
+        "direction": "ABOVE_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "away_odds_bucket",
+        "value": "1.80-2.19",
+        "metric": "wdl",
+        "sample_count": 5,
+        "accuracy": 0.4,
+        "baseline_accuracy": 0.608,
+        "delta_vs_baseline": -0.20799999999999996,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "structure",
+        "value": "均衡",
+        "metric": "htft_top2",
+        "sample_count": 48,
+        "accuracy": 0.3125,
+        "baseline_accuracy": 0.52,
+        "delta_vs_baseline": -0.20750000000000002,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      },
+      {
+        "factor": "advantage_side",
+        "value": "客",
+        "metric": "htft_top2",
+        "sample_count": 32,
+        "accuracy": 0.3125,
+        "baseline_accuracy": 0.52,
+        "delta_vs_baseline": -0.20750000000000002,
+        "direction": "BELOW_BASELINE",
+        "status": "RESEARCH_SIGNAL_ONLY"
+      }
+    ],
+    "signal_count": 252,
+    "detail_pages": 13
+  },
+  "league_dna": {
+    "世界杯": {
+      "matches": 62,
+      "date_count": 20,
+      "metrics": {
+        "wdl": {
+          "sample_count": 62,
+          "hits": 40,
+          "accuracy": 0.6451612903225806
+        },
+        "score_exact": {
+          "sample_count": 62,
+          "hits": 12,
+          "accuracy": 0.1935483870967742
+        },
+        "score_top2": {
+          "sample_count": 62,
+          "hits": 18,
+          "accuracy": 0.2903225806451613
+        },
+        "htft": {
+          "sample_count": 62,
+          "hits": 26,
+          "accuracy": 0.41935483870967744
+        },
+        "htft_top2": {
+          "sample_count": 62,
+          "hits": 31,
+          "accuracy": 0.5
+        },
+        "goals": {
+          "sample_count": 62,
+          "hits": 18,
+          "accuracy": 0.2903225806451613
+        }
+      }
+    },
+    "国际赛": {
+      "matches": 33,
+      "date_count": 9,
+      "metrics": {
+        "wdl": {
+          "sample_count": 33,
+          "hits": 20,
+          "accuracy": 0.6060606060606061
+        },
+        "score_exact": {
+          "sample_count": 33,
+          "hits": 4,
+          "accuracy": 0.12121212121212122
+        },
+        "score_top2": {
+          "sample_count": 33,
+          "hits": 9,
+          "accuracy": 0.2727272727272727
+        },
+        "htft": {
+          "sample_count": 33,
+          "hits": 10,
+          "accuracy": 0.30303030303030304
+        },
+        "htft_top2": {
+          "sample_count": 33,
+          "hits": 20,
+          "accuracy": 0.6060606060606061
+        },
+        "goals": {
+          "sample_count": 33,
+          "hits": 6,
+          "accuracy": 0.18181818181818182
+        }
+      }
+    },
+    "日职": {
+      "matches": 6,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 6,
+          "hits": 3,
+          "accuracy": 0.5
+        },
+        "score_exact": {
+          "sample_count": 6,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_top2": {
+          "sample_count": 6,
+          "hits": 1,
+          "accuracy": 0.16666666666666666
+        },
+        "htft": {
+          "sample_count": 6,
+          "hits": 2,
+          "accuracy": 0.3333333333333333
+        },
+        "htft_top2": {
+          "sample_count": 6,
+          "hits": 3,
+          "accuracy": 0.5
+        },
+        "goals": {
+          "sample_count": 6,
+          "hits": 1,
+          "accuracy": 0.16666666666666666
+        }
+      }
+    },
+    "芬超": {
+      "matches": 24,
+      "date_count": 5,
+      "metrics": {
+        "wdl": {
+          "sample_count": 24,
+          "hits": 13,
+          "accuracy": 0.5416666666666666
+        },
+        "score_exact": {
+          "sample_count": 24,
+          "hits": 4,
+          "accuracy": 0.16666666666666666
+        },
+        "score_top2": {
+          "sample_count": 24,
+          "hits": 7,
+          "accuracy": 0.2916666666666667
+        },
+        "htft": {
+          "sample_count": 24,
+          "hits": 9,
+          "accuracy": 0.375
+        },
+        "htft_top2": {
+          "sample_count": 24,
+          "hits": 11,
+          "accuracy": 0.4583333333333333
+        },
+        "goals": {
+          "sample_count": 24,
+          "hits": 4,
+          "accuracy": 0.16666666666666666
+        }
+      }
+    }
+  },
+  "team_dna": [
+    {
+      "team": "瑞典",
+      "matches": 6,
+      "date_count": 6,
+      "metrics": {
+        "wdl": {
+          "sample_count": 6,
+          "hits": 5,
+          "accuracy": 0.8333333333333334
+        },
+        "score_exact": {
+          "sample_count": 6,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_top2": {
+          "sample_count": 6,
+          "hits": 2,
+          "accuracy": 0.3333333333333333
+        },
+        "htft": {
+          "sample_count": 6,
+          "hits": 4,
+          "accuracy": 0.6666666666666666
+        },
+        "htft_top2": {
+          "sample_count": 6,
+          "hits": 4,
+          "accuracy": 0.6666666666666666
+        },
+        "goals": {
+          "sample_count": 6,
+          "hits": 0,
+          "accuracy": 0.0
+        }
+      }
+    },
+    {
+      "team": "挪威",
+      "matches": 5,
+      "date_count": 5,
+      "metrics": {
+        "wdl": {
+          "sample_count": 5,
+          "hits": 2,
+          "accuracy": 0.4
+        },
+        "score_exact": {
+          "sample_count": 5,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_top2": {
+          "sample_count": 5,
+          "hits": 1,
+          "accuracy": 0.2
+        },
+        "htft": {
+          "sample_count": 5,
+          "hits": 4,
+          "accuracy": 0.8
+        },
+        "htft_top2": {
+          "sample_count": 5,
+          "hits": 4,
+          "accuracy": 0.8
+        },
+        "goals": {
+          "sample_count": 5,
+          "hits": 0,
+          "accuracy": 0.0
+        }
+      }
+    },
+    {
+      "team": "土耳其",
+      "matches": 5,
+      "date_count": 5,
+      "metrics": {
+        "wdl": {
+          "sample_count": 5,
+          "hits": 2,
+          "accuracy": 0.4
+        },
+        "score_exact": {
+          "sample_count": 5,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_top2": {
+          "sample_count": 5,
+          "hits": 1,
+          "accuracy": 0.2
+        },
+        "htft": {
+          "sample_count": 5,
+          "hits": 1,
+          "accuracy": 0.2
+        },
+        "htft_top2": {
+          "sample_count": 5,
+          "hits": 1,
+          "accuracy": 0.2
+        },
+        "goals": {
+          "sample_count": 5,
+          "hits": 2,
+          "accuracy": 0.4
+        }
+      }
+    },
+    {
+      "team": "加拿大",
+      "matches": 5,
+      "date_count": 5,
+      "metrics": {
+        "wdl": {
+          "sample_count": 5,
+          "hits": 4,
+          "accuracy": 0.8
+        },
+        "score_exact": {
+          "sample_count": 5,
+          "hits": 1,
+          "accuracy": 0.2
+        },
+        "score_top2": {
+          "sample_count": 5,
+          "hits": 3,
+          "accuracy": 0.6
+        },
+        "htft": {
+          "sample_count": 5,
+          "hits": 1,
+          "accuracy": 0.2
+        },
+        "htft_top2": {
+          "sample_count": 5,
+          "hits": 3,
+          "accuracy": 0.6
+        },
+        "goals": {
+          "sample_count": 5,
+          "hits": 1,
+          "accuracy": 0.2
+        }
+      }
+    },
+    {
+      "team": "克罗地亚",
+      "matches": 5,
+      "date_count": 5,
+      "metrics": {
+        "wdl": {
+          "sample_count": 5,
+          "hits": 4,
+          "accuracy": 0.8
+        },
+        "score_exact": {
+          "sample_count": 5,
+          "hits": 1,
+          "accuracy": 0.2
+        },
+        "score_top2": {
+          "sample_count": 5,
+          "hits": 1,
+          "accuracy": 0.2
+        },
+        "htft": {
+          "sample_count": 5,
+          "hits": 3,
+          "accuracy": 0.6
+        },
+        "htft_top2": {
+          "sample_count": 5,
+          "hits": 5,
+          "accuracy": 1.0
+        },
+        "goals": {
+          "sample_count": 5,
+          "hits": 2,
+          "accuracy": 0.4
+        }
+      }
+    },
+    {
+      "team": "荷兰",
+      "matches": 5,
+      "date_count": 5,
+      "metrics": {
+        "wdl": {
+          "sample_count": 5,
+          "hits": 2,
+          "accuracy": 0.4
+        },
+        "score_exact": {
+          "sample_count": 5,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_top2": {
+          "sample_count": 5,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "htft": {
+          "sample_count": 5,
+          "hits": 2,
+          "accuracy": 0.4
+        },
+        "htft_top2": {
+          "sample_count": 5,
+          "hits": 3,
+          "accuracy": 0.6
+        },
+        "goals": {
+          "sample_count": 5,
+          "hits": 0,
+          "accuracy": 0.0
+        }
+      }
+    },
+    {
+      "team": "墨西哥",
+      "matches": 5,
+      "date_count": 5,
+      "metrics": {
+        "wdl": {
+          "sample_count": 5,
+          "hits": 5,
+          "accuracy": 1.0
+        },
+        "score_exact": {
+          "sample_count": 5,
+          "hits": 2,
+          "accuracy": 0.4
+        },
+        "score_top2": {
+          "sample_count": 5,
+          "hits": 2,
+          "accuracy": 0.4
+        },
+        "htft": {
+          "sample_count": 5,
+          "hits": 3,
+          "accuracy": 0.6
+        },
+        "htft_top2": {
+          "sample_count": 5,
+          "hits": 3,
+          "accuracy": 0.6
+        },
+        "goals": {
+          "sample_count": 5,
+          "hits": 2,
+          "accuracy": 0.4
+        }
+      }
+    },
+    {
+      "team": "奥地利",
+      "matches": 4,
+      "date_count": 4,
+      "metrics": {
+        "wdl": {
+          "sample_count": 4,
+          "hits": 4,
+          "accuracy": 1.0
+        },
+        "score_exact": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "score_top2": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "htft": {
+          "sample_count": 4,
+          "hits": 4,
+          "accuracy": 1.0
+        },
+        "htft_top2": {
+          "sample_count": 4,
+          "hits": 4,
+          "accuracy": 1.0
+        },
+        "goals": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        }
+      }
+    },
+    {
+      "team": "突尼斯",
+      "matches": 4,
+      "date_count": 4,
+      "metrics": {
+        "wdl": {
+          "sample_count": 4,
+          "hits": 4,
+          "accuracy": 1.0
+        },
+        "score_exact": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "score_top2": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "htft": {
+          "sample_count": 4,
+          "hits": 3,
+          "accuracy": 0.75
+        },
+        "htft_top2": {
+          "sample_count": 4,
+          "hits": 3,
+          "accuracy": 0.75
+        },
+        "goals": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        }
+      }
+    },
+    {
+      "team": "乌兹别克",
+      "matches": 4,
+      "date_count": 4,
+      "metrics": {
+        "wdl": {
+          "sample_count": 4,
+          "hits": 4,
+          "accuracy": 1.0
+        },
+        "score_exact": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_top2": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "htft": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "htft_top2": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "goals": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        }
+      }
+    },
+    {
+      "team": "比利时",
+      "matches": 4,
+      "date_count": 4,
+      "metrics": {
+        "wdl": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "score_exact": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_top2": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "htft": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "htft_top2": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "goals": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        }
+      }
+    },
+    {
+      "team": "刚果金",
+      "matches": 4,
+      "date_count": 4,
+      "metrics": {
+        "wdl": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "score_exact": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "score_top2": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "htft": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "htft_top2": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "goals": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        }
+      }
+    },
+    {
+      "team": "阿尔及利",
+      "matches": 4,
+      "date_count": 4,
+      "metrics": {
+        "wdl": {
+          "sample_count": 4,
+          "hits": 3,
+          "accuracy": 0.75
+        },
+        "score_exact": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_top2": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "htft": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "htft_top2": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "goals": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        }
+      }
+    },
+    {
+      "team": "法国",
+      "matches": 4,
+      "date_count": 4,
+      "metrics": {
+        "wdl": {
+          "sample_count": 4,
+          "hits": 3,
+          "accuracy": 0.75
+        },
+        "score_exact": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_top2": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "htft": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "htft_top2": {
+          "sample_count": 4,
+          "hits": 3,
+          "accuracy": 0.75
+        },
+        "goals": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        }
+      }
+    },
+    {
+      "team": "科特迪瓦",
+      "matches": 4,
+      "date_count": 4,
+      "metrics": {
+        "wdl": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "score_exact": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "score_top2": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "htft": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "htft_top2": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "goals": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        }
+      }
+    },
+    {
+      "team": "葡萄牙",
+      "matches": 4,
+      "date_count": 4,
+      "metrics": {
+        "wdl": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "score_exact": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_top2": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "htft": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "htft_top2": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "goals": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        }
+      }
+    },
+    {
+      "team": "美国",
+      "matches": 4,
+      "date_count": 4,
+      "metrics": {
+        "wdl": {
+          "sample_count": 4,
+          "hits": 3,
+          "accuracy": 0.75
+        },
+        "score_exact": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_top2": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "htft": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "htft_top2": {
+          "sample_count": 4,
+          "hits": 3,
+          "accuracy": 0.75
+        },
+        "goals": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        }
+      }
+    },
+    {
+      "team": "德国",
+      "matches": 4,
+      "date_count": 4,
+      "metrics": {
+        "wdl": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "score_exact": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "score_top2": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "htft": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "htft_top2": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "goals": {
+          "sample_count": 4,
+          "hits": 3,
+          "accuracy": 0.75
+        }
+      }
+    },
+    {
+      "team": "澳大利亚",
+      "matches": 4,
+      "date_count": 4,
+      "metrics": {
+        "wdl": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "score_exact": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "score_top2": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "htft": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "htft_top2": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "goals": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        }
+      }
+    },
+    {
+      "team": "波黑",
+      "matches": 4,
+      "date_count": 4,
+      "metrics": {
+        "wdl": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "score_exact": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "score_top2": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "htft": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "htft_top2": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "goals": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        }
+      }
+    },
+    {
+      "team": "苏格兰",
+      "matches": 4,
+      "date_count": 4,
+      "metrics": {
+        "wdl": {
+          "sample_count": 4,
+          "hits": 4,
+          "accuracy": 1.0
+        },
+        "score_exact": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "score_top2": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "htft": {
+          "sample_count": 4,
+          "hits": 3,
+          "accuracy": 0.75
+        },
+        "htft_top2": {
+          "sample_count": 4,
+          "hits": 3,
+          "accuracy": 0.75
+        },
+        "goals": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        }
+      }
+    },
+    {
+      "team": "巴西",
+      "matches": 4,
+      "date_count": 4,
+      "metrics": {
+        "wdl": {
+          "sample_count": 4,
+          "hits": 3,
+          "accuracy": 0.75
+        },
+        "score_exact": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_top2": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "htft": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "htft_top2": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "goals": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        }
+      }
+    },
+    {
+      "team": "埃及",
+      "matches": 4,
+      "date_count": 4,
+      "metrics": {
+        "wdl": {
+          "sample_count": 4,
+          "hits": 3,
+          "accuracy": 0.75
+        },
+        "score_exact": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_top2": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "htft": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "htft_top2": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "goals": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        }
+      }
+    },
+    {
+      "team": "摩洛哥",
+      "matches": 4,
+      "date_count": 4,
+      "metrics": {
+        "wdl": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "score_exact": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "score_top2": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "htft": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "htft_top2": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "goals": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        }
+      }
+    },
+    {
+      "team": "哥伦比亚",
+      "matches": 4,
+      "date_count": 4,
+      "metrics": {
+        "wdl": {
+          "sample_count": 4,
+          "hits": 3,
+          "accuracy": 0.75
+        },
+        "score_exact": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "score_top2": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "htft": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "htft_top2": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "goals": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        }
+      }
+    },
+    {
+      "team": "南非",
+      "matches": 4,
+      "date_count": 4,
+      "metrics": {
+        "wdl": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "score_exact": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "score_top2": {
+          "sample_count": 4,
+          "hits": 3,
+          "accuracy": 0.75
+        },
+        "htft": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "htft_top2": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "goals": {
+          "sample_count": 4,
+          "hits": 3,
+          "accuracy": 0.75
+        }
+      }
+    },
+    {
+      "team": "巴拉圭",
+      "matches": 4,
+      "date_count": 4,
+      "metrics": {
+        "wdl": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "score_exact": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "score_top2": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "htft": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "htft_top2": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "goals": {
+          "sample_count": 4,
+          "hits": 3,
+          "accuracy": 0.75
+        }
+      }
+    },
+    {
+      "team": "坦山猫",
+      "matches": 4,
+      "date_count": 4,
+      "metrics": {
+        "wdl": {
+          "sample_count": 4,
+          "hits": 3,
+          "accuracy": 0.75
+        },
+        "score_exact": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_top2": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "htft": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "htft_top2": {
+          "sample_count": 4,
+          "hits": 3,
+          "accuracy": 0.75
+        },
+        "goals": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        }
+      }
+    },
+    {
+      "team": "TPS图尔",
+      "matches": 4,
+      "date_count": 4,
+      "metrics": {
+        "wdl": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "score_exact": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_top2": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "htft": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "htft_top2": {
+          "sample_count": 4,
+          "hits": 2,
+          "accuracy": 0.5
+        },
+        "goals": {
+          "sample_count": 4,
+          "hits": 0,
+          "accuracy": 0.0
+        }
+      }
+    },
+    {
+      "team": "国际图尔",
+      "matches": 4,
+      "date_count": 4,
+      "metrics": {
+        "wdl": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "score_exact": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "score_top2": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "htft": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "htft_top2": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        },
+        "goals": {
+          "sample_count": 4,
+          "hits": 1,
+          "accuracy": 0.25
+        }
+      }
+    }
+  ],
+  "candidate_rule_engine": {
+    "status": "CANDIDATE_ONLY",
+    "candidate_count": 3,
+    "thresholds": {
+      "min_sample": 20,
+      "min_dates": 3,
+      "min_delta_vs_baseline": 0.08,
+      "min_positive_date_ratio": 0.6,
+      "min_leagues_for_global": 2
+    },
+    "rejected_signal_count": 104
+  },
+  "candidate_rules": [
+    {
+      "factor": "probability_concentration",
+      "value": ">=60%",
+      "metric": "wdl",
+      "sample_count": 24,
+      "hits": 18,
+      "accuracy": 0.75,
+      "baseline_accuracy": 0.608,
+      "delta_vs_baseline": 0.14200000000000002,
+      "date_count": 16,
+      "positive_date_ratio": 0.6875,
+      "league_count": 3,
+      "leagues": [
+        "世界杯",
+        "国际赛",
+        "芬超"
+      ],
+      "rule_scope": "GLOBAL_FACTOR",
+      "stable_access": "FORBIDDEN",
+      "id": "CR-001",
+      "status": "CANDIDATE_ONLY",
+      "next_stage": "SHADOW_TEST",
+      "statement": "When probability_concentration=>=60%, evaluate wdl as a candidate filter; observed delta vs baseline is 0.142."
+    },
+    {
+      "factor": "pattern",
+      "value": "🔶风控赔率",
+      "metric": "wdl",
+      "sample_count": 21,
+      "hits": 15,
+      "accuracy": 0.7142857142857143,
+      "baseline_accuracy": 0.608,
+      "delta_vs_baseline": 0.10628571428571432,
+      "date_count": 17,
+      "positive_date_ratio": 0.7058823529411765,
+      "league_count": 3,
+      "leagues": [
+        "世界杯",
+        "国际赛",
+        "芬超"
+      ],
+      "rule_scope": "GLOBAL_FACTOR",
+      "stable_access": "FORBIDDEN",
+      "id": "CR-002",
+      "status": "CANDIDATE_ONLY",
+      "next_stage": "SHADOW_TEST",
+      "statement": "When pattern=🔶风控赔率, evaluate wdl as a candidate filter; observed delta vs baseline is 0.106."
+    },
+    {
+      "factor": "home_odds_bucket",
+      "value": "<1.50",
+      "metric": "wdl",
+      "sample_count": 36,
+      "hits": 25,
+      "accuracy": 0.6944444444444444,
+      "baseline_accuracy": 0.608,
+      "delta_vs_baseline": 0.08644444444444443,
+      "date_count": 22,
+      "positive_date_ratio": 0.6363636363636364,
+      "league_count": 3,
+      "leagues": [
+        "世界杯",
+        "国际赛",
+        "芬超"
+      ],
+      "rule_scope": "GLOBAL_FACTOR",
+      "stable_access": "FORBIDDEN",
+      "id": "CR-003",
+      "status": "CANDIDATE_ONLY",
+      "next_stage": "SHADOW_TEST",
+      "statement": "When home_odds_bucket=<1.50, evaluate wdl as a candidate filter; observed delta vs baseline is 0.086."
+    }
+  ],
+  "promotion_policy": "MANUAL_REVIEW_REQUIRED",
+  "detail_manifest_path": "pages/hh520-research-20260601-20260630-g2d8c5a1/manifest.json",
+  "archive_path": "archive/hh520-research-20260601-20260630-g2d8c5a1.json",
+  "message": "Research READY. This polling payload is compact; use detail_manifest_path for paged details.",
   "_action": {
     "request_id": "hh520-research-20260601-20260630-g2d8c5a1",
     "repository": "ltaln/HH520-stable-V2",
