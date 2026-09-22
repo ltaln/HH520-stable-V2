@@ -121,7 +121,12 @@ def validate_prediction(item, prepared, evidence):
     result["gpt_review"] = item.get("reason", "")
     result["gpt_status"] = item.get("status", "GPT")
     result["gpt_rejected_changes"] = rejected
-    result["status"] = "PREDICTED_GPT_REVIEW_REJECTED" if rejected else "PREDICTED_GPT_REVIEWED"
+    if item.get("status") == "PASS":
+        result["status"] = "PREDICTED_GPT_REVIEW_SKIPPED"
+    elif rejected:
+        result["status"] = "PREDICTED_GPT_REVIEW_REJECTED"
+    else:
+        result["status"] = "PREDICTED_GPT_REVIEWED"
     return result
 
 

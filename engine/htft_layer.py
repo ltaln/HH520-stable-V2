@@ -1,11 +1,4 @@
-"""FT-conditioned HT/FT layer for HH520 Stable V3.4.
-
-The layer follows the verified structure:
-- FT home: H/H and D/H dominate;
-- FT away: A/A and D/A dominate;
-- FT draw: D/D is primary, with H/D or A/D secondary.
-External goal-timing data is no longer part of the formal production chain.
-"""
+"""FT-conditioned HT/FT layer for HH520 Stable V3.4."""
 from __future__ import annotations
 
 FT_MAP = {"home": "HOME", "draw": "DRAW", "away": "AWAY"}
@@ -25,7 +18,8 @@ def _row(ft_key, ht_code, cond, p_ft):
     ft = FT_MAP[ft_key]
     return {
         "selection": f"{ZH[ht_code]}/{ZH[ft]}",
-        "ht": ht_code, "ft": ft,
+        "ht": ht_code,
+        "ft": ft,
         "conditional_probability": cond,
         "probability": float(p_ft) * cond,
     }
@@ -66,7 +60,7 @@ def htft_layer(probability: dict, match: dict = None, decision: dict = None) -> 
     return {
         "valid": True,
         "model": "FT_CONDITIONAL_TEMPLATE_V1",
-        "top": primary_rows[:2],
+        "top": primary_rows[:3],
         "distribution": rows,
         "timing_used": False,
         "timing_source": None,

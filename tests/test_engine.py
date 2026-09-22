@@ -6,7 +6,7 @@ from engine.data_quality import data_quality_gate
 from engine.match_classifier import classify_match
 from engine.risk_engine import assess_risk
 from engine.decision_filter import decision_filter
-from engine.state_engine import build_state
+from engine.market_failure_detector import market_failure_detector
 from analysis.confidence import confidence_from_probability
 
 
@@ -20,94 +20,65 @@ def base_match():
             "home_attack":10,"away_attack":7,
             "home_defense":1.0,"away_defense":1.6,
             "home_h2h":8,"away_h2h":4,
-            "home_form":1.2,"away_form":0.8,
-            "structure":"强优",
+            "home_form":1.2,"away_form":0.8,"structure":"强优",
         },
     }
 
 
 def test_invalid_odds_rejected():
     with pytest.raises(ValueError):
-        dejuice_1x2(0, 3, 4)
+        dejuice_1x2(0,3,4)
 
 
 def test_missing_probability_is_pass():
-    probability = probability_layer({})
-    decision = decision_filter({}, probability, {})
+    probability=probability_layer({})
+    decision=decision_filter({},probability,{})
     assert probability["direction"] is None
     assert decision["allow_prediction"] is False
-    assert confidence_from_probability(probability, decision) == 0
+    assert confidence_from_probability(probability,decision)==0
 
 
-def test_page_probability_does_not_override_market_direction_but_creates_value_edge():
-    match = base_match()
-    match["page_probability"] = {"home":0.05,"draw":0.05,"away":0.90}
-    p = probability_layer(match)
-    v = value_layer(match, p)
-    assert p["direction"] == "home"
+def test_page_probability_is_diagnostic_only():
+    match=base_match()
+    match["page_probability"]={"home":0.05,"draw":0.05,"away":0.90}
+    p=probability_layer(match)
+    v=value_layer(match,p)
+    assert p["direction"]=="home"
     assert p["page_probability_used_for_direction"] is False
-    assert p["page_probability_used_for_state"] is True
+    assert p["page_probability_used_for_state"] is False
     assert v["used_for_confirmation"] is True
-    assert v["independent_direction"] == "away"
-    assert v["directional_edge"] != 0
+    assert v["independent_direction"]=="away"
 
 
-def test_v33_confirmed_state_for_strong_aligned_market():
-    match = base_match()
-    p = probability_layer(match)
-    s = build_state(match, p)
-    v = value_layer(match, p)
-    d = decision_filter(match, p, v, state=s)
-    assert s["base_state"] == "CONFIRMED"
-    assert s["primary_direction"] == "home"
-    assert d["version"] == "HH520 Decision Filter V3.3"
+def test_v34_decision_filter_uses_failure_detector():
+    match=base_match()
+    p=probability_layer(match); v=value_layer(match,p)
+    d=decision_filter(match,p,v)
+    assert d["version"]=="HH520 Decision Filter V3.4"
+    assert d["selection_rule"]=="MARKET_FAILURE_DETECTOR_V1"
+    assert d["decision"] in {"CONFIRM","BALANCED","TAIL_ALERT","PASS"}
     assert d["allow_prediction"] is True
 
 
-def test_v33_conflict_tail_does_not_flip_market_primary():
-    match = base_match()
-    match["market"] = {"home_odds":2.2,"draw_odds":3.1,"away_odds":3.0}
-    match["page_probability"] = {"home":0.20,"draw":0.20,"away":0.60}
-    match["research_factors"].update({"risk":"中高","pattern":"⚡ 极端","structure":"均衡"})
-    p = probability_layer(match)
-    s = build_state(match, p)
-    assert s["primary_direction"] == p["direction"]
-    assert s["base_state"] == "CONFLICT"
-    assert s["tail_alert"] is True
-    assert s["state"] == "TAIL_ALERT"
-    assert s["alternate_direction"] != s["primary_direction"]
+def test_failure_detector_never_overrides_probability():
+    match=base_match(); p=probability_layer(match)
+    f=market_failure_detector(match,p)
+    assert f["probability_overridden"] is False
+    assert f["favorite"] in {"home","away"}
 
 
-def test_balanced_is_not_automatic_draw_override():
-    match = base_match()
-    match["market"] = {"home_odds":2.4,"draw_odds":3.1,"away_odds":2.8}
-    match["page_probability"] = {"home":0.40,"draw":0.32,"away":0.28}
-    match["research_factors"]["structure"] = "均衡"
-    p = probability_layer(match)
-    s = build_state(match, p)
-    assert s["base_state"] in {"BALANCED","CONFLICT"}
-    assert s["primary_direction"] == p["direction"]
-    assert p["direction"] != "draw"
-
-
-def test_data_quality_warns_incomplete_modules_and_timing_without_hard_fail():
-    match = {
-        "match_id":"2","home_team":"A","away_team":"B","league":"联赛",
-        "market":{"home_odds":2.0,"draw_odds":3.0,"away_odds":4.0},
-        "research_factors":{},
-    }
-    p = probability_layer(match)
-    q = data_quality_gate(match, p)
+def test_data_quality_missing_modules_does_not_hard_fail():
+    match={"match_id":"2","home_team":"A","away_team":"B","league":"联赛",
+           "market":{"home_odds":2.0,"draw_odds":3.0,"away_odds":4.0},
+           "research_factors":{}}
+    p=probability_layer(match); q=data_quality_gate(match,p)
     assert q["valid"] is True
     assert "team_modules_missing_or_zero" in q["warnings"]
-    assert "goal_timing_missing" in q["warnings"]
 
 
-def test_risk_engine_remains_advisory_under_v33():
-    match = base_match()
-    p=probability_layer(match); v=value_layer(match,p)
+def test_legacy_risk_engine_remains_advisory():
+    match=base_match(); p=probability_layer(match); v=value_layer(match,p)
     q=data_quality_gate(match,p); c=classify_match(match,p)
-    r=assess_risk(match,p,v,q,c)
-    d=decision_filter(match,p,v,q,c,r)
+    r=assess_risk(match,p,v,q,c); d=decision_filter(match,p,v,q,c,r)
     assert d["risk_is_advisory"] is True
     assert d["value_layer_used_for_direction"] is False

@@ -27,14 +27,16 @@ def _outcome(h, a):
 def score_layer(match: dict, probability: dict, htft: dict = None) -> dict:
     if not probability.get("valid"):
         return {"valid": False, "model": "HTFT_SCORE_TEMPLATE_V1", "top_scores": [], "all_scores": []}
-    if not htft or not htft.get("valid"):
+
+    if not htft:
+        from .htft_layer import htft_layer
+        htft = htft_layer(probability, match)
+    if not htft.get("valid"):
         return {"valid": False, "model": "HTFT_SCORE_TEMPLATE_V1", "top_scores": [], "all_scores": []}
 
-    score_mass = {}
-    totals = {}
+    score_mass, totals = {}, {}
     for joint in htft.get("distribution", []):
-        template = TEMPLATES.get((joint["ht"], joint["ft"]), [])
-        for score, cond in template:
+        for score, cond in TEMPLATES.get((joint["ht"], joint["ft"]), []):
             mass = float(joint["probability"]) * float(cond)
             score_mass[score] = score_mass.get(score, 0.0) + mass
             h, a = _parse(score)
@@ -47,15 +49,14 @@ def score_layer(match: dict, probability: dict, htft: dict = None) -> dict:
         outcome = _outcome(h, a)
         rows.append({
             "score": score, "home": h, "away": a, "outcome": outcome,
-            "direction": OUTCOME_ZH[outcome],
-            "probability": mass / total_mass,
+            "direction": OUTCOME_ZH[outcome], "probability": mass / total_mass,
         })
     rows.sort(key=lambda x: x["probability"], reverse=True)
 
     total_rows = [{"goals": g, "probability": m / total_mass} for g, m in totals.items()]
     total_rows.sort(key=lambda x: x["probability"], reverse=True)
-    primary = probability.get("direction")
-    code = {"home": "HOME", "draw": "DRAW", "away": "AWAY"}.get(primary)
+
+    code = {"home": "HOME", "draw": "DRAW", "away": "AWAY"}.get(probability.get("direction"))
     primary_rows = [r for r in rows if r["outcome"] == code]
     primary_rows.sort(key=lambda x: x["probability"], reverse=True)
 
@@ -71,8 +72,7 @@ def score_layer(match: dict, probability: dict, htft: dict = None) -> dict:
         "top_totals": total_rows[:5],
         "total_goals_pick": None if goal_pick is None else f"{goal_pick}球",
         "total_goals_pick_probability": total_rows[0]["probability"] if total_rows else None,
-        "lambda_home": None,
-        "lambda_away": None,
+        "lambda_home": None, "lambda_away": None,
         "feature_snapshot": {"source": "htft_template"},
         "high_variance_challenger_promoted": False,
     }

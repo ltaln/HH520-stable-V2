@@ -11,14 +11,7 @@ _LAST_SCRAPE_AT = 0.0
 
 
 def _firecrawl_keys():
-    """Return configured Firecrawl keys in priority order.
-
-    The project supports automatic account fallback:
-    FIRECRAWL_API_KEY is used first; when Firecrawl quota exhaustion is detected,
-    FIRECRAWL_API_KEY_BACKUP is tried.
-
-    Keys are loaded only from environment/secrets. Never commit real keys.
-    """
+    """Return configured Firecrawl keys in priority order."""
     keys = [
         os.getenv("FIRECRAWL_API_KEY", "").strip(),
         os.getenv("FIRECRAWL_API_KEY_BACKUP", "").strip(),
@@ -75,9 +68,8 @@ def _post(endpoint: str, payload: dict, timeout: int = 60, *, paced: bool = Fals
             last_error = exc
             continue
 
-        # 402/payment, 403 quota, and explicit quota messages mean this key is exhausted.
-        # Try the next configured account without affecting the workflow.
-        body = response.text.lower()
+        raw_body = response.text if isinstance(response.text, str) else ""
+        body = raw_body.lower()
         quota_error = (
             response.status_code in (402, 403)
             or "quota" in body
