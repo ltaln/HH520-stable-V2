@@ -1,0 +1,120 @@
+{
+  "version": "HH520 Stable V3.4",
+  "artifact_version": "HH520-Stable-V3.4-Candidate-20260922",
+  "training_period": {
+    "start": "2026-09-10",
+    "end": "2026-09-20",
+    "rows": 165,
+    "note": "V3.4 reverse-engineering development window; not untouched final validation"
+  },
+  "wdl": {
+    "model": "DRAW_ANCHOR_PLUS_MARKET_SIDE_SHARE",
+    "draw_formula": "0.789*PD_market + 0.211*0.2574",
+    "home_share_formula": "(1/OH)/[(1/OH)+(1/OA)]",
+    "direction_override": false,
+    "page_probability_for_direction": false,
+    "page_probability_for_state": false
+  },
+  "confidence": {
+    "model": "MARKET_PMAX",
+    "s_threshold": 0.73,
+    "factor_vote_required": false,
+    "evidence": {
+      "development_2026_06_to_08": {
+        "correct": 46,
+        "n": 52,
+        "accuracy": 0.8846153846153846
+      },
+      "stress_2026_09_01_to_20": {
+        "correct": 19,
+        "n": 22,
+        "accuracy": 0.8636363636363636
+      }
+    }
+  },
+  "htft": {
+    "model": "FT_CONDITIONAL_TEMPLATE_V1",
+    "formal_source": "10027S_ONLY",
+    "external_goal_timing": false,
+    "notes": [
+      "FT home -> H/H,D/H",
+      "FT away -> A/A,D/A",
+      "FT draw -> D/D then side/draw"
+    ]
+  },
+  "score": {
+    "model": "HTFT_SCORE_TEMPLATE_V1",
+    "formal_source": "10027S_ONLY",
+    "pooled_poisson_retired": true,
+    "notes": [
+      "score candidates are conditional on HTFT structure",
+      "do not interpret score probability as FT confidence"
+    ]
+  },
+  "disabled": {
+    "draw_residual": true,
+    "factor_direction_override": true,
+    "league_hard_rules": true,
+    "water_weight": true,
+    "empirical_score_blend": true,
+    "automatic_market_override": true,
+    "automatic_draw_override": true,
+    "negative_binomial_score": true
+  },
+  "state_engine": {
+    "market_strong_threshold": 0.73,
+    "balanced_margin": 0.08,
+    "weak_market_pmax": 0.5,
+    "draw_near_top_margin": 0.08,
+    "page_confirm_threshold": 0.6,
+    "page_conflict_threshold": 0.4,
+    "strong_odds_threshold": 1.5,
+    "risky_odds_low": 1.8,
+    "risky_odds_high": 3,
+    "confirmation_evidence_required": 2,
+    "conflict_evidence_required": 2,
+    "formal_decision": false,
+    "note": "legacy diagnostic compatibility only; formal decision uses Market Failure Detector V1"
+  },
+  "value_layer": {
+    "model": "PAGE_VALUE_DIAGNOSTIC",
+    "page_probability_used_for_confirmation": false,
+    "page_probability_direct_override": false,
+    "direction_override": false
+  },
+  "timing": {
+    "enabled": false,
+    "formal_chain": false,
+    "note": "legacy collector may remain for research compatibility only"
+  },
+  "calibration": {
+    "diagnostic_only": true,
+    "page_low_threshold": 0.4,
+    "page_high_threshold": 0.6,
+    "empirical_reliability": {
+      "page_lt_40": 0.32919254658385094,
+      "page_ge_60": 0.7718120805369127,
+      "balanced": 0.45481481481481484
+    },
+    "development_period": "2026-05-01..2026-09-20"
+  },
+  "market_failure_detector": {
+    "version": "V1",
+    "risk_rules": {
+      "defense_diff<=-0.5": 3,
+      "attack_diff<=-2_and_h2h_diff>=3": 2,
+      "pfav<60%_and_form_diff>=0.5": 2,
+      "pfav<55%_and_h2h_diff>=3": 2,
+      "possession_diff<=-8": 1,
+      "pfav>=65%": -2,
+      "60%<=pfav<65%": -1
+    },
+    "tiers": {
+      "1": "BALANCED",
+      "<=0": "CONFIRM",
+      "2-4": "TAIL_ALERT",
+      ">=5": "PASS"
+    },
+    "probability_override": false
+  }
+}

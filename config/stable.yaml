@@ -1,6 +1,6 @@
 project:
-  name: HH520 Stable V3.3
-  version: "3.3"
+  name: HH520 Stable V3.4
+  version: "3.4"
 
 source:
   page: "10027s"
@@ -8,6 +8,7 @@ source:
   date_params: ["riqi_start", "riqi_end"]
   threshold: 1
   bankroll: 5000
+  formal_source_only: true
 
 firecrawl:
   endpoint: "https://api.firecrawl.dev/v2/scrape"
@@ -19,42 +20,42 @@ firecrawl:
   one_request_per_date: true
 
 goal_timing:
-  enabled_in_actions: true
-  best_effort: true
-  candidate_only: true
-  cache: true
-  max_matches: 30
-  bins: ["0-15", "16-30", "31-45", "46-60", "61-75", "76-90"]
-  source_priority: ["soccerstats.com", "footystats.org", "inplaywise.com", "sofascore.com", "365scores.com"]
-  allow_half_aggregate_fallback: true
+  enabled_in_actions: false
+  formal_chain: false
+  research_compatibility_only: true
   failure_blocks_prediction: false
 
 prediction:
-  model_artifact: "model_artifacts/HH520_Stable_V3_3.json"
-  wdl_model: "MARKET_PROPORTIONAL_DEVIG"
+  model_artifact: "model_artifacts/HH520_Stable_V3_4.json"
+  wdl_model: "DRAW_ANCHOR_PLUS_MARKET_SIDE_SHARE"
+  market_devig: true
+  draw_anchor:
+    market_weight: 0.789
+    center_weight: 0.211
+    center: 0.2574
+  side_layer: "MARKET_HOME_SHARE"
   page_probability_for_direction: false
-  page_probability_for_state: true
-  state_engine: "V3_3_STATE_ENGINE"
-  market_conflict_layer: true
-  tail_alert_layer: true
+  page_probability_for_state: false
+  market_failure_detector: "V1"
+  risk_tiers: ["CONFIRM", "BALANCED", "TAIL_ALERT", "PASS"]
   automatic_market_override: false
   automatic_draw_override: false
-  htft_model: "CONDITIONAL_HT_GIVEN_FT+OPTIONAL_TIMING_REWEIGHT"
+  htft_model: "FT_CONDITIONAL_TEMPLATE_V1"
   htft_preserve_ft_marginal: true
-  score_model: "POOLED_POISSON"
-  high_variance_score_challenger_promoted: false
+  score_model: "HTFT_SCORE_TEMPLATE_V1"
+  pooled_poisson_formal: false
   use_probability_layer: true
   use_value_layer: true
   use_decision_filter: true
   use_consistency_layer: true
   use_calibration_diagnostics: true
-  decision_filter_version: "3.3"
-  decision_filter_mode: "state_engine_v3_3"
+  decision_filter_version: "3.4"
+  decision_filter_mode: "market_failure_detector_v1"
   allow_pass: true
   gpt_role: "EXPLANATION_ONLY"
 
 output:
-  version: "HH520-OUTPUT-V3.3"
+  version: "HH520-OUTPUT-V3.4"
   columns:
     - 球队对阵
     - 胜平负场景
@@ -62,13 +63,19 @@ output:
     - 比分×2及概率
     - 半全场×2及概率
     - 总进球及概率
+  semantics:
+    market_probability: "官方赔率去水概率"
+    model_probability: "Draw Anchor + Side Layer 后概率"
+    risk_tier: "市场可靠度，不是概率"
+    htft_probability: "条件联合概率"
+    score_probability: "HTFT 条件模板概率"
   hidden_from_formal_table:
-    - 置信等级
-    - 置信度
+    - 通用模糊自信度
     - 最终筛选
 
 research:
   enabled: true
   auto_tune_stable: false
-  frozen_through: "2026-09-20"
-  post_freeze_shadow_start: "2026-09-21"
+  v34_development_window: "2026-09-10..2026-09-20"
+  forward_validation_required: true
+  candidate_changes_never_auto_promote: true

@@ -77,7 +77,7 @@ def test_complete_inference_without_page_answers_and_cache(api):
     assert "SECRET_RAW" not in body["input"]
     assert "result" not in payload["matches"][0]
     assert payload["matches"][0]["gpt_role"]=="EXPLANATION_ONLY"
-    assert payload["config"]["project"]["version"]=="3.3"
+    assert payload["config"]["project"]["version"]=="3.4"
     assert body["store"] is False
 
 
