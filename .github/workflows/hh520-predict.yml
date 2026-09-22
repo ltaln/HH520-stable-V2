@@ -1,5 +1,5 @@
-name: HH520 GPT Prediction
-run-name: "stable - ${{ inputs.request_id }}"
+name: HH520 Stable V3.2 Prediction
+run-name: "stable-v3.2 - ${{ inputs.request_id }}"
 on:
   workflow_dispatch:
     inputs:
