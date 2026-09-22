@@ -39,6 +39,7 @@ def main(argv=None):
             report = {
                 key: data[key]
                 for key in ("date", "url", "captured_at", "predictions", "output_contract", "display_rows")
+                if key in data
             }
             if "gpt_handoff" in data:
                 report["gpt_handoff"] = data["gpt_handoff"]
