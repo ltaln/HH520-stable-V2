@@ -1,4 +1,4 @@
-"""Single batched, cached Responses request; GPT is explanation-only in V3.2."""
+"""Single batched, cached Responses request; GPT is explanation-only in V3.3."""
 import hashlib
 import json
 import os
@@ -8,11 +8,13 @@ import requests
 import yaml
 from collector import cache_manager
 
-PROMPT_PATH = Path(__file__).resolve().parents[1] / "prompts" / "HH520_Stable_V3_2_Prediction_Prompt.md"
-FIELDS = ("match_id", "score1", "score2", "htft1", "htft2", "total_goals", "direction", "reason")
+PROMPT_PATH = Path(__file__).resolve().parents[1] / "prompts" / "HH520_Stable_V3_3_Prediction_Prompt.md"
+FIELDS = (
+    "match_id", "score1", "score2", "htft1", "htft2", "total_goals",
+    "direction", "alternate_direction", "state", "reason",
+)
 PROPERTIES = {name: {"type": "string"} for name in FIELDS}
-PROPERTIES.update(confidence={"type": "integer", "minimum": 0, "maximum": 99},
-                  status={"type": "string", "enum": ["GPT", "PASS"]})
+PROPERTIES.update(status={"type": "string", "enum": ["GPT", "PASS"]})
 _SCHEMA = {"type": "object", "additionalProperties": False, "required": ["predictions"],
            "properties": {"predictions": {"type": "array", "items": {
                "type": "object", "additionalProperties": False, "properties": PROPERTIES,
@@ -32,8 +34,6 @@ def validate_rows(parsed, matches):
             raise ValueError("GPT字段类型错误")
         if row["match_id"] != match["match_id"]:
             raise ValueError("GPT比赛顺序错误")
-        if type(row["confidence"]) is not int or not 0 <= row["confidence"] <= 99:
-            raise ValueError("GPT置信度无效")
         if row["status"] not in ("GPT", "PASS"):
             raise ValueError("GPT状态错误")
     return rows
@@ -45,18 +45,15 @@ def request_predictions(matches):
         raise RuntimeError("--gpt 要求设置账户可用的 OPENAI_MODEL")
 
     prompt = PROMPT_PATH.read_text(encoding="utf-8") + """
-HH520 Stable V3.2 已经在本地冻结完成胜平负、比分、半全场、总进球和置信度预测。
-你的角色只有解释和审核，绝对不得重新预测、改方向、改比分、改半全场、改总进球或提高置信度。
-对每场比赛：
-1. 必须逐字复制 locked_prediction 中的 direction/score1/score2/htft1/htft2/total_goals。
-2. confidence 必须复制 locked_prediction.confidence。
-3. reason 仅解释市场概率、研究置信等级以及模型不确定性。
-4. 不得使用 建议下注、是否下注、page_prediction，也不得引入未采集的伤停、阵容、天气等事实。
-5. status 使用 GPT；只有输入本身明显损坏时才可 PASS，但仍不得修改任何冻结字段。
+HH520 Stable V3.3 已经在本地完成主场景、尾部场景、比分、半全场和总进球预测。
+你的角色只有解释和审核，绝对不得重新预测或修改 locked_prediction。
+必须逐字复制 direction/alternate_direction/state/score1/score2/htft1/htft2/total_goals。
+reason 仅解释 State、Conflict、Tail、Timing 与 Calibration。
+不得使用 建议下注、是否下注、page_prediction，也不得引入未采集的外部事实。
 保持 match_id 和输入顺序。"""
 
     config = yaml.safe_load((PROMPT_PATH.parents[1] / "config" / "stable.yaml").read_text(encoding="utf-8"))
-    body = {"version": "3.2", "model": model, "schema": _SCHEMA, "prompt": prompt, "config": config, "matches": matches}
+    body = {"version": "3.3", "model": model, "schema": _SCHEMA, "prompt": prompt, "config": config, "matches": matches}
     digest = hashlib.sha256(json.dumps(body, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
     cache_dir = cache_manager.CACHE_DIR
     cache_dir.mkdir(parents=True, exist_ok=True)
