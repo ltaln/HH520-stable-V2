@@ -13,7 +13,7 @@ from research.candidate_rules import generate_candidate_rules
 from research.chronology import classify_window, canonical_timeline
 from research.calibration import calibrate
 
-MAX_DAYS = 31
+MAX_DAYS = 62
 
 
 def date_range(start, end):
