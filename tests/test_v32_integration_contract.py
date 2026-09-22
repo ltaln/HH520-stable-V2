@@ -82,3 +82,20 @@ def test_v32_output_contract_forbids_legacy_five_column_table():
     schema = spec["paths"]["/repos/ltaln/HH520-stable-V2/contents/results/{request_id}.json"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]
     assert "output_contract" in schema["properties"]
     assert "display_rows" in schema["properties"]
+
+
+def test_openapi_object_schemas_are_explicit_for_gpt_editor():
+    spec = json.loads((ROOT / "integration" / "chatgpt-action.openapi.json").read_text(encoding="utf-8"))
+    assert isinstance(spec.get("components", {}).get("schemas"), dict)
+
+    def walk(node):
+        if isinstance(node, dict):
+            if node.get("type") == "object":
+                assert isinstance(node.get("properties"), dict)
+            for value in node.values():
+                walk(value)
+        elif isinstance(node, list):
+            for value in node:
+                walk(value)
+
+    walk(spec)
