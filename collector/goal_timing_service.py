@@ -167,16 +167,63 @@ def collect_goal_timing(date: str, match: dict) -> dict:
     return {"available": False, "reason": "timing_extract_failed"}
 
 
+def _needs_timing(match: dict) -> bool:
+    """Spend timing lookups where HTFT uncertainty is most likely to matter."""
+    if os.getenv("HH520_GOAL_TIMING_ONLY_UNCERTAIN", "1").strip() != "1":
+        return True
+
+    market = match.get("market") or {}
+    try:
+        q = [1 / float(market[k]) for k in ("home_odds", "draw_odds", "away_odds")]
+        total = sum(q)
+        p = [x / total for x in q]
+        ordered = sorted(p, reverse=True)
+        pmax = ordered[0]
+        margin = ordered[0] - ordered[1]
+    except Exception:
+        return True
+
+    page = match.get("page_probability") or {}
+    try:
+        page_vals = [float(page[k]) for k in ("home", "draw", "away")]
+        page_pmax = max(page_vals)
+    except Exception:
+        page_pmax = None
+
+    factors = match.get("research_factors") or {}
+    structure = str(factors.get("structure") or "").strip()
+    risk = str(factors.get("risk") or "").strip()
+    pattern = str(factors.get("pattern") or "").strip()
+
+    return (
+        pmax < 0.73
+        or margin < 0.12
+        or (page_pmax is not None and page_pmax < 0.60)
+        or structure == "均衡"
+        or risk in {"中高", "高", "很高"}
+        or "极端" in pattern
+    )
+
+
 def enrich_matches_with_goal_timing(date: str, matches: list[dict]) -> dict:
     if os.getenv("HH520_GOAL_TIMING_ENABLED", "0").strip() != "1":
-        return {"enabled": False, "attempted": 0, "available": 0}
+        return {"enabled": False, "attempted": 0, "available": 0, "skipped_confirmed": 0}
 
     try:
         max_matches = int(os.getenv("HH520_GOAL_TIMING_MAX_MATCHES", "30"))
     except ValueError:
         max_matches = 30
+
+    candidates = [m for m in matches if _needs_timing(m)]
+    selected = candidates[:max(0, max_matches)]
+    selected_ids = {id(m) for m in selected}
     attempted = available = 0
-    for match in matches[:max(0, max_matches)]:
+
+    for match in matches:
+        if id(match) not in selected_ids:
+            reason = "confirmed_skip" if match not in candidates else "daily_lookup_cap"
+            match["goal_timing"] = {"available": False, "reason": reason}
+            continue
         attempted += 1
         try:
             timing = collect_goal_timing(date, match)
@@ -184,6 +231,11 @@ def enrich_matches_with_goal_timing(date: str, matches: list[dict]) -> dict:
             timing = {"available": False, "reason": f"collector_error:{type(exc).__name__}"}
         match["goal_timing"] = timing
         available += int(bool(timing.get("available")))
-    for match in matches[max(0, max_matches):]:
-        match["goal_timing"] = {"available": False, "reason": "daily_lookup_cap"}
-    return {"enabled": True, "attempted": attempted, "available": available}
+
+    return {
+        "enabled": True,
+        "attempted": attempted,
+        "available": available,
+        "skipped_confirmed": sum(1 for m in matches if (m.get("goal_timing") or {}).get("reason") == "confirmed_skip"),
+        "lookup_capped": max(0, len(candidates) - len(selected)),
+    }
