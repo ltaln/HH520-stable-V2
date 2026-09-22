@@ -36,7 +36,11 @@ def main(argv=None):
             print("\n" + format_prediction(prediction))
         if args.output:
             args.output.parent.mkdir(parents=True, exist_ok=True)
-            report = {key: data[key] for key in ("date", "url", "captured_at", "predictions")}
+            report = {
+                key: data[key]
+                for key in ("date", "url", "captured_at", "predictions", "output_contract", "display_rows")
+                if key in data
+            }
             if "gpt_handoff" in data:
                 report["gpt_handoff"] = data["gpt_handoff"]
             args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False), encoding="utf-8")
