@@ -10,11 +10,15 @@ import re
 from typing import Dict, List
 
 
-BASE_HEADER = [
+BASE_PREFIX = [
     "日期", "场次", "联赛", "时间", "比分", "胜", "平", "负",
-    "主队", "主控球率", "客控球率", "客队", "半场比分", "全场比分",
-    "差值", "区间", "平滑p", "EV", "凯利比例", "建议下注", "是否下注",
+    "主队", "主控球率", "客控球率", "客队",
 ]
+
+# 10027s has at least two historical base-table layouts:
+# - older layout: combined 比分 only, followed directly by 差值/区间/...
+# - newer layout: explicit 半场比分 + 全场比分 before 差值/区间/...
+# Match the stable prefix and resolve all later columns by header name.
 
 FUSION_PREFIX = ["日期", "排名", "场次", "对阵", "比赛结果"]
 
@@ -152,13 +156,19 @@ def parse_10027s_markdown(markdown: str) -> List[Dict]:
     base_header_index = None
     for i, line in enumerate(lines):
         cells = _cells(line)
-        if _header_starts(cells, BASE_HEADER):
+        if _header_starts(cells, BASE_PREFIX):
             base_header_index = i
             break
     if base_header_index is None:
         raise ValueError("10027s 缺少结算基础表")
 
     base_factor_columns = _detect_grouped_factor_columns(lines, base_header_index)
+    base_header = [_clean_header(x) for x in _cells(lines[base_header_index])]
+    base_index = {name: pos for pos, name in enumerate(base_header)}
+
+    def base_value(cells, name, default=""):
+        pos = base_index.get(name)
+        return _strip_md(cells[pos]) if pos is not None and pos < len(cells) else default
 
     records = {}
     order = []
@@ -185,16 +195,17 @@ def parse_10027s_markdown(markdown: str) -> List[Dict]:
             i += 1
             continue
 
-        league = _strip_md(cells[2]) if len(cells) > 2 else ""
-        kickoff = _strip_md(cells[3]) if len(cells) > 3 else ""
-        combined_score = _strip_md(cells[4]) if len(cells) > 4 else ""
-        home = _strip_md(cells[8]) if len(cells) > 8 else ""
-        away = _strip_md(cells[11]) if len(cells) > 11 else ""
-        half_score = _score(cells[12]) if len(cells) > 12 else None
-        full_score = _score(cells[13]) if len(cells) > 13 else None
+        league = base_value(cells, "联赛")
+        kickoff = base_value(cells, "时间")
+        combined_score = base_value(cells, "比分")
+        home = base_value(cells, "主队")
+        away = base_value(cells, "客队")
+        half_score = _score(base_value(cells, "半场比分"))
+        full_score = _score(base_value(cells, "全场比分"))
 
-        # Defensive fallback: combined "HT / FT" column.
-        if (half_score is None or full_score is None) and "/" in combined_score:
+        # Older 10027s layouts expose only the combined "HT / FT" score.
+        # Newer layouts may also expose explicit HT/FT columns.
+        if "/" in combined_score:
             parts = combined_score.split("/", 1)
             half_score = half_score or _score(parts[0])
             full_score = full_score or _score(parts[1])
@@ -209,21 +220,21 @@ def parse_10027s_markdown(markdown: str) -> List[Dict]:
             "result": full_score,
             "half_score": half_score,
             "market": {
-                "home_odds": _num(cells[5]) if len(cells) > 5 else None,
-                "draw_odds": _num(cells[6]) if len(cells) > 6 else None,
-                "away_odds": _num(cells[7]) if len(cells) > 7 else None,
+                "home_odds": _num(base_value(cells, "胜")),
+                "draw_odds": _num(base_value(cells, "平")),
+                "away_odds": _num(base_value(cells, "负")),
             },
             "possession": {
-                "home": _percent(cells[9]) if len(cells) > 9 else None,
-                "away": _percent(cells[10]) if len(cells) > 10 else None,
-                "diff": _num(cells[14]) if len(cells) > 14 else None,
-                "interval": _strip_md(cells[15]) if len(cells) > 15 else "",
-                "smooth_p": _num(cells[16]) if len(cells) > 16 else None,
+                "home": _percent(base_value(cells, "主控球率")),
+                "away": _percent(base_value(cells, "客控球率")),
+                "diff": _num(base_value(cells, "差值")),
+                "interval": base_value(cells, "区间"),
+                "smooth_p": _num(base_value(cells, "平滑p")),
             },
             "page_probability": None,
             "value": {
-                "ev": _num(cells[17]) if len(cells) > 17 else None,
-                "kelly": _num(cells[18]) if len(cells) > 18 else None,
+                "ev": _num(base_value(cells, "EV")),
+                "kelly": _num(base_value(cells, "凯利比例")),
             },
             "team_dna": {},
             "research_factors": {
