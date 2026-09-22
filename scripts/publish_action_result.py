@@ -5,7 +5,9 @@ Research results use a compact polling envelope:
 - archive/<request_id>.json: complete Research report
 - pages/<request_id>/manifest.json + error-attribution pages: bounded detail payloads
 
-Prediction results retain the original single-file behavior.
+Prediction results use the same compact polling pattern:
+- results/<request_id>.json: small READY envelope for ChatGPT Actions
+- archive/<request_id>.json: complete prediction report
 """
 import json
 import os
@@ -101,6 +103,49 @@ def _research_summary(data, request_id):
         "detail_manifest_path": f"pages/{request_id}/manifest.json",
         "archive_path": f"archive/{request_id}.json",
         "message": "Research READY. This polling payload is compact; use detail_manifest_path for paged details.",
+    }
+
+
+PREDICTION_FIELDS = (
+    "match_id", "home_team", "away_team", "status", "stable_version",
+    "direction", "alternate_direction", "state", "base_state",
+    "market_probability", "page_probability", "tail_alert", "draw_candidate",
+    "score1", "score2", "score1_probability", "score2_probability",
+    "htft1", "htft2", "htft1_probability", "htft2_probability",
+    "total_goals", "total_goals_probability",
+    "timing_used", "timing_source", "quality_warnings", "reason",
+)
+
+
+def _prediction_summary(data, request_id):
+    predictions = []
+    for row in data.get("predictions") or []:
+        compact = {key: row.get(key) for key in PREDICTION_FIELDS if key in row}
+        predictions.append(compact)
+
+    contract = data.get("output_contract") or {}
+    display_rows = data.get("display_rows") or contract.get("display_rows") or []
+    compact_contract = {
+        "version": contract.get("version"),
+        "stable_version": contract.get("stable_version"),
+        "strict": bool(contract.get("strict", True)),
+        "required_columns": contract.get("required_columns") or [],
+        "display_rows": display_rows,
+        "render_rule": contract.get("render_rule"),
+    }
+    return {
+        "status": "READY",
+        "kind": "prediction",
+        "request_id": request_id,
+        "date": data.get("date"),
+        "url": data.get("url"),
+        "captured_at": data.get("captured_at"),
+        "goal_timing_summary": data.get("goal_timing_summary"),
+        "predictions": predictions,
+        "output_contract": compact_contract,
+        "display_rows": display_rows,
+        "archive_path": f"archive/{request_id}.json",
+        "message": "Prediction READY. Polling payload is compact; render the strict 6-column output_contract.display_rows. Full audit data is in archive_path.",
     }
 
 
@@ -218,7 +263,11 @@ def publish(result_file, branch, request_id):
                 if old_run_id not in ("", current_run_id) and not retrying_failed:
                     raise ValueError("request_id already belongs to another workflow run")
 
-            if branch == "research-results" and data.get("status") == "READY":
+            if branch == "action-results" and data.get("status") == "READY":
+                _write_json(target / "archive" / f"{request_id}.json", data)
+                poll_data = _prediction_summary(data, request_id)
+                poll_data["_action"] = data["_action"]
+            elif branch == "research-results" and data.get("status") == "READY":
                 if data.get("kind") == "shadow_test":
                     _write_json(target / "archive" / f"{request_id}.json", data)
                     poll_data = _shadow_summary(data, request_id)
