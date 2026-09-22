@@ -12,7 +12,11 @@ permissions:
 jobs:
   export:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
+    env:
+      FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+      HH520_ALLOW_INCOMPLETE_REQUEST_RESUME: "1"
+      FIRECRAWL_MIN_INTERVAL_SECONDS: "2.5"
     steps:
       - uses: actions/checkout@v4
         with:
@@ -29,7 +33,20 @@ jobs:
           key: hh520-v3-export-${{ github.run_id }}
           restore-keys: |
             hh520-collection-v1-
-      - name: Verify full cache window without network
+      - name: Fill the one known cache gap
+        run: |
+          python - <<'PY'
+          from collector.cache_manager import load_cache
+          from collector.service import collect_date
+          day="2026-07-31"
+          if load_cache(day, source="10027s") is None:
+              print("collecting", day)
+              payload=collect_date(day)
+              print("match_count", len(payload.get("matches", [])))
+          else:
+              print("already cached", day)
+          PY
+      - name: Verify full cache window
         run: |
           python - <<'PY'
           import datetime as dt
@@ -56,6 +73,12 @@ jobs:
             --end 2026-09-20 \
             --csv _v3_export/10027s_20260501_20260920_full.csv \
             --audit _v3_export/10027s_20260501_20260920_audit.json
+      - name: Preserve completed cumulative cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: cache
+          key: hh520-collection-v1-${{ github.run_id }}-${{ github.run_attempt }}
       - name: Upload V3 master dataset
         uses: actions/upload-artifact@v4
         with:
