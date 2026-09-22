@@ -134,16 +134,24 @@ def validate_prediction(item, prepared, evidence):
     if item["match_id"] != prepared["match_id"]:
         raise ValueError("GPT 场次ID或顺序不匹配")
 
-    # GPT is review/explanation only. Every model output is direction-locked.
+    # GPT is explanation-only. Any attempted change is ignored instead of
+    # invalidating the deterministic Stable prediction.
     locked = ("direction", "score1", "score2", "htft1", "htft2", "total_goals")
-    for key in locked:
-        if item.get(key) != prepared.get(key):
-            raise ValueError(f"GPT试图修改冻结预测字段:{key}")
+    rejected = [
+        key for key in locked
+        if item.get(key) != prepared.get(key)
+    ]
 
     result = dict(prepared)
     result["gpt_review"] = item.get("reason", "")
     result["gpt_status"] = item.get("status", "GPT")
-    result["status"] = "PREDICTED_GPT_REVIEWED"
+    result["gpt_rejected_changes"] = rejected
+    if item.get("status") == "PASS":
+        result["status"] = "PREDICTED_GPT_REVIEW_SKIPPED"
+    elif rejected:
+        result["status"] = "PREDICTED_GPT_REVIEW_REJECTED"
+    else:
+        result["status"] = "PREDICTED_GPT_REVIEWED"
     return result
 
 
