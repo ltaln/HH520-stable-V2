@@ -69,6 +69,13 @@ Research 流程：
 6. Research 仅写 research-results，不得自动修改 Stable。
 
 ## GitHub Contents 响应
+getHH520PredictionResult 只传三个参数：
+- request_id：当前任务ID
+- ref：固定 action-results
+- poll：每次递增的新值
+
+不要为该 GET 操作自行构造 Accept 请求头；Schema 已移除该参数。
+
 若返回 raw JSON，直接解析。
 若返回 content + encoding=base64，先解码再解析。
 不得把 GitHub Contents 包装对象当成业务结果。

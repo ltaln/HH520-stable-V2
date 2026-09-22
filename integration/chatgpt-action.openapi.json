@@ -63,6 +63,9 @@
           }
         },
         "responses": {
+          "200": {
+            "description": "Workflow dispatch accepted by GitHub Actions. GitHub may return workflow run metadata."
+          },
           "204": {
             "description": "Workflow accepted by GitHub Actions."
           }
@@ -93,25 +96,14 @@
                 "action-results"
               ],
               "default": "action-results"
-            }
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "application/vnd.github.raw+json"
-              ],
-              "default": "application/vnd.github.raw+json"
-            }
+            },
+            "description": "Always use action-results."
           },
           {
             "name": "poll",
             "in": "query",
             "required": true,
-            "description": "Cache-busting poll token. Change on every GET for the same request_id, e.g. 1,2,3... Never reuse the same poll value.",
+            "description": "Cache-busting token. Use a new value on every retry, for example 1, 2, 3.",
             "schema": {
               "type": "string",
               "pattern": "^[A-Za-z0-9_-]{1,40}$"
@@ -219,7 +211,8 @@
           "404": {
             "description": "Result is not ready yet. Retry this GET; do not dispatch a duplicate workflow."
           }
-        }
+        },
+        "description": "Read the Stable V3.2 result from the action-results branch. Supply request_id, ref=action-results, and a fresh poll token."
       }
     },
     "/repos/ltaln/HH520-stable-V2/actions/workflows/hh520-research.yml/dispatches": {
@@ -274,6 +267,9 @@
           }
         },
         "responses": {
+          "200": {
+            "description": "Workflow dispatch accepted by GitHub Actions. GitHub may return workflow run metadata."
+          },
           "204": {
             "description": "Workflow accepted by GitHub Actions."
           }
@@ -315,18 +311,6 @@
                 "research-results"
               ],
               "default": "research-results"
-            }
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "application/vnd.github.raw+json"
-              ],
-              "default": "application/vnd.github.raw+json"
             }
           },
           {
@@ -413,18 +397,6 @@
             }
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "application/vnd.github.raw+json"
-              ],
-              "default": "application/vnd.github.raw+json"
-            }
-          },
-          {
             "name": "poll",
             "in": "query",
             "required": true,
@@ -488,18 +460,6 @@
                 "research-results"
               ],
               "default": "research-results"
-            }
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "application/vnd.github.raw+json"
-              ],
-              "default": "application/vnd.github.raw+json"
             }
           },
           {
@@ -590,6 +550,9 @@
           }
         },
         "responses": {
+          "200": {
+            "description": "Workflow dispatch accepted by GitHub Actions. GitHub may return workflow run metadata."
+          },
           "204": {
             "description": "Shadow Test workflow accepted by GitHub Actions."
           }
@@ -654,6 +617,9 @@
           }
         },
         "responses": {
+          "200": {
+            "description": "Workflow dispatch accepted by GitHub Actions. GitHub may return workflow run metadata."
+          },
           "204": {
             "description": "Forward Test workflow accepted by GitHub Actions."
           }
