@@ -1,4 +1,4 @@
-"""Frozen pooled-Poisson score layer for HH520 Stable V3.2."""
+"""Frozen pooled-Poisson score baseline for HH520 Stable V3.3."""
 from __future__ import annotations
 import math
 from .model_artifact import load_model_artifact
@@ -59,7 +59,7 @@ def _poisson_pmf(k: int, lam: float) -> float:
 
 def score_layer(match: dict, probability: dict) -> dict:
     if not probability.get("valid"):
-        return {"valid": False, "model": "POOLED_POISSON", "top_scores": []}
+        return {"valid": False, "model": "POOLED_POISSON", "top_scores": [], "all_scores": []}
 
     artifact = load_model_artifact()
     cfg = artifact["score"]
@@ -101,7 +101,7 @@ def score_layer(match: dict, probability: dict) -> dict:
             })
 
     if total_mass <= 0:
-        return {"valid": False, "model": cfg["model"], "top_scores": []}
+        return {"valid": False, "model": cfg["model"], "top_scores": [], "all_scores": []}
 
     for row in rows:
         row["probability"] /= total_mass
@@ -115,6 +115,8 @@ def score_layer(match: dict, probability: dict) -> dict:
         reverse=True,
     )
     goal_pick = total_ranked[0]["goals"] if total_ranked else None
+    high_scores = [r for r in rows if (r["home"] + r["away"] >= 5 or max(r["home"], r["away"]) >= 3)]
+    high_score_mass = sum(r["probability"] for r in high_scores)
 
     return {
         "valid": True,
@@ -122,7 +124,12 @@ def score_layer(match: dict, probability: dict) -> dict:
         "lambda_home": lambda_home,
         "lambda_away": lambda_away,
         "top_scores": rows[:5],
+        "all_scores": rows,
+        "tail_scores": high_scores[:5],
+        "high_score_mass": high_score_mass,
         "top_totals": total_ranked[:5],
         "total_goals_pick": None if goal_pick is None else f"{goal_pick}球",
+        "total_goals_pick_probability": total_ranked[0]["probability"] if total_ranked else None,
         "feature_snapshot": raw,
+        "high_variance_challenger_promoted": False,
     }

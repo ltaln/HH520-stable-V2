@@ -13,7 +13,7 @@ SOURCE_NAME = "HH520_10027s"
 def _source_config(date, source=SOURCE):
     normalized = str(source or SOURCE).lower()
     if normalized != SOURCE:
-        raise ValueError("Stable V3 只允许 HH520 10027s 数据源")
+        raise ValueError("Stable V3.3 只允许 HH520 10027s 作为正式基础数据源")
     return {
         "source": SOURCE,
         "source_name": SOURCE_NAME,
@@ -62,7 +62,7 @@ def import_response(date, raw, source=SOURCE):
 def collect_date(date: str, force_refresh: bool = False, source: str = SOURCE):
     cfg = _source_config(date, source)
     if force_refresh:
-        raise ValueError("禁止 force_refresh；同日期只允许一次10027s抓取")
+        raise ValueError("禁止无条件 force_refresh；实时新鲜度由快照时间和显式规则控制")
 
     payload = load_cache(date, source=SOURCE)
     if payload is None:
@@ -80,5 +80,17 @@ def collect_date(date: str, force_refresh: bool = False, source: str = SOURCE):
         save_cache(date, payload, source=SOURCE)
 
     markdown = validate_raw(date, payload.get("raw"), source=SOURCE)
-    payload["matches"] = parse_10027s_markdown(markdown)
-    return payload
+    matches = parse_10027s_markdown(markdown)
+    for match in matches:
+        match["_captured_at"] = payload.get("captured_at")
+        match["_source_url"] = payload.get("url")
+
+    timing_summary = {"enabled": False, "attempted": 0, "available": 0}
+    if os.getenv("HH520_GOAL_TIMING_ENABLED", "0").strip() == "1":
+        from .goal_timing_service import enrich_matches_with_goal_timing
+        timing_summary = enrich_matches_with_goal_timing(date, matches)
+
+    result = dict(payload)
+    result["matches"] = matches
+    result["goal_timing_summary"] = timing_summary
+    return result

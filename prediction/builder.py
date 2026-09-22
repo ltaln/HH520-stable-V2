@@ -1,22 +1,22 @@
-"""HH520 Stable V3.2 deterministic prediction assembly.
+"""HH520 Stable V3.3 deterministic prediction assembly.
 
-WDL, HTFT and score are produced locally from the frozen V3.2 artifact.
-Optional GPT is explanation/review only and cannot alter model outputs.
+WDL is market-anchored, then State/Conflict/Tail logic determines how the
+primary and alternate scenarios are presented. GPT remains explanation-only.
 """
 import re
 from analysis.match_analysis import analyze_match
 
 MISSING = "未提供"
 DIRECTIONS = {"home": "主胜", "draw": "平", "away": "客胜"}
+STATE_ZH = {
+    "CONFIRMED": "确认",
+    "STANDARD": "标准",
+    "BALANCED": "均衡",
+    "CONFLICT": "冲突",
+    "TAIL_ALERT": "尾部预警",
+    "INVALID": "无效",
+}
 SCORE = re.compile(r"(\d{1,2})[:：-](\d{1,2})")
-
-
-def _score_direction(text):
-    match = SCORE.fullmatch(str(text).strip())
-    if not match:
-        return None
-    home, away = map(int, match.groups())
-    return "主胜" if home > away else "客胜" if home < away else "平"
 
 
 def prepare_match(match):
@@ -30,11 +30,12 @@ def prepare_match(match):
         "htft2": MISSING,
         "total_goals": MISSING,
         "confidence": 0,
-        "confidence_tier": "PASS",
         "status": "PASS",
         "reason": "无有效市场概率",
         "direction": None,
-        "stable_version": "HH520 Stable V3.2",
+        "alternate_direction": None,
+        "state": "INVALID",
+        "stable_version": "HH520 Stable V3.3",
     }
     if SCORE.search(str(match.get("result", ""))):
         result.update(status="SKIP", reason="已有比分，不作为赛前预测")
@@ -42,24 +43,42 @@ def prepare_match(match):
 
     analysis = analyze_match(match)
     probability = analysis["probability"]
-    direction = DIRECTIONS.get(probability.get("direction"))
-    result["direction"] = direction
-    result["decision_filter"] = analysis["decision"]
-    result["stable_v32_direction"] = direction
-    result["stable_v32_decision"] = analysis["decision"].get("decision", "PASS")
-    result["confidence"] = analysis["confidence"]
-    result["confidence_tier"] = analysis["research_confidence"].get("tier", "PASS")
-    result["market_probability"] = analysis["research_confidence"].get("pmax", 0.0)
-    result["selection_status"] = analysis["decision"].get("decision", "PASS")
+    state = analysis["state"]
+    primary = state.get("primary_direction") or probability.get("direction")
+    direction = DIRECTIONS.get(primary)
+    alternate = DIRECTIONS.get(state.get("alternate_direction"))
+
+    result.update(
+        direction=direction,
+        alternate_direction=alternate,
+        state=state.get("state", "INVALID"),
+        base_state=state.get("base_state", "INVALID"),
+        state_label=STATE_ZH.get(state.get("state"), state.get("state")),
+        decision_filter=analysis["decision"],
+        stable_v33_direction=direction,
+        stable_v33_decision=analysis["decision"].get("decision", "PASS"),
+        confidence=analysis["confidence"],
+        market_probability=state.get("market_pmax") or probability.get("pmax") or 0.0,
+        page_probability=probability.get("page_probability"),
+        tail_alert=bool(state.get("tail_alert")),
+        draw_candidate=bool(state.get("draw_candidate")),
+        calibration=analysis["calibration"],
+        timing_used=bool(analysis["htft"].get("timing_used")),
+        timing_source=analysis["htft"].get("timing_source"),
+        quality_warnings=analysis["quality"].get("warnings", []),
+    )
 
     if not probability.get("valid") or not direction:
         return result
 
-    htft_top = analysis["htft"].get("top", [])
-    score_top = analysis["score"].get("top_scores", [])
+    htft_top = analysis["consistency"].get("htft_top", [])
+    score_top = analysis["consistency"].get("score_top", [])
     if len(htft_top) < 2 or len(score_top) < 2:
-        result.update(status="PASS", reason="冻结模型输出不完整")
+        result.update(status="PASS", reason="V3.3 场景一致性输出不完整")
         return result
+
+    totals = analysis["score"].get("top_totals", [])
+    total_pick = totals[0] if totals else None
 
     result.update(
         score1=score_top[0]["score"],
@@ -71,23 +90,29 @@ def prepare_match(match):
         htft1_probability=htft_top[0]["probability"],
         htft2_probability=htft_top[1]["probability"],
         total_goals=analysis["score"].get("total_goals_pick") or MISSING,
+        total_goals_probability=(total_pick or {}).get("probability"),
         lambda_home=analysis["score"].get("lambda_home"),
         lambda_away=analysis["score"].get("lambda_away"),
+        high_score_mass=analysis["score"].get("high_score_mass"),
+        tail_score_candidates=analysis["score"].get("tail_scores", [])[:2],
         htft_model=analysis["htft"].get("model"),
         score_model=analysis["score"].get("model"),
+        consistency=analysis["consistency"],
         status="PREDICTED",
-        reason=(
-            "S级高置信市场方向"
-            if analysis["research_confidence"].get("high_confidence")
-            else "市场方向；未达到S级筛选阈值"
-        ),
     )
 
-    score_dirs = {_score_direction(result["score1"]), _score_direction(result["score2"])}
-    if direction not in score_dirs:
-        result["consistency_warning"] = "比分Top2与WDL主方向未形成同向候选；保留各模型原始排序"
+    base = result.get("base_state")
+    if result["tail_alert"]:
+        result["reason"] = "市场方向保留为主场景；检测到冲突/尾部结构，第二场景独立展示"
+    elif base == "BALANCED":
+        result["reason"] = "均衡场；不把市场最高项描述为强方向，保留第二场景"
+    elif base == "CONFLICT":
+        result["reason"] = "市场与独立结构存在冲突；保留市场主锚并降级为多场景"
+    elif base == "CONFIRMED":
+        result["reason"] = "市场主方向得到历史稳定结构确认"
     else:
-        result["consistency_warning"] = None
+        result["reason"] = "市场主方向；未触发强确认或强冲突"
+
     return result
 
 
@@ -106,24 +131,26 @@ def build_model_input(matches):
             "league": match.get("league"),
             "kickoff": match.get("kickoff"),
             "market": match.get("market", {}),
-            "page_probability_audit_only": match.get("page_probability"),
+            "page_probability_for_state": match.get("page_probability"),
             "research_factors": match.get("research_factors", {}),
+            "goal_timing": match.get("goal_timing", {}),
             "analysis": {
                 "probability": analysis["probability"],
-                "research_confidence": analysis["research_confidence"],
+                "state": analysis["state"],
                 "decision": analysis["decision"],
-                "confidence": analysis["confidence"],
+                "calibration": analysis["calibration"],
+                "consistency": analysis["consistency"],
                 "htft": analysis["htft"],
                 "score": analysis["score"],
             },
             "locked_prediction": {
                 key: prepared[key] for key in (
-                    "direction", "score1", "score2", "htft1", "htft2",
-                    "total_goals", "confidence", "confidence_tier",
+                    "direction", "alternate_direction", "state",
+                    "score1", "score2", "htft1", "htft2", "total_goals",
                 )
             },
-            "stable_version": "HH520 Stable V3.2",
-            "source_contract": "HH520_10027s",
+            "stable_version": "HH520 Stable V3.3",
+            "source_contract": "HH520_10027s+PUBLIC_GOAL_TIMING_OPTIONAL",
             "excluded_source_fields": ["建议下注", "是否下注", "page_prediction"],
             "gpt_role": "EXPLANATION_ONLY",
         })
@@ -134,13 +161,11 @@ def validate_prediction(item, prepared, evidence):
     if item["match_id"] != prepared["match_id"]:
         raise ValueError("GPT 场次ID或顺序不匹配")
 
-    # GPT is explanation-only. Any attempted change is ignored instead of
-    # invalidating the deterministic Stable prediction.
-    locked = ("direction", "score1", "score2", "htft1", "htft2", "total_goals")
-    rejected = [
-        key for key in locked
-        if item.get(key) != prepared.get(key)
-    ]
+    locked = (
+        "direction", "alternate_direction", "state",
+        "score1", "score2", "htft1", "htft2", "total_goals",
+    )
+    rejected = [key for key in locked if item.get(key) != prepared.get(key)]
 
     result = dict(prepared)
     result["gpt_review"] = item.get("reason", "")
