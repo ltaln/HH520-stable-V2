@@ -1,8 +1,8 @@
 {
-  "status": "PENDING",
+  "status": "FAILED",
   "kind": "research",
   "request_id": "hh520-research-20260601-20260630-f4c9a7e2",
-  "message": "Workflow accepted and is still running.",
+  "message": "Workflow failed before a final result was published.",
   "_action": {
     "request_id": "hh520-research-20260601-20260630-f4c9a7e2",
     "repository": "ltaln/HH520-stable-V2",
