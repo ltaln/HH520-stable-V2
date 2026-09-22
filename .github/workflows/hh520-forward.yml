@@ -48,6 +48,7 @@ jobs:
       cancel-in-progress: false
     env:
       FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+      FIRECRAWL_API_KEY_BACKUP: ${{ secrets.FIRECRAWL_API_KEY_BACKUP }}
       PYTHONUTF8: "1"
       REQUEST_ID: ${{ inputs.request_id }}
       SHADOW_REQUEST_ID: ${{ inputs.shadow_request_id }}
