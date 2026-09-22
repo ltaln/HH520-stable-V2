@@ -8,7 +8,7 @@ import requests
 import yaml
 from collector import cache_manager
 
-PROMPT_PATH = Path(__file__).resolve().parents[1] / "prompts" / "HH520_Stable_V2_Prediction_Prompt.md"
+PROMPT_PATH = Path(__file__).resolve().parents[1] / "prompts" / "HH520_Stable_V3_2_Prediction_Prompt.md"
 FIELDS = ("match_id", "score1", "score2", "htft1", "htft2", "total_goals", "direction", "reason")
 PROPERTIES = {name: {"type": "string"} for name in FIELDS}
 PROPERTIES.update(confidence={"type": "integer", "minimum": 0, "maximum": 99},
