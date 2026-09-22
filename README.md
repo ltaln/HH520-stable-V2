@@ -1,8 +1,8 @@
-# HH520 Stable V2.1 — 10027s + Decision Filter V2
+# HH520 Stable V3.2
 
 ## 目标
-以 HH520 `10027s.php` 为唯一正式采集入口，使用 Firecrawl 单页抓取，
-经 Probability Layer、Value Layer、Decision Filter V2 和 GPT 分析后输出预测。
+以 HH520 `10027s.php` 为唯一正式采集入口，通过 Firecrawl 单页抓取，
+由冻结的 Stable V3.2 本地模型完成胜平负、半全场、比分、总进球与置信等级输出。
 
 ## 用户命令
 `预测 YYYY-MM-DD 全部比赛`
@@ -12,33 +12,49 @@
 
 ## 正式预测流程
 命令 → 10027s URL Builder → Cache → Firecrawl → 10027s Parser →
-Market Baseline → Probability Layer → Value Layer → Decision Filter V2 →
-GPT → 固定输出
+Market Baseline → WDL → Research Confidence → HTFT → Pooled Poisson Score →
+Decision Filter V3.2 → 固定输出 → GPT 可选解释审核
 
-## Decision Filter V2
-Decision Filter V2 使用 2026-08 Discovery + 2026-09-01..20 Historical Shadow
-验证后的跨时间窗因子，只负责最终放行 / PASS，不改变 Probability Layer
-的方向，也不允许 Value Layer 单独决定胜平负。
+## Stable V3.2
+- WDL：`MARKET_PROPORTIONAL_DEVIG`
+- page_probability：仅审计，不参与正式方向
+- S级筛选：`market pmax >= 0.73`
+- HTFT：`CONDITIONAL_HT_GIVEN_FT`
+- Score：`POOLED_POISSON`
+- GPT：`EXPLANATION_ONLY`
+- Stable 自动调参：禁止
 
-当前 Hard PASS：
-- 概率集中度 <40%
-- pattern = ⚡ 极端
-
-正式输出保留：
-- Stable V2 原始方向
-- Stable V2.1 Decision Filter 决策
-- BET_CANDIDATE / PASS
-- Filter 分数与原因
+## 输出
+每场保留：
+- 胜平负
+- 市场概率
+- 置信等级 S / NORMAL
+- 比分 Top2
+- 半全场 Top2
+- 总进球
+- 置信度
+- Decision Filter：BET_CANDIDATE / PASS
+- 一致性提示（若比分 Top2 与 WDL 方向不一致）
 
 ## 10027s 数据语义
 - 基础表中的半场比分、全场比分属于真实赛果标签。
-- 已结束比赛不得把这些赛果字段送入赛前预测。
-- 融合表中的单选、融合真实概率、半全场及研究因子可作为赛前结构化字段。
-- 比分/总进球若为研究推导，必须明确标记为派生结果，不得冒充 HH520 原始预测。
+- 已结束比赛不得把赛果字段送入赛前推理。
+- 赔率、控球、进攻、防守、交锋、状态等赛前结构字段可用于冻结模型。
+- “建议下注”“是否下注”不得作为正式预测输入。
+- 页面融合概率不得覆盖正式市场 WDL。
 
-## 研究验证流程
+## 模型文件
+`model_artifacts/HH520_Stable_V3_2.json`
+
+冻结训练区间：
+- 2026-05-01 至 2026-09-20
+- 1432 场
+
+9月1-20日已参与开发与压力测试，不再视为 untouched final test。
+
+## 研究验证
 Historical Research / Hidden Model Reverse / Shadow / Forward 独立运行。
-Research 不得自动修改 Stable；任何后续规则晋级仍需人工审核。
+Research 只能生成 Candidate；任何升级必须人工审核后进入 Stable。
 
 ## 不使用
 - 10013
@@ -46,4 +62,4 @@ Research 不得自动修改 Stable；任何后续规则晋级仍需人工审核�
 - 10017
 - xi.php
 - 长期数据库
-- 自动训练
+- 自动训练/自动晋升
