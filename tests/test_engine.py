@@ -6,7 +6,24 @@ from engine.data_quality import data_quality_gate
 from engine.match_classifier import classify_match
 from engine.risk_engine import assess_risk
 from engine.decision_filter import decision_filter
+from engine.state_engine import build_state
 from analysis.confidence import confidence_from_probability
+
+
+def base_match():
+    return {
+        "match_id":"1","home_team":"A","away_team":"B","league":"联赛",
+        "market":{"home_odds":1.45,"draw_odds":4.5,"away_odds":7.0},
+        "page_probability":{"home":0.65,"draw":0.20,"away":0.15},
+        "possession":{"home":58,"away":42},
+        "research_factors":{
+            "home_attack":10,"away_attack":7,
+            "home_defense":1.0,"away_defense":1.6,
+            "home_h2h":8,"away_h2h":4,
+            "home_form":1.2,"away_form":0.8,
+            "structure":"强优",
+        },
+    }
 
 
 def test_invalid_odds_rejected():
@@ -22,85 +39,75 @@ def test_missing_probability_is_pass():
     assert confidence_from_probability(probability, decision) == 0
 
 
-def test_value_fields_do_not_change_direction_or_use_advice():
-    match = {"market": {"home_odds": 2, "draw_odds": 3, "away_odds": 4}}
-    first = probability_layer(match)["direction"]
-    match["value"] = {"ev": -100, "kelly": 99, "signal": "away"}
-    probability = probability_layer(match)
-    value = value_layer(match, probability)
-    assert probability["direction"] == first
-    assert "page_signal" not in value
-    assert value["forbidden_advice_fields_used"] is False
-
-
-def test_page_probability_cannot_override_market_direction():
-    match = {
-        "market": {"home_odds": 1.50, "draw_odds": 4.0, "away_odds": 7.0},
-        "page_probability": {"home": 0.05, "draw": 0.05, "away": 0.90},
-    }
+def test_page_probability_does_not_override_market_direction_but_creates_value_edge():
+    match = base_match()
+    match["page_probability"] = {"home":0.05,"draw":0.05,"away":0.90}
     p = probability_layer(match)
+    v = value_layer(match, p)
     assert p["direction"] == "home"
     assert p["page_probability_used_for_direction"] is False
+    assert p["page_probability_used_for_state"] is True
+    assert v["used_for_confirmation"] is True
+    assert v["independent_direction"] == "away"
+    assert v["directional_edge"] != 0
 
 
-def test_v32_allows_only_s_threshold_candidate():
-    strong = {
-        "match_id": "1", "home_team": "A", "away_team": "B", "league": "联赛",
-        "market": {"home_odds": 1.20, "draw_odds": 6.0, "away_odds": 13.0},
-        "research_factors": {"risk": "高"},
-    }
-    p = probability_layer(strong)
-    v = value_layer(strong, p)
-    q = data_quality_gate(strong, p)
-    c = classify_match(strong, p)
-    r = assess_risk(strong, p, v, q, c)
-    d = decision_filter(strong, p, v, q, c, r)
-    assert d["version"] == "HH520 Decision Filter V3.2"
-    assert d["decision"] == "BET_CANDIDATE"
-    assert d["risk_is_advisory"] is True
+def test_v33_confirmed_state_for_strong_aligned_market():
+    match = base_match()
+    p = probability_layer(match)
+    s = build_state(match, p)
+    v = value_layer(match, p)
+    d = decision_filter(match, p, v, state=s)
+    assert s["base_state"] == "CONFIRMED"
+    assert s["primary_direction"] == "home"
+    assert d["version"] == "HH520 Decision Filter V3.3"
+    assert d["allow_prediction"] is True
 
 
-def test_v32_passes_normal_market_even_with_valid_prediction():
+def test_v33_conflict_tail_does_not_flip_market_primary():
+    match = base_match()
+    match["market"] = {"home_odds":2.2,"draw_odds":3.1,"away_odds":3.0}
+    match["page_probability"] = {"home":0.20,"draw":0.20,"away":0.60}
+    match["research_factors"].update({"risk":"中高","pattern":"⚡ 极端","structure":"均衡"})
+    p = probability_layer(match)
+    s = build_state(match, p)
+    assert s["primary_direction"] == p["direction"]
+    assert s["base_state"] == "CONFLICT"
+    assert s["tail_alert"] is True
+    assert s["state"] == "TAIL_ALERT"
+    assert s["alternate_direction"] != s["primary_direction"]
+
+
+def test_balanced_is_not_automatic_draw_override():
+    match = base_match()
+    match["market"] = {"home_odds":2.4,"draw_odds":3.1,"away_odds":2.8}
+    match["page_probability"] = {"home":0.40,"draw":0.32,"away":0.28}
+    match["research_factors"]["structure"] = "均衡"
+    p = probability_layer(match)
+    s = build_state(match, p)
+    assert s["base_state"] in {"BALANCED","CONFLICT"}
+    assert s["primary_direction"] == p["direction"]
+    assert p["direction"] != "draw"
+
+
+def test_data_quality_warns_incomplete_modules_and_timing_without_hard_fail():
     match = {
-        "match_id": "2", "home_team": "A", "away_team": "B", "league": "联赛",
-        "market": {"home_odds": 2.4, "draw_odds": 3.1, "away_odds": 2.8},
+        "match_id":"2","home_team":"A","away_team":"B","league":"联赛",
+        "market":{"home_odds":2.0,"draw_odds":3.0,"away_odds":4.0},
+        "research_factors":{},
     }
     p = probability_layer(match)
-    v = value_layer(match, p)
-    d = decision_filter(match, p, v)
-    assert p["valid"] is True
-    assert d["decision"] == "PASS"
-    assert confidence_from_probability(p, d) > 0
-
-
-def test_risk_engine_v31_version_and_balanced_penalty():
-    from engine.risk_engine import assess_risk_v3, assess_risk_v31
-    match = {
-        "match_id": "3", "home_team": "A", "away_team": "B", "league": "联赛",
-        "market": {"home_odds": 2.4, "draw_odds": 3.1, "away_odds": 2.8},
-        "research_factors": {"risk": "低"},
-    }
-    p = probability_layer(match)
-    v = value_layer(match, p)
     q = data_quality_gate(match, p)
-    c = classify_match(match, p)
-    old = assess_risk_v3(match, p, v, q, c)
-    new = assess_risk_v31(match, p, v, q, c)
-    prod = assess_risk(match, p, v, q, c)
-    assert new["version"] == "HH520 Risk Engine V3.1"
-    assert prod["version"] == "HH520 Risk Engine V3.0"
-    assert new["score"] >= old["score"]
+    assert q["valid"] is True
+    assert "team_modules_missing_or_zero" in q["warnings"]
+    assert "goal_timing_missing" in q["warnings"]
 
 
-def test_risk_engine_v32_is_research_candidate_only():
-    from engine.risk_engine import assess_risk_v32
-    match = {
-        "match_id":"4","home_team":"A","away_team":"B","league":"联赛",
-        "market":{"home_odds":1.6,"draw_odds":3.8,"away_odds":5.5},
-        "research_factors":{"risk":"高","pattern":"极端"},
-    }
-    p=probability_layer(match); v=value_layer(match,p); q=data_quality_gate(match,p); c=classify_match(match,p)
-    prod=assess_risk(match,p,v,q,c)
-    cand=assess_risk_v32(match,p,v,q,c)
-    assert prod["version"]=="HH520 Risk Engine V3.0"
-    assert cand["version"]=="HH520 Risk Engine V3.2 Candidate"
+def test_risk_engine_remains_advisory_under_v33():
+    match = base_match()
+    p=probability_layer(match); v=value_layer(match,p)
+    q=data_quality_gate(match,p); c=classify_match(match,p)
+    r=assess_risk(match,p,v,q,c)
+    d=decision_filter(match,p,v,q,c,r)
+    assert d["risk_is_advisory"] is True
+    assert d["value_layer_used_for_direction"] is False
