@@ -1,0 +1,229 @@
+{
+  "status": "READY",
+  "kind": "research_hidden_signal_page",
+  "request_id": "hh520-research-20260501-20260531-e5c8a1f3",
+  "page": 19,
+  "page_size": 20,
+  "items": [
+    {
+      "factor": "structure",
+      "value": "均衡",
+      "metric": "htft",
+      "sample_count": 188,
+      "accuracy": 0.2872340425531915,
+      "baseline_accuracy": 0.30024213075060535,
+      "delta_vs_baseline": -0.013008088197413836,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "home_odds_bucket",
+      "value": "1.80-2.19",
+      "metric": "goals",
+      "sample_count": 78,
+      "accuracy": 0.2564102564102564,
+      "baseline_accuracy": 0.2687651331719128,
+      "delta_vs_baseline": -0.01235487676165642,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "consistency",
+      "value": "⚠️部分",
+      "metric": "score_exact",
+      "sample_count": 176,
+      "accuracy": 0.18181818181818182,
+      "baseline_accuracy": 0.1694915254237288,
+      "delta_vs_baseline": 0.012326656394453017,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "consistency",
+      "value": "⚠️部分",
+      "metric": "htft",
+      "sample_count": 176,
+      "accuracy": 0.3125,
+      "baseline_accuracy": 0.30024213075060535,
+      "delta_vs_baseline": 0.012257869249394648,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "意甲",
+      "metric": "score_top2",
+      "sample_count": 36,
+      "accuracy": 0.2777777777777778,
+      "baseline_accuracy": 0.26634382566585957,
+      "delta_vs_baseline": 0.011433952111918222,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "pattern",
+      "value": "❌ 不符合",
+      "metric": "score_top2",
+      "sample_count": 98,
+      "accuracy": 0.25510204081632654,
+      "baseline_accuracy": 0.26634382566585957,
+      "delta_vs_baseline": -0.011241784849533032,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "risk",
+      "value": "低",
+      "metric": "score_top2",
+      "sample_count": 83,
+      "accuracy": 0.27710843373493976,
+      "baseline_accuracy": 0.26634382566585957,
+      "delta_vs_baseline": 0.010764608069080195,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "away_odds_bucket",
+      "value": ">=3.00",
+      "metric": "score_exact",
+      "sample_count": 214,
+      "accuracy": 0.1588785046728972,
+      "baseline_accuracy": 0.1694915254237288,
+      "delta_vs_baseline": -0.01061302075083162,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "probability_concentration",
+      "value": "50-59%",
+      "metric": "score_exact",
+      "sample_count": 44,
+      "accuracy": 0.1590909090909091,
+      "baseline_accuracy": 0.1694915254237288,
+      "delta_vs_baseline": -0.010400616332819718,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "draw_odds_bucket",
+      "value": ">=3.00",
+      "metric": "htft_top2",
+      "sample_count": 350,
+      "accuracy": 0.4942857142857143,
+      "baseline_accuracy": 0.48426150121065376,
+      "delta_vs_baseline": 0.010024213075060517,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "risk",
+      "value": "中低",
+      "metric": "score_top2",
+      "sample_count": 39,
+      "accuracy": 0.2564102564102564,
+      "baseline_accuracy": 0.26634382566585957,
+      "delta_vs_baseline": -0.00993356925560318,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "pattern",
+      "value": "🔶风控赔率",
+      "metric": "score_exact",
+      "sample_count": 50,
+      "accuracy": 0.16,
+      "baseline_accuracy": 0.1694915254237288,
+      "delta_vs_baseline": -0.009491525423728803,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "away_odds_bucket",
+      "value": ">=3.00",
+      "metric": "score_top2",
+      "sample_count": 214,
+      "accuracy": 0.2757009345794392,
+      "baseline_accuracy": 0.26634382566585957,
+      "delta_vs_baseline": 0.00935710891357966,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "pattern",
+      "value": "🔶风控赔率",
+      "metric": "goals",
+      "sample_count": 50,
+      "accuracy": 0.26,
+      "baseline_accuracy": 0.2687651331719128,
+      "delta_vs_baseline": -0.008765133171912798,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "rating",
+      "value": "B",
+      "metric": "htft",
+      "sample_count": 48,
+      "accuracy": 0.2916666666666667,
+      "baseline_accuracy": 0.30024213075060535,
+      "delta_vs_baseline": -0.008575464083938666,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "draw_odds_bucket",
+      "value": ">=3.00",
+      "metric": "goals",
+      "sample_count": 350,
+      "accuracy": 0.27714285714285714,
+      "baseline_accuracy": 0.2687651331719128,
+      "delta_vs_baseline": 0.008377723970944329,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "risk",
+      "value": "低",
+      "metric": "goals",
+      "sample_count": 83,
+      "accuracy": 0.27710843373493976,
+      "baseline_accuracy": 0.2687651331719128,
+      "delta_vs_baseline": 0.008343300563026956,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "risk",
+      "value": "中高",
+      "metric": "goals",
+      "sample_count": 92,
+      "accuracy": 0.2608695652173913,
+      "baseline_accuracy": 0.2687651331719128,
+      "delta_vs_baseline": -0.00789556795452151,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "rating",
+      "value": "D",
+      "metric": "htft",
+      "sample_count": 13,
+      "accuracy": 0.3076923076923077,
+      "baseline_accuracy": 0.30024213075060535,
+      "delta_vs_baseline": 0.007450176941702358,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "consistency",
+      "value": "⚠️部分",
+      "metric": "htft_top2",
+      "sample_count": 176,
+      "accuracy": 0.4772727272727273,
+      "baseline_accuracy": 0.48426150121065376,
+      "delta_vs_baseline": -0.006988773937926462,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    }
+  ]
+}
