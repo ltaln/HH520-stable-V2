@@ -1,8 +1,242 @@
 {
-  "status": "PENDING",
-  "kind": "stable",
+  "status": "READY",
+  "kind": "prediction",
   "request_id": "hh520-20260922-2001-s9k4m2",
-  "message": "Workflow accepted and is still running.",
+  "date": "2026-09-22",
+  "url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-22&riqi_end=2026-09-22&threshold=1&bankroll=5000",
+  "captured_at": "2026-09-22T04:27:58.521742+00:00",
+  "goal_timing_summary": {
+    "enabled": true,
+    "attempted": 4,
+    "available": 0,
+    "six_bin": 0,
+    "half_aggregate_fallback": 0,
+    "skipped_confirmed": 0,
+    "lookup_capped": 0
+  },
+  "predictions": [
+    {
+      "match_id": "1",
+      "home_team": "韩国亚",
+      "away_team": "沙特亚",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.3",
+      "direction": "主胜",
+      "alternate_direction": "平",
+      "state": "CONFIRMED",
+      "base_state": "CONFIRMED",
+      "market_probability": 0.6973505910938741,
+      "page_probability": {
+        "home": 0.6464646464646465,
+        "draw": 0.21212121212121213,
+        "away": 0.1414141414141414
+      },
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "2:0",
+      "score2": "2:1",
+      "score1_probability": 0.10738517510448484,
+      "score2_probability": 0.09772457208513806,
+      "htft1": "主/主",
+      "htft2": "平/主",
+      "htft1_probability": 0.4172764512561718,
+      "htft2_probability": 0.24378923103281777,
+      "total_goals": "3球",
+      "total_goals_probability": 0.2231221254852883,
+      "timing_used": false,
+      "timing_source": null,
+      "quality_warnings": [
+        "goal_timing_missing"
+      ],
+      "reason": "市场主方向得到历史稳定结构确认"
+    },
+    {
+      "match_id": "2",
+      "home_team": "米尔顿",
+      "away_team": "克劳利",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.3",
+      "direction": "主胜",
+      "alternate_direction": "平",
+      "state": "BALANCED",
+      "base_state": "BALANCED",
+      "market_probability": 0.610385979369307,
+      "page_probability": {
+        "home": 0.6326530612244898,
+        "draw": 0.21428571428571427,
+        "away": 0.15306122448979592
+      },
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "1:0",
+      "score2": "1:1",
+      "score1_probability": 0.11130998351476665,
+      "score2_probability": 0.11355620209602887,
+      "htft1": "主/主",
+      "htft2": "平/平",
+      "htft1_probability": 0.36523909009415445,
+      "htft2_probability": 0.12806777233071023,
+      "total_goals": "2球",
+      "total_goals_probability": 0.24275103337299272,
+      "timing_used": false,
+      "timing_source": null,
+      "quality_warnings": [
+        "goal_timing_missing"
+      ],
+      "reason": "均衡场；不把市场最高项描述为强方向，保留第二场景"
+    },
+    {
+      "match_id": "3",
+      "home_team": "诺茨郡",
+      "away_team": "格里姆",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.3",
+      "direction": "主胜",
+      "alternate_direction": "客胜",
+      "state": "TAIL_ALERT",
+      "base_state": "BALANCED",
+      "market_probability": 0.42581852446615087,
+      "page_probability": {},
+      "tail_alert": true,
+      "draw_candidate": false,
+      "score1": "1:0",
+      "score2": "0:1",
+      "score1_probability": 0.10408270441203255,
+      "score2_probability": 0.07965347063050571,
+      "htft1": "主/主",
+      "htft2": "客/客",
+      "htft1_probability": 0.25479872683503013,
+      "htft2_probability": 0.18822618571257269,
+      "total_goals": "2球",
+      "total_goals_probability": 0.24621700284333561,
+      "timing_used": false,
+      "timing_source": null,
+      "quality_warnings": [
+        "page_probability_missing",
+        "goal_timing_missing"
+      ],
+      "reason": "市场方向保留为主场景；检测到冲突/尾部结构，第二场景独立展示"
+    },
+    {
+      "match_id": "4",
+      "home_team": "维冈",
+      "away_team": "布莱克浦",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.3",
+      "direction": "主胜",
+      "alternate_direction": "客胜",
+      "state": "TAIL_ALERT",
+      "base_state": "CONFLICT",
+      "market_probability": 0.4215747055176689,
+      "page_probability": {
+        "home": 0.40816326530612246,
+        "draw": 0.25510204081632654,
+        "away": 0.336734693877551
+      },
+      "tail_alert": true,
+      "draw_candidate": false,
+      "score1": "1:0",
+      "score2": "0:1",
+      "score1_probability": 0.09949066091336846,
+      "score2_probability": 0.09076368913115368,
+      "htft1": "主/主",
+      "htft2": "客/客",
+      "htft1_probability": 0.25225933598455635,
+      "htft2_probability": 0.19298399618146805,
+      "total_goals": "2球",
+      "total_goals_probability": 0.24962809606900718,
+      "timing_used": false,
+      "timing_source": null,
+      "quality_warnings": [
+        "goal_timing_missing"
+      ],
+      "reason": "市场方向保留为主场景；检测到冲突/尾部结构，第二场景独立展示"
+    }
+  ],
+  "output_contract": {
+    "version": "HH520-OUTPUT-V3.3",
+    "stable_version": "HH520 Stable V3.3",
+    "strict": true,
+    "required_columns": [
+      "球队对阵",
+      "胜平负场景",
+      "市场概率",
+      "比分×2及概率",
+      "半全场×2及概率",
+      "总进球及概率"
+    ],
+    "display_rows": [
+      {
+        "球队对阵": "韩国亚 vs 沙特亚",
+        "胜平负场景": "主胜（确认）",
+        "市场概率": "69.7%",
+        "比分×2及概率": "2:0 (10.7%) / 2:1 (9.8%)",
+        "半全场×2及概率": "主/主 (41.7%) / 平/主 (24.4%)",
+        "总进球及概率": "3球 (22.3%)"
+      },
+      {
+        "球队对阵": "米尔顿 vs 克劳利",
+        "胜平负场景": "主胜 / 平（均衡）",
+        "市场概率": "61.0%",
+        "比分×2及概率": "1:0 (11.1%) / 1:1 (11.4%)",
+        "半全场×2及概率": "主/主 (36.5%) / 平/平 (12.8%)",
+        "总进球及概率": "2球 (24.3%)"
+      },
+      {
+        "球队对阵": "诺茨郡 vs 格里姆",
+        "胜平负场景": "主胜 / 客胜（尾部预警）",
+        "市场概率": "42.6%",
+        "比分×2及概率": "1:0 (10.4%) / 0:1 (8.0%)",
+        "半全场×2及概率": "主/主 (25.5%) / 客/客 (18.8%)",
+        "总进球及概率": "2球 (24.6%)"
+      },
+      {
+        "球队对阵": "维冈 vs 布莱克浦",
+        "胜平负场景": "主胜 / 客胜（尾部预警）",
+        "市场概率": "42.2%",
+        "比分×2及概率": "1:0 (9.9%) / 0:1 (9.1%)",
+        "半全场×2及概率": "主/主 (25.2%) / 客/客 (19.3%)",
+        "总进球及概率": "2球 (25.0%)"
+      }
+    ],
+    "render_rule": "必须按6列完整输出；不得显示置信等级、置信度或最终筛选；不得把主场景和尾部场景混成同一级单一方向。"
+  },
+  "display_rows": [
+    {
+      "球队对阵": "韩国亚 vs 沙特亚",
+      "胜平负场景": "主胜（确认）",
+      "市场概率": "69.7%",
+      "比分×2及概率": "2:0 (10.7%) / 2:1 (9.8%)",
+      "半全场×2及概率": "主/主 (41.7%) / 平/主 (24.4%)",
+      "总进球及概率": "3球 (22.3%)"
+    },
+    {
+      "球队对阵": "米尔顿 vs 克劳利",
+      "胜平负场景": "主胜 / 平（均衡）",
+      "市场概率": "61.0%",
+      "比分×2及概率": "1:0 (11.1%) / 1:1 (11.4%)",
+      "半全场×2及概率": "主/主 (36.5%) / 平/平 (12.8%)",
+      "总进球及概率": "2球 (24.3%)"
+    },
+    {
+      "球队对阵": "诺茨郡 vs 格里姆",
+      "胜平负场景": "主胜 / 客胜（尾部预警）",
+      "市场概率": "42.6%",
+      "比分×2及概率": "1:0 (10.4%) / 0:1 (8.0%)",
+      "半全场×2及概率": "主/主 (25.5%) / 客/客 (18.8%)",
+      "总进球及概率": "2球 (24.6%)"
+    },
+    {
+      "球队对阵": "维冈 vs 布莱克浦",
+      "胜平负场景": "主胜 / 客胜（尾部预警）",
+      "市场概率": "42.2%",
+      "比分×2及概率": "1:0 (9.9%) / 0:1 (9.1%)",
+      "半全场×2及概率": "主/主 (25.2%) / 客/客 (19.3%)",
+      "总进球及概率": "2球 (25.0%)"
+    }
+  ],
+  "archive_path": "archive/hh520-20260922-2001-s9k4m2.json",
+  "message": "Prediction READY. Polling payload is compact; render the strict 6-column output_contract.display_rows. Full audit data is in archive_path.",
   "_action": {
     "request_id": "hh520-20260922-2001-s9k4m2",
     "repository": "ltaln/HH520-stable-V2",
