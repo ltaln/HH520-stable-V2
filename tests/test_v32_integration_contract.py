@@ -5,20 +5,20 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_v33_active_prompt_and_config_are_aligned():
-    prompt = (ROOT / "prompts" / "HH520_Stable_V3_3_Prediction_Prompt.md").read_text(encoding="utf-8")
+def test_v34_active_prompt_and_config_are_aligned():
+    prompt = (ROOT / "prompts" / "HH520_Stable_V3_4_Prediction_Prompt.md").read_text(encoding="utf-8")
     config = yaml.safe_load((ROOT / "config" / "stable.yaml").read_text(encoding="utf-8"))
-    assert "HH520 Stable V3.3" in prompt
+    assert "HH520 Stable V3.4" in prompt
     assert "EXPLANATION_ONLY" in prompt
-    assert config["project"]["version"] == "3.3"
+    assert config["project"]["version"] == "3.4"
     assert config["prediction"]["gpt_role"] == "EXPLANATION_ONLY"
-    assert config["prediction"]["page_probability_for_state"] is True
+    assert config["prediction"]["page_probability_for_state"] is False
     assert config["prediction"]["automatic_market_override"] is False
 
 
-def test_v33_integration_contract_exposes_locked_predictions():
+def test_v34_integration_contract_exposes_locked_predictions():
     spec = json.loads((ROOT / "integration" / "chatgpt-action.openapi.json").read_text(encoding="utf-8"))
-    assert spec["info"]["version"] == "3.3"
+    assert spec["info"]["version"] == "3.4"
     schema = spec["paths"]["/repos/ltaln/HH520-stable-V2/contents/results/{request_id}.json"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]
     assert "predictions" in schema["properties"]
     assert "output_contract" in schema["properties"]
@@ -28,7 +28,7 @@ def test_v33_integration_contract_exposes_locked_predictions():
     assert "EXPLANATION_ONLY" in instructions
 
 
-def test_v33_output_contract_is_six_columns():
+def test_v34_output_contract_is_six_columns():
     from formatter.output_formatter import OUTPUT_COLUMNS, build_output_contract, build_display_row
 
     assert OUTPUT_COLUMNS == [
