@@ -64,3 +64,8 @@ def test_historical_10027_layout_without_explicit_half_full_columns():
     assert match["value"]["ev"] == pytest.approx(-0.3323)
     assert match["page_prediction"]["single"] == "主胜"
     assert match["research_factors"]["structure"] == "强优"
+
+
+def test_10027_explicit_no_match_date_is_valid_empty_schedule():
+    markdown = "📭 该日期区间暂无赛事实力数据（当前阈值 > 1）"
+    assert parse_10027s_markdown(markdown) == []
