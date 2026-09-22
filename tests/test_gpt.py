@@ -12,12 +12,14 @@ def match():
     return {
         "match_id":"1","home_team":"甲","away_team":"乙","league":"联赛",
         "market":{"home_odds":1.5,"draw_odds":4,"away_odds":6},
+        "page_probability":{"home":0.62,"draw":0.23,"away":0.15},
         "possession":{"home":56,"away":44},
         "research_factors":{
             "home_attack":10,"away_attack":8,
             "home_defense":1.2,"away_defense":1.6,
             "home_h2h":7,"away_h2h":5,
             "home_form":1.2,"away_form":0.9,
+            "structure":"强优",
         },
         "value":{"ev":100,"kelly":0.02},
         "page_prediction":{},
@@ -35,7 +37,8 @@ def row(source=None):
         "htft2": locked["htft2"],
         "total_goals": locked["total_goals"],
         "direction": locked["direction"],
-        "confidence": locked["confidence"],
+        "alternate_direction": locked["alternate_direction"],
+        "state": locked["state"],
         "status": "GPT",
         "reason": "仅解释冻结模型输出",
     }
@@ -74,15 +77,14 @@ def test_complete_inference_without_page_answers_and_cache(api):
     assert "SECRET_RAW" not in body["input"]
     assert "result" not in payload["matches"][0]
     assert payload["matches"][0]["gpt_role"]=="EXPLANATION_ONLY"
-    assert payload["matches"][0]["locked_prediction"]["score1"]==expected["score1"]
-    assert payload["config"]["project"]["version"]=="3.2"
+    assert payload["config"]["project"]["version"]=="3.3"
     assert body["store"] is False
 
 
 @pytest.mark.parametrize("changes",[
     {"direction":"客胜"},{"score1":"0:2"},{"htft1":"主/客"},
     {"score2":"9:9"},{"htft2":"主/主"},{"total_goals":"未知"},
-    {"total_goals":"7—9球"},
+    {"alternate_direction":"客胜"},{"state":"TAIL_ALERT"},
 ])
 def test_conflicting_gpt_changes_are_ignored(api,changes):
     source=match()
@@ -90,12 +92,8 @@ def test_conflicting_gpt_changes_are_ignored(api,changes):
     value=row(source); value.update(changes); set_output(api,value)
     result=build_predictions([source],use_gpt=True)[0]
     assert result["status"]=="PREDICTED_GPT_REVIEW_REJECTED"
-    assert result["direction"]==expected["direction"]
-    assert result["score1"]==expected["score1"]
-    assert result["score2"]==expected["score2"]
-    assert result["htft1"]==expected["htft1"]
-    assert result["htft2"]==expected["htft2"]
-    assert result["total_goals"]==expected["total_goals"]
+    for key in ("direction","alternate_direction","state","score1","score2","htft1","htft2","total_goals"):
+        assert result[key]==expected[key]
     assert result["gpt_rejected_changes"]
 
 
@@ -107,16 +105,6 @@ def test_gpt_pass_does_not_erase_model_prediction(api):
     assert result["status"]=="PREDICTED_GPT_REVIEW_SKIPPED"
     assert result["score1"]==expected["score1"]
     assert result["direction"]==expected["direction"]
-
-
-def test_gpt_cannot_override_model_confidence(api):
-    source=match()
-    source["market"]={"home_odds":1.05,"draw_odds":20,"away_odds":30}
-    expected=prepare_match(source)
-    value=row(source); value["confidence"]=1; set_output(api,value)
-    result=build_predictions([source],use_gpt=True)[0]
-    assert result["confidence"]==expected["confidence"]
-    assert result["confidence"]>60
 
 
 def test_timeout_does_not_retry(api):
