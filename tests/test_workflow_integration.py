@@ -52,7 +52,7 @@ def test_publish_to_isolated_branch_and_repeat_request(tmp_path,monkeypatch):
         publish(str(report),branch,'test-request-123')
         names=git('--git-dir',str(remote),'ls-tree','--name-only','-r',branch).splitlines()
         assert 'results/test-request-123.json' in names
+        assert 'archive/test-request-123.json' in names
         if branch == 'research-results':
-            assert 'archive/test-request-123.json' in names
             assert 'pages/test-request-123/manifest.json' in names
     assert git('--git-dir',str(remote),'show','main:model.txt')=='frozen'
