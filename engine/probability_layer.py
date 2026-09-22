@@ -29,9 +29,8 @@ def probability_layer(match: dict) -> dict:
     except (KeyError, TypeError, ValueError):
         base = {}
 
-    # V3.2 research result: the full-coverage WDL anchor remains the de-vigged
-    # 1X2 market. Page/fusion probabilities are retained for audit only and
-    # cannot override the direction.
+    # V3.3: market remains the full-coverage WDL anchor. 10027s page
+    # probability is independent evidence for State/Conflict/Value only.
     page_prob = _valid_probabilities(match.get("page_probability"))
     final = {k: base[k] for k in _OUTCOMES} if base else {}
 
@@ -43,6 +42,7 @@ def probability_layer(match: dict) -> dict:
     concentration = vals[0][1] - vals[1][1] if len(vals) >= 2 else None
     pmax = vals[0][1] if vals else None
 
+    page_vals = sorted(page_prob.items(), key=lambda x: x[1], reverse=True)
     return {
         "baseline": base,
         "probabilities": final,
@@ -52,5 +52,8 @@ def probability_layer(match: dict) -> dict:
         "valid": bool(final),
         "source": "market_proportional_devig",
         "page_probability": page_prob,
+        "page_pmax": page_vals[0][1] if page_vals else None,
+        "page_direction": page_vals[0][0] if page_vals else None,
         "page_probability_used_for_direction": False,
+        "page_probability_used_for_state": bool(page_prob),
     }
