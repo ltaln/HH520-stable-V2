@@ -3,7 +3,7 @@
   "info": {
     "title": "HH520 Stable V3.4 - GitHub Actions Bridge",
     "version": "3.4",
-    "description": "Trigger HH520 Stable V3.4 prediction plus isolated Research/Shadow/Forward validation on GitHub Actions. Stable READY responses contain locked scenario-aware predictions; GPT is explanation-only."
+    "description": "Trigger HH520 Stable V3.4 prediction plus isolated Research/Shadow/Forward validation on GitHub Actions. Stable READY responses contain locked scenario-aware predictions; GPT is explanation-only. Dispatch returns HTTP 204 and does not provide workflow run metadata. After any dispatch, preserve the original request_id and poll the matching result endpoint; keep polling while status=PENDING and, when status=READY, render only output_contract.display_rows."
   },
   "servers": [
     {
@@ -64,12 +64,13 @@
         },
         "responses": {
           "200": {
-            "description": "Workflow dispatch accepted by GitHub Actions. GitHub may return workflow run metadata."
+            "description": "Workflow accepted. The response body is not used; continue polling with the same request_id."
           },
           "204": {
-            "description": "Workflow accepted by GitHub Actions."
+            "description": "Workflow accepted. Do not expect workflow run metadata; poll the matching result endpoint with the same request_id."
           }
-        }
+        },
+        "description": " The dispatch response is accepted with HTTP 204; do not wait for or depend on a workflow run ID or run metadata. Keep the same request_id and call the matching result operation to poll."
       }
     },
     "/repos/ltaln/HH520-stable-V2/contents/results/{request_id}.json": {
@@ -267,12 +268,13 @@
         },
         "responses": {
           "200": {
-            "description": "Workflow dispatch accepted by GitHub Actions. GitHub may return workflow run metadata."
+            "description": "Workflow accepted. The response body is not used; continue polling with the same request_id."
           },
           "204": {
-            "description": "Workflow accepted by GitHub Actions."
+            "description": "Workflow accepted. Do not expect workflow run metadata; poll the matching result endpoint with the same request_id."
           }
-        }
+        },
+        "description": " The dispatch response is accepted with HTTP 204; do not wait for or depend on a workflow run ID or run metadata. Keep the same request_id and call the matching result operation to poll."
       }
     },
     "/repos/ltaln/HH520-stable-V2/contents/{directory}/{request_id}.json": {
@@ -550,12 +552,13 @@
         },
         "responses": {
           "200": {
-            "description": "Workflow dispatch accepted by GitHub Actions. GitHub may return workflow run metadata."
+            "description": "Workflow accepted. The response body is not used; continue polling with the same request_id."
           },
           "204": {
-            "description": "Shadow Test workflow accepted by GitHub Actions."
+            "description": "Workflow accepted. Do not expect workflow run metadata; poll the matching result endpoint with the same request_id."
           }
-        }
+        },
+        "description": " The dispatch response is accepted with HTTP 204; do not wait for or depend on a workflow run ID or run metadata. Keep the same request_id and call the matching result operation to poll."
       }
     },
     "/repos/ltaln/HH520-stable-V2/actions/workflows/hh520-forward.yml/dispatches": {
@@ -617,12 +620,13 @@
         },
         "responses": {
           "200": {
-            "description": "Workflow dispatch accepted by GitHub Actions. GitHub may return workflow run metadata."
+            "description": "Workflow accepted. The response body is not used; continue polling with the same request_id."
           },
           "204": {
-            "description": "Forward Test workflow accepted by GitHub Actions."
+            "description": "Workflow accepted. Do not expect workflow run metadata; poll the matching result endpoint with the same request_id."
           }
-        }
+        },
+        "description": " The dispatch response is accepted with HTTP 204; do not wait for or depend on a workflow run ID or run metadata. Keep the same request_id and call the matching result operation to poll."
       }
     }
   },
