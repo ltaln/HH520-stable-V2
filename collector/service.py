@@ -13,7 +13,7 @@ SOURCE_NAME = "HH520_10027s"
 def _source_config(date, source=SOURCE):
     normalized = str(source or SOURCE).lower()
     if normalized != SOURCE:
-        raise ValueError("Stable V3.3 只允许 HH520 10027s 作为正式基础数据源")
+        raise ValueError("Stable V3.4 只允许 HH520 10027s 作为正式基础数据源")
     return {
         "source": SOURCE,
         "source_name": SOURCE_NAME,
@@ -45,11 +45,8 @@ def import_response(date, raw, source=SOURCE):
     if load_cache(date, source=SOURCE) is not None:
         raise ValueError("该日期已有10027s缓存，不覆盖")
     payload = {
-        "date": date,
-        "url": cfg["url"],
-        "source": SOURCE_NAME,
-        "captured_at": datetime.now(timezone.utc).isoformat(),
-        "raw": raw,
+        "date": date, "url": cfg["url"], "source": SOURCE_NAME,
+        "captured_at": datetime.now(timezone.utc).isoformat(), "raw": raw,
     }
     try:
         claim_request(date, source=SOURCE)
@@ -67,15 +64,12 @@ def collect_date(date: str, force_refresh: bool = False, source: str = SOURCE):
     payload = load_cache(date, source=SOURCE)
     if payload is None:
         require_key()
-        allow_resume = os.getenv("HH520_ALLOW_INCOMPLETE_REQUEST_RESUME", "").strip() == "1"
+        allow_resume = os.getenv("HH520_ALLOW_INCOMPLETE_REQUEST_RESUME","").strip() == "1"
         claim_request(date, source=SOURCE, allow_resume_incomplete=allow_resume)
         raw = scrape_markdown(cfg["url"])
         payload = {
-            "date": date,
-            "url": cfg["url"],
-            "source": SOURCE_NAME,
-            "captured_at": datetime.now(timezone.utc).isoformat(),
-            "raw": raw,
+            "date": date, "url": cfg["url"], "source": SOURCE_NAME,
+            "captured_at": datetime.now(timezone.utc).isoformat(), "raw": raw,
         }
         save_cache(date, payload, source=SOURCE)
 
@@ -85,12 +79,10 @@ def collect_date(date: str, force_refresh: bool = False, source: str = SOURCE):
         match["_captured_at"] = payload.get("captured_at")
         match["_source_url"] = payload.get("url")
 
-    timing_summary = {"enabled": False, "attempted": 0, "available": 0}
-    if os.getenv("HH520_GOAL_TIMING_ENABLED", "0").strip() == "1":
-        from .goal_timing_service import enrich_matches_with_goal_timing
-        timing_summary = enrich_matches_with_goal_timing(date, matches)
-
     result = dict(payload)
     result["matches"] = matches
-    result["goal_timing_summary"] = timing_summary
+    result["goal_timing_summary"] = {
+        "enabled": False, "attempted": 0, "available": 0,
+        "formal_chain": False, "reason": "disabled_in_stable_v3_4",
+    }
     return result

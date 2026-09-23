@@ -1,10 +1,11 @@
-"""Stable V3.3 value/confirmation layer.
+"""HH520 Stable V3.4 value diagnostics.
 
-Independent page probability is compared with the market baseline. It can
-confirm or conflict with the market but cannot directly override WDL.
+Page/fusion probability and EV/Kelly fields may be inspected for value/audit
+purposes only. They never confirm, reject, or override the formal FT direction
+or Market Failure Detector tier.
 """
 
-_OUTCOMES = ("home", "draw", "away")
+_OUTCOMES = ("home","draw","away")
 
 
 def value_layer(match: dict, probability: dict) -> dict:
@@ -20,7 +21,7 @@ def value_layer(match: dict, probability: dict) -> dict:
 
     directional_edge = edges.get(direction) if direction else None
     independent_direction = (
-        max(_OUTCOMES, key=lambda k: float(page_probs.get(k, 0.0)))
+        max(_OUTCOMES, key=lambda k: float(page_probs.get(k,0.0)))
         if len(page_probs) == 3 else None
     )
 
@@ -33,6 +34,7 @@ def value_layer(match: dict, probability: dict) -> dict:
         "probability_edges": edges,
         "directional_edge": directional_edge,
         "used_for_direction": False,
-        "used_for_confirmation": bool(page_probs),
+        "used_for_confirmation": False,
+        "diagnostic_only": True,
         "forbidden_advice_fields_used": False,
     }

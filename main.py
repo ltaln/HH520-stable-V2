@@ -16,9 +16,11 @@ def main(argv=None):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8")
     load_dotenv(ROOT / ".env")
-    parser = argparse.ArgumentParser(description="HH520 Stable V3.3：10027s + State/Conflict/Tail + HTFT Timing + Poisson Score")
+    parser = argparse.ArgumentParser(
+        description="HH520 Stable V3.4：10027s + Draw Anchor + Side Layer + Market Failure Detector + FT-conditioned HTFT/Score"
+    )
     parser.add_argument("command", nargs="*", help="预测 YYYY-MM-DD 全部比赛")
-    parser.add_argument("--gpt", action="store_true", help="显式启用GPT解释审核；GPT不得修改冻结模型输出")
+    parser.add_argument("--gpt", action="store_true", help="可选：由服务器端 OpenAI API 做解释审核；不得修改冻结模型输出")
     parser.add_argument("--import-response", type=Path, help="离线导入已保存的Firecrawl响应JSON")
     parser.add_argument("--output", type=Path, help="保存本次结构化结果JSON")
     args = parser.parse_args(argv)
@@ -29,19 +31,16 @@ def main(argv=None):
             raw = json.loads(args.import_response.read_text(encoding="utf-8-sig"))
             import_response(command["date"], raw)
         data = execute_prediction(command["date"], use_gpt=args.gpt)
-        mode = "Stable V3.3 + GPT解释审核" if args.gpt else "Stable V3.3 本地确定性预测"
+        mode = "Stable V3.4 + API解释审核" if args.gpt else "Stable V3.4 确定性预测 + ChatGPT Handoff"
         print(f"日期：{command['date']} | 比赛：{len(data['matches'])} | 模式：{mode}")
         print(f"10027s快照：{data.get('captured_at', '未知')}")
-        timing = data.get("goal_timing_summary") or {}
-        if timing.get("enabled"):
-            print(f"半全场分时补充：尝试 {timing.get('attempted', 0)} 场，获得 {timing.get('available', 0)} 场")
         for prediction in data["predictions"]:
             print("\n" + format_prediction(prediction))
         if args.output:
             args.output.parent.mkdir(parents=True, exist_ok=True)
             report = {
                 key: data[key]
-                for key in ("date", "url", "captured_at", "goal_timing_summary", "predictions", "output_contract", "display_rows")
+                for key in ("date", "url", "captured_at", "predictions", "output_contract", "display_rows")
                 if key in data
             }
             if "gpt_handoff" in data:

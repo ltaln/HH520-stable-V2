@@ -1,4 +1,4 @@
-"""Hard data-quality gate for Stable V3.3 prediction input."""
+"""Hard data-quality gate for HH520 Stable V3.4 production input."""
 import math
 from datetime import datetime, timezone
 
@@ -16,10 +16,10 @@ def _stale_warning(match):
     if not captured:
         return None
     try:
-        stamp = datetime.fromisoformat(str(captured).replace("Z", "+00:00"))
+        stamp = datetime.fromisoformat(str(captured).replace("Z","+00:00"))
         if stamp.tzinfo is None:
             stamp = stamp.replace(tzinfo=timezone.utc)
-        age_h = (datetime.now(timezone.utc) - stamp.astimezone(timezone.utc)).total_seconds() / 3600
+        age_h = (datetime.now(timezone.utc)-stamp.astimezone(timezone.utc)).total_seconds()/3600
         match_day = str(match.get("date") or "")
         today = datetime.now(timezone.utc).date().isoformat()
         if match_day >= today and age_h > 12:
@@ -30,16 +30,15 @@ def _stale_warning(match):
 
 
 def data_quality_gate(match: dict, probability: dict) -> dict:
-    errors = []
-    warnings = []
+    errors, warnings = [], []
 
-    for key in ("match_id", "home_team", "away_team", "league"):
-        if not str(match.get(key, "")).strip():
+    for key in ("match_id","home_team","away_team","league"):
+        if not str(match.get(key,"")).strip():
             errors.append(f"missing:{key}")
 
     market = match.get("market") or {}
     odds = {}
-    for key in ("home_odds", "draw_odds", "away_odds"):
+    for key in ("home_odds","draw_odds","away_odds"):
         number = _finite_number(market.get(key))
         if number is None or number <= 1.0:
             errors.append(f"invalid_market:{key}")
@@ -52,12 +51,12 @@ def data_quality_gate(match: dict, probability: dict) -> dict:
     probs = probability.get("probabilities") or {}
     if probs:
         total = sum(probs.values())
-        if abs(total - 1.0) > 0.001:
+        if abs(total-1.0) > 0.001:
             errors.append("probability_not_normalized")
         if max(probs.values()) > 0.90:
             warnings.append("extreme_probability")
 
-    if match.get("home_team") and match.get("away_team") and match.get("home_team") == match.get("away_team"):
+    if match.get("home_team") and match.get("home_team") == match.get("away_team"):
         errors.append("same_team")
 
     factors = match.get("research_factors") or {}
@@ -79,10 +78,6 @@ def data_quality_gate(match: dict, probability: dict) -> dict:
     if len(page) != 3:
         warnings.append("page_probability_missing")
 
-    timing = match.get("goal_timing") or {}
-    if not timing.get("available"):
-        warnings.append("goal_timing_missing")
-
     stale = _stale_warning(match)
     if stale:
         warnings.append(stale)
@@ -92,5 +87,5 @@ def data_quality_gate(match: dict, probability: dict) -> dict:
         "errors": errors,
         "warnings": warnings,
         "market": odds,
-        "goal_timing_available": bool(timing.get("available")),
+        "formal_source": "HH520_10027s_ONLY",
     }
