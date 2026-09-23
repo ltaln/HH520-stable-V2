@@ -46,7 +46,7 @@ def test_page_probability_is_diagnostic_only():
     assert p["direction"]=="home"
     assert p["page_probability_used_for_direction"] is False
     assert p["page_probability_used_for_state"] is False
-    assert v["used_for_confirmation"] is True
+    assert v["used_for_confirmation"] is False
     assert v["independent_direction"]=="away"
 
 
