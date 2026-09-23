@@ -85,6 +85,23 @@ jobs:
       - name: Publish READY result
         if: steps.execute.outcome == 'success'
         run: python scripts/publish_action_result.py "_action_out/$REQUEST_ID.json" "action-results" "$REQUEST_ID"
+      - name: Verify published prediction contract
+        if: steps.execute.outcome == 'success'
+        run: |
+          set -euo pipefail
+          git fetch origin action-results
+          git show origin/action-results:results/$REQUEST_ID.json > /tmp/hh520-result.json
+          python - <<'PY'
+          import json
+          import os
+          p='/tmp/hh520-result.json'
+          data=json.load(open(p,encoding='utf-8'))
+          assert data.get('status') == 'READY', data
+          assert data.get('request_id') == os.environ['REQUEST_ID'], data
+          rows=data.get('display_rows') or data.get('output_contract',{}).get('display_rows')
+          assert isinstance(rows,list), data
+          print('HH520 READY contract verified:', len(rows), 'rows')
+          PY
       - name: Publish FAILED state
         if: failure() && steps.execute.outcome != 'success'
         run: python scripts/publish_action_status.py action-results "$REQUEST_ID" FAILED stable
