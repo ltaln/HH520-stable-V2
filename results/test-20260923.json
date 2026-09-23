@@ -1,8 +1,114 @@
 {
-  "status": "PENDING",
-  "kind": "stable",
+  "status": "READY",
+  "kind": "prediction",
   "request_id": "test-20260923",
-  "message": "Workflow accepted and is still running.",
+  "date": "2026-09-23",
+  "url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-23&riqi_end=2026-09-23&threshold=1&bankroll=5000",
+  "captured_at": "2026-09-23T12:53:43.669144+00:00",
+  "goal_timing_summary": null,
+  "predictions": [
+    {
+      "match_id": "1",
+      "home_team": "中国亚",
+      "away_team": "阿联酋亚",
+      "status": "SKIP",
+      "stable_version": "HH520 Stable V3.4",
+      "direction": null,
+      "alternate_direction": null,
+      "state": "PASS",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "reason": "已有比分，不作为赛前预测"
+    },
+    {
+      "match_id": "3",
+      "home_team": "西雅图",
+      "away_team": "盐湖城",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.4",
+      "direction": "主胜",
+      "alternate_direction": "客胜",
+      "state": "CONFIRM",
+      "base_state": "CONFIRM",
+      "market_probability": 0.49734835133143207,
+      "page_probability": {
+        "home": 0.47474747474747475,
+        "draw": 0.25252525252525254,
+        "away": 0.2727272727272727
+      },
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "2:1",
+      "score2": "2:0",
+      "score1_probability": 0.16551827037231437,
+      "score2_probability": 0.08672364465615275,
+      "htft1": "主/主",
+      "htft2": "平/主",
+      "htft1_probability": 0.346894578624611,
+      "htft2_probability": 0.1387578314498444,
+      "total_goals": "3球",
+      "total_goals_probability": 0.2766291384788472,
+      "timing_used": false,
+      "timing_source": null,
+      "quality_warnings": [],
+      "reason": "市场方向通过 Failure Detector，正常采用"
+    }
+  ],
+  "output_contract": {
+    "version": "HH520-OUTPUT-V3.4",
+    "stable_version": "HH520 Stable V3.4",
+    "strict": true,
+    "required_columns": [
+      "球队对阵",
+      "胜平负场景",
+      "市场概率",
+      "比分×2及概率",
+      "半全场×2及概率",
+      "总进球及概率"
+    ],
+    "display_rows": [
+      {
+        "球队对阵": "中国亚 vs 阿联酋亚",
+        "胜平负场景": "未提供（回避）",
+        "市场概率": "未提供",
+        "比分×2及概率": "未提供 (未提供) / 未提供 (未提供)",
+        "半全场×2及概率": "未提供 (未提供) / 未提供 (未提供)",
+        "总进球及概率": "未提供 (未提供)"
+      },
+      {
+        "球队对阵": "西雅图 vs 盐湖城",
+        "胜平负场景": "主胜（确认）",
+        "市场概率": "49.7%",
+        "比分×2及概率": "2:1 (16.6%) / 2:0 (8.7%)",
+        "半全场×2及概率": "主/主 (34.7%) / 平/主 (13.9%)",
+        "总进球及概率": "3球 (27.7%)"
+      }
+    ],
+    "render_rule": "必须按6列完整输出；市场概率=官方赔率去水概率；括号状态仅表示市场可靠度；不得把比分/半全场条件概率解释成FT自信度。"
+  },
+  "display_rows": [
+    {
+      "球队对阵": "中国亚 vs 阿联酋亚",
+      "胜平负场景": "未提供（回避）",
+      "市场概率": "未提供",
+      "比分×2及概率": "未提供 (未提供) / 未提供 (未提供)",
+      "半全场×2及概率": "未提供 (未提供) / 未提供 (未提供)",
+      "总进球及概率": "未提供 (未提供)"
+    },
+    {
+      "球队对阵": "西雅图 vs 盐湖城",
+      "胜平负场景": "主胜（确认）",
+      "市场概率": "49.7%",
+      "比分×2及概率": "2:1 (16.6%) / 2:0 (8.7%)",
+      "半全场×2及概率": "主/主 (34.7%) / 平/主 (13.9%)",
+      "总进球及概率": "3球 (27.7%)"
+    }
+  ],
+  "archive_path": "archive/test-20260923.json",
+  "message": "Prediction READY. Polling payload is compact; render the strict 6-column output_contract.display_rows. Full audit data is in archive_path.",
   "_action": {
     "request_id": "test-20260923",
     "repository": "ltaln/HH520-stable-V2",

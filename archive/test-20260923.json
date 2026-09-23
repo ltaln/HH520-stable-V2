@@ -1,0 +1,1168 @@
+{
+  "date": "2026-09-23",
+  "url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-23&riqi_end=2026-09-23&threshold=1&bankroll=5000",
+  "captured_at": "2026-09-23T12:53:43.669144+00:00",
+  "predictions": [
+    {
+      "match_id": "1",
+      "home_team": "中国亚",
+      "away_team": "阿联酋亚",
+      "score1": "未提供",
+      "score2": "未提供",
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "total_goals": "未提供",
+      "confidence": 0,
+      "status": "SKIP",
+      "reason": "已有比分，不作为赛前预测",
+      "direction": null,
+      "alternate_direction": null,
+      "state": "PASS",
+      "stable_version": "HH520 Stable V3.4"
+    },
+    {
+      "match_id": "3",
+      "home_team": "西雅图",
+      "away_team": "盐湖城",
+      "score1": "2:1",
+      "score2": "2:0",
+      "htft1": "主/主",
+      "htft2": "平/主",
+      "total_goals": "3球",
+      "confidence": 50,
+      "status": "PREDICTED",
+      "reason": "市场方向通过 Failure Detector，正常采用",
+      "direction": "主胜",
+      "alternate_direction": "客胜",
+      "state": "CONFIRM",
+      "stable_version": "HH520 Stable V3.4",
+      "base_state": "CONFIRM",
+      "state_label": "确认",
+      "decision_filter": {
+        "version": "HH520 Decision Filter V3.4",
+        "decision": "CONFIRM",
+        "allow_prediction": true,
+        "strong_recommendation": true,
+        "decision_score": 0.49556368374944426,
+        "hard_pass": false,
+        "state": "CONFIRM",
+        "base_state": "CONFIRM",
+        "primary_direction": "home",
+        "alternate_direction": "away",
+        "tail_alert": false,
+        "draw_candidate": false,
+        "risk": "CONFIRM",
+        "risk_score": 0,
+        "risk_reasons": [],
+        "risk_is_advisory": true,
+        "failure_detector": {
+          "version": "HH520 Market Failure Detector V1",
+          "valid": true,
+          "tier": "CONFIRM",
+          "risk_score": 0,
+          "favorite": "home",
+          "favorite_probability": 0.49734835133143207,
+          "oriented_features": {
+            "possession": 3.1700000000000017,
+            "attack": 4.0,
+            "defense": 0.8300000000000001,
+            "h2h": -9.0,
+            "form": -0.6699999999999999
+          },
+          "signals": [],
+          "probability_overridden": false,
+          "development_note": "candidate thresholds; forward validation required"
+        },
+        "match_type": "standard",
+        "reasons": [],
+        "source": "HH520_10027s_ONLY",
+        "selection_rule": "MARKET_FAILURE_DETECTOR_V1",
+        "forbidden_advice_fields_used": false,
+        "value_layer_used_for_direction": false,
+        "value_layer_used_for_confirmation": false
+      },
+      "stable_v34_direction": "主胜",
+      "stable_v34_decision": "CONFIRM",
+      "ft_confidence": 0.49556368374944426,
+      "market_probability": 0.49734835133143207,
+      "model_probability": 0.49556368374944426,
+      "draw_anchor": 0.24726332584996957,
+      "home_share": 0.6583493282149713,
+      "risk_tier": "CONFIRM",
+      "risk_score": 0,
+      "page_probability": {
+        "home": 0.47474747474747475,
+        "draw": 0.25252525252525254,
+        "away": 0.2727272727272727
+      },
+      "tail_alert": false,
+      "draw_candidate": false,
+      "calibration": {
+        "valid": true,
+        "diagnostic_only": true,
+        "model_version": "HH520 Stable V3.4",
+        "market_probability": 0.49556368374944426,
+        "reliability_band": "BALANCED",
+        "historical_direction_accuracy": 0.45481481481481484,
+        "development_period": "2026-05-01..2026-09-20",
+        "changes_prediction_probability": false,
+        "changes_failure_tier": false
+      },
+      "timing_used": false,
+      "timing_source": null,
+      "quality_warnings": [],
+      "score1_probability": 0.16551827037231437,
+      "score2_probability": 0.08672364465615275,
+      "htft1_probability": 0.346894578624611,
+      "htft2_probability": 0.1387578314498444,
+      "total_goals_probability": 0.2766291384788472,
+      "lambda_home": null,
+      "lambda_away": null,
+      "high_score_mass": 0.27179406320660215,
+      "tail_score_candidates": [
+        {
+          "score": "3:1",
+          "home": 3,
+          "away": 1,
+          "outcome": "HOME",
+          "direction": "主胜",
+          "probability": 0.05272797595094087
+        },
+        {
+          "score": "3:0",
+          "home": 3,
+          "away": 0,
+          "outcome": "HOME",
+          "direction": "主胜",
+          "probability": 0.0471776626929471
+        }
+      ],
+      "htft_model": "FT_CONDITIONAL_TEMPLATE_V1",
+      "score_model": "HTFT_SCORE_TEMPLATE_V1",
+      "consistency": {
+        "valid": true,
+        "primary_direction": "home",
+        "alternate_direction": null,
+        "htft_top": [
+          {
+            "selection": "主/主",
+            "ht": "HOME",
+            "ft": "HOME",
+            "conditional_probability": 0.7,
+            "probability": 0.346894578624611
+          },
+          {
+            "selection": "平/主",
+            "ht": "DRAW",
+            "ft": "HOME",
+            "conditional_probability": 0.28,
+            "probability": 0.1387578314498444
+          }
+        ],
+        "score_top": [
+          {
+            "score": "2:1",
+            "home": 2,
+            "away": 1,
+            "outcome": "HOME",
+            "direction": "主胜",
+            "probability": 0.16551827037231437
+          },
+          {
+            "score": "2:0",
+            "home": 2,
+            "away": 0,
+            "outcome": "HOME",
+            "direction": "主胜",
+            "probability": 0.08672364465615275
+          }
+        ],
+        "tail_alert": false,
+        "warnings": [],
+        "probability_conservation": {
+          "wdl_anchor_unchanged": true,
+          "htft_ft_marginal_preserved": true,
+          "score_distribution_unchanged": true
+        }
+      }
+    }
+  ],
+  "output_contract": {
+    "version": "HH520-OUTPUT-V3.4",
+    "stable_version": "HH520 Stable V3.4",
+    "strict": true,
+    "required_columns": [
+      "球队对阵",
+      "胜平负场景",
+      "市场概率",
+      "比分×2及概率",
+      "半全场×2及概率",
+      "总进球及概率"
+    ],
+    "display_rows": [
+      {
+        "球队对阵": "中国亚 vs 阿联酋亚",
+        "胜平负场景": "未提供（回避）",
+        "市场概率": "未提供",
+        "比分×2及概率": "未提供 (未提供) / 未提供 (未提供)",
+        "半全场×2及概率": "未提供 (未提供) / 未提供 (未提供)",
+        "总进球及概率": "未提供 (未提供)"
+      },
+      {
+        "球队对阵": "西雅图 vs 盐湖城",
+        "胜平负场景": "主胜（确认）",
+        "市场概率": "49.7%",
+        "比分×2及概率": "2:1 (16.6%) / 2:0 (8.7%)",
+        "半全场×2及概率": "主/主 (34.7%) / 平/主 (13.9%)",
+        "总进球及概率": "3球 (27.7%)"
+      }
+    ],
+    "render_rule": "必须按6列完整输出；市场概率=官方赔率去水概率；括号状态仅表示市场可靠度；不得把比分/半全场条件概率解释成FT自信度。"
+  },
+  "display_rows": [
+    {
+      "球队对阵": "中国亚 vs 阿联酋亚",
+      "胜平负场景": "未提供（回避）",
+      "市场概率": "未提供",
+      "比分×2及概率": "未提供 (未提供) / 未提供 (未提供)",
+      "半全场×2及概率": "未提供 (未提供) / 未提供 (未提供)",
+      "总进球及概率": "未提供 (未提供)"
+    },
+    {
+      "球队对阵": "西雅图 vs 盐湖城",
+      "胜平负场景": "主胜（确认）",
+      "市场概率": "49.7%",
+      "比分×2及概率": "2:1 (16.6%) / 2:0 (8.7%)",
+      "半全场×2及概率": "主/主 (34.7%) / 平/主 (13.9%)",
+      "总进球及概率": "3球 (27.7%)"
+    }
+  ],
+  "gpt_handoff": {
+    "role": "EXPLANATION_ONLY",
+    "stable_version": "HH520 Stable V3.4",
+    "prompt_version": "HH520_Stable_V3_4_Prediction_Prompt.md",
+    "prompt": "# HH520 Stable V3.4 Prediction Prompt\n\n你是 HH520 Stable V3.4 的解释与审核层，不是预测生成器。\n\n正式预测由本地 V3.4 链生成。GPT 只能解释 locked_prediction，不能重新计算、改写或翻转结果。\n\n## V3.4 核心\n1. 正式数据源：HH520 10027S。\n2. Market De-vig：官方1X2赔率去水，作为市场基准。\n3. Draw Layer：平局概率使用 Draw Anchor。\n4. Side Layer：非平局概率池由 Market HomeShare 分配。\n5. Market Failure Detector：控球/进攻/防守/交锋/状态只判断市场可靠度，不直接改概率。\n6. 风险等级：CONFIRM / BALANCED / TAIL_ALERT / PASS。\n7. Value Layer：只作价值诊断，不决定胜平负方向。\n8. HTFT：由 FT 条件生成，不独立重算。\n9. Score：由 HTFT 条件比分模板生成，不使用正式 Pooled Poisson。\n10. GPT：EXPLANATION_ONLY。\n\n## 概率语义\n- market_probability = 官方赔率去水概率。\n- model_probability = Draw Anchor + Side Layer 后的模型基础概率。\n- Risk Tier = 市场可靠度，不是命中概率。\n- HTFT probability = 条件联合概率。\n- Score probability = 条件比分模板概率。\n\n## 禁止\n- 不得修改 direction / state / score / HTFT / total_goals。\n- 不得用建议下注、是否下注、page_prediction 改方向。\n- 不得把 10027S 融合真实概率当作正式方向覆盖器。\n- 不得把赛后比分、赛后事件作为赛前输入。\n- 不得引入未采集的伤停、阵容、天气、舆情事实。\n- 不得把 PASS 自动翻成反方向；PASS 仅表示市场方向不作为强推荐。\n\n## 输出\n必须逐字复制 locked_prediction 的：\n- direction\n- alternate_direction\n- state\n- score1\n- score2\n- htft1\n- htft2\n- total_goals\n\nreason 只能解释 Market Probability / Draw Anchor / HomeShare / Failure Detector / Risk Tier / 条件链，不得重算预测。\n",
+    "config": {
+      "project": {
+        "name": "HH520 Stable V3.4",
+        "version": "3.4"
+      },
+      "source": {
+        "page": "10027s",
+        "base_url": "https://www.hh520.com/tx/10027s.php",
+        "date_params": [
+          "riqi_start",
+          "riqi_end"
+        ],
+        "threshold": 1,
+        "bankroll": 5000,
+        "formal_source_only": true
+      },
+      "firecrawl": {
+        "endpoint": "https://api.firecrawl.dev/v2/scrape",
+        "formats": [
+          "markdown"
+        ],
+        "only_main_content": true,
+        "proxy": "basic",
+        "store_in_cache": true,
+        "max_age_ms": 0,
+        "one_request_per_date": true
+      },
+      "goal_timing": {
+        "enabled_in_actions": false,
+        "formal_chain": false,
+        "research_compatibility_only": true,
+        "failure_blocks_prediction": false
+      },
+      "prediction": {
+        "model_artifact": "model_artifacts/HH520_Stable_V3_4.json",
+        "wdl_model": "DRAW_ANCHOR_PLUS_MARKET_SIDE_SHARE",
+        "market_devig": true,
+        "draw_anchor": {
+          "market_weight": 0.789,
+          "center_weight": 0.211,
+          "center": 0.2574
+        },
+        "side_layer": "MARKET_HOME_SHARE",
+        "page_probability_for_direction": false,
+        "page_probability_for_state": false,
+        "market_failure_detector": "V1",
+        "risk_tiers": [
+          "CONFIRM",
+          "BALANCED",
+          "TAIL_ALERT",
+          "PASS"
+        ],
+        "automatic_market_override": false,
+        "automatic_draw_override": false,
+        "htft_model": "FT_CONDITIONAL_TEMPLATE_V1",
+        "htft_preserve_ft_marginal": true,
+        "score_model": "HTFT_SCORE_TEMPLATE_V1",
+        "pooled_poisson_formal": false,
+        "use_probability_layer": true,
+        "use_value_layer": true,
+        "use_decision_filter": true,
+        "use_consistency_layer": true,
+        "use_calibration_diagnostics": true,
+        "decision_filter_version": "3.4",
+        "decision_filter_mode": "market_failure_detector_v1",
+        "allow_pass": true,
+        "gpt_role": "EXPLANATION_ONLY"
+      },
+      "output": {
+        "version": "HH520-OUTPUT-V3.4",
+        "columns": [
+          "球队对阵",
+          "胜平负场景",
+          "市场概率",
+          "比分×2及概率",
+          "半全场×2及概率",
+          "总进球及概率"
+        ],
+        "semantics": {
+          "market_probability": "官方赔率去水概率",
+          "model_probability": "Draw Anchor + Side Layer 后概率",
+          "risk_tier": "市场可靠度，不是概率",
+          "htft_probability": "条件联合概率",
+          "score_probability": "HTFT 条件模板概率"
+        },
+        "hidden_from_formal_table": [
+          "通用模糊自信度",
+          "最终筛选"
+        ]
+      },
+      "research": {
+        "enabled": true,
+        "auto_tune_stable": false,
+        "v34_development_window": "2026-09-10..2026-09-20",
+        "forward_validation_required": true,
+        "candidate_changes_never_auto_promote": true
+      }
+    },
+    "matches": [
+      {
+        "match_id": "3",
+        "home_team": "西雅图",
+        "away_team": "盐湖城",
+        "league": "美职",
+        "kickoff": "09:30",
+        "market": {
+          "home_odds": 1.78,
+          "draw_odds": 3.62,
+          "away_odds": 3.43
+        },
+        "research_factors": {
+          "home_attack": 5.0,
+          "away_attack": 1.0,
+          "home_defense": 1.33,
+          "away_defense": 0.5,
+          "home_h2h": 4.0,
+          "away_h2h": 13.0,
+          "home_form": 1.5,
+          "away_form": 2.17,
+          "odds_judgement": "",
+          "draw_odds": 3.62,
+          "fusion_draw": 25.2,
+          "advantage_diff": 20.79,
+          "draw_composite_score": 0.0,
+          "advantage_side": "主",
+          "structure": "均衡",
+          "consistency": "⚠️部分",
+          "pattern": "🚫 平局分为0",
+          "rating_score": 70.0,
+          "rating": "B",
+          "risk": "中低",
+          "handicap": "主让平半低水/半球高水",
+          "handicap_features": {
+            "raw": "主让平半低水/半球高水",
+            "side": "home",
+            "primary_line": "平半",
+            "secondary_line": "半球",
+            "primary_water": "low",
+            "secondary_water": "high"
+          },
+          "ignore": "忽略",
+          "attack": null,
+          "defense": null,
+          "h2h": null,
+          "form": null,
+          "water_level": "",
+          "home_water": null,
+          "away_water": null
+        },
+        "analysis": {
+          "probability": {
+            "baseline": {
+              "home": 0.49734835133143207,
+              "draw": 0.24455250424584227,
+              "away": 0.25809914442272563,
+              "overround": 0.12958603623601395
+            },
+            "market_probabilities": {
+              "home": 0.49734835133143207,
+              "draw": 0.24455250424584227,
+              "away": 0.25809914442272563,
+              "overround": 0.12958603623601395
+            },
+            "probabilities": {
+              "home": 0.49556368374944426,
+              "draw": 0.24726332584996957,
+              "away": 0.25717299040058617
+            },
+            "direction": "home",
+            "concentration": 0.2383906933488581,
+            "pmax": 0.49556368374944426,
+            "valid": true,
+            "source": "market_draw_anchor_side_share_v3_4",
+            "draw_market_probability": 0.24455250424584227,
+            "draw_anchor": 0.24726332584996957,
+            "draw_anchor_formula": "0.789*market_draw + 0.211*0.2574",
+            "home_share": 0.6583493282149713,
+            "side_pool": 0.7527366741500304,
+            "market_side_favorite": "home",
+            "market_side_favorite_probability": 0.49734835133143207,
+            "page_probability": {
+              "home": 0.47474747474747475,
+              "draw": 0.25252525252525254,
+              "away": 0.2727272727272727
+            },
+            "page_pmax": 0.47474747474747475,
+            "page_direction": "home",
+            "page_probability_used_for_direction": false,
+            "page_probability_used_for_state": false
+          },
+          "decision": {
+            "version": "HH520 Decision Filter V3.4",
+            "decision": "CONFIRM",
+            "allow_prediction": true,
+            "strong_recommendation": true,
+            "decision_score": 0.49556368374944426,
+            "hard_pass": false,
+            "state": "CONFIRM",
+            "base_state": "CONFIRM",
+            "primary_direction": "home",
+            "alternate_direction": "away",
+            "tail_alert": false,
+            "draw_candidate": false,
+            "risk": "CONFIRM",
+            "risk_score": 0,
+            "risk_reasons": [],
+            "risk_is_advisory": true,
+            "failure_detector": {
+              "version": "HH520 Market Failure Detector V1",
+              "valid": true,
+              "tier": "CONFIRM",
+              "risk_score": 0,
+              "favorite": "home",
+              "favorite_probability": 0.49734835133143207,
+              "oriented_features": {
+                "possession": 3.1700000000000017,
+                "attack": 4.0,
+                "defense": 0.8300000000000001,
+                "h2h": -9.0,
+                "form": -0.6699999999999999
+              },
+              "signals": [],
+              "probability_overridden": false,
+              "development_note": "candidate thresholds; forward validation required"
+            },
+            "match_type": "standard",
+            "reasons": [],
+            "source": "HH520_10027s_ONLY",
+            "selection_rule": "MARKET_FAILURE_DETECTOR_V1",
+            "forbidden_advice_fields_used": false,
+            "value_layer_used_for_direction": false,
+            "value_layer_used_for_confirmation": false
+          },
+          "calibration": {
+            "valid": true,
+            "diagnostic_only": true,
+            "model_version": "HH520 Stable V3.4",
+            "market_probability": 0.49556368374944426,
+            "reliability_band": "BALANCED",
+            "historical_direction_accuracy": 0.45481481481481484,
+            "development_period": "2026-05-01..2026-09-20",
+            "changes_prediction_probability": false,
+            "changes_failure_tier": false
+          },
+          "consistency": {
+            "valid": true,
+            "primary_direction": "home",
+            "alternate_direction": null,
+            "htft_top": [
+              {
+                "selection": "主/主",
+                "ht": "HOME",
+                "ft": "HOME",
+                "conditional_probability": 0.7,
+                "probability": 0.346894578624611
+              },
+              {
+                "selection": "平/主",
+                "ht": "DRAW",
+                "ft": "HOME",
+                "conditional_probability": 0.28,
+                "probability": 0.1387578314498444
+              }
+            ],
+            "score_top": [
+              {
+                "score": "2:1",
+                "home": 2,
+                "away": 1,
+                "outcome": "HOME",
+                "direction": "主胜",
+                "probability": 0.16551827037231437
+              },
+              {
+                "score": "2:0",
+                "home": 2,
+                "away": 0,
+                "outcome": "HOME",
+                "direction": "主胜",
+                "probability": 0.08672364465615275
+              }
+            ],
+            "tail_alert": false,
+            "warnings": [],
+            "probability_conservation": {
+              "wdl_anchor_unchanged": true,
+              "htft_ft_marginal_preserved": true,
+              "score_distribution_unchanged": true
+            }
+          },
+          "htft": {
+            "valid": true,
+            "model": "FT_CONDITIONAL_TEMPLATE_V1",
+            "top": [
+              {
+                "selection": "主/主",
+                "ht": "HOME",
+                "ft": "HOME",
+                "conditional_probability": 0.7,
+                "probability": 0.346894578624611
+              },
+              {
+                "selection": "平/主",
+                "ht": "DRAW",
+                "ft": "HOME",
+                "conditional_probability": 0.28,
+                "probability": 0.1387578314498444
+              },
+              {
+                "selection": "客/主",
+                "ht": "AWAY",
+                "ft": "HOME",
+                "conditional_probability": 0.02,
+                "probability": 0.009911273674988886
+              }
+            ],
+            "distribution": [
+              {
+                "selection": "主/主",
+                "ht": "HOME",
+                "ft": "HOME",
+                "conditional_probability": 0.7,
+                "probability": 0.346894578624611
+              },
+              {
+                "selection": "平/主",
+                "ht": "DRAW",
+                "ft": "HOME",
+                "conditional_probability": 0.28,
+                "probability": 0.1387578314498444
+              },
+              {
+                "selection": "客/客",
+                "ht": "AWAY",
+                "ft": "AWAY",
+                "conditional_probability": 0.5,
+                "probability": 0.12858649520029308
+              },
+              {
+                "selection": "平/平",
+                "ht": "DRAW",
+                "ft": "DRAW",
+                "conditional_probability": 0.5,
+                "probability": 0.12363166292498479
+              },
+              {
+                "selection": "平/客",
+                "ht": "DRAW",
+                "ft": "AWAY",
+                "conditional_probability": 0.46,
+                "probability": 0.11829957558426964
+              },
+              {
+                "selection": "主/平",
+                "ht": "HOME",
+                "ft": "DRAW",
+                "conditional_probability": 0.27,
+                "probability": 0.06676109797949178
+              },
+              {
+                "selection": "客/平",
+                "ht": "AWAY",
+                "ft": "DRAW",
+                "conditional_probability": 0.23,
+                "probability": 0.056870564945493
+              },
+              {
+                "selection": "主/客",
+                "ht": "HOME",
+                "ft": "AWAY",
+                "conditional_probability": 0.04,
+                "probability": 0.010286919616023446
+              },
+              {
+                "selection": "客/主",
+                "ht": "AWAY",
+                "ft": "HOME",
+                "conditional_probability": 0.02,
+                "probability": 0.009911273674988886
+              }
+            ],
+            "timing_used": false,
+            "timing_source": null,
+            "timing_mode": null,
+            "ft_marginal_preserved": true,
+            "risk_tier": "CONFIRM"
+          },
+          "score": {
+            "valid": true,
+            "model": "HTFT_SCORE_TEMPLATE_V1",
+            "top_scores": [
+              {
+                "score": "2:1",
+                "home": 2,
+                "away": 1,
+                "outcome": "HOME",
+                "direction": "主胜",
+                "probability": 0.16551827037231437
+              },
+              {
+                "score": "2:0",
+                "home": 2,
+                "away": 0,
+                "outcome": "HOME",
+                "direction": "主胜",
+                "probability": 0.08672364465615275
+              },
+              {
+                "score": "1:0",
+                "home": 1,
+                "away": 0,
+                "outcome": "HOME",
+                "direction": "主胜",
+                "probability": 0.07463189077266633
+              },
+              {
+                "score": "3:1",
+                "home": 3,
+                "away": 1,
+                "outcome": "HOME",
+                "direction": "主胜",
+                "probability": 0.05272797595094087
+              },
+              {
+                "score": "3:0",
+                "home": 3,
+                "away": 0,
+                "outcome": "HOME",
+                "direction": "主胜",
+                "probability": 0.0471776626929471
+              }
+            ],
+            "all_scores": [
+              {
+                "score": "2:1",
+                "home": 2,
+                "away": 1,
+                "outcome": "HOME",
+                "direction": "主胜",
+                "probability": 0.16551827037231437
+              },
+              {
+                "score": "1:1",
+                "home": 1,
+                "away": 1,
+                "outcome": "DRAW",
+                "direction": "平",
+                "probability": 0.13543106883454534
+              },
+              {
+                "score": "2:0",
+                "home": 2,
+                "away": 0,
+                "outcome": "HOME",
+                "direction": "主胜",
+                "probability": 0.08672364465615275
+              },
+              {
+                "score": "1:0",
+                "home": 1,
+                "away": 0,
+                "outcome": "HOME",
+                "direction": "主胜",
+                "probability": 0.07463189077266633
+              },
+              {
+                "score": "0:1",
+                "home": 0,
+                "away": 1,
+                "outcome": "AWAY",
+                "direction": "客胜",
+                "probability": 0.06964244580047874
+              },
+              {
+                "score": "0:0",
+                "home": 0,
+                "away": 0,
+                "outcome": "DRAW",
+                "direction": "平",
+                "probability": 0.05884867155229276
+              },
+              {
+                "score": "3:1",
+                "home": 3,
+                "away": 1,
+                "outcome": "HOME",
+                "direction": "主胜",
+                "probability": 0.05272797595094087
+              },
+              {
+                "score": "1:2",
+                "home": 1,
+                "away": 2,
+                "outcome": "AWAY",
+                "direction": "客胜",
+                "probability": 0.05040590611851489
+              },
+              {
+                "score": "2:2",
+                "home": 2,
+                "away": 2,
+                "outcome": "DRAW",
+                "direction": "平",
+                "probability": 0.04729652896858218
+              },
+              {
+                "score": "3:0",
+                "home": 3,
+                "away": 0,
+                "outcome": "HOME",
+                "direction": "主胜",
+                "probability": 0.0471776626929471
+              },
+              {
+                "score": "3:2",
+                "home": 3,
+                "away": 2,
+                "outcome": "HOME",
+                "direction": "主胜",
+                "probability": 0.04588919711519854
+              },
+              {
+                "score": "1:3",
+                "home": 1,
+                "away": 3,
+                "outcome": "AWAY",
+                "direction": "客胜",
+                "probability": 0.04310219319113825
+              },
+              {
+                "score": "0:2",
+                "home": 0,
+                "away": 2,
+                "outcome": "AWAY",
+                "direction": "客胜",
+                "probability": 0.0397075097178505
+              },
+              {
+                "score": "4:0",
+                "home": 4,
+                "away": 0,
+                "outcome": "HOME",
+                "direction": "主胜",
+                "probability": 0.01734472893123055
+              },
+              {
+                "score": "2:3",
+                "home": 2,
+                "away": 3,
+                "outcome": "AWAY",
+                "direction": "客胜",
+                "probability": 0.016973417366438686
+              },
+              {
+                "score": "0:3",
+                "home": 0,
+                "away": 3,
+                "outcome": "AWAY",
+                "direction": "客胜",
+                "probability": 0.013527299295070832
+              },
+              {
+                "score": "2:4",
+                "home": 2,
+                "away": 4,
+                "outcome": "AWAY",
+                "direction": "客胜",
+                "probability": 0.010286919616023446
+              },
+              {
+                "score": "1:4",
+                "home": 1,
+                "away": 4,
+                "outcome": "AWAY",
+                "direction": "客胜",
+                "probability": 0.009978312027542744
+              },
+              {
+                "score": "3:3",
+                "home": 3,
+                "away": 3,
+                "outcome": "DRAW",
+                "direction": "平",
+                "probability": 0.0056870564945493
+              },
+              {
+                "score": "4:1",
+                "home": 4,
+                "away": 1,
+                "outcome": "HOME",
+                "direction": "主胜",
+                "probability": 0.005550313257993777
+              },
+              {
+                "score": "0:4",
+                "home": 0,
+                "away": 4,
+                "outcome": "AWAY",
+                "direction": "客胜",
+                "probability": 0.003548987267528089
+              }
+            ],
+            "tail_scores": [
+              {
+                "score": "3:1",
+                "home": 3,
+                "away": 1,
+                "outcome": "HOME",
+                "direction": "主胜",
+                "probability": 0.05272797595094087
+              },
+              {
+                "score": "3:0",
+                "home": 3,
+                "away": 0,
+                "outcome": "HOME",
+                "direction": "主胜",
+                "probability": 0.0471776626929471
+              },
+              {
+                "score": "3:2",
+                "home": 3,
+                "away": 2,
+                "outcome": "HOME",
+                "direction": "主胜",
+                "probability": 0.04588919711519854
+              },
+              {
+                "score": "1:3",
+                "home": 1,
+                "away": 3,
+                "outcome": "AWAY",
+                "direction": "客胜",
+                "probability": 0.04310219319113825
+              },
+              {
+                "score": "4:0",
+                "home": 4,
+                "away": 0,
+                "outcome": "HOME",
+                "direction": "主胜",
+                "probability": 0.01734472893123055
+              }
+            ],
+            "high_score_mass": 0.27179406320660215,
+            "top_totals": [
+              {
+                "goals": 3,
+                "probability": 0.2766291384788472
+              },
+              {
+                "goals": 2,
+                "probability": 0.2618622232085486
+              },
+              {
+                "goals": 4,
+                "probability": 0.16402041430941994
+              },
+              {
+                "goals": 1,
+                "probability": 0.14427433657314506
+              },
+              {
+                "goals": 5,
+                "probability": 0.07839123976717373
+              }
+            ],
+            "total_goals_pick": "3球",
+            "total_goals_pick_probability": 0.2766291384788472,
+            "lambda_home": null,
+            "lambda_away": null,
+            "feature_snapshot": {
+              "source": "htft_template"
+            },
+            "high_variance_challenger_promoted": false
+          }
+        },
+        "locked_prediction": {
+          "direction": "主胜",
+          "alternate_direction": "客胜",
+          "state": "CONFIRM",
+          "score1": "2:1",
+          "score2": "2:0",
+          "htft1": "主/主",
+          "htft2": "平/主",
+          "total_goals": "3球"
+        },
+        "stable_version": "HH520 Stable V3.4",
+        "source_contract": "HH520_10027s_ONLY",
+        "excluded_source_fields": [
+          "建议下注",
+          "是否下注",
+          "page_prediction"
+        ],
+        "gpt_role": "EXPLANATION_ONLY"
+      }
+    ],
+    "locked_predictions": [
+      {
+        "match_id": "1",
+        "home_team": "中国亚",
+        "away_team": "阿联酋亚",
+        "score1": "未提供",
+        "score2": "未提供",
+        "htft1": "未提供",
+        "htft2": "未提供",
+        "total_goals": "未提供",
+        "confidence": 0,
+        "status": "SKIP",
+        "reason": "已有比分，不作为赛前预测",
+        "direction": null,
+        "alternate_direction": null,
+        "state": "PASS",
+        "stable_version": "HH520 Stable V3.4"
+      },
+      {
+        "match_id": "3",
+        "home_team": "西雅图",
+        "away_team": "盐湖城",
+        "score1": "2:1",
+        "score2": "2:0",
+        "htft1": "主/主",
+        "htft2": "平/主",
+        "total_goals": "3球",
+        "confidence": 50,
+        "status": "PREDICTED",
+        "reason": "市场方向通过 Failure Detector，正常采用",
+        "direction": "主胜",
+        "alternate_direction": "客胜",
+        "state": "CONFIRM",
+        "stable_version": "HH520 Stable V3.4",
+        "base_state": "CONFIRM",
+        "state_label": "确认",
+        "decision_filter": {
+          "version": "HH520 Decision Filter V3.4",
+          "decision": "CONFIRM",
+          "allow_prediction": true,
+          "strong_recommendation": true,
+          "decision_score": 0.49556368374944426,
+          "hard_pass": false,
+          "state": "CONFIRM",
+          "base_state": "CONFIRM",
+          "primary_direction": "home",
+          "alternate_direction": "away",
+          "tail_alert": false,
+          "draw_candidate": false,
+          "risk": "CONFIRM",
+          "risk_score": 0,
+          "risk_reasons": [],
+          "risk_is_advisory": true,
+          "failure_detector": {
+            "version": "HH520 Market Failure Detector V1",
+            "valid": true,
+            "tier": "CONFIRM",
+            "risk_score": 0,
+            "favorite": "home",
+            "favorite_probability": 0.49734835133143207,
+            "oriented_features": {
+              "possession": 3.1700000000000017,
+              "attack": 4.0,
+              "defense": 0.8300000000000001,
+              "h2h": -9.0,
+              "form": -0.6699999999999999
+            },
+            "signals": [],
+            "probability_overridden": false,
+            "development_note": "candidate thresholds; forward validation required"
+          },
+          "match_type": "standard",
+          "reasons": [],
+          "source": "HH520_10027s_ONLY",
+          "selection_rule": "MARKET_FAILURE_DETECTOR_V1",
+          "forbidden_advice_fields_used": false,
+          "value_layer_used_for_direction": false,
+          "value_layer_used_for_confirmation": false
+        },
+        "stable_v34_direction": "主胜",
+        "stable_v34_decision": "CONFIRM",
+        "ft_confidence": 0.49556368374944426,
+        "market_probability": 0.49734835133143207,
+        "model_probability": 0.49556368374944426,
+        "draw_anchor": 0.24726332584996957,
+        "home_share": 0.6583493282149713,
+        "risk_tier": "CONFIRM",
+        "risk_score": 0,
+        "page_probability": {
+          "home": 0.47474747474747475,
+          "draw": 0.25252525252525254,
+          "away": 0.2727272727272727
+        },
+        "tail_alert": false,
+        "draw_candidate": false,
+        "calibration": {
+          "valid": true,
+          "diagnostic_only": true,
+          "model_version": "HH520 Stable V3.4",
+          "market_probability": 0.49556368374944426,
+          "reliability_band": "BALANCED",
+          "historical_direction_accuracy": 0.45481481481481484,
+          "development_period": "2026-05-01..2026-09-20",
+          "changes_prediction_probability": false,
+          "changes_failure_tier": false
+        },
+        "timing_used": false,
+        "timing_source": null,
+        "quality_warnings": [],
+        "score1_probability": 0.16551827037231437,
+        "score2_probability": 0.08672364465615275,
+        "htft1_probability": 0.346894578624611,
+        "htft2_probability": 0.1387578314498444,
+        "total_goals_probability": 0.2766291384788472,
+        "lambda_home": null,
+        "lambda_away": null,
+        "high_score_mass": 0.27179406320660215,
+        "tail_score_candidates": [
+          {
+            "score": "3:1",
+            "home": 3,
+            "away": 1,
+            "outcome": "HOME",
+            "direction": "主胜",
+            "probability": 0.05272797595094087
+          },
+          {
+            "score": "3:0",
+            "home": 3,
+            "away": 0,
+            "outcome": "HOME",
+            "direction": "主胜",
+            "probability": 0.0471776626929471
+          }
+        ],
+        "htft_model": "FT_CONDITIONAL_TEMPLATE_V1",
+        "score_model": "HTFT_SCORE_TEMPLATE_V1",
+        "consistency": {
+          "valid": true,
+          "primary_direction": "home",
+          "alternate_direction": null,
+          "htft_top": [
+            {
+              "selection": "主/主",
+              "ht": "HOME",
+              "ft": "HOME",
+              "conditional_probability": 0.7,
+              "probability": 0.346894578624611
+            },
+            {
+              "selection": "平/主",
+              "ht": "DRAW",
+              "ft": "HOME",
+              "conditional_probability": 0.28,
+              "probability": 0.1387578314498444
+            }
+          ],
+          "score_top": [
+            {
+              "score": "2:1",
+              "home": 2,
+              "away": 1,
+              "outcome": "HOME",
+              "direction": "主胜",
+              "probability": 0.16551827037231437
+            },
+            {
+              "score": "2:0",
+              "home": 2,
+              "away": 0,
+              "outcome": "HOME",
+              "direction": "主胜",
+              "probability": 0.08672364465615275
+            }
+          ],
+          "tail_alert": false,
+          "warnings": [],
+          "probability_conservation": {
+            "wdl_anchor_unchanged": true,
+            "htft_ft_marginal_preserved": true,
+            "score_distribution_unchanged": true
+          }
+        }
+      }
+    ],
+    "output_contract": {
+      "version": "HH520-OUTPUT-V3.4",
+      "stable_version": "HH520 Stable V3.4",
+      "strict": true,
+      "required_columns": [
+        "球队对阵",
+        "胜平负场景",
+        "市场概率",
+        "比分×2及概率",
+        "半全场×2及概率",
+        "总进球及概率"
+      ],
+      "display_rows": [
+        {
+          "球队对阵": "中国亚 vs 阿联酋亚",
+          "胜平负场景": "未提供（回避）",
+          "市场概率": "未提供",
+          "比分×2及概率": "未提供 (未提供) / 未提供 (未提供)",
+          "半全场×2及概率": "未提供 (未提供) / 未提供 (未提供)",
+          "总进球及概率": "未提供 (未提供)"
+        },
+        {
+          "球队对阵": "西雅图 vs 盐湖城",
+          "胜平负场景": "主胜（确认）",
+          "市场概率": "49.7%",
+          "比分×2及概率": "2:1 (16.6%) / 2:0 (8.7%)",
+          "半全场×2及概率": "主/主 (34.7%) / 平/主 (13.9%)",
+          "总进球及概率": "3球 (27.7%)"
+        }
+      ],
+      "render_rule": "必须按6列完整输出；市场概率=官方赔率去水概率；括号状态仅表示市场可靠度；不得把比分/半全场条件概率解释成FT自信度。"
+    }
+  },
+  "status": "READY",
+  "_action": {
+    "request_id": "test-20260923",
+    "repository": "ltaln/HH520-stable-V2",
+    "run_id": "35863337149",
+    "run_attempt": "1",
+    "source_sha": "94232794defda054d18b3974c072c55178ceea66"
+  }
+}
