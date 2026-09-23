@@ -17,12 +17,24 @@ Repository → Settings → Actions → General → Workflow permissions：
 
 ## ChatGPT 侧
 1. 导入 `integration/chatgpt-action.openapi.json`。
-2. Authentication 选择 Bearer。
+2. 在 GPT 编辑器的 Action Authentication 中选择：
+   - 类型：`API key`
+   - Auth Type：`Bearer`
+   - Header name：`Authorization`
+   - API key：只粘贴 GitHub PAT 本身，不要手动添加 `Bearer ` 前缀；编辑器会生成 `Authorization: Bearer <PAT>`。
 3. 使用 fine-grained GitHub PAT：
    - Repository access：仅 `HH520-stable-V2`
    - Actions：Read and write
    - Contents：Read
-4. Instructions 使用 `integration/CHATGPT_INSTRUCTIONS.md`。
+4. 保存 Action 后，在 Preview 中确认请求的实际头部是 `Authorization: Bearer <PAT>`，并确认 dispatch 返回 `204 No Content`。
+5. Instructions 使用 `integration/CHATGPT_INSTRUCTIONS.md`。
+
+### 连接故障定位
+
+- `401`：Bearer token 未注入、前缀被重复添加，或 PAT 已失效。
+- `403`：PAT 没有该仓库的 Actions/Contents 权限，或组织策略阻止 Actions。
+- `404`：仓库、workflow 文件名或 `ref=main` 不匹配。
+- `204`：dispatch 已被 GitHub 接收；保持同一个 `request_id`，继续轮询 `action-results`，不要重复 dispatch。
 
 ## 重要规则
 READY 后：

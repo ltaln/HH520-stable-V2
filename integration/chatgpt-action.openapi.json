@@ -635,7 +635,7 @@
       "githubToken": {
         "type": "http",
         "scheme": "bearer",
-        "description": "Fine-grained GitHub personal access token with repository access to ltaln/HH520-stable-V2, Actions read/write, Contents read."
+        "description": "Configure the GPT Action as API key authentication with Auth Type Bearer and header Authorization. Paste the raw fine-grained GitHub PAT only; the editor must send Authorization: Bearer <PAT>. Grant repository access to ltaln/HH520-stable-V2, Actions read/write, and Contents read."
       }
     },
     "schemas": {}
