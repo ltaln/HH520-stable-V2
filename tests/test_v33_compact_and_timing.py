@@ -2,7 +2,25 @@ import json
 
 from collector.goal_timing_service import _team, _team_half_rates
 from engine.htft_layer import htft_layer
-from scripts.publish_action_result import _prediction_summary
+from scripts.publish_action_result import _prediction_summary, _validate_prediction_contract
+import pytest
+
+
+@pytest.mark.parametrize("payload,reason", [
+    ({"predictions": []}, "missing_predictions"),
+    ({"predictions": [{}], "output_contract": {}}, "missing_locked_prediction_output"),
+    ({"predictions": [{}], "output_contract": {"display_rows": [{}]}}, "missing_stable_version"),
+])
+def test_prediction_contract_rejects_incomplete_locked_output(payload, reason):
+    with pytest.raises(ValueError, match=reason):
+        _validate_prediction_contract(payload)
+
+
+def test_prediction_contract_accepts_complete_locked_output():
+    assert _validate_prediction_contract({
+        "predictions": [{}],
+        "output_contract": {"stable_version": "HH520 Stable V3.4", "display_rows": [{}]},
+    }) is True
 
 
 def test_prediction_summary_is_compact_and_six_column_authoritative():
@@ -42,3 +60,4 @@ def test_v34_formal_htft_does_not_use_external_goal_timing():
     assert out["valid"] is True
     assert out["timing_used"] is False
     assert out["ft_marginal_preserved"] is True
+
