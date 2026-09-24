@@ -1017,6 +1017,662 @@
     ],
     "stress_used_for_selection": false
   },
+  "draw_factor_optimizer": {
+    "candidate_count": 1587,
+    "selection_objective": "positive_net_hits_vs_base_argmax_in_both_dev_splits_with_structural_symmetry",
+    "stress_used_for_selection": false,
+    "final_selected_on_dev_only": {
+      "probability_params": {
+        "pd_min": 0.29,
+        "side_gap_max": 0.2,
+        "draw_top_gap_max": 0.16,
+        "pmax_max": 0.45,
+        "market_pd_min": 0.0,
+        "home_share_dev_max": 0.2
+      },
+      "factor_limits": {
+        "attack_gap": 1.0,
+        "form_gap": 0.15
+      },
+      "dev1": {
+        "n": 10,
+        "hits": 6,
+        "accuracy": 0.6
+      },
+      "dev2": {
+        "n": 10,
+        "hits": 6,
+        "accuracy": 0.6
+      },
+      "override_dev1": {
+        "n": 10,
+        "draw_hits": 6,
+        "draw_accuracy": 0.6,
+        "base_argmax_hits": 3,
+        "base_argmax_accuracy": 0.3,
+        "net_hits_if_override": 3,
+        "net_rate": 0.3
+      },
+      "override_dev2": {
+        "n": 10,
+        "draw_hits": 6,
+        "draw_accuracy": 0.6,
+        "base_argmax_hits": 1,
+        "base_argmax_accuracy": 0.1,
+        "net_hits_if_override": 5,
+        "net_rate": 0.5
+      },
+      "min_net_rate": 0.3,
+      "total_net_hits": 8,
+      "coverage": 20,
+      "stress": {
+        "n": 1,
+        "hits": 0,
+        "accuracy": 0.0
+      },
+      "override_stress": {
+        "n": 1,
+        "draw_hits": 0,
+        "draw_accuracy": 0.0,
+        "base_argmax_hits": 1,
+        "base_argmax_accuracy": 1.0,
+        "net_hits_if_override": -1,
+        "net_rate": -1.0
+      }
+    },
+    "top10_dev_only": [
+      {
+        "probability_params": {
+          "pd_min": 0.29,
+          "side_gap_max": 0.2,
+          "draw_top_gap_max": 0.16,
+          "pmax_max": 0.45,
+          "market_pd_min": 0.0,
+          "home_share_dev_max": 0.2
+        },
+        "factor_limits": {
+          "attack_gap": 1.0,
+          "form_gap": 0.15
+        },
+        "dev1": {
+          "n": 10,
+          "hits": 6,
+          "accuracy": 0.6
+        },
+        "dev2": {
+          "n": 10,
+          "hits": 6,
+          "accuracy": 0.6
+        },
+        "override_dev1": {
+          "n": 10,
+          "draw_hits": 6,
+          "draw_accuracy": 0.6,
+          "base_argmax_hits": 3,
+          "base_argmax_accuracy": 0.3,
+          "net_hits_if_override": 3,
+          "net_rate": 0.3
+        },
+        "override_dev2": {
+          "n": 10,
+          "draw_hits": 6,
+          "draw_accuracy": 0.6,
+          "base_argmax_hits": 1,
+          "base_argmax_accuracy": 0.1,
+          "net_hits_if_override": 5,
+          "net_rate": 0.5
+        },
+        "min_net_rate": 0.3,
+        "total_net_hits": 8,
+        "coverage": 20,
+        "stress": {
+          "n": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "override_stress": {
+          "n": 1,
+          "draw_hits": 0,
+          "draw_accuracy": 0.0,
+          "base_argmax_hits": 1,
+          "base_argmax_accuracy": 1.0,
+          "net_hits_if_override": -1,
+          "net_rate": -1.0
+        }
+      },
+      {
+        "probability_params": {
+          "pd_min": 0.29,
+          "side_gap_max": 0.2,
+          "draw_top_gap_max": 0.16,
+          "pmax_max": 0.45,
+          "market_pd_min": 0.0,
+          "home_share_dev_max": 0.2
+        },
+        "factor_limits": {
+          "attack_gap": 1.5,
+          "form_gap": 0.15
+        },
+        "dev1": {
+          "n": 10,
+          "hits": 6,
+          "accuracy": 0.6
+        },
+        "dev2": {
+          "n": 10,
+          "hits": 6,
+          "accuracy": 0.6
+        },
+        "override_dev1": {
+          "n": 10,
+          "draw_hits": 6,
+          "draw_accuracy": 0.6,
+          "base_argmax_hits": 3,
+          "base_argmax_accuracy": 0.3,
+          "net_hits_if_override": 3,
+          "net_rate": 0.3
+        },
+        "override_dev2": {
+          "n": 10,
+          "draw_hits": 6,
+          "draw_accuracy": 0.6,
+          "base_argmax_hits": 1,
+          "base_argmax_accuracy": 0.1,
+          "net_hits_if_override": 5,
+          "net_rate": 0.5
+        },
+        "min_net_rate": 0.3,
+        "total_net_hits": 8,
+        "coverage": 20,
+        "stress": {
+          "n": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "override_stress": {
+          "n": 1,
+          "draw_hits": 0,
+          "draw_accuracy": 0.0,
+          "base_argmax_hits": 1,
+          "base_argmax_accuracy": 1.0,
+          "net_hits_if_override": -1,
+          "net_rate": -1.0
+        }
+      },
+      {
+        "probability_params": {
+          "pd_min": 0.29,
+          "side_gap_max": 0.2,
+          "draw_top_gap_max": 0.16,
+          "pmax_max": 0.5,
+          "market_pd_min": 0.0,
+          "home_share_dev_max": 0.2
+        },
+        "factor_limits": {
+          "attack_gap": 1.0,
+          "form_gap": 0.15
+        },
+        "dev1": {
+          "n": 10,
+          "hits": 6,
+          "accuracy": 0.6
+        },
+        "dev2": {
+          "n": 10,
+          "hits": 6,
+          "accuracy": 0.6
+        },
+        "override_dev1": {
+          "n": 10,
+          "draw_hits": 6,
+          "draw_accuracy": 0.6,
+          "base_argmax_hits": 3,
+          "base_argmax_accuracy": 0.3,
+          "net_hits_if_override": 3,
+          "net_rate": 0.3
+        },
+        "override_dev2": {
+          "n": 10,
+          "draw_hits": 6,
+          "draw_accuracy": 0.6,
+          "base_argmax_hits": 1,
+          "base_argmax_accuracy": 0.1,
+          "net_hits_if_override": 5,
+          "net_rate": 0.5
+        },
+        "min_net_rate": 0.3,
+        "total_net_hits": 8,
+        "coverage": 20,
+        "stress": {
+          "n": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "override_stress": {
+          "n": 1,
+          "draw_hits": 0,
+          "draw_accuracy": 0.0,
+          "base_argmax_hits": 1,
+          "base_argmax_accuracy": 1.0,
+          "net_hits_if_override": -1,
+          "net_rate": -1.0
+        }
+      },
+      {
+        "probability_params": {
+          "pd_min": 0.29,
+          "side_gap_max": 0.2,
+          "draw_top_gap_max": 0.16,
+          "pmax_max": 0.5,
+          "market_pd_min": 0.0,
+          "home_share_dev_max": 0.2
+        },
+        "factor_limits": {
+          "attack_gap": 1.5,
+          "form_gap": 0.15
+        },
+        "dev1": {
+          "n": 10,
+          "hits": 6,
+          "accuracy": 0.6
+        },
+        "dev2": {
+          "n": 10,
+          "hits": 6,
+          "accuracy": 0.6
+        },
+        "override_dev1": {
+          "n": 10,
+          "draw_hits": 6,
+          "draw_accuracy": 0.6,
+          "base_argmax_hits": 3,
+          "base_argmax_accuracy": 0.3,
+          "net_hits_if_override": 3,
+          "net_rate": 0.3
+        },
+        "override_dev2": {
+          "n": 10,
+          "draw_hits": 6,
+          "draw_accuracy": 0.6,
+          "base_argmax_hits": 1,
+          "base_argmax_accuracy": 0.1,
+          "net_hits_if_override": 5,
+          "net_rate": 0.5
+        },
+        "min_net_rate": 0.3,
+        "total_net_hits": 8,
+        "coverage": 20,
+        "stress": {
+          "n": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "override_stress": {
+          "n": 1,
+          "draw_hits": 0,
+          "draw_accuracy": 0.0,
+          "base_argmax_hits": 1,
+          "base_argmax_accuracy": 1.0,
+          "net_hits_if_override": -1,
+          "net_rate": -1.0
+        }
+      },
+      {
+        "probability_params": {
+          "pd_min": 0.29,
+          "side_gap_max": 0.2,
+          "draw_top_gap_max": 0.18,
+          "pmax_max": 0.45,
+          "market_pd_min": 0.0,
+          "home_share_dev_max": 0.2
+        },
+        "factor_limits": {
+          "attack_gap": 1.0,
+          "form_gap": 0.15
+        },
+        "dev1": {
+          "n": 10,
+          "hits": 6,
+          "accuracy": 0.6
+        },
+        "dev2": {
+          "n": 10,
+          "hits": 6,
+          "accuracy": 0.6
+        },
+        "override_dev1": {
+          "n": 10,
+          "draw_hits": 6,
+          "draw_accuracy": 0.6,
+          "base_argmax_hits": 3,
+          "base_argmax_accuracy": 0.3,
+          "net_hits_if_override": 3,
+          "net_rate": 0.3
+        },
+        "override_dev2": {
+          "n": 10,
+          "draw_hits": 6,
+          "draw_accuracy": 0.6,
+          "base_argmax_hits": 1,
+          "base_argmax_accuracy": 0.1,
+          "net_hits_if_override": 5,
+          "net_rate": 0.5
+        },
+        "min_net_rate": 0.3,
+        "total_net_hits": 8,
+        "coverage": 20,
+        "stress": {
+          "n": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "override_stress": {
+          "n": 1,
+          "draw_hits": 0,
+          "draw_accuracy": 0.0,
+          "base_argmax_hits": 1,
+          "base_argmax_accuracy": 1.0,
+          "net_hits_if_override": -1,
+          "net_rate": -1.0
+        }
+      },
+      {
+        "probability_params": {
+          "pd_min": 0.29,
+          "side_gap_max": 0.2,
+          "draw_top_gap_max": 0.18,
+          "pmax_max": 0.45,
+          "market_pd_min": 0.0,
+          "home_share_dev_max": 0.2
+        },
+        "factor_limits": {
+          "attack_gap": 1.5,
+          "form_gap": 0.15
+        },
+        "dev1": {
+          "n": 10,
+          "hits": 6,
+          "accuracy": 0.6
+        },
+        "dev2": {
+          "n": 10,
+          "hits": 6,
+          "accuracy": 0.6
+        },
+        "override_dev1": {
+          "n": 10,
+          "draw_hits": 6,
+          "draw_accuracy": 0.6,
+          "base_argmax_hits": 3,
+          "base_argmax_accuracy": 0.3,
+          "net_hits_if_override": 3,
+          "net_rate": 0.3
+        },
+        "override_dev2": {
+          "n": 10,
+          "draw_hits": 6,
+          "draw_accuracy": 0.6,
+          "base_argmax_hits": 1,
+          "base_argmax_accuracy": 0.1,
+          "net_hits_if_override": 5,
+          "net_rate": 0.5
+        },
+        "min_net_rate": 0.3,
+        "total_net_hits": 8,
+        "coverage": 20,
+        "stress": {
+          "n": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "override_stress": {
+          "n": 1,
+          "draw_hits": 0,
+          "draw_accuracy": 0.0,
+          "base_argmax_hits": 1,
+          "base_argmax_accuracy": 1.0,
+          "net_hits_if_override": -1,
+          "net_rate": -1.0
+        }
+      },
+      {
+        "probability_params": {
+          "pd_min": 0.29,
+          "side_gap_max": 0.2,
+          "draw_top_gap_max": 0.18,
+          "pmax_max": 0.5,
+          "market_pd_min": 0.0,
+          "home_share_dev_max": 0.2
+        },
+        "factor_limits": {
+          "attack_gap": 1.0,
+          "form_gap": 0.15
+        },
+        "dev1": {
+          "n": 10,
+          "hits": 6,
+          "accuracy": 0.6
+        },
+        "dev2": {
+          "n": 10,
+          "hits": 6,
+          "accuracy": 0.6
+        },
+        "override_dev1": {
+          "n": 10,
+          "draw_hits": 6,
+          "draw_accuracy": 0.6,
+          "base_argmax_hits": 3,
+          "base_argmax_accuracy": 0.3,
+          "net_hits_if_override": 3,
+          "net_rate": 0.3
+        },
+        "override_dev2": {
+          "n": 10,
+          "draw_hits": 6,
+          "draw_accuracy": 0.6,
+          "base_argmax_hits": 1,
+          "base_argmax_accuracy": 0.1,
+          "net_hits_if_override": 5,
+          "net_rate": 0.5
+        },
+        "min_net_rate": 0.3,
+        "total_net_hits": 8,
+        "coverage": 20,
+        "stress": {
+          "n": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "override_stress": {
+          "n": 1,
+          "draw_hits": 0,
+          "draw_accuracy": 0.0,
+          "base_argmax_hits": 1,
+          "base_argmax_accuracy": 1.0,
+          "net_hits_if_override": -1,
+          "net_rate": -1.0
+        }
+      },
+      {
+        "probability_params": {
+          "pd_min": 0.29,
+          "side_gap_max": 0.2,
+          "draw_top_gap_max": 0.18,
+          "pmax_max": 0.5,
+          "market_pd_min": 0.0,
+          "home_share_dev_max": 0.2
+        },
+        "factor_limits": {
+          "attack_gap": 1.5,
+          "form_gap": 0.15
+        },
+        "dev1": {
+          "n": 10,
+          "hits": 6,
+          "accuracy": 0.6
+        },
+        "dev2": {
+          "n": 10,
+          "hits": 6,
+          "accuracy": 0.6
+        },
+        "override_dev1": {
+          "n": 10,
+          "draw_hits": 6,
+          "draw_accuracy": 0.6,
+          "base_argmax_hits": 3,
+          "base_argmax_accuracy": 0.3,
+          "net_hits_if_override": 3,
+          "net_rate": 0.3
+        },
+        "override_dev2": {
+          "n": 10,
+          "draw_hits": 6,
+          "draw_accuracy": 0.6,
+          "base_argmax_hits": 1,
+          "base_argmax_accuracy": 0.1,
+          "net_hits_if_override": 5,
+          "net_rate": 0.5
+        },
+        "min_net_rate": 0.3,
+        "total_net_hits": 8,
+        "coverage": 20,
+        "stress": {
+          "n": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "override_stress": {
+          "n": 1,
+          "draw_hits": 0,
+          "draw_accuracy": 0.0,
+          "base_argmax_hits": 1,
+          "base_argmax_accuracy": 1.0,
+          "net_hits_if_override": -1,
+          "net_rate": -1.0
+        }
+      },
+      {
+        "probability_params": {
+          "pd_min": 0.27,
+          "side_gap_max": 0.2,
+          "draw_top_gap_max": 0.18,
+          "pmax_max": 0.45,
+          "market_pd_min": 0.0,
+          "home_share_dev_max": 0.2
+        },
+        "factor_limits": {
+          "attack_gap": 1.0,
+          "form_gap": 0.15
+        },
+        "dev1": {
+          "n": 16,
+          "hits": 8,
+          "accuracy": 0.5
+        },
+        "dev2": {
+          "n": 19,
+          "hits": 9,
+          "accuracy": 0.47368421052631576
+        },
+        "override_dev1": {
+          "n": 16,
+          "draw_hits": 8,
+          "draw_accuracy": 0.5,
+          "base_argmax_hits": 4,
+          "base_argmax_accuracy": 0.25,
+          "net_hits_if_override": 4,
+          "net_rate": 0.25
+        },
+        "override_dev2": {
+          "n": 19,
+          "draw_hits": 9,
+          "draw_accuracy": 0.47368421052631576,
+          "base_argmax_hits": 3,
+          "base_argmax_accuracy": 0.15789473684210525,
+          "net_hits_if_override": 6,
+          "net_rate": 0.3157894736842105
+        },
+        "min_net_rate": 0.25,
+        "total_net_hits": 10,
+        "coverage": 35,
+        "stress": {
+          "n": 3,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "override_stress": {
+          "n": 3,
+          "draw_hits": 0,
+          "draw_accuracy": 0.0,
+          "base_argmax_hits": 3,
+          "base_argmax_accuracy": 1.0,
+          "net_hits_if_override": -3,
+          "net_rate": -1.0
+        }
+      },
+      {
+        "probability_params": {
+          "pd_min": 0.27,
+          "side_gap_max": 0.2,
+          "draw_top_gap_max": 0.18,
+          "pmax_max": 0.45,
+          "market_pd_min": 0.0,
+          "home_share_dev_max": 0.2
+        },
+        "factor_limits": {
+          "attack_gap": 1.5,
+          "form_gap": 0.15
+        },
+        "dev1": {
+          "n": 16,
+          "hits": 8,
+          "accuracy": 0.5
+        },
+        "dev2": {
+          "n": 19,
+          "hits": 9,
+          "accuracy": 0.47368421052631576
+        },
+        "override_dev1": {
+          "n": 16,
+          "draw_hits": 8,
+          "draw_accuracy": 0.5,
+          "base_argmax_hits": 4,
+          "base_argmax_accuracy": 0.25,
+          "net_hits_if_override": 4,
+          "net_rate": 0.25
+        },
+        "override_dev2": {
+          "n": 19,
+          "draw_hits": 9,
+          "draw_accuracy": 0.47368421052631576,
+          "base_argmax_hits": 3,
+          "base_argmax_accuracy": 0.15789473684210525,
+          "net_hits_if_override": 6,
+          "net_rate": 0.3157894736842105
+        },
+        "min_net_rate": 0.25,
+        "total_net_hits": 10,
+        "coverage": 35,
+        "stress": {
+          "n": 3,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "override_stress": {
+          "n": 3,
+          "draw_hits": 0,
+          "draw_accuracy": 0.0,
+          "base_argmax_hits": 3,
+          "base_argmax_accuracy": 1.0,
+          "net_hits_if_override": -3,
+          "net_rate": -1.0
+        }
+      }
+    ]
+  },
   "htft_optimizer": {
     "status": "READY",
     "model": "INDEPENDENT_POISSON_SPLIT_HTFT_V2",
