@@ -45,7 +45,7 @@ def request_predictions(matches):
         raise RuntimeError("--gpt 要求设置账户可用的 OPENAI_MODEL")
 
     prompt=PROMPT_PATH.read_text(encoding="utf-8")+"""
-HH520 Stable V3.5 Phase 1 已由本地模型完成 FT校准、风险等级、独立比分、Cross Gate、HTFT和总进球。
+HH520 Stable V3.5 Phase 1 已由本地模型完成 FT校准、正式平局解析、独立比分、Cross Gate、Goal Timing独立HTFT和总进球。
 你的角色只有解释和审核，绝对不得重新预测或修改 locked_prediction。
 必须逐字复制 direction/alternate_direction/state/score1/score2/htft1/htft2/total_goals。
 不得使用 建议下注、是否下注、page_prediction，也不得引入未采集的外部事实。
