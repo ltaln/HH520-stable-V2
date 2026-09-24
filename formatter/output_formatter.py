@@ -35,10 +35,10 @@ def build_display_row(pred: dict) -> dict:
 
 def build_output_contract(predictions: list[dict]) -> dict:
     return {
-        "version": "HH520-OUTPUT-V3.5-P1", "stable_version": "HH520 Stable V3.5 Phase 1",
+        "version": "HH520-OUTPUT-V3.5-P2", "stable_version": "HH520 Stable V3.5 Phase 2",
         "strict": True, "required_columns": OUTPUT_COLUMNS,
         "display_rows": [build_display_row(pred) for pred in predictions],
-        "render_rule": "必须按6列完整输出；FT侧向概率低于55%显示均衡/不强制方向；比分为独立H/D/A拟合分布，不受FT硬锁；市场概率=官方赔率去水概率；HT/FT仍为Phase 1旧链，低于55%时不正式输出。",
+        "render_rule": "必须按6列完整输出；>=55%的主/客方向保持侧向校准；低置信侧向区允许历史验证的正式平局解析；比分独立于FT硬锁；HT/FT为Goal Timing必需的独立模型，时间数据缺失时半全场显示未提供。",
     }
 
 
