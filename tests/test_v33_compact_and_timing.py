@@ -52,12 +52,14 @@ def test_goal_timing_utils_remain_available_for_research():
     assert fallback is not None
 
 
-def test_v34_formal_htft_does_not_use_external_goal_timing():
+def test_v35_phase2_formal_htft_requires_and_uses_goal_timing():
     probability={"valid":True,"probabilities":{"home":0.5,"draw":0.3,"away":0.2},
                  "market_probabilities":{"home":0.5,"draw":0.3,"away":0.2},"home_share":0.714,"direction":"home"}
-    match={"goal_timing":{"available":True,"timing_mode":"half_aggregate_fallback","source_domain":"footystats.org"}}
+    match={"goal_timing":{"available":True,"timing_mode":"half_aggregate_fallback","source_domain":"footystats.org",
+           "home":{"first_half_gf_signal":0.40,"first_half_ga_signal":0.35},
+           "away":{"first_half_gf_signal":0.38,"first_half_ga_signal":0.42}}}
     out=htft_layer(probability,match)
     assert out["valid"] is True
-    assert out["timing_used"] is False
-    assert out["ft_marginal_preserved"] is True
-
+    assert out["timing_used"] is True
+    assert out["ft_core_unchanged"] is True
+    assert out["model"]=="INDEPENDENT_POISSON_SPLIT_HTFT_V2_TIMING_REQUIRED"

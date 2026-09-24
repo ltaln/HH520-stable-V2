@@ -50,12 +50,12 @@ def test_page_probability_is_diagnostic_only():
     assert v["independent_direction"]=="away"
 
 
-def test_v35_phase1_decision_filter_uses_calibration_and_failure_detector():
+def test_v35_phase2_decision_filter_uses_calibration_draw_and_failure_detector():
     match=base_match()
     p=probability_layer(match); v=value_layer(match,p)
     d=decision_filter(match,p,v)
-    assert d["version"]=="HH520 Decision Filter V3.5 Phase 1"
-    assert d["selection_rule"]=="V35_PHASE1_FT_CALIBRATION_PLUS_MFD"
+    assert d["version"]=="HH520 Decision Filter V3.5 Phase 2"
+    assert d["selection_rule"]=="V35_PHASE2_FT_CALIBRATION_PLUS_FORMAL_DRAW_LOGISTIC_PLUS_MFD"
     assert d["decision"] in {"CONFIRM","BALANCED","TAIL_ALERT","PASS"}
     assert d["allow_prediction"] is True
 

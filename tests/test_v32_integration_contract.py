@@ -5,12 +5,12 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_v35_phase1_active_prompt_and_config_are_aligned():
-    prompt = (ROOT / "prompts" / "HH520_Stable_V3_5_Phase1_Prediction_Prompt.md").read_text(encoding="utf-8")
+def test_v35_phase2_active_prompt_and_config_are_aligned():
+    prompt = (ROOT / "prompts" / "HH520_Stable_V3_5_Phase2_Prediction_Prompt.md").read_text(encoding="utf-8")
     config = yaml.safe_load((ROOT / "config" / "stable.yaml").read_text(encoding="utf-8"))
-    assert "HH520 Stable V3.5 Phase 1" in prompt
+    assert "HH520 Stable V3.5 Phase 2" in prompt
     assert "EXPLANATION_ONLY" in prompt
-    assert config["project"]["version"] == "3.5-p1"
+    assert config["project"]["version"] == "3.5-p2"
     assert config["prediction"]["gpt_role"] == "EXPLANATION_ONLY"
     assert config["prediction"]["page_probability_for_state"] is False
     assert config["prediction"]["automatic_market_override"] is False

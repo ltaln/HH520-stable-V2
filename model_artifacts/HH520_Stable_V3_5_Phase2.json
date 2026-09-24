@@ -1,0 +1,77 @@
+{
+  "version": "HH520 Stable V3.5 Phase 2",
+  "artifact_version": "HH520-Stable-V3.5-Phase2-20260924",
+  "source": "10027S",
+  "probability_core_changed": false,
+  "ft_calibration": {
+    "standard": 0.55,
+    "strong": 0.6,
+    "high": 0.65
+  },
+  "draw_resolver": {
+    "mode": "BALANCED_SIDE_ZONE_ONLY",
+    "type": "CROSS_FIT_LOGISTIC_V1",
+    "threshold": 0.38,
+    "pmax_limit": 0.45,
+    "feature_names": [
+      "pd",
+      "side_gap",
+      "draw_top_gap",
+      "pmax",
+      "market_pd",
+      "home_share_dev",
+      "lambda_total",
+      "lambda_gap",
+      "attack_gap",
+      "defense_gap",
+      "h2h_gap",
+      "form_gap",
+      "possession_gap"
+    ],
+    "crossfit_dev1": {
+      "n": 13,
+      "hits": 8,
+      "accuracy": 0.6153846153846154,
+      "base_argmax_hits": 2,
+      "base_argmax_accuracy": 0.15384615384615385,
+      "net_hits": 6
+    },
+    "crossfit_dev2": {
+      "n": 29,
+      "hits": 12,
+      "accuracy": 0.41379310344827586,
+      "base_argmax_hits": 11,
+      "base_argmax_accuracy": 0.3793103448275862,
+      "net_hits": 1
+    },
+    "stress": {
+      "n": 9,
+      "hits": 5,
+      "accuracy": 0.5555555555555556,
+      "base_argmax_hits": 4,
+      "base_argmax_accuracy": 0.4444444444444444,
+      "net_hits": 1
+    },
+    "stress_used_for_selection": false,
+    "l2": 0.01,
+    "note": "High-specificity draw override selected by symmetric May-Aug cross-fit; only operates in pmax<=45% balanced-side zone and never overrides >=55% authorized side."
+  },
+  "htft": {
+    "model": "INDEPENDENT_POISSON_SPLIT_HTFT_V2_TIMING_REQUIRED",
+    "base_home_half_share": 0.36,
+    "base_away_half_share": 0.44,
+    "timing_weight": 0.25,
+    "max_timing_delta": 0.08,
+    "historical_labels": 1432,
+    "dev1_top2": 0.533457249070632,
+    "dev2_top2": 0.527027027027027,
+    "stress_top2": 0.4867549668874172,
+    "formal_same_day_goal_timing_required": true,
+    "historical_goal_timing_recollection": false
+  },
+  "score": {
+    "model": "HDA_POISSON_V1",
+    "ft_direction_lock": false
+  },
+  "gpt_role": "EXPLANATION_ONLY"
+}

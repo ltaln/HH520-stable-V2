@@ -1,4 +1,4 @@
-"""HH520 Stable V3.5 Phase 1 deterministic prediction assembly."""
+"""HH520 Stable V3.5 Phase 2 deterministic prediction assembly."""
 import re
 from analysis.match_analysis import analyze_match
 
@@ -15,7 +15,7 @@ def prepare_match(match):
         "score1": MISSING, "score2": MISSING, "htft1": MISSING, "htft2": MISSING,
         "total_goals": MISSING, "confidence": 0, "status": "PASS",
         "reason": "无有效市场概率", "direction": None, "alternate_direction": None,
-        "state": "PASS", "stable_version": "HH520 Stable V3.5 Phase 1",
+        "state": "PASS", "stable_version": "HH520 Stable V3.5 Phase 2",
     }
     if SCORE.search(str(match.get("result", ""))):
         result.update(status="SKIP", reason="已有比分，不作为赛前预测")
@@ -25,12 +25,14 @@ def prepare_match(match):
     probability = analysis["probability"]
     decision = analysis["decision"]
     consistency = analysis["consistency"]
-    primary = probability.get("direction")
-    raw_direction = DIRECTIONS.get(primary)
+    primary = decision.get("resolved_direction") or probability.get("direction")
+    raw_primary = probability.get("direction")
+    raw_direction = DIRECTIONS.get(raw_primary)
+    formal_direction = DIRECTIONS.get(primary)
     probs = probability.get("probabilities") or {}
     ordered = sorted(probs, key=lambda k: float(probs[k]), reverse=True) if probs else []
     authorized = bool(decision.get("ft_direction_authorized", True))
-    direction = raw_direction
+    direction = formal_direction
     if primary in {"home", "away"} and not authorized:
         direction = "均衡"
 
@@ -39,6 +41,7 @@ def prepare_match(match):
     result.update(
         direction=direction,
         raw_direction=raw_direction,
+        resolved_direction=formal_direction,
         alternate_direction=DIRECTIONS.get(ordered[1]) if len(ordered) > 1 else None,
         state=effective_tier,
         base_state=decision.get("decision", "PASS"),
@@ -57,11 +60,15 @@ def prepare_match(match):
         risk_score=decision.get("risk_score"),
         page_probability=probability.get("page_probability"),
         tail_alert=effective_tier in {"TAIL_ALERT","PASS"},
-        draw_candidate=primary == "draw",
+        draw_candidate=bool(decision.get("draw_candidate")),
+        draw_rule_promoted=bool(decision.get("draw_rule_promoted")),
         calibration=analysis["calibration"],
-        timing_used=False, timing_source=None,
+        timing_used=bool(analysis["htft"].get("timing_used")),
+        timing_source=analysis["htft"].get("timing_source"),
+        timing_mode=analysis["htft"].get("timing_mode"),
         quality_warnings=analysis["quality"].get("warnings", []),
         cross_gate=consistency.get("cross_gate"),
+        htft_gate=consistency.get("htft_gate"),
     )
 
     if not probability.get("valid") or not raw_direction:
@@ -70,14 +77,12 @@ def prepare_match(match):
     htft_top = consistency.get("htft_top", [])
     score_top = consistency.get("score_top", [])
     if len(score_top) < 2:
-        result.update(status="PASS", reason="V3.5 Phase 1 独立比分输出不完整")
+        result.update(status="PASS", reason="V3.5 Phase 2 独立比分输出不完整")
         return result
 
     totals = analysis["score"].get("top_totals", [])
     total_pick = totals[0] if totals else None
-
-    # Low-probability FT is no longer allowed to cascade into a formal HT/FT pick.
-    htft_available = authorized and len(htft_top) >= 2
+    htft_available = analysis["htft"].get("valid") and len(htft_top) >= 2
 
     result.update(
         score1=score_top[0]["score"], score2=score_top[1]["score"],
@@ -93,14 +98,18 @@ def prepare_match(match):
         high_score_mass=analysis["score"].get("high_score_mass"),
         tail_score_candidates=analysis["score"].get("tail_scores", [])[:2],
         htft_model=analysis["htft"].get("model"),
+        htft_status=analysis["htft"].get("status"),
+        htft_reason=analysis["htft"].get("reason"),
         score_model=analysis["score"].get("model"),
         consistency=consistency,
         status="PREDICTED",
     )
 
     cross_status = (consistency.get("cross_gate") or {}).get("status")
-    if not authorized and primary in {"home", "away"}:
-        result["reason"] = "FT模型概率低于55%，不强制主胜/客胜；比分保持独立输出，HT/FT暂不正式输出"
+    if decision.get("draw_rule_promoted") and primary == "draw":
+        result["reason"] = "历史验证的平局判定规则触发；FT正式方向判为平局"
+    elif not authorized and primary in {"home", "away"}:
+        result["reason"] = "FT模型概率低于55%，不强制主胜/客胜；比分保持独立输出"
     elif cross_status == "CONFLICT":
         result["reason"] = "FT与独立比分方向冲突，Cross-Layer Gate已自动降级"
     else:
@@ -109,7 +118,9 @@ def prepare_match(match):
             "BALANCED": "FT保留但可靠度有限，按均衡处理",
             "TAIL_ALERT": "FT方向存在明显尾部或跨层风险",
             "PASS": "当前结构仅供参考，不作为强方向",
-        }.get(effective_tier, "V3.5 Phase 1结构输出")
+        }.get(effective_tier, "V3.5 Phase 2结构输出")
+    if not htft_available:
+        result["reason"] += "；Goal Timing缺失或异常，本场HT/FT按规则PASS"
     return result
 
 
@@ -125,11 +136,12 @@ def build_model_input(matches):
             "away_team": prepared["away_team"], "league": match.get("league"),
             "kickoff": match.get("kickoff"), "market": match.get("market", {}),
             "research_factors": match.get("research_factors", {}),
+            "goal_timing": match.get("goal_timing", {}),
             "analysis": {k: analysis[k] for k in ("probability","decision","calibration","consistency","htft","score")},
             "locked_prediction": {key: prepared[key] for key in (
                 "direction","alternate_direction","state","score1","score2","htft1","htft2","total_goals")},
-            "stable_version": "HH520 Stable V3.5 Phase 1",
-            "source_contract": "HH520_10027s_ONLY",
+            "stable_version": "HH520 Stable V3.5 Phase 2",
+            "source_contract": "HH520_10027s_PLUS_FORMAL_GOAL_TIMING_FOR_HTFT_ONLY",
             "excluded_source_fields": ["建议下注","是否下注","page_prediction"],
             "gpt_role": "EXPLANATION_ONLY",
         })

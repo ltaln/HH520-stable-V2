@@ -37,17 +37,22 @@ def test_failure_detector_does_not_override_probability():
     assert f["tier"] in {"CONFIRM","BALANCED","TAIL_ALERT","PASS"}
 
 
-def test_htft_remains_conditioned_but_score_is_independent():
-    m=match(); p=probability_layer(m); v=value_layer(m,p); d=decision_filter(m,p,v)
+def test_htft_and_score_are_independent_in_phase2():
+    m=match()
+    m["goal_timing"]={"available":True,"source_domain":"test","timing_mode":"six_bin",
+        "home":{"first_half_gf_signal":0.40,"first_half_ga_signal":0.42},
+        "away":{"first_half_gf_signal":0.46,"first_half_ga_signal":0.44}}
+    p=probability_layer(m); v=value_layer(m,p); d=decision_filter(m,p,v)
     h=htft_layer(p,m,d)
     s=score_layer(m,p,h)
-    assert h["model"]=="FT_CONDITIONAL_TEMPLATE_V1"
+    assert h["model"]=="INDEPENDENT_POISSON_SPLIT_HTFT_V2_TIMING_REQUIRED"
+    assert h["timing_used"] is True
+    assert h["ft_core_unchanged"] is True
     assert s["model"]=="HDA_POISSON_V1"
-    assert h["top"][0]["ft"]=="HOME"
     assert s["feature_snapshot"]["ft_direction_lock"] is False
 
 
 def test_value_does_not_drive_direction():
     m=match(); p=probability_layer(m); v=value_layer(m,p); d=decision_filter(m,p,v)
     assert d["value_layer_used_for_direction"] is False
-    assert d["selection_rule"]=="V35_PHASE1_FT_CALIBRATION_PLUS_MFD"
+    assert d["selection_rule"]=="V35_PHASE2_FT_CALIBRATION_PLUS_FORMAL_DRAW_LOGISTIC_PLUS_MFD"
