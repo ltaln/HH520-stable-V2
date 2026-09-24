@@ -8,6 +8,21 @@ class FirecrawlError(RuntimeError):
 
 
 _LAST_SCRAPE_AT = 0.0
+_FIRECRAWL_RUNTIME = {
+    "configured_key_count": 0,
+    "request_count": 0,
+    "backup_attempted": False,
+    "backup_succeeded": False,
+    "last_key_index": None,
+    "last_status_code": None,
+}
+
+
+def firecrawl_runtime_status():
+    """Return safe runtime diagnostics without exposing secret values."""
+    out = dict(_FIRECRAWL_RUNTIME)
+    out["configured_key_count"] = len(_firecrawl_keys())
+    return out
 
 
 def _firecrawl_keys():
@@ -54,8 +69,12 @@ def _post(endpoint: str, payload: dict, timeout: int = 60, *, paced: bool = Fals
     if not keys:
         raise FirecrawlError("Firecrawl API Key 未配置")
 
+    _FIRECRAWL_RUNTIME["configured_key_count"] = len(keys)
+    _FIRECRAWL_RUNTIME["request_count"] += 1
     last_error = None
     for index, key in enumerate(keys):
+        if index > 0:
+            _FIRECRAWL_RUNTIME["backup_attempted"] = True
         try:
             response = requests.post(
                 endpoint,
@@ -67,6 +86,11 @@ def _post(endpoint: str, payload: dict, timeout: int = 60, *, paced: bool = Fals
         except requests.RequestException as exc:
             last_error = exc
             continue
+
+        _FIRECRAWL_RUNTIME["last_key_index"] = index
+        _FIRECRAWL_RUNTIME["last_status_code"] = response.status_code
+        if index > 0 and response.status_code == 200:
+            _FIRECRAWL_RUNTIME["backup_succeeded"] = True
 
         raw_body = response.text if isinstance(response.text, str) else ""
         body = raw_body.lower()
