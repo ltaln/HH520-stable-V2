@@ -12,6 +12,7 @@ from research.dna import build_dna
 from research.candidate_rules import generate_candidate_rules
 from research.chronology import classify_window, canonical_timeline
 from research.calibration import calibrate
+from research.stable_v34_backtest import evaluate_stable_v34
 
 MAX_DAYS = 62
 
@@ -94,6 +95,7 @@ def _candidate_rules(records):
 
 def build_research_report(records, start=None, end=None, source="HH520_10027s", result_labels=None):
     prediction_snapshots = _prediction_snapshots(records)
+    stable_v34_backtest = evaluate_stable_v34(records, result_labels or [])
     clean, audit = sanitize_records(records)
     joined = match_results(clean, result_labels or [])
     joined = _restore_research_predictions(joined, prediction_snapshots)
@@ -129,6 +131,7 @@ def build_research_report(records, start=None, end=None, source="HH520_10027s", 
             "stable_access": "FORBIDDEN",
         },
         "backtest": backtest,
+        "stable_v34_backtest": stable_v34_backtest,
         "prediction_snapshot_layer": {
             "enabled": True,
             "count": len(prediction_snapshots),
