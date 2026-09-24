@@ -61,6 +61,28 @@ def rule_from_params(q):
         return "DRAW"
     return fn
 
+
+def compare_override(rows, fn):
+    selected=draw_hits=base_hits=0
+    for r in rows:
+        if fn(r)!="DRAW":
+            continue
+        selected+=1
+        actual=str(r.get("actual_outcome") or "").upper()
+        p=r.get("probabilities") or {}
+        base=max(("home","draw","away"), key=lambda k: float(p.get(k,0.0))).upper()
+        draw_hits+=int(actual=="DRAW")
+        base_hits+=int(actual==base)
+    return {
+        "n":selected,
+        "draw_hits":draw_hits,
+        "draw_accuracy":draw_hits/selected if selected else None,
+        "base_argmax_hits":base_hits,
+        "base_argmax_accuracy":base_hits/selected if selected else None,
+        "net_hits_if_override":draw_hits-base_hits,
+        "net_rate":(draw_hits-base_hits)/selected if selected else None,
+    }
+
 def combine(a,b):
     n=a["n"]+b["n"]; h=a["hits"]+b["hits"]
     return {"n":n,"hits":h,"accuracy":h/n if n else None,"wilson95":wilson(h,n)}
@@ -77,50 +99,47 @@ def draw_search(rows):
         q={"pd_min":pd_min,"side_gap_max":sg,"draw_top_gap_max":tg}
         fn=rule_from_params(q); a=metric(rows["dev1"],fn); b=metric(rows["dev2"],fn)
         if a["n"]>=15 and b["n"]>=15 and a["n"]+b["n"]>=50:
-            c=combine(a,b); base.append({"params":q,"dev1":a,"dev2":b,"dev":c,
-                                        "stability":min(a["accuracy"],b["accuracy"])})
-    base.sort(key=lambda x:(x["stability"],x["dev"]["accuracy"],x["dev"]["n"]),reverse=True)
+            c=combine(a,b); ca=compare_override(rows["dev1"],fn); cb=compare_override(rows["dev2"],fn)
+            base.append({"params":q,"dev1":a,"dev2":b,"dev":c,
+                         "stability":min(a["accuracy"],b["accuracy"]),
+                         "override_dev1":ca,"override_dev2":cb,
+                         "override_min_net_rate":min(ca["net_rate"],cb["net_rate"]),
+                         "override_total_net_hits":ca["net_hits_if_override"]+cb["net_hits_if_override"]})
+    base.sort(key=lambda x:(x["override_min_net_rate"],x["override_total_net_hits"],
+                            x["stability"],x["dev"]["accuracy"],x["dev"]["n"]),reverse=True)
     expanded=[]
-    for seed in base[:60]:
+    for seed in base[:120]:
       for pmax,mpd,hsd in product([.36,.38,.40,.42,.45,.50,1.0],[0,.24,.26,.28,.30],[.08,.12,.16,.20,.30,.50]):
         q=dict(seed["params"],pmax_max=pmax,market_pd_min=mpd,home_share_dev_max=hsd)
         fn=rule_from_params(q); a=metric(rows["dev1"],fn); b=metric(rows["dev2"],fn)
         if a["n"]>=15 and b["n"]>=15 and a["n"]+b["n"]>=50:
-            c=combine(a,b); expanded.append({"params":q,"dev1":a,"dev2":b,"dev":c,
-                                              "stability":min(a["accuracy"],b["accuracy"])})
+            c=combine(a,b); ca=compare_override(rows["dev1"],fn); cb=compare_override(rows["dev2"],fn)
+            expanded.append({"params":q,"dev1":a,"dev2":b,"dev":c,
+                             "stability":min(a["accuracy"],b["accuracy"]),
+                             "override_dev1":ca,"override_dev2":cb,
+                             "override_min_net_rate":min(ca["net_rate"],cb["net_rate"]),
+                             "override_total_net_hits":ca["net_hits_if_override"]+cb["net_hits_if_override"]})
     dedup={tuple(sorted(x["params"].items())):x for x in expanded}
     candidates=list(dedup.values())
-    candidates.sort(key=lambda x:((x["dev"]["wilson95"][0] or 0),x["stability"],x["dev"]["accuracy"],x["dev"]["n"]),reverse=True)
+    safe=[x for x in candidates
+          if x["override_dev1"]["net_hits_if_override"]>0
+          and x["override_dev2"]["net_hits_if_override"]>0]
+    ranked=safe if safe else candidates
+    ranked.sort(key=lambda x:(x["override_min_net_rate"],x["override_total_net_hits"],
+                              (x["dev"]["wilson95"][0] or 0),x["stability"],
+                              x["dev"]["accuracy"],x["dev"]["n"]),reverse=True)
     def finish(x):
         if not x:return None
         y=json.loads(json.dumps(x)); fn=rule_from_params(y["params"])
         y["stress"]=metric(rows["stress"],fn)
         y["stress"]["wilson95"]=wilson(y["stress"]["hits"],y["stress"]["n"])
-        override_compare={}
-        for split, rr in rows.items():
-            selected=draw_hits=base_hits=0
-            for r in rr:
-                if fn(r)!="DRAW":
-                    continue
-                selected+=1
-                actual=str(r.get("actual_outcome") or "").upper()
-                p=r.get("probabilities") or {}
-                base=max(("home","draw","away"), key=lambda k: float(p.get(k,0.0))).upper()
-                draw_hits+=int(actual=="DRAW")
-                base_hits+=int(actual==base)
-            override_compare[split]={
-                "n":selected,
-                "draw_hits":draw_hits,
-                "draw_accuracy":draw_hits/selected if selected else None,
-                "base_argmax_hits":base_hits,
-                "base_argmax_accuracy":base_hits/selected if selected else None,
-                "net_hits_if_override":draw_hits-base_hits,
-            }
-        y["override_compare"]=override_compare
+        y["override_compare"]={split:compare_override(rr,fn) for split,rr in rows.items()}
         return y
     return {"baseline":baseline,"candidate_count":len(candidates),
-            "final_selected_on_dev_only":finish(candidates[0] if candidates else None),
-            "top10_dev_only":[finish(x) for x in candidates[:10]],"stress_used_for_selection":False}
+            "safe_positive_net_candidate_count":len(safe),
+            "selection_objective":"positive_net_hits_vs_base_argmax_in_both_dev_splits",
+            "final_selected_on_dev_only":finish(ranked[0] if ranked else None),
+            "top10_dev_only":[finish(x) for x in ranked[:10]],"stress_used_for_selection":False}
 
 def parse_score(v):
     m=re.search(r"(\d+)\s*[-:：]\s*(\d+)",str(v or ""))
