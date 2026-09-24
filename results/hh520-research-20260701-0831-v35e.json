@@ -1,0 +1,13 @@
+{
+  "status": "PENDING",
+  "kind": "research",
+  "request_id": "hh520-research-20260701-0831-v35e",
+  "message": "Workflow accepted and is still running.",
+  "_action": {
+    "request_id": "hh520-research-20260701-0831-v35e",
+    "repository": "ltaln/HH520-stable-V2",
+    "run_id": "35965129314",
+    "run_attempt": "1",
+    "source_sha": "52a816235fbc122b656193b14e6efc35570dd7be"
+  }
+}
