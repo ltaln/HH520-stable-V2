@@ -10,24 +10,51 @@
   },
   "draw_resolver": {
     "mode": "BALANCED_SIDE_ZONE_ONLY",
-    "rule": {
-      "pd_min": 0.29,
-      "side_gap_max": 0.2,
-      "draw_top_gap_max": 0.16,
-      "pmax_max": 0.45,
-      "home_share_dev_max": 0.16
+    "type": "CROSS_FIT_LOGISTIC_V1",
+    "threshold": 0.38,
+    "pmax_limit": 0.45,
+    "feature_names": [
+      "pd",
+      "side_gap",
+      "draw_top_gap",
+      "pmax",
+      "market_pd",
+      "home_share_dev",
+      "lambda_total",
+      "lambda_gap",
+      "attack_gap",
+      "defense_gap",
+      "h2h_gap",
+      "form_gap",
+      "possession_gap"
+    ],
+    "crossfit_dev1": {
+      "n": 13,
+      "hits": 8,
+      "accuracy": 0.6153846153846154,
+      "base_argmax_hits": 2,
+      "base_argmax_accuracy": 0.15384615384615385,
+      "net_hits": 6
     },
-    "development": {
-      "n": 116,
-      "hits": 45,
-      "accuracy": 0.3879310344827586
+    "crossfit_dev2": {
+      "n": 29,
+      "hits": 12,
+      "accuracy": 0.41379310344827586,
+      "base_argmax_hits": 11,
+      "base_argmax_accuracy": 0.3793103448275862,
+      "net_hits": 1
     },
     "stress": {
-      "n": 22,
-      "hits": 8,
-      "accuracy": 0.36363636363636365
+      "n": 9,
+      "hits": 5,
+      "accuracy": 0.5555555555555556,
+      "base_argmax_hits": 4,
+      "base_argmax_accuracy": 0.4444444444444444,
+      "net_hits": 1
     },
-    "note": "Does not override authorized >=55% side directions."
+    "stress_used_for_selection": false,
+    "l2": 0.01,
+    "note": "High-specificity draw override selected by symmetric May-Aug cross-fit; only operates in pmax<=45% balanced-side zone and never overrides >=55% authorized side."
   },
   "htft": {
     "model": "INDEPENDENT_POISSON_SPLIT_HTFT_V2_TIMING_REQUIRED",
