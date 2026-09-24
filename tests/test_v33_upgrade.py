@@ -62,9 +62,9 @@ def test_consistency_selects_two_candidates_for_primary_ft():
     assert c["probability_conservation"]["wdl_anchor_unchanged"] is True
 
 
-def test_score_template_exposes_tail_diagnostics():
+def test_independent_score_exposes_tail_diagnostics():
     m=sample_match(); p=probability_layer(m); s=score_layer(m,p)
-    assert s["model"]=="HTFT_SCORE_TEMPLATE_V1"
+    assert s["model"]=="HDA_POISSON_V1"
     assert s["high_variance_challenger_promoted"] is False
     assert 0<=s["high_score_mass"]<=1
     assert len(s["all_scores"])>=len(s["top_scores"])
