@@ -50,7 +50,7 @@ The bridge dispatches `.github/workflows/hh520-research.yml`.
 
 Poll:
 
-`results/<request_id>.json` on branch `research-results`.
+`research-results/results/<request_id>.json` on branch `research-results`.
 
 ## Plugin execution rule
 
@@ -64,4 +64,13 @@ For prediction:
 7. On FAILED, stop and report the failure.
 8. Never recalculate or replace the frozen model output.
 
-For research, use the same pattern with `plugin-requests/research/` and `research-results`.
+For research, use the same pattern with `plugin-requests/research/` and
+`research-results/results/<request_id>.json` on the `research-results` branch.
+
+## GitHub App native plugin entry
+
+The migrated plugin does not use the legacy Custom GPT Action operations. It
+uses the GitHub App `github_create_file` tool once to create the request file
+on `main`, then uses `github_fetch_file` only for polling the result branch.
+See `PLUGIN_NATIVE_TOOLS.md` and `CHATGPT_INSTRUCTIONS.md` for the exact
+tool arguments and the exactly-once request protocol.

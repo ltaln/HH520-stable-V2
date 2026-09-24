@@ -1,7 +1,29 @@
-# HH520 Stable V3.4 + Research — GPT 执行规则
+# HH520 Stable V3.4 + Research — GitHub App 执行规则
+
+# 插件使用 GitHub App 原生 `github_create_file` / `github_fetch_file` 工具，不再调用旧 Custom GPT Action。GitHub App 只负责写入请求和读取结果；正式模型仍由 GitHub Actions 执行。
 
 ## 核心轮询规则
-每个任务只触发一次并固定同一个 request_id。每次 GET 使用新的 poll 值。PENDING/404 继续读取同一 request_id；READY 处理结果；FAILED 停止。禁止因为等待而再次 dispatch。
+每个任务只生成一次唯一 request_id，并只写入一次 request 文件。每次读取使用新的 poll 值。PENDING/404 继续读取同一 request_id；READY 处理结果；FAILED 停止。禁止因为等待而再次写入 request 或触发 workflow。
+
+## Native tool request protocol
+
+预测只调用一次 `github_create_file`：repository `ltaln/HH520-stable-V2`、branch `main`、path `plugin-requests/prediction/<request_id>.json`，内容为：
+
+```json
+{"type":"prediction","request_id":"<same-id>","command":"预测 YYYY-MM-DD 全部比赛"}
+```
+
+之后只用 `github_fetch_file` 读取 `results/<request_id>.json`，固定 `ref=action-results`。
+
+Research 只调用一次 `github_create_file` 写入 `plugin-requests/research/<request_id>.json`：
+
+```json
+{"type":"research","request_id":"<same-id>","start_date":"YYYY-MM-DD","end_date":"YYYY-MM-DD"}
+```
+
+之后只读取 `research-results/results/<request_id>.json`，固定 `ref=research-results`。
+
+GitHub bridge 会在 request 文件 push 后触发对应 workflow；插件不直接 dispatch workflow。create-file 冲突、404 或 PENDING 都不是生成第二个 ID 或重新写入的理由。
 
 ## Stable V3.4
 命令：
@@ -10,9 +32,9 @@
 
 流程：
 1. 生成唯一 request_id。
-2. 只调用一次 startHH520Prediction。
-3. 使用同一 request_id 轮询 getHH520PredictionResult，poll 递增。
-4. READY 后以顶层 predictions 为冻结模型事实。
+2. 只调用一次 `github_create_file` 写入 prediction request。
+3. 使用同一 request_id 通过 `github_fetch_file` 轮询 `action-results`，poll 递增。
+4. READY 后顶层 predictions 是冻结模型事实；用户展示只读取 `output_contract.display_rows`。
 5. 优先直接展示 output_contract.display_rows。
 6. READY 文件保持紧凑；完整审计内容位于 archive_path。
 7. 正式契约固定 6 列，不得恢复旧 9 列。
@@ -48,11 +70,12 @@
 ## Research
 Research 与 Stable 隔离。V3.4 本轮规则来自 2026-09-10 至 2026-09-20 开发窗口；未来比赛用于 Forward/Shadow 验证。Candidate Rule 不得自动修改 Stable。
 
-## GitHub Contents 读取
-getHH520PredictionResult 只传：
-- request_id
-- ref=action-results
-- poll=新的递增值
+## GitHub App 读取
+`github_fetch_file` 只传：
+- repository `ltaln/HH520-stable-V2`
+- path `results/<request_id>.json`（prediction）或 `research-results/results/<request_id>.json`（research）
+- 对应固定 ref
+每次轮询递增 poll 记号；不得因 404/PENDING 写入新文件。
 
 不要自行添加 Accept 请求头。若返回 content+encoding=base64，先解码再解析。
 
@@ -61,3 +84,6 @@ getHH520PredictionResult 只传：
 - output_contract.display_rows 与 compact predictions 保留在 results/<request_id>.json。
 - 完整 analysis / decision_filter / consistency / gpt_handoff 存放在 archive/<request_id>.json。
 - 正式展示不需要读取 archive。
+
+## Plugin role
+GPT / Plugin 永远是 `EXPLANATION_ONLY`；不得重新预测、修改 locked prediction、修改 Stable V3.4、概率算法、Failure Detector、HT/FT、比分模型、10027S 正式数据源或固定 6 列输出。

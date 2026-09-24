@@ -19,6 +19,29 @@ def test_dispatch_schema_preserves_stable_and_adds_research():
     assert next(x for x in r['parameters'] if x['name']=='ref')['schema']['enum']==['research-results']
 
 
+def test_native_plugin_contract_replaces_custom_action_execution():
+    instructions=(ROOT/'integration/CHATGPT_INSTRUCTIONS.md').read_text(encoding='utf-8')
+    native=(ROOT/'integration/PLUGIN_NATIVE_TOOLS.md').read_text(encoding='utf-8')
+    assert 'github_create_file' in instructions
+    assert 'github_fetch_file' in instructions
+    assert 'plugin-requests/prediction/<request_id>.json' in native
+    assert 'plugin-requests/research/<request_id>.json' in native
+    assert 'research-results/results/<request_id>.json' in native
+    assert 'output_contract.display_rows' in native
+    assert 'EXPLANATION_ONLY' in native
+    # The plugin instructions must not route execution through legacy Actions.
+    assert 'startHH520Prediction' not in instructions
+    assert 'getHH520PredictionResult' not in instructions
+
+
+def test_native_request_paths_are_isolated_and_exactly_once():
+    bridge=(ROOT/'integration/PLUGIN_MIGRATION_BRIDGE.md').read_text(encoding='utf-8')
+    assert 'research-results/results/<request_id>.json' in bridge
+    assert 'github_create_file' in bridge
+    assert 'github_fetch_file' in bridge
+    assert '只调用一次' in (ROOT/'integration/CHATGPT_INSTRUCTIONS.md').read_text(encoding='utf-8')
+
+
 def test_workflows_share_cache_lock_and_preserve_on_failure():
     for file,branch in [('hh520-predict.yml','action-results'),('hh520-research.yml','research-results')]:
         data=yaml.safe_load((ROOT/'.github/workflows'/file).read_text(encoding='utf-8'))

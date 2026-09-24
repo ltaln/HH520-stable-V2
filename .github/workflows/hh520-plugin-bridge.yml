@@ -16,7 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          # Resolve the exact push that caused this run. Using main here can
+          # race with another native create_file commit and make GITHUB_SHA
+          # absent from the shallow checkout, dropping a valid request.
+          ref: ${{ github.sha }}
           fetch-depth: 2
 
       - name: Locate request file
