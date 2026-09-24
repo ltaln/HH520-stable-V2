@@ -40,3 +40,13 @@ Read `research-results/results/<request_id>.json` on `research-results`.
 The GPT/plugin role is always `EXPLANATION_ONLY`. Stable V3.4 model logic,
 probability layers, Failure Detector, HT/FT, score model, 10027S source, and
 the six-column output contract are read-only from the plugin's perspective.
+
+## Legacy OpenAPI Action compatibility
+
+If a mobile client still has the legacy OpenAPI Action imported, its result GET
+must use `ref=action-results`, a fresh `poll_timestamp` query value on every
+request, and `Accept: application/vnd.github.raw+json`. The raw media type is
+important: without it, GitHub returns a Contents API envelope with
+`content`/`encoding` and the client can mistake a READY file for a missing
+status. A raw `status=READY` response is rendered immediately from
+`output_contract.display_rows`; it is never turned into a waiting message.

@@ -3,7 +3,7 @@
 # 插件使用 GitHub App 原生 `github_create_file` / `github_fetch_file` 工具，不再调用旧 Custom GPT Action。GitHub App 只负责写入请求和读取结果；正式模型仍由 GitHub Actions 执行。
 
 ## 核心轮询规则
-每个任务只生成一次唯一 request_id，并只写入一次 request 文件。每次读取使用新的 poll 值。PENDING/404 继续读取同一 request_id；READY 处理结果；FAILED 停止。禁止因为等待而再次写入 request 或触发 workflow。
+每个任务只生成一次唯一 request_id，并只写入一次 request 文件。原生 GitHub App 读取时每次调用都必须重新发起 `github_fetch_file`；旧 OpenAPI Action 读取则使用新的 `poll_timestamp`（毫秒时间戳）和 `Accept: application/vnd.github.raw+json`，确保绕过 Contents API 的旧缓存和 base64 包装。PENDING/404 继续读取同一 request_id；READY 立即处理结果；FAILED 停止。禁止因为等待而再次写入 request 或触发 workflow。
 
 ## Native tool request protocol
 
@@ -33,7 +33,7 @@ GitHub bridge 会在 request 文件 push 后触发对应 workflow；插件不直
 流程：
 1. 生成唯一 request_id。
 2. 只调用一次 `github_create_file` 写入 prediction request。
-3. 使用同一 request_id 通过 `github_fetch_file` 轮询 `action-results`，poll 递增。
+3. 使用同一 request_id 通过 `github_fetch_file` 轮询 `action-results`，每次重新发起读取；若使用旧 OpenAPI Action，则递增 `poll_timestamp`。
 4. READY 后顶层 predictions 是冻结模型事实；用户展示只读取 `output_contract.display_rows`。
 5. 优先直接展示 output_contract.display_rows。
 6. READY 文件保持紧凑；完整审计内容位于 archive_path。
@@ -75,9 +75,11 @@ Research 与 Stable 隔离。V3.4 本轮规则来自 2026-09-10 至 2026-09-20 �
 - repository `ltaln/HH520-stable-V2`
 - path `results/<request_id>.json`（prediction）或 `research-results/results/<request_id>.json`（research）
 - 对应固定 ref
-每次轮询递增 poll 记号；不得因 404/PENDING 写入新文件。
+每次轮询重新读取；旧 OpenAPI Action 使用新的 `poll_timestamp`；不得因 404/PENDING 写入新文件。
 
-不要自行添加 Accept 请求头。若返回 content+encoding=base64，先解码再解析。
+Prediction 的旧 Action 读取接口必须传 `ref=action-results`、新的
+`poll_timestamp` 和 `Accept: application/vnd.github.raw+json`。返回值应是
+直接 JSON；若仍收到 `content+encoding=base64` 包装，先解码再按同一状态规则解析。
 
 ## ResponseTooLarge 防护
 - prediction READY 只返回紧凑 polling envelope。

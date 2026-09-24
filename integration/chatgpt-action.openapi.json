@@ -101,13 +101,26 @@
             "description": "Always use action-results."
           },
           {
-            "name": "poll",
+            "name": "poll_timestamp",
             "in": "query",
             "required": true,
-            "description": "Cache-busting token. Use a new value on every retry, for example 1, 2, 3.",
+            "description": "Cache-busting timestamp in milliseconds. Generate a new value for every GET; never reuse it for the same request_id.",
             "schema": {
               "type": "string",
               "pattern": "^[A-Za-z0-9_-]{1,40}$"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "description": "Request the raw JSON file instead of the GitHub Contents API base64 envelope, so status=READY/PENDING is directly visible to the Action.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "application/vnd.github.raw+json"
+              ],
+              "default": "application/vnd.github.raw+json"
             }
           }
         ],
@@ -212,7 +225,7 @@
             "description": "Result is not ready yet. Retry this GET; do not dispatch a duplicate workflow."
           }
         },
-        "description": "Read the Stable V3.4 result from the action-results branch. Supply request_id, ref=action-results, and a fresh poll token."
+        "description": "Read the Stable V3.4 result directly as JSON from action-results. Supply ref=action-results, a new poll_timestamp on every GET, and Accept=application/vnd.github.raw+json. On status=READY return output_contract.display_rows immediately; on status=PENDING keep reading the same request_id; on status=FAILED stop."
       }
     },
     "/repos/ltaln/HH520-stable-V2/actions/workflows/hh520-research.yml/dispatches": {

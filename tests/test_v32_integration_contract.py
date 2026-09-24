@@ -90,14 +90,16 @@ def test_openapi_object_schemas_are_explicit_for_gpt_editor():
     walk(spec)
 
 
-def test_prediction_action_schema_has_no_custom_accept_header():
+def test_prediction_action_schema_uses_raw_json_and_cache_busting():
     spec = json.loads((ROOT / "integration" / "chatgpt-action.openapi.json").read_text(encoding="utf-8"))
     get_op = spec["paths"]["/repos/ltaln/HH520-stable-V2/contents/results/{request_id}.json"]["get"]
     params = {(p["in"], p["name"]) for p in get_op["parameters"]}
-    assert ("header", "Accept") not in params
+    assert ("header", "Accept") in params
     assert ("path", "request_id") in params
     assert ("query", "ref") in params
-    assert ("query", "poll") in params
+    assert ("query", "poll_timestamp") in params
+    accept = next(p for p in get_op["parameters"] if p["name"] == "Accept")
+    assert accept["schema"]["default"] == "application/vnd.github.raw+json"
     post_op = spec["paths"]["/repos/ltaln/HH520-stable-V2/actions/workflows/hh520-predict.yml/dispatches"]["post"]
     assert "200" in post_op["responses"]
     assert "204" in post_op["responses"]

@@ -42,6 +42,20 @@ def test_native_request_paths_are_isolated_and_exactly_once():
     assert '只调用一次' in (ROOT/'integration/CHATGPT_INSTRUCTIONS.md').read_text(encoding='utf-8')
 
 
+def test_action_reader_forces_fresh_raw_ready_payload():
+    schema=json.loads((ROOT/'integration/chatgpt-action.openapi.json').read_text(encoding='utf-8'))
+    op=schema['paths']['/repos/ltaln/HH520-stable-V2/contents/results/{request_id}.json']['get']
+    params={(p['in'],p['name']):p for p in op['parameters']}
+    assert params[('query','ref')]['schema']['enum']==['action-results']
+    assert params[('query','poll_timestamp')]['required'] is True
+    assert params[('header','Accept')]['schema']['default']=='application/vnd.github.raw+json'
+    description=op['description']
+    assert 'status=READY' in description
+    assert 'output_contract.display_rows' in description
+    assert 'status=PENDING' in description
+    assert 'status=FAILED' in description
+
+
 def test_workflows_share_cache_lock_and_preserve_on_failure():
     for file,branch in [('hh520-predict.yml','action-results'),('hh520-research.yml','research-results')]:
         data=yaml.safe_load((ROOT/'.github/workflows'/file).read_text(encoding='utf-8'))
