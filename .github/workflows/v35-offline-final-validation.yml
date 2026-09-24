@@ -1,0 +1,38 @@
+name: V3.5 Offline Final Validation
+on:
+  push:
+    branches: [main]
+    paths: ["offline-validation-requests/*.json"]
+permissions:
+  contents: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Fetch existing research archives
+        run: git fetch origin research-results:refs/remotes/origin/research-results
+      - name: Run offline validation
+        run: python scripts/offline_v35_final_validation.py
+      - name: Publish result
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin offline-validation-results || true
+          if git show-ref --verify --quiet refs/remotes/origin/offline-validation-results; then
+            git switch --detach origin/offline-validation-results
+          else
+            git switch --orphan offline-validation-results
+            git rm -rf . || true
+          fi
+          mkdir -p results
+          cp "$GITHUB_WORKSPACE/_offline_v35_final.json" results/latest.json
+          git add results/latest.json
+          git commit -m "research: offline v35 final validation" || true
+          git push origin HEAD:offline-validation-results --force
