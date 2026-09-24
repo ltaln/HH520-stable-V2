@@ -1,4 +1,5 @@
 import json, math, os, re, subprocess, sys
+import numpy as np
 from copy import deepcopy
 from itertools import product
 from pathlib import Path
@@ -294,6 +295,113 @@ def factor_draw_search(rows):
       "top10_dev_only":[finalize(x) for x in candidates[:10]],
     }
 
+
+DRAW_LOGISTIC_FEATURES = [
+    "pd","side_gap","draw_top_gap","pmax","market_pd","home_share_dev",
+    "lambda_total","lambda_gap","attack_gap","defense_gap","h2h_gap","form_gap","possession_gap",
+]
+
+def logistic_features(r):
+    f=features(r); ff=factor_features(r)
+    lh,la=fit_lambdas(r.get("probabilities") or {})
+    values={
+        "pd":f["pd"],"side_gap":f["side_gap"],"draw_top_gap":f["draw_top_gap"],
+        "pmax":f["pmax"],"market_pd":f["market_pd"],"home_share_dev":f["home_share_dev"],
+        "lambda_total":lh+la,"lambda_gap":abs(lh-la),
+        **ff,
+    }
+    return [0.0 if values.get(k) is None else float(values[k]) for k in DRAW_LOGISTIC_FEATURES]
+
+def _fit_logistic(rows, feature_idx, l2):
+    X=np.asarray([[logistic_features(r)[i] for i in feature_idx] for r in rows],dtype=float)
+    y=np.asarray([1.0 if str(r.get("actual_outcome")).upper()=="DRAW" else 0.0 for r in rows],dtype=float)
+    mean=X.mean(axis=0); std=X.std(axis=0); std[std<1e-8]=1.0
+    X=(X-mean)/std
+    X=np.column_stack([np.ones(len(X)),X])
+    w=np.zeros(X.shape[1],dtype=float)
+    for _ in range(1800):
+        z=np.clip(X@w,-30,30); p=1/(1+np.exp(-z))
+        grad=(X.T@(p-y))/len(y)
+        grad[1:]+=l2*w[1:]/len(y)
+        w-=0.08*grad
+    return {"mean":mean,"std":std,"w":w,"feature_idx":feature_idx,"l2":l2}
+
+def _predict_logistic(model, rows):
+    X=np.asarray([[logistic_features(r)[i] for i in model["feature_idx"]] for r in rows],dtype=float)
+    X=(X-model["mean"])/model["std"]
+    X=np.column_stack([np.ones(len(X)),X])
+    z=np.clip(X@model["w"],-30,30)
+    return 1/(1+np.exp(-z))
+
+def _override_from_scores(rows,scores,threshold,pmax_limit):
+    n=draw_hits=base_hits=0
+    for r,s in zip(rows,scores):
+        p=r.get("probabilities") or {}
+        base=max(("home","draw","away"),key=lambda k:float(p.get(k,0.0)))
+        if base=="draw": continue
+        if max(float(p.get(k,0.0)) for k in ("home","draw","away"))>pmax_limit: continue
+        if float(s)<threshold: continue
+        n+=1; actual=str(r.get("actual_outcome") or "").upper()
+        draw_hits+=int(actual=="DRAW"); base_hits+=int(actual==base.upper())
+    return {"n":n,"draw_hits":draw_hits,"draw_accuracy":draw_hits/n if n else None,
+            "base_argmax_hits":base_hits,"base_argmax_accuracy":base_hits/n if n else None,
+            "net_hits_if_override":draw_hits-base_hits,
+            "net_rate":(draw_hits-base_hits)/n if n else None}
+
+def draw_logistic_search(rows):
+    # Symmetric cross-fit: train May-Jun -> validate Jul-Aug and vice versa.
+    sets=[
+      list(range(8)),                       # probability + goal intensity only
+      list(range(13)),                      # all structural features
+      [0,1,2,3,4,5,6,7,8,11,12],          # attack/form/possession
+      [0,1,2,3,4,5,6,7,9,10,11,12],       # defense/H2H/form/possession
+    ]
+    candidates=[]
+    for idx in sets:
+      for l2 in (0.01,0.05,0.1,0.5,1.0,2.0):
+        m12=_fit_logistic(rows["dev1"],idx,l2)
+        s2=_predict_logistic(m12,rows["dev2"])
+        m21=_fit_logistic(rows["dev2"],idx,l2)
+        s1=_predict_logistic(m21,rows["dev1"])
+        for threshold in [x/100 for x in range(25,71)]:
+          for pmax_limit in (0.42,0.45,0.50,0.55):
+            a=_override_from_scores(rows["dev1"],s1,threshold,pmax_limit)
+            b=_override_from_scores(rows["dev2"],s2,threshold,pmax_limit)
+            if a["n"]<12 or b["n"]<12: continue
+            if a["net_hits_if_override"]<=0 or b["net_hits_if_override"]<=0: continue
+            candidates.append({
+              "feature_names":[DRAW_LOGISTIC_FEATURES[i] for i in idx],
+              "feature_idx":idx,"l2":l2,"threshold":threshold,"pmax_limit":pmax_limit,
+              "crossfit_dev1":a,"crossfit_dev2":b,
+              "min_net_rate":min(a["net_rate"],b["net_rate"]),
+              "total_net_hits":a["net_hits_if_override"]+b["net_hits_if_override"],
+              "coverage":a["n"]+b["n"],
+            })
+    candidates.sort(key=lambda x:(x["min_net_rate"],x["total_net_hits"],x["coverage"]),reverse=True)
+    if not candidates:
+        return {"candidate_count":0,"final_selected_on_dev_only":None,
+                "stress_used_for_selection":False}
+    best=candidates[0]
+    dev=rows["dev1"]+rows["dev2"]
+    final_model=_fit_logistic(dev,best["feature_idx"],best["l2"])
+    stress_scores=_predict_logistic(final_model,rows["stress"])
+    stress=_override_from_scores(rows["stress"],stress_scores,best["threshold"],best["pmax_limit"])
+    # Export frozen coefficients in raw-standardized form for deterministic Stable implementation.
+    export={
+      "feature_names":best["feature_names"],
+      "mean":[float(x) for x in final_model["mean"]],
+      "std":[float(x) for x in final_model["std"]],
+      "weights":[float(x) for x in final_model["w"]],
+      "threshold":best["threshold"],"pmax_limit":best["pmax_limit"],"l2":best["l2"],
+    }
+    out=json.loads(json.dumps(best))
+    out["stress"]=stress; out["frozen_model"]=export
+    return {"candidate_count":len(candidates),
+            "selection_objective":"positive_net_draw_override_in_both_crossfit_dev_splits",
+            "stress_used_for_selection":False,
+            "final_selected_on_dev_only":out,
+            "top10_dev_only":candidates[:10]}
+
 def pois(lam,n):
     arr=[math.exp(-lam)]
     for k in range(1,n+1): arr.append(arr[-1]*lam/k)
@@ -415,6 +523,7 @@ out={
  "sample_counts":{k:len(v) for k,v in archive_rows.items()},
  "draw_optimizer":draw_search(archive_rows),
  "draw_factor_optimizer":factor_draw_search(cache_rows),
+ "draw_logistic_optimizer":draw_logistic_search(cache_rows),
  "htft_optimizer":htft_search(cache_rows,cache_meta,data),
 }
 Path("_draw_htft_final.json").write_text(json.dumps(out,ensure_ascii=False,indent=2),encoding="utf-8")
