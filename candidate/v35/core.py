@@ -92,9 +92,9 @@ def independent_score(probability):
             "total_goals":f"{total_top[0]}球","total_goals_probability":total_top[1]}
 
 def _timing_share(side, opponent, mode):
-    if mode=="six_bin":
-        vals=[side.get("first_half_gf_signal"),opponent.get("first_half_ga_signal")]
-    elif mode=="half_aggregate_fallback":
+    if side.get("first_half_gf_share") is not None or opponent.get("first_half_ga_share") is not None:
+        vals=[side.get("first_half_gf_share"),opponent.get("first_half_ga_share")]
+    else:
         vals=[]
         fg1,fg2=side.get("first_half_gf_signal"),side.get("second_half_gf_signal")
         ga1,ga2=opponent.get("first_half_ga_signal"),opponent.get("second_half_ga_signal")
@@ -105,8 +105,6 @@ def _timing_share(side, opponent, mode):
                 vals.append(float(ga1)/(float(ga1)+float(ga2)))
         except (TypeError,ValueError,ZeroDivisionError):
             return None
-    else:
-        return None
     nums=[]
     for x in vals:
         try:
