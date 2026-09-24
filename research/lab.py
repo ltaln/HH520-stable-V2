@@ -14,6 +14,7 @@ from research.chronology import classify_window, canonical_timeline
 from research.calibration import calibrate
 from research.stable_v34_backtest import evaluate_stable_v34
 from research.v35_ft_dataset import build_v35_ft_dataset
+from research.v35_calibration_summary import build_v35_research_summary
 
 MAX_DAYS = 62
 
@@ -98,6 +99,7 @@ def build_research_report(records, start=None, end=None, source="HH520_10027s", 
     prediction_snapshots = _prediction_snapshots(records)
     stable_v34_backtest = evaluate_stable_v34(records, result_labels or [])
     v35_ft_dataset = build_v35_ft_dataset(records, result_labels or [])
+    v35_research_summary = build_v35_research_summary(records, result_labels or [], v35_ft_dataset)
     clean, audit = sanitize_records(records)
     joined = match_results(clean, result_labels or [])
     joined = _restore_research_predictions(joined, prediction_snapshots)
@@ -135,6 +137,7 @@ def build_research_report(records, start=None, end=None, source="HH520_10027s", 
         "backtest": backtest,
         "stable_v34_backtest": stable_v34_backtest,
         "v35_ft_dataset": v35_ft_dataset,
+        "v35_research_summary": v35_research_summary,
         "prediction_snapshot_layer": {
             "enabled": True,
             "count": len(prediction_snapshots),
