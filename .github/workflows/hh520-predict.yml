@@ -1,5 +1,5 @@
-name: HH520 Stable V3.5 Phase 2 Prediction
-run-name: "stable-v3.5-p2 - ${{ inputs.request_id }}"
+name: HH520 Stable V3.4 Prediction
+run-name: "stable-v3.4 - ${{ inputs.request_id }}"
 on:
   workflow_dispatch:
     inputs:
@@ -71,7 +71,7 @@ jobs:
           path: cache
           key: hh520-collection-v1-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: hh520-collection-v1-
-      - name: Run Stable V3.5 Phase 2
+      - name: Run Stable V3.4
         id: execute
         env:
           COMMAND: ${{ inputs.command }}
@@ -79,6 +79,28 @@ jobs:
           set -euo pipefail
           mkdir -p _action_out
           python main.py "$COMMAND" --output "_action_out/$REQUEST_ID.json"
+      - name: Inspect generated output
+        if: always()
+        run: |
+          set -euo pipefail
+          echo "=== action output directory ==="
+          ls -la _action_out || true
+          if [ -f "_action_out/$REQUEST_ID.json" ]; then
+            echo "=== result preview ==="
+            python - <<'PY'
+            import json, os
+            p=f"_action_out/{os.environ['REQUEST_ID']}.json"
+            data=json.load(open(p,encoding='utf-8'))
+            print(json.dumps({
+              'status': data.get('status'),
+              'prediction_count': len(data.get('predictions') or []),
+              'has_output_contract': bool(data.get('output_contract')),
+              'display_rows': len(data.get('display_rows') or data.get('output_contract',{}).get('display_rows') or [])
+            }, ensure_ascii=False, indent=2))
+            PY
+          else
+            echo "missing action output"
+          fi
       - name: Preserve cache and request ledger even after failure
         if: always() && steps.restore.outcome == 'success'
         uses: actions/cache/save@v4
@@ -97,14 +119,14 @@ jobs:
           python - <<'PY'
           import json
           import os
-          p='/tmp/hh520-result.json'
-          data=json.load(open(p,encoding='utf-8'))
+          data=json.load(open('/tmp/hh520-result.json',encoding='utf-8'))
           assert data.get('status') == 'READY', data
           assert data.get('request_id') == os.environ['REQUEST_ID'], data
           rows=data.get('display_rows') or data.get('output_contract',{}).get('display_rows')
           assert isinstance(rows,list), data
           print('HH520 READY contract verified:', len(rows), 'rows')
           PY
-      - name: Publish FAILED state
-        if: failure() && steps.execute.outcome != 'success'
-        run: python scripts/publish_action_status.py action-results "$REQUEST_ID" FAILED stable
+      - name: Publish FAILED state with diagnostics
+        if: failure()
+        run: |
+          python scripts/publish_action_status.py action-results "$REQUEST_ID" FAILED stable || true
