@@ -24,13 +24,23 @@ def test_research_confidence_s_tier():
     assert c["direction_override"] is False
 
 
-def test_htft_layer_produces_three_primary_ft_rows():
-    p=probability_layer(sample_match())
-    h=htft_layer(p,sample_match())
+def test_htft_layer_requires_timing_and_then_ranks_global_joint_rows():
+    m=sample_match()
+    p=probability_layer(m)
+    missing=htft_layer(p,m)
+    assert missing["valid"] is False
+    assert missing["status"]=="PASS"
+    m["goal_timing"]={
+        "available":True,"timing_mode":"six_bin","source_domain":"test",
+        "home":{"first_half_gf_signal":0.40,"first_half_ga_signal":0.42},
+        "away":{"first_half_gf_signal":0.46,"first_half_ga_signal":0.44},
+    }
+    h=htft_layer(p,m)
     assert h["valid"] is True
     assert len(h["top"])==3
     assert h["top"][0]["probability"]>=h["top"][1]["probability"]
-    assert all(x["ft"]=="HOME" for x in h["top"])
+    assert h["timing_used"] is True
+    assert h["ft_core_unchanged"] is True
 
 
 def test_score_layer_uses_independent_hda_poisson():
