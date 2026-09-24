@@ -1,11 +1,11 @@
 {
-  "status": "PENDING",
+  "status": "FAILED",
   "kind": "stable",
   "request_id": "hh520-20260924-e2e-3f51",
   "stage": "workflow",
   "run_id": "36027762820",
   "run_attempt": "1",
-  "message": "Workflow accepted and is still running.",
+  "message": "Workflow failed before a final result was published. Check GitHub Actions logs for the failed stage.",
   "_action": {
     "request_id": "hh520-20260924-e2e-3f51",
     "repository": "ltaln/HH520-stable-V2",
