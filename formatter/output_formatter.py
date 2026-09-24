@@ -14,6 +14,8 @@ def _pct(value):
 
 def _scenario(pred):
     primary = pred.get("direction") or "未提供"
+    if primary == "均衡":
+        return "均衡（不强制方向）"
     state = pred.get("state")
     label = STATE_ZH.get(state)
     return f"{primary}（{label}）" if label else primary
@@ -33,10 +35,10 @@ def build_display_row(pred: dict) -> dict:
 
 def build_output_contract(predictions: list[dict]) -> dict:
     return {
-        "version": "HH520-OUTPUT-V3.4", "stable_version": "HH520 Stable V3.4",
+        "version": "HH520-OUTPUT-V3.5-P1", "stable_version": "HH520 Stable V3.5 Phase 1",
         "strict": True, "required_columns": OUTPUT_COLUMNS,
         "display_rows": [build_display_row(pred) for pred in predictions],
-        "render_rule": "必须按6列完整输出；市场概率=官方赔率去水概率；括号状态仅表示市场可靠度；不得把比分/半全场条件概率解释成FT自信度。",
+        "render_rule": "必须按6列完整输出；FT侧向概率低于55%显示均衡/不强制方向；比分为独立H/D/A拟合分布，不受FT硬锁；市场概率=官方赔率去水概率；HT/FT仍为Phase 1旧链，低于55%时不正式输出。",
     }
 
 
@@ -45,7 +47,7 @@ def format_prediction(pred: dict) -> str:
     return (
         f"比赛：\n{pred['home_team']} vs {pred['away_team']}\n\n"
         f"胜平负场景：{_scenario(pred)}\n市场概率：{_pct(get('market_probability'))}\n"
-        f"模型概率：{_pct(get('model_probability'))}\n风险等级：{get('risk_tier','未提供')}\n\n"
+        f"模型概率：{_pct(get('model_probability'))}\nFT等级：{get('ft_grade','未提供')}\n风险等级：{get('risk_tier','未提供')}\n\n"
         f"比分预测：\n1. {get('score1') or '未提供'} ({_pct(get('score1_probability'))})\n"
         f"2. {get('score2') or '未提供'} ({_pct(get('score2_probability'))})\n\n"
         f"半全场：\n1. {get('htft1') or '未提供'} ({_pct(get('htft1_probability'))})\n"
