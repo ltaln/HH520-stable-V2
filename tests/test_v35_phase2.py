@@ -37,7 +37,9 @@ def test_phase2_draw_resolver_only_operates_in_balanced_side_zone():
     d=decision_filter(m,p,v)
     if d["draw_rule_promoted"]:
         assert d["resolved_direction"]=="draw"
-        assert d["ft_grade"]=="DRAW_STANDARD"\n        assert d["draw_rule_type"]=="CROSS_FIT_LOGISTIC_V1"\n        assert d["draw_rule_metrics"]["score"] >= 0.38
+        assert d["ft_grade"]=="DRAW_STANDARD"
+        assert d["draw_rule_type"]=="CROSS_FIT_LOGISTIC_V1"
+        assert d["draw_rule_metrics"]["score"] >= 0.38
         assert p["pmax"] < 0.55
     else:
         assert d["resolved_direction"]==p["direction"]
