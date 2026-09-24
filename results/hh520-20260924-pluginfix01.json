@@ -1,0 +1,13 @@
+{
+  "status": "PENDING",
+  "kind": "stable",
+  "request_id": "hh520-20260924-pluginfix01",
+  "message": "Workflow accepted and is still running.",
+  "_action": {
+    "request_id": "hh520-20260924-pluginfix01",
+    "repository": "ltaln/HH520-stable-V2",
+    "run_id": "35953662923",
+    "run_attempt": "1",
+    "source_sha": "cb51986607771408f0a90f633c53051d4ee9729f"
+  }
+}
