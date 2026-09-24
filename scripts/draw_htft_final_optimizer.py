@@ -1,7 +1,11 @@
-import json, math, os, re, subprocess
+import json, math, os, re, subprocess, sys
 from copy import deepcopy
 from itertools import product
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from collector.hh520_10027_parser import parse_10027s_markdown
 from engine.probability_layer import probability_layer
