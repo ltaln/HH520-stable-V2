@@ -29,6 +29,7 @@ def test_native_plugin_contract_replaces_custom_action_execution():
     assert 'research-results/results/<request_id>.json' in native
     assert 'output_contract.display_rows' in native
     assert 'EXPLANATION_ONLY' in native
+    assert 'connector_76869538009648d5b282a4bb21c3d157' in native
     # The plugin instructions must not route execution through legacy Actions.
     assert 'startHH520Prediction' not in instructions
     assert 'getHH520PredictionResult' not in instructions

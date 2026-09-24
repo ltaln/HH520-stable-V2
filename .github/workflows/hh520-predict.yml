@@ -1,5 +1,5 @@
-name: HH520 Stable V3.4 Prediction
-run-name: "stable-v3.4 - ${{ inputs.request_id }}"
+name: HH520 Stable V3.5.1 Prediction
+run-name: "stable-v3.5.1 - ${{ inputs.request_id }}"
 on:
   workflow_dispatch:
     inputs:
@@ -71,7 +71,7 @@ jobs:
           path: cache
           key: hh520-collection-v1-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: hh520-collection-v1-
-      - name: Run Stable V3.4
+      - name: Run Stable V3.5.1
         id: execute
         env:
           COMMAND: ${{ inputs.command }}

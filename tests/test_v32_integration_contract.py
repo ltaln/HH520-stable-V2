@@ -16,9 +16,9 @@ def test_v35_phase2_active_prompt_and_config_are_aligned():
     assert config["prediction"]["automatic_market_override"] is False
 
 
-def test_v34_integration_contract_exposes_locked_predictions():
+def test_v351_integration_contract_exposes_locked_predictions():
     spec = json.loads((ROOT / "integration" / "chatgpt-action.openapi.json").read_text(encoding="utf-8"))
-    assert spec["info"]["version"] == "3.4"
+    assert spec["info"]["version"] == "3.5.1"
     schema = spec["paths"]["/repos/ltaln/HH520-stable-V2/contents/results/{request_id}.json"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]
     assert "predictions" in schema["properties"]
     assert "output_contract" in schema["properties"]

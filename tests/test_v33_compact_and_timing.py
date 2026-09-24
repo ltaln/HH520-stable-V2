@@ -19,13 +19,13 @@ def test_prediction_contract_rejects_incomplete_locked_output(payload, reason):
 def test_prediction_contract_accepts_complete_locked_output():
     assert _validate_prediction_contract({
         "predictions": [{}],
-        "output_contract": {"stable_version": "HH520 Stable V3.4", "display_rows": [{}]},
+        "output_contract": {"stable_version": "HH520 Stable V3.5.1", "display_rows": [{}]},
     }) is True
 
 
 def test_prediction_summary_is_compact_and_six_column_authoritative():
     contract={
-        "version":"HH520-OUTPUT-V3.4","stable_version":"HH520 Stable V3.4","strict":True,
+        "version":"HH520-OUTPUT-V3.5.1","stable_version":"HH520 Stable V3.5.1","strict":True,
         "required_columns":["球队对阵","胜平负场景","市场概率","比分×2及概率","半全场×2及概率","总进球及概率"],
         "display_rows":[{"球队对阵":"A vs B"}],"render_rule":"six",
     }

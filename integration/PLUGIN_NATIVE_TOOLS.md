@@ -4,6 +4,14 @@ This contract replaces the old Custom Actions while keeping the existing GitHub 
 
 ## Native tools
 
+The plugin package must attach the GitHub connector as a required app. Without
+that attachment, a migrated mobile GPT can load the skill text but cannot call
+the file tools, which produces a false "no READY result" conversation.
+
+```json
+{"apps":{"github":{"id":"connector_76869538009648d5b282a4bb21c3d157","required":true}}}
+```
+
 | Tool | Operation | Fixed values |
 | --- | --- | --- |
 | `github_create_file` | Create exactly one request file | repository `ltaln/HH520-stable-V2`, branch `main` |
@@ -37,7 +45,7 @@ Read `research-results/results/<request_id>.json` on `research-results`.
 - `READY` research: return the compact research summary; detail pages remain isolated on `research-results`.
 - `FAILED`: stop and report the returned error; do not auto-retry.
 
-The GPT/plugin role is always `EXPLANATION_ONLY`. Stable V3.4 model logic,
+The GPT/plugin role is always `EXPLANATION_ONLY`. Stable V3.5.1 model logic,
 probability layers, Failure Detector, HT/FT, score model, 10027S source, and
 the six-column output contract are read-only from the plugin's perspective.
 

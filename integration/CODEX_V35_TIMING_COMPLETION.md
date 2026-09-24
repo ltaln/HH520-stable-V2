@@ -1,7 +1,7 @@
 # Codex Task — HH520 V3.5 Goal-Timing Completion
 
 ## Scope
-Finish only the V3.5 Shadow goal-timing acquisition path. Do not modify Stable V3.4/V3.4.1 production probability, Decision Filter, 6-column output, or historical Research behavior.
+Finish only the V3.5 Shadow goal-timing acquisition path. Do not modify Stable V3.5.1 production probability, Decision Filter, 6-column output, or historical Research behavior.
 
 ## Hard constraints
 - Historical Research MUST NOT collect goal-timing data.

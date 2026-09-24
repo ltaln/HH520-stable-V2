@@ -4,7 +4,7 @@ This bridge exists because migrated ChatGPT Plugins do not inherit Custom GPT Ac
 
 ## Stable model protection
 
-This bridge does **not** modify HH520 Stable V3.4 model logic.
+This bridge does **not** modify HH520 Stable V3.5.1 model logic.
 It only converts a GitHub file write into the existing workflow_dispatch call.
 
 ## Prediction request
@@ -60,7 +60,7 @@ For prediction:
 3. Never create a second request file for the same user command.
 4. Poll the same request_id from `action-results`.
 5. On PENDING or 404, keep polling.
-6. On READY, render only the authoritative V3.4 6-column `display_rows`.
+6. On READY, render only the authoritative V3.5.1 6-column `display_rows`.
 7. On FAILED, stop and report the failure.
 8. Never recalculate or replace the frozen model output.
 

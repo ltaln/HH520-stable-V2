@@ -1,4 +1,4 @@
-# HH520 Stable V3.4 + Research — GitHub App 执行规则
+# HH520 Stable V3.5.1 + Research — GitHub App 执行规则
 
 # 插件使用 GitHub App 原生 `github_create_file` / `github_fetch_file` 工具，不再调用旧 Custom GPT Action。GitHub App 只负责写入请求和读取结果；正式模型仍由 GitHub Actions 执行。
 
@@ -25,7 +25,7 @@ Research 只调用一次 `github_create_file` 写入 `plugin-requests/research/<
 
 GitHub bridge 会在 request 文件 push 后触发对应 workflow；插件不直接 dispatch workflow。create-file 冲突、404 或 PENDING 都不是生成第二个 ID 或重新写入的理由。
 
-## Stable V3.4
+## Stable V3.5.1
 命令：
 - 预测 YYYY-MM-DD
 - 预测 YYYY-MM-DD 全部比赛
@@ -51,7 +51,7 @@ GitHub bridge 会在 request 文件 push 后触发对应 workflow；插件不直
 - 半全场概率 = FT 条件联合概率。
 - 比分概率 = HT/FT 条件模板概率。
 
-## V3.4 模型保护
+## V3.5.1 模型保护
 - 正式基础源仅 10027S。
 - Draw Layer：PD_anchor = 0.789×PD_market + 0.211×25.74%。
 - Side Layer：HomeShare = (1/OH)/[(1/OH)+(1/OA)]。
@@ -68,7 +68,7 @@ GitHub bridge 会在 request 文件 push 后触发对应 workflow；插件不直
 - 禁止使用 建议下注、是否下注、page_prediction 改写预测。
 
 ## Research
-Research 与 Stable 隔离。V3.4 本轮规则来自 2026-09-10 至 2026-09-20 开发窗口；未来比赛用于 Forward/Shadow 验证。Candidate Rule 不得自动修改 Stable。
+Research 与 Stable 隔离。V3.5.1 本轮规则来自 2026-09-10 至 2026-09-20 开发窗口；未来比赛用于 Forward/Shadow 验证。Candidate Rule 不得自动修改 Stable。
 
 ## GitHub App 读取
 `github_fetch_file` 只传：
@@ -88,4 +88,4 @@ Prediction 的旧 Action 读取接口必须传 `ref=action-results`、新的
 - 正式展示不需要读取 archive。
 
 ## Plugin role
-GPT / Plugin 永远是 `EXPLANATION_ONLY`；不得重新预测、修改 locked prediction、修改 Stable V3.4、概率算法、Failure Detector、HT/FT、比分模型、10027S 正式数据源或固定 6 列输出。
+GPT / Plugin 永远是 `EXPLANATION_ONLY`；不得重新预测、修改 locked prediction、修改 Stable V3.5.1、概率算法、Failure Detector、HT/FT、比分模型、10027S 正式数据源或固定 6 列输出。

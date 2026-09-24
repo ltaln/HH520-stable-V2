@@ -1,9 +1,9 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "HH520 Stable V3.4 - GitHub Actions Bridge",
-    "version": "3.4",
-    "description": "Trigger HH520 Stable V3.4 prediction plus isolated Research/Shadow/Forward validation on GitHub Actions. Stable READY responses contain locked scenario-aware predictions; GPT is explanation-only. Dispatch returns HTTP 204 and does not provide workflow run metadata. After any dispatch, preserve the original request_id and poll the matching result endpoint; keep polling while status=PENDING and, when status=READY, render only output_contract.display_rows."
+    "title": "HH520 Stable V3.5.1 - GitHub Actions Bridge",
+    "version": "3.5.1",
+    "description": "Trigger HH520 Stable V3.5.1 prediction plus isolated Research/Shadow/Forward validation on GitHub Actions. Stable READY responses contain locked scenario-aware predictions; GPT is explanation-only. Dispatch returns HTTP 204 and does not provide workflow run metadata. After any dispatch, preserve the original request_id and poll the matching result endpoint; keep polling while status=PENDING and, when status=READY, render only output_contract.display_rows."
   },
   "servers": [
     {
@@ -19,7 +19,7 @@
     "/repos/ltaln/HH520-stable-V2/actions/workflows/hh520-predict.yml/dispatches": {
       "post": {
         "operationId": "startHH520Prediction",
-        "summary": "Start one HH520 Stable V3.4 prediction run",
+        "summary": "Start one HH520 Stable V3.5.1 prediction run",
         "x-openai-isConsequential": false,
         "requestBody": {
           "required": true,
@@ -76,7 +76,7 @@
     "/repos/ltaln/HH520-stable-V2/contents/results/{request_id}.json": {
       "get": {
         "operationId": "getHH520PredictionResult",
-        "summary": "Read locked HH520 Stable V3.4 prediction result",
+        "summary": "Read locked HH520 Stable V3.5.1 prediction result",
         "parameters": [
           {
             "name": "request_id",
@@ -126,7 +126,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Compact state/result JSON. status=PENDING means keep polling the same request_id; status=READY means render output_contract.display_rows as the strict 6-column Stable V3.4 table. The polling payload is intentionally compact to avoid ResponseTooLarge; full audit data is referenced by archive_path. Never require the legacy 9-column table.",
+            "description": "Compact state/result JSON. status=PENDING means keep polling the same request_id; status=READY means render output_contract.display_rows as the strict 6-column Stable V3.5.1 table. The polling payload is intentionally compact to avoid ResponseTooLarge; full audit data is referenced by archive_path. Never require the legacy 9-column table.",
             "content": {
               "application/json": {
                 "schema": {
@@ -161,7 +161,7 @@
                     },
                     "predictions": {
                       "type": "array",
-                      "description": "Compact locked Stable V3.4 predictions sufficient for verification and explanation. Do not regenerate them.",
+                                      "description": "Compact locked Stable V3.5.1 predictions sufficient for verification and explanation. Do not regenerate them.",
                       "items": {
                         "type": "object",
                         "additionalProperties": true,
@@ -170,7 +170,7 @@
                     },
                     "output_contract": {
                       "type": "object",
-                      "description": "Authoritative strict 6-column Stable V3.4 presentation contract. Never apply the legacy 9-column contract.",
+                                                                                                                     "description": "Authoritative strict 6-column Stable V3.5.1 presentation contract. Never apply the legacy 9-column contract.",
                       "additionalProperties": true,
                       "properties": {
                         "version": {
@@ -191,7 +191,7 @@
                         },
                         "display_rows": {
                           "type": "array",
-                          "description": "Preformatted authoritative display rows for the strict 6-column Stable V3.4 table.",
+                                                                                     "description": "Preformatted authoritative display rows for the strict 6-column Stable V3.5.1 table.",
                           "items": {
                             "type": "object",
                             "additionalProperties": true,
@@ -225,7 +225,7 @@
             "description": "Result is not ready yet. Retry this GET; do not dispatch a duplicate workflow."
           }
         },
-        "description": "Read the Stable V3.4 result directly as JSON from action-results. Supply ref=action-results, a new poll_timestamp on every GET, and Accept=application/vnd.github.raw+json. On status=READY return output_contract.display_rows immediately; on status=PENDING keep reading the same request_id; on status=FAILED stop."
+        "description": "Read the Stable V3.5.1 result directly as JSON from action-results. Supply ref=action-results, a new poll_timestamp on every GET, and Accept=application/vnd.github.raw+json. On status=READY return output_contract.display_rows immediately; on status=PENDING keep reading the same request_id; on status=FAILED stop."
       }
     },
     "/repos/ltaln/HH520-stable-V2/actions/workflows/hh520-research.yml/dispatches": {
