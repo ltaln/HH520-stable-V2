@@ -38,22 +38,24 @@ def test_goal_timing_collector_legacy_budget_function_remains_callable(monkeypat
     assert _needs_timing(strong) is False
 
 
-def test_v34_htft_ignores_external_timing_and_preserves_ft_marginal():
+def test_v35_phase2_htft_uses_timing_without_changing_ft_core():
     m=sample_match()
-    m["goal_timing"]={"available":True,"source_domain":"soccerstats.com",
-        "home":{"first_half_gf_share":0.70,"first_half_ga_share":0.35},
-        "away":{"first_half_gf_share":0.30,"first_half_ga_share":0.65}}
-    p=probability_layer(m); h=htft_layer(p,m)
-    assert h["timing_used"] is False
-    by_ft={"HOME":0.0,"DRAW":0.0,"AWAY":0.0}
-    for row in h["distribution"]: by_ft[row["ft"]]+=row["probability"]
-    assert abs(by_ft["HOME"]-p["probabilities"]["home"])<1e-9
-    assert abs(by_ft["DRAW"]-p["probabilities"]["draw"])<1e-9
-    assert abs(by_ft["AWAY"]-p["probabilities"]["away"])<1e-9
+    m["goal_timing"]={"available":True,"source_domain":"soccerstats.com","timing_mode":"six_bin",
+        "home":{"first_half_gf_signal":0.45,"first_half_ga_signal":0.35},
+        "away":{"first_half_gf_signal":0.38,"first_half_ga_signal":0.48}}
+    p=probability_layer(m); before=dict(p["probabilities"]); h=htft_layer(p,m)
+    assert h["valid"] is True
+    assert h["timing_used"] is True
+    assert h["ft_core_unchanged"] is True
+    assert p["probabilities"]==before
 
 
-def test_consistency_selects_two_candidates_for_primary_ft():
-    m=sample_match(); p=probability_layer(m); state=build_state(m,p)
+def test_consistency_selects_two_independent_htft_candidates_with_timing():
+    m=sample_match()
+    m["goal_timing"]={"available":True,"source_domain":"test","timing_mode":"six_bin",
+        "home":{"first_half_gf_signal":0.40,"first_half_ga_signal":0.42},
+        "away":{"first_half_gf_signal":0.46,"first_half_ga_signal":0.44}}
+    p=probability_layer(m); state=build_state(m,p)
     ht=htft_layer(p,m); score=score_layer(m,p,ht)
     c=consistency_layer(p,state,ht,score)
     assert c["valid"] is True
