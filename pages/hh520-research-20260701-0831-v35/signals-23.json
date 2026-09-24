@@ -1,0 +1,53 @@
+{
+  "status": "READY",
+  "kind": "research_hidden_signal_page",
+  "request_id": "hh520-research-20260701-0831-v35",
+  "page": 23,
+  "page_size": 20,
+  "items": [
+    {
+      "factor": "structure",
+      "value": "强优",
+      "metric": "goals",
+      "sample_count": 44,
+      "accuracy": 0.20454545454545456,
+      "baseline_accuracy": 0.20608108108108109,
+      "delta_vs_baseline": -0.0015356265356265275,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "世界杯",
+      "metric": "score_exact",
+      "sample_count": 23,
+      "accuracy": 0.13043478260869565,
+      "baseline_accuracy": 0.13175675675675674,
+      "delta_vs_baseline": -0.0013219741480610947,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "芬超",
+      "metric": "htft",
+      "sample_count": 40,
+      "accuracy": 0.325,
+      "baseline_accuracy": 0.3260135135135135,
+      "delta_vs_baseline": -0.0010135135135134754,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "西甲",
+      "metric": "goals",
+      "sample_count": 29,
+      "accuracy": 0.20689655172413793,
+      "baseline_accuracy": 0.20608108108108109,
+      "delta_vs_baseline": 0.0008154706430568426,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    }
+  ]
+}
