@@ -1,0 +1,229 @@
+{
+  "status": "READY",
+  "kind": "research_hidden_signal_page",
+  "request_id": "hh520-research-20260701-0831-v35e",
+  "page": 9,
+  "page_size": 20,
+  "items": [
+    {
+      "factor": "home_odds_bucket",
+      "value": "1.80-2.19",
+      "metric": "htft",
+      "sample_count": 116,
+      "accuracy": 0.23275862068965517,
+      "baseline_accuracy": 0.3260135135135135,
+      "delta_vs_baseline": -0.09325489282385832,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "韩职",
+      "metric": "goals",
+      "sample_count": 53,
+      "accuracy": 0.11320754716981132,
+      "baseline_accuracy": 0.20608108108108109,
+      "delta_vs_baseline": -0.09287353391126976,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "pattern",
+      "value": "⚡ 极端",
+      "metric": "htft",
+      "sample_count": 51,
+      "accuracy": 0.23529411764705882,
+      "baseline_accuracy": 0.3260135135135135,
+      "delta_vs_baseline": -0.09071939586645467,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "rating",
+      "value": "C+",
+      "metric": "score_top2",
+      "sample_count": 19,
+      "accuracy": 0.15789473684210525,
+      "baseline_accuracy": 0.2483108108108108,
+      "delta_vs_baseline": -0.09041607396870555,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "handicap",
+      "value": "客让平半低水/半球高水",
+      "metric": "htft_top2",
+      "sample_count": 95,
+      "accuracy": 0.4,
+      "baseline_accuracy": 0.48986486486486486,
+      "delta_vs_baseline": -0.08986486486486484,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "法乙",
+      "metric": "htft_top2",
+      "sample_count": 10,
+      "accuracy": 0.4,
+      "baseline_accuracy": 0.48986486486486486,
+      "delta_vs_baseline": -0.08986486486486484,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "risk",
+      "value": "高",
+      "metric": "htft_top2",
+      "sample_count": 10,
+      "accuracy": 0.4,
+      "baseline_accuracy": 0.48986486486486486,
+      "delta_vs_baseline": -0.08986486486486484,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "pattern",
+      "value": "⚠️ 边缘",
+      "metric": "htft",
+      "sample_count": 38,
+      "accuracy": 0.23684210526315788,
+      "baseline_accuracy": 0.3260135135135135,
+      "delta_vs_baseline": -0.0891714082503556,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "rating",
+      "value": "B+",
+      "metric": "wdl",
+      "sample_count": 138,
+      "accuracy": 0.6086956521739131,
+      "baseline_accuracy": 0.5219594594594594,
+      "delta_vs_baseline": 0.08673619271445365,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "handicap",
+      "value": "主让平半低水/半球高水",
+      "metric": "htft_top2",
+      "sample_count": 119,
+      "accuracy": 0.40336134453781514,
+      "baseline_accuracy": 0.48986486486486486,
+      "delta_vs_baseline": -0.08650352032704972,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "risk",
+      "value": "低",
+      "metric": "htft",
+      "sample_count": 136,
+      "accuracy": 0.4117647058823529,
+      "baseline_accuracy": 0.3260135135135135,
+      "delta_vs_baseline": 0.08575119236883944,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "handicap",
+      "value": "主让半一低水/一球高水",
+      "metric": "goals",
+      "sample_count": 83,
+      "accuracy": 0.12048192771084337,
+      "baseline_accuracy": 0.20608108108108109,
+      "delta_vs_baseline": -0.08559915337023771,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "美职",
+      "metric": "score_top2",
+      "sample_count": 24,
+      "accuracy": 0.3333333333333333,
+      "baseline_accuracy": 0.2483108108108108,
+      "delta_vs_baseline": 0.08502252252252251,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "荷乙",
+      "metric": "score_top2",
+      "sample_count": 6,
+      "accuracy": 0.3333333333333333,
+      "baseline_accuracy": 0.2483108108108108,
+      "delta_vs_baseline": 0.08502252252252251,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "handicap",
+      "value": "主让平半低水/半球高水",
+      "metric": "wdl",
+      "sample_count": 119,
+      "accuracy": 0.4369747899159664,
+      "baseline_accuracy": 0.5219594594594594,
+      "delta_vs_baseline": -0.08498466954349304,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "西甲",
+      "metric": "htft",
+      "sample_count": 29,
+      "accuracy": 0.2413793103448276,
+      "baseline_accuracy": 0.3260135135135135,
+      "delta_vs_baseline": -0.08463420316868589,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "league",
+      "value": "欧冠",
+      "metric": "score_exact",
+      "sample_count": 42,
+      "accuracy": 0.21428571428571427,
+      "baseline_accuracy": 0.13175675675675674,
+      "delta_vs_baseline": 0.08252895752895753,
+      "direction": "ABOVE_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "structure",
+      "value": "中等优势",
+      "metric": "score_top2",
+      "sample_count": 12,
+      "accuracy": 0.16666666666666666,
+      "baseline_accuracy": 0.2483108108108108,
+      "delta_vs_baseline": -0.08164414414414414,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "pattern",
+      "value": "✅ 严格",
+      "metric": "score_top2",
+      "sample_count": 12,
+      "accuracy": 0.16666666666666666,
+      "baseline_accuracy": 0.2483108108108108,
+      "delta_vs_baseline": -0.08164414414414414,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    },
+    {
+      "factor": "rating",
+      "value": "C",
+      "metric": "htft_top2",
+      "sample_count": 22,
+      "accuracy": 0.4090909090909091,
+      "baseline_accuracy": 0.48986486486486486,
+      "delta_vs_baseline": -0.08077395577395574,
+      "direction": "BELOW_BASELINE",
+      "status": "RESEARCH_SIGNAL_ONLY"
+    }
+  ]
+}
