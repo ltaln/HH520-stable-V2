@@ -1,11 +1,391 @@
 {
-  "status": "PENDING",
-  "kind": "stable",
+  "status": "READY",
+  "kind": "prediction",
   "request_id": "hh520-20260924-e2e-3f52",
-  "stage": "workflow",
-  "run_id": "36029602299",
-  "run_attempt": "1",
-  "message": "Workflow accepted and is still running.",
+  "date": "2026-09-24",
+  "url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-24&riqi_end=2026-09-24&threshold=1&bankroll=5000",
+  "captured_at": "2026-09-24T03:59:13.898600+00:00",
+  "goal_timing_summary": {
+    "enabled": true,
+    "attempted": 7,
+    "available": 0,
+    "six_bin": 0,
+    "half_aggregate_fallback": 0,
+    "skipped_confirmed": 0,
+    "lookup_capped": 0
+  },
+  "predictions": [
+    {
+      "match_id": "1",
+      "home_team": "日本",
+      "away_team": "乌拉圭",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5 Phase 2",
+      "direction": "均衡",
+      "alternate_direction": "平",
+      "state": "BALANCED",
+      "base_state": "BALANCED",
+      "market_probability": 0.5089021631966595,
+      "page_probability": {
+        "home": 0.494949494949495,
+        "draw": 0.2727272727272727,
+        "away": 0.23232323232323232
+      },
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "1:0",
+      "score2": "1:1",
+      "score1_probability": 0.15512697654542001,
+      "score2_probability": 0.124101581236336,
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "htft1_probability": null,
+      "htft2_probability": null,
+      "total_goals": "2球",
+      "total_goals_probability": 0.26814805945708314,
+      "timing_used": false,
+      "timing_source": null,
+      "quality_warnings": [
+        "stale_live_snapshot:12.9h"
+      ],
+      "reason": "FT模型概率低于55%，不强制主胜/客胜；比分保持独立输出；Goal Timing缺失或异常，本场HT/FT按规则PASS"
+    },
+    {
+      "match_id": "2",
+      "home_team": "韩国",
+      "away_team": "厄瓜多尔",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5 Phase 2",
+      "direction": "均衡",
+      "alternate_direction": "平",
+      "state": "TAIL_ALERT",
+      "base_state": "TAIL_ALERT",
+      "market_probability": 0.42598817665468874,
+      "page_probability": {
+        "home": 0.41414141414141414,
+        "draw": 0.29292929292929293,
+        "away": 0.29292929292929293
+      },
+      "tail_alert": true,
+      "draw_candidate": false,
+      "score1": "1:0",
+      "score2": "1:1",
+      "score1_probability": 0.14694849793416837,
+      "score2_probability": 0.13225364814075155,
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "htft1_probability": null,
+      "htft2_probability": null,
+      "total_goals": "2球",
+      "total_goals_probability": 0.2700178649540344,
+      "timing_used": false,
+      "timing_source": null,
+      "quality_warnings": [
+        "stale_live_snapshot:12.9h"
+      ],
+      "reason": "FT模型概率低于55%，不强制主胜/客胜；比分保持独立输出；Goal Timing缺失或异常，本场HT/FT按规则PASS"
+    },
+    {
+      "match_id": "4",
+      "home_team": "科索沃",
+      "away_team": "爱尔兰",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5 Phase 2",
+      "direction": "均衡",
+      "alternate_direction": "客胜",
+      "state": "PASS",
+      "base_state": "PASS",
+      "market_probability": 0.37218118831296165,
+      "page_probability": {
+        "home": 0.3877551020408163,
+        "draw": 0.29591836734693877,
+        "away": 0.3163265306122449
+      },
+      "tail_alert": true,
+      "draw_candidate": false,
+      "score1": "1:0",
+      "score2": "1:1",
+      "score1_probability": 0.13470254957568378,
+      "score2_probability": 0.13470254957568378,
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "htft1_probability": null,
+      "htft2_probability": null,
+      "total_goals": "2球",
+      "total_goals_probability": 0.27001738346762066,
+      "timing_used": false,
+      "timing_source": null,
+      "quality_warnings": [
+        "team_modules_missing_or_zero",
+        "possession_missing",
+        "stale_live_snapshot:12.9h"
+      ],
+      "reason": "FT模型概率低于55%，不强制主胜/客胜；比分保持独立输出；Goal Timing缺失或异常，本场HT/FT按规则PASS"
+    },
+    {
+      "match_id": "5",
+      "home_team": "葡萄牙",
+      "away_team": "威尔士",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5 Phase 2",
+      "direction": "主胜",
+      "alternate_direction": "平",
+      "state": "CONFIRM",
+      "base_state": "CONFIRM",
+      "market_probability": 0.7904658535888721,
+      "page_probability": {},
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "2:0",
+      "score2": "1:0",
+      "score1_probability": 0.16271373881427875,
+      "score2_probability": 0.14792158074025338,
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "htft1_probability": null,
+      "htft2_probability": null,
+      "total_goals": "2球",
+      "total_goals_probability": 0.24507916445373798,
+      "timing_used": false,
+      "timing_source": null,
+      "quality_warnings": [
+        "page_probability_missing",
+        "stale_live_snapshot:12.9h"
+      ],
+      "reason": "FT通过可靠性过滤，且未发现需要进一步降级的跨层冲突；Goal Timing缺失或异常，本场HT/FT按规则PASS"
+    },
+    {
+      "match_id": "6",
+      "home_team": "荷兰",
+      "away_team": "德国",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5 Phase 2",
+      "direction": "均衡",
+      "alternate_direction": "客胜",
+      "state": "TAIL_ALERT",
+      "base_state": "TAIL_ALERT",
+      "market_probability": 0.39028946580442175,
+      "page_probability": {
+        "home": 0.36363636363636365,
+        "draw": 0.25252525252525254,
+        "away": 0.3838383838383838
+      },
+      "tail_alert": true,
+      "draw_candidate": false,
+      "score1": "1:1",
+      "score2": "2:1",
+      "score1_probability": 0.1155538492821485,
+      "score2_probability": 0.08666538696161136,
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "htft1_probability": null,
+      "htft2_probability": null,
+      "total_goals": "2球",
+      "total_goals_probability": 0.23138282677687352,
+      "timing_used": false,
+      "timing_source": null,
+      "quality_warnings": [
+        "stale_live_snapshot:12.9h"
+      ],
+      "reason": "FT模型概率低于55%，不强制主胜/客胜；比分保持独立输出；Goal Timing缺失或异常，本场HT/FT按规则PASS"
+    },
+    {
+      "match_id": "7",
+      "home_team": "塞尔维亚",
+      "away_team": "希腊",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5 Phase 2",
+      "direction": "均衡",
+      "alternate_direction": "客胜",
+      "state": "TAIL_ALERT",
+      "base_state": "TAIL_ALERT",
+      "market_probability": 0.37508027661693394,
+      "page_probability": {},
+      "tail_alert": true,
+      "draw_candidate": false,
+      "score1": "1:1",
+      "score2": "1:0",
+      "score1_probability": 0.1323426379452325,
+      "score2_probability": 0.12031148904112045,
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "htft1_probability": null,
+      "htft2_probability": null,
+      "total_goals": "2球",
+      "total_goals_probability": 0.26518657376146965,
+      "timing_used": false,
+      "timing_source": null,
+      "quality_warnings": [
+        "page_probability_missing",
+        "stale_live_snapshot:12.9h"
+      ],
+      "reason": "FT模型概率低于55%，不强制主胜/客胜；比分保持独立输出；Goal Timing缺失或异常，本场HT/FT按规则PASS"
+    },
+    {
+      "match_id": "8",
+      "home_team": "挪威",
+      "away_team": "丹麦",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5 Phase 2",
+      "direction": "主胜",
+      "alternate_direction": "平",
+      "state": "CONFIRM",
+      "base_state": "CONFIRM",
+      "market_probability": 0.5602877479515546,
+      "page_probability": {},
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "1:0",
+      "score2": "1:1",
+      "score1_probability": 0.10947024966176351,
+      "score2_probability": 0.10947024966176351,
+      "htft1": "未提供",
+      "htft2": "未提供",
+      "htft1_probability": null,
+      "htft2_probability": null,
+      "total_goals": "2球",
+      "total_goals_probability": 0.23840187704117385,
+      "timing_used": false,
+      "timing_source": null,
+      "quality_warnings": [
+        "page_probability_missing",
+        "stale_live_snapshot:12.9h"
+      ],
+      "reason": "FT通过可靠性过滤，且未发现需要进一步降级的跨层冲突；Goal Timing缺失或异常，本场HT/FT按规则PASS"
+    }
+  ],
+  "output_contract": {
+    "version": "HH520-OUTPUT-V3.5-P2",
+    "stable_version": "HH520 Stable V3.5 Phase 2",
+    "strict": true,
+    "required_columns": [
+      "球队对阵",
+      "胜平负场景",
+      "市场概率",
+      "比分×2及概率",
+      "半全场×2及概率",
+      "总进球及概率"
+    ],
+    "display_rows": [
+      {
+        "球队对阵": "日本 vs 乌拉圭",
+        "胜平负场景": "均衡（不强制方向）",
+        "市场概率": "50.9%",
+        "比分×2及概率": "1:0 (15.5%) / 1:1 (12.4%)",
+        "半全场×2及概率": "未提供 (未提供) / 未提供 (未提供)",
+        "总进球及概率": "2球 (26.8%)"
+      },
+      {
+        "球队对阵": "韩国 vs 厄瓜多尔",
+        "胜平负场景": "均衡（不强制方向）",
+        "市场概率": "42.6%",
+        "比分×2及概率": "1:0 (14.7%) / 1:1 (13.2%)",
+        "半全场×2及概率": "未提供 (未提供) / 未提供 (未提供)",
+        "总进球及概率": "2球 (27.0%)"
+      },
+      {
+        "球队对阵": "科索沃 vs 爱尔兰",
+        "胜平负场景": "均衡（不强制方向）",
+        "市场概率": "37.2%",
+        "比分×2及概率": "1:0 (13.5%) / 1:1 (13.5%)",
+        "半全场×2及概率": "未提供 (未提供) / 未提供 (未提供)",
+        "总进球及概率": "2球 (27.0%)"
+      },
+      {
+        "球队对阵": "葡萄牙 vs 威尔士",
+        "胜平负场景": "主胜（确认）",
+        "市场概率": "79.0%",
+        "比分×2及概率": "2:0 (16.3%) / 1:0 (14.8%)",
+        "半全场×2及概率": "未提供 (未提供) / 未提供 (未提供)",
+        "总进球及概率": "2球 (24.5%)"
+      },
+      {
+        "球队对阵": "荷兰 vs 德国",
+        "胜平负场景": "均衡（不强制方向）",
+        "市场概率": "39.0%",
+        "比分×2及概率": "1:1 (11.6%) / 2:1 (8.7%)",
+        "半全场×2及概率": "未提供 (未提供) / 未提供 (未提供)",
+        "总进球及概率": "2球 (23.1%)"
+      },
+      {
+        "球队对阵": "塞尔维亚 vs 希腊",
+        "胜平负场景": "均衡（不强制方向）",
+        "市场概率": "37.5%",
+        "比分×2及概率": "1:1 (13.2%) / 1:0 (12.0%)",
+        "半全场×2及概率": "未提供 (未提供) / 未提供 (未提供)",
+        "总进球及概率": "2球 (26.5%)"
+      },
+      {
+        "球队对阵": "挪威 vs 丹麦",
+        "胜平负场景": "主胜（确认）",
+        "市场概率": "56.0%",
+        "比分×2及概率": "1:0 (10.9%) / 1:1 (10.9%)",
+        "半全场×2及概率": "未提供 (未提供) / 未提供 (未提供)",
+        "总进球及概率": "2球 (23.8%)"
+      }
+    ],
+    "render_rule": "必须按6列完整输出；>=55%的主/客方向保持侧向校准；低置信侧向区允许历史验证的正式平局解析；比分独立于FT硬锁；HT/FT为Goal Timing必需的独立模型，时间数据缺失时半全场显示未提供。"
+  },
+  "display_rows": [
+    {
+      "球队对阵": "日本 vs 乌拉圭",
+      "胜平负场景": "均衡（不强制方向）",
+      "市场概率": "50.9%",
+      "比分×2及概率": "1:0 (15.5%) / 1:1 (12.4%)",
+      "半全场×2及概率": "未提供 (未提供) / 未提供 (未提供)",
+      "总进球及概率": "2球 (26.8%)"
+    },
+    {
+      "球队对阵": "韩国 vs 厄瓜多尔",
+      "胜平负场景": "均衡（不强制方向）",
+      "市场概率": "42.6%",
+      "比分×2及概率": "1:0 (14.7%) / 1:1 (13.2%)",
+      "半全场×2及概率": "未提供 (未提供) / 未提供 (未提供)",
+      "总进球及概率": "2球 (27.0%)"
+    },
+    {
+      "球队对阵": "科索沃 vs 爱尔兰",
+      "胜平负场景": "均衡（不强制方向）",
+      "市场概率": "37.2%",
+      "比分×2及概率": "1:0 (13.5%) / 1:1 (13.5%)",
+      "半全场×2及概率": "未提供 (未提供) / 未提供 (未提供)",
+      "总进球及概率": "2球 (27.0%)"
+    },
+    {
+      "球队对阵": "葡萄牙 vs 威尔士",
+      "胜平负场景": "主胜（确认）",
+      "市场概率": "79.0%",
+      "比分×2及概率": "2:0 (16.3%) / 1:0 (14.8%)",
+      "半全场×2及概率": "未提供 (未提供) / 未提供 (未提供)",
+      "总进球及概率": "2球 (24.5%)"
+    },
+    {
+      "球队对阵": "荷兰 vs 德国",
+      "胜平负场景": "均衡（不强制方向）",
+      "市场概率": "39.0%",
+      "比分×2及概率": "1:1 (11.6%) / 2:1 (8.7%)",
+      "半全场×2及概率": "未提供 (未提供) / 未提供 (未提供)",
+      "总进球及概率": "2球 (23.1%)"
+    },
+    {
+      "球队对阵": "塞尔维亚 vs 希腊",
+      "胜平负场景": "均衡（不强制方向）",
+      "市场概率": "37.5%",
+      "比分×2及概率": "1:1 (13.2%) / 1:0 (12.0%)",
+      "半全场×2及概率": "未提供 (未提供) / 未提供 (未提供)",
+      "总进球及概率": "2球 (26.5%)"
+    },
+    {
+      "球队对阵": "挪威 vs 丹麦",
+      "胜平负场景": "主胜（确认）",
+      "市场概率": "56.0%",
+      "比分×2及概率": "1:0 (10.9%) / 1:1 (10.9%)",
+      "半全场×2及概率": "未提供 (未提供) / 未提供 (未提供)",
+      "总进球及概率": "2球 (23.8%)"
+    }
+  ],
+  "archive_path": "archive/hh520-20260924-e2e-3f52.json",
+  "message": "Prediction READY. Polling payload is compact; render the strict 6-column output_contract.display_rows. Full audit data is in archive_path.",
   "_action": {
     "request_id": "hh520-20260924-e2e-3f52",
     "repository": "ltaln/HH520-stable-V2",
