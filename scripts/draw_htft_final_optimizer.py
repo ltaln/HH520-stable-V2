@@ -302,6 +302,9 @@ DRAW_LOGISTIC_FEATURES = [
 ]
 
 def logistic_features(r):
+    cached=r.get("_logistic_features")
+    if cached is not None:
+        return cached
     f=features(r); ff=factor_features(r)
     lh,la=fit_lambdas(r.get("probabilities") or {})
     values={
@@ -310,7 +313,9 @@ def logistic_features(r):
         "lambda_total":lh+la,"lambda_gap":abs(lh-la),
         **ff,
     }
-    return [0.0 if values.get(k) is None else float(values[k]) for k in DRAW_LOGISTIC_FEATURES]
+    cached=[0.0 if values.get(k) is None else float(values[k]) for k in DRAW_LOGISTIC_FEATURES]
+    r["_logistic_features"]=cached
+    return cached
 
 def _fit_logistic(rows, feature_idx, l2):
     X=np.asarray([[logistic_features(r)[i] for i in feature_idx] for r in rows],dtype=float)
