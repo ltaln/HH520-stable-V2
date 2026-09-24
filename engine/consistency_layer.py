@@ -1,8 +1,9 @@
-"""Cross-layer consistency for HH520 Stable V3.5 Phase 1.
+"""Cross-layer consistency for HH520 Stable V3.5 Phase 2.
 
-HT/FT remains the existing V3.4 conditional model in Phase 1.
-Score is independent. FT/Score agreement is used as a reliability gate:
-agreement never upgrades a prediction, while conflict downgrades or passes it.
+Score and HT/FT are independent of the FT hard direction. FT×Score remains the
+formal downgrade gate validated in Phase 1. HT/FT agreement is diagnostic in
+Phase 2 because live Goal Timing is a required same-day input and was not used
+to tune the historical FT core.
 """
 from __future__ import annotations
 
@@ -19,22 +20,21 @@ def _cross_downgrade(tier):
 
 
 def consistency_layer(probability: dict, state: dict, htft: dict, score: dict, decision: dict = None) -> dict:
-    primary = probability.get("direction")
+    primary = (decision or {}).get("resolved_direction") or probability.get("direction")
     primary_code = FT_MAP.get(primary)
     raw_htft = htft.get("distribution") or []
     raw_score = score.get("all_scores") or score.get("top_scores") or []
 
-    # HT/FT remains V3.4 in Phase 1 and is still FT-conditioned internally.
-    htft_top = [r for r in raw_htft if r.get("ft") == primary_code][:2]
-    # Score is now global and independent of the FT selected direction.
+    htft_top = (htft.get("top") or raw_htft[:3])[:2] if htft.get("valid") else []
     score_top = raw_score[:2]
 
     tier = (decision or {}).get("decision", "PASS")
     authorized = bool((decision or {}).get("ft_direction_authorized", True))
     score_primary = score_top[0].get("outcome") if score_top else None
+    htft_primary_ft = htft_top[0].get("ft") if htft_top else None
+
     cross_status = "UNAVAILABLE"
     effective = tier
-
     if not authorized and primary in {"home", "away"}:
         cross_status = "FT_BALANCED"
     elif primary_code and score_primary:
@@ -44,8 +44,14 @@ def consistency_layer(probability: dict, state: dict, htft: dict, score: dict, d
             cross_status = "CONFLICT"
             effective = _cross_downgrade(tier)
 
+    htft_status = "UNAVAILABLE"
+    if primary_code and htft_primary_ft:
+        htft_status = "AGREE" if primary_code == htft_primary_ft else "CONFLICT"
+
     warnings = []
-    if len(htft_top) < 2:
+    if not htft.get("valid"):
+        warnings.append("htft_timing_required_or_unavailable")
+    elif len(htft_top) < 2:
         warnings.append("htft_candidates_incomplete")
     if len(score_top) < 2:
         warnings.append("score_candidates_incomplete")
@@ -55,9 +61,11 @@ def consistency_layer(probability: dict, state: dict, htft: dict, score: dict, d
         warnings.append("ft_score_direction_conflict")
     if cross_status == "FT_BALANCED":
         warnings.append("ft_below_55_no_forced_direction")
+    if htft_status == "CONFLICT":
+        warnings.append("ft_htft_direction_conflict_diagnostic")
 
     return {
-        "valid": bool(primary and len(htft_top) >= 2 and len(score_top) >= 2),
+        "valid": bool(primary and len(score_top) >= 2),
         "primary_direction": primary,
         "alternate_direction": None,
         "htft_top": htft_top,
@@ -73,10 +81,18 @@ def consistency_layer(probability: dict, state: dict, htft: dict, score: dict, d
             "agreement_can_upgrade": False,
             "conflict_downgrades": True,
         },
+        "htft_gate": {
+            "status": htft_status,
+            "formal_downgrade": False,
+            "ft_direction": primary_code,
+            "htft_top_ft": htft_primary_ft,
+            "timing_used": bool(htft.get("timing_used")),
+        },
         "effective_decision": effective,
         "probability_conservation": {
             "wdl_anchor_unchanged": True,
-            "htft_ft_marginal_preserved": bool(htft.get("ft_marginal_preserved", True)),
+            "htft_ft_marginal_preserved": bool(htft.get("ft_marginal_preserved", False)),
+            "htft_ft_core_unchanged": bool(htft.get("ft_core_unchanged", True)),
             "score_distribution_unchanged": True,
         },
     }
