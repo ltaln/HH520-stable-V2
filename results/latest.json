@@ -1,0 +1,18 @@
+{
+  "primary": {
+    "name": "FIRECRAWL_API_KEY",
+    "configured": true,
+    "status_code": 402,
+    "ok": false,
+    "success": false
+  },
+  "backup": {
+    "name": "FIRECRAWL_API_KEY_BACKUP",
+    "configured": true,
+    "status_code": 200,
+    "ok": true,
+    "success": true
+  },
+  "configured_key_count": 2,
+  "failover_ready": true
+}
