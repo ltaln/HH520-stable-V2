@@ -1,0 +1,42 @@
+name: Draw HTFT Final Offline Optimizer
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "optimizer-requests/*.json"
+
+permissions:
+  contents: write
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Fetch existing research archives only
+        run: git fetch origin research-results:refs/remotes/origin/research-results
+      - name: Run draw and HTFT optimizer
+        run: python scripts/draw_htft_final_optimizer.py
+      - name: Publish optimizer result
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin optimizer-results || true
+          if git show-ref --verify --quiet refs/remotes/origin/optimizer-results; then
+            git switch --detach origin/optimizer-results
+          else
+            git switch --orphan optimizer-results
+            git rm -rf . || true
+          fi
+          mkdir -p results
+          cp "$GITHUB_WORKSPACE/_draw_htft_final.json" results/latest.json
+          git add results/latest.json
+          git commit -m "research: draw htft final optimizer" || true
+          git push origin HEAD:optimizer-results --force
