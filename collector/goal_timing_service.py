@@ -20,6 +20,13 @@ from .firecrawl_client import search_web, scrape_json
 BINS = ("0-15", "16-30", "31-45", "46-60", "61-75", "76-90")
 PRIORITY = ("soccerstats.com", "footystats.org", "inplaywise.com", "sofascore.com", "365scores.com")
 
+TEAM_SEARCH_ALIASES = {
+    "日本": "Japan", "乌拉圭": "Uruguay", "韩国": "South Korea", "厄瓜多尔": "Ecuador",
+    "科索沃": "Kosovo", "爱尔兰": "Republic of Ireland", "葡萄牙": "Portugal", "威尔士": "Wales",
+    "荷兰": "Netherlands", "德国": "Germany", "塞尔维亚": "Serbia", "希腊": "Greece",
+    "挪威": "Norway", "丹麦": "Denmark",
+}
+
 
 def _cache_path(date: str, match: dict) -> Path:
     token = f"{date}|{match.get('match_id')}|{match.get('home_team')}|{match.get('away_team')}"
@@ -172,10 +179,16 @@ def _schemas():
     return six_bin, half
 
 
+def _search_name(team):
+    return TEAM_SEARCH_ALIASES.get(str(team).strip(), str(team).strip())
+
+
 def _discover(home, away):
+    home_q, away_q = _search_name(home), _search_name(away)
     queries = [
-        f'"{home}" "{away}" FootyStats SoccerSTATS',
-        f'"{home}" "{away}" football goal timing statistics',
+        f'{home_q} {away_q} FootyStats SoccerSTATS goal timing',
+        f'{home_q} {away_q} football goal timing statistics',
+        f'{home_q} vs {away_q} sofascore 365scores',
     ]
     urls = []
     for index, query in enumerate(queries):
@@ -199,6 +212,92 @@ def _discover(home, away):
     return unique
 
 
+def _discover_team(team):
+    name = _search_name(team)
+    queries = [
+        f'{name} FootyStats goal timing scored conceded',
+        f'{name} SoccerSTATS goal times',
+        f'{name} football first half second half scoring statistics',
+    ]
+    urls = []
+    for query in queries:
+        try:
+            urls.extend(_urls(search_web(query, limit=8)))
+        except Exception:
+            continue
+    unique, seen = [], set()
+    for url in sorted(urls, key=_rank_url):
+        if url in seen or not _supported_url(url):
+            continue
+        seen.add(url)
+        unique.append(url)
+    return unique
+
+
+def _single_team_schemas():
+    six = {
+        "type": "object",
+        "properties": {
+            "team": {"type": "string"},
+            "goals_for": {"type": "array", "items": {"type": "number"}, "minItems": 6, "maxItems": 6},
+            "goals_against": {"type": "array", "items": {"type": "number"}, "minItems": 6, "maxItems": 6},
+            "scope": {"type": "string"},
+        },
+        "required": ["goals_for", "goals_against"],
+    }
+    half = {
+        "type": "object",
+        "properties": {
+            "team": {"type": "string"},
+            "first_half_scoring_rate": {"type": "number"},
+            "first_half_conceding_rate": {"type": "number"},
+            "second_half_scoring_rate": {"type": "number"},
+            "second_half_conceding_rate": {"type": "number"},
+            "scope": {"type": "string"},
+        },
+        "required": ["first_half_scoring_rate", "first_half_conceding_rate"],
+    }
+    return six, half
+
+
+def _extract_single_team(team, urls):
+    six_schema, half_schema = _single_team_schemas()
+    errors = []
+    for url in urls[:5]:
+        try:
+            raw = scrape_json(
+                url,
+                schema=six_schema,
+                prompt=(
+                    f'Extract PRE-MATCH goal timing statistics for {team}. '
+                    'Return scored and conceded values for exactly six bins: '
+                    '0-15,16-30,31-45,46-60,61-75,76-90. Do not invent missing data.'
+                ),
+            )
+            payload = raw.get("data", {}).get("json") if isinstance(raw, dict) else None
+            parsed = _team(payload or {})
+            if parsed:
+                return parsed, "six_bin", url, errors
+        except Exception as exc:
+            errors.append(f'six_bin:{urlparse(url).netloc}:{type(exc).__name__}')
+        try:
+            raw = scrape_json(
+                url,
+                schema=half_schema,
+                prompt=(
+                    f'Extract PRE-MATCH first-half and second-half scoring/conceding rates for {team}. '
+                    'Return only rates visible on the page; do not infer unrelated statistics.'
+                ),
+            )
+            payload = raw.get("data", {}).get("json") if isinstance(raw, dict) else None
+            parsed = _team_half_rates(payload or {})
+            if parsed:
+                return parsed, "half_aggregate_fallback", url, errors
+        except Exception as exc:
+            errors.append(f'half:{urlparse(url).netloc}:{type(exc).__name__}')
+    return None, None, None, errors
+
+
 def _save(path, result):
     path.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
     return result
@@ -209,8 +308,10 @@ def collect_goal_timing(date: str, match: dict) -> dict:
     if path.exists():
         try:
             data = json.loads(path.read_text(encoding="utf-8"))
-            data["cache_hit"] = True
-            return data
+            retry_failures = os.getenv("HH520_GOAL_TIMING_RETRY_FAILURES", "0").strip() == "1"
+            if data.get("available") or not retry_failures:
+                data["cache_hit"] = True
+                return data
         except Exception:
             pass
 
@@ -284,12 +385,37 @@ def collect_goal_timing(date: str, match: dict) -> dict:
         except Exception as exc:
             errors.append(f"half:{urlparse(url).netloc}:{type(exc).__name__}")
 
+    # Match pages often do not contain both teams' timing tables. Fall back to
+    # independent team-stat pages and join them only after both sides succeed.
+    home_urls = _discover_team(home)
+    away_urls = _discover_team(away)
+    h, h_mode, h_url, h_errors = _extract_single_team(_search_name(home), home_urls)
+    a, a_mode, a_url, a_errors = _extract_single_team(_search_name(away), away_urls)
+    errors.extend(h_errors)
+    errors.extend(a_errors)
+    if h and a:
+        mode = h_mode if h_mode == a_mode else "mixed_team_sources"
+        return _save(path, {
+            "available": True,
+            "timing_mode": mode,
+            "source_url": [h_url, a_url],
+            "source_domain": ",".join(sorted({urlparse(h_url).netloc.lower(), urlparse(a_url).netloc.lower()})),
+            "captured_at": datetime.now(timezone.utc).isoformat(),
+            "bins": list(BINS) if mode == "six_bin" else None,
+            "home": h,
+            "away": a,
+            "cache_hit": False,
+            "discovery_mode": "independent_team_pages",
+        })
+
     return _save(path, {
         "available": False,
         "reason": "timing_extract_failed",
         "captured_at": datetime.now(timezone.utc).isoformat(),
         "candidate_count": len(candidates),
-        "errors": errors[-5:],
+        "home_candidate_count": len(home_urls),
+        "away_candidate_count": len(away_urls),
+        "errors": errors[-12:],
         "cache_hit": False,
     })
 
