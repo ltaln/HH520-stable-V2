@@ -1,14 +1,21 @@
-"""HH520 Stable V3.4 decision filter.
+"""HH520 Stable V3.4 selective decision filter.
 
-Probability predicts. Market Failure Detector grades reliability. Value remains
-diagnostic and cannot change the selected direction.
+Probability predicts. Market Failure Detector grades structural reliability.
+This layer applies abstention / downgrade rules without changing H/D/A
+probabilities or the selected FT direction.
 """
 from .data_quality import data_quality_gate
 from .match_classifier import classify_match
 from .risk_engine import assess_risk
 from .market_failure_detector import market_failure_detector
 
-VERSION = "HH520 Decision Filter V3.4"
+VERSION = "HH520 Decision Filter V3.4.1"
+
+_TIER_ORDER = {"CONFIRM": 0, "BALANCED": 1, "TAIL_ALERT": 2, "PASS": 3}
+
+
+def _worse(a, b):
+    return a if _TIER_ORDER.get(a, 3) >= _TIER_ORDER.get(b, 3) else b
 
 
 def decision_filter(match: dict, probability: dict, value: dict,
@@ -22,20 +29,46 @@ def decision_filter(match: dict, probability: dict, value: dict,
     hard_invalid = not quality.get("valid") or not probability.get("valid")
     decision = "PASS" if hard_invalid else failure["tier"]
     reasons = list(failure.get("signals", []))
+
+    probs = probability.get("probabilities") or {}
+    ordered_pairs = sorted(probs.items(), key=lambda kv: float(kv[1]), reverse=True) if probs else []
+    ordered = [k for k, _ in ordered_pairs]
+    margin = (float(ordered_pairs[0][1]) - float(ordered_pairs[1][1])) if len(ordered_pairs) > 1 else None
+
+    # Selective gate: low separation is not the same as a confident pick.
+    if not hard_invalid and margin is not None:
+        if margin < 0.04:
+            decision = _worse(decision, "TAIL_ALERT")
+            reasons.append("probability_margin<4%")
+        elif margin < 0.08:
+            decision = _worse(decision, "BALANCED")
+            reasons.append("probability_margin<8%")
+
+    warnings = set(quality.get("warnings", []))
+    modules_missing = "team_modules_missing_or_zero" in warnings
+    possession_missing = "possession_missing" in warnings
+
+    # Missing evidence must never be interpreted as confirmation.
+    if not hard_invalid and modules_missing and possession_missing:
+        decision = _worse(decision, "PASS")
+        reasons.append("critical_structural_data_missing")
+    elif not hard_invalid and (modules_missing or possession_missing):
+        decision = _worse(decision, "BALANCED")
+        reasons.append("structural_data_incomplete")
+
     if hard_invalid:
         reasons = ["data_quality_or_probability_invalid"] + quality.get("errors", [])
 
-    probs = probability.get("probabilities") or {}
-    ordered = sorted(probs, key=lambda k: float(probs[k]), reverse=True) if probs else []
     return {
         "version": VERSION,
         "decision": decision,
         "allow_prediction": not hard_invalid,
         "strong_recommendation": decision == "CONFIRM",
         "decision_score": probability.get("pmax"),
+        "probability_margin": margin,
         "hard_pass": hard_invalid,
         "state": decision,
-        "base_state": decision,
+        "base_state": failure.get("tier", decision),
         "primary_direction": probability.get("direction"),
         "alternate_direction": ordered[1] if len(ordered) > 1 else None,
         "tail_alert": decision in {"TAIL_ALERT", "PASS"},
@@ -48,7 +81,7 @@ def decision_filter(match: dict, probability: dict, value: dict,
         "match_type": classification.get("type"),
         "reasons": reasons,
         "source": "HH520_10027s_ONLY",
-        "selection_rule": "MARKET_FAILURE_DETECTOR_V1",
+        "selection_rule": "MARKET_FAILURE_DETECTOR_V1_1_PLUS_SELECTIVE_GATE",
         "forbidden_advice_fields_used": False,
         "value_layer_used_for_direction": False,
         "value_layer_used_for_confirmation": False,
