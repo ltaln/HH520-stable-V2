@@ -1,0 +1,18 @@
+{
+  "status": "READY",
+  "kind": "research_detail_manifest",
+  "request_id": "hh520-20260924-e2e-research-fix-25750210",
+  "archive_path": "archive/hh520-20260924-e2e-research-fix-25750210.json",
+  "error_attribution": {
+    "item_count": 6,
+    "page_size": 20,
+    "pages": [
+      "pages/hh520-20260924-e2e-research-fix-25750210/error-1.json"
+    ]
+  },
+  "hidden_model_signals": {
+    "item_count": 0,
+    "page_size": 20,
+    "pages": []
+  }
+}

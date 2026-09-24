@@ -1,8 +1,738 @@
 {
-  "status": "PENDING",
+  "status": "READY",
   "kind": "research",
   "request_id": "hh520-20260924-e2e-research-fix-25750210",
-  "message": "Workflow accepted and is still running.",
+  "system": "HH520 Research Lab V3.1",
+  "stable_access": "READ_ONLY",
+  "source": "HH520_10027s",
+  "window": {
+    "from": "2026-09-22",
+    "to": "2026-09-23"
+  },
+  "input_count": 6,
+  "clean_count": 6,
+  "sanitizer": {
+    "pollution_events": 6
+  },
+  "backtest": {
+    "status": "BACKTEST_READY",
+    "sample_count": 6,
+    "matched_results": 1,
+    "metrics": {
+      "win_draw_loss": {
+        "status": "READY",
+        "sample_count": 1,
+        "hits": 0,
+        "accuracy": 0.0,
+        "direction_source": "probability_or_single_or_primary_score"
+      },
+      "score": {
+        "status": "READY",
+        "sample_count": 1,
+        "exact_hits": 0,
+        "exact_accuracy": 0.0,
+        "top2_hits": 1,
+        "top2_accuracy": 1.0,
+        "label_field": "actual_score",
+        "prediction_field": "predicted_score",
+        "actual_labels_available": 1,
+        "note": null
+      },
+      "half_time": {
+        "status": "READY",
+        "sample_count": 1,
+        "hits": 0,
+        "accuracy": 0.0,
+        "top2_hits": 1,
+        "top2_accuracy": 1.0,
+        "source_counts": {
+          "hh520_raw": 0,
+          "research_derived_poisson": 1
+        },
+        "note": null
+      },
+      "goals": {
+        "status": "READY",
+        "sample_count": 1,
+        "hits": 0,
+        "accuracy": 0.0,
+        "label_field": "actual_total_goals",
+        "prediction_field": "predicted_total_goals",
+        "actual_labels_available": 1,
+        "prediction_fallback": "derive from predicted_score when available",
+        "note": null
+      }
+    },
+    "note": "Result labels and prediction snapshots are isolated from Stable. No automatic promotion to Stable."
+  },
+  "prediction_coverage": {
+    "records": 6,
+    "single": 5,
+    "htft": 5,
+    "predicted_score": 0,
+    "predicted_total_goals": 0,
+    "predicted_total_goals_explicit": 0,
+    "predicted_total_goals_derived_from_score": 0,
+    "research_derived_score": 0,
+    "research_derived_total_goals": 0,
+    "research_derived_htft": 0,
+    "raw_actionable_htft": 0,
+    "page_probability": 5,
+    "actual_half_score": 1,
+    "actual_score": 1,
+    "actual_total_goals": 1,
+    "legacy_aliases": {
+      "scores": 0,
+      "total_goals": 0,
+      "actual_full_score": 1
+    },
+    "source_note": "actual_score and actual_total_goals are Result Labels. predicted_score and predicted_total_goals are Prediction fields used only for accuracy evaluation. If raw predicted_score is absent, Research may derive it from pre-match 1X2 probabilities using the RESEARCH_POISSON_1X2 layer. predicted_total_goals is derived from predicted_score when no explicit total-goals prediction exists."
+  },
+  "result_collection": {
+    "source": "HH520_10027s_RESULT_LABEL",
+    "collected": 1,
+    "stable_access": "FORBIDDEN"
+  },
+  "prediction_snapshot_layer": {
+    "enabled": true,
+    "count": 6,
+    "isolation": "RESEARCH_ONLY",
+    "contains_actual_results": false,
+    "stable_access": "FORBIDDEN"
+  },
+  "result_label_layer": {
+    "enabled": true,
+    "collected": 1,
+    "matched": 1,
+    "unmatched": 5,
+    "isolation": "RESEARCH_ONLY",
+    "stable_access": "FORBIDDEN"
+  },
+  "error_attribution": {
+    "summary": {
+      "matches": 6,
+      "wdl": {
+        "evaluable": 1,
+        "hits": 0,
+        "accuracy": 0.0
+      },
+      "score_exact": {
+        "evaluable": 1,
+        "hits": 0,
+        "accuracy": 0.0
+      },
+      "score_top2": {
+        "evaluable": 1,
+        "hits": 1,
+        "accuracy": 1.0
+      },
+      "htft": {
+        "evaluable": 1,
+        "hits": 0,
+        "accuracy": 0.0
+      },
+      "htft_top2": {
+        "evaluable": 1,
+        "hits": 1,
+        "accuracy": 1.0
+      },
+      "goals": {
+        "evaluable": 1,
+        "hits": 0,
+        "accuracy": 0.0
+      }
+    },
+    "detail_pages": 1
+  },
+  "hidden_model_reverse": {
+    "status": "RESEARCH_ONLY",
+    "stable_access": "FORBIDDEN",
+    "baseline": {
+      "wdl": 0.0,
+      "score_exact": 0.0,
+      "score_top2": 1.0,
+      "htft": 0.0,
+      "htft_top2": 1.0,
+      "goals": 0.0
+    },
+    "min_bucket_sample": 3,
+    "top_signals": [],
+    "signal_count": 0,
+    "detail_pages": 0
+  },
+  "league_dna": {
+    "亚运男足": {
+      "matches": 2,
+      "date_count": 2,
+      "metrics": {
+        "wdl": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_exact": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_top2": {
+          "sample_count": 1,
+          "hits": 1,
+          "accuracy": 1.0
+        },
+        "htft": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "htft_top2": {
+          "sample_count": 1,
+          "hits": 1,
+          "accuracy": 1.0
+        },
+        "goals": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        }
+      }
+    },
+    "美职": {
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_exact": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "goals": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        }
+      }
+    },
+    "英锦标赛": {
+      "matches": 3,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_exact": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "goals": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        }
+      }
+    }
+  },
+  "team_dna": [
+    {
+      "team": "韩国亚",
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_exact": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "goals": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        }
+      }
+    },
+    {
+      "team": "沙特亚",
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_exact": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "goals": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        }
+      }
+    },
+    {
+      "team": "米尔顿",
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_exact": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "goals": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        }
+      }
+    },
+    {
+      "team": "克劳利",
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_exact": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "goals": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        }
+      }
+    },
+    {
+      "team": "诺茨郡",
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_exact": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "goals": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        }
+      }
+    },
+    {
+      "team": "格里姆",
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_exact": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "goals": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        }
+      }
+    },
+    {
+      "team": "维冈",
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_exact": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "goals": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        }
+      }
+    },
+    {
+      "team": "布莱克浦",
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_exact": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "goals": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        }
+      }
+    },
+    {
+      "team": "中国亚",
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_exact": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_top2": {
+          "sample_count": 1,
+          "hits": 1,
+          "accuracy": 1.0
+        },
+        "htft": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "htft_top2": {
+          "sample_count": 1,
+          "hits": 1,
+          "accuracy": 1.0
+        },
+        "goals": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        }
+      }
+    },
+    {
+      "team": "阿联酋亚",
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_exact": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_top2": {
+          "sample_count": 1,
+          "hits": 1,
+          "accuracy": 1.0
+        },
+        "htft": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "htft_top2": {
+          "sample_count": 1,
+          "hits": 1,
+          "accuracy": 1.0
+        },
+        "goals": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        }
+      }
+    },
+    {
+      "team": "西雅图",
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_exact": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "goals": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        }
+      }
+    },
+    {
+      "team": "盐湖城",
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_exact": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "goals": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        }
+      }
+    }
+  ],
+  "candidate_rule_engine": {
+    "status": "RESEARCH_ONLY",
+    "candidate_count": 0,
+    "thresholds": {
+      "min_sample": 20,
+      "min_dates": 3,
+      "min_delta_vs_baseline": 0.08,
+      "min_positive_date_ratio": 0.6,
+      "min_leagues_for_global": 2
+    },
+    "rejected_signal_count": 0
+  },
+  "candidate_rules": [],
+  "promotion_policy": "MANUAL_REVIEW_REQUIRED",
+  "detail_manifest_path": "pages/hh520-20260924-e2e-research-fix-25750210/manifest.json",
+  "archive_path": "archive/hh520-20260924-e2e-research-fix-25750210.json",
+  "message": "Research READY. This polling payload is compact; use detail_manifest_path for paged details.",
   "_action": {
     "request_id": "hh520-20260924-e2e-research-fix-25750210",
     "repository": "ltaln/HH520-stable-V2",

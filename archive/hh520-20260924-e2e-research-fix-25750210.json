@@ -1,0 +1,2733 @@
+{
+  "system": "HH520 Research Lab V3.1",
+  "stable_access": "READ_ONLY",
+  "source": "HH520_10027s",
+  "window": {
+    "from": "2026-09-22",
+    "to": "2026-09-23"
+  },
+  "research_phase": "FORWARD",
+  "canonical_timeline": {
+    "history_start": "2026-08-01",
+    "discovery_window": {
+      "from": "2026-08-01",
+      "to": "2026-08-31"
+    },
+    "historical_shadow_window": {
+      "from": "2026-09-01",
+      "to": "2026-09-20"
+    },
+    "forward_window": {
+      "from": "2026-09-21",
+      "to": null
+    },
+    "policy": {
+      "discovery_rules_frozen_before_shadow": true,
+      "historical_shadow_must_not_regenerate_rules": true,
+      "forward_validation_after_historical_shadow": true,
+      "stable_access": "FORBIDDEN"
+    }
+  },
+  "input_count": 6,
+  "clean_count": 6,
+  "sanitizer": {
+    "pollution_events": 6,
+    "audit": [
+      {
+        "index": 0,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores",
+          "scores"
+        ]
+      },
+      {
+        "index": 1,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores",
+          "scores"
+        ]
+      },
+      {
+        "index": 2,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores",
+          "scores"
+        ]
+      },
+      {
+        "index": 3,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores",
+          "scores"
+        ]
+      },
+      {
+        "index": 4,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores",
+          "scores"
+        ]
+      },
+      {
+        "index": 5,
+        "removed_fields": [
+          "half_score",
+          "result",
+          "scores",
+          "scores"
+        ]
+      }
+    ]
+  },
+  "league_dna": {
+    "亚运男足": {
+      "matches": 2,
+      "date_count": 2,
+      "metrics": {
+        "wdl": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_exact": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_top2": {
+          "sample_count": 1,
+          "hits": 1,
+          "accuracy": 1.0
+        },
+        "htft": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "htft_top2": {
+          "sample_count": 1,
+          "hits": 1,
+          "accuracy": 1.0
+        },
+        "goals": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        }
+      }
+    },
+    "美职": {
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_exact": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "goals": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        }
+      }
+    },
+    "英锦标赛": {
+      "matches": 3,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_exact": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "goals": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        }
+      }
+    }
+  },
+  "team_dna": [
+    {
+      "team": "韩国亚",
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_exact": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "goals": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        }
+      }
+    },
+    {
+      "team": "沙特亚",
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_exact": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "goals": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        }
+      }
+    },
+    {
+      "team": "米尔顿",
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_exact": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "goals": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        }
+      }
+    },
+    {
+      "team": "克劳利",
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_exact": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "goals": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        }
+      }
+    },
+    {
+      "team": "诺茨郡",
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_exact": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "goals": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        }
+      }
+    },
+    {
+      "team": "格里姆",
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_exact": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "goals": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        }
+      }
+    },
+    {
+      "team": "维冈",
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_exact": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "goals": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        }
+      }
+    },
+    {
+      "team": "布莱克浦",
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_exact": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "goals": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        }
+      }
+    },
+    {
+      "team": "中国亚",
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_exact": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_top2": {
+          "sample_count": 1,
+          "hits": 1,
+          "accuracy": 1.0
+        },
+        "htft": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "htft_top2": {
+          "sample_count": 1,
+          "hits": 1,
+          "accuracy": 1.0
+        },
+        "goals": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        }
+      }
+    },
+    {
+      "team": "阿联酋亚",
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_exact": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_top2": {
+          "sample_count": 1,
+          "hits": 1,
+          "accuracy": 1.0
+        },
+        "htft": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "htft_top2": {
+          "sample_count": 1,
+          "hits": 1,
+          "accuracy": 1.0
+        },
+        "goals": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        }
+      }
+    },
+    {
+      "team": "西雅图",
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_exact": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "goals": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        }
+      }
+    },
+    {
+      "team": "盐湖城",
+      "matches": 1,
+      "date_count": 1,
+      "metrics": {
+        "wdl": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_exact": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "score_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "htft_top2": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        },
+        "goals": {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null
+        }
+      }
+    }
+  ],
+  "data_contract": {
+    "actual_score": "RESULT_LABEL_ONLY",
+    "actual_total_goals": "DERIVED_FROM_ACTUAL_SCORE",
+    "predicted_score": "RAW_SOURCE_OR_RESEARCH_POISSON_1X2",
+    "predicted_total_goals": "EXPLICIT_OR_DERIVED_FROM_PREDICTED_SCORE",
+    "research_derived_predictions": "RESEARCH_ONLY",
+    "predicted_htft": "HH520_RAW_OR_RESEARCH_POISSON_HTFT",
+    "stable_access": "FORBIDDEN"
+  },
+  "backtest": {
+    "status": "BACKTEST_READY",
+    "sample_count": 6,
+    "matched_results": 1,
+    "metrics": {
+      "win_draw_loss": {
+        "status": "READY",
+        "sample_count": 1,
+        "hits": 0,
+        "accuracy": 0.0,
+        "direction_source": "probability_or_single_or_primary_score"
+      },
+      "score": {
+        "status": "READY",
+        "sample_count": 1,
+        "exact_hits": 0,
+        "exact_accuracy": 0.0,
+        "top2_hits": 1,
+        "top2_accuracy": 1.0,
+        "label_field": "actual_score",
+        "prediction_field": "predicted_score",
+        "actual_labels_available": 1,
+        "note": null
+      },
+      "half_time": {
+        "status": "READY",
+        "sample_count": 1,
+        "hits": 0,
+        "accuracy": 0.0,
+        "top2_hits": 1,
+        "top2_accuracy": 1.0,
+        "source_counts": {
+          "hh520_raw": 0,
+          "research_derived_poisson": 1
+        },
+        "note": null
+      },
+      "goals": {
+        "status": "READY",
+        "sample_count": 1,
+        "hits": 0,
+        "accuracy": 0.0,
+        "label_field": "actual_total_goals",
+        "prediction_field": "predicted_total_goals",
+        "actual_labels_available": 1,
+        "prediction_fallback": "derive from predicted_score when available",
+        "note": null
+      }
+    },
+    "note": "Result labels and prediction snapshots are isolated from Stable. No automatic promotion to Stable."
+  },
+  "prediction_snapshot_layer": {
+    "enabled": true,
+    "count": 6,
+    "isolation": "RESEARCH_ONLY",
+    "contains_actual_results": false,
+    "stable_access": "FORBIDDEN"
+  },
+  "result_label_layer": {
+    "enabled": true,
+    "collected": 1,
+    "matched": 1,
+    "unmatched": 5,
+    "isolation": "RESEARCH_ONLY",
+    "stable_access": "FORBIDDEN"
+  },
+  "error_attribution": {
+    "summary": {
+      "matches": 6,
+      "wdl": {
+        "evaluable": 1,
+        "hits": 0,
+        "accuracy": 0.0
+      },
+      "score_exact": {
+        "evaluable": 1,
+        "hits": 0,
+        "accuracy": 0.0
+      },
+      "score_top2": {
+        "evaluable": 1,
+        "hits": 1,
+        "accuracy": 1.0
+      },
+      "htft": {
+        "evaluable": 1,
+        "hits": 0,
+        "accuracy": 0.0
+      },
+      "htft_top2": {
+        "evaluable": 1,
+        "hits": 1,
+        "accuracy": 1.0
+      },
+      "goals": {
+        "evaluable": 1,
+        "hits": 0,
+        "accuracy": 0.0
+      }
+    },
+    "matches": [
+      {
+        "date": "2026-09-22",
+        "match_id": "1",
+        "league": "亚运男足",
+        "home_team": "韩国亚",
+        "away_team": "沙特亚",
+        "sources": {
+          "score": "RESEARCH_DERIVED",
+          "htft": "HH520_RAW",
+          "goals": "RESEARCH_DERIVED_FROM_SCORE"
+        },
+        "errors": []
+      },
+      {
+        "date": "2026-09-22",
+        "match_id": "2",
+        "league": "英锦标赛",
+        "home_team": "米尔顿",
+        "away_team": "克劳利",
+        "sources": {
+          "score": "RESEARCH_DERIVED",
+          "htft": "RESEARCH_DERIVED_POISSON",
+          "goals": "RESEARCH_DERIVED_FROM_SCORE"
+        },
+        "errors": []
+      },
+      {
+        "date": "2026-09-22",
+        "match_id": "3",
+        "league": "英锦标赛",
+        "home_team": "诺茨郡",
+        "away_team": "格里姆",
+        "sources": {
+          "score": "RESEARCH_DERIVED",
+          "htft": "RESEARCH_DERIVED_POISSON",
+          "goals": "RESEARCH_DERIVED_FROM_SCORE"
+        },
+        "errors": []
+      },
+      {
+        "date": "2026-09-22",
+        "match_id": "4",
+        "league": "英锦标赛",
+        "home_team": "维冈",
+        "away_team": "布莱克浦",
+        "sources": {
+          "score": "RESEARCH_DERIVED",
+          "htft": "HH520_RAW",
+          "goals": "RESEARCH_DERIVED_FROM_SCORE"
+        },
+        "errors": []
+      },
+      {
+        "date": "2026-09-23",
+        "match_id": "1",
+        "league": "亚运男足",
+        "home_team": "中国亚",
+        "away_team": "阿联酋亚",
+        "sources": {
+          "score": "RESEARCH_DERIVED",
+          "htft": "RESEARCH_DERIVED_POISSON",
+          "goals": "RESEARCH_DERIVED_FROM_SCORE"
+        },
+        "errors": [
+          "WDL_MISS",
+          "SCORE_EXACT_MISS",
+          "HTFT_MISS",
+          "GOALS_MISS"
+        ],
+        "wdl": "MISS",
+        "score_exact": "MISS",
+        "score_top2": "HIT",
+        "htft": "MISS",
+        "htft_top2": "HIT",
+        "goals": "MISS"
+      },
+      {
+        "date": "2026-09-23",
+        "match_id": "3",
+        "league": "美职",
+        "home_team": "西雅图",
+        "away_team": "盐湖城",
+        "sources": {
+          "score": "RESEARCH_DERIVED",
+          "htft": "RESEARCH_DERIVED_POISSON",
+          "goals": "RESEARCH_DERIVED_FROM_SCORE"
+        },
+        "errors": []
+      }
+    ]
+  },
+  "hidden_model_reverse": {
+    "status": "RESEARCH_ONLY",
+    "stable_access": "FORBIDDEN",
+    "baseline": {
+      "wdl": 0.0,
+      "score_exact": 0.0,
+      "score_top2": 1.0,
+      "htft": 0.0,
+      "htft_top2": 1.0,
+      "goals": 0.0
+    },
+    "min_bucket_sample": 3,
+    "factors": {
+      "league": {
+        "亚运男足": {
+          "wdl": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "score_exact": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "score_top2": {
+            "sample_count": 1,
+            "hits": 1,
+            "accuracy": 1.0,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": 0.0
+          },
+          "htft": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "htft_top2": {
+            "sample_count": 1,
+            "hits": 1,
+            "accuracy": 1.0,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": 0.0
+          },
+          "goals": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          }
+        },
+        "英锦标赛": {
+          "wdl": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_exact": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "htft": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "htft_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "goals": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          }
+        },
+        "美职": {
+          "wdl": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_exact": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "htft": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "htft_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "goals": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          }
+        }
+      },
+      "risk": {
+        "低": {
+          "wdl": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_exact": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "htft": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "htft_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "goals": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          }
+        },
+        "中高": {
+          "wdl": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "score_exact": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "score_top2": {
+            "sample_count": 1,
+            "hits": 1,
+            "accuracy": 1.0,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": 0.0
+          },
+          "htft": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "htft_top2": {
+            "sample_count": 1,
+            "hits": 1,
+            "accuracy": 1.0,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": 0.0
+          },
+          "goals": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          }
+        },
+        "中低": {
+          "wdl": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_exact": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "htft": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "htft_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "goals": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          }
+        }
+      },
+      "rating": {
+        "B+": {
+          "wdl": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_exact": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "htft": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "htft_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "goals": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          }
+        },
+        "B": {
+          "wdl": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "score_exact": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "score_top2": {
+            "sample_count": 1,
+            "hits": 1,
+            "accuracy": 1.0,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": 0.0
+          },
+          "htft": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "htft_top2": {
+            "sample_count": 1,
+            "hits": 1,
+            "accuracy": 1.0,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": 0.0
+          },
+          "goals": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          }
+        }
+      },
+      "structure": {
+        "强优": {
+          "wdl": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_exact": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "htft": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "htft_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "goals": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          }
+        },
+        "均衡": {
+          "wdl": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "score_exact": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "score_top2": {
+            "sample_count": 1,
+            "hits": 1,
+            "accuracy": 1.0,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": 0.0
+          },
+          "htft": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "htft_top2": {
+            "sample_count": 1,
+            "hits": 1,
+            "accuracy": 1.0,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": 0.0
+          },
+          "goals": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          }
+        }
+      },
+      "consistency": {
+        "⚠️部分": {
+          "wdl": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_exact": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "htft": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "htft_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "goals": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          }
+        },
+        "✅一致": {
+          "wdl": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "score_exact": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "score_top2": {
+            "sample_count": 1,
+            "hits": 1,
+            "accuracy": 1.0,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": 0.0
+          },
+          "htft": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "htft_top2": {
+            "sample_count": 1,
+            "hits": 1,
+            "accuracy": 1.0,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": 0.0
+          },
+          "goals": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          }
+        }
+      },
+      "pattern": {
+        "🔶风控赔率": {
+          "wdl": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_exact": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "htft": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "htft_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "goals": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          }
+        },
+        "⚠️ 边缘": {
+          "wdl": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_exact": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "htft": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "htft_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "goals": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          }
+        },
+        "❌ 不符合": {
+          "wdl": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "score_exact": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "score_top2": {
+            "sample_count": 1,
+            "hits": 1,
+            "accuracy": 1.0,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": 0.0
+          },
+          "htft": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "htft_top2": {
+            "sample_count": 1,
+            "hits": 1,
+            "accuracy": 1.0,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": 0.0
+          },
+          "goals": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          }
+        },
+        "🚫 平局分为0": {
+          "wdl": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_exact": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "htft": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "htft_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "goals": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          }
+        }
+      },
+      "advantage_side": {
+        "主": {
+          "wdl": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "score_exact": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "score_top2": {
+            "sample_count": 1,
+            "hits": 1,
+            "accuracy": 1.0,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": 0.0
+          },
+          "htft": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "htft_top2": {
+            "sample_count": 1,
+            "hits": 1,
+            "accuracy": 1.0,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": 0.0
+          },
+          "goals": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          }
+        }
+      },
+      "handicap": {
+        "主让半一低水/一球高水": {
+          "wdl": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_exact": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "htft": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "htft_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "goals": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          }
+        },
+        "主让平半低水/半球高水": {
+          "wdl": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "score_exact": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "score_top2": {
+            "sample_count": 1,
+            "hits": 1,
+            "accuracy": 1.0,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": 0.0
+          },
+          "htft": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "htft_top2": {
+            "sample_count": 1,
+            "hits": 1,
+            "accuracy": 1.0,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": 0.0
+          },
+          "goals": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          }
+        }
+      },
+      "probability_concentration": {
+        ">=60%": {
+          "wdl": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_exact": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "htft": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "htft_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "goals": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          }
+        },
+        "40-49%": {
+          "wdl": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "score_exact": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "score_top2": {
+            "sample_count": 1,
+            "hits": 1,
+            "accuracy": 1.0,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": 0.0
+          },
+          "htft": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "htft_top2": {
+            "sample_count": 1,
+            "hits": 1,
+            "accuracy": 1.0,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": 0.0
+          },
+          "goals": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          }
+        }
+      },
+      "home_odds_bucket": {
+        "<1.50": {
+          "wdl": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_exact": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "htft": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "htft_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "goals": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          }
+        },
+        "1.80-2.19": {
+          "wdl": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "score_exact": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "score_top2": {
+            "sample_count": 1,
+            "hits": 1,
+            "accuracy": 1.0,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": 0.0
+          },
+          "htft": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "htft_top2": {
+            "sample_count": 1,
+            "hits": 1,
+            "accuracy": 1.0,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": 0.0
+          },
+          "goals": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          }
+        },
+        "1.50-1.79": {
+          "wdl": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_exact": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "htft": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "htft_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "goals": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          }
+        }
+      },
+      "draw_odds_bucket": {
+        ">=3.00": {
+          "wdl": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_exact": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "htft": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "htft_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "goals": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          }
+        },
+        "2.20-2.99": {
+          "wdl": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "score_exact": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "score_top2": {
+            "sample_count": 1,
+            "hits": 1,
+            "accuracy": 1.0,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": 0.0
+          },
+          "htft": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "htft_top2": {
+            "sample_count": 1,
+            "hits": 1,
+            "accuracy": 1.0,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": 0.0
+          },
+          "goals": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          }
+        }
+      },
+      "away_odds_bucket": {
+        ">=3.00": {
+          "wdl": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "score_exact": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "score_top2": {
+            "sample_count": 1,
+            "hits": 1,
+            "accuracy": 1.0,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": 0.0
+          },
+          "htft": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          },
+          "htft_top2": {
+            "sample_count": 1,
+            "hits": 1,
+            "accuracy": 1.0,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": 0.0
+          },
+          "goals": {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": 0.0
+          }
+        },
+        "2.20-2.99": {
+          "wdl": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_exact": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "score_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "htft": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          },
+          "htft_top2": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 1.0,
+            "delta_vs_baseline": null
+          },
+          "goals": {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "baseline_accuracy": 0.0,
+            "delta_vs_baseline": null
+          }
+        }
+      }
+    },
+    "signals": [],
+    "top_signals": [],
+    "note": "Descriptive reverse-engineering only. Small samples may be unstable. No signal may modify Stable without later validation and manual review."
+  },
+  "risk_analysis": {
+    "status": "RESEARCH_ONLY"
+  },
+  "causal_analysis": {
+    "status": "HYPOTHESIS_ONLY"
+  },
+  "confidence_analysis": {
+    "status": "RESEARCH_ONLY",
+    "sample_count": 6
+  },
+  "candidate_rule_engine": {
+    "status": "RESEARCH_ONLY",
+    "stable_access": "FORBIDDEN",
+    "promotion_policy": "MANUAL_REVIEW_REQUIRED",
+    "thresholds": {
+      "min_sample": 20,
+      "min_dates": 3,
+      "min_delta_vs_baseline": 0.08,
+      "min_positive_date_ratio": 0.6,
+      "min_leagues_for_global": 2
+    },
+    "candidate_count": 0,
+    "rules": [],
+    "rejected_signal_count": 0,
+    "top_rejected": []
+  },
+  "candidate_rules": [],
+  "stable_v3_calibration": {
+    "system": "HH520 Research Lab V1 - Stable V3 Calibration",
+    "stable_access": "READ_ONLY",
+    "promotion_policy": "MANUAL_REVIEW_REQUIRED",
+    "sample": {
+      "sample_count": 1,
+      "hits": 0,
+      "accuracy": 0.0,
+      "date_count": 1
+    },
+    "risk_score": {
+      "buckets": [
+        {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null,
+          "coverage": 0.0,
+          "bucket": "0-9"
+        },
+        {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null,
+          "coverage": 0.0,
+          "bucket": "10-19"
+        },
+        {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null,
+          "coverage": 0.0,
+          "bucket": "20-29"
+        },
+        {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null,
+          "coverage": 0.0,
+          "bucket": "30-39"
+        },
+        {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null,
+          "coverage": 0.0,
+          "bucket": "40-49"
+        },
+        {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0,
+          "bucket": "50-59"
+        },
+        {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null,
+          "coverage": 0.0,
+          "bucket": "60+"
+        }
+      ],
+      "threshold_scan": [
+        {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null,
+          "coverage": 0.0,
+          "threshold": 20,
+          "operator": "<="
+        },
+        {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null,
+          "coverage": 0.0,
+          "threshold": 30,
+          "operator": "<="
+        },
+        {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null,
+          "coverage": 0.0,
+          "threshold": 40,
+          "operator": "<="
+        },
+        {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0,
+          "threshold": 50,
+          "operator": "<=",
+          "coverage": 1.0
+        },
+        {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0,
+          "threshold": 55,
+          "operator": "<=",
+          "coverage": 1.0
+        },
+        {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0,
+          "threshold": 60,
+          "operator": "<=",
+          "coverage": 1.0
+        },
+        {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0,
+          "threshold": 70,
+          "operator": "<=",
+          "coverage": 1.0
+        }
+      ],
+      "candidate": null
+    },
+    "probability_margin": {
+      "buckets": [
+        {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null,
+          "coverage": 0.0,
+          "bucket": "0-3%"
+        },
+        {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null,
+          "coverage": 0.0,
+          "bucket": "3-5%"
+        },
+        {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null,
+          "coverage": 0.0,
+          "bucket": "5-8%"
+        },
+        {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null,
+          "coverage": 0.0,
+          "bucket": "8-12%"
+        },
+        {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0,
+          "bucket": "12-20%"
+        },
+        {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null,
+          "coverage": 0.0,
+          "bucket": "20%+"
+        }
+      ],
+      "threshold_scan": [
+        {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0,
+          "threshold": 0.03,
+          "operator": ">=",
+          "coverage": 1.0
+        },
+        {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0,
+          "threshold": 0.05,
+          "operator": ">=",
+          "coverage": 1.0
+        },
+        {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0,
+          "threshold": 0.08,
+          "operator": ">=",
+          "coverage": 1.0
+        },
+        {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0,
+          "threshold": 0.1,
+          "operator": ">=",
+          "coverage": 1.0
+        },
+        {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0,
+          "threshold": 0.12,
+          "operator": ">=",
+          "coverage": 1.0
+        },
+        {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0,
+          "threshold": 0.15,
+          "operator": ">=",
+          "coverage": 1.0
+        },
+        {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null,
+          "coverage": 0.0,
+          "threshold": 0.2,
+          "operator": ">="
+        }
+      ],
+      "candidate": null
+    },
+    "value_edge": {
+      "buckets": [
+        {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0,
+          "bucket": "<0"
+        },
+        {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null,
+          "coverage": 0.0,
+          "bucket": "0-3%"
+        },
+        {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null,
+          "coverage": 0.0,
+          "bucket": "3-5%"
+        },
+        {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null,
+          "coverage": 0.0,
+          "bucket": "5-8%"
+        },
+        {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null,
+          "coverage": 0.0,
+          "bucket": "8%+"
+        }
+      ],
+      "threshold_scan": [
+        {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null,
+          "coverage": 0.0,
+          "threshold": 0.0,
+          "operator": ">="
+        },
+        {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null,
+          "coverage": 0.0,
+          "threshold": 0.03,
+          "operator": ">="
+        },
+        {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null,
+          "coverage": 0.0,
+          "threshold": 0.05,
+          "operator": ">="
+        },
+        {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null,
+          "coverage": 0.0,
+          "threshold": 0.08,
+          "operator": ">="
+        },
+        {
+          "sample_count": 0,
+          "hits": 0,
+          "accuracy": null,
+          "coverage": 0.0,
+          "threshold": 0.1,
+          "operator": ">="
+        }
+      ],
+      "candidate": null
+    },
+    "match_type": {
+      "standard": {
+        "overall": {
+          "sample_count": 1,
+          "hits": 0,
+          "accuracy": 0.0,
+          "coverage": 1.0
+        },
+        "risk_scan": [
+          {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "coverage": 0.0,
+            "threshold": 20,
+            "operator": "<="
+          },
+          {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "coverage": 0.0,
+            "threshold": 30,
+            "operator": "<="
+          },
+          {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "coverage": 0.0,
+            "threshold": 40,
+            "operator": "<="
+          },
+          {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "threshold": 50,
+            "operator": "<=",
+            "coverage": 1.0
+          },
+          {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "threshold": 55,
+            "operator": "<=",
+            "coverage": 1.0
+          },
+          {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "threshold": 60,
+            "operator": "<=",
+            "coverage": 1.0
+          },
+          {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "threshold": 70,
+            "operator": "<=",
+            "coverage": 1.0
+          }
+        ],
+        "margin_scan": [
+          {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "threshold": 0.03,
+            "operator": ">=",
+            "coverage": 1.0
+          },
+          {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "threshold": 0.05,
+            "operator": ">=",
+            "coverage": 1.0
+          },
+          {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "threshold": 0.08,
+            "operator": ">=",
+            "coverage": 1.0
+          },
+          {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "threshold": 0.1,
+            "operator": ">=",
+            "coverage": 1.0
+          },
+          {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "threshold": 0.12,
+            "operator": ">=",
+            "coverage": 1.0
+          },
+          {
+            "sample_count": 1,
+            "hits": 0,
+            "accuracy": 0.0,
+            "threshold": 0.15,
+            "operator": ">=",
+            "coverage": 1.0
+          },
+          {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "coverage": 0.0,
+            "threshold": 0.2,
+            "operator": ">="
+          }
+        ],
+        "edge_scan": [
+          {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "coverage": 0.0,
+            "threshold": 0.0,
+            "operator": ">="
+          },
+          {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "coverage": 0.0,
+            "threshold": 0.03,
+            "operator": ">="
+          },
+          {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "coverage": 0.0,
+            "threshold": 0.05,
+            "operator": ">="
+          },
+          {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "coverage": 0.0,
+            "threshold": 0.08,
+            "operator": ">="
+          },
+          {
+            "sample_count": 0,
+            "hits": 0,
+            "accuracy": null,
+            "coverage": 0.0,
+            "threshold": 0.1,
+            "operator": ">="
+          }
+        ],
+        "candidate": {
+          "max_risk": null,
+          "min_margin": null,
+          "min_edge": null
+        }
+      }
+    },
+    "output_error": {
+      "summary": {
+        "matches": 6,
+        "wdl": {
+          "evaluable": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_exact": {
+          "evaluable": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "score_top2": {
+          "evaluable": 1,
+          "hits": 1,
+          "accuracy": 1.0
+        },
+        "htft": {
+          "evaluable": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        },
+        "htft_top2": {
+          "evaluable": 1,
+          "hits": 1,
+          "accuracy": 1.0
+        },
+        "goals": {
+          "evaluable": 1,
+          "hits": 0,
+          "accuracy": 0.0
+        }
+      },
+      "error_counts": {},
+      "scope": [
+        "win_draw_loss",
+        "score",
+        "half_time_full_time",
+        "total_goals"
+      ],
+      "note": "Output errors are Research-only diagnostics; they do not auto-change Stable generation logic."
+    },
+    "guardrails": {
+      "min_candidate_sample": 20,
+      "min_coverage": 0.2,
+      "forbidden_inputs": [
+        "建议下注",
+        "是否下注"
+      ],
+      "automatic_stable_write": false
+    }
+  },
+  "promotion_policy": "MANUAL_REVIEW_REQUIRED",
+  "collection": [
+    {
+      "date": "2026-09-22",
+      "captured_at": "2026-09-22T04:27:58.521742+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-22&riqi_end=2026-09-22&threshold=1&bankroll=5000",
+      "match_count": 4
+    },
+    {
+      "date": "2026-09-23",
+      "captured_at": "2026-09-23T12:53:43.669144+00:00",
+      "source_url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-09-23&riqi_end=2026-09-23&threshold=1&bankroll=5000",
+      "match_count": 2
+    }
+  ],
+  "prediction_coverage": {
+    "records": 6,
+    "single": 5,
+    "htft": 5,
+    "predicted_score": 0,
+    "predicted_total_goals": 0,
+    "predicted_total_goals_explicit": 0,
+    "predicted_total_goals_derived_from_score": 0,
+    "research_derived_score": 0,
+    "research_derived_total_goals": 0,
+    "research_derived_htft": 0,
+    "raw_actionable_htft": 0,
+    "page_probability": 5,
+    "actual_half_score": 1,
+    "actual_score": 1,
+    "actual_total_goals": 1,
+    "legacy_aliases": {
+      "scores": 0,
+      "total_goals": 0,
+      "actual_full_score": 1
+    },
+    "source_note": "actual_score and actual_total_goals are Result Labels. predicted_score and predicted_total_goals are Prediction fields used only for accuracy evaluation. If raw predicted_score is absent, Research may derive it from pre-match 1X2 probabilities using the RESEARCH_POISSON_1X2 layer. predicted_total_goals is derived from predicted_score when no explicit total-goals prediction exists."
+  },
+  "result_collection": {
+    "source": "HH520_10027s_RESULT_LABEL",
+    "collected": 1,
+    "stable_access": "FORBIDDEN"
+  },
+  "status": "READY",
+  "_action": {
+    "request_id": "hh520-20260924-e2e-research-fix-25750210",
+    "repository": "ltaln/HH520-stable-V2",
+    "run_id": "35957748599",
+    "run_attempt": "1",
+    "source_sha": "3f1da212ad8ff76351400150ef390e5442e849d1"
+  }
+}
