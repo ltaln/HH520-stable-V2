@@ -1,0 +1,56 @@
+name: HH520 V3.5 Shadow
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "v35-shadow-requests/*.json"
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    concurrency:
+      group: hh520-v35-shadow
+      cancel-in-progress: false
+    env:
+      FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+      FIRECRAWL_API_KEY_BACKUP: ${{ secrets.FIRECRAWL_API_KEY_BACKUP }}
+      PYTHONUTF8: "1"
+      HH520_GOAL_TIMING_ENABLED: "1"
+      HH520_GOAL_TIMING_ONLY_UNCERTAIN: "0"
+      HH520_GOAL_TIMING_MAX_MATCHES: "30"
+      HH520_ALLOW_INCOMPLETE_REQUEST_RESUME: "1"
+      FIRECRAWL_MIN_INTERVAL_SECONDS: "2.5"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - name: Read shadow request
+        id: req
+        shell: bash
+        run: |
+          set -euo pipefail
+          FILE="$(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep '^v35-shadow-requests/.*\.json$' | tail -n 1)"
+          test -n "$FILE"
+          REQUEST_ID="$(jq -r '.request_id // empty' "$FILE")"
+          DATE="$(jq -r '.date // empty' "$FILE")"
+          [[ "$REQUEST_ID" =~ ^[A-Za-z0-9_-]{8,80}$ ]]
+          [[ "$DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]
+          echo "request_id=$REQUEST_ID" >> "$GITHUB_OUTPUT"
+          echo "date=$DATE" >> "$GITHUB_OUTPUT"
+      - name: Run V3.5 shadow
+        run: |
+          mkdir -p _action_out
+          python -m candidate.v35.run_shadow "${{ steps.req.outputs.date }}" "_action_out/${{ steps.req.outputs.request_id }}.json"
+      - name: Publish V3.5 shadow
+        run: python candidate/v35/publish_shadow.py "_action_out/${{ steps.req.outputs.request_id }}.json" "${{ steps.req.outputs.request_id }}"
