@@ -75,6 +75,7 @@ def _research_summary(data, request_id):
         },
         "backtest": data.get("backtest"),
         "stable_v34_backtest": data.get("stable_v34_backtest"),
+        "v35_research_summary": data.get("v35_research_summary"),
         "prediction_coverage": data.get("prediction_coverage"),
         "result_collection": data.get("result_collection"),
         "prediction_snapshot_layer": data.get("prediction_snapshot_layer"),
