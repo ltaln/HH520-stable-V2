@@ -1,6 +1,6 @@
 project:
-  name: HH520 Stable V3.4
-  version: "3.4"
+  name: HH520 Stable V3.5 Phase 1
+  version: "3.5-p1"
 
 source:
   page: "10027s"
@@ -26,7 +26,7 @@ goal_timing:
   failure_blocks_prediction: false
 
 prediction:
-  model_artifact: "model_artifacts/HH520_Stable_V3_4.json"
+  model_artifact: "model_artifacts/HH520_Stable_V3_5_Phase1.json"
   wdl_model: "DRAW_ANCHOR_PLUS_MARKET_SIDE_SHARE"
   market_devig: true
   draw_anchor:
@@ -36,26 +36,36 @@ prediction:
   side_layer: "MARKET_HOME_SHARE"
   page_probability_for_direction: false
   page_probability_for_state: false
-  market_failure_detector: "V1"
+  market_failure_detector: "V1.1"
   risk_tiers: ["CONFIRM", "BALANCED", "TAIL_ALERT", "PASS"]
   automatic_market_override: false
   automatic_draw_override: false
+  ft_calibration:
+    standard: 0.55
+    strong: 0.60
+    high: 0.65
+    below_standard_behavior: "BALANCED_NO_FORCED_SIDE"
   htft_model: "FT_CONDITIONAL_TEMPLATE_V1"
   htft_preserve_ft_marginal: true
-  score_model: "HTFT_SCORE_TEMPLATE_V1"
-  pooled_poisson_formal: false
+  htft_phase1_status: "UNCHANGED_NOT_PROMOTED"
+  score_model: "HDA_POISSON_V1"
+  score_ft_direction_lock: false
+  cross_layer_gate:
+    ft_score_agreement: "KEEP_TIER"
+    ft_score_conflict: "DOWNGRADE_OR_PASS"
   use_probability_layer: true
   use_value_layer: true
   use_decision_filter: true
   use_consistency_layer: true
   use_calibration_diagnostics: true
-  decision_filter_version: "3.4"
-  decision_filter_mode: "market_failure_detector_v1"
+  decision_filter_version: "3.5-p1"
+  decision_filter_mode: "ft_calibration_plus_market_failure_detector"
+  draw_candidate_phase: "RESEARCH_ONLY_NOT_PROMOTED"
   allow_pass: true
   gpt_role: "EXPLANATION_ONLY"
 
 output:
-  version: "HH520-OUTPUT-V3.4"
+  version: "HH520-OUTPUT-V3.5-P1"
   columns:
     - 球队对阵
     - 胜平负场景
@@ -66,9 +76,10 @@ output:
   semantics:
     market_probability: "官方赔率去水概率"
     model_probability: "Draw Anchor + Side Layer 后概率"
-    risk_tier: "市场可靠度，不是概率"
-    htft_probability: "条件联合概率"
-    score_probability: "HTFT 条件模板概率"
+    ft_grade: "55/60/65历史校准等级"
+    risk_tier: "市场可靠度与跨层Gate结果，不是概率"
+    htft_probability: "Phase 1旧HTFT条件联合概率"
+    score_probability: "独立H/D/A拟合Poisson比分概率"
   hidden_from_formal_table:
     - 通用模糊自信度
     - 最终筛选
@@ -76,6 +87,7 @@ output:
 research:
   enabled: true
   auto_tune_stable: false
-  v34_development_window: "2026-09-10..2026-09-20"
+  phase1_development_window: "2026-05-01..2026-08-31"
+  phase1_stress_window: "2026-09-01..2026-09-20"
   forward_validation_required: true
   candidate_changes_never_auto_promote: true
