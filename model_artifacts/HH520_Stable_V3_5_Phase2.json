@@ -1,0 +1,50 @@
+{
+  "version": "HH520 Stable V3.5 Phase 2",
+  "artifact_version": "HH520-Stable-V3.5-Phase2-20260924",
+  "source": "10027S",
+  "probability_core_changed": false,
+  "ft_calibration": {
+    "standard": 0.55,
+    "strong": 0.6,
+    "high": 0.65
+  },
+  "draw_resolver": {
+    "mode": "BALANCED_SIDE_ZONE_ONLY",
+    "rule": {
+      "pd_min": 0.29,
+      "side_gap_max": 0.2,
+      "draw_top_gap_max": 0.16,
+      "pmax_max": 0.45,
+      "home_share_dev_max": 0.16
+    },
+    "development": {
+      "n": 116,
+      "hits": 45,
+      "accuracy": 0.3879310344827586
+    },
+    "stress": {
+      "n": 22,
+      "hits": 8,
+      "accuracy": 0.36363636363636365
+    },
+    "note": "Does not override authorized >=55% side directions."
+  },
+  "htft": {
+    "model": "INDEPENDENT_POISSON_SPLIT_HTFT_V2_TIMING_REQUIRED",
+    "base_home_half_share": 0.36,
+    "base_away_half_share": 0.44,
+    "timing_weight": 0.25,
+    "max_timing_delta": 0.08,
+    "historical_labels": 1432,
+    "dev1_top2": 0.533457249070632,
+    "dev2_top2": 0.527027027027027,
+    "stress_top2": 0.4867549668874172,
+    "formal_same_day_goal_timing_required": true,
+    "historical_goal_timing_recollection": false
+  },
+  "score": {
+    "model": "HDA_POISSON_V1",
+    "ft_direction_lock": false
+  },
+  "gpt_role": "EXPLANATION_ONLY"
+}
