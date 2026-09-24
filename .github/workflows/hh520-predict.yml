@@ -87,17 +87,7 @@ jobs:
           ls -la _action_out || true
           if [ -f "_action_out/$REQUEST_ID.json" ]; then
             echo "=== result preview ==="
-            python - <<'PY'
-            import json, os
-            p=f"_action_out/{os.environ['REQUEST_ID']}.json"
-            data=json.load(open(p,encoding='utf-8'))
-            print(json.dumps({
-              'status': data.get('status'),
-              'prediction_count': len(data.get('predictions') or []),
-              'has_output_contract': bool(data.get('output_contract')),
-              'display_rows': len(data.get('display_rows') or data.get('output_contract',{}).get('display_rows') or [])
-            }, ensure_ascii=False, indent=2))
-            PY
+            python -c 'import json, os; p="_action_out/"+os.environ["REQUEST_ID"]+".json"; data=json.load(open(p, encoding="utf-8")); print(json.dumps({"status": data.get("status"), "prediction_count": len(data.get("predictions") or []), "has_output_contract": bool(data.get("output_contract")), "display_rows": len(data.get("display_rows") or data.get("output_contract", {}).get("display_rows") or [])}, ensure_ascii=False, indent=2))'
           else
             echo "missing action output"
           fi
