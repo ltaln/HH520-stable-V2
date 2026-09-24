@@ -20,7 +20,8 @@ def test_without_gpt_returns_deterministic_prediction():
     result=build_predictions([fixture_match()])[0]
     assert result["status"]=="PREDICTED"
     assert result["score1"]!="未提供" and result["score2"]!="未提供"
-    assert result["htft1"]=="未提供" and result["htft2"]=="未提供"\n    assert result["total_goals"]!="未提供"
+    assert result["htft1"]=="未提供" and result["htft2"]=="未提供"
+    assert result["total_goals"]!="未提供"
     assert result["stable_version"]=="HH520 Stable V3.5 Phase 2"
     assert result["state"] in {"CONFIRM","BALANCED","TAIL_ALERT","PASS"}
 
