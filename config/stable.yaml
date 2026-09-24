@@ -1,6 +1,6 @@
 project:
-  name: HH520 Stable V3.5 Phase 1
-  version: "3.5-p1"
+  name: HH520 Stable V3.5 Phase 2
+  version: "3.5-p2"
 
 source:
   page: "10027s"
@@ -20,13 +20,18 @@ firecrawl:
   one_request_per_date: true
 
 goal_timing:
-  enabled_in_actions: false
-  formal_chain: false
-  research_compatibility_only: true
+  enabled_in_actions: true
+  formal_chain: true
+  required_for_htft: true
+  historical_research_collection: false
   failure_blocks_prediction: false
+  failure_blocks_htft_only: true
+  may_change_ft_core: false
+  timing_weight: 0.25
+  max_half_share_delta: 0.08
 
 prediction:
-  model_artifact: "model_artifacts/HH520_Stable_V3_5_Phase1.json"
+  model_artifact: "model_artifacts/HH520_Stable_V3_5_Phase2.json"
   wdl_model: "DRAW_ANCHOR_PLUS_MARKET_SIDE_SHARE"
   market_devig: true
   draw_anchor:
@@ -39,33 +44,61 @@ prediction:
   market_failure_detector: "V1.1"
   risk_tiers: ["CONFIRM", "BALANCED", "TAIL_ALERT", "PASS"]
   automatic_market_override: false
-  automatic_draw_override: false
   ft_calibration:
     standard: 0.55
     strong: 0.60
     high: 0.65
     below_standard_behavior: "BALANCED_NO_FORCED_SIDE"
-  htft_model: "FT_CONDITIONAL_TEMPLATE_V1"
-  htft_preserve_ft_marginal: true
-  htft_phase1_status: "UNCHANGED_NOT_PROMOTED"
+  draw_resolver:
+    formal: true
+    scope: "BALANCED_SIDE_ZONE_ONLY"
+    never_overrides_authorized_side: true
+    pd_min: 0.29
+    side_gap_max: 0.20
+    draw_top_gap_max: 0.16
+    pmax_max: 0.45
+    home_share_dev_max: 0.16
+    evidence:
+      development_20260501_0831:
+        n: 116
+        hits: 45
+        accuracy: 0.3879310345
+      stress_20260901_0920:
+        n: 22
+        hits: 8
+        accuracy: 0.3636363636
+  htft_model: "INDEPENDENT_POISSON_SPLIT_HTFT_V2_TIMING_REQUIRED"
+  htft_base_half_share:
+    home: 0.36
+    away: 0.44
+  htft_historical_validation:
+    development_20260501_0630:
+      top1: 0.3215613383
+      top2: 0.5334572491
+    development_20260701_0831:
+      top1: 0.3429054054
+      top2: 0.5270270270
+    stress_20260901_0920:
+      top1: 0.3112582781
+      top2: 0.4867549669
   score_model: "HDA_POISSON_V1"
   score_ft_direction_lock: false
   cross_layer_gate:
     ft_score_agreement: "KEEP_TIER"
     ft_score_conflict: "DOWNGRADE_OR_PASS"
+    htft_ft_agreement: "DIAGNOSTIC_ONLY"
   use_probability_layer: true
   use_value_layer: true
   use_decision_filter: true
   use_consistency_layer: true
   use_calibration_diagnostics: true
-  decision_filter_version: "3.5-p1"
-  decision_filter_mode: "ft_calibration_plus_market_failure_detector"
-  draw_candidate_phase: "RESEARCH_ONLY_NOT_PROMOTED"
+  decision_filter_version: "3.5-p2"
+  decision_filter_mode: "ft_calibration_plus_balanced_draw_resolver_plus_mfd"
   allow_pass: true
   gpt_role: "EXPLANATION_ONLY"
 
 output:
-  version: "HH520-OUTPUT-V3.5-P1"
+  version: "HH520-OUTPUT-V3.5-P2"
   columns:
     - 球队对阵
     - 胜平负场景
@@ -74,11 +107,11 @@ output:
     - 半全场×2及概率
     - 总进球及概率
   semantics:
-    market_probability: "官方赔率去水概率"
-    model_probability: "Draw Anchor + Side Layer 后概率"
-    ft_grade: "55/60/65历史校准等级"
-    risk_tier: "市场可靠度与跨层Gate结果，不是概率"
-    htft_probability: "Phase 1旧HTFT条件联合概率"
+    market_probability: "正式FT方向对应的官方赔率去水概率"
+    model_probability: "正式FT方向对应的Draw Anchor + Side Layer概率"
+    ft_grade: "55/60/65侧向校准或DRAW_STANDARD"
+    risk_tier: "市场可靠度与FT×Score Gate结果，不是概率"
+    htft_probability: "Goal Timing约束的独立HT/FT联合概率"
     score_probability: "独立H/D/A拟合Poisson比分概率"
   hidden_from_formal_table:
     - 通用模糊自信度
@@ -87,7 +120,8 @@ output:
 research:
   enabled: true
   auto_tune_stable: false
-  phase1_development_window: "2026-05-01..2026-08-31"
-  phase1_stress_window: "2026-09-01..2026-09-20"
+  development_window: "2026-05-01..2026-08-31"
+  stress_window: "2026-09-01..2026-09-20"
+  historical_goal_timing_recollection: false
   forward_validation_required: true
   candidate_changes_never_auto_promote: true
