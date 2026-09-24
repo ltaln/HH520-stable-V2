@@ -96,6 +96,27 @@ def draw_search(rows):
         y=json.loads(json.dumps(x)); fn=rule_from_params(y["params"])
         y["stress"]=metric(rows["stress"],fn)
         y["stress"]["wilson95"]=wilson(y["stress"]["hits"],y["stress"]["n"])
+        override_compare={}
+        for split, rr in rows.items():
+            selected=draw_hits=base_hits=0
+            for r in rr:
+                if fn(r)!="DRAW":
+                    continue
+                selected+=1
+                actual=str(r.get("actual_outcome") or "").upper()
+                p=r.get("probabilities") or {}
+                base=max(("home","draw","away"), key=lambda k: float(p.get(k,0.0))).upper()
+                draw_hits+=int(actual=="DRAW")
+                base_hits+=int(actual==base)
+            override_compare[split]={
+                "n":selected,
+                "draw_hits":draw_hits,
+                "draw_accuracy":draw_hits/selected if selected else None,
+                "base_argmax_hits":base_hits,
+                "base_argmax_accuracy":base_hits/selected if selected else None,
+                "net_hits_if_override":draw_hits-base_hits,
+            }
+        y["override_compare"]=override_compare
         return y
     return {"baseline":baseline,"candidate_count":len(candidates),
             "final_selected_on_dev_only":finish(candidates[0] if candidates else None),
