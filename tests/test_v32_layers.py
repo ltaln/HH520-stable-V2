@@ -33,11 +33,11 @@ def test_htft_layer_produces_three_primary_ft_rows():
     assert all(x["ft"]=="HOME" for x in h["top"])
 
 
-def test_score_layer_uses_htft_templates():
+def test_score_layer_uses_independent_hda_poisson():
     m=sample_match(); p=probability_layer(m)
     s=score_layer(m,p)
     assert s["valid"] is True
-    assert s["model"]=="HTFT_SCORE_TEMPLATE_V1"
+    assert s["model"]=="HDA_POISSON_V1"
     assert len(s["top_scores"])>=2
-    assert s["lambda_home"] is None and s["lambda_away"] is None
+    assert s["lambda_home"] is not None and s["lambda_away"] is not None
     assert s["total_goals_pick"].endswith("球")

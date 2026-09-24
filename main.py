@@ -17,7 +17,7 @@ def main(argv=None):
             stream.reconfigure(encoding="utf-8")
     load_dotenv(ROOT / ".env")
     parser = argparse.ArgumentParser(
-        description="HH520 Stable V3.4：10027s + Draw Anchor + Side Layer + Market Failure Detector + FT-conditioned HTFT/Score"
+        description="HH520 Stable V3.5 Phase 1：V3.4概率核心 + FT 55/60/65校准 + 独立比分 + FT×Score Cross Gate"
     )
     parser.add_argument("command", nargs="*", help="预测 YYYY-MM-DD 全部比赛")
     parser.add_argument("--gpt", action="store_true", help="可选：由服务器端 OpenAI API 做解释审核；不得修改冻结模型输出")
@@ -31,7 +31,7 @@ def main(argv=None):
             raw = json.loads(args.import_response.read_text(encoding="utf-8-sig"))
             import_response(command["date"], raw)
         data = execute_prediction(command["date"], use_gpt=args.gpt)
-        mode = "Stable V3.4 + API解释审核" if args.gpt else "Stable V3.4 确定性预测 + ChatGPT Handoff"
+        mode = "Stable V3.5 Phase 1 + API解释审核" if args.gpt else "Stable V3.5 Phase 1 确定性预测 + ChatGPT Handoff"
         print(f"日期：{command['date']} | 比赛：{len(data['matches'])} | 模式：{mode}")
         print(f"10027s快照：{data.get('captured_at', '未知')}")
         for prediction in data["predictions"]:

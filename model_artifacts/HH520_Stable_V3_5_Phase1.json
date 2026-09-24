@@ -1,0 +1,48 @@
+{
+  "version": "HH520 Stable V3.5 Phase 1",
+  "artifact_version": "HH520-Stable-V3.5-Phase1-20260924",
+  "source": "10027S_ONLY",
+  "inherited_probability_core": {
+    "model": "DRAW_ANCHOR_PLUS_MARKET_SIDE_SHARE",
+    "changed": false,
+    "draw_formula": "0.789*PD_market + 0.211*0.2574",
+    "page_probability_for_direction": false
+  },
+  "promoted": {
+    "ft_calibration": {
+      "thresholds": {
+        "standard": 0.55,
+        "strong": 0.6,
+        "high": 0.65
+      },
+      "below_standard": "BALANCED_NO_FORCED_SIDE",
+      "evidence": {
+        "development_20260501_0831": {
+          "n": 1130
+        },
+        "stress_20260901_0920": {
+          "n": 302
+        }
+      }
+    },
+    "score": {
+      "model": "HDA_POISSON_V1",
+      "ft_direction_lock": false,
+      "development_top2_accuracy": 0.2584070796460177,
+      "stress_top2_accuracy": 0.20860927152317882
+    },
+    "cross_gate": {
+      "rule": "FT_SCORE_AGREE_KEEP__CONFLICT_DOWNGRADE_OR_PASS",
+      "development_agree_accuracy": 0.6904231625835189,
+      "stress_agree_accuracy": 0.6697247706422018,
+      "development_conflict_accuracy": 0.2727272727272727,
+      "stress_conflict_accuracy": 0
+    }
+  },
+  "not_promoted": {
+    "draw_candidate": "RESEARCH_ONLY",
+    "goal_timing_htft": "SHADOW_ONLY",
+    "htft_formal_model": "FT_CONDITIONAL_TEMPLATE_V1"
+  },
+  "gpt_role": "EXPLANATION_ONLY"
+}

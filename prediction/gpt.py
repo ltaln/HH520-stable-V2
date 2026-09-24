@@ -1,4 +1,4 @@
-"""Single batched, cached Responses request; GPT is explanation-only in V3.4."""
+"""Single batched, cached Responses request; GPT is explanation-only in V3.5 Phase 1."""
 import hashlib
 import json
 import os
@@ -8,7 +8,7 @@ import requests
 import yaml
 from collector import cache_manager
 
-PROMPT_PATH = Path(__file__).resolve().parents[1] / "prompts" / "HH520_Stable_V3_4_Prediction_Prompt.md"
+PROMPT_PATH = Path(__file__).resolve().parents[1] / "prompts" / "HH520_Stable_V3_5_Phase1_Prediction_Prompt.md"
 FIELDS = (
     "match_id", "score1", "score2", "htft1", "htft2", "total_goals",
     "direction", "alternate_direction", "state", "reason",
@@ -45,14 +45,14 @@ def request_predictions(matches):
         raise RuntimeError("--gpt 要求设置账户可用的 OPENAI_MODEL")
 
     prompt=PROMPT_PATH.read_text(encoding="utf-8")+"""
-HH520 Stable V3.4 已由本地模型完成 FT、风险等级、HTFT、比分和总进球。
+HH520 Stable V3.5 Phase 1 已由本地模型完成 FT校准、风险等级、独立比分、Cross Gate、HTFT和总进球。
 你的角色只有解释和审核，绝对不得重新预测或修改 locked_prediction。
 必须逐字复制 direction/alternate_direction/state/score1/score2/htft1/htft2/total_goals。
 不得使用 建议下注、是否下注、page_prediction，也不得引入未采集的外部事实。
 保持 match_id 和输入顺序。"""
 
     config=yaml.safe_load((PROMPT_PATH.parents[1]/"config"/"stable.yaml").read_text(encoding="utf-8"))
-    body={"version":"3.4","model":model,"schema":_SCHEMA,"prompt":prompt,"config":config,"matches":matches}
+    body={"version":"3.5-p1","model":model,"schema":_SCHEMA,"prompt":prompt,"config":config,"matches":matches}
     digest=hashlib.sha256(json.dumps(body,ensure_ascii=False,sort_keys=True).encode()).hexdigest()
     cache_dir=cache_manager.CACHE_DIR
     cache_dir.mkdir(parents=True,exist_ok=True)
