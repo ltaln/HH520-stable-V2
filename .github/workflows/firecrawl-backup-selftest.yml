@@ -1,0 +1,46 @@
+name: Firecrawl Backup Selftest
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "firecrawl-selftest-requests/*.json"
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+      FIRECRAWL_API_KEY_BACKUP: ${{ secrets.FIRECRAWL_API_KEY_BACKUP }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install requests
+      - name: Run selftest
+        run: python scripts/firecrawl_backup_selftest.py
+      - name: Publish selftest
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin firecrawl-selftest-results || true
+          if git show-ref --verify --quiet refs/remotes/origin/firecrawl-selftest-results; then
+            git switch --detach origin/firecrawl-selftest-results
+          else
+            git switch --orphan firecrawl-selftest-results
+            git rm -rf . || true
+          fi
+          mkdir -p results
+          cp "$GITHUB_WORKSPACE/_firecrawl_selftest.json" results/latest.json
+          git add results/latest.json
+          git commit -m "selftest: firecrawl backup" || true
+          git push origin HEAD:firecrawl-selftest-results --force
