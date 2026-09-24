@@ -187,9 +187,112 @@ def load_cache_rows():
                 "actual_half":outcome(half),"actual_full":outcome(full),
                 "probabilities":p.get("probabilities"),
                 "market_probabilities":p.get("market_probabilities"),
+                "home_share":p.get("home_share"),
+                "actual_outcome":outcome(full),
+                "research_factors":deepcopy(m.get("research_factors") or {}),
+                "possession":deepcopy(m.get("possession") or {}),
             })
     return out,{"cache_files_seen":len(files),"cache_files_parsed":parsed_files,
                 "rows":{k:len(v) for k,v in out.items()}}
+
+
+def _num(v):
+    try:
+        return float(v)
+    except (TypeError,ValueError):
+        return None
+
+def factor_features(r):
+    f=r.get("research_factors") or {}
+    p=r.get("possession") or {}
+    def gap(name):
+        h=_num(f.get("home_"+name)); a=_num(f.get("away_"+name))
+        return abs(h-a) if h is not None and a is not None else None
+    hp=_num(p.get("home")); ap=_num(p.get("away"))
+    return {
+        "attack_gap":gap("attack"),
+        "defense_gap":gap("defense"),
+        "h2h_gap":gap("h2h"),
+        "form_gap":gap("form"),
+        "possession_gap":abs(hp-ap) if hp is not None and ap is not None else None,
+    }
+
+def factor_draw_search(rows):
+    # Start from probability-balanced families, then refine by structural symmetry.
+    prob_seeds=[]
+    for pd_min in [0.26,0.27,0.28,0.29,0.30,0.31]:
+      for sg in [0.08,0.10,0.12,0.14,0.16,0.18,0.20]:
+       for tg in [0.08,0.10,0.12,0.14,0.16,0.18]:
+        for pmax in [0.38,0.40,0.42,0.45,0.50]:
+         q={"pd_min":pd_min,"side_gap_max":sg,"draw_top_gap_max":tg,
+            "pmax_max":pmax,"market_pd_min":0.0,"home_share_dev_max":0.20}
+         fn=rule_from_params(q)
+         a=compare_override(rows["dev1"],fn); b=compare_override(rows["dev2"],fn)
+         if a["n"]>=12 and b["n"]>=12:
+            prob_seeds.append((min(a["net_rate"],b["net_rate"]),a["net_hits_if_override"]+b["net_hits_if_override"],q))
+    prob_seeds.sort(reverse=True,key=lambda x:(x[0],x[1]))
+    prob_seeds=prob_seeds[:80]
+
+    thresholds={
+      "attack_gap":[0.5,1.0,1.5,2.0,3.0,999.0],
+      "defense_gap":[0.15,0.25,0.4,0.6,1.0,999.0],
+      "h2h_gap":[1.0,2.0,3.0,4.0,6.0,999.0],
+      "form_gap":[0.15,0.25,0.4,0.6,1.0,999.0],
+      "possession_gap":[3.0,5.0,8.0,12.0,20.0,999.0],
+    }
+
+    candidates=[]
+    # One or two structural symmetry gates; keep the search interpretable.
+    names=list(thresholds)
+    gate_sets=[(n,) for n in names]
+    gate_sets += [(names[i],names[j]) for i in range(len(names)) for j in range(i+1,len(names))]
+    for _,__,q in prob_seeds:
+      basefn=rule_from_params(q)
+      for gates in gate_sets:
+        value_lists=[thresholds[g] for g in gates]
+        for vals in product(*value_lists):
+          limits=dict(zip(gates,vals))
+          def fn(r,basefn=basefn,limits=limits):
+            if basefn(r)!="DRAW": return None
+            ff=factor_features(r)
+            for k,lim in limits.items():
+                v=ff.get(k)
+                if v is None or v>lim: return None
+            return "DRAW"
+          a=compare_override(rows["dev1"],fn); b=compare_override(rows["dev2"],fn)
+          if a["n"]<10 or b["n"]<10: continue
+          if a["net_hits_if_override"]<=0 or b["net_hits_if_override"]<=0: continue
+          da=metric(rows["dev1"],fn); db=metric(rows["dev2"],fn)
+          candidates.append({
+            "probability_params":q,"factor_limits":limits,
+            "dev1":da,"dev2":db,
+            "override_dev1":a,"override_dev2":b,
+            "min_net_rate":min(a["net_rate"],b["net_rate"]),
+            "total_net_hits":a["net_hits_if_override"]+b["net_hits_if_override"],
+            "coverage":a["n"]+b["n"],
+          })
+    candidates.sort(key=lambda x:(x["min_net_rate"],x["total_net_hits"],x["coverage"]),reverse=True)
+    def finalize(x):
+        if not x:return None
+        q=x["probability_params"]; limits=x["factor_limits"]; basefn=rule_from_params(q)
+        def fn(r):
+            if basefn(r)!="DRAW": return None
+            ff=factor_features(r)
+            for k,lim in limits.items():
+                v=ff.get(k)
+                if v is None or v>lim:return None
+            return "DRAW"
+        y=json.loads(json.dumps(x))
+        y["stress"]=metric(rows["stress"],fn)
+        y["override_stress"]=compare_override(rows["stress"],fn)
+        return y
+    return {
+      "candidate_count":len(candidates),
+      "selection_objective":"positive_net_hits_vs_base_argmax_in_both_dev_splits_with_structural_symmetry",
+      "stress_used_for_selection":False,
+      "final_selected_on_dev_only":finalize(candidates[0] if candidates else None),
+      "top10_dev_only":[finalize(x) for x in candidates[:10]],
+    }
 
 def pois(lam,n):
     arr=[math.exp(-lam)]
@@ -311,6 +414,7 @@ out={
  "archive_paths":ARCHIVES,
  "sample_counts":{k:len(v) for k,v in archive_rows.items()},
  "draw_optimizer":draw_search(archive_rows),
+ "draw_factor_optimizer":factor_draw_search(cache_rows),
  "htft_optimizer":htft_search(cache_rows,cache_meta,data),
 }
 Path("_draw_htft_final.json").write_text(json.dumps(out,ensure_ascii=False,indent=2),encoding="utf-8")
