@@ -1,0 +1,378 @@
+{
+  "status": "READY",
+  "kind": "v35_shadow",
+  "date": "2026-09-24",
+  "stable_mutated": false,
+  "historical_goal_timing_collection": false,
+  "prediction_goal_timing_required": true,
+  "goal_timing_summary": {
+    "enabled": true,
+    "attempted": 7,
+    "available": 0,
+    "six_bin": 0,
+    "half_aggregate_fallback": 0,
+    "skipped_confirmed": 0,
+    "lookup_capped": 0
+  },
+  "matches": [
+    {
+      "match_id": "1",
+      "home_team": "日本",
+      "away_team": "乌拉圭",
+      "probabilities": {
+        "home": 0.5374281521238586,
+        "draw": 0.2610362908296943,
+        "away": 0.20153555704644696
+      },
+      "ft": {
+        "status": "BALANCED",
+        "direction": null,
+        "raw_direction": "home",
+        "pmax": 0.5374281521238586,
+        "margin": 0.2763918612941643,
+        "thresholds": {
+          "standard": 0.55,
+          "strong": 0.6,
+          "high": 0.65
+        },
+        "reason": "historically_calibrated_ft_thresholds"
+      },
+      "score": {
+        "available": true,
+        "model": "FORMAL_HDA_POISSON_V35",
+        "home_lambda": 1.5,
+        "away_lambda": 0.8,
+        "fit_error": 3.607215056645161e-06,
+        "top2": [
+          {
+            "score": "1:0",
+            "probability": 0.15039246399101522,
+            "outcome": "主胜"
+          },
+          {
+            "score": "1:1",
+            "probability": 0.12031397119281216,
+            "outcome": "平"
+          }
+        ],
+        "total_goals": "2球",
+        "total_goals_probability": 0.26519204483749015
+      },
+      "htft": {
+        "available": false,
+        "status": "PASS",
+        "reason": "timing_extract_failed"
+      },
+      "quality_warnings": []
+    },
+    {
+      "match_id": "2",
+      "home_team": "韩国",
+      "away_team": "厄瓜多尔",
+      "probabilities": {
+        "home": 0.4400067994726705,
+        "draw": 0.29204876144546443,
+        "away": 0.26794443908186505
+      },
+      "ft": {
+        "status": "BALANCED",
+        "direction": null,
+        "raw_direction": "home",
+        "pmax": 0.4400067994726705,
+        "margin": 0.14795803802720608,
+        "thresholds": {
+          "standard": 0.55,
+          "strong": 0.6,
+          "high": 0.65
+        },
+        "reason": "historically_calibrated_ft_thresholds"
+      },
+      "score": {
+        "available": true,
+        "model": "FORMAL_HDA_POISSON_V35",
+        "home_lambda": 1.2,
+        "away_lambda": 0.9000000000000001,
+        "fit_error": 0.00018861513412828164,
+        "top2": [
+          {
+            "score": "1:0",
+            "probability": 0.1469484979341685,
+            "outcome": "主胜"
+          },
+          {
+            "score": "1:1",
+            "probability": 0.13225364814075166,
+            "outcome": "平"
+          }
+        ],
+        "total_goals": "2球",
+        "total_goals_probability": 0.2700178649540346
+      },
+      "htft": {
+        "available": false,
+        "status": "PASS",
+        "reason": "timing_extract_failed"
+      },
+      "quality_warnings": []
+    },
+    {
+      "match_id": "4",
+      "home_team": "科索沃",
+      "away_team": "爱尔兰",
+      "probabilities": {
+        "home": 0.38551199805528724,
+        "draw": 0.2936869464201343,
+        "away": 0.3208010555245784
+      },
+      "ft": {
+        "status": "PASS",
+        "direction": null,
+        "raw_direction": "home",
+        "pmax": 0.38551199805528724,
+        "margin": 0.06471094253070886,
+        "reason": "critical_structural_data_missing"
+      },
+      "score": {
+        "available": true,
+        "model": "FORMAL_HDA_POISSON_V35",
+        "home_lambda": 1.1,
+        "away_lambda": 1.0,
+        "fit_error": 0.00013308667736310498,
+        "top2": [
+          {
+            "score": "1:1",
+            "probability": 0.1347025495756838,
+            "outcome": "平"
+          },
+          {
+            "score": "1:0",
+            "probability": 0.1347025495756838,
+            "outcome": "主胜"
+          }
+        ],
+        "total_goals": "2球",
+        "total_goals_probability": 0.2700173834676207
+      },
+      "htft": {
+        "available": false,
+        "status": "PASS",
+        "reason": "timing_extract_failed"
+      },
+      "quality_warnings": [
+        "team_modules_missing_or_zero",
+        "possession_missing"
+      ]
+    },
+    {
+      "match_id": "5",
+      "home_team": "葡萄牙",
+      "away_team": "威尔士",
+      "probabilities": {
+        "home": 0.768362654240854,
+        "draw": 0.16789170333323813,
+        "away": 0.06374564242590788
+      },
+      "ft": {
+        "status": "HIGH",
+        "direction": "主胜",
+        "raw_direction": "home",
+        "pmax": 0.768362654240854,
+        "margin": 0.6004709509076159,
+        "thresholds": {
+          "standard": 0.55,
+          "strong": 0.6,
+          "high": 0.65
+        },
+        "reason": "historically_calibrated_ft_thresholds"
+      },
+      "score": {
+        "available": true,
+        "model": "FORMAL_HDA_POISSON_V35",
+        "home_lambda": 2.2,
+        "away_lambda": 0.5,
+        "fit_error": 5.6553619951860165e-05,
+        "top2": [
+          {
+            "score": "2:0",
+            "probability": 0.16271373881427875,
+            "outcome": "主胜"
+          },
+          {
+            "score": "1:0",
+            "probability": 0.14792158074025338,
+            "outcome": "主胜"
+          }
+        ],
+        "total_goals": "2球",
+        "total_goals_probability": 0.24507916445373804
+      },
+      "htft": {
+        "available": false,
+        "status": "PASS",
+        "reason": "timing_extract_failed"
+      },
+      "quality_warnings": [
+        "page_probability_missing"
+      ]
+    },
+    {
+      "match_id": "6",
+      "home_team": "荷兰",
+      "away_team": "德国",
+      "probabilities": {
+        "home": 0.37919957312922875,
+        "draw": 0.251120508297088,
+        "away": 0.36967991857368326
+      },
+      "ft": {
+        "status": "BALANCED",
+        "direction": null,
+        "raw_direction": "home",
+        "pmax": 0.37919957312922875,
+        "margin": 0.009519654555545487,
+        "thresholds": {
+          "standard": 0.55,
+          "strong": 0.6,
+          "high": 0.65
+        },
+        "reason": "historically_calibrated_ft_thresholds"
+      },
+      "score": {
+        "available": true,
+        "model": "FORMAL_HDA_POISSON_V35",
+        "home_lambda": 1.4000000000000001,
+        "away_lambda": 1.4000000000000001,
+        "fit_error": 4.961261171411531e-05,
+        "top2": [
+          {
+            "score": "1:1",
+            "probability": 0.11919160569372518,
+            "outcome": "平"
+          },
+          {
+            "score": "1:0",
+            "probability": 0.0851368612098037,
+            "outcome": "主胜"
+          }
+        ],
+        "total_goals": "2球",
+        "total_goals_probability": 0.23838321138745036
+      },
+      "htft": {
+        "available": false,
+        "status": "PASS",
+        "reason": "timing_extract_failed"
+      },
+      "quality_warnings": []
+    },
+    {
+      "match_id": "7",
+      "home_team": "塞尔维亚",
+      "away_team": "希腊",
+      "probabilities": {
+        "home": 0.37896456852964533,
+        "draw": 0.2848112278124738,
+        "away": 0.33622420365788086
+      },
+      "ft": {
+        "status": "BALANCED",
+        "direction": null,
+        "raw_direction": "home",
+        "pmax": 0.37896456852964533,
+        "margin": 0.04274036487176447,
+        "thresholds": {
+          "standard": 0.55,
+          "strong": 0.6,
+          "high": 0.65
+        },
+        "reason": "historically_calibrated_ft_thresholds"
+      },
+      "score": {
+        "available": true,
+        "model": "FORMAL_HDA_POISSON_V35",
+        "home_lambda": 1.2,
+        "away_lambda": 1.1,
+        "fit_error": 2.573465255441051e-05,
+        "top2": [
+          {
+            "score": "1:1",
+            "probability": 0.1323426379452325,
+            "outcome": "平"
+          },
+          {
+            "score": "1:0",
+            "probability": 0.12031148904112045,
+            "outcome": "主胜"
+          }
+        ],
+        "total_goals": "2球",
+        "total_goals_probability": 0.26518657376146965
+      },
+      "htft": {
+        "available": false,
+        "status": "PASS",
+        "reason": "timing_extract_failed"
+      },
+      "quality_warnings": [
+        "page_probability_missing"
+      ]
+    },
+    {
+      "match_id": "8",
+      "home_team": "挪威",
+      "away_team": "丹麦",
+      "probabilities": {
+        "home": 0.5731325741149336,
+        "draw": 0.22981285545903316,
+        "away": 0.19705457042603328
+      },
+      "ft": {
+        "status": "STANDARD",
+        "direction": "主胜",
+        "raw_direction": "home",
+        "pmax": 0.5731325741149336,
+        "margin": 0.3433197186559004,
+        "thresholds": {
+          "standard": 0.55,
+          "strong": 0.6,
+          "high": 0.65
+        },
+        "reason": "historically_calibrated_ft_thresholds"
+      },
+      "score": {
+        "available": true,
+        "model": "FORMAL_HDA_POISSON_V35",
+        "home_lambda": 1.9000000000000001,
+        "away_lambda": 1.0,
+        "fit_error": 0.0001987586730601575,
+        "top2": [
+          {
+            "score": "1:1",
+            "probability": 0.10456132583869673,
+            "outcome": "平"
+          },
+          {
+            "score": "1:0",
+            "probability": 0.10456132583869673,
+            "outcome": "主胜"
+          }
+        ],
+        "total_goals": "2球",
+        "total_goals_probability": 0.23141072376406302
+      },
+      "htft": {
+        "available": false,
+        "status": "PASS",
+        "reason": "timing_extract_failed"
+      },
+      "quality_warnings": [
+        "page_probability_missing"
+      ]
+    }
+  ],
+  "_action": {
+    "request_id": "hh520-v35-shadow-20260924-a1",
+    "run_id": "35965534509",
+    "source_sha": "e9cba3a318bdf383ea55106e325456639461e2eb"
+  }
+}
