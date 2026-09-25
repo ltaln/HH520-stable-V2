@@ -169,7 +169,10 @@ def main():
         url_to_teams[eu].append(team)
 
     initial=credit_balance()
-    ordered=list(sorted(url_to_teams))\n    # Two earlier failed attempts already spent credits on the first ten URLs; move them to the end to avoid another immediate duplicate burn.\n    if len(ordered)>10: ordered=ordered[10:]+ordered[:10]
+    ordered=list(sorted(url_to_teams))
+    # Two earlier failed attempts already spent credits on the first ten URLs; move them to the end to avoid another immediate duplicate burn.
+    if len(ordered)>10:
+        ordered=ordered[10:]+ordered[:10]
     profiles_by_url={}
     errors={}
     # One fresh scrape per unique profile URL. Keep a hard safety floor.
