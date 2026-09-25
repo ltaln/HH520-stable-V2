@@ -1,0 +1,1 @@
+{"request_id":"draw-pmax-interval-20260925","scope":"existing cache 2026-05-01..2026-09-20","rule":"frozen V3.5.1 draw logistic","threshold":0.38,"search":"pmax eligibility intervals 0.35..0.60","select_on":"May-Aug only","stress":"Sep1-20"}
