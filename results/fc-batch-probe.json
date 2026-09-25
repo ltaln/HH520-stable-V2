@@ -1,0 +1,12 @@
+{
+  "query": "site:footystats.org/clubs (\"利雅新月\" OR \"吉达国民\" OR \"斯旺西\" OR \"沃特福德\" OR \"都灵\" OR \"蒙扎\" OR \"大阪樱花\" OR \"柏太阳神\" OR \"米亚尔比\" OR \"佐加顿斯\")",
+  "status": 200,
+  "data": {
+    "success": true,
+    "data": {
+      "web": []
+    },
+    "creditsUsed": 0,
+    "id": "01a0d770-6121-77a5-a707-608b6a5cc10a"
+  }
+}
