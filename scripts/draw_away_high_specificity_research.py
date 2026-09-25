@@ -126,17 +126,18 @@ def main():
     dev1,dev2,stress=rows["dev1"],rows["dev2"],rows["stress"]
 
     candidates=[]
-    for fs_name,feats in FEATURE_SETS.items():
-      for l2 in (0.05,0.1,0.25,0.5,1.0,2.0,4.0):
+    for fs_name in ("CORE","MARKET_POISSON","STRUCTURE"):
+      feats=FEATURE_SETS[fs_name]
+      for l2 in (0.1,0.5,1.0):
         m1=fit(dev1,feats,l2); m2=fit(dev2,feats,l2)
         s1=score(m2,dev1); s2=score(m1,dev2)
-        for th in (0.55,0.60,0.65,0.70,0.75,0.80,0.85,0.90):
-          for bpmin in (0.00,0.02,0.04,0.06,0.08,0.10):
-            for bpmax in (0.12,0.16,0.20,0.25,0.30,0.40):
+        for th in (0.65,0.70,0.75,0.80,0.85,0.90,0.95):
+          for bpmin in (0.02,0.04,0.06,0.08,0.10):
+            for bpmax in (0.16,0.20,0.25,0.30):
               if bpmax<=bpmin: continue
-              for pdmin in (0.18,0.20,0.22,0.24,0.26):
-                for pamin in (0.25,0.30,0.35,0.40):
-                  for lgmax in (0.25,0.40,0.60,0.80,1.20):
+              for pdmin in (0.20,0.22,0.24,0.26):
+                for pamin in (0.30,0.35,0.40):
+                  for lgmax in (0.40,0.60,0.80):
                     e1=evaluate(dev1,s1,th,bpmin,bpmax,pdmin,pamin,lgmax,True)
                     e2=evaluate(dev2,s2,th,bpmin,bpmax,pdmin,pamin,lgmax,True)
                     if e1["protected_loss"] or e2["protected_loss"]: continue
