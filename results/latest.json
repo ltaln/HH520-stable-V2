@@ -1,0 +1,1435 @@
+{
+  "mode": "RETROSPECTIVE_COLLECTION1_ALL_CANDIDATE_HOLDOUT_AUDIT",
+  "source_summary": {
+    "mapped_teams": 159,
+    "unique_profile_urls": 150,
+    "profiles_scraped": 150,
+    "profiles_available": 145,
+    "unique_profiles_available": 136,
+    "initial_backup_credits": 226,
+    "final_backup_credits": 90,
+    "credits_consumed": 136,
+    "source": "FootyStats full team profile",
+    "snapshot_date": "2026-09-25",
+    "historical_point_in_time": false,
+    "warning": "Current-season snapshot captured after Sep1-20 target matches; retrospective feature-value research only."
+  },
+  "quality_gate": {
+    "accepted": 81,
+    "rejected": {
+      "mapping_low_confidence": 195,
+      "profile_unavailable": 15,
+      "ambiguous_profile_url": 11
+    },
+    "ambiguous_profile_url_groups": 9,
+    "mapping_score_min": 0.85
+  },
+  "selection_n": 50,
+  "holdout_n": 31,
+  "profile_field_availability": {
+    "btts": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "btts_draw": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "btts_win": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "clean_sheet": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "clean_sheet_1h": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "clean_sheet_2h": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "conceded_avg_1h": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "conceded_avg_2h": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "conceded_per_match": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "draws": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "failed_score_1h": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "failed_score_2h": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "failed_to_score": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "losses": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "over_05": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "over_15": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "over_25": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "over_35": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "possession": {
+      "present": 142,
+      "coverage": 0.8930817610062893
+    },
+    "scored_1h": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "scored_2h": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "scored_both_halves": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "scored_per_match": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "shot_conversion": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "shots": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "shots_off_target": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "shots_on_target": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "shots_per_goal": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "sot_per_goal": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "wins": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "xg_against": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    },
+    "xg_for": {
+      "present": 145,
+      "coverage": 0.9119496855345912
+    }
+  },
+  "warning": "Holdout audit evaluates all already-tested candidates on Sep15-20 only for robustness diagnostics. It must not be treated as a fresh selection set; snapshot is Sep25 and is not point-in-time.",
+  "ft": {
+    "candidate_count": 381,
+    "cv_safe_count": 358,
+    "cross_window_strict_count": 19,
+    "cross_window_top2_count": 0,
+    "best_cross_window_strict": {
+      "groups": [
+        "SHOTS",
+        "RESULT_STABILITY",
+        "HALF_TIMING"
+      ],
+      "params": [
+        0.1
+      ],
+      "min_primary": 0,
+      "total_primary": 9,
+      "total_secondary": 0,
+      "holdout": {
+        "n": 31,
+        "top1_hits": 21,
+        "top1_accuracy": 0.6774193548387096,
+        "baseline_hits": 19,
+        "baseline_accuracy": 0.6129032258064516,
+        "net_top1": 2
+      },
+      "cv_safe": true,
+      "cross_window_strict": true
+    },
+    "top10_cross_window_strict": [
+      {
+        "groups": [
+          "SHOTS",
+          "RESULT_STABILITY",
+          "HALF_TIMING"
+        ],
+        "params": [
+          0.1
+        ],
+        "min_primary": 0,
+        "total_primary": 9,
+        "total_secondary": 0,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 21,
+          "top1_accuracy": 0.6774193548387096,
+          "baseline_hits": 19,
+          "baseline_accuracy": 0.6129032258064516,
+          "net_top1": 2
+        },
+        "cv_safe": true,
+        "cross_window_strict": true
+      },
+      {
+        "groups": [
+          "SHOTS",
+          "GOAL_RATE",
+          "RESULT_STABILITY",
+          "HALF_TIMING"
+        ],
+        "params": [
+          1.0
+        ],
+        "min_primary": 0,
+        "total_primary": 8,
+        "total_secondary": 0,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 21,
+          "top1_accuracy": 0.6774193548387096,
+          "baseline_hits": 19,
+          "baseline_accuracy": 0.6129032258064516,
+          "net_top1": 2
+        },
+        "cv_safe": true,
+        "cross_window_strict": true
+      },
+      {
+        "groups": [
+          "SHOTS",
+          "GOAL_RATE",
+          "RESULT_STABILITY",
+          "HALF_TIMING"
+        ],
+        "params": [
+          5.0
+        ],
+        "min_primary": 0,
+        "total_primary": 8,
+        "total_secondary": 0,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 21,
+          "top1_accuracy": 0.6774193548387096,
+          "baseline_hits": 19,
+          "baseline_accuracy": 0.6129032258064516,
+          "net_top1": 2
+        },
+        "cv_safe": true,
+        "cross_window_strict": true
+      },
+      {
+        "groups": [
+          "SHOTS",
+          "RESULT_STABILITY",
+          "HALF_TIMING",
+          "POSSESSION"
+        ],
+        "params": [
+          0.1
+        ],
+        "min_primary": 0,
+        "total_primary": 10,
+        "total_secondary": 0,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 20,
+          "top1_accuracy": 0.6451612903225806,
+          "baseline_hits": 19,
+          "baseline_accuracy": 0.6129032258064516,
+          "net_top1": 1
+        },
+        "cv_safe": true,
+        "cross_window_strict": true
+      },
+      {
+        "groups": [
+          "SHOTS",
+          "RESULT_STABILITY",
+          "HALF_TIMING"
+        ],
+        "params": [
+          1.0
+        ],
+        "min_primary": 0,
+        "total_primary": 9,
+        "total_secondary": 0,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 20,
+          "top1_accuracy": 0.6451612903225806,
+          "baseline_hits": 19,
+          "baseline_accuracy": 0.6129032258064516,
+          "net_top1": 1
+        },
+        "cv_safe": true,
+        "cross_window_strict": true
+      },
+      {
+        "groups": [
+          "SHOTS",
+          "RESULT_STABILITY",
+          "HALF_TIMING",
+          "POSSESSION"
+        ],
+        "params": [
+          1.0
+        ],
+        "min_primary": 0,
+        "total_primary": 9,
+        "total_secondary": 0,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 20,
+          "top1_accuracy": 0.6451612903225806,
+          "baseline_hits": 19,
+          "baseline_accuracy": 0.6129032258064516,
+          "net_top1": 1
+        },
+        "cv_safe": true,
+        "cross_window_strict": true
+      },
+      {
+        "groups": [
+          "XG",
+          "SHOTS",
+          "GOAL_RATE",
+          "RESULT_STABILITY",
+          "HALF_TIMING"
+        ],
+        "params": [
+          5.0
+        ],
+        "min_primary": 0,
+        "total_primary": 9,
+        "total_secondary": 0,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 20,
+          "top1_accuracy": 0.6451612903225806,
+          "baseline_hits": 19,
+          "baseline_accuracy": 0.6129032258064516,
+          "net_top1": 1
+        },
+        "cv_safe": true,
+        "cross_window_strict": true
+      },
+      {
+        "groups": [
+          "SHOTS",
+          "GOAL_RATE",
+          "RESULT_STABILITY",
+          "HALF_TIMING",
+          "POSSESSION"
+        ],
+        "params": [
+          5.0
+        ],
+        "min_primary": 0,
+        "total_primary": 9,
+        "total_secondary": 0,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 20,
+          "top1_accuracy": 0.6451612903225806,
+          "baseline_hits": 19,
+          "baseline_accuracy": 0.6129032258064516,
+          "net_top1": 1
+        },
+        "cv_safe": true,
+        "cross_window_strict": true
+      },
+      {
+        "groups": [
+          "SHOTS",
+          "RESULT_STABILITY",
+          "HALF_TIMING"
+        ],
+        "params": [
+          5.0
+        ],
+        "min_primary": 0,
+        "total_primary": 8,
+        "total_secondary": 0,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 20,
+          "top1_accuracy": 0.6451612903225806,
+          "baseline_hits": 19,
+          "baseline_accuracy": 0.6129032258064516,
+          "net_top1": 1
+        },
+        "cv_safe": true,
+        "cross_window_strict": true
+      },
+      {
+        "groups": [
+          "SHOTS",
+          "GOAL_RATE",
+          "RESULT_STABILITY",
+          "HALF_TIMING"
+        ],
+        "params": [
+          0.1
+        ],
+        "min_primary": 0,
+        "total_primary": 8,
+        "total_secondary": 0,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 20,
+          "top1_accuracy": 0.6451612903225806,
+          "baseline_hits": 19,
+          "baseline_accuracy": 0.6129032258064516,
+          "net_top1": 1
+        },
+        "cv_safe": true,
+        "cross_window_strict": true
+      }
+    ],
+    "best_cross_window_top2": null,
+    "best_single_group_by_holdout": {
+      "XG": {
+        "groups": [
+          "XG"
+        ],
+        "params": [
+          5.0
+        ],
+        "min_primary": 1,
+        "total_primary": 10,
+        "total_secondary": 0,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 4,
+          "top1_accuracy": 0.12903225806451613,
+          "baseline_hits": 19,
+          "baseline_accuracy": 0.6129032258064516,
+          "net_top1": -15
+        },
+        "cv_safe": true,
+        "cross_window_strict": false
+      },
+      "SHOTS": {
+        "groups": [
+          "SHOTS"
+        ],
+        "params": [
+          1.0
+        ],
+        "min_primary": 0,
+        "total_primary": 7,
+        "total_secondary": 0,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 15,
+          "top1_accuracy": 0.4838709677419355,
+          "baseline_hits": 19,
+          "baseline_accuracy": 0.6129032258064516,
+          "net_top1": -4
+        },
+        "cv_safe": true,
+        "cross_window_strict": false
+      },
+      "GOAL_RATE": {
+        "groups": [
+          "GOAL_RATE"
+        ],
+        "params": [
+          0.1
+        ],
+        "min_primary": 0,
+        "total_primary": 9,
+        "total_secondary": 0,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 15,
+          "top1_accuracy": 0.4838709677419355,
+          "baseline_hits": 19,
+          "baseline_accuracy": 0.6129032258064516,
+          "net_top1": -4
+        },
+        "cv_safe": true,
+        "cross_window_strict": false
+      },
+      "RESULT_STABILITY": {
+        "groups": [
+          "RESULT_STABILITY"
+        ],
+        "params": [
+          0.1
+        ],
+        "min_primary": 0,
+        "total_primary": 19,
+        "total_secondary": 0,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 18,
+          "top1_accuracy": 0.5806451612903226,
+          "baseline_hits": 19,
+          "baseline_accuracy": 0.6129032258064516,
+          "net_top1": -1
+        },
+        "cv_safe": true,
+        "cross_window_strict": false
+      },
+      "BTTS_TOTALS": {
+        "groups": [
+          "BTTS_TOTALS"
+        ],
+        "params": [
+          0.1
+        ],
+        "min_primary": 1,
+        "total_primary": 13,
+        "total_secondary": 0,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 15,
+          "top1_accuracy": 0.4838709677419355,
+          "baseline_hits": 19,
+          "baseline_accuracy": 0.6129032258064516,
+          "net_top1": -4
+        },
+        "cv_safe": true,
+        "cross_window_strict": false
+      },
+      "HALF_TIMING": {
+        "groups": [
+          "HALF_TIMING"
+        ],
+        "params": [
+          5.0
+        ],
+        "min_primary": -1,
+        "total_primary": 0,
+        "total_secondary": 0,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 16,
+          "top1_accuracy": 0.5161290322580645,
+          "baseline_hits": 19,
+          "baseline_accuracy": 0.6129032258064516,
+          "net_top1": -3
+        },
+        "cv_safe": false,
+        "cross_window_strict": false
+      },
+      "POSSESSION": {
+        "groups": [
+          "POSSESSION"
+        ],
+        "params": [
+          0.1
+        ],
+        "min_primary": -1,
+        "total_primary": 1,
+        "total_secondary": 0,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 16,
+          "top1_accuracy": 0.5161290322580645,
+          "baseline_hits": 19,
+          "baseline_accuracy": 0.6129032258064516,
+          "net_top1": -3
+        },
+        "cv_safe": false,
+        "cross_window_strict": false
+      }
+    }
+  },
+  "htft": {
+    "candidate_count": 381,
+    "cv_safe_count": 0,
+    "cross_window_strict_count": 0,
+    "cross_window_top2_count": 10,
+    "best_cross_window_strict": null,
+    "top10_cross_window_strict": [],
+    "best_cross_window_top2": {
+      "groups": [
+        "RESULT_STABILITY"
+      ],
+      "params": [
+        2.0
+      ],
+      "min_primary": 0,
+      "total_primary": 11,
+      "min_top1": -2,
+      "min_top3": 1,
+      "total_secondary": 17,
+      "holdout": {
+        "n": 31,
+        "top1_hits": 12,
+        "top2_hits": 18,
+        "top3_hits": 21,
+        "baseline_top1_hits": 13,
+        "baseline_top2_hits": 15,
+        "baseline_top3_hits": 20,
+        "net_top1": -1,
+        "net_top2": 3,
+        "net_top3": 1
+      },
+      "cv_safe": false,
+      "cross_window_strict": false,
+      "cross_window_top2": true
+    },
+    "best_single_group_by_holdout": {
+      "XG": {
+        "groups": [
+          "XG"
+        ],
+        "params": [
+          8.0
+        ],
+        "min_primary": -2,
+        "total_primary": -3,
+        "min_top1": -2,
+        "min_top3": -1,
+        "total_secondary": -2,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 3,
+          "top2_hits": 10,
+          "top3_hits": 15,
+          "baseline_top1_hits": 13,
+          "baseline_top2_hits": 15,
+          "baseline_top3_hits": 20,
+          "net_top1": -10,
+          "net_top2": -5,
+          "net_top3": -5
+        },
+        "cv_safe": false,
+        "cross_window_strict": false,
+        "cross_window_top2": false
+      },
+      "SHOTS": {
+        "groups": [
+          "SHOTS"
+        ],
+        "params": [
+          2.0
+        ],
+        "min_primary": -3,
+        "total_primary": -6,
+        "min_top1": -2,
+        "min_top3": -2,
+        "total_secondary": -7,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 8,
+          "top2_hits": 19,
+          "top3_hits": 22,
+          "baseline_top1_hits": 13,
+          "baseline_top2_hits": 15,
+          "baseline_top3_hits": 20,
+          "net_top1": -5,
+          "net_top2": 4,
+          "net_top3": 2
+        },
+        "cv_safe": false,
+        "cross_window_strict": false,
+        "cross_window_top2": false
+      },
+      "GOAL_RATE": {
+        "groups": [
+          "GOAL_RATE"
+        ],
+        "params": [
+          8.0
+        ],
+        "min_primary": -1,
+        "total_primary": 3,
+        "min_top1": -2,
+        "min_top3": -1,
+        "total_secondary": 6,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 8,
+          "top2_hits": 19,
+          "top3_hits": 22,
+          "baseline_top1_hits": 13,
+          "baseline_top2_hits": 15,
+          "baseline_top3_hits": 20,
+          "net_top1": -5,
+          "net_top2": 4,
+          "net_top3": 2
+        },
+        "cv_safe": false,
+        "cross_window_strict": false,
+        "cross_window_top2": false
+      },
+      "RESULT_STABILITY": {
+        "groups": [
+          "RESULT_STABILITY"
+        ],
+        "params": [
+          2.0
+        ],
+        "min_primary": 0,
+        "total_primary": 11,
+        "min_top1": -2,
+        "min_top3": 1,
+        "total_secondary": 17,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 12,
+          "top2_hits": 18,
+          "top3_hits": 21,
+          "baseline_top1_hits": 13,
+          "baseline_top2_hits": 15,
+          "baseline_top3_hits": 20,
+          "net_top1": -1,
+          "net_top2": 3,
+          "net_top3": 1
+        },
+        "cv_safe": false,
+        "cross_window_strict": false,
+        "cross_window_top2": true
+      },
+      "BTTS_TOTALS": {
+        "groups": [
+          "BTTS_TOTALS"
+        ],
+        "params": [
+          8.0
+        ],
+        "min_primary": -1,
+        "total_primary": 4,
+        "min_top1": -2,
+        "min_top3": -1,
+        "total_secondary": 9,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 9,
+          "top2_hits": 19,
+          "top3_hits": 22,
+          "baseline_top1_hits": 13,
+          "baseline_top2_hits": 15,
+          "baseline_top3_hits": 20,
+          "net_top1": -4,
+          "net_top2": 4,
+          "net_top3": 2
+        },
+        "cv_safe": false,
+        "cross_window_strict": false,
+        "cross_window_top2": false
+      },
+      "HALF_TIMING": {
+        "groups": [
+          "HALF_TIMING"
+        ],
+        "params": [
+          8.0
+        ],
+        "min_primary": -1,
+        "total_primary": 1,
+        "min_top1": -1,
+        "min_top3": 0,
+        "total_secondary": 6,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 8,
+          "top2_hits": 14,
+          "top3_hits": 18,
+          "baseline_top1_hits": 13,
+          "baseline_top2_hits": 15,
+          "baseline_top3_hits": 20,
+          "net_top1": -5,
+          "net_top2": -1,
+          "net_top3": -2
+        },
+        "cv_safe": false,
+        "cross_window_strict": false,
+        "cross_window_top2": false
+      },
+      "POSSESSION": {
+        "groups": [
+          "POSSESSION"
+        ],
+        "params": [
+          8.0
+        ],
+        "min_primary": -3,
+        "total_primary": -5,
+        "min_top1": -2,
+        "min_top3": -1,
+        "total_secondary": -6,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 8,
+          "top2_hits": 15,
+          "top3_hits": 20,
+          "baseline_top1_hits": 13,
+          "baseline_top2_hits": 15,
+          "baseline_top3_hits": 20,
+          "net_top1": -5,
+          "net_top2": 0,
+          "net_top3": 0
+        },
+        "cv_safe": false,
+        "cross_window_strict": false,
+        "cross_window_top2": false
+      }
+    }
+  },
+  "score": {
+    "candidate_count": 1143,
+    "cv_safe_count": 238,
+    "cross_window_strict_count": 39,
+    "cross_window_top2_count": 208,
+    "best_cross_window_strict": {
+      "groups": [
+        "SHOTS",
+        "RESULT_STABILITY"
+      ],
+      "params": [
+        3.0,
+        0.75
+      ],
+      "min_primary": 0,
+      "total_primary": 2,
+      "min_top1": 0,
+      "total_secondary": 4,
+      "holdout": {
+        "n": 31,
+        "top1_hits": 8,
+        "top2_hits": 14,
+        "top3_hits": 17,
+        "top5_hits": 17,
+        "baseline_top1_hits": 6,
+        "baseline_top2_hits": 7,
+        "baseline_top3_hits": 11,
+        "baseline_top5_hits": 17,
+        "net_top1": 2,
+        "net_top2": 7,
+        "net_top3": 6,
+        "net_top5": 0
+      },
+      "cv_safe": true,
+      "cross_window_strict": true,
+      "cross_window_top2": true
+    },
+    "top10_cross_window_strict": [
+      {
+        "groups": [
+          "SHOTS",
+          "RESULT_STABILITY"
+        ],
+        "params": [
+          3.0,
+          0.75
+        ],
+        "min_primary": 0,
+        "total_primary": 2,
+        "min_top1": 0,
+        "total_secondary": 4,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 8,
+          "top2_hits": 14,
+          "top3_hits": 17,
+          "top5_hits": 17,
+          "baseline_top1_hits": 6,
+          "baseline_top2_hits": 7,
+          "baseline_top3_hits": 11,
+          "baseline_top5_hits": 17,
+          "net_top1": 2,
+          "net_top2": 7,
+          "net_top3": 6,
+          "net_top5": 0
+        },
+        "cv_safe": true,
+        "cross_window_strict": true,
+        "cross_window_top2": true
+      },
+      {
+        "groups": [
+          "SHOTS",
+          "RESULT_STABILITY"
+        ],
+        "params": [
+          10.0,
+          0.75
+        ],
+        "min_primary": 0,
+        "total_primary": 3,
+        "min_top1": 0,
+        "total_secondary": 4,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 7,
+          "top2_hits": 14,
+          "top3_hits": 16,
+          "top5_hits": 17,
+          "baseline_top1_hits": 6,
+          "baseline_top2_hits": 7,
+          "baseline_top3_hits": 11,
+          "baseline_top5_hits": 17,
+          "net_top1": 1,
+          "net_top2": 7,
+          "net_top3": 5,
+          "net_top5": 0
+        },
+        "cv_safe": true,
+        "cross_window_strict": true,
+        "cross_window_top2": true
+      },
+      {
+        "groups": [
+          "SHOTS",
+          "RESULT_STABILITY",
+          "POSSESSION"
+        ],
+        "params": [
+          3.0,
+          0.75
+        ],
+        "min_primary": 0,
+        "total_primary": 3,
+        "min_top1": 0,
+        "total_secondary": 2,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 7,
+          "top2_hits": 14,
+          "top3_hits": 16,
+          "top5_hits": 17,
+          "baseline_top1_hits": 6,
+          "baseline_top2_hits": 7,
+          "baseline_top3_hits": 11,
+          "baseline_top5_hits": 17,
+          "net_top1": 1,
+          "net_top2": 7,
+          "net_top3": 5,
+          "net_top5": 0
+        },
+        "cv_safe": true,
+        "cross_window_strict": true,
+        "cross_window_top2": true
+      },
+      {
+        "groups": [
+          "SHOTS",
+          "GOAL_RATE",
+          "HALF_TIMING"
+        ],
+        "params": [
+          30.0,
+          0.75
+        ],
+        "min_primary": 0,
+        "total_primary": 5,
+        "min_top1": 0,
+        "total_secondary": 4,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 6,
+          "top2_hits": 13,
+          "top3_hits": 17,
+          "top5_hits": 17,
+          "baseline_top1_hits": 6,
+          "baseline_top2_hits": 7,
+          "baseline_top3_hits": 11,
+          "baseline_top5_hits": 17,
+          "net_top1": 0,
+          "net_top2": 6,
+          "net_top3": 6,
+          "net_top5": 0
+        },
+        "cv_safe": true,
+        "cross_window_strict": true,
+        "cross_window_top2": true
+      },
+      {
+        "groups": [
+          "SHOTS",
+          "RESULT_STABILITY"
+        ],
+        "params": [
+          30.0,
+          0.75
+        ],
+        "min_primary": 0,
+        "total_primary": 2,
+        "min_top1": 0,
+        "total_secondary": 3,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 6,
+          "top2_hits": 13,
+          "top3_hits": 16,
+          "top5_hits": 17,
+          "baseline_top1_hits": 6,
+          "baseline_top2_hits": 7,
+          "baseline_top3_hits": 11,
+          "baseline_top5_hits": 17,
+          "net_top1": 0,
+          "net_top2": 6,
+          "net_top3": 5,
+          "net_top5": 0
+        },
+        "cv_safe": true,
+        "cross_window_strict": true,
+        "cross_window_top2": true
+      },
+      {
+        "groups": [
+          "XG",
+          "GOAL_RATE",
+          "HALF_TIMING",
+          "POSSESSION"
+        ],
+        "params": [
+          30.0,
+          0.75
+        ],
+        "min_primary": 0,
+        "total_primary": 5,
+        "min_top1": 0,
+        "total_secondary": 3,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 6,
+          "top2_hits": 13,
+          "top3_hits": 15,
+          "top5_hits": 17,
+          "baseline_top1_hits": 6,
+          "baseline_top2_hits": 7,
+          "baseline_top3_hits": 11,
+          "baseline_top5_hits": 17,
+          "net_top1": 0,
+          "net_top2": 6,
+          "net_top3": 4,
+          "net_top5": 0
+        },
+        "cv_safe": true,
+        "cross_window_strict": true,
+        "cross_window_top2": true
+      },
+      {
+        "groups": [
+          "SHOTS",
+          "GOAL_RATE",
+          "HALF_TIMING",
+          "POSSESSION"
+        ],
+        "params": [
+          30.0,
+          0.75
+        ],
+        "min_primary": 0,
+        "total_primary": 5,
+        "min_top1": 0,
+        "total_secondary": 4,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 6,
+          "top2_hits": 13,
+          "top3_hits": 15,
+          "top5_hits": 18,
+          "baseline_top1_hits": 6,
+          "baseline_top2_hits": 7,
+          "baseline_top3_hits": 11,
+          "baseline_top5_hits": 17,
+          "net_top1": 0,
+          "net_top2": 6,
+          "net_top3": 4,
+          "net_top5": 1
+        },
+        "cv_safe": true,
+        "cross_window_strict": true,
+        "cross_window_top2": true
+      },
+      {
+        "groups": [
+          "SHOTS",
+          "RESULT_STABILITY",
+          "POSSESSION"
+        ],
+        "params": [
+          30.0,
+          0.75
+        ],
+        "min_primary": 0,
+        "total_primary": 3,
+        "min_top1": 0,
+        "total_secondary": 3,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 6,
+          "top2_hits": 13,
+          "top3_hits": 15,
+          "top5_hits": 17,
+          "baseline_top1_hits": 6,
+          "baseline_top2_hits": 7,
+          "baseline_top3_hits": 11,
+          "baseline_top5_hits": 17,
+          "net_top1": 0,
+          "net_top2": 6,
+          "net_top3": 4,
+          "net_top5": 0
+        },
+        "cv_safe": true,
+        "cross_window_strict": true,
+        "cross_window_top2": true
+      },
+      {
+        "groups": [
+          "SHOTS",
+          "RESULT_STABILITY",
+          "HALF_TIMING",
+          "POSSESSION"
+        ],
+        "params": [
+          30.0,
+          0.75
+        ],
+        "min_primary": 0,
+        "total_primary": 4,
+        "min_top1": 0,
+        "total_secondary": 3,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 7,
+          "top2_hits": 12,
+          "top3_hits": 13,
+          "top5_hits": 18,
+          "baseline_top1_hits": 6,
+          "baseline_top2_hits": 7,
+          "baseline_top3_hits": 11,
+          "baseline_top5_hits": 17,
+          "net_top1": 1,
+          "net_top2": 5,
+          "net_top3": 2,
+          "net_top5": 1
+        },
+        "cv_safe": true,
+        "cross_window_strict": true,
+        "cross_window_top2": true
+      },
+      {
+        "groups": [
+          "SHOTS",
+          "POSSESSION"
+        ],
+        "params": [
+          3.0,
+          0.75
+        ],
+        "min_primary": 0,
+        "total_primary": 5,
+        "min_top1": 0,
+        "total_secondary": 3,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 6,
+          "top2_hits": 12,
+          "top3_hits": 16,
+          "top5_hits": 17,
+          "baseline_top1_hits": 6,
+          "baseline_top2_hits": 7,
+          "baseline_top3_hits": 11,
+          "baseline_top5_hits": 17,
+          "net_top1": 0,
+          "net_top2": 5,
+          "net_top3": 5,
+          "net_top5": 0
+        },
+        "cv_safe": true,
+        "cross_window_strict": true,
+        "cross_window_top2": true
+      }
+    ],
+    "best_cross_window_top2": {
+      "groups": [
+        "SHOTS",
+        "RESULT_STABILITY"
+      ],
+      "params": [
+        3.0,
+        0.75
+      ],
+      "min_primary": 0,
+      "total_primary": 2,
+      "min_top1": 0,
+      "total_secondary": 4,
+      "holdout": {
+        "n": 31,
+        "top1_hits": 8,
+        "top2_hits": 14,
+        "top3_hits": 17,
+        "top5_hits": 17,
+        "baseline_top1_hits": 6,
+        "baseline_top2_hits": 7,
+        "baseline_top3_hits": 11,
+        "baseline_top5_hits": 17,
+        "net_top1": 2,
+        "net_top2": 7,
+        "net_top3": 6,
+        "net_top5": 0
+      },
+      "cv_safe": true,
+      "cross_window_strict": true,
+      "cross_window_top2": true
+    },
+    "best_single_group_by_holdout": {
+      "XG": {
+        "groups": [
+          "XG"
+        ],
+        "params": [
+          10.0,
+          0.75
+        ],
+        "min_primary": -2,
+        "total_primary": -4,
+        "min_top1": 0,
+        "total_secondary": 0,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 3,
+          "top2_hits": 10,
+          "top3_hits": 13,
+          "top5_hits": 18,
+          "baseline_top1_hits": 6,
+          "baseline_top2_hits": 7,
+          "baseline_top3_hits": 11,
+          "baseline_top5_hits": 17,
+          "net_top1": -3,
+          "net_top2": 3,
+          "net_top3": 2,
+          "net_top5": 1
+        },
+        "cv_safe": false,
+        "cross_window_strict": false,
+        "cross_window_top2": false
+      },
+      "SHOTS": {
+        "groups": [
+          "SHOTS"
+        ],
+        "params": [
+          3.0,
+          0.75
+        ],
+        "min_primary": 0,
+        "total_primary": 6,
+        "min_top1": 0,
+        "total_secondary": 5,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 5,
+          "top2_hits": 13,
+          "top3_hits": 16,
+          "top5_hits": 18,
+          "baseline_top1_hits": 6,
+          "baseline_top2_hits": 7,
+          "baseline_top3_hits": 11,
+          "baseline_top5_hits": 17,
+          "net_top1": -1,
+          "net_top2": 6,
+          "net_top3": 5,
+          "net_top5": 1
+        },
+        "cv_safe": true,
+        "cross_window_strict": false,
+        "cross_window_top2": true
+      },
+      "GOAL_RATE": {
+        "groups": [
+          "GOAL_RATE"
+        ],
+        "params": [
+          3.0,
+          0.5
+        ],
+        "min_primary": -1,
+        "total_primary": 6,
+        "min_top1": 0,
+        "total_secondary": 2,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 7,
+          "top2_hits": 12,
+          "top3_hits": 14,
+          "top5_hits": 19,
+          "baseline_top1_hits": 6,
+          "baseline_top2_hits": 7,
+          "baseline_top3_hits": 11,
+          "baseline_top5_hits": 17,
+          "net_top1": 1,
+          "net_top2": 5,
+          "net_top3": 3,
+          "net_top5": 2
+        },
+        "cv_safe": false,
+        "cross_window_strict": false,
+        "cross_window_top2": false
+      },
+      "RESULT_STABILITY": {
+        "groups": [
+          "RESULT_STABILITY"
+        ],
+        "params": [
+          10.0,
+          0.5
+        ],
+        "min_primary": -1,
+        "total_primary": -1,
+        "min_top1": 0,
+        "total_secondary": 1,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 6,
+          "top2_hits": 10,
+          "top3_hits": 13,
+          "top5_hits": 17,
+          "baseline_top1_hits": 6,
+          "baseline_top2_hits": 7,
+          "baseline_top3_hits": 11,
+          "baseline_top5_hits": 17,
+          "net_top1": 0,
+          "net_top2": 3,
+          "net_top3": 2,
+          "net_top5": 0
+        },
+        "cv_safe": false,
+        "cross_window_strict": false,
+        "cross_window_top2": false
+      },
+      "BTTS_TOTALS": {
+        "groups": [
+          "BTTS_TOTALS"
+        ],
+        "params": [
+          30.0,
+          0.75
+        ],
+        "min_primary": 0,
+        "total_primary": 10,
+        "min_top1": 0,
+        "total_secondary": 5,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 3,
+          "top2_hits": 12,
+          "top3_hits": 13,
+          "top5_hits": 16,
+          "baseline_top1_hits": 6,
+          "baseline_top2_hits": 7,
+          "baseline_top3_hits": 11,
+          "baseline_top5_hits": 17,
+          "net_top1": -3,
+          "net_top2": 5,
+          "net_top3": 2,
+          "net_top5": -1
+        },
+        "cv_safe": true,
+        "cross_window_strict": false,
+        "cross_window_top2": true
+      },
+      "HALF_TIMING": {
+        "groups": [
+          "HALF_TIMING"
+        ],
+        "params": [
+          30.0,
+          0.5
+        ],
+        "min_primary": -1,
+        "total_primary": 6,
+        "min_top1": 0,
+        "total_secondary": 2,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 5,
+          "top2_hits": 11,
+          "top3_hits": 14,
+          "top5_hits": 17,
+          "baseline_top1_hits": 6,
+          "baseline_top2_hits": 7,
+          "baseline_top3_hits": 11,
+          "baseline_top5_hits": 17,
+          "net_top1": -1,
+          "net_top2": 4,
+          "net_top3": 3,
+          "net_top5": 0
+        },
+        "cv_safe": false,
+        "cross_window_strict": false,
+        "cross_window_top2": false
+      },
+      "POSSESSION": {
+        "groups": [
+          "POSSESSION"
+        ],
+        "params": [
+          3.0,
+          0.25
+        ],
+        "min_primary": 0,
+        "total_primary": 0,
+        "min_top1": 0,
+        "total_secondary": 1,
+        "holdout": {
+          "n": 31,
+          "top1_hits": 6,
+          "top2_hits": 8,
+          "top3_hits": 13,
+          "top5_hits": 16,
+          "baseline_top1_hits": 6,
+          "baseline_top2_hits": 7,
+          "baseline_top3_hits": 11,
+          "baseline_top5_hits": 17,
+          "net_top1": 0,
+          "net_top2": 1,
+          "net_top3": 2,
+          "net_top5": -1
+        },
+        "cv_safe": false,
+        "cross_window_strict": false,
+        "cross_window_top2": false
+      }
+    }
+  },
+  "promotion_status": "RESEARCH_ONLY_NOT_PROMOTED_AUTOMATICALLY"
+}
