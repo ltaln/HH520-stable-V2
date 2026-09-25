@@ -1,4 +1,4 @@
-"""HH520 Stable V3.5 Phase 2 selective decision filter.
+"""HH520 Stable V3.5.1 formal draw decision filter.
 
 Phase 2 keeps the V3.4 H/D/A probability core unchanged, retains the validated
 55/60/65 side calibration, and promotes a high-specificity draw resolver in the
@@ -14,7 +14,7 @@ from .risk_engine import assess_risk
 from .market_failure_detector import market_failure_detector
 from .score_layer import _fit_lambdas
 
-VERSION = "HH520 Decision Filter V3.5 Phase 2"
+VERSION = "HH520 Decision Filter V3.5.1 Draw Final"
 
 _TIER_ORDER = {"CONFIRM": 0, "BALANCED": 1, "TAIL_ALERT": 2, "PASS": 3}
 
@@ -235,7 +235,7 @@ def decision_filter(match: dict, probability: dict, value: dict,
         "match_type": classification.get("type"),
         "reasons": reasons,
         "source": "HH520_10027s_ONLY",
-        "selection_rule": "V35_PHASE2_FT_CALIBRATION_PLUS_FORMAL_DRAW_LOGISTIC_PLUS_MFD",
+        "selection_rule": "V351_FT_CALIBRATION_PLUS_FORMAL_DRAW_LOGISTIC_PLUS_MFD",
         "forbidden_advice_fields_used": False,
         "value_layer_used_for_direction": False,
         "value_layer_used_for_confirmation": False,
