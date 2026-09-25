@@ -1,0 +1,48 @@
+name: HTFT Transition Hybrid Research
+on:
+  push:
+    branches: [main]
+    paths:
+      - "htft-transition-hybrid-requests/*.json"
+permissions:
+  contents: write
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - uses: actions/cache/restore@v4
+        with:
+          path: cache
+          key: hh520-htft-transition-hybrid-${{ github.run_id }}
+          restore-keys: |
+            hh520-collection-v1-
+      - name: Run offline hybrid study
+        env:
+          HH520_HTFT_TRANSITION_OFFLINE_ONLY: "1"
+        run: python scripts/htft_transition_hybrid_research.py
+      - name: Publish result
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin htft-transition-hybrid-results || true
+          if git show-ref --verify --quiet refs/remotes/origin/htft-transition-hybrid-results; then
+            git switch --detach origin/htft-transition-hybrid-results
+          else
+            git switch --orphan htft-transition-hybrid-results
+            git rm -rf . || true
+          fi
+          mkdir -p results
+          cp "$GITHUB_WORKSPACE/_htft_transition_hybrid.json" results/latest.json
+          git add results/latest.json
+          git commit -m "research: HTFT transition hybrid" || true
+          git push origin HEAD:htft-transition-hybrid-results --force
