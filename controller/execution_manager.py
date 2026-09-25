@@ -1,5 +1,4 @@
 from collector.service import collect_date
-from collector.goal_timing_service import enrich_matches_with_goal_timing
 from prediction import build_predictions
 from prediction.builder import build_model_input
 from formatter.output_formatter import build_output_contract
@@ -11,7 +10,13 @@ PROMPT_FILE = "HH520_Stable_V3_5_Phase2_Prediction_Prompt.md"
 
 def execute_prediction(date: str, use_gpt: bool = False):
     data = collect_date(date)
-    data["goal_timing_summary"] = enrich_matches_with_goal_timing(date, data["matches"])
+    data["goal_timing_summary"] = {
+        "enabled": False,
+        "attempted": 0,
+        "available": 0,
+        "formal_chain": False,
+        "reason": "formal_htft_uses_existing_calibration_only",
+    }
     data["predictions"] = build_predictions(data["matches"], use_gpt=use_gpt)
     data["output_contract"] = build_output_contract(data["predictions"])
     data["display_rows"] = data["output_contract"]["display_rows"]
