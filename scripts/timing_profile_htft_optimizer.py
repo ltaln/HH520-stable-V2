@@ -73,9 +73,10 @@ def timing_signals(home,away,shrink):
       "late_balance":1.0-min(1.0,abs(hlate-alate)),
     }
 
-def transition_mass(row,conditional,sig,beta_second,beta_late,beta_draw):
-    probs={"home":row["features"]["ph"],"draw":row["features"]["pd"],"away":row["features"]["pa"]}
-    fit=_fit_lambdas(probs)
+def transition_mass(row,conditional,sig,beta_second,beta_late,beta_draw,fit=None):
+    if fit is None:
+        probs={"home":row["features"]["ph"],"draw":row["features"]["pd"],"away":row["features"]["pa"]}
+        fit=_fit_lambdas(probs)
     if not fit:return formal_mass(row)
     _,lh,la=fit
     hp=ht_probs(lh,la,sig["home_half_share"],sig["away_half_share"])
@@ -157,6 +158,10 @@ def main():
     models={ht:fit_multinomial(dev,ht,1.0) for ht in STATES}
     cond={ht:predict_conditional(models[ht],rows) for ht in STATES}
     formal=[formal_mass(r) for r in rows]
+    fitted=[]
+    for r in rows:
+        probs={"home":r["features"]["ph"],"draw":r["features"]["pd"],"away":r["features"]["pa"]}
+        fitted.append(_fit_lambdas(probs))
 
     train_idx=[i for i,r in enumerate(rows) if r["date"]<="2026-09-14"]
     hold_idx=[i for i,r in enumerate(rows) if r["date"]>="2026-09-15"]
@@ -175,7 +180,7 @@ def main():
             if sig is None:
                 raw.append(formal[i]);continue
             cb={ht:cond[ht][i] for ht in STATES}
-            raw.append(transition_mass(r,cb,sig,b2,bl,bd))
+            raw.append(transition_mass(r,cb,sig,b2,bl,bd,fitted[i]))
          for alpha in (0.0,.2,.4,.6,.8,1.0):
             masses=[blend_mass(formal[i],raw[i],alpha) for i in range(len(rows))]
             tr=metrics([rows[i] for i in train_idx],[masses[i] for i in train_idx])
@@ -206,7 +211,7 @@ def main():
             sig=timing_signals((x or {}).get("home_timing"),(x or {}).get("away_timing"),shrink) if x else None
             if sig is None:raw2.append(formal[i]);continue
             cb={ht:cond[ht][i] for ht in STATES}
-            raw2.append(transition_mass(r,cb,sig,b2,bl,bd))
+            raw2.append(transition_mass(r,cb,sig,b2,bl,bd,fitted[i]))
          tr=locked_third_metrics(train_rows,train_formal,[raw2[i] for i in train_idx])
          third_grid.append({"shrink":shrink,"beta_second":b2,"beta_late":bl,"beta_draw":bd,
                             "train_hits":tr["candidate_top3_hits"],"train_net":tr["net_hits"],"_raw":raw2})
