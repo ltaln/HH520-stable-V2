@@ -38,14 +38,14 @@ def test_goal_timing_collector_legacy_budget_function_remains_callable(monkeypat
     assert _needs_timing(strong) is False
 
 
-def test_v35_phase2_htft_uses_timing_without_changing_ft_core():
+def test_v351_htft_uses_frozen_existing_data_split_without_changing_ft_core():
     m=sample_match()
     m["goal_timing"]={"available":True,"source_domain":"soccerstats.com","timing_mode":"six_bin",
         "home":{"first_half_gf_signal":0.45,"first_half_ga_signal":0.35},
         "away":{"first_half_gf_signal":0.38,"first_half_ga_signal":0.48}}
     p=probability_layer(m); before=dict(p["probabilities"]); h=htft_layer(p,m)
     assert h["valid"] is True
-    assert h["timing_used"] is True
+    assert h["timing_used"] is False
     assert h["ft_core_unchanged"] is True
     assert p["probabilities"]==before
 
