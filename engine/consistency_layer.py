@@ -1,9 +1,7 @@
-"""Cross-layer consistency for HH520 Stable V3.5 Phase 2.
+"""Cross-layer consistency for HH520 Stable V3.5.1.
 
 Score and HT/FT are independent of the FT hard direction. FT×Score remains the
-formal downgrade gate validated in Phase 1. HT/FT agreement is diagnostic in
-Phase 2 because live Goal Timing is a required same-day input and was not used
-to tune the historical FT core.
+formal downgrade gate validated in Phase 1. HT/FT agreement is diagnostic. The formal HT/FT model is calibrated from already-collected historical half/full labels and requires no new timing collection.
 """
 from __future__ import annotations
 
@@ -50,7 +48,7 @@ def consistency_layer(probability: dict, state: dict, htft: dict, score: dict, d
 
     warnings = []
     if not htft.get("valid"):
-        warnings.append("htft_timing_required_or_unavailable")
+        warnings.append("htft_unavailable")
     elif len(htft_top) < 2:
         warnings.append("htft_candidates_incomplete")
     if len(score_top) < 2:
@@ -86,7 +84,8 @@ def consistency_layer(probability: dict, state: dict, htft: dict, score: dict, d
             "formal_downgrade": False,
             "ft_direction": primary_code,
             "htft_top_ft": htft_primary_ft,
-            "timing_used": bool(htft.get("timing_used")),
+            "timing_used": False,
+            "new_timing_collection_required": bool(htft.get("new_timing_collection_required", False)),
         },
         "effective_decision": effective,
         "probability_conservation": {
