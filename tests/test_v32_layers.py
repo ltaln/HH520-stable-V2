@@ -30,7 +30,7 @@ def test_htft_layer_uses_existing_data_and_ranks_global_joint_rows():
     missing=htft_layer(p,m)
     assert missing["valid"] is True
     assert missing["timing_used"] is False
-    assert missing["status"]=="PASS"
+    assert missing["status"]=="READY"
     m["goal_timing"]={
         "available":True,"timing_mode":"six_bin","source_domain":"test",
         "home":{"first_half_gf_signal":0.40,"first_half_ga_signal":0.42},
