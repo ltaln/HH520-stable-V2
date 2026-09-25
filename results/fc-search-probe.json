@@ -1,0 +1,212 @@
+{
+  "利雅新月": {
+    "status": 200,
+    "data": {
+      "success": true,
+      "data": {
+        "web": [
+          {
+            "url": "https://footystats.org/",
+            "title": "FootyStats: Football Stats, Tables & Data | Soccer Stats",
+            "description": "FootyStats provides football statistics and statistical analysis, including Goals, Over 2.5/Under 2.5, HT/FT, Dynamic In-Play Stats, and much more.",
+            "position": 1
+          },
+          {
+            "url": "https://footystats.org/china/chinese-super-league",
+            "title": "Chinese Super League 2026 Stats | FootyStats",
+            "description": "Chinese Super League (China) tables, results, and stats of the latest season. Goals 29.1min/Goal (643 Goals in 208 matches) Total Goals - Full-Time 2 Goals 22. ...",
+            "position": 2
+          },
+          {
+            "url": "https://footystats.org/england/premier-league",
+            "title": "Premier League 2026/27 Stats | FootyStats",
+            "description": "FootyStats provides football statistics and statistical analysis, including Goals, Over 2.5/Under 2.5, HT/FT, Dynamic In-Play Stats, and much more.",
+            "position": 3
+          },
+          {
+            "url": "https://footystats.org/clubs/st-louis-lions-sc-8788",
+            "title": "St. Louis Lions SC Stats, Form & xG | FootyStats",
+            "description": "St. Louis Lions scores a goal every 0 minutes in USL League Two. • St. Louis Lions scores an average of 0 goals every game. Louis Lions concedes a goal every 0 ...",
+            "position": 4
+          },
+          {
+            "url": "https://footystats.org/clubs/al-ahli-sc-jeddah-5062",
+            "title": "Al Ahli SC Jeddah Stats, Form & xG | FootyStats",
+            "description": "Al Ahli scores a goal every 39 minutes in Professional League. • Al Ahli scores an average of 2.29 goals every game. Saudi Arabia Professional League Goals ...",
+            "position": 5
+          }
+        ]
+      },
+      "creditsUsed": 2,
+      "id": "01a0d76e-a1d6-74ea-9052-b08aa1c0e597"
+    }
+  },
+  "斯旺西": {
+    "status": 200,
+    "data": {
+      "success": true,
+      "data": {
+        "web": [
+          {
+            "url": "https://footystats.org/clubs/swansea-fc-699692",
+            "title": "Swansea FC Stats, Form & xG | FootyStats",
+            "description": "Swansea scores a goal every 30 minutes in Northern NSW FFA Cup Preliminary. • Swansea scores an average of 3 goals every game. Australia Northern NSW FFA Cup ...",
+            "position": 1
+          },
+          {
+            "url": "https://footystats.org/clubs/swansea-university-fc-671369",
+            "title": "Swansea University FC Stats, Form & xG | FootyStats",
+            "description": "Swansea University scores a goal every 61 minutes in FAW Championship. • Swansea University scores an average of 1.47 goals every game. Wales FAW Championship ...",
+            "position": 2
+          },
+          {
+            "url": "https://footystats.org/clubs/belmont-swansea-united-sc-7590",
+            "title": "Belmont Swansea Stats, Form & xG | FootyStats",
+            "description": "Belmont Swansea scores a goal every 43 minutes in Northern NSW NPL. • Belmont Swansea scores an average of 2.09 goals every game. Australia Northern NSW NPL ...",
+            "position": 3
+          },
+          {
+            "url": "https://footystats.org/england/swansea-city-afc-vs-luton-town-fc-h2h-stats",
+            "title": "Swansea City vs Luton Town Stats, H2H, xG | FootyStats",
+            "description": "Head to Head, live stats, live scores, and prediction stats for Swansea City vs Luton Town in the Championship. Goals Scored, Goals Conceded, Clean Sheets, ...",
+            "position": 4
+          },
+          {
+            "url": "https://footystats.org/england/tottenham-hotspur-fc-vs-swansea-city-afc-h2h-stats",
+            "title": "Swansea City vs Tottenham Hotspur Stats, H2H, xG | FootyStats",
+            "description": "Swansea City vs Tottenham Hotspur's head to head record shows that in the previous 14 meetings, Swansea City has won 0 times, Tottenham Hotspur has won 11 ...",
+            "position": 5
+          }
+        ]
+      },
+      "creditsUsed": 2,
+      "id": "01a0d76e-a774-7095-bf7c-7432851af846"
+    }
+  },
+  "大阪樱花": {
+    "status": 200,
+    "data": {
+      "success": true,
+      "data": {
+        "web": [
+          {
+            "url": "https://footystats.org/clubs/osaka-sangyo-university-fc-1054398",
+            "title": "Osaka Sangyo University Stats, Form & xG | FootyStats",
+            "description": "Osaka Sangyo University has conceded a total of 3 goals this season in Empress Cup. • Osaka Sangyo University concedes a goal every 60 min.",
+            "position": 1
+          },
+          {
+            "url": "https://footystats.org/",
+            "title": "FootyStats: Football Stats, Tables & Data | Soccer Stats",
+            "description": "FootyStats provides football statistics and statistical analysis, including Goals, Over 2.5/Under 2.5, HT/FT, Dynamic In-Play Stats, and much more. If you ...",
+            "position": 2
+          },
+          {
+            "url": "https://footystats.org/clubs/cerezo-osaka-866",
+            "title": "Cerezo Osaka Stats, Form & xG | FootyStats",
+            "description": "# Cerezo Osaka\n## ![Cerezo Osaka](https://cdn.footystats.org/img/teams/japan-cerezo-osaka.png)First 10 Minutes (0 ~ 9:59')\n| Goals 0.5+ | 28% | 25% | 33% |\n\n| Goals 0.5+ | 2 in 7 | 1 in 4 | 1 in 3 |",
+            "position": 3
+          },
+          {
+            "url": "https://footystats.org/japan/kagoshima-united-fc-vs-fc-osaka-h2h-stats",
+            "title": "Osaka vs Kagoshima United Stats, H2H, xG | FootyStats",
+            "description": "Osaka vs Kagoshima United's head to head record shows that in the previous 6 meetings, Osaka has won 1 times, Kagoshima United has won 5 times, ...",
+            "position": 4
+          },
+          {
+            "url": "https://footystats.org/clubs/sabas-fc-1431542",
+            "title": "Sabas FC Stats, Form & xG | FootyStats",
+            "description": "Sabas scores a goal every 90 minutes in Tokai Soccer League. • Sabas scores an average of 1 goals every game. Japan Tokai Soccer League Goals Scored Table & ...",
+            "position": 5
+          }
+        ]
+      },
+      "creditsUsed": 2,
+      "id": "01a0d76e-acab-7621-a9f9-3a88b7ead158"
+    }
+  },
+  "米亚尔比": {
+    "status": 200,
+    "data": {
+      "success": true,
+      "data": {
+        "web": [
+          {
+            "url": "https://footystats.org/",
+            "title": "FootyStats: Football Stats, Tables & Data | Soccer Stats",
+            "description": "FootyStats provides football statistics and statistical analysis, including Goals, Over 2.5/Under 2.5, HT/FT, Dynamic In-Play Stats, and much more.",
+            "position": 1
+          },
+          {
+            "url": "https://footystats.org/england/premier-league",
+            "title": "Premier League 2026/27 Stats | FootyStats",
+            "description": "FootyStats provides football statistics and statistical analysis, including Goals, Over 2.5/Under 2.5, HT/FT, Dynamic In-Play Stats, and much more.",
+            "position": 2
+          },
+          {
+            "url": "https://play.google.com/store/apps/details?id=org.footystats.official&hl=en_US&referrer=utm_source%3Dgoogle%26utm_medium%3Dorganic%26utm_term%3D%E7%B1%B3%E4%BA%9A%E5%B0%94%E6%AF%94+football+club+footystats+soccerstats+goal+timing",
+            "title": "FootyStats - Soccer Stats - Apps on Google Play",
+            "description": "Rating 4.4(2,173) · Free · AndroidWe provide in-play statistics during soccer matches, which will inform you when the team scores or concedes their goals across the season.",
+            "position": 3
+          },
+          {
+            "url": "https://footystats.org/clubs/club-internacional-de-futbol-miami-677446",
+            "title": "Inter Miami Stats, Form & xG | FootyStats",
+            "description": "# Inter Miami\n## Inter Miami Scores & Fixture Stats\nInter Miami Goal  | Conceded",
+            "position": 4
+          },
+          {
+            "url": "https://footystats.org/clubs/monterey-bay-fc-711352",
+            "title": "Monterey Bay Stats, Form & xG | FootyStats",
+            "description": "# Monterey Bay FC\n## ![Monterey Bay](https://cdn.footystats.org/img/teams/usa-monterey-bay-fc.png)Shots, xG & Offsides - Monterey Bay\n| Shots On Target / Match | 3.24 | 4.50 | 2.08 |",
+            "position": 5
+          }
+        ]
+      },
+      "creditsUsed": 2,
+      "id": "01a0d76e-b2a4-72a1-8fca-79350f533386"
+    }
+  },
+  "弗拉门戈": {
+    "status": 200,
+    "data": {
+      "success": true,
+      "data": {
+        "web": [
+          {
+            "url": "https://footystats.org/",
+            "title": "FootyStats: Football Stats, Tables & Data | Soccer Stats",
+            "description": "FootyStats provides football statistics and statistical analysis, including Goals, Over 2.5/Under 2.5, HT/FT, Dynamic In-Play Stats, and much more. If you ...",
+            "position": 1
+          },
+          {
+            "url": "https://footystats.org/clubs/san-diego-fc-1398748",
+            "title": "San Diego Stats, Form & xG | FootyStats",
+            "description": "San Diego scores a goal every 53 minutes in MLS. • San Diego scores an average of 1.69 goals every game. USA MLS Goals Scored Table & Results. Goals Conceded - ...",
+            "position": 2
+          },
+          {
+            "url": "https://play.google.com/store/apps/details?id=org.footystats.official&hl=en_US&referrer=utm_source%3Dgoogle%26utm_medium%3Dorganic%26utm_term%3D%E5%BC%97%E6%8B%89%E9%97%A8%E6%88%88+football+club+footystats+soccerstats+goal+timing",
+            "title": "FootyStats - Soccer Stats - Apps on Google Play",
+            "description": "Rating 4.4(2,173) · Free · AndroidWe provide in-play statistics during soccer matches, which will inform you when the team scores or concedes their goals across the season. This feature is very ...",
+            "position": 3
+          },
+          {
+            "url": "https://footystats.org/clubs/bgh-city-fc-705659",
+            "title": "BGH City FC Stats, Form & xG | FootyStats",
+            "description": "BGH City has conceded a total of 36 goals this season in Canadian Soccer League. • BGH City concedes a goal every 25 min. • BGH City concedes an average of ...",
+            "position": 4
+          },
+          {
+            "url": "https://footystats.org/help",
+            "title": "FootyStats Help",
+            "description": "FootyStats provides football statistics and statistical analysis, including Goals, Over 2.5/Under 2.5, HT/FT, Dynamic In-Play Stats, and much more. If you have ...",
+            "position": 5
+          }
+        ]
+      },
+      "creditsUsed": 2,
+      "id": "01a0d76e-bd4d-74eb-867f-59e32fcd824b"
+    }
+  }
+}
