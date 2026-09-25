@@ -12,7 +12,7 @@ for p in sorted(Path("cache").glob("10027s_2026-09-*.json")):
  rows=parse_10027s_markdown(md or "")
  counts[d]=len(rows)
  for m in rows:
-  teams.add(str(m.get("home_team")));teams.add(str(m.get("away_team")))
+  teams.add(str(m.get("home_team")));teams.add(str(m.get("away_team")))\n  lg=str(m.get("league") or "")\n  leagues[lg]=leagues.get(lg,0)+1
   if len(samples)<40:samples.append({"date":d,"home":m.get("home_team"),"away":m.get("away_team"),"half":m.get("half_score"),"full":m.get("result") or m.get("full_score"),"league":m.get("league")})
 out={"counts":counts,"sample_matches":samples,"unique_teams":len(teams),"teams":sorted(teams),"leagues":leagues}
 Path("_timing_prep.json").write_text(json.dumps(out,ensure_ascii=False,indent=2),encoding="utf-8")
