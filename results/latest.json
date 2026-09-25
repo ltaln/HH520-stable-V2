@@ -1,0 +1,347 @@
+{
+  "mode": "OFFLINE_EXISTING_MAY_SEP_CACHE_ONLY",
+  "threshold_fixed": 0.38,
+  "sample_counts": {
+    "dev1": 536,
+    "dev2": 592,
+    "stress": 302
+  },
+  "candidate_intervals": 115,
+  "safe_positive_both_dev": 4,
+  "selected_on_may_aug_only": {
+    "pmax_lo": 0.39,
+    "pmax_hi": 0.45,
+    "threshold": 0.38,
+    "dev1": {
+      "n": 8,
+      "draw_hits": 4,
+      "draw_acc": 0.5,
+      "base_hits": 2,
+      "base_acc": 0.25,
+      "net_hits": 2,
+      "net_rate": 0.25
+    },
+    "dev2": {
+      "n": 9,
+      "draw_hits": 5,
+      "draw_acc": 0.5555555555555556,
+      "base_hits": 3,
+      "base_acc": 0.3333333333333333,
+      "net_hits": 2,
+      "net_rate": 0.2222222222222222
+    },
+    "min_net_rate": 0.2222222222222222,
+    "total_net_hits": 4,
+    "coverage_dev": 17,
+    "stress": {
+      "n": 6,
+      "draw_hits": 4,
+      "draw_acc": 0.6666666666666666,
+      "base_hits": 2,
+      "base_acc": 0.3333333333333333,
+      "net_hits": 2,
+      "net_rate": 0.3333333333333333
+    }
+  },
+  "stress_used_for_selection": false,
+  "fixed_bands": [
+    {
+      "band": [
+        0.35,
+        0.4
+      ],
+      "dev1": {
+        "n": 7,
+        "draw_hits": 2,
+        "draw_acc": 0.2857142857142857,
+        "base_hits": 5,
+        "base_acc": 0.7142857142857143,
+        "net_hits": -3,
+        "net_rate": -0.42857142857142855
+      },
+      "dev2": {
+        "n": 4,
+        "draw_hits": 2,
+        "draw_acc": 0.5,
+        "base_hits": 1,
+        "base_acc": 0.25,
+        "net_hits": 1,
+        "net_rate": 0.25
+      },
+      "stress": {
+        "n": 4,
+        "draw_hits": 2,
+        "draw_acc": 0.5,
+        "base_hits": 2,
+        "base_acc": 0.5,
+        "net_hits": 0,
+        "net_rate": 0.0
+      }
+    },
+    {
+      "band": [
+        0.4,
+        0.45
+      ],
+      "dev1": {
+        "n": 7,
+        "draw_hits": 4,
+        "draw_acc": 0.5714285714285714,
+        "base_hits": 1,
+        "base_acc": 0.14285714285714285,
+        "net_hits": 3,
+        "net_rate": 0.42857142857142855
+      },
+      "dev2": {
+        "n": 8,
+        "draw_hits": 4,
+        "draw_acc": 0.5,
+        "base_hits": 3,
+        "base_acc": 0.375,
+        "net_hits": 1,
+        "net_rate": 0.125
+      },
+      "stress": {
+        "n": 5,
+        "draw_hits": 3,
+        "draw_acc": 0.6,
+        "base_hits": 2,
+        "base_acc": 0.4,
+        "net_hits": 1,
+        "net_rate": 0.2
+      }
+    },
+    {
+      "band": [
+        0.45,
+        0.5
+      ],
+      "dev1": {
+        "n": 5,
+        "draw_hits": 0,
+        "draw_acc": 0.0,
+        "base_hits": 3,
+        "base_acc": 0.6,
+        "net_hits": -3,
+        "net_rate": -0.6
+      },
+      "dev2": {
+        "n": 5,
+        "draw_hits": 2,
+        "draw_acc": 0.4,
+        "base_hits": 3,
+        "base_acc": 0.6,
+        "net_hits": -1,
+        "net_rate": -0.2
+      },
+      "stress": {
+        "n": 2,
+        "draw_hits": 0,
+        "draw_acc": 0.0,
+        "base_hits": 1,
+        "base_acc": 0.5,
+        "net_hits": -1,
+        "net_rate": -0.5
+      }
+    },
+    {
+      "band": [
+        0.5,
+        0.55
+      ],
+      "dev1": {
+        "n": 0,
+        "draw_hits": 0,
+        "draw_acc": null,
+        "base_hits": 0,
+        "base_acc": null,
+        "net_hits": 0,
+        "net_rate": null
+      },
+      "dev2": {
+        "n": 1,
+        "draw_hits": 0,
+        "draw_acc": 0.0,
+        "base_hits": 1,
+        "base_acc": 1.0,
+        "net_hits": -1,
+        "net_rate": -1.0
+      },
+      "stress": {
+        "n": 0,
+        "draw_hits": 0,
+        "draw_acc": null,
+        "base_hits": 0,
+        "base_acc": null,
+        "net_hits": 0,
+        "net_rate": null
+      }
+    },
+    {
+      "band": [
+        0.55,
+        0.6
+      ],
+      "dev1": {
+        "n": 0,
+        "draw_hits": 0,
+        "draw_acc": null,
+        "base_hits": 0,
+        "base_acc": null,
+        "net_hits": 0,
+        "net_rate": null
+      },
+      "dev2": {
+        "n": 0,
+        "draw_hits": 0,
+        "draw_acc": null,
+        "base_hits": 0,
+        "base_acc": null,
+        "net_hits": 0,
+        "net_rate": null
+      },
+      "stress": {
+        "n": 0,
+        "draw_hits": 0,
+        "draw_acc": null,
+        "base_hits": 0,
+        "base_acc": null,
+        "net_hits": 0,
+        "net_rate": null
+      }
+    },
+    {
+      "band": [
+        0.35,
+        0.45
+      ],
+      "dev1": {
+        "n": 14,
+        "draw_hits": 6,
+        "draw_acc": 0.42857142857142855,
+        "base_hits": 6,
+        "base_acc": 0.42857142857142855,
+        "net_hits": 0,
+        "net_rate": 0.0
+      },
+      "dev2": {
+        "n": 12,
+        "draw_hits": 6,
+        "draw_acc": 0.5,
+        "base_hits": 4,
+        "base_acc": 0.3333333333333333,
+        "net_hits": 2,
+        "net_rate": 0.16666666666666666
+      },
+      "stress": {
+        "n": 9,
+        "draw_hits": 5,
+        "draw_acc": 0.5555555555555556,
+        "base_hits": 4,
+        "base_acc": 0.4444444444444444,
+        "net_hits": 1,
+        "net_rate": 0.1111111111111111
+      }
+    },
+    {
+      "band": [
+        0.4,
+        0.5
+      ],
+      "dev1": {
+        "n": 12,
+        "draw_hits": 4,
+        "draw_acc": 0.3333333333333333,
+        "base_hits": 4,
+        "base_acc": 0.3333333333333333,
+        "net_hits": 0,
+        "net_rate": 0.0
+      },
+      "dev2": {
+        "n": 13,
+        "draw_hits": 6,
+        "draw_acc": 0.46153846153846156,
+        "base_hits": 6,
+        "base_acc": 0.46153846153846156,
+        "net_hits": 0,
+        "net_rate": 0.0
+      },
+      "stress": {
+        "n": 7,
+        "draw_hits": 3,
+        "draw_acc": 0.42857142857142855,
+        "base_hits": 3,
+        "base_acc": 0.42857142857142855,
+        "net_hits": 0,
+        "net_rate": 0.0
+      }
+    },
+    {
+      "band": [
+        0.45,
+        0.55
+      ],
+      "dev1": {
+        "n": 5,
+        "draw_hits": 0,
+        "draw_acc": 0.0,
+        "base_hits": 3,
+        "base_acc": 0.6,
+        "net_hits": -3,
+        "net_rate": -0.6
+      },
+      "dev2": {
+        "n": 6,
+        "draw_hits": 2,
+        "draw_acc": 0.3333333333333333,
+        "base_hits": 4,
+        "base_acc": 0.6666666666666666,
+        "net_hits": -2,
+        "net_rate": -0.3333333333333333
+      },
+      "stress": {
+        "n": 2,
+        "draw_hits": 0,
+        "draw_acc": 0.0,
+        "base_hits": 1,
+        "base_acc": 0.5,
+        "net_hits": -1,
+        "net_rate": -0.5
+      }
+    },
+    {
+      "band": [
+        0.5,
+        0.6
+      ],
+      "dev1": {
+        "n": 0,
+        "draw_hits": 0,
+        "draw_acc": null,
+        "base_hits": 0,
+        "base_acc": null,
+        "net_hits": 0,
+        "net_rate": null
+      },
+      "dev2": {
+        "n": 1,
+        "draw_hits": 0,
+        "draw_acc": 0.0,
+        "base_hits": 1,
+        "base_acc": 1.0,
+        "net_hits": -1,
+        "net_rate": -1.0
+      },
+      "stress": {
+        "n": 0,
+        "draw_hits": 0,
+        "draw_acc": null,
+        "base_hits": 0,
+        "base_acc": null,
+        "net_hits": 0,
+        "net_rate": null
+      }
+    }
+  ],
+  "note": "Frozen V3.5.1 draw logistic score; only pmax eligibility interval is varied."
+}
