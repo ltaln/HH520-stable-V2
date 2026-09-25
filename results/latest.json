@@ -1,0 +1,471 @@
+{
+  "mode": "OFFLINE_EXISTING_10027S_CACHE_ONLY",
+  "new_collection": false,
+  "goal_timing_used": false,
+  "periods": {
+    "dev1": [
+      "2026-05-01",
+      "2026-06-30"
+    ],
+    "dev2": [
+      "2026-07-01",
+      "2026-08-31"
+    ],
+    "stress": [
+      "2026-09-01",
+      "2026-09-20"
+    ]
+  },
+  "load_summary": {
+    "cache_files": 147,
+    "parsed_files": 143,
+    "rows": {
+      "dev1": 538,
+      "dev2": 592,
+      "stress": 302
+    }
+  },
+  "field_groups": {
+    "DRAW_FUSION": {
+      "num": [
+        "draw_odds",
+        "fusion_draw",
+        "advantage_diff",
+        "draw_composite_score"
+      ],
+      "cat": []
+    },
+    "HANDICAP_WATER": {
+      "num": [
+        "home_water",
+        "away_water"
+      ],
+      "cat": [
+        "handicap_side",
+        "handicap_primary_line",
+        "handicap_primary_water",
+        "handicap_secondary_line",
+        "handicap_secondary_water",
+        "water_level"
+      ]
+    },
+    "META_STRUCTURE": {
+      "num": [
+        "rating_score"
+      ],
+      "cat": [
+        "odds_judgement",
+        "advantage_side",
+        "structure",
+        "consistency",
+        "pattern",
+        "rating",
+        "risk"
+      ]
+    },
+    "VALUE": {
+      "num": [
+        "ev",
+        "kelly"
+      ],
+      "cat": []
+    }
+  },
+  "field_availability": {
+    "DRAW_FUSION": {
+      "draw_odds": {
+        "present": 814,
+        "coverage": 0.5684357541899442
+      },
+      "fusion_draw": {
+        "present": 814,
+        "coverage": 0.5684357541899442
+      },
+      "advantage_diff": {
+        "present": 814,
+        "coverage": 0.5684357541899442
+      },
+      "draw_composite_score": {
+        "present": 814,
+        "coverage": 0.5684357541899442
+      }
+    },
+    "HANDICAP_WATER": {
+      "home_water": {
+        "present": 0,
+        "coverage": 0.0
+      },
+      "away_water": {
+        "present": 0,
+        "coverage": 0.0
+      },
+      "handicap_side": {
+        "present": 814,
+        "coverage": 0.5684357541899442
+      },
+      "handicap_primary_line": {
+        "present": 814,
+        "coverage": 0.5684357541899442
+      },
+      "handicap_primary_water": {
+        "present": 814,
+        "coverage": 0.5684357541899442
+      },
+      "handicap_secondary_line": {
+        "present": 814,
+        "coverage": 0.5684357541899442
+      },
+      "handicap_secondary_water": {
+        "present": 814,
+        "coverage": 0.5684357541899442
+      },
+      "water_level": {
+        "present": 0,
+        "coverage": 0.0
+      }
+    },
+    "META_STRUCTURE": {
+      "rating_score": {
+        "present": 814,
+        "coverage": 0.5684357541899442
+      },
+      "odds_judgement": {
+        "present": 0,
+        "coverage": 0.0
+      },
+      "advantage_side": {
+        "present": 814,
+        "coverage": 0.5684357541899442
+      },
+      "structure": {
+        "present": 814,
+        "coverage": 0.5684357541899442
+      },
+      "consistency": {
+        "present": 814,
+        "coverage": 0.5684357541899442
+      },
+      "pattern": {
+        "present": 814,
+        "coverage": 0.5684357541899442
+      },
+      "rating": {
+        "present": 814,
+        "coverage": 0.5684357541899442
+      },
+      "risk": {
+        "present": 814,
+        "coverage": 0.5684357541899442
+      }
+    },
+    "VALUE": {
+      "ev": {
+        "present": 1319,
+        "coverage": 0.9210893854748603
+      },
+      "kelly": {
+        "present": 1319,
+        "coverage": 0.9210893854748603
+      }
+    }
+  },
+  "methodology": {
+    "selection": "symmetric May-Jun <-> Jul-Aug crossfit",
+    "stress": "Sep1-20 untouched until final selected candidate",
+    "ft": "multinomial residual calibration on top of formal H/D/A probabilities; compare locked current FT decision",
+    "htft": "9-class residual calibration on top of formal 9-cell HTFT distribution",
+    "score": "ridge residual correction of formal home/away Poisson lambdas; exact-score ranking",
+    "missing": "numeric mean+missing indicator; categorical train-vocabulary one-hot",
+    "promotion": "research only; no Stable modification"
+  },
+  "ft": {
+    "candidate_count": 45,
+    "safe_count": 0,
+    "selected_on_dev_only": {
+      "groups": [
+        "HANDICAP_WATER"
+      ],
+      "l2": 0.1,
+      "dev2_from_dev1": {
+        "n": 592,
+        "top1_hits": 325,
+        "top1_accuracy": 0.5489864864864865,
+        "top2_hits": 481,
+        "top2_accuracy": 0.8125,
+        "baseline_current": {
+          "n": 592,
+          "top1_hits": 330,
+          "top1_accuracy": 0.5574324324324325
+        },
+        "net_top1": -5
+      },
+      "dev1_from_dev2": {
+        "n": 538,
+        "top1_hits": 274,
+        "top1_accuracy": 0.5092936802973977,
+        "top2_hits": 414,
+        "top2_accuracy": 0.7695167286245354,
+        "baseline_current": {
+          "n": 538,
+          "top1_hits": 274,
+          "top1_accuracy": 0.5092936802973977
+        },
+        "net_top1": 0
+      },
+      "min_net": -5,
+      "total_net": -5
+    },
+    "stress": {
+      "n": 302,
+      "top1_hits": 159,
+      "top1_accuracy": 0.5264900662251656,
+      "top2_hits": 233,
+      "top2_accuracy": 0.7715231788079471,
+      "baseline_current": {
+        "n": 302,
+        "top1_hits": 159,
+        "top1_accuracy": 0.5264900662251656
+      },
+      "net_top1": 0
+    },
+    "feature_names": [
+      "home_water",
+      "home_water__missing",
+      "away_water",
+      "away_water__missing",
+      "handicap_side=away",
+      "handicap_side=home",
+      "handicap_side=__OTHER",
+      "handicap_primary_line=半一",
+      "handicap_primary_line=平半",
+      "handicap_primary_line=__OTHER",
+      "handicap_primary_water=low",
+      "handicap_primary_water=__OTHER",
+      "handicap_secondary_line=一球",
+      "handicap_secondary_line=半球",
+      "handicap_secondary_line=__OTHER",
+      "handicap_secondary_water=high",
+      "handicap_secondary_water=__OTHER",
+      "water_level=__OTHER"
+    ],
+    "stress_used_for_selection": false
+  },
+  "htft": {
+    "candidate_count": 45,
+    "safe_count": 0,
+    "selected_on_dev_only": {
+      "groups": [
+        "HANDICAP_WATER",
+        "VALUE"
+      ],
+      "l2": 8.0,
+      "dev2_from_dev1": {
+        "n": 592,
+        "top1_hits": 192,
+        "top1_accuracy": 0.32432432432432434,
+        "top2_hits": 301,
+        "top2_accuracy": 0.5084459459459459,
+        "top3_hits": 402,
+        "top3_accuracy": 0.6790540540540541,
+        "baseline_current": {
+          "n": 592,
+          "top1_hits": 203,
+          "top1_accuracy": 0.34290540540540543,
+          "top2_hits": 312,
+          "top2_accuracy": 0.527027027027027,
+          "top3_hits": 398,
+          "top3_accuracy": 0.6722972972972973
+        },
+        "net_top1": -11,
+        "net_top2": -11,
+        "net_top3": 4
+      },
+      "dev1_from_dev2": {
+        "n": 538,
+        "top1_hits": 168,
+        "top1_accuracy": 0.31226765799256506,
+        "top2_hits": 276,
+        "top2_accuracy": 0.5130111524163569,
+        "top3_hits": 372,
+        "top3_accuracy": 0.6914498141263941,
+        "baseline_current": {
+          "n": 538,
+          "top1_hits": 173,
+          "top1_accuracy": 0.3215613382899628,
+          "top2_hits": 287,
+          "top2_accuracy": 0.533457249070632,
+          "top3_hits": 357,
+          "top3_accuracy": 0.6635687732342007
+        },
+        "net_top1": -5,
+        "net_top2": -11,
+        "net_top3": 15
+      },
+      "min_top1": -11,
+      "min_top2": -11,
+      "min_top3": 4,
+      "total_top2": -22
+    },
+    "stress": {
+      "n": 302,
+      "top1_hits": 94,
+      "top1_accuracy": 0.31125827814569534,
+      "top2_hits": 149,
+      "top2_accuracy": 0.49337748344370863,
+      "top3_hits": 193,
+      "top3_accuracy": 0.6390728476821192,
+      "baseline_current": {
+        "n": 302,
+        "top1_hits": 94,
+        "top1_accuracy": 0.31125827814569534,
+        "top2_hits": 147,
+        "top2_accuracy": 0.4867549668874172,
+        "top3_hits": 195,
+        "top3_accuracy": 0.6456953642384106
+      },
+      "net_top1": 0,
+      "net_top2": 2,
+      "net_top3": -2
+    },
+    "feature_names": [
+      "home_water",
+      "home_water__missing",
+      "away_water",
+      "away_water__missing",
+      "ev",
+      "ev__missing",
+      "kelly",
+      "kelly__missing",
+      "handicap_side=away",
+      "handicap_side=home",
+      "handicap_side=__OTHER",
+      "handicap_primary_line=半一",
+      "handicap_primary_line=平半",
+      "handicap_primary_line=__OTHER",
+      "handicap_primary_water=low",
+      "handicap_primary_water=__OTHER",
+      "handicap_secondary_line=一球",
+      "handicap_secondary_line=半球",
+      "handicap_secondary_line=__OTHER",
+      "handicap_secondary_water=high",
+      "handicap_secondary_water=__OTHER",
+      "water_level=__OTHER"
+    ],
+    "stress_used_for_selection": false
+  },
+  "score": {
+    "candidate_count": 135,
+    "safe_count": 0,
+    "selected_on_dev_only": {
+      "groups": [
+        "HANDICAP_WATER"
+      ],
+      "l2": 3.0,
+      "shrink": 0.5,
+      "dev2_from_dev1": {
+        "n": 592,
+        "top1_hits": 65,
+        "top1_accuracy": 0.1097972972972973,
+        "top2_hits": 137,
+        "top2_accuracy": 0.23141891891891891,
+        "top3_hits": 195,
+        "top3_accuracy": 0.3293918918918919,
+        "top5_hits": 275,
+        "top5_accuracy": 0.46452702702702703,
+        "baseline_current": {
+          "n": 592,
+          "top1_hits": 66,
+          "top1_accuracy": 0.11148648648648649,
+          "top2_hits": 141,
+          "top2_accuracy": 0.23817567567567569,
+          "top3_hits": 196,
+          "top3_accuracy": 0.3310810810810811,
+          "top5_hits": 283,
+          "top5_accuracy": 0.4780405405405405
+        },
+        "net_top1": -1,
+        "net_top2": -4,
+        "net_top3": -1,
+        "net_top5": -8
+      },
+      "dev1_from_dev2": {
+        "n": 538,
+        "top1_hits": 73,
+        "top1_accuracy": 0.13568773234200743,
+        "top2_hits": 138,
+        "top2_accuracy": 0.25650557620817843,
+        "top3_hits": 183,
+        "top3_accuracy": 0.34014869888475835,
+        "top5_hits": 272,
+        "top5_accuracy": 0.5055762081784386,
+        "baseline_current": {
+          "n": 538,
+          "top1_hits": 84,
+          "top1_accuracy": 0.15613382899628253,
+          "top2_hits": 142,
+          "top2_accuracy": 0.26394052044609667,
+          "top3_hits": 190,
+          "top3_accuracy": 0.35315985130111527,
+          "top5_hits": 280,
+          "top5_accuracy": 0.5204460966542751
+        },
+        "net_top1": -11,
+        "net_top2": -4,
+        "net_top3": -7,
+        "net_top5": -8
+      },
+      "min_top1": -11,
+      "min_top2": -4,
+      "total_top2": -8,
+      "total_top1": -12
+    },
+    "stress": {
+      "n": 302,
+      "top1_hits": 35,
+      "top1_accuracy": 0.11589403973509933,
+      "top2_hits": 63,
+      "top2_accuracy": 0.20860927152317882,
+      "top3_hits": 91,
+      "top3_accuracy": 0.30132450331125826,
+      "top5_hits": 138,
+      "top5_accuracy": 0.45695364238410596,
+      "baseline_current": {
+        "n": 302,
+        "top1_hits": 38,
+        "top1_accuracy": 0.12582781456953643,
+        "top2_hits": 67,
+        "top2_accuracy": 0.22185430463576158,
+        "top3_hits": 90,
+        "top3_accuracy": 0.2980132450331126,
+        "top5_hits": 139,
+        "top5_accuracy": 0.4602649006622517
+      },
+      "net_top1": -3,
+      "net_top2": -4,
+      "net_top3": 1,
+      "net_top5": -1
+    },
+    "feature_names": [
+      "home_water",
+      "home_water__missing",
+      "away_water",
+      "away_water__missing",
+      "handicap_side=away",
+      "handicap_side=home",
+      "handicap_side=__OTHER",
+      "handicap_primary_line=半一",
+      "handicap_primary_line=平半",
+      "handicap_primary_line=__OTHER",
+      "handicap_primary_water=low",
+      "handicap_primary_water=__OTHER",
+      "handicap_secondary_line=一球",
+      "handicap_secondary_line=半球",
+      "handicap_secondary_line=__OTHER",
+      "handicap_secondary_water=high",
+      "handicap_secondary_water=__OTHER",
+      "water_level=__OTHER"
+    ],
+    "stress_used_for_selection": false
+  },
+  "promotion_status": "RESEARCH_ONLY_NOT_PROMOTED"
+}
