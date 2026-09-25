@@ -20,17 +20,7 @@ def _base_match():
     }
 
 
-def _timing():
-    return {
-        "available":True,
-        "timing_mode":"six_bin",
-        "source_domain":"example.test",
-        "home":{"first_half_gf_signal":0.40,"first_half_ga_signal":0.42},
-        "away":{"first_half_gf_signal":0.46,"first_half_ga_signal":0.44},
-    }
-
-
-def test_phase2_draw_resolver_only_operates_in_balanced_side_zone():
+def test_formal_draw_resolver_only_operates_in_balanced_side_zone():
     m=_base_match()
     p=probability_layer(m)
     v=value_layer(m,p)
@@ -40,7 +30,7 @@ def test_phase2_draw_resolver_only_operates_in_balanced_side_zone():
         assert d["ft_grade"]=="DRAW_STANDARD"
         assert d["draw_rule_type"]=="CROSS_FIT_LOGISTIC_V1"
         assert d["draw_rule_metrics"]["score"] >= 0.38
-        assert p["pmax"] < 0.55
+        assert p["pmax"] <= 0.45
     else:
         assert d["resolved_direction"]==p["direction"]
 
@@ -54,40 +44,40 @@ def test_authorized_strong_side_cannot_be_overridden_by_draw_resolver():
     assert d["ft_direction_authorized"] is True
 
 
-def test_htft_requires_goal_timing():
+def test_htft_requires_no_new_goal_timing_collection():
     m=_base_match()
     p=probability_layer(m)
     h=htft_layer(p,m)
-    assert h["valid"] is False
-    assert h["status"]=="PASS"
-    assert h["reason"]=="goal_timing_required_or_invalid"
+    assert h["valid"] is True
+    assert h["status"]=="READY"
+    assert h["timing_used"] is False
+    assert h["new_timing_collection_required"] is False
+    assert h["model"]=="INDEPENDENT_POISSON_SPLIT_HTFT_V3_EXISTING_DATA"
+    assert h["home_half_share"]==0.36
+    assert h["away_half_share"]==0.44
+    assert len(h["top"])>=2
 
 
-def test_htft_is_independent_when_timing_available():
-    m=_base_match(); m["goal_timing"]=_timing()
+def test_htft_ignores_optional_goal_timing_payload():
+    m=_base_match()
+    m["goal_timing"]={
+        "available":True,
+        "home":{"first_half_gf_signal":0.9},
+        "away":{"first_half_gf_signal":0.1},
+    }
     p=probability_layer(m)
     h=htft_layer(p,m)
     assert h["valid"] is True
-    assert h["timing_used"] is True
-    assert h["model"]=="INDEPENDENT_POISSON_SPLIT_HTFT_V2_TIMING_REQUIRED"
-    assert len(h["top"])>=2
-    assert h["ft_core_unchanged"] is True
-    assert 0.28 <= h["home_half_share"] <= 0.44
-    assert 0.36 <= h["away_half_share"] <= 0.52
+    assert h["timing_used"] is False
+    assert h["home_half_share"]==0.36
+    assert h["away_half_share"]==0.44
 
 
-def test_builder_does_not_fill_htft_when_timing_missing():
+def test_builder_outputs_formal_htft_without_timing():
     row=prepare_match(_base_match())
-    assert row["status"]=="PREDICTED"
-    assert row["htft1"]=="未提供"
-    assert row["htft2"]=="未提供"
-    assert row["score1"]!="未提供"
-
-
-def test_builder_outputs_independent_htft_with_timing():
-    m=_base_match(); m["goal_timing"]=_timing()
-    row=prepare_match(m)
     assert row["status"]=="PREDICTED"
     assert row["htft1"]!="未提供"
     assert row["htft2"]!="未提供"
-    assert row["timing_used"] is True
+    assert row["score1"]!="未提供"
+    assert row["timing_used"] is False
+    assert row["htft_model"]=="INDEPENDENT_POISSON_SPLIT_HTFT_V3_EXISTING_DATA"
