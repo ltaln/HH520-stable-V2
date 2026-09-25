@@ -38,7 +38,7 @@ def build_output_contract(predictions: list[dict]) -> dict:
         "version": "HH520-OUTPUT-V3.5.1", "stable_version": "HH520 Stable V3.5.1",
         "strict": True, "required_columns": OUTPUT_COLUMNS,
         "display_rows": [build_display_row(pred) for pred in predictions],
-        "render_rule": "必须按6列完整输出；>=55%的主/客方向保持侧向校准；低置信侧向区允许历史验证的正式平局解析；比分独立于FT硬锁；HT/FT保持独立；生产链不因外部分时数据阻塞，缺少正式可用输入时半全场显示未提供。",
+        "render_rule": "必须按6列完整输出；>=55%的主/客方向保持侧向校准；低置信侧向区允许历史验证的正式平局解析；比分独立于FT硬锁；HT/FT采用已采集历史半/全场标签冻结的独立模型，不采集新的进球时间数据。",
     }
 
 
