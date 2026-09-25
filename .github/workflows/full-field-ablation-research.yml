@@ -1,0 +1,54 @@
+name: Full Retained-Field Ablation Research
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "field-ablation-requests/*.json"
+
+permissions:
+  contents: write
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - name: Restore existing collection cache only
+        uses: actions/cache/restore@v4
+        with:
+          path: cache
+          key: hh520-field-ablation-readonly-${{ github.run_id }}
+          restore-keys: |
+            hh520-collection-v1-
+      - name: Run offline retained-field ablation
+        env:
+          HH520_FIELD_ABLATION_OFFLINE_ONLY: "1"
+        run: python scripts/full_field_ablation_research.py
+      - name: Publish research result
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin field-ablation-results || true
+          if git show-ref --verify --quiet refs/remotes/origin/field-ablation-results; then
+            git switch --detach origin/field-ablation-results
+          else
+            git switch --orphan field-ablation-results
+            git rm -rf . || true
+          fi
+          mkdir -p results
+          cp "$GITHUB_WORKSPACE/_field_ablation_full.json" results/latest.json
+          git add results/latest.json
+          git commit -m "research: retained-field ablation result" || true
+          git push origin HEAD:field-ablation-results --force
