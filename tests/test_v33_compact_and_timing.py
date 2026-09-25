@@ -62,4 +62,4 @@ def test_v351_formal_htft_ignores_goal_timing_payload():
     assert out["valid"] is True
     assert out["timing_used"] is False
     assert out["ft_core_unchanged"] is True
-    assert out["model"]=="INDEPENDENT_POISSON_SPLIT_HTFT_V2_TIMING_REQUIRED"
+    assert out["model"]=="INDEPENDENT_POISSON_SPLIT_HTFT_V3_EXISTING_DATA"
