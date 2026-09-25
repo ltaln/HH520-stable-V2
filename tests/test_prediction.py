@@ -20,7 +20,7 @@ def test_without_gpt_returns_deterministic_prediction():
     result=build_predictions([fixture_match()])[0]
     assert result["status"]=="PREDICTED"
     assert result["score1"]!="未提供" and result["score2"]!="未提供"
-    assert result["htft1"]=="未提供" and result["htft2"]=="未提供"
+    assert result["htft1"]!="未提供" and result["htft2"]!="未提供"
     assert result["total_goals"]!="未提供"
     assert result["stable_version"]=="HH520 Stable V3.5.1"
     assert result["state"] in {"CONFIRM","BALANCED","TAIL_ALERT","PASS"}
@@ -31,7 +31,7 @@ def test_finished_match_is_skipped():
     assert build_predictions([match])[0]["status"]=="SKIP"
 
 
-def test_model_input_contains_locked_v35_phase2_prediction():
+def test_model_input_contains_locked_v351_prediction():
     payload=build_model_input([fixture_match()])
     assert len(payload)==1
     assert payload[0]["gpt_role"]=="EXPLANATION_ONLY"
