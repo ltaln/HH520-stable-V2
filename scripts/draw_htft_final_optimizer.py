@@ -509,9 +509,9 @@ def htft_search(cache_rows,cache_meta,data):
             "formal_base_promotion_recommended":True,
             "goal_timing_policy":{
                 "historical_timing_collection":False,
-                "formal_prediction_day_timing_required":True,
-                "timing_role":"bounded first-half intensity adjustment only",
-                "missing_or_abnormal_timing":"HTFT_PASS",
+                "formal_prediction_day_timing_required":False,
+                "timing_role":"not_used_in_formal_model",
+                "missing_or_abnormal_timing":"NOT_APPLICABLE",
                 "may_change_ft_core":False
             }}
 
