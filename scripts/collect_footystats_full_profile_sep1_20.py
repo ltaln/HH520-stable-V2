@@ -23,7 +23,7 @@ def credit_balance():
         return None
 
 def scrape(url):
-    payload={"url":url,"formats":["markdown"],"onlyMainContent":False,"maxAge":0}
+    payload={"url":url,"formats":["markdown"],"onlyMainContent":False,"maxAge":604800000}
     for i in range(4):
         try:
             r=requests.post(FC+"/scrape",headers=H,json=payload,timeout=180)
