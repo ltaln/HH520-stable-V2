@@ -52,7 +52,7 @@ def score(model, rows):
     X=np.column_stack([np.ones(len(X)),X])
     return 1/(1+np.exp(-np.clip(X@model["w"],-30,30)))
 
-def evaluate(rows,scores,threshold,base_prob_min,base_prob_max,pd_min,pa_min,lambda_gap_max,require_second_mutable):
+def evaluate(rows,scores,threshold,base_prob_min,base_prob_max,pd_min,pa_min,lambda_gap_max,second_prob_max,target_gap_max,require_second_mutable):
     base_top2_hits=new_top2_hits=0
     target_n=target_base=target_new=0
     triggers=trigger_hits=0
@@ -78,7 +78,9 @@ def evaluate(rows,scores,threshold,base_prob_min,base_prob_max,pd_min,pa_min,lam
             base.get(TARGET,0.0)<=base_prob_max and
             r["features"]["pd"]>=pd_min and
             r["features"]["pa"]>=pa_min and
-            r["features"]["lambda_gap"]<=lambda_gap_max
+            r["features"]["lambda_gap"]<=lambda_gap_max and
+            base.get(top2,0.0)<=second_prob_max and
+            (base.get(top2,0.0)-base.get(TARGET,0.0))<=target_gap_max
         )
         if require_second_mutable:
             eligible=eligible and top2 not in PROTECTED
@@ -138,26 +140,29 @@ def main():
               for pdmin in (0.20,0.22,0.24,0.26):
                 for pamin in (0.30,0.35,0.40):
                   for lgmax in (0.40,0.60,0.80):
-                    e1=evaluate(dev1,s1,th,bpmin,bpmax,pdmin,pamin,lgmax,True)
-                    e2=evaluate(dev2,s2,th,bpmin,bpmax,pdmin,pamin,lgmax,True)
-                    if e1["protected_loss"] or e2["protected_loss"]: continue
-                    # Require no overall Top2 loss in either split.
-                    if e1["top2_net_hits"]<0 or e2["top2_net_hits"]<0: continue
-                    # Require at least one target gain in both splits.
-                    if e1["target_new_hits"]<=e1["target_base_hits"] or e2["target_new_hits"]<=e2["target_base_hits"]: continue
-                    # High-specificity: minimum precision across splits >= 20%.
-                    p1=e1["trigger_precision"] or 0; p2=e2["trigger_precision"] or 0
-                    if min(p1,p2)<0.20: continue
-                    candidates.append({
-                      "feature_set":fs_name,"l2":l2,"threshold":th,
-                      "base_prob_min":bpmin,"base_prob_max":bpmax,
-                      "pd_min":pdmin,"pa_min":pamin,"lambda_gap_max":lgmax,
-                      "dev1":e1,"dev2":e2,
-                      "min_precision":min(p1,p2),
-                      "total_net":e1["top2_net_hits"]+e2["top2_net_hits"],
-                      "total_target_gain":(e1["target_new_hits"]-e1["target_base_hits"])+(e2["target_new_hits"]-e2["target_base_hits"]),
-                      "total_triggers":e1["triggers"]+e2["triggers"],
-                    })
+                    for spmax in (0.12,0.16,0.20,0.24,0.28):
+                      for gapmax in (0.01,0.02,0.04,0.06,0.08,0.12):
+                        e1=evaluate(dev1,s1,th,bpmin,bpmax,pdmin,pamin,lgmax,spmax,gapmax,True)
+                        e2=evaluate(dev2,s2,th,bpmin,bpmax,pdmin,pamin,lgmax,spmax,gapmax,True)
+                        if e1["protected_loss"] or e2["protected_loss"]: continue
+                        # Require no overall Top2 loss in either split.
+                        if e1["top2_net_hits"]<0 or e2["top2_net_hits"]<0: continue
+                        # Require at least one target gain in both splits.
+                        if e1["target_new_hits"]<=e1["target_base_hits"] or e2["target_new_hits"]<=e2["target_base_hits"]: continue
+                        # High-specificity: minimum precision across splits >= 25%.
+                        p1=e1["trigger_precision"] or 0; p2=e2["trigger_precision"] or 0
+                        if min(p1,p2)<0.25: continue
+                        candidates.append({
+                          "feature_set":fs_name,"l2":l2,"threshold":th,
+                          "base_prob_min":bpmin,"base_prob_max":bpmax,
+                          "pd_min":pdmin,"pa_min":pamin,"lambda_gap_max":lgmax,
+                          "second_prob_max":spmax,"target_gap_max":gapmax,
+                          "dev1":e1,"dev2":e2,
+                          "min_precision":min(p1,p2),
+                          "total_net":e1["top2_net_hits"]+e2["top2_net_hits"],
+                          "total_target_gain":(e1["target_new_hits"]-e1["target_base_hits"])+(e2["target_new_hits"]-e2["target_base_hits"]),
+                          "total_triggers":e1["triggers"]+e2["triggers"],
+                        })
     candidates.sort(key=lambda x:(x["total_net"],x["total_target_gain"],x["min_precision"],-x["total_triggers"]),reverse=True)
     best=candidates[0] if candidates else None
 
@@ -168,12 +173,13 @@ def main():
         ss=score(model,stress)
         stress_result=evaluate(
           stress,ss,best["threshold"],best["base_prob_min"],best["base_prob_max"],
-          best["pd_min"],best["pa_min"],best["lambda_gap_max"],True
+          best["pd_min"],best["pa_min"],best["lambda_gap_max"],best["second_prob_max"],best["target_gap_max"],True
         )
         frozen={
           "feature_set":best["feature_set"],"features":list(feats),"l2":best["l2"],
           "threshold":best["threshold"],"base_prob_min":best["base_prob_min"],"base_prob_max":best["base_prob_max"],
           "pd_min":best["pd_min"],"pa_min":best["pa_min"],"lambda_gap_max":best["lambda_gap_max"],
+          "second_prob_max":best["second_prob_max"],"target_gap_max":best["target_gap_max"],
           "mean":[float(x) for x in model["mean"]],
           "std":[float(x) for x in model["std"]],
           "weights":[float(x) for x in model["w"]],
@@ -197,7 +203,7 @@ def main():
     Path("_draw_away_high_specificity.json").write_text(json.dumps(out,ensure_ascii=False,indent=2),encoding="utf-8")
     print(json.dumps({
       "sample_counts":out["sample_counts"],"candidate_count":len(candidates),
-      "selected":None if best is None else {k:best[k] for k in ("feature_set","l2","threshold","base_prob_min","base_prob_max","pd_min","pa_min","lambda_gap_max","min_precision","total_net","total_target_gain","total_triggers")},
+      "selected":None if best is None else {k:best[k] for k in ("feature_set","l2","threshold","base_prob_min","base_prob_max","pd_min","pa_min","lambda_gap_max","second_prob_max","target_gap_max","min_precision","total_net","total_target_gain","total_triggers")},
       "dev1":None if best is None else {k:best["dev1"][k] for k in ("top2_net_hits","target_base_hits","target_new_hits","trigger_precision","triggers","gains","losses")},
       "dev2":None if best is None else {k:best["dev2"][k] for k in ("top2_net_hits","target_base_hits","target_new_hits","trigger_precision","triggers","gains","losses")},
       "stress":stress_result
