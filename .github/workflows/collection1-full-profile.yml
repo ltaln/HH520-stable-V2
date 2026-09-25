@@ -1,0 +1,55 @@
+name: Collection 1 FootyStats Full Profile Sep1-20
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "collection1-requests/*.json"
+
+permissions:
+  contents: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - name: Restore HH520 cache
+        uses: actions/cache/restore@v4
+        with:
+          path: cache
+          key: collection1-hh520-${{ github.run_id }}
+          restore-keys: |
+            hh520-collection-v1-
+      - name: Fetch prior FootyStats mapping result
+        run: |
+          git fetch origin goal-timing-results:refs/remotes/origin/goal-timing-results
+          git show origin/goal-timing-results:results/footystats-sep1-20-v2.json > _timing_source.json
+      - name: Collect full profiles
+        env:
+          FIRECRAWL_API_KEY_BACKUP: ${{ secrets.FIRECRAWL_API_KEY_BACKUP }}
+        run: python scripts/collect_footystats_full_profile_sep1_20.py
+      - name: Publish
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin collection1-results || true
+          if git show-ref --verify --quiet refs/remotes/origin/collection1-results; then
+            git switch --detach origin/collection1-results
+          else
+            git switch --orphan collection1-results
+            git rm -rf . || true
+          fi
+          mkdir -p results
+          cp "$GITHUB_WORKSPACE/_footystats_full_profile_sep1_20.json" results/full-profile-sep1-20.json
+          git add results/full-profile-sep1-20.json
+          git commit -m "research: Collection 1 full FootyStats profiles" || true
+          git push origin HEAD:collection1-results --force
