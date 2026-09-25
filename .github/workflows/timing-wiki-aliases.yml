@@ -1,0 +1,31 @@
+name: Timing Wiki Aliases
+on:
+  push:
+    branches: [main]
+    paths: ["timing-wiki-requests/*.json"]
+permissions: {contents: write}
+jobs:
+  aliases:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install requests
+      - name: Fetch prep
+        shell: bash
+        run: |
+          git fetch origin timing-research-results
+          git show origin/timing-research-results:results/prep.json > _timing_prep_input.json
+      - run: python scripts/timing_wiki_aliases.py
+      - name: Publish
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin timing-research-results
+          git switch --detach origin/timing-research-results
+          cp "$GITHUB_WORKSPACE/_wiki_aliases.json" results/wiki-aliases.json
+          git add results/wiki-aliases.json
+          git commit -m "research: timing wiki aliases" || true
+          git push origin HEAD:timing-research-results --force
