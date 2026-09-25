@@ -1,4 +1,4 @@
-"""HH520 Stable V3.5 Phase 2 deterministic prediction assembly."""
+"""HH520 Stable V3.5.1 deterministic prediction assembly."""
 import re
 from analysis.match_analysis import analyze_match
 
@@ -15,7 +15,7 @@ def prepare_match(match):
         "score1": MISSING, "score2": MISSING, "htft1": MISSING, "htft2": MISSING,
         "total_goals": MISSING, "confidence": 0, "status": "PASS",
         "reason": "无有效市场概率", "direction": None, "alternate_direction": None,
-        "state": "PASS", "stable_version": "HH520 Stable V3.5 Phase 2",
+        "state": "PASS", "stable_version": "HH520 Stable V3.5.1",
     }
     if SCORE.search(str(match.get("result", ""))):
         result.update(status="SKIP", reason="已有比分，不作为赛前预测")
@@ -77,7 +77,7 @@ def prepare_match(match):
     htft_top = consistency.get("htft_top", [])
     score_top = consistency.get("score_top", [])
     if len(score_top) < 2:
-        result.update(status="PASS", reason="V3.5 Phase 2 独立比分输出不完整")
+        result.update(status="PASS", reason="V3.5.1 独立比分输出不完整")
         return result
 
     totals = analysis["score"].get("top_totals", [])
@@ -118,9 +118,9 @@ def prepare_match(match):
             "BALANCED": "FT保留但可靠度有限，按均衡处理",
             "TAIL_ALERT": "FT方向存在明显尾部或跨层风险",
             "PASS": "当前结构仅供参考，不作为强方向",
-        }.get(effective_tier, "V3.5 Phase 2结构输出")
+        }.get(effective_tier, "V3.5.1结构输出")
     if not htft_available:
-        result["reason"] += "；Goal Timing缺失或异常，本场HT/FT按规则PASS"
+        result["reason"] += "；生产链未启用外部分时数据，本场HT/FT按规则PASS"
     return result
 
 
@@ -140,8 +140,8 @@ def build_model_input(matches):
             "analysis": {k: analysis[k] for k in ("probability","decision","calibration","consistency","htft","score")},
             "locked_prediction": {key: prepared[key] for key in (
                 "direction","alternate_direction","state","score1","score2","htft1","htft2","total_goals")},
-            "stable_version": "HH520 Stable V3.5 Phase 2",
-            "source_contract": "HH520_10027s_PLUS_FORMAL_GOAL_TIMING_FOR_HTFT_ONLY",
+            "stable_version": "HH520 Stable V3.5.1",
+            "source_contract": "HH520_10027s_PRODUCTION_WITH_OPTIONAL_RESEARCH_TIMING",
             "excluded_source_fields": ["建议下注","是否下注","page_prediction"],
             "gpt_role": "EXPLANATION_ONLY",
         })
