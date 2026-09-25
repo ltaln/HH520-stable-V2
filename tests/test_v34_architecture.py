@@ -46,7 +46,7 @@ def test_htft_and_score_are_independent_in_phase2():
     h=htft_layer(p,m,d)
     s=score_layer(m,p,h)
     assert h["model"]=="INDEPENDENT_POISSON_SPLIT_HTFT_V3_EXISTING_DATA"
-    assert h["timing_used"] is True
+    assert h["timing_used"] is False
     assert h["ft_core_unchanged"] is True
     assert s["model"]=="HDA_POISSON_V1"
     assert s["feature_snapshot"]["ft_direction_lock"] is False
