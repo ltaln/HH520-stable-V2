@@ -1,0 +1,27 @@
+name: Firecrawl Scrape Probe
+on:
+  push:
+    branches: [main]
+    paths: ["fc-scrape-probe-requests/*.json"]
+permissions: {contents: write}
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install requests
+      - env:
+          FIRECRAWL_API_KEY_BACKUP: ${{ secrets.FIRECRAWL_API_KEY_BACKUP }}
+        run: python scripts/fc_scrape_probe.py
+      - shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin timing-research-results
+          git switch --detach origin/timing-research-results
+          cp "$GITHUB_WORKSPACE/_fc_scrape_probe.json" results/fc-scrape-probe.json
+          git add results/fc-scrape-probe.json
+          git commit -m "research: Firecrawl scrape probe" || true
+          git push origin HEAD:timing-research-results --force
