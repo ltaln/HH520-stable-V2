@@ -1,0 +1,46 @@
+name: Publish Sep1-20 Match List
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "match-list-requests/*.json"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r requirements.txt
+      - uses: actions/cache/restore@v4
+        with:
+          path: cache
+          key: match-list-${{ github.run_id }}
+          restore-keys: |
+            hh520-collection-v1-
+      - run: python scripts/export_sep1_20_match_list.py
+      - name: Publish
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin match-list-results || true
+          if git show-ref --verify --quiet refs/remotes/origin/match-list-results; then
+            git switch --detach origin/match-list-results
+          else
+            git switch --orphan match-list-results
+            git rm -rf . || true
+          fi
+          mkdir -p results
+          cp "$GITHUB_WORKSPACE/_sep1_20_match_list.json" results/sep1-20.json
+          git add results/sep1-20.json
+          git commit -m "research: publish Sep1-20 match list" || true
+          git push origin HEAD:match-list-results --force
