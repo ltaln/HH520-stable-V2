@@ -13,7 +13,7 @@ SOURCE_NAME = "HH520_10027s"
 def _source_config(date, source=SOURCE):
     normalized = str(source or SOURCE).lower()
     if normalized != SOURCE:
-        raise ValueError("Stable V3.4 只允许 HH520 10027s 作为正式基础数据源")
+        raise ValueError("Stable V3.5.1 只允许 HH520 10027s 作为正式基础数据源")
     return {
         "source": SOURCE,
         "source_name": SOURCE_NAME,
@@ -83,6 +83,6 @@ def collect_date(date: str, force_refresh: bool = False, source: str = SOURCE):
     result["matches"] = matches
     result["goal_timing_summary"] = {
         "enabled": False, "attempted": 0, "available": 0,
-        "formal_chain": False, "reason": "disabled_in_stable_v3_4",
+        "formal_chain": False, "reason": "disabled_in_stable_v3_5_1",
     }
     return result
