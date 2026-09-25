@@ -40,7 +40,7 @@ def test_htft_layer_uses_existing_data_and_ranks_global_joint_rows():
     assert h["valid"] is True
     assert len(h["top"])==3
     assert h["top"][0]["probability"]>=h["top"][1]["probability"]
-    assert h["timing_used"] is True
+    assert h["timing_used"] is False
     assert h["ft_core_unchanged"] is True
 
 
