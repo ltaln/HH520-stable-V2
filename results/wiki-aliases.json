@@ -1,0 +1,1167 @@
+{
+  "AC米兰": {
+    "zh": "AC米兰",
+    "search_titles": [
+      "AC米兰",
+      "AC米蘭足球學院香港",
+      "保罗·马尔蒂尼"
+    ],
+    "en": "AC Milan"
+  },
+  "LASK林茨": {
+    "zh": "LASK林茨",
+    "search_titles": [
+      "林茨竞技体育俱乐部",
+      "奥利弗·格拉斯纳",
+      "格诺特·特劳纳"
+    ],
+    "en": "LASK"
+  },
+  "SBV精英": {
+    "zh": "SBV精英",
+    "search_titles": [
+      "飛燕諾",
+      "鹿特丹精英",
+      "荷兰女子足球甲级联赛"
+    ],
+    "en": "Feyenoord"
+  },
+  "上海海港": {
+    "zh": "上海海港",
+    "search_titles": [
+      "上海海港足球俱乐部",
+      "浦东足球场",
+      "上海德比"
+    ],
+    "en": "Shanghai Port F.C."
+  },
+  "上海申花": {
+    "zh": "上海申花",
+    "search_titles": [
+      "上海申花足球俱乐部",
+      "北京国安9-1上海申花",
+      "上海申花足球俱乐部历史"
+    ],
+    "en": "Shanghai Shenhua F.C."
+  },
+  "不来梅": {
+    "zh": "不来梅",
+    "error": "HTTPError"
+  },
+  "东京FC": {
+    "zh": "东京FC",
+    "error": "HTTPError"
+  },
+  "东京绿茵": {
+    "zh": "东京绿茵",
+    "error": "HTTPError"
+  },
+  "中国亚": {
+    "zh": "中国亚",
+    "error": "HTTPError"
+  },
+  "乌迪内斯": {
+    "zh": "乌迪内斯",
+    "error": "HTTPError"
+  },
+  "亚特兰大": {
+    "zh": "亚特兰大",
+    "error": "HTTPError"
+  },
+  "京都": {
+    "zh": "京都",
+    "error": "HTTPError"
+  },
+  "仁川联": {
+    "zh": "仁川联",
+    "error": "HTTPError"
+  },
+  "仙台七夕": {
+    "zh": "仙台七夕",
+    "error": "HTTPError"
+  },
+  "伊普斯": {
+    "zh": "伊普斯",
+    "error": "HTTPError"
+  },
+  "伊朗亚": {
+    "zh": "伊朗亚",
+    "error": "HTTPError"
+  },
+  "伍尔弗": {
+    "zh": "伍尔弗",
+    "error": "HTTPError"
+  },
+  "伯恩利": {
+    "zh": "伯恩利",
+    "error": "HTTPError"
+  },
+  "伯恩茅斯": {
+    "zh": "伯恩茅斯",
+    "error": "HTTPError"
+  },
+  "伯明翰": {
+    "zh": "伯明翰",
+    "error": "HTTPError"
+  },
+  "佐加顿斯": {
+    "zh": "佐加顿斯",
+    "error": "HTTPError"
+  },
+  "佛罗伦萨": {
+    "zh": "佛罗伦萨",
+    "error": "HTTPError"
+  },
+  "光州FC": {
+    "zh": "光州FC",
+    "error": "HTTPError"
+  },
+  "克里斯蒂": {
+    "zh": "克里斯蒂",
+    "error": "HTTPError"
+  },
+  "克里特": {
+    "zh": "克里特",
+    "error": "HTTPError"
+  },
+  "全北现代": {
+    "zh": "全北现代",
+    "error": "HTTPError"
+  },
+  "八户南源": {
+    "zh": "八户南源",
+    "error": "HTTPError"
+  },
+  "兰斯": {
+    "zh": "兰斯",
+    "error": "HTTPError"
+  },
+  "兹沃勒": {
+    "zh": "兹沃勒",
+    "error": "HTTPError"
+  },
+  "切尔西": {
+    "zh": "切尔西",
+    "error": "HTTPError"
+  },
+  "利兹联": {
+    "zh": "利兹联",
+    "error": "HTTPError"
+  },
+  "利勒斯特": {
+    "zh": "利勒斯特",
+    "error": "HTTPError"
+  },
+  "利物浦": {
+    "zh": "利物浦",
+    "error": "HTTPError"
+  },
+  "利雅新月": {
+    "zh": "利雅新月",
+    "error": "HTTPError"
+  },
+  "利雅胜利": {
+    "zh": "利雅胜利",
+    "error": "HTTPError"
+  },
+  "利雅青年": {
+    "zh": "利雅青年",
+    "error": "HTTPError"
+  },
+  "加拉塔萨": {
+    "zh": "加拉塔萨",
+    "error": "HTTPError"
+  },
+  "加的夫城": {
+    "zh": "加的夫城",
+    "error": "HTTPError"
+  },
+  "勒沃库森": {
+    "zh": "勒沃库森",
+    "error": "HTTPError"
+  },
+  "勒芒": {
+    "zh": "勒芒",
+    "error": "HTTPError"
+  },
+  "勒阿弗尔": {
+    "zh": "勒阿弗尔",
+    "error": "HTTPError"
+  },
+  "北京国安": {
+    "zh": "北京国安",
+    "error": "HTTPError"
+  },
+  "千叶市原": {
+    "zh": "千叶市原",
+    "error": "HTTPError"
+  },
+  "南安普敦": {
+    "zh": "南安普敦",
+    "error": "HTTPError"
+  },
+  "博塔弗戈": {
+    "zh": "博塔弗戈",
+    "error": "HTTPError"
+  },
+  "博尔顿": {
+    "zh": "博尔顿",
+    "error": "HTTPError"
+  },
+  "博德闪耀": {
+    "zh": "博德闪耀",
+    "error": "HTTPError"
+  },
+  "博洛尼亚": {
+    "zh": "博洛尼亚",
+    "error": "HTTPError"
+  },
+  "卡利亚里": {
+    "zh": "卡利亚里",
+    "error": "HTTPError"
+  },
+  "卡塔尔亚": {
+    "zh": "卡塔尔亚",
+    "error": "HTTPError"
+  },
+  "卡尔马": {
+    "zh": "卡尔马",
+    "error": "HTTPError"
+  },
+  "卡斯鲁厄": {
+    "zh": "卡斯鲁厄",
+    "error": "HTTPError"
+  },
+  "卡萨皮亚": {
+    "zh": "卡萨皮亚",
+    "error": "HTTPError"
+  },
+  "叻武里": {
+    "zh": "叻武里",
+    "error": "HTTPError"
+  },
+  "吉达国民": {
+    "zh": "吉达国民",
+    "error": "HTTPError"
+  },
+  "吉达联合": {
+    "zh": "吉达联合",
+    "error": "HTTPError"
+  },
+  "名古屋鲸": {
+    "zh": "名古屋鲸",
+    "error": "HTTPError"
+  },
+  "哈马费萨": {
+    "zh": "哈马费萨",
+    "error": "HTTPError"
+  },
+  "国际图尔": {
+    "zh": "国际图尔",
+    "error": "HTTPError"
+  },
+  "国际米兰": {
+    "zh": "国际米兰",
+    "error": "HTTPError"
+  },
+  "图卢兹": {
+    "zh": "图卢兹",
+    "error": "HTTPError"
+  },
+  "圣克拉拉": {
+    "zh": "圣克拉拉",
+    "error": "HTTPError"
+  },
+  "圣旺红星": {
+    "zh": "圣旺红星",
+    "error": "HTTPError"
+  },
+  "埃因霍温": {
+    "zh": "埃因霍温",
+    "error": "HTTPError"
+  },
+  "埃尔切": {
+    "zh": "埃尔切",
+    "error": "HTTPError"
+  },
+  "埃弗顿": {
+    "zh": "埃弗顿",
+    "error": "HTTPError"
+  },
+  "埃斯托里": {
+    "zh": "埃斯托里",
+    "error": "HTTPError"
+  },
+  "埃沃斯堡": {
+    "zh": "埃沃斯堡",
+    "error": "HTTPError"
+  },
+  "埃门": {
+    "zh": "埃门",
+    "error": "HTTPError"
+  },
+  "基多体大": {
+    "zh": "基多体大",
+    "error": "HTTPError"
+  },
+  "塞尔塔": {
+    "zh": "塞尔塔",
+    "error": "HTTPError"
+  },
+  "塞维利亚": {
+    "zh": "塞维利亚",
+    "error": "HTTPError"
+  },
+  "多特蒙德": {
+    "zh": "多特蒙德",
+    "error": "HTTPError"
+  },
+  "大宫松鼠": {
+    "zh": "大宫松鼠",
+    "error": "HTTPError"
+  },
+  "大田市民": {
+    "zh": "大田市民",
+    "error": "HTTPError"
+  },
+  "大阪樱花": {
+    "zh": "大阪樱花",
+    "error": "HTTPError"
+  },
+  "大阪钢巴": {
+    "zh": "大阪钢巴",
+    "error": "HTTPError"
+  },
+  "奈梅亨": {
+    "zh": "奈梅亨",
+    "error": "HTTPError"
+  },
+  "奥斯KFUM": {
+    "zh": "奥斯KFUM",
+    "error": "HTTPError"
+  },
+  "奥格斯堡": {
+    "zh": "奥格斯堡",
+    "error": "HTTPError"
+  },
+  "奥莫尼亚": {
+    "zh": "奥莫尼亚",
+    "error": "HTTPError"
+  },
+  "奥萨苏纳": {
+    "zh": "奥萨苏纳",
+    "error": "HTTPError"
+  },
+  "女王巡游": {
+    "zh": "女王巡游",
+    "error": "HTTPError"
+  },
+  "威尼斯": {
+    "zh": "威尼斯",
+    "error": "HTTPError"
+  },
+  "安养FC": {
+    "zh": "安养FC",
+    "error": "HTTPError"
+  },
+  "安德莱": {
+    "zh": "安德莱",
+    "error": "HTTPError"
+  },
+  "富勒姆": {
+    "zh": "富勒姆",
+    "error": "HTTPError"
+  },
+  "尤文图斯": {
+    "zh": "尤文图斯",
+    "error": "HTTPError"
+  },
+  "尼斯": {
+    "zh": "尼斯",
+    "error": "HTTPError"
+  },
+  "山形山神": {
+    "zh": "山形山神",
+    "error": "HTTPError"
+  },
+  "川崎前锋": {
+    "zh": "川崎前锋",
+    "error": "HTTPError"
+  },
+  "巴伊亚": {
+    "zh": "巴伊亚",
+    "error": "HTTPError"
+  },
+  "巴伦西亚": {
+    "zh": "巴伦西亚",
+    "error": "HTTPError"
+  },
+  "巴列卡诺": {
+    "zh": "巴列卡诺",
+    "error": "HTTPError"
+  },
+  "巴竞技": {
+    "zh": "巴竞技",
+    "error": "HTTPError"
+  },
+  "巴萨": {
+    "zh": "巴萨",
+    "error": "HTTPError"
+  },
+  "巴西国际": {
+    "zh": "巴西国际",
+    "error": "HTTPError"
+  },
+  "巴黎FC": {
+    "zh": "巴黎FC",
+    "error": "HTTPError"
+  },
+  "巴黎圣曼": {
+    "zh": "巴黎圣曼",
+    "error": "HTTPError"
+  },
+  "布伦特": {
+    "zh": "布伦特",
+    "error": "HTTPError"
+  },
+  "布兰": {
+    "zh": "布兰",
+    "error": "HTTPError"
+  },
+  "布城": {
+    "zh": "布城",
+    "error": "HTTPError"
+  },
+  "布拉加": {
+    "zh": "布拉加",
+    "error": "HTTPError"
+  },
+  "布拉干RB": {
+    "zh": "布拉干RB",
+    "error": "HTTPError"
+  },
+  "布莱克本": {
+    "zh": "布莱克本",
+    "error": "HTTPError"
+  },
+  "布赖合作": {
+    "zh": "布赖合作",
+    "error": "HTTPError"
+  },
+  "布里兰": {
+    "zh": "布里兰",
+    "error": "HTTPError"
+  },
+  "布雷斯特": {
+    "zh": "布雷斯特",
+    "error": "HTTPError"
+  },
+  "布鲁日": {
+    "zh": "布鲁日",
+    "error": "HTTPError"
+  },
+  "帕尔马": {
+    "zh": "帕尔马",
+    "error": "HTTPError"
+  },
+  "帕德博恩": {
+    "zh": "帕德博恩",
+    "error": "HTTPError"
+  },
+  "帕梅拉斯": {
+    "zh": "帕梅拉斯",
+    "error": "HTTPError"
+  },
+  "广岛三箭": {
+    "zh": "广岛三箭",
+    "error": "HTTPError"
+  },
+  "库奥皮奥": {
+    "zh": "库奥皮奥",
+    "error": "HTTPError"
+  },
+  "弗拉门戈": {
+    "zh": "弗拉门戈",
+    "error": "HTTPError"
+  },
+  "弗洛西诺": {
+    "zh": "弗洛西诺",
+    "error": "HTTPError"
+  },
+  "弗赖堡": {
+    "zh": "弗赖堡",
+    "error": "HTTPError"
+  },
+  "弗鲁米嫩": {
+    "zh": "弗鲁米嫩",
+    "error": "HTTPError"
+  },
+  "德尔瓦耶": {
+    "zh": "德尔瓦耶",
+    "error": "HTTPError"
+  },
+  "德比郡": {
+    "zh": "德比郡",
+    "error": "HTTPError"
+  },
+  "托林斯": {
+    "zh": "托林斯",
+    "error": "HTTPError"
+  },
+  "拉斯永恒": {
+    "zh": "拉斯永恒",
+    "error": "HTTPError"
+  },
+  "拉普大学": {
+    "zh": "拉普大学",
+    "error": "HTTPError"
+  },
+  "拉科": {
+    "zh": "拉科",
+    "error": "HTTPError"
+  },
+  "拉齐奥": {
+    "zh": "拉齐奥",
+    "error": "HTTPError"
+  },
+  "摩纳哥": {
+    "zh": "摩纳哥",
+    "error": "HTTPError"
+  },
+  "斯图加特": {
+    "zh": "斯图加特",
+    "error": "HTTPError"
+  },
+  "斯托克城": {
+    "zh": "斯托克城",
+    "error": "HTTPError"
+  },
+  "斯拉维亚": {
+    "zh": "斯拉维亚",
+    "error": "HTTPError"
+  },
+  "斯旺西": {
+    "zh": "斯旺西",
+    "error": "HTTPError"
+  },
+  "斯特拉斯": {
+    "zh": "斯特拉斯",
+    "error": "HTTPError"
+  },
+  "新未来SC": {
+    "zh": "新未来SC",
+    "error": "HTTPError"
+  },
+  "新英格兰": {
+    "zh": "新英格兰",
+    "error": "HTTPError"
+  },
+  "昂热": {
+    "zh": "昂热",
+    "error": "HTTPError"
+  },
+  "普拉滕斯": {
+    "zh": "普拉滕斯",
+    "error": "HTTPError"
+  },
+  "普雷斯顿": {
+    "zh": "普雷斯顿",
+    "error": "HTTPError"
+  },
+  "曼城": {
+    "zh": "曼城",
+    "error": "HTTPError"
+  },
+  "曼联": {
+    "zh": "曼联",
+    "error": "HTTPError"
+  },
+  "朗斯": {
+    "zh": "朗斯",
+    "error": "HTTPError"
+  },
+  "朝鲜亚": {
+    "zh": "朝鲜亚",
+    "error": "HTTPError"
+  },
+  "本菲卡": {
+    "zh": "本菲卡",
+    "error": "HTTPError"
+  },
+  "札幌冈萨": {
+    "zh": "札幌冈萨",
+    "error": "HTTPError"
+  },
+  "朴次茅斯": {
+    "zh": "朴次茅斯",
+    "error": "HTTPError"
+  },
+  "林肯城": {
+    "zh": "林肯城",
+    "error": "HTTPError"
+  },
+  "枥木城": {
+    "zh": "枥木城",
+    "error": "HTTPError"
+  },
+  "柏太阳神": {
+    "zh": "柏太阳神",
+    "error": "HTTPError"
+  },
+  "柏林联合": {
+    "zh": "柏林联合",
+    "error": "HTTPError"
+  },
+  "柔佛": {
+    "zh": "柔佛",
+    "error": "HTTPError"
+  },
+  "查尔顿": {
+    "zh": "查尔顿",
+    "error": "HTTPError"
+  },
+  "格勒诺布": {
+    "zh": "格勒诺布",
+    "error": "HTTPError"
+  },
+  "格罗宁根": {
+    "zh": "格罗宁根",
+    "error": "HTTPError"
+  },
+  "格雷米奥": {
+    "zh": "格雷米奥",
+    "error": "HTTPError"
+  },
+  "格风暴": {
+    "zh": "格风暴",
+    "error": "HTTPError"
+  },
+  "桑坦德": {
+    "zh": "桑坦德",
+    "error": "HTTPError"
+  },
+  "桑德兰": {
+    "zh": "桑德兰",
+    "error": "HTTPError"
+  },
+  "桑托斯": {
+    "zh": "桑托斯",
+    "error": "HTTPError"
+  },
+  "梅斯": {
+    "zh": "梅斯",
+    "error": "HTTPError"
+  },
+  "横滨水手": {
+    "zh": "横滨水手",
+    "error": "HTTPError"
+  },
+  "欧塞尔": {
+    "zh": "欧塞尔",
+    "error": "HTTPError"
+  },
+  "比利亚雷": {
+    "zh": "比利亚雷",
+    "error": "HTTPError"
+  },
+  "毕尔巴鄂": {
+    "zh": "毕尔巴鄂",
+    "error": "HTTPError"
+  },
+  "水户蜀葵": {
+    "zh": "水户蜀葵",
+    "error": "HTTPError"
+  },
+  "水晶宫": {
+    "zh": "水晶宫",
+    "error": "HTTPError"
+  },
+  "汉坎": {
+    "zh": "汉坎",
+    "error": "HTTPError"
+  },
+  "汉堡": {
+    "zh": "汉堡",
+    "error": "HTTPError"
+  },
+  "汉诺威96": {
+    "zh": "汉诺威96",
+    "error": "HTTPError"
+  },
+  "江原FC": {
+    "zh": "江原FC",
+    "error": "HTTPError"
+  },
+  "沃夫斯堡": {
+    "zh": "沃夫斯堡",
+    "error": "HTTPError"
+  },
+  "沃特福德": {
+    "zh": "沃特福德",
+    "error": "HTTPError"
+  },
+  "沙尔克04": {
+    "zh": "沙尔克04",
+    "error": "HTTPError"
+  },
+  "沙特亚": {
+    "zh": "沙特亚",
+    "error": "HTTPError"
+  },
+  "法兰克福": {
+    "zh": "法兰克福",
+    "error": "HTTPError"
+  },
+  "法马利康": {
+    "zh": "法马利康",
+    "error": "HTTPError"
+  },
+  "波兹南": {
+    "zh": "波兹南",
+    "error": "HTTPError"
+  },
+  "波尔图": {
+    "zh": "波尔图",
+    "error": "HTTPError"
+  },
+  "洛里昂": {
+    "zh": "洛里昂",
+    "error": "HTTPError"
+  },
+  "济州SK": {
+    "zh": "济州SK",
+    "error": "HTTPError"
+  },
+  "浦和红钻": {
+    "zh": "浦和红钻",
+    "error": "HTTPError"
+  },
+  "浦项制铁": {
+    "zh": "浦项制铁",
+    "error": "HTTPError"
+  },
+  "海伦芬": {
+    "zh": "海伦芬",
+    "error": "HTTPError"
+  },
+  "海尔蒙特": {
+    "zh": "海尔蒙特",
+    "error": "HTTPError"
+  },
+  "淡宾尼士": {
+    "zh": "淡宾尼士",
+    "error": "HTTPError"
+  },
+  "热刺": {
+    "zh": "热刺",
+    "error": "HTTPError"
+  },
+  "热那亚": {
+    "zh": "热那亚",
+    "error": "HTTPError"
+  },
+  "特尔斯达": {
+    "zh": "特尔斯达",
+    "error": "HTTPError"
+  },
+  "特温特": {
+    "zh": "特温特",
+    "error": "HTTPError"
+  },
+  "特罗姆瑟": {
+    "zh": "特罗姆瑟",
+    "error": "HTTPError"
+  },
+  "特鲁瓦": {
+    "zh": "特鲁瓦",
+    "error": "HTTPError"
+  },
+  "瓦萨": {
+    "zh": "瓦萨",
+    "error": "HTTPError"
+  },
+  "甲府风林": {
+    "zh": "甲府风林",
+    "error": "HTTPError"
+  },
+  "町田泽维": {
+    "zh": "町田泽维",
+    "error": "HTTPError"
+  },
+  "登博思": {
+    "zh": "登博思",
+    "error": "HTTPError"
+  },
+  "皇家社会": {
+    "zh": "皇家社会",
+    "error": "HTTPError"
+  },
+  "皇马": {
+    "zh": "皇马",
+    "error": "HTTPError"
+  },
+  "盖斯": {
+    "zh": "盖斯",
+    "error": "HTTPError"
+  },
+  "神户胜利": {
+    "zh": "神户胜利",
+    "error": "HTTPError"
+  },
+  "福伦丹": {
+    "zh": "福伦丹",
+    "error": "HTTPError"
+  },
+  "福冈黄蜂": {
+    "zh": "福冈黄蜂",
+    "error": "HTTPError"
+  },
+  "福图纳": {
+    "zh": "福图纳",
+    "error": "HTTPError"
+  },
+  "科林蒂安": {
+    "zh": "科林蒂安",
+    "error": "HTTPError"
+  },
+  "科莫": {
+    "zh": "科莫",
+    "error": "HTTPError"
+  },
+  "科里蒂巴": {
+    "zh": "科里蒂巴",
+    "error": "HTTPError"
+  },
+  "科隆": {
+    "zh": "科隆",
+    "error": "HTTPError"
+  },
+  "米亚尔比": {
+    "zh": "米亚尔比",
+    "error": "HTTPError"
+  },
+  "米堡": {
+    "zh": "米堡",
+    "error": "HTTPError"
+  },
+  "米尔沃尔": {
+    "zh": "米尔沃尔",
+    "error": "HTTPError"
+  },
+  "米拉索尔": {
+    "zh": "米拉索尔",
+    "error": "HTTPError"
+  },
+  "索尔纳": {
+    "zh": "索尔纳",
+    "error": "HTTPError"
+  },
+  "纳什维尔": {
+    "zh": "纳什维尔",
+    "error": "HTTPError"
+  },
+  "纽伦堡": {
+    "zh": "纽伦堡",
+    "error": "HTTPError"
+  },
+  "纽卡斯尔": {
+    "zh": "纽卡斯尔",
+    "error": "HTTPError"
+  },
+  "纽约城": {
+    "zh": "纽约城",
+    "error": "HTTPError"
+  },
+  "纽约红牛": {
+    "zh": "纽约红牛",
+    "error": "HTTPError"
+  },
+  "维京": {
+    "zh": "维京",
+    "error": "HTTPError"
+  },
+  "维多利亚": {
+    "zh": "维多利亚",
+    "error": "HTTPError"
+  },
+  "维拉": {
+    "zh": "维拉",
+    "error": "HTTPError"
+  },
+  "罗森博格": {
+    "zh": "罗森博格",
+    "error": "HTTPError"
+  },
+  "罗马": {
+    "zh": "罗马",
+    "error": "HTTPError"
+  },
+  "美因茨": {
+    "zh": "美因茨",
+    "error": "HTTPError"
+  },
+  "考文垂": {
+    "zh": "考文垂",
+    "error": "HTTPError"
+  },
+  "胡巴卡德": {
+    "zh": "胡巴卡德",
+    "error": "HTTPError"
+  },
+  "腓特烈": {
+    "zh": "腓特烈",
+    "error": "HTTPError"
+  },
+  "芝加哥": {
+    "zh": "芝加哥",
+    "error": "HTTPError"
+  },
+  "莫尔德": {
+    "zh": "莫尔德",
+    "error": "HTTPError"
+  },
+  "莱万特": {
+    "zh": "莱万特",
+    "error": "HTTPError"
+  },
+  "莱切": {
+    "zh": "莱切",
+    "error": "HTTPError"
+  },
+  "莱红牛": {
+    "zh": "莱红牛",
+    "error": "HTTPError"
+  },
+  "萨普斯堡": {
+    "zh": "萨普斯堡",
+    "error": "HTTPError"
+  },
+  "萨索洛": {
+    "zh": "萨索洛",
+    "error": "HTTPError"
+  },
+  "蒙彼利埃": {
+    "zh": "蒙彼利埃",
+    "error": "HTTPError"
+  },
+  "蒙扎": {
+    "zh": "蒙扎",
+    "error": "HTTPError"
+  },
+  "蔚山现代": {
+    "zh": "蔚山现代",
+    "error": "HTTPError"
+  },
+  "藤枝MYFC": {
+    "zh": "藤枝MYFC",
+    "error": "HTTPError"
+  },
+  "西布罗姆": {
+    "zh": "西布罗姆",
+    "error": "HTTPError"
+  },
+  "西汉姆联": {
+    "zh": "西汉姆联",
+    "error": "HTTPError"
+  },
+  "西班牙人": {
+    "zh": "西班牙人",
+    "error": "HTTPError"
+  },
+  "诺丁汉": {
+    "zh": "诺丁汉",
+    "error": "HTTPError"
+  },
+  "诺维奇": {
+    "zh": "诺维奇",
+    "error": "HTTPError"
+  },
+  "谢菲联": {
+    "zh": "谢菲联",
+    "error": "HTTPError"
+  },
+  "贝蒂斯": {
+    "zh": "贝蒂斯",
+    "error": "HTTPError"
+  },
+  "贝西克塔": {
+    "zh": "贝西克塔",
+    "error": "HTTPError"
+  },
+  "费内巴切": {
+    "zh": "费内巴切",
+    "error": "HTTPError"
+  },
+  "赛哈海湾": {
+    "zh": "赛哈海湾",
+    "error": "HTTPError"
+  },
+  "赫塔费": {
+    "zh": "赫塔费",
+    "error": "HTTPError"
+  },
+  "赫尔城": {
+    "zh": "赫尔城",
+    "error": "HTTPError"
+  },
+  "赫尔火花": {
+    "zh": "赫尔火花",
+    "error": "HTTPError"
+  },
+  "赫尔辛基": {
+    "zh": "赫尔辛基",
+    "error": "HTTPError"
+  },
+  "赫根": {
+    "zh": "赫根",
+    "error": "HTTPError"
+  },
+  "达姆施塔": {
+    "zh": "达姆施塔",
+    "error": "HTTPError"
+  },
+  "迈国际": {
+    "zh": "迈国际",
+    "error": "HTTPError"
+  },
+  "迈季宽广": {
+    "zh": "迈季宽广",
+    "error": "HTTPError"
+  },
+  "迪里耶": {
+    "zh": "迪里耶",
+    "error": "HTTPError"
+  },
+  "那不勒斯": {
+    "zh": "那不勒斯",
+    "error": "HTTPError"
+  },
+  "都灵": {
+    "zh": "都灵",
+    "error": "HTTPError"
+  },
+  "里奥阿维": {
+    "zh": "里奥阿维",
+    "error": "HTTPError"
+  },
+  "里尔": {
+    "zh": "里尔",
+    "error": "HTTPError"
+  },
+  "里斯本": {
+    "zh": "里斯本",
+    "error": "HTTPError"
+  },
+  "里昂": {
+    "zh": "里昂",
+    "error": "HTTPError"
+  },
+  "金泉尚武": {
+    "zh": "金泉尚武",
+    "error": "HTTPError"
+  },
+  "长崎航海": {
+    "zh": "长崎航海",
+    "error": "HTTPError"
+  },
+  "门兴": {
+    "zh": "门兴",
+    "error": "HTTPError"
+  },
+  "阿尔克马": {
+    "zh": "阿尔克马",
+    "error": "HTTPError"
+  },
+  "阿尔梅勒": {
+    "zh": "阿尔梅勒",
+    "error": "HTTPError"
+  },
+  "阿布艾因": {
+    "zh": "阿布艾因",
+    "error": "HTTPError"
+  },
+  "阿拉维斯": {
+    "zh": "阿拉维斯",
+    "error": "HTTPError"
+  },
+  "阿森纳": {
+    "zh": "阿森纳",
+    "error": "HTTPError"
+  },
+  "阿纳西": {
+    "zh": "阿纳西",
+    "error": "HTTPError"
+  },
+  "阿罗卡": {
+    "zh": "阿罗卡",
+    "error": "HTTPError"
+  },
+  "阿贾克斯": {
+    "zh": "阿贾克斯",
+    "error": "HTTPError"
+  },
+  "阿马多拉": {
+    "zh": "阿马多拉",
+    "error": "HTTPError"
+  },
+  "雅典AEK": {
+    "zh": "雅典AEK",
+    "error": "HTTPError"
+  },
+  "雷克斯": {
+    "zh": "雷克斯",
+    "error": "HTTPError"
+  },
+  "雷恩": {
+    "zh": "雷恩",
+    "error": "HTTPError"
+  },
+  "霍芬海姆": {
+    "zh": "霍芬海姆",
+    "error": "HTTPError"
+  },
+  "韦斯特罗": {
+    "zh": "韦斯特罗",
+    "error": "HTTPError"
+  },
+  "韩国亚": {
+    "zh": "韩国亚",
+    "error": "HTTPError"
+  },
+  "首尔FC": {
+    "zh": "首尔FC",
+    "error": "HTTPError"
+  },
+  "马尔默": {
+    "zh": "马尔默",
+    "error": "HTTPError"
+  },
+  "马拉加": {
+    "zh": "马拉加",
+    "error": "HTTPError"
+  },
+  "马斯特里": {
+    "zh": "马斯特里",
+    "error": "HTTPError"
+  },
+  "马竞": {
+    "zh": "马竞",
+    "error": "HTTPError"
+  },
+  "马赛": {
+    "zh": "马赛",
+    "error": "HTTPError"
+  },
+  "马里迪莫": {
+    "zh": "马里迪莫",
+    "error": "HTTPError"
+  },
+  "鹿岛鹿角": {
+    "zh": "鹿岛鹿角",
+    "error": "HTTPError"
+  },
+  "鹿斯巴达": {
+    "zh": "鹿斯巴达",
+    "error": "HTTPError"
+  }
+}
