@@ -12,12 +12,10 @@ def formal_mass(row):
     fake={"probability":{"valid":True,"probabilities":{
         "home":row["features"]["ph"],"draw":row["features"]["pd"],"away":row["features"]["pa"]
     }}}
-    pred=htft_layer(fake)
+    pred=htft_layer(fake["probability"])
     mass={}
-    for x in pred.get("full_distribution",[]):
-        label=x.get("label") or x.get("code")
-        if not label: continue
-        code=label.replace("/","_").replace("主","HOME").replace("平","DRAW").replace("客","AWAY")
+    for x in pred.get("distribution",[]):
+        code=f'{x["ht"]}_{x["ft"]}'
         mass[code]=float(x["probability"])
     return mass
 
