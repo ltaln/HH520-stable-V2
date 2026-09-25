@@ -2364,7 +2364,7 @@
       "stress": 302
     },
     "cache_meta": {
-      "cache_files_seen": 146,
+      "cache_files_seen": 147,
       "cache_files_parsed": 143,
       "rows": {
         "dev1": 538,
@@ -4141,9 +4141,9 @@
     "formal_base_promotion_recommended": true,
     "goal_timing_policy": {
       "historical_timing_collection": false,
-      "formal_prediction_day_timing_required": true,
-      "timing_role": "bounded first-half intensity adjustment only",
-      "missing_or_abnormal_timing": "HTFT_PASS",
+      "formal_prediction_day_timing_required": false,
+      "timing_role": "not_used_in_formal_model",
+      "missing_or_abnormal_timing": "NOT_APPLICABLE",
       "may_change_ft_core": false
     }
   }
