@@ -1,0 +1,48 @@
+name: HH520 Sep1-25 Diagnostics
+on:
+  push:
+    branches: [main]
+    paths:
+      - "diagnostic-requests/sep1-25-*.json"
+permissions:
+  contents: write
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - uses: actions/cache/restore@v4
+        with:
+          path: cache
+          key: hh520-diagnostic-${{ github.run_id }}
+          restore-keys: |
+            hh520-collection-v1-
+      - name: Run diagnostics
+        env:
+          FIRECRAWL_API_KEY_BACKUP: ${{ secrets.FIRECRAWL_API_KEY_BACKUP }}
+        run: python scripts/sep1_25_diagnostics.py
+      - name: Publish result
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin diagnostic-results || true
+          if git show-ref --verify --quiet refs/remotes/origin/diagnostic-results; then
+            git switch --detach origin/diagnostic-results
+          else
+            git switch --orphan diagnostic-results
+            git rm -rf . || true
+          fi
+          mkdir -p results
+          cp "$GITHUB_WORKSPACE/_diagnostic_sep1_25.json" results/sep1-25-latest.json
+          git add results/sep1-25-latest.json
+          git commit -m "diagnostic: sep1-25 count and backup credits" || true
+          git push origin HEAD:diagnostic-results --force
