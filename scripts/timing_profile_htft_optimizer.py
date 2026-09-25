@@ -130,7 +130,26 @@ def main():
     timing=json.loads(Path("_timing_profiles.json").read_text(encoding="utf-8"))
     rows=load_rows()["stress"]
     tmatches=timing.get("matches") or []
-    tmap={(x["date"],x["home_team"],x["away_team"]):x for x in tmatches}
+    mappings=timing.get("team_mappings") or {}
+    def trusted(team):
+        mp=mappings.get(team) or {}
+        try: score=float(mp.get("score") or 0)
+        except Exception: score=0.0
+        return score>=0.85
+    tmap={}
+    rejected_low_confidence=0
+    rejected_same_url=0
+    for x in tmatches:
+        h=x["home_team"]; a=x["away_team"]
+        if not (trusted(h) and trusted(a)):
+            rejected_low_confidence+=1
+            continue
+        hu=((mappings.get(h) or {}).get("url"))
+        au=((mappings.get(a) or {}).get("url"))
+        if hu and au and hu==au:
+            rejected_same_url+=1
+            continue
+        tmap[(x["date"],h,a)]=x
 
     # Freeze the already-researched HT->FT conditional model on May-Aug only.
     old=load_rows()
@@ -198,6 +217,7 @@ def main():
       "mode":"RETROSPECTIVE_GOAL_TIMING_PROFILE_AUGMENTED_HTFT_TRANSITION",
       "timing_collection_summary":timing.get("summary"),
       "timing_coverage_rows":coverage,
+      "timing_quality_gate":{"mapping_score_min":0.85,"rejected_low_confidence_matches":rejected_low_confidence,"rejected_same_profile_url_matches":rejected_same_url},
       "base_transition_model":"P_HT_BASE_X_P_FT_GIVEN_HT_MULTINOMIAL_l2_1_MAY_AUG",
       "selection_window":"2026-09-01..2026-09-14",
       "holdout_window":"2026-09-15..2026-09-20",
