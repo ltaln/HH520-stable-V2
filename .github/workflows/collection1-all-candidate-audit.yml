@@ -1,0 +1,57 @@
+name: Collection 1 All Candidate Holdout Audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "collection1-audit-requests/*.json"
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - name: Restore HH520 historical cache
+        uses: actions/cache/restore@v4
+        with:
+          path: cache
+          key: collection1-audit-hh520-${{ github.run_id }}
+          restore-keys: |
+            hh520-collection-v1-
+      - name: Fetch Collection 1 inputs
+        run: |
+          git fetch origin collection1-results:refs/remotes/origin/collection1-results
+          git fetch origin collection1-ablation-results:refs/remotes/origin/collection1-ablation-results
+          git show origin/collection1-results:results/full-profile-sep1-20.json > _collection1_profiles.json
+          git show origin/collection1-ablation-results:results/latest.json > _collection1_ablation.json
+      - name: Run holdout robustness audit
+        env:
+          HH520_COLLECTION1_AUDIT_OFFLINE_ONLY: "1"
+        run: python scripts/collection1_all_candidate_holdout_audit.py
+      - name: Publish audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin collection1-audit-results || true
+          if git show-ref --verify --quiet refs/remotes/origin/collection1-audit-results; then
+            git switch --detach origin/collection1-audit-results
+          else
+            git switch --orphan collection1-audit-results
+            git rm -rf . || true
+          fi
+          mkdir -p results
+          cp "$GITHUB_WORKSPACE/_collection1_holdout_audit.json" results/latest.json
+          git add results/latest.json
+          git commit -m "research: Collection 1 all-candidate holdout audit" || true
+          git push origin HEAD:collection1-audit-results --force
