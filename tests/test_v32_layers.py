@@ -24,11 +24,12 @@ def test_research_confidence_s_tier():
     assert c["direction_override"] is False
 
 
-def test_htft_layer_requires_timing_and_then_ranks_global_joint_rows():
+def test_htft_layer_uses_existing_data_and_ranks_global_joint_rows():
     m=sample_match()
     p=probability_layer(m)
     missing=htft_layer(p,m)
-    assert missing["valid"] is False
+    assert missing["valid"] is True
+    assert missing["timing_used"] is False
     assert missing["status"]=="PASS"
     m["goal_timing"]={
         "available":True,"timing_mode":"six_bin","source_domain":"test",
