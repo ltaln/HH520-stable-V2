@@ -22,7 +22,7 @@ def test_without_gpt_returns_deterministic_prediction():
     assert result["score1"]!="未提供" and result["score2"]!="未提供"
     assert result["htft1"]=="未提供" and result["htft2"]=="未提供"
     assert result["total_goals"]!="未提供"
-    assert result["stable_version"]=="HH520 Stable V3.5 Phase 2"
+    assert result["stable_version"]=="HH520 Stable V3.5.1"
     assert result["state"] in {"CONFIRM","BALANCED","TAIL_ALERT","PASS"}
 
 
@@ -35,7 +35,7 @@ def test_model_input_contains_locked_v35_phase2_prediction():
     payload=build_model_input([fixture_match()])
     assert len(payload)==1
     assert payload[0]["gpt_role"]=="EXPLANATION_ONLY"
-    assert payload[0]["stable_version"]=="HH520 Stable V3.5 Phase 2"
+    assert payload[0]["stable_version"]=="HH520 Stable V3.5.1"
     assert payload[0]["locked_prediction"]["score1"]
     assert set(payload[0]["analysis"])=={"probability","decision","calibration","consistency","htft","score"}
 
