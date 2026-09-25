@@ -45,7 +45,7 @@ def test_htft_and_score_are_independent_in_phase2():
     p=probability_layer(m); v=value_layer(m,p); d=decision_filter(m,p,v)
     h=htft_layer(p,m,d)
     s=score_layer(m,p,h)
-    assert h["model"]=="INDEPENDENT_POISSON_SPLIT_HTFT_V2_TIMING_REQUIRED"
+    assert h["model"]=="INDEPENDENT_POISSON_SPLIT_HTFT_V3_EXISTING_DATA"
     assert h["timing_used"] is True
     assert h["ft_core_unchanged"] is True
     assert s["model"]=="HDA_POISSON_V1"
@@ -55,4 +55,4 @@ def test_htft_and_score_are_independent_in_phase2():
 def test_value_does_not_drive_direction():
     m=match(); p=probability_layer(m); v=value_layer(m,p); d=decision_filter(m,p,v)
     assert d["value_layer_used_for_direction"] is False
-    assert d["selection_rule"]=="V35_PHASE2_FT_CALIBRATION_PLUS_FORMAL_DRAW_LOGISTIC_PLUS_MFD"
+    assert d["selection_rule"]=="V351_FT_CALIBRATION_PLUS_FORMAL_DRAW_LOGISTIC_PLUS_MFD"
