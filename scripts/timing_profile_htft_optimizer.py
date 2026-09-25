@@ -132,22 +132,35 @@ def main():
     rows=load_rows()["stress"]
     tmatches=timing.get("matches") or []
     mappings=timing.get("team_mappings") or {}
+    url_owners=defaultdict(set)
+    for team,mp in mappings.items():
+        u=(mp or {}).get("url")
+        if u: url_owners[u].add(team)
+    ambiguous_urls={u for u,owners in url_owners.items() if len(owners)>1}
+
     def trusted(team):
         mp=mappings.get(team) or {}
         try: score=float(mp.get("score") or 0)
         except Exception: score=0.0
-        return score>=0.85
+        u=mp.get("url")
+        return score>=0.85 and bool(u) and u not in ambiguous_urls
+
     tmap={}
     rejected_low_confidence=0
+    rejected_ambiguous_profile=0
     rejected_same_url=0
     for x in tmatches:
         h=x["home_team"]; a=x["away_team"]
-        if not (trusted(h) and trusted(a)):
+        hm=mappings.get(h) or {}; am=mappings.get(a) or {}
+        hs=float(hm.get("score") or 0); ascore=float(am.get("score") or 0)
+        hu=hm.get("url"); au=am.get("url")
+        if hs<0.85 or ascore<0.85 or not hu or not au:
             rejected_low_confidence+=1
             continue
-        hu=((mappings.get(h) or {}).get("url"))
-        au=((mappings.get(a) or {}).get("url"))
-        if hu and au and hu==au:
+        if hu in ambiguous_urls or au in ambiguous_urls:
+            rejected_ambiguous_profile+=1
+            continue
+        if hu==au:
             rejected_same_url+=1
             continue
         tmap[(x["date"],h,a)]=x
@@ -185,12 +198,22 @@ def main():
             masses=[blend_mass(formal[i],raw[i],alpha) for i in range(len(rows))]
             tr=metrics([rows[i] for i in train_idx],[masses[i] for i in train_idx])
             base=metrics([rows[i] for i in train_idx],[formal[i] for i in train_idx])
-            # Do not accept training candidates that sacrifice more than one Top1 hit.
-            if tr["top1_hits"]<base["top1_hits"]-1:continue
+            # Robust promotion screen on selection window only:
+            # no Top1 loss, no Top3 loss, and no Top2 loss for the three protected strong structures.
+            if tr["top1_hits"]<base["top1_hits"]:continue
+            if tr["top3_hits"]<base["top3_hits"]:continue
+            protected_ok=True
+            for cls in ("HOME_HOME","AWAY_AWAY","DRAW_HOME"):
+                tb=(tr.get("by_actual") or {}).get(cls) or {}
+                bb=(base.get("by_actual") or {}).get(cls) or {}
+                if tb.get("top2",0)<bb.get("top2",0):
+                    protected_ok=False
+                    break
+            if not protected_ok:continue
             grid.append({"shrink":shrink,"beta_second":b2,"beta_late":bl,"beta_draw":bd,"alpha":alpha,
                          "train_top1":tr["top1_hits"],"train_top2":tr["top2_hits"],"train_top3":tr["top3_hits"],
                          "_masses":masses,"_raw":raw})
-    grid.sort(key=lambda x:(x["train_top2"],x["train_top3"],x["train_top1"],-x["alpha"]),reverse=True)
+    grid.sort(key=lambda x:(x["train_top2"],x["train_top3"],x["train_top1"],x["alpha"]),reverse=True)
     best=grid[0]
     masses=best.pop("_masses");raw=best.pop("_raw")
 
@@ -222,7 +245,10 @@ def main():
       "mode":"RETROSPECTIVE_GOAL_TIMING_PROFILE_AUGMENTED_HTFT_TRANSITION",
       "timing_collection_summary":timing.get("summary"),
       "timing_coverage_rows":coverage,
-      "timing_quality_gate":{"mapping_score_min":0.85,"rejected_low_confidence_matches":rejected_low_confidence,"rejected_same_profile_url_matches":rejected_same_url},
+      "timing_quality_gate":{"mapping_score_min":0.85,"ambiguous_profile_url_groups":len(ambiguous_urls),
+                             "rejected_low_confidence_matches":rejected_low_confidence,
+                             "rejected_ambiguous_profile_matches":rejected_ambiguous_profile,
+                             "rejected_same_profile_url_matches":rejected_same_url},
       "base_transition_model":"P_HT_BASE_X_P_FT_GIVEN_HT_MULTINOMIAL_l2_1_MAY_AUG",
       "selection_window":"2026-09-01..2026-09-14",
       "holdout_window":"2026-09-15..2026-09-20",
