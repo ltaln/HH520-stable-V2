@@ -1,0 +1,40 @@
+name: Timing Profile HTFT Optimizer
+on:
+  push:
+    branches: [main]
+    paths: ["timing-profile-optimizer-requests/*.json"]
+permissions: {contents: write}
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12", cache: pip}
+      - run: python -m pip install -r requirements.txt
+      - uses: actions/cache/restore@v4
+        with:
+          path: cache
+          key: timing-profile-opt-${{ github.run_id }}
+          restore-keys: |
+            hh520-collection-v1-
+      - name: Fetch timing profiles
+        shell: bash
+        run: |
+          git fetch origin goal-timing-results
+          git show origin/goal-timing-results:results/footystats-sep1-20-v2.json > _timing_profiles.json
+      - run: python scripts/timing_profile_htft_optimizer.py
+      - name: Publish
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin timing-optimizer-results || true
+          if git show-ref --verify --quiet refs/remotes/origin/timing-optimizer-results; then git switch --detach origin/timing-optimizer-results; else git switch --orphan timing-optimizer-results; git rm -rf . || true; fi
+          mkdir -p results
+          cp "$GITHUB_WORKSPACE/_timing_profile_optimizer.json" results/profile-latest.json
+          git add results/profile-latest.json
+          git commit -m "research: timing profile HTFT optimizer" || true
+          git push origin HEAD:timing-optimizer-results --force
