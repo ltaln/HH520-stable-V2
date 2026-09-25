@@ -48,7 +48,7 @@ DRAW_WEIGHTS = (
     -0.02550321545183099,
 )
 DRAW_THRESHOLD = 0.38
-DRAW_PMAX_LIMIT = 0.45
+DRAW_PMAX_MIN = 0.39\nDRAW_PMAX_LIMIT = 0.45
 
 
 def _worse(a, b):
@@ -223,9 +223,9 @@ def decision_filter(match: dict, probability: dict, value: dict,
         "draw_rule_promoted": draw_rule_promoted,
         "draw_rule_type": "CROSS_FIT_LOGISTIC_V1",
         "draw_rule_threshold": DRAW_THRESHOLD,
-        "draw_rule_pmax_limit": DRAW_PMAX_LIMIT,
+        "draw_rule_pmax_min": DRAW_PMAX_MIN,\n        "draw_rule_pmax_limit": DRAW_PMAX_LIMIT,
         "draw_rule_metrics": draw_metrics,
-        "draw_rule_scope": "BALANCED_SIDE_ZONE_ONLY",
+        "draw_rule_scope": "BALANCED_SIDE_ZONE_39_TO_45_ONLY",
         "draw_rule_never_overrides_authorized_side": True,
         "risk": decision,
         "risk_score": failure.get("risk_score"),
