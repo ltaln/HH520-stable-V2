@@ -1,0 +1,33 @@
+name: HH520 Sep1-25 Direct Count
+on:
+  push:
+    branches: [main]
+    paths:
+      - "diagnostic-requests/sep1-25-direct-*.json"
+permissions:
+  contents: write
+jobs:
+  count:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - run: python scripts/sep1_25_direct_count.py
+      - name: Publish
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin diagnostic-results || true
+          git switch --detach origin/diagnostic-results
+          cp "$GITHUB_WORKSPACE/_sep1_25_direct.json" results/sep1-25-direct.json
+          git add results/sep1-25-direct.json
+          git commit -m "diagnostic: direct Sep1-25 count" || true
+          git push origin HEAD:diagnostic-results --force
