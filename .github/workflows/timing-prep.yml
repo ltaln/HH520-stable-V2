@@ -1,0 +1,32 @@
+name: Timing Prep
+on:
+  push:
+    branches: [main]
+    paths: ["timing-prep-requests/*.json"]
+permissions: {contents: write}
+jobs:
+  prep:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12", cache: pip}
+      - run: python -m pip install -r requirements.txt
+      - uses: actions/cache/restore@v4
+        with:
+          path: cache
+          key: timing-prep-${{ github.run_id }}
+          restore-keys: |
+            hh520-collection-v1-
+      - run: python scripts/timing_prep.py
+      - shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin timing-research-results || true
+          if git show-ref --verify --quiet refs/remotes/origin/timing-research-results; then git switch --detach origin/timing-research-results; else git switch --orphan timing-research-results; git rm -rf . || true; fi
+          mkdir -p results
+          cp "$GITHUB_WORKSPACE/_timing_prep.json" results/prep.json
+          git add results/prep.json
+          git commit -m "research: timing prep" || true
+          git push origin HEAD:timing-research-results --force
