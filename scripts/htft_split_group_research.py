@@ -149,35 +149,48 @@ def rerank(row, group_scores, cfg):
     base=row["base"]
     ranked=sorted(base,key=base.get,reverse=True)
     base_top=ranked[:2]
-    locked=[x for x in base_top if x in PROTECTED]
-    slots=2-len(locked)
-    if slots<=0:
-        return base_top,False,None
-    pool=[x for x in base_top if x not in PROTECTED]
     fired=[]
     for g in ("DRAW_FINISH","REVERSAL","DRAW_AWAY"):
         sc=group_scores.get(g,0.0)
         if sc>=cfg[g]["threshold"]:
             subtype=choose_subtype(g,row)
-            pool.append(subtype)
             fired.append((g,subtype,sc))
+    if not fired:
+        return base_top,False,[]
+
+    # Keep protected selections in their original Top2 positions. Only
+    # non-protected positions are eligible for replacement.
+    final=list(base_top)
+    mutable_positions=[i for i,x in enumerate(base_top) if x not in PROTECTED]
+    if not mutable_positions:
+        return base_top,False,fired
+
+    pool=[base_top[i] for i in mutable_positions]
+    for g,sub,sc in fired:
+        if sub not in PROTECTED:
+            pool.append(sub)
+
     def adjusted(t):
         bonus=0.0
         for g,sub,sc in fired:
             if t==sub:
                 bonus=max(bonus,cfg[g]["gamma"]*sc)
         return base.get(t,0.0)+bonus
-    chosen=sorted(set(pool),key=adjusted,reverse=True)[:slots]
-    final=[]
-    for x in base_top:
-        if x in PROTECTED and x not in final:final.append(x)
-    for x in chosen:
-        if x not in final:final.append(x)
-    for x in ranked:
-        if len(final)>=2:break
-        if x not in final:final.append(x)
-    if base_top[0] in PROTECTED and final[0]!=base_top[0]:
-        final.remove(base_top[0]);final.insert(0,base_top[0])
+
+    chosen=sorted(set(pool),key=adjusted,reverse=True)[:len(mutable_positions)]
+    for pos,val in zip(mutable_positions,chosen):
+        final[pos]=val
+
+    # Avoid duplicate Top2 entries by backfilling from original ranking.
+    if len(set(final))<2:
+        for x in ranked:
+            if x not in final:
+                for pos in mutable_positions:
+                    if final.count(final[pos])>1:
+                        final[pos]=x
+                        break
+            if len(set(final))==2:
+                break
     return final[:2],final[:2]!=base_top,fired
 
 def evaluate(rows, scoremaps, cfg):
