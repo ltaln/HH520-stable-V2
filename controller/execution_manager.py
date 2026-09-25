@@ -20,7 +20,7 @@ def execute_prediction(date: str, use_gpt: bool = False):
         root = Path(__file__).resolve().parents[1]
         data["gpt_handoff"] = {
             "role": "EXPLANATION_ONLY",
-            "stable_version": "HH520 Stable V3.5 Phase 2",
+            "stable_version": "HH520 Stable V3.5.1",
             "prompt_version": PROMPT_FILE,
             "prompt": (root / "prompts" / PROMPT_FILE).read_text(encoding="utf-8"),
             "config": yaml.safe_load((root / "config/stable.yaml").read_text(encoding="utf-8")),
