@@ -1,0 +1,18 @@
+{
+  "mode": "OFFLINE_EXISTING_CACHE_ONLY",
+  "new_collection": false,
+  "goal_timing_collected": false,
+  "target": "DRAW_AWAY",
+  "sample_counts": {
+    "dev1": 538,
+    "dev2": 592,
+    "stress": 302
+  },
+  "selection_used_stress": false,
+  "candidate_count": 0,
+  "selection_objective": "high_specificity_draw_away_with_nonnegative_overall_top2_on_each_dev_split",
+  "selected_on_dev_only": null,
+  "stress": null,
+  "frozen_candidate": null,
+  "promotion_status": "RESEARCH_ONLY_NOT_PROMOTED"
+}
