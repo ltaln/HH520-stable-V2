@@ -1,0 +1,5612 @@
+{
+  "summary": {
+    "requested_matches": 302,
+    "unique_teams": 285,
+    "mapped_teams": 0,
+    "timing_profiles_available": 0,
+    "matches_both_sides_timing": 0,
+    "matches_one_side_timing": 0,
+    "matches_no_timing": 302,
+    "initial_backup_credits": 446,
+    "final_backup_credits": 398,
+    "credits_consumed": 48,
+    "league_searches": 30,
+    "fallback_team_searches": 285,
+    "source": "FootyStats team goal timing, 15-minute six-bin distributions",
+    "snapshot_date": "2026-09-25",
+    "historical_point_in_time": false,
+    "warning": "Retrospective current-season snapshot; contains information accumulated after some target dates. Research only, not leakage-clean validation."
+  },
+  "league_search": {
+    "英冠": {
+      "query": "England Championship FootyStats 2026 stats",
+      "url": "https://footystats.org/england/efl-league-two",
+      "result_count": 8
+    },
+    "欧冠": {
+      "query": "UEFA Champions League FootyStats 2026 stats",
+      "url": "https://footystats.org/europe/uefa-womens-champions-league",
+      "result_count": 8
+    },
+    "欧罗巴": {
+      "query": "欧罗巴 FootyStats 2026 stats",
+      "url": "https://footystats.org/europe/uefa-europa-league",
+      "result_count": 8
+    },
+    "西甲": {
+      "query": "Spain La Liga FootyStats 2026 stats",
+      "url": "https://footystats.org/spain/la-liga",
+      "result_count": 8
+    },
+    "意甲": {
+      "query": "Italy Serie A FootyStats 2026 stats",
+      "url": "https://footystats.org/italy/serie-c-group-a",
+      "result_count": 8
+    },
+    "英超": {
+      "query": "England Premier League FootyStats 2026 stats",
+      "url": "https://footystats.org/england/premier-league/fixtures",
+      "result_count": 8
+    },
+    "日职": {
+      "query": "Japan J1 League FootyStats 2026 stats",
+      "url": "https://footystats.org/japan/j2-league",
+      "result_count": 8
+    },
+    "法甲": {
+      "query": "France Ligue 1 FootyStats 2026 stats",
+      "url": "https://footystats.org/france/ligue-2",
+      "result_count": 8
+    },
+    "德甲": {
+      "query": "Germany Bundesliga FootyStats 2026 stats",
+      "url": "https://footystats.org/germany/bundesliga",
+      "result_count": 8
+    },
+    "沙职": {
+      "query": "Saudi Arabia Professional League FootyStats 2026 stats",
+      "url": "https://footystats.org/saudi-arabia/professional-league",
+      "result_count": 8
+    },
+    "挪超": {
+      "query": "Norway Eliteserien FootyStats 2026 stats",
+      "url": null,
+      "result_count": 0
+    },
+    "荷甲": {
+      "query": "Netherlands Eredivisie FootyStats 2026 stats",
+      "url": null,
+      "result_count": 0
+    },
+    "葡超": {
+      "query": "Portugal Liga NOS FootyStats 2026 stats",
+      "url": null,
+      "result_count": 0
+    },
+    "亚冠精英": {
+      "query": "亚冠精英 FootyStats 2026 stats",
+      "url": null,
+      "result_count": 0
+    },
+    "巴甲": {
+      "query": "Brazil Serie A FootyStats 2026 stats",
+      "url": null,
+      "result_count": 0
+    },
+    "韩职": {
+      "query": "韩职 FootyStats 2026 stats",
+      "url": null,
+      "result_count": 0
+    },
+    "英联赛杯": {
+      "query": "英联赛杯 FootyStats 2026 stats",
+      "url": null,
+      "result_count": 0
+    },
+    "瑞超": {
+      "query": "Sweden Allsvenskan FootyStats 2026 stats",
+      "url": null,
+      "result_count": 0
+    },
+    "解放者杯": {
+      "query": "解放者杯 FootyStats 2026 stats",
+      "url": null,
+      "result_count": 0
+    },
+    "意大利杯": {
+      "query": "Italy Coppa Italia FootyStats 2026 stats",
+      "url": null,
+      "result_count": 0
+    },
+    "美职": {
+      "query": "USA MLS FootyStats 2026 stats",
+      "url": null,
+      "result_count": 0
+    },
+    "法乙": {
+      "query": "France Ligue 2 FootyStats 2026 stats",
+      "url": null,
+      "result_count": 0
+    },
+    "荷乙": {
+      "query": "荷乙 FootyStats 2026 stats",
+      "url": null,
+      "result_count": 0
+    },
+    "日乙": {
+      "query": "Japan J2 League FootyStats 2026 stats",
+      "url": null,
+      "result_count": 0
+    },
+    "亚运男足": {
+      "query": "亚运男足 FootyStats 2026 stats",
+      "url": null,
+      "result_count": 0
+    },
+    "德乙": {
+      "query": "Germany 2 Bundesliga FootyStats 2026 stats",
+      "url": null,
+      "result_count": 0
+    },
+    "芬超": {
+      "query": "Finland Veikkausliiga FootyStats 2026 stats",
+      "url": null,
+      "result_count": 0
+    },
+    "巴西杯": {
+      "query": "Brazil Copa do Brasil FootyStats 2026 stats",
+      "url": null,
+      "result_count": 0
+    },
+    "日联赛杯": {
+      "query": "Japan J League Cup FootyStats 2026 stats",
+      "url": null,
+      "result_count": 0
+    },
+    "亚冠乙": {
+      "query": "亚冠乙 FootyStats 2026 stats",
+      "url": null,
+      "result_count": 0
+    }
+  },
+  "team_mappings": {},
+  "profiles": {},
+  "matches": [
+    {
+      "date": "2026-09-01",
+      "match_id": "1",
+      "league": "沙职",
+      "home_team": "利雅新月",
+      "away_team": "吉达国民",
+      "half_score": "2-0",
+      "full_score": "3-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-01",
+      "match_id": "10",
+      "league": "意大利杯",
+      "home_team": "都灵",
+      "away_team": "蒙扎",
+      "half_score": "0-1",
+      "full_score": "0-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-01",
+      "match_id": "2",
+      "league": "英冠",
+      "home_team": "斯旺西",
+      "away_team": "沃特福德",
+      "half_score": "2-0",
+      "full_score": "2-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-01",
+      "match_id": "3",
+      "league": "英冠",
+      "home_team": "西汉姆联",
+      "away_team": "伍尔弗",
+      "half_score": "2-1",
+      "full_score": "4-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-01",
+      "match_id": "4",
+      "league": "英冠",
+      "home_team": "朴次茅斯",
+      "away_team": "德比郡",
+      "half_score": "0-1",
+      "full_score": "0-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-01",
+      "match_id": "5",
+      "league": "英冠",
+      "home_team": "林肯城",
+      "away_team": "布莱克本",
+      "half_score": "0-0",
+      "full_score": "0-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-01",
+      "match_id": "6",
+      "league": "英冠",
+      "home_team": "普雷斯顿",
+      "away_team": "布城",
+      "half_score": "0-1",
+      "full_score": "1-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-01",
+      "match_id": "7",
+      "league": "英冠",
+      "home_team": "谢菲联",
+      "away_team": "博尔顿",
+      "half_score": "1-1",
+      "full_score": "3-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-01",
+      "match_id": "8",
+      "league": "英冠",
+      "home_team": "伯明翰",
+      "away_team": "南安普敦",
+      "half_score": "0-1",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-01",
+      "match_id": "9",
+      "league": "英冠",
+      "home_team": "斯托克城",
+      "away_team": "诺维奇",
+      "half_score": "1-0",
+      "full_score": "1-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-02",
+      "match_id": "1",
+      "league": "日联赛杯",
+      "home_team": "八户南源",
+      "away_team": "枥木城",
+      "half_score": "0-1",
+      "full_score": "0-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-02",
+      "match_id": "11",
+      "league": "英冠",
+      "home_team": "伯恩利",
+      "away_team": "米堡",
+      "half_score": "0-1",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-02",
+      "match_id": "12",
+      "league": "巴甲",
+      "home_team": "弗拉门戈",
+      "away_team": "米拉索尔",
+      "half_score": "2-0",
+      "full_score": "2-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-02",
+      "match_id": "13",
+      "league": "巴西杯",
+      "home_team": "桑托斯",
+      "away_team": "帕梅拉斯",
+      "half_score": "0-0",
+      "full_score": "0-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-02",
+      "match_id": "2",
+      "league": "日职",
+      "home_team": "大阪樱花",
+      "away_team": "柏太阳神",
+      "half_score": "1-0",
+      "full_score": "2-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-02",
+      "match_id": "3",
+      "league": "日职",
+      "home_team": "水户蜀葵",
+      "away_team": "鹿岛鹿角",
+      "half_score": "2-0",
+      "full_score": "4-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-02",
+      "match_id": "4",
+      "league": "日职",
+      "home_team": "町田泽维",
+      "away_team": "川崎前锋",
+      "half_score": "0-0",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-02",
+      "match_id": "5",
+      "league": "意大利杯",
+      "home_team": "萨索洛",
+      "away_team": "弗洛西诺",
+      "half_score": "1-1",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-02",
+      "match_id": "6",
+      "league": "意大利杯",
+      "home_team": "乌迪内斯",
+      "away_team": "威尼斯",
+      "half_score": "1-1",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-02",
+      "match_id": "7",
+      "league": "英冠",
+      "home_team": "米尔沃尔",
+      "away_team": "雷克斯",
+      "half_score": "0-1",
+      "full_score": "0-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-02",
+      "match_id": "8",
+      "league": "英冠",
+      "home_team": "西布罗姆",
+      "away_team": "查尔顿",
+      "half_score": "0-0",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-02",
+      "match_id": "9",
+      "league": "英冠",
+      "home_team": "女王巡游",
+      "away_team": "加的夫城",
+      "half_score": "1-0",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-03",
+      "match_id": "1",
+      "league": "沙职",
+      "home_team": "迈季宽广",
+      "away_team": "拉斯永恒",
+      "half_score": "1-1",
+      "full_score": "2-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-03",
+      "match_id": "2",
+      "league": "沙职",
+      "home_team": "新未来SC",
+      "away_team": "赛哈海湾",
+      "half_score": "3-0",
+      "full_score": "3-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-03",
+      "match_id": "3",
+      "league": "瑞超",
+      "home_team": "米亚尔比",
+      "away_team": "佐加顿斯",
+      "half_score": "0-0",
+      "full_score": "0-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-03",
+      "match_id": "4",
+      "league": "沙职",
+      "home_team": "迪里耶",
+      "away_team": "胡巴卡德",
+      "half_score": "0-0",
+      "full_score": "0-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-03",
+      "match_id": "5",
+      "league": "法甲",
+      "home_team": "图卢兹",
+      "away_team": "里尔",
+      "half_score": "0-0",
+      "full_score": "0-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-03",
+      "match_id": "6",
+      "league": "西甲",
+      "home_team": "皇家社会",
+      "away_team": "塞尔塔",
+      "half_score": "0-0",
+      "full_score": "0-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-03",
+      "match_id": "7",
+      "league": "巴西杯",
+      "home_team": "格雷米奥",
+      "away_team": "巴西国际",
+      "half_score": "2-0",
+      "full_score": "3-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-04",
+      "match_id": "1",
+      "league": "德乙",
+      "home_team": "汉诺威96",
+      "away_team": "卡斯鲁厄",
+      "half_score": "2-1",
+      "full_score": "2-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-04",
+      "match_id": "10",
+      "league": "英超",
+      "home_team": "伊普斯",
+      "away_team": "利物浦",
+      "half_score": "0-2",
+      "full_score": "0-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-04",
+      "match_id": "11",
+      "league": "西甲",
+      "home_team": "贝蒂斯",
+      "away_team": "皇马",
+      "half_score": "0-0",
+      "full_score": "1-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-04",
+      "match_id": "12",
+      "league": "法甲",
+      "home_team": "巴黎圣曼",
+      "away_team": "摩纳哥",
+      "half_score": "1-0",
+      "full_score": "1-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-04",
+      "match_id": "14",
+      "league": "美职",
+      "home_team": "纽约城",
+      "away_team": "纳什维尔",
+      "half_score": "0-0",
+      "full_score": "0-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-04",
+      "match_id": "2",
+      "league": "法甲",
+      "home_team": "里昂",
+      "away_team": "欧塞尔",
+      "half_score": "2-1",
+      "full_score": "3-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-04",
+      "match_id": "3",
+      "league": "挪超",
+      "home_team": "腓特烈",
+      "away_team": "博德闪耀",
+      "half_score": "0-1",
+      "full_score": "1-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-04",
+      "match_id": "4",
+      "league": "沙职",
+      "home_team": "利雅青年",
+      "away_team": "利雅新月",
+      "half_score": "0-0",
+      "full_score": "0-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-04",
+      "match_id": "5",
+      "league": "法乙",
+      "home_team": "格勒诺布",
+      "away_team": "阿纳西",
+      "half_score": "0-0",
+      "full_score": "1-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-04",
+      "match_id": "6",
+      "league": "荷甲",
+      "home_team": "鹿斯巴达",
+      "away_team": "兹沃勒",
+      "half_score": "1-1",
+      "full_score": "2-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-04",
+      "match_id": "7",
+      "league": "荷乙",
+      "home_team": "埃门",
+      "away_team": "福伦丹",
+      "half_score": "1-0",
+      "full_score": "5-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-04",
+      "match_id": "8",
+      "league": "德甲",
+      "home_team": "斯图加特",
+      "away_team": "科隆",
+      "half_score": "1-0",
+      "full_score": "4-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-04",
+      "match_id": "9",
+      "league": "意甲",
+      "home_team": "热那亚",
+      "away_team": "科莫",
+      "half_score": "1-3",
+      "full_score": "1-4",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "1",
+      "league": "日职",
+      "home_team": "福冈黄蜂",
+      "away_team": "水户蜀葵",
+      "half_score": "0-0",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "10",
+      "league": "德甲",
+      "home_team": "霍芬海姆",
+      "away_team": "多特蒙德",
+      "half_score": "1-0",
+      "full_score": "2-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "11",
+      "league": "德甲",
+      "home_team": "勒沃库森",
+      "away_team": "柏林联合",
+      "half_score": "2-0",
+      "full_score": "4-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "12",
+      "league": "英超",
+      "home_team": "诺丁汉",
+      "away_team": "热刺",
+      "half_score": "0-0",
+      "full_score": "0-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "14",
+      "league": "英超",
+      "home_team": "布伦特",
+      "away_team": "桑德兰",
+      "half_score": "0-0",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "15",
+      "league": "英超",
+      "home_team": "富勒姆",
+      "away_team": "水晶宫",
+      "half_score": "2-1",
+      "full_score": "2-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "16",
+      "league": "西甲",
+      "home_team": "毕尔巴鄂",
+      "away_team": "马竞",
+      "half_score": "0-0",
+      "full_score": "3-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "17",
+      "league": "法甲",
+      "home_team": "朗斯",
+      "away_team": "洛里昂",
+      "half_score": "0-0",
+      "full_score": "0-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "18",
+      "league": "意甲",
+      "home_team": "国际米兰",
+      "away_team": "那不勒斯",
+      "half_score": "0-0",
+      "full_score": "3-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "19",
+      "league": "挪超",
+      "home_team": "布兰",
+      "away_team": "利勒斯特",
+      "half_score": "0-2",
+      "full_score": "1-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "2",
+      "league": "日乙",
+      "home_team": "山形山神",
+      "away_team": "甲府风林",
+      "half_score": "0-2",
+      "full_score": "1-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "20",
+      "league": "英超",
+      "home_team": "赫尔城",
+      "away_team": "维拉",
+      "half_score": "0-0",
+      "full_score": "0-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "22",
+      "league": "西甲",
+      "home_team": "巴列卡诺",
+      "away_team": "桑坦德",
+      "half_score": "2-2",
+      "full_score": "3-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "23",
+      "league": "葡超",
+      "home_team": "马里迪莫",
+      "away_team": "本菲卡",
+      "half_score": "0-1",
+      "full_score": "0-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "24",
+      "league": "沙职",
+      "home_team": "吉达联合",
+      "away_team": "利雅胜利",
+      "half_score": "2-1",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "25",
+      "league": "荷甲",
+      "home_team": "阿贾克斯",
+      "away_team": "埃因霍温",
+      "half_score": "1-2",
+      "full_score": "1-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "26",
+      "league": "意甲",
+      "home_team": "罗马",
+      "away_team": "亚特兰大",
+      "half_score": "0-0",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "27",
+      "league": "法甲",
+      "home_team": "勒阿弗尔",
+      "away_team": "布雷斯特",
+      "half_score": "0-1",
+      "full_score": "1-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "28",
+      "league": "西甲",
+      "home_team": "比利亚雷",
+      "away_team": "拉科",
+      "half_score": "1-1",
+      "full_score": "2-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "29",
+      "league": "巴甲",
+      "home_team": "布拉干RB",
+      "away_team": "巴伊亚",
+      "half_score": "2-2",
+      "full_score": "2-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "3",
+      "league": "韩职",
+      "home_team": "济州SK",
+      "away_team": "蔚山现代",
+      "half_score": "0-0",
+      "full_score": "0-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "4",
+      "league": "英超",
+      "home_team": "纽卡斯尔",
+      "away_team": "伯恩茅斯",
+      "half_score": "1-2",
+      "full_score": "2-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "5",
+      "league": "英冠",
+      "home_team": "林肯城",
+      "away_team": "南安普敦",
+      "half_score": "0-1",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "6",
+      "league": "意甲",
+      "home_team": "佛罗伦萨",
+      "away_team": "都灵",
+      "half_score": "0-0",
+      "full_score": "1-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "7",
+      "league": "德甲",
+      "home_team": "门兴",
+      "away_team": "埃沃斯堡",
+      "half_score": "2-1",
+      "full_score": "3-4",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "8",
+      "league": "德甲",
+      "home_team": "不来梅",
+      "away_team": "莱红牛",
+      "half_score": "1-0",
+      "full_score": "3-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-05",
+      "match_id": "9",
+      "league": "德甲",
+      "home_team": "帕德博恩",
+      "away_team": "弗赖堡",
+      "half_score": "0-1",
+      "full_score": "0-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-06",
+      "match_id": "1",
+      "league": "日职",
+      "home_team": "鹿岛鹿角",
+      "away_team": "浦和红钻",
+      "half_score": "0-1",
+      "full_score": "0-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-06",
+      "match_id": "10",
+      "league": "意甲",
+      "home_team": "帕尔马",
+      "away_team": "蒙扎",
+      "half_score": "0-1",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-06",
+      "match_id": "11",
+      "league": "法甲",
+      "home_team": "特鲁瓦",
+      "away_team": "斯特拉斯",
+      "half_score": "1-2",
+      "full_score": "2-6",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-06",
+      "match_id": "12",
+      "league": "德甲",
+      "home_team": "汉堡",
+      "away_team": "美因茨",
+      "half_score": "0-2",
+      "full_score": "0-5",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-06",
+      "match_id": "13",
+      "league": "西甲",
+      "home_team": "巴伦西亚",
+      "away_team": "巴萨",
+      "half_score": "0-2",
+      "full_score": "0-5",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-06",
+      "match_id": "14",
+      "league": "葡超",
+      "home_team": "圣克拉拉",
+      "away_team": "里奥阿维",
+      "half_score": "1-0",
+      "full_score": "4-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-06",
+      "match_id": "15",
+      "league": "挪超",
+      "home_team": "莫尔德",
+      "away_team": "奥斯KFUM",
+      "half_score": "1-0",
+      "full_score": "2-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-06",
+      "match_id": "16",
+      "league": "英超",
+      "home_team": "阿森纳",
+      "away_team": "切尔西",
+      "half_score": "1-1",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-06",
+      "match_id": "17",
+      "league": "德甲",
+      "home_team": "法兰克福",
+      "away_team": "奥格斯堡",
+      "half_score": "1-0",
+      "full_score": "1-4",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-06",
+      "match_id": "18",
+      "league": "意甲",
+      "home_team": "博洛尼亚",
+      "away_team": "萨索洛",
+      "half_score": "0-1",
+      "full_score": "2-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-06",
+      "match_id": "19",
+      "league": "西甲",
+      "home_team": "阿拉维斯",
+      "away_team": "奥萨苏纳",
+      "half_score": "2-0",
+      "full_score": "5-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-06",
+      "match_id": "2",
+      "league": "日职",
+      "home_team": "名古屋鲸",
+      "away_team": "町田泽维",
+      "half_score": "0-1",
+      "full_score": "1-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-06",
+      "match_id": "20",
+      "league": "西甲",
+      "home_team": "马拉加",
+      "away_team": "莱万特",
+      "half_score": "0-0",
+      "full_score": "0-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-06",
+      "match_id": "21",
+      "league": "意甲",
+      "home_team": "尤文图斯",
+      "away_team": "AC米兰",
+      "half_score": "0-0",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-06",
+      "match_id": "22",
+      "league": "法甲",
+      "home_team": "马赛",
+      "away_team": "巴黎FC",
+      "half_score": "1-2",
+      "full_score": "2-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-06",
+      "match_id": "23",
+      "league": "西甲",
+      "home_team": "西班牙人",
+      "away_team": "塞维利亚",
+      "half_score": "0-0",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-06",
+      "match_id": "24",
+      "league": "巴甲",
+      "home_team": "博塔弗戈",
+      "away_team": "帕梅拉斯",
+      "half_score": "0-0",
+      "full_score": "0-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-06",
+      "match_id": "3",
+      "league": "韩职",
+      "home_team": "安养FC",
+      "away_team": "江原FC",
+      "half_score": "0-1",
+      "full_score": "0-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-06",
+      "match_id": "4",
+      "league": "韩职",
+      "home_team": "金泉尚武",
+      "away_team": "光州FC",
+      "half_score": "1-0",
+      "full_score": "2-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-06",
+      "match_id": "5",
+      "league": "日职",
+      "home_team": "东京FC",
+      "away_team": "京都",
+      "half_score": "0-0",
+      "full_score": "2-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-06",
+      "match_id": "6",
+      "league": "英冠",
+      "home_team": "伯明翰",
+      "away_team": "伍尔弗",
+      "half_score": "2-2",
+      "full_score": "2-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-06",
+      "match_id": "7",
+      "league": "荷甲",
+      "home_team": "海伦芬",
+      "away_team": "阿尔克马",
+      "half_score": "2-1",
+      "full_score": "2-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-06",
+      "match_id": "8",
+      "league": "英超",
+      "home_team": "埃弗顿",
+      "away_team": "曼联",
+      "half_score": "0-0",
+      "full_score": "2-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-06",
+      "match_id": "9",
+      "league": "意甲",
+      "home_team": "弗洛西诺",
+      "away_team": "威尼斯",
+      "half_score": "2-0",
+      "full_score": "3-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-07",
+      "match_id": "1",
+      "league": "意甲",
+      "home_team": "卡利亚里",
+      "away_team": "莱切",
+      "half_score": "1-0",
+      "full_score": "1-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-07",
+      "match_id": "2",
+      "league": "西甲",
+      "home_team": "赫塔费",
+      "away_team": "塞尔塔",
+      "half_score": "1-0",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-07",
+      "match_id": "3",
+      "league": "瑞超",
+      "home_team": "马尔默",
+      "away_team": "索尔纳",
+      "half_score": "0-0",
+      "full_score": "0-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-07",
+      "match_id": "4",
+      "league": "瑞超",
+      "home_team": "卡尔马",
+      "away_team": "佐加顿斯",
+      "half_score": "0-0",
+      "full_score": "0-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-07",
+      "match_id": "5",
+      "league": "沙职",
+      "home_team": "利雅新月",
+      "away_team": "新未来SC",
+      "half_score": "0-2",
+      "full_score": "0-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-07",
+      "match_id": "6",
+      "league": "意甲",
+      "home_team": "乌迪内斯",
+      "away_team": "拉齐奥",
+      "half_score": "0-0",
+      "full_score": "1-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-07",
+      "match_id": "7",
+      "league": "葡超",
+      "home_team": "埃斯托里",
+      "away_team": "阿罗卡",
+      "half_score": "0-0",
+      "full_score": "0-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-07",
+      "match_id": "8",
+      "league": "西甲",
+      "home_team": "埃尔切",
+      "away_team": "皇家社会",
+      "half_score": "0-2",
+      "full_score": "2-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-07",
+      "match_id": "9",
+      "league": "巴甲",
+      "home_team": "维多利亚",
+      "away_team": "格雷米奥",
+      "half_score": "0-0",
+      "full_score": "1-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-08",
+      "match_id": "1",
+      "league": "韩职",
+      "home_team": "蔚山现代",
+      "away_team": "首尔FC",
+      "half_score": "0-0",
+      "full_score": "1-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-08",
+      "match_id": "10",
+      "league": "欧冠",
+      "home_team": "里尔",
+      "away_team": "贝蒂斯",
+      "half_score": "2-1",
+      "full_score": "2-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-08",
+      "match_id": "11",
+      "league": "欧冠",
+      "home_team": "波尔图",
+      "away_team": "曼城",
+      "half_score": "0-0",
+      "full_score": "0-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-08",
+      "match_id": "12",
+      "league": "解放者杯",
+      "home_team": "弗鲁米嫩",
+      "away_team": "普拉滕斯",
+      "half_score": "2-0",
+      "full_score": "2-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-08",
+      "match_id": "2",
+      "league": "欧冠",
+      "home_team": "雅典AEK",
+      "away_team": "LASK林茨",
+      "half_score": "1-0",
+      "full_score": "1-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-08",
+      "match_id": "3",
+      "league": "欧冠",
+      "home_team": "布鲁日",
+      "away_team": "维拉",
+      "half_score": "1-3",
+      "full_score": "2-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-08",
+      "match_id": "4",
+      "league": "荷甲",
+      "home_team": "奈梅亨",
+      "away_team": "SBV精英",
+      "half_score": "1-1",
+      "full_score": "2-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-08",
+      "match_id": "5",
+      "league": "沙职",
+      "home_team": "胡巴卡德",
+      "away_team": "吉达国民",
+      "half_score": "3-0",
+      "full_score": "3-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-08",
+      "match_id": "6",
+      "league": "英冠",
+      "home_team": "南安普敦",
+      "away_team": "斯旺西",
+      "half_score": "2-0",
+      "full_score": "3-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-08",
+      "match_id": "7",
+      "league": "英联赛杯",
+      "home_team": "桑德兰",
+      "away_team": "赫尔城",
+      "half_score": "0-0",
+      "full_score": "1-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-08",
+      "match_id": "8",
+      "league": "欧冠",
+      "home_team": "皇马",
+      "away_team": "国际米兰",
+      "half_score": "2-0",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-08",
+      "match_id": "9",
+      "league": "欧冠",
+      "home_team": "多特蒙德",
+      "away_team": "比利亚雷",
+      "half_score": "0-0",
+      "full_score": "3-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-09",
+      "match_id": "1",
+      "league": "韩职",
+      "home_team": "江原FC",
+      "away_team": "全北现代",
+      "half_score": "0-1",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-09",
+      "match_id": "10",
+      "league": "英冠",
+      "home_team": "查尔顿",
+      "away_team": "女王巡游",
+      "half_score": "0-0",
+      "full_score": "0-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-09",
+      "match_id": "11",
+      "league": "英联赛杯",
+      "home_team": "切尔西",
+      "away_team": "利兹联",
+      "half_score": "0-1",
+      "full_score": "6-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-09",
+      "match_id": "13",
+      "league": "解放者杯",
+      "home_team": "帕梅拉斯",
+      "away_team": "基多体大",
+      "half_score": "1-0",
+      "full_score": "1-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-09",
+      "match_id": "14",
+      "league": "解放者杯",
+      "home_team": "拉普大学",
+      "away_team": "科林蒂安",
+      "half_score": "1-0",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-09",
+      "match_id": "15",
+      "league": "美职",
+      "home_team": "芝加哥",
+      "away_team": "迈国际",
+      "half_score": "1-0",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-09",
+      "match_id": "2",
+      "league": "沙职",
+      "home_team": "拉斯永恒",
+      "away_team": "利雅青年",
+      "half_score": "1-1",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-09",
+      "match_id": "6",
+      "league": "欧冠",
+      "home_team": "里斯本",
+      "away_team": "加拉塔萨",
+      "half_score": "1-1",
+      "full_score": "3-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-09",
+      "match_id": "7",
+      "league": "欧冠",
+      "home_team": "那不勒斯",
+      "away_team": "阿森纳",
+      "half_score": "0-0",
+      "full_score": "0-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-09",
+      "match_id": "8",
+      "league": "欧冠",
+      "home_team": "利物浦",
+      "away_team": "马竞",
+      "half_score": "1-1",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-10",
+      "match_id": "1",
+      "league": "欧冠",
+      "home_team": "费内巴切",
+      "away_team": "罗马",
+      "half_score": "0-1",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-10",
+      "match_id": "2",
+      "league": "欧冠",
+      "home_team": "科莫",
+      "away_team": "莱红牛",
+      "half_score": "2-0",
+      "full_score": "4-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-10",
+      "match_id": "4",
+      "league": "欧冠",
+      "home_team": "斯拉维亚",
+      "away_team": "朗斯",
+      "half_score": "0-0",
+      "full_score": "2-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-10",
+      "match_id": "6",
+      "league": "葡超",
+      "home_team": "阿马多拉",
+      "away_team": "布拉加",
+      "half_score": "1-1",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-10",
+      "match_id": "7",
+      "league": "解放者杯",
+      "home_team": "德尔瓦耶",
+      "away_team": "弗拉门戈",
+      "half_score": "0-0",
+      "full_score": "0-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-11",
+      "match_id": "1",
+      "league": "日职",
+      "home_team": "京都",
+      "away_team": "柏太阳神",
+      "half_score": "2-0",
+      "full_score": "2-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-11",
+      "match_id": "10",
+      "league": "英冠",
+      "home_team": "西汉姆联",
+      "away_team": "雷克斯",
+      "half_score": "2-0",
+      "full_score": "6-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-11",
+      "match_id": "11",
+      "league": "西甲",
+      "home_team": "塞维利亚",
+      "away_team": "巴伦西亚",
+      "half_score": "0-0",
+      "full_score": "1-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-11",
+      "match_id": "12",
+      "league": "巴甲",
+      "home_team": "科里蒂巴",
+      "away_team": "巴竞技",
+      "half_score": "1-2",
+      "full_score": "3-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-11",
+      "match_id": "2",
+      "league": "沙职",
+      "home_team": "哈马费萨",
+      "away_team": "吉达联合",
+      "half_score": "0-2",
+      "full_score": "1-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-11",
+      "match_id": "3",
+      "league": "德乙",
+      "home_team": "纽伦堡",
+      "away_team": "汉诺威96",
+      "half_score": "1-1",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-11",
+      "match_id": "4",
+      "league": "瑞超",
+      "home_team": "赫根",
+      "away_team": "米亚尔比",
+      "half_score": "0-1",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-11",
+      "match_id": "6",
+      "league": "荷乙",
+      "home_team": "马斯特里",
+      "away_team": "阿尔梅勒",
+      "half_score": "0-0",
+      "full_score": "0-4",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-11",
+      "match_id": "7",
+      "league": "德甲",
+      "home_team": "柏林联合",
+      "away_team": "沙尔克04",
+      "half_score": "0-1",
+      "full_score": "1-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-11",
+      "match_id": "8",
+      "league": "意甲",
+      "home_team": "威尼斯",
+      "away_team": "佛罗伦萨",
+      "half_score": "1-2",
+      "full_score": "2-4",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-11",
+      "match_id": "9",
+      "league": "法甲",
+      "home_team": "雷恩",
+      "away_team": "马赛",
+      "half_score": "0-0",
+      "full_score": "1-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "1",
+      "league": "韩职",
+      "home_team": "蔚山现代",
+      "away_team": "仁川联",
+      "half_score": "0-0",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "10",
+      "league": "德甲",
+      "home_team": "奥格斯堡",
+      "away_team": "勒沃库森",
+      "half_score": "0-1",
+      "full_score": "2-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "11",
+      "league": "德甲",
+      "home_team": "霍芬海姆",
+      "away_team": "斯图加特",
+      "half_score": "1-0",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "12",
+      "league": "英超",
+      "home_team": "切尔西",
+      "away_team": "赫尔城",
+      "half_score": "1-2",
+      "full_score": "2-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "13",
+      "league": "英超",
+      "home_team": "伯恩茅斯",
+      "away_team": "布伦特",
+      "half_score": "1-1",
+      "full_score": "2-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "14",
+      "league": "英超",
+      "home_team": "维拉",
+      "away_team": "诺丁汉",
+      "half_score": "0-0",
+      "full_score": "1-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "15",
+      "league": "英超",
+      "home_team": "水晶宫",
+      "away_team": "伊普斯",
+      "half_score": "1-2",
+      "full_score": "2-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "16",
+      "league": "英超",
+      "home_team": "利物浦",
+      "away_team": "富勒姆",
+      "half_score": "0-0",
+      "full_score": "0-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "17",
+      "league": "西甲",
+      "home_team": "奥萨苏纳",
+      "away_team": "西班牙人",
+      "half_score": "0-2",
+      "full_score": "0-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "18",
+      "league": "法甲",
+      "home_team": "斯特拉斯",
+      "away_team": "摩纳哥",
+      "half_score": "0-0",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "19",
+      "league": "沙职",
+      "home_team": "布赖合作",
+      "away_team": "利雅新月",
+      "half_score": "0-3",
+      "full_score": "0-6",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "2",
+      "league": "韩职",
+      "home_team": "全北现代",
+      "away_team": "首尔FC",
+      "half_score": "1-1",
+      "full_score": "1-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "20",
+      "league": "意甲",
+      "home_team": "拉齐奥",
+      "away_team": "AC米兰",
+      "half_score": "2-0",
+      "full_score": "2-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "21",
+      "league": "挪超",
+      "home_team": "罗森博格",
+      "away_team": "特罗姆瑟",
+      "half_score": "4-0",
+      "full_score": "5-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "22",
+      "league": "英超",
+      "home_team": "热刺",
+      "away_team": "埃弗顿",
+      "half_score": "0-0",
+      "full_score": "0-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "23",
+      "league": "德甲",
+      "home_team": "科隆",
+      "away_team": "不来梅",
+      "half_score": "1-0",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "24",
+      "league": "西甲",
+      "home_team": "毕尔巴鄂",
+      "away_team": "埃尔切",
+      "half_score": "0-0",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "25",
+      "league": "葡超",
+      "home_team": "卡萨皮亚",
+      "away_team": "波尔图",
+      "half_score": "1-1",
+      "full_score": "1-4",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "26",
+      "league": "荷甲",
+      "home_team": "福图纳",
+      "away_team": "阿贾克斯",
+      "half_score": "0-1",
+      "full_score": "1-5",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "27",
+      "league": "意甲",
+      "home_team": "亚特兰大",
+      "away_team": "卡利亚里",
+      "half_score": "1-1",
+      "full_score": "1-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "28",
+      "league": "法甲",
+      "home_team": "巴黎FC",
+      "away_team": "里昂",
+      "half_score": "0-0",
+      "full_score": "0-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "29",
+      "league": "英超",
+      "home_team": "桑德兰",
+      "away_team": "阿森纳",
+      "half_score": "0-0",
+      "full_score": "0-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "3",
+      "league": "日职",
+      "home_team": "广岛三箭",
+      "away_team": "大阪樱花",
+      "half_score": "3-0",
+      "full_score": "6-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "4",
+      "league": "日职",
+      "home_team": "大阪钢巴",
+      "away_team": "东京FC",
+      "half_score": "0-1",
+      "full_score": "0-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "5",
+      "league": "西甲",
+      "home_team": "桑坦德",
+      "away_team": "阿拉维斯",
+      "half_score": "1-1",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "6",
+      "league": "意甲",
+      "home_team": "热那亚",
+      "away_team": "弗洛西诺",
+      "half_score": "0-1",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "7",
+      "league": "德甲",
+      "home_team": "弗赖堡",
+      "away_team": "门兴",
+      "half_score": "2-0",
+      "full_score": "5-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "8",
+      "league": "德甲",
+      "home_team": "美因茨",
+      "away_team": "法兰克福",
+      "half_score": "0-2",
+      "full_score": "1-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-12",
+      "match_id": "9",
+      "league": "德甲",
+      "home_team": "多特蒙德",
+      "away_team": "帕德博恩",
+      "half_score": "1-0",
+      "full_score": "3-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-13",
+      "match_id": "1",
+      "league": "日职",
+      "home_team": "东京绿茵",
+      "away_team": "千叶市原",
+      "half_score": "0-0",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-13",
+      "match_id": "11",
+      "league": "挪超",
+      "home_team": "汉坎",
+      "away_team": "莫尔德",
+      "half_score": "0-1",
+      "full_score": "1-5",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-13",
+      "match_id": "12",
+      "league": "法甲",
+      "home_team": "勒芒",
+      "away_team": "朗斯",
+      "half_score": "2-1",
+      "full_score": "2-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-13",
+      "match_id": "13",
+      "league": "英超",
+      "home_team": "曼联",
+      "away_team": "曼城",
+      "half_score": "0-0",
+      "full_score": "0-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-13",
+      "match_id": "15",
+      "league": "意甲",
+      "home_team": "那不勒斯",
+      "away_team": "博洛尼亚",
+      "half_score": "0-0",
+      "full_score": "1-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-13",
+      "match_id": "16",
+      "league": "西甲",
+      "home_team": "赫塔费",
+      "away_team": "拉科",
+      "half_score": "0-0",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-13",
+      "match_id": "19",
+      "league": "意甲",
+      "home_team": "萨索洛",
+      "away_team": "尤文图斯",
+      "half_score": "0-0",
+      "full_score": "3-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-13",
+      "match_id": "2",
+      "league": "日乙",
+      "home_team": "仙台七夕",
+      "away_team": "札幌冈萨",
+      "half_score": "1-1",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-13",
+      "match_id": "20",
+      "league": "法甲",
+      "home_team": "布雷斯特",
+      "away_team": "巴黎圣曼",
+      "half_score": "0-1",
+      "full_score": "0-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-13",
+      "match_id": "21",
+      "league": "西甲",
+      "home_team": "皇家社会",
+      "away_team": "马竞",
+      "half_score": "0-0",
+      "full_score": "0-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-13",
+      "match_id": "22",
+      "league": "葡超",
+      "home_team": "法马利康",
+      "away_team": "里斯本",
+      "half_score": "0-0",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-13",
+      "match_id": "23",
+      "league": "巴甲",
+      "home_team": "弗拉门戈",
+      "away_team": "科林蒂安",
+      "half_score": "0-0",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-13",
+      "match_id": "24",
+      "league": "美职",
+      "home_team": "芝加哥",
+      "away_team": "新英格兰",
+      "half_score": "0-1",
+      "full_score": "1-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-13",
+      "match_id": "3",
+      "league": "西甲",
+      "home_team": "塞尔塔",
+      "away_team": "马拉加",
+      "half_score": "1-0",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-13",
+      "match_id": "5",
+      "league": "芬超",
+      "home_team": "库奥皮奥",
+      "away_team": "赫尔辛基",
+      "half_score": "0-0",
+      "full_score": "0-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-13",
+      "match_id": "6",
+      "league": "荷甲",
+      "home_team": "海伦芬",
+      "away_team": "特尔斯达",
+      "half_score": "0-0",
+      "full_score": "0-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-13",
+      "match_id": "7",
+      "league": "意甲",
+      "home_team": "莱切",
+      "away_team": "蒙扎",
+      "half_score": "3-1",
+      "full_score": "3-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-13",
+      "match_id": "8",
+      "league": "法甲",
+      "home_team": "里尔",
+      "away_team": "特鲁瓦",
+      "half_score": "1-0",
+      "full_score": "2-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-13",
+      "match_id": "9",
+      "league": "德甲",
+      "home_team": "莱红牛",
+      "away_team": "汉堡",
+      "half_score": "2-0",
+      "full_score": "5-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-14",
+      "match_id": "10",
+      "league": "英超",
+      "home_team": "利兹联",
+      "away_team": "纽卡斯尔",
+      "half_score": "3-0",
+      "full_score": "4-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-14",
+      "match_id": "11",
+      "league": "西甲",
+      "home_team": "比利亚雷",
+      "away_team": "贝蒂斯",
+      "half_score": "1-2",
+      "full_score": "1-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-14",
+      "match_id": "12",
+      "league": "葡超",
+      "home_team": "布拉加",
+      "away_team": "埃斯托里",
+      "half_score": "0-0",
+      "full_score": "1-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-14",
+      "match_id": "2",
+      "league": "芬超",
+      "home_team": "国际图尔",
+      "away_team": "瓦萨",
+      "half_score": "0-0",
+      "full_score": "1-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-14",
+      "match_id": "3",
+      "league": "意甲",
+      "home_team": "科莫",
+      "away_team": "帕尔马",
+      "half_score": "1-0",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-14",
+      "match_id": "4",
+      "league": "意甲",
+      "home_team": "都灵",
+      "away_team": "罗马",
+      "half_score": "0-1",
+      "full_score": "0-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-14",
+      "match_id": "5",
+      "league": "瑞超",
+      "home_team": "佐加顿斯",
+      "away_team": "盖斯",
+      "half_score": "1-0",
+      "full_score": "2-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-14",
+      "match_id": "8",
+      "league": "意甲",
+      "home_team": "国际米兰",
+      "away_team": "乌迪内斯",
+      "half_score": "2-2",
+      "full_score": "5-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-14",
+      "match_id": "9",
+      "league": "法乙",
+      "home_team": "圣旺红星",
+      "away_team": "梅斯",
+      "half_score": "0-0",
+      "full_score": "1-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-15",
+      "match_id": "1",
+      "league": "亚冠精英",
+      "home_team": "叻武里",
+      "away_team": "上海海港",
+      "half_score": "0-3",
+      "full_score": "4-6",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-15",
+      "match_id": "10",
+      "league": "英冠",
+      "home_team": "米堡",
+      "away_team": "米尔沃尔",
+      "half_score": "0-2",
+      "full_score": "2-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-15",
+      "match_id": "11",
+      "league": "英联赛杯",
+      "home_team": "利物浦",
+      "away_team": "热刺",
+      "half_score": "1-0",
+      "full_score": "3-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-15",
+      "match_id": "12",
+      "league": "英联赛杯",
+      "home_team": "伊普斯",
+      "away_team": "阿森纳",
+      "half_score": "0-2",
+      "full_score": "2-4",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-15",
+      "match_id": "14",
+      "league": "解放者杯",
+      "home_team": "普拉滕斯",
+      "away_team": "弗鲁米嫩",
+      "half_score": "2-0",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-15",
+      "match_id": "2",
+      "league": "亚冠精英",
+      "home_team": "大田市民",
+      "away_team": "京都",
+      "half_score": "0-0",
+      "full_score": "1-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-15",
+      "match_id": "3",
+      "league": "亚运男足",
+      "home_team": "卡塔尔亚",
+      "away_team": "韩国亚",
+      "half_score": "0-3",
+      "full_score": "1-4",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-15",
+      "match_id": "4",
+      "league": "亚冠精英",
+      "home_team": "柔佛",
+      "away_team": "布里兰",
+      "half_score": "1-1",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-15",
+      "match_id": "5",
+      "league": "亚冠精英",
+      "home_team": "北京国安",
+      "away_team": "浦项制铁",
+      "half_score": "2-1",
+      "full_score": "3-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-15",
+      "match_id": "6",
+      "league": "亚冠精英",
+      "home_team": "阿布艾因",
+      "away_team": "利雅胜利",
+      "half_score": "1-0",
+      "full_score": "4-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-15",
+      "match_id": "7",
+      "league": "西甲",
+      "home_team": "巴列卡诺",
+      "away_team": "西班牙人",
+      "half_score": "2-0",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-15",
+      "match_id": "8",
+      "league": "西甲",
+      "home_team": "阿拉维斯",
+      "away_team": "巴伦西亚",
+      "half_score": "0-0",
+      "full_score": "0-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-16",
+      "match_id": "1",
+      "league": "亚运男足",
+      "home_team": "中国亚",
+      "away_team": "朝鲜亚",
+      "half_score": "1-1",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-16",
+      "match_id": "10",
+      "league": "欧罗巴",
+      "home_team": "格风暴",
+      "away_team": "雷恩",
+      "half_score": "0-0",
+      "full_score": "0-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-16",
+      "match_id": "11",
+      "league": "欧罗巴",
+      "home_team": "安德莱",
+      "away_team": "里昂",
+      "half_score": "0-2",
+      "full_score": "1-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-16",
+      "match_id": "12",
+      "league": "英联赛杯",
+      "home_team": "考文垂",
+      "away_team": "维拉",
+      "half_score": "1-2",
+      "full_score": "1-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-16",
+      "match_id": "14",
+      "league": "西甲",
+      "home_team": "莱万特",
+      "away_team": "毕尔巴鄂",
+      "half_score": "0-0",
+      "full_score": "0-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-16",
+      "match_id": "15",
+      "league": "解放者杯",
+      "home_team": "基多体大",
+      "away_team": "帕梅拉斯",
+      "half_score": "1-1",
+      "full_score": "3-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-16",
+      "match_id": "16",
+      "league": "巴甲",
+      "home_team": "博塔弗戈",
+      "away_team": "格雷米奥",
+      "half_score": "1-1",
+      "full_score": "3-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-16",
+      "match_id": "17",
+      "league": "解放者杯",
+      "home_team": "科林蒂安",
+      "away_team": "拉普大学",
+      "half_score": "0-0",
+      "full_score": "0-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-16",
+      "match_id": "2",
+      "league": "亚冠精英",
+      "home_team": "全北现代",
+      "away_team": "柏太阳神",
+      "half_score": "0-1",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-16",
+      "match_id": "4",
+      "league": "欧罗巴",
+      "home_team": "奥莫尼亚",
+      "away_team": "塞尔塔",
+      "half_score": "0-0",
+      "full_score": "1-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-16",
+      "match_id": "5",
+      "league": "西甲",
+      "home_team": "拉科",
+      "away_team": "塞维利亚",
+      "half_score": "0-0",
+      "full_score": "0-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-16",
+      "match_id": "6",
+      "league": "西甲",
+      "home_team": "马竞",
+      "away_team": "奥萨苏纳",
+      "half_score": "1-0",
+      "full_score": "4-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-16",
+      "match_id": "7",
+      "league": "欧罗巴",
+      "home_team": "AC米兰",
+      "away_team": "本菲卡",
+      "half_score": "0-1",
+      "full_score": "0-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-16",
+      "match_id": "9",
+      "league": "欧罗巴",
+      "home_team": "桑德兰",
+      "away_team": "阿尔克马",
+      "half_score": "0-0",
+      "full_score": "1-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-17",
+      "match_id": "10",
+      "league": "西甲",
+      "home_team": "马拉加",
+      "away_team": "比利亚雷",
+      "half_score": "1-2",
+      "full_score": "1-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-17",
+      "match_id": "11",
+      "league": "解放者杯",
+      "home_team": "弗拉门戈",
+      "away_team": "德尔瓦耶",
+      "half_score": "0-1",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-17",
+      "match_id": "2",
+      "league": "亚冠乙",
+      "home_team": "上海申花",
+      "away_team": "淡宾尼士",
+      "half_score": "1-1",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-17",
+      "match_id": "3",
+      "league": "欧罗巴",
+      "home_team": "克里特",
+      "away_team": "霍芬海姆",
+      "half_score": "1-0",
+      "full_score": "2-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-17",
+      "match_id": "4",
+      "league": "西甲",
+      "home_team": "贝蒂斯",
+      "away_team": "赫塔费",
+      "half_score": "1-0",
+      "full_score": "1-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-17",
+      "match_id": "5",
+      "league": "欧罗巴",
+      "home_team": "水晶宫",
+      "away_team": "波兹南",
+      "half_score": "3-0",
+      "full_score": "4-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-17",
+      "match_id": "6",
+      "league": "欧罗巴",
+      "home_team": "皇家社会",
+      "away_team": "伯恩茅斯",
+      "half_score": "0-2",
+      "full_score": "1-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-17",
+      "match_id": "7",
+      "league": "欧罗巴",
+      "home_team": "尤文图斯",
+      "away_team": "奈梅亨",
+      "half_score": "3-0",
+      "full_score": "5-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-17",
+      "match_id": "8",
+      "league": "欧罗巴",
+      "home_team": "贝西克塔",
+      "away_team": "马赛",
+      "half_score": "1-1",
+      "full_score": "4-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-17",
+      "match_id": "9",
+      "league": "欧罗巴",
+      "home_team": "利勒斯特",
+      "away_team": "托林斯",
+      "half_score": "0-1",
+      "full_score": "1-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-18",
+      "match_id": "1",
+      "league": "亚运男足",
+      "home_team": "沙特亚",
+      "away_team": "卡塔尔亚",
+      "half_score": "1-0",
+      "full_score": "2-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-18",
+      "match_id": "10",
+      "league": "法甲",
+      "home_team": "摩纳哥",
+      "away_team": "朗斯",
+      "half_score": "1-0",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-18",
+      "match_id": "11",
+      "league": "英超",
+      "home_team": "布伦特",
+      "away_team": "切尔西",
+      "half_score": "0-0",
+      "full_score": "3-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-18",
+      "match_id": "12",
+      "league": "英冠",
+      "home_team": "布城",
+      "away_team": "沃特福德",
+      "half_score": "1-0",
+      "full_score": "1-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-18",
+      "match_id": "13",
+      "league": "西甲",
+      "home_team": "西班牙人",
+      "away_team": "埃尔切",
+      "half_score": "0-2",
+      "full_score": "1-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-18",
+      "match_id": "14",
+      "league": "美职",
+      "home_team": "纽约城",
+      "away_team": "纽约红牛",
+      "half_score": "0-0",
+      "full_score": "0-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-18",
+      "match_id": "2",
+      "league": "芬超",
+      "home_team": "赫尔火花",
+      "away_team": "赫尔辛基",
+      "half_score": "1-1",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-18",
+      "match_id": "3",
+      "league": "德乙",
+      "home_team": "沃夫斯堡",
+      "away_team": "达姆施塔",
+      "half_score": "2-1",
+      "full_score": "5-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-18",
+      "match_id": "4",
+      "league": "挪超",
+      "home_team": "萨普斯堡",
+      "away_team": "奥斯KFUM",
+      "half_score": "1-2",
+      "full_score": "1-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-18",
+      "match_id": "5",
+      "league": "法乙",
+      "home_team": "兰斯",
+      "away_team": "蒙彼利埃",
+      "half_score": "1-1",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-18",
+      "match_id": "6",
+      "league": "荷甲",
+      "home_team": "格罗宁根",
+      "away_team": "兹沃勒",
+      "half_score": "2-0",
+      "full_score": "3-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-18",
+      "match_id": "7",
+      "league": "荷乙",
+      "home_team": "登博思",
+      "away_team": "海尔蒙特",
+      "half_score": "2-1",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-18",
+      "match_id": "9",
+      "league": "意甲",
+      "home_team": "蒙扎",
+      "away_team": "萨索洛",
+      "half_score": "0-0",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "1",
+      "league": "日职",
+      "home_team": "长崎航海",
+      "away_team": "大阪樱花",
+      "half_score": "1-0",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "10",
+      "league": "瑞超",
+      "home_team": "韦斯特罗",
+      "away_team": "马尔默",
+      "half_score": "1-0",
+      "full_score": "2-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "11",
+      "league": "德甲",
+      "home_team": "法兰克福",
+      "away_team": "弗赖堡",
+      "half_score": "2-1",
+      "full_score": "2-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "12",
+      "league": "德甲",
+      "home_team": "汉堡",
+      "away_team": "科隆",
+      "half_score": "1-0",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "13",
+      "league": "德甲",
+      "home_team": "门兴",
+      "away_team": "美因茨",
+      "half_score": "1-2",
+      "full_score": "3-4",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "14",
+      "league": "德甲",
+      "home_team": "不来梅",
+      "away_team": "奥格斯堡",
+      "half_score": "0-1",
+      "full_score": "3-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "15",
+      "league": "英超",
+      "home_team": "埃弗顿",
+      "away_team": "伊普斯",
+      "half_score": "1-0",
+      "full_score": "1-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "16",
+      "league": "英超",
+      "home_team": "纽卡斯尔",
+      "away_team": "赫尔城",
+      "half_score": "2-0",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "17",
+      "league": "挪超",
+      "home_team": "克里斯蒂",
+      "away_team": "罗森博格",
+      "half_score": "1-1",
+      "full_score": "1-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "18",
+      "league": "西甲",
+      "home_team": "毕尔巴鄂",
+      "away_team": "阿拉维斯",
+      "half_score": "0-0",
+      "full_score": "0-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "19",
+      "league": "法甲",
+      "home_team": "巴黎FC",
+      "away_team": "斯特拉斯",
+      "half_score": "1-0",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "2",
+      "league": "日乙",
+      "home_team": "藤枝MYFC",
+      "away_team": "大宫松鼠",
+      "half_score": "1-0",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "20",
+      "league": "意甲",
+      "home_team": "罗马",
+      "away_team": "国际米兰",
+      "half_score": "2-0",
+      "full_score": "2-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "21",
+      "league": "英超",
+      "home_team": "诺丁汉",
+      "away_team": "考文垂",
+      "half_score": "0-0",
+      "full_score": "0-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "22",
+      "league": "德甲",
+      "home_team": "斯图加特",
+      "away_team": "多特蒙德",
+      "half_score": "0-0",
+      "full_score": "0-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "23",
+      "league": "西甲",
+      "home_team": "塞尔塔",
+      "away_team": "桑坦德",
+      "half_score": "2-0",
+      "full_score": "5-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "25",
+      "league": "意甲",
+      "home_team": "威尼斯",
+      "away_team": "拉齐奥",
+      "half_score": "0-0",
+      "full_score": "0-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "26",
+      "league": "法甲",
+      "home_team": "昂热",
+      "away_team": "特鲁瓦",
+      "half_score": "1-0",
+      "full_score": "2-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "27",
+      "league": "法甲",
+      "home_team": "里昂",
+      "away_team": "雷恩",
+      "half_score": "2-0",
+      "full_score": "4-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "3",
+      "league": "韩职",
+      "home_team": "安养FC",
+      "away_team": "蔚山现代",
+      "half_score": "1-0",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "30",
+      "league": "巴甲",
+      "home_team": "米拉索尔",
+      "away_team": "博塔弗戈",
+      "half_score": "2-0",
+      "full_score": "2-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "4",
+      "league": "日职",
+      "home_team": "横滨水手",
+      "away_team": "水户蜀葵",
+      "half_score": "1-0",
+      "full_score": "2-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "5",
+      "league": "英超",
+      "home_team": "热刺",
+      "away_team": "维拉",
+      "half_score": "0-1",
+      "full_score": "2-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "6",
+      "league": "英冠",
+      "home_team": "斯托克城",
+      "away_team": "谢菲联",
+      "half_score": "0-0",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "7",
+      "league": "西甲",
+      "home_team": "奥萨苏纳",
+      "away_team": "巴列卡诺",
+      "half_score": "1-0",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "8",
+      "league": "意甲",
+      "home_team": "乌迪内斯",
+      "away_team": "卡利亚里",
+      "half_score": "0-0",
+      "full_score": "0-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-19",
+      "match_id": "9",
+      "league": "意甲",
+      "home_team": "博洛尼亚",
+      "away_team": "都灵",
+      "half_score": "1-0",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "1",
+      "league": "亚运男足",
+      "home_team": "伊朗亚",
+      "away_team": "中国亚",
+      "half_score": "0-0",
+      "full_score": "0-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "10",
+      "league": "英超",
+      "home_team": "利兹联",
+      "away_team": "水晶宫",
+      "half_score": "0-0",
+      "full_score": "0-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "11",
+      "league": "英超",
+      "home_team": "伯恩茅斯",
+      "away_team": "利物浦",
+      "half_score": "0-0",
+      "full_score": "0-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "12",
+      "league": "英超",
+      "home_team": "曼城",
+      "away_team": "桑德兰",
+      "half_score": "3-2",
+      "full_score": "5-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "13",
+      "league": "意甲",
+      "home_team": "帕尔马",
+      "away_team": "热那亚",
+      "half_score": "1-0",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "14",
+      "league": "意甲",
+      "home_team": "弗洛西诺",
+      "away_team": "科莫",
+      "half_score": "2-0",
+      "full_score": "2-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "15",
+      "league": "德甲",
+      "home_team": "勒沃库森",
+      "away_team": "莱红牛",
+      "half_score": "1-0",
+      "full_score": "2-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "16",
+      "league": "西甲",
+      "home_team": "马竞",
+      "away_team": "皇马",
+      "half_score": "0-0",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "17",
+      "league": "瑞超",
+      "home_team": "米亚尔比",
+      "away_team": "盖斯",
+      "half_score": "0-1",
+      "full_score": "0-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "18",
+      "league": "挪超",
+      "home_team": "维京",
+      "away_team": "利勒斯特",
+      "half_score": "2-0",
+      "full_score": "3-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "19",
+      "league": "法甲",
+      "home_team": "尼斯",
+      "away_team": "里尔",
+      "half_score": "1-0",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "2",
+      "league": "日职",
+      "home_team": "町田泽维",
+      "away_team": "柏太阳神",
+      "half_score": "1-0",
+      "full_score": "2-4",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "20",
+      "league": "英超",
+      "home_team": "富勒姆",
+      "away_team": "曼联",
+      "half_score": "0-0",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "21",
+      "league": "德甲",
+      "home_team": "沙尔克04",
+      "away_team": "埃沃斯堡",
+      "half_score": "0-0",
+      "full_score": "0-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "22",
+      "league": "意甲",
+      "home_team": "尤文图斯",
+      "away_team": "亚特兰大",
+      "half_score": "1-0",
+      "full_score": "2-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "23",
+      "league": "西甲",
+      "home_team": "比利亚雷",
+      "away_team": "莱万特",
+      "half_score": "1-1",
+      "full_score": "3-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "24",
+      "league": "西甲",
+      "home_team": "拉科",
+      "away_team": "贝蒂斯",
+      "half_score": "0-1",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "25",
+      "league": "德甲",
+      "home_team": "帕德博恩",
+      "away_team": "霍芬海姆",
+      "half_score": "2-0",
+      "full_score": "3-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "26",
+      "league": "意甲",
+      "home_team": "AC米兰",
+      "away_team": "莱切",
+      "half_score": "1-0",
+      "full_score": "3-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "27",
+      "league": "法甲",
+      "home_team": "马赛",
+      "away_team": "巴黎圣曼",
+      "half_score": "0-0",
+      "full_score": "1-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "28",
+      "league": "西甲",
+      "home_team": "巴伦西亚",
+      "away_team": "皇家社会",
+      "half_score": "0-1",
+      "full_score": "2-3",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "29",
+      "league": "葡超",
+      "home_team": "波尔图",
+      "away_team": "本菲卡",
+      "half_score": "1-0",
+      "full_score": "3-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "3",
+      "league": "日职",
+      "home_team": "大阪钢巴",
+      "away_team": "神户胜利",
+      "half_score": "0-0",
+      "full_score": "0-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "30",
+      "league": "巴甲",
+      "home_team": "巴竞技",
+      "away_team": "巴伊亚",
+      "half_score": "1-1",
+      "full_score": "2-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "4",
+      "league": "韩职",
+      "home_team": "仁川联",
+      "away_team": "大田市民",
+      "half_score": "1-0",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "6",
+      "league": "意甲",
+      "home_team": "佛罗伦萨",
+      "away_team": "那不勒斯",
+      "half_score": "0-1",
+      "full_score": "1-1",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "7",
+      "league": "英冠",
+      "home_team": "伍尔弗",
+      "away_team": "西布罗姆",
+      "half_score": "0-0",
+      "full_score": "1-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "8",
+      "league": "西甲",
+      "home_team": "赫塔费",
+      "away_team": "马拉加",
+      "half_score": "0-0",
+      "full_score": "1-0",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    },
+    {
+      "date": "2026-09-20",
+      "match_id": "9",
+      "league": "荷甲",
+      "home_team": "特温特",
+      "away_team": "埃因霍温",
+      "half_score": "1-2",
+      "full_score": "3-2",
+      "home_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "away_timing": {
+        "available": false,
+        "reason": "team_unresolved"
+      },
+      "timing_sides_available": 0
+    }
+  ]
+}
