@@ -1,0 +1,68 @@
+{
+  "https://footystats.org/japan/j1-league": {
+    "status": 403,
+    "final": "https://footystats.org/japan/j1-league",
+    "chars": 5471,
+    "title": "Just a moment...",
+    "club_links": [],
+    "club_count": 0,
+    "has_goals_scored_15": false,
+    "has_cn_goal": false,
+    "sample": "Just a moment...\nEnable JavaScript and cookies to continue"
+  },
+  "https://footystats.org/cn/japan/j1-league": {
+    "status": 403,
+    "final": "https://footystats.org/cn/japan/j1-league",
+    "chars": 5480,
+    "title": "Just a moment...",
+    "club_links": [],
+    "club_count": 0,
+    "has_goals_scored_15": false,
+    "has_cn_goal": false,
+    "sample": "Just a moment...\nEnable JavaScript and cookies to continue"
+  },
+  "https://footystats.org/england/championship": {
+    "status": 403,
+    "final": "https://footystats.org/england/championship",
+    "chars": 5486,
+    "title": "Just a moment...",
+    "club_links": [],
+    "club_count": 0,
+    "has_goals_scored_15": false,
+    "has_cn_goal": false,
+    "sample": "Just a moment...\nEnable JavaScript and cookies to continue"
+  },
+  "https://footystats.org/cn/england/championship": {
+    "status": 403,
+    "final": "https://footystats.org/cn/england/championship",
+    "chars": 5495,
+    "title": "Just a moment...",
+    "club_links": [],
+    "club_count": 0,
+    "has_goals_scored_15": false,
+    "has_cn_goal": false,
+    "sample": "Just a moment...\nEnable JavaScript and cookies to continue"
+  },
+  "https://footystats.org/clubs/cerezo-osaka-866": {
+    "status": 403,
+    "final": "https://footystats.org/clubs/cerezo-osaka-866",
+    "chars": 5492,
+    "title": "Just a moment...",
+    "club_links": [],
+    "club_count": 0,
+    "has_goals_scored_15": false,
+    "has_cn_goal": false,
+    "sample": "Just a moment...\nEnable JavaScript and cookies to continue"
+  },
+  "https://footystats.org/cn/clubs/cerezo-osaka-866": {
+    "status": 403,
+    "final": "https://footystats.org/cn/clubs/cerezo-osaka-866",
+    "chars": 5501,
+    "title": "Just a moment...",
+    "club_links": [],
+    "club_count": 0,
+    "has_goals_scored_15": false,
+    "has_cn_goal": false,
+    "sample": "Just a moment...\nEnable JavaScript and cookies to continue"
+  }
+}
