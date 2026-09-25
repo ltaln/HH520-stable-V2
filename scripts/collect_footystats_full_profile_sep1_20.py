@@ -23,6 +23,7 @@ def credit_balance():
         return None
 
 def scrape(url):
+    err="scrape_failed"
     payload={"url":url,"formats":["markdown"],"onlyMainContent":False,"maxAge":604800000}
     for i in range(4):
         try:
@@ -168,7 +169,7 @@ def main():
         url_to_teams[eu].append(team)
 
     initial=credit_balance()
-    ordered=list(sorted(url_to_teams))
+    ordered=list(sorted(url_to_teams))\n    # Two earlier failed attempts already spent credits on the first ten URLs; move them to the end to avoid another immediate duplicate burn.\n    if len(ordered)>10: ordered=ordered[10:]+ordered[:10]
     profiles_by_url={}
     errors={}
     # One fresh scrape per unique profile URL. Keep a hard safety floor.
