@@ -1,0 +1,52 @@
+name: Draw-Away High Specificity Research
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "draw-away-requests/*.json"
+
+permissions:
+  contents: write
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - uses: actions/cache/restore@v4
+        with:
+          path: cache
+          key: hh520-draw-away-offline-${{ github.run_id }}
+          restore-keys: |
+            hh520-collection-v1-
+      - name: Run offline draw-away research
+        env:
+          HH520_DRAW_AWAY_OFFLINE_ONLY: "1"
+        run: python scripts/draw_away_high_specificity_research.py
+      - name: Publish result
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin draw-away-results || true
+          if git show-ref --verify --quiet refs/remotes/origin/draw-away-results; then
+            git switch --detach origin/draw-away-results
+          else
+            git switch --orphan draw-away-results
+            git rm -rf . || true
+          fi
+          mkdir -p results
+          cp "$GITHUB_WORKSPACE/_draw_away_high_specificity.json" results/latest.json
+          git add results/latest.json
+          git commit -m "research: draw-away high specificity" || true
+          git push origin HEAD:draw-away-results --force
