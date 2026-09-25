@@ -330,7 +330,12 @@ def run_ft(rows):
     P=predict_residual(Xs,base_logits(rows["stress"],"ft",FT_CLASSES),W)
     stress=rank_metrics(P,np.asarray([FT_CLASSES.index(r["actual_ft"]) for r in rows["stress"]],dtype=int),(1,2))
     stress["baseline_current"]=ft_baseline(rows["stress"]);stress["net_top1"]=stress["top1_hits"]-stress["baseline_current"]["top1_hits"]
-    return {"candidate_count":len(res),"safe_count":len(safe),"selected_on_dev_only":best,"stress":stress,"feature_names":names,"stress_used_for_selection":False}
+    by_group={}
+    for g in CANDIDATES:
+        rr=[x for x in res if tuple(x["groups"])==tuple(g)]
+        rr=sorted(rr,key=lambda x:(x["min_net"],x["total_net"]),reverse=True)
+        if rr: by_group["+".join(g)]=rr[0]
+    return {"candidate_count":len(res),"safe_count":len(safe),"selected_on_dev_only":best,"best_by_group":by_group,"stress":stress,"feature_names":names,"stress_used_for_selection":False}
 
 def run_htft(rows):
     res=[]
@@ -352,7 +357,12 @@ def run_htft(rows):
     stress=rank_metrics(P,np.asarray([HTFT_CLASSES.index(r["actual_htft"]) for r in rows["stress"]],dtype=int),(1,2,3))
     b=htft_baseline(rows["stress"]);stress["baseline_current"]=b
     for n in (1,2,3):stress[f"net_top{n}"]=stress[f"top{n}_hits"]-b[f"top{n}_hits"]
-    return {"candidate_count":len(res),"safe_count":len(safe),"selected_on_dev_only":best,"stress":stress,"feature_names":names,"stress_used_for_selection":False}
+    by_group={}
+    for g in CANDIDATES:
+        rr=[x for x in res if tuple(x["groups"])==tuple(g)]
+        rr=sorted(rr,key=lambda x:(x["min_top2"],x["total_top2"],x["min_top1"],x["min_top3"]),reverse=True)
+        if rr: by_group["+".join(g)]=rr[0]
+    return {"candidate_count":len(res),"safe_count":len(safe),"selected_on_dev_only":best,"best_by_group":by_group,"stress":stress,"feature_names":names,"stress_used_for_selection":False}
 
 def run_score(rows):
     res=[]
@@ -376,7 +386,12 @@ def run_score(rows):
     P,keys=score_probs(rows["stress"],lams);stress=score_metrics(P,keys,rows["stress"])
     BP,bk=score_probs(rows["stress"]);b=score_metrics(BP,bk,rows["stress"]);stress["baseline_current"]=b
     for n in (1,2,3,5):stress[f"net_top{n}"]=stress[f"top{n}_hits"]-b[f"top{n}_hits"]
-    return {"candidate_count":len(res),"safe_count":len(safe),"selected_on_dev_only":best,"stress":stress,"feature_names":names,"stress_used_for_selection":False}
+    by_group={}
+    for g in CANDIDATES:
+        rr=[x for x in res if tuple(x["groups"])==tuple(g)]
+        rr=sorted(rr,key=lambda x:(x["min_top2"],x["total_top2"],x["total_top1"]),reverse=True)
+        if rr: by_group["+".join(g)]=rr[0]
+    return {"candidate_count":len(res),"safe_count":len(safe),"selected_on_dev_only":best,"best_by_group":by_group,"stress":stress,"feature_names":names,"stress_used_for_selection":False}
 
 def availability(rows):
     allr=rows["dev1"]+rows["dev2"]+rows["stress"]
