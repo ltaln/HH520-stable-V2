@@ -123,7 +123,7 @@ def _draw_resolver(match, probability):
     values = _draw_features(match, probability)
     if not values:
         return False, {"score": None}
-    if values["pmax"] > DRAW_PMAX_LIMIT:
+    if values["pmax"] < DRAW_PMAX_MIN or values["pmax"] > DRAW_PMAX_LIMIT:
         return False, {"score": None, **values}
 
     z = DRAW_WEIGHTS[0]
