@@ -1,0 +1,48 @@
+name: Flashscore Match Probe
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "flashscore-probe-requests/*.json"
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - name: Restore HH520 cache
+        uses: actions/cache/restore@v4
+        with:
+          path: cache
+          key: flashscore-probe-${{ github.run_id }}
+          restore-keys: |
+            hh520-collection-v1-
+      - run: python scripts/flashscore_match_probe.py
+      - name: Publish
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin flashscore-probe-results || true
+          if git show-ref --verify --quiet refs/remotes/origin/flashscore-probe-results; then
+            git switch --detach origin/flashscore-probe-results
+          else
+            git switch --orphan flashscore-probe-results
+            git rm -rf . || true
+          fi
+          mkdir -p results
+          cp "$GITHUB_WORKSPACE/_flashscore_probe.json" results/latest.json
+          git add results/latest.json
+          git commit -m "research: Flashscore match probe" || true
+          git push origin HEAD:flashscore-probe-results --force
