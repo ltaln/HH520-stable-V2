@@ -1,0 +1,854 @@
+{
+  "mode": "RETROSPECTIVE_GOAL_TIMING_PROFILE_AUGMENTED_HTFT_TRANSITION",
+  "timing_collection_summary": {
+    "requested_matches": 302,
+    "unique_teams": 285,
+    "league_pages_attempted": 30,
+    "club_pool": 641,
+    "mapped_teams": 159,
+    "unique_profile_urls": 150,
+    "profiles_scraped": 150,
+    "timing_profiles_available": 130,
+    "matches_both_sides_timing": 96,
+    "matches_one_side_timing": 128,
+    "matches_no_timing": 78,
+    "initial_backup_credits": 396,
+    "final_backup_credits": 246,
+    "credits_consumed": 150,
+    "source": "FootyStats current-season team six-bin goal timing",
+    "snapshot_date": "2026-09-25",
+    "historical_point_in_time": false,
+    "warning": "Current-season snapshot captured after target dates; retrospective research only, not a leakage-clean historical validation."
+  },
+  "timing_coverage_rows": 75,
+  "timing_quality_gate": {
+    "mapping_score_min": 0.85,
+    "rejected_low_confidence_matches": 195,
+    "rejected_same_profile_url_matches": 0
+  },
+  "base_transition_model": "P_HT_BASE_X_P_FT_GIVEN_HT_MULTINOMIAL_l2_1_MAY_AUG",
+  "selection_window": "2026-09-01..2026-09-14",
+  "holdout_window": "2026-09-15..2026-09-20",
+  "selection_used_holdout_labels": false,
+  "historical_point_in_time": false,
+  "leakage_warning": "FootyStats profiles are Sep25 current-season snapshots, so this is retrospective exploratory validation, not leakage-clean historical OOS.",
+  "best_full_ranking_params": {
+    "shrink": 1.0,
+    "beta_second": 0.5,
+    "beta_late": 1.0,
+    "beta_draw": 0.25,
+    "alpha": 0.8,
+    "train_top1": 57,
+    "train_top2": 103,
+    "train_top3": 131
+  },
+  "full_ranking_train": {
+    "formal": {
+      "n": 197,
+      "top1_hits": 58,
+      "top1_accuracy": 0.29441624365482233,
+      "top2_hits": 100,
+      "top2_accuracy": 0.5076142131979695,
+      "top3_hits": 130,
+      "top3_accuracy": 0.6598984771573604,
+      "by_actual": {
+        "HOME_HOME": {
+          "n": 40,
+          "top1": 32,
+          "top2": 33,
+          "top3": 34,
+          "top1_rate": 0.8,
+          "top2_rate": 0.825,
+          "top3_rate": 0.85
+        },
+        "AWAY_AWAY": {
+          "n": 38,
+          "top1": 24,
+          "top2": 24,
+          "top3": 27,
+          "top1_rate": 0.631578947368421,
+          "top2_rate": 0.631578947368421,
+          "top3_rate": 0.7105263157894737
+        },
+        "DRAW_DRAW": {
+          "n": 35,
+          "top1": 2,
+          "top2": 13,
+          "top3": 32,
+          "top1_rate": 0.05714285714285714,
+          "top2_rate": 0.37142857142857144,
+          "top3_rate": 0.9142857142857143
+        },
+        "DRAW_HOME": {
+          "n": 30,
+          "top1": 0,
+          "top2": 20,
+          "top3": 23,
+          "top1_rate": 0.0,
+          "top2_rate": 0.6666666666666666,
+          "top3_rate": 0.7666666666666667
+        },
+        "AWAY_DRAW": {
+          "n": 13,
+          "top1": 0,
+          "top2": 0,
+          "top3": 0,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.0
+        },
+        "DRAW_AWAY": {
+          "n": 23,
+          "top1": 0,
+          "top2": 10,
+          "top3": 14,
+          "top1_rate": 0.0,
+          "top2_rate": 0.43478260869565216,
+          "top3_rate": 0.6086956521739131
+        },
+        "HOME_DRAW": {
+          "n": 9,
+          "top1": 0,
+          "top2": 0,
+          "top3": 0,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.0
+        },
+        "HOME_AWAY": {
+          "n": 8,
+          "top1": 0,
+          "top2": 0,
+          "top3": 0,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.0
+        },
+        "AWAY_HOME": {
+          "n": 1,
+          "top1": 0,
+          "top2": 0,
+          "top3": 0,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.0
+        }
+      }
+    },
+    "candidate": {
+      "n": 197,
+      "top1_hits": 57,
+      "top1_accuracy": 0.2893401015228426,
+      "top2_hits": 103,
+      "top2_accuracy": 0.5228426395939086,
+      "top3_hits": 131,
+      "top3_accuracy": 0.6649746192893401,
+      "by_actual": {
+        "HOME_HOME": {
+          "n": 40,
+          "top1": 32,
+          "top2": 33,
+          "top3": 34,
+          "top1_rate": 0.8,
+          "top2_rate": 0.825,
+          "top3_rate": 0.85
+        },
+        "AWAY_AWAY": {
+          "n": 38,
+          "top1": 22,
+          "top2": 24,
+          "top3": 27,
+          "top1_rate": 0.5789473684210527,
+          "top2_rate": 0.631578947368421,
+          "top3_rate": 0.7105263157894737
+        },
+        "DRAW_DRAW": {
+          "n": 35,
+          "top1": 2,
+          "top2": 17,
+          "top3": 33,
+          "top1_rate": 0.05714285714285714,
+          "top2_rate": 0.4857142857142857,
+          "top3_rate": 0.9428571428571428
+        },
+        "DRAW_HOME": {
+          "n": 30,
+          "top1": 0,
+          "top2": 19,
+          "top3": 23,
+          "top1_rate": 0.0,
+          "top2_rate": 0.6333333333333333,
+          "top3_rate": 0.7666666666666667
+        },
+        "AWAY_DRAW": {
+          "n": 13,
+          "top1": 0,
+          "top2": 0,
+          "top3": 0,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.0
+        },
+        "DRAW_AWAY": {
+          "n": 23,
+          "top1": 1,
+          "top2": 10,
+          "top3": 14,
+          "top1_rate": 0.043478260869565216,
+          "top2_rate": 0.43478260869565216,
+          "top3_rate": 0.6086956521739131
+        },
+        "HOME_DRAW": {
+          "n": 9,
+          "top1": 0,
+          "top2": 0,
+          "top3": 0,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.0
+        },
+        "HOME_AWAY": {
+          "n": 8,
+          "top1": 0,
+          "top2": 0,
+          "top3": 0,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.0
+        },
+        "AWAY_HOME": {
+          "n": 1,
+          "top1": 0,
+          "top2": 0,
+          "top3": 0,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.0
+        }
+      }
+    }
+  },
+  "full_ranking_holdout": {
+    "formal": {
+      "n": 105,
+      "top1_hits": 36,
+      "top1_accuracy": 0.34285714285714286,
+      "top2_hits": 47,
+      "top2_accuracy": 0.44761904761904764,
+      "top3_hits": 65,
+      "top3_accuracy": 0.6190476190476191,
+      "by_actual": {
+        "AWAY_AWAY": {
+          "n": 15,
+          "top1": 10,
+          "top2": 10,
+          "top3": 11,
+          "top1_rate": 0.6666666666666666,
+          "top2_rate": 0.6666666666666666,
+          "top3_rate": 0.7333333333333333
+        },
+        "AWAY_DRAW": {
+          "n": 4,
+          "top1": 0,
+          "top2": 0,
+          "top3": 0,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.0
+        },
+        "HOME_HOME": {
+          "n": 37,
+          "top1": 26,
+          "top2": 27,
+          "top3": 29,
+          "top1_rate": 0.7027027027027027,
+          "top2_rate": 0.7297297297297297,
+          "top3_rate": 0.7837837837837838
+        },
+        "DRAW_HOME": {
+          "n": 16,
+          "top1": 0,
+          "top2": 8,
+          "top3": 11,
+          "top1_rate": 0.0,
+          "top2_rate": 0.5,
+          "top3_rate": 0.6875
+        },
+        "DRAW_DRAW": {
+          "n": 10,
+          "top1": 0,
+          "top2": 0,
+          "top3": 9,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.9
+        },
+        "DRAW_AWAY": {
+          "n": 12,
+          "top1": 0,
+          "top2": 2,
+          "top3": 5,
+          "top1_rate": 0.0,
+          "top2_rate": 0.16666666666666666,
+          "top3_rate": 0.4166666666666667
+        },
+        "AWAY_HOME": {
+          "n": 3,
+          "top1": 0,
+          "top2": 0,
+          "top3": 0,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.0
+        },
+        "HOME_DRAW": {
+          "n": 7,
+          "top1": 0,
+          "top2": 0,
+          "top3": 0,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.0
+        },
+        "HOME_AWAY": {
+          "n": 1,
+          "top1": 0,
+          "top2": 0,
+          "top3": 0,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.0
+        }
+      }
+    },
+    "candidate": {
+      "n": 105,
+      "top1_hits": 36,
+      "top1_accuracy": 0.34285714285714286,
+      "top2_hits": 49,
+      "top2_accuracy": 0.4666666666666667,
+      "top3_hits": 64,
+      "top3_accuracy": 0.6095238095238096,
+      "by_actual": {
+        "AWAY_AWAY": {
+          "n": 15,
+          "top1": 10,
+          "top2": 10,
+          "top3": 11,
+          "top1_rate": 0.6666666666666666,
+          "top2_rate": 0.6666666666666666,
+          "top3_rate": 0.7333333333333333
+        },
+        "AWAY_DRAW": {
+          "n": 4,
+          "top1": 0,
+          "top2": 0,
+          "top3": 0,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.0
+        },
+        "HOME_HOME": {
+          "n": 37,
+          "top1": 26,
+          "top2": 27,
+          "top3": 29,
+          "top1_rate": 0.7027027027027027,
+          "top2_rate": 0.7297297297297297,
+          "top3_rate": 0.7837837837837838
+        },
+        "DRAW_HOME": {
+          "n": 16,
+          "top1": 0,
+          "top2": 8,
+          "top3": 11,
+          "top1_rate": 0.0,
+          "top2_rate": 0.5,
+          "top3_rate": 0.6875
+        },
+        "DRAW_DRAW": {
+          "n": 10,
+          "top1": 0,
+          "top2": 1,
+          "top3": 9,
+          "top1_rate": 0.0,
+          "top2_rate": 0.1,
+          "top3_rate": 0.9
+        },
+        "DRAW_AWAY": {
+          "n": 12,
+          "top1": 0,
+          "top2": 3,
+          "top3": 4,
+          "top1_rate": 0.0,
+          "top2_rate": 0.25,
+          "top3_rate": 0.3333333333333333
+        },
+        "AWAY_HOME": {
+          "n": 3,
+          "top1": 0,
+          "top2": 0,
+          "top3": 0,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.0
+        },
+        "HOME_DRAW": {
+          "n": 7,
+          "top1": 0,
+          "top2": 0,
+          "top3": 0,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.0
+        },
+        "HOME_AWAY": {
+          "n": 1,
+          "top1": 0,
+          "top2": 0,
+          "top3": 0,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.0
+        }
+      }
+    }
+  },
+  "full_ranking_all": {
+    "formal": {
+      "n": 302,
+      "top1_hits": 94,
+      "top1_accuracy": 0.31125827814569534,
+      "top2_hits": 147,
+      "top2_accuracy": 0.4867549668874172,
+      "top3_hits": 195,
+      "top3_accuracy": 0.6456953642384106,
+      "by_actual": {
+        "HOME_HOME": {
+          "n": 77,
+          "top1": 58,
+          "top2": 60,
+          "top3": 63,
+          "top1_rate": 0.7532467532467533,
+          "top2_rate": 0.7792207792207793,
+          "top3_rate": 0.8181818181818182
+        },
+        "AWAY_AWAY": {
+          "n": 53,
+          "top1": 34,
+          "top2": 34,
+          "top3": 38,
+          "top1_rate": 0.6415094339622641,
+          "top2_rate": 0.6415094339622641,
+          "top3_rate": 0.7169811320754716
+        },
+        "DRAW_DRAW": {
+          "n": 45,
+          "top1": 2,
+          "top2": 13,
+          "top3": 41,
+          "top1_rate": 0.044444444444444446,
+          "top2_rate": 0.28888888888888886,
+          "top3_rate": 0.9111111111111111
+        },
+        "DRAW_HOME": {
+          "n": 46,
+          "top1": 0,
+          "top2": 28,
+          "top3": 34,
+          "top1_rate": 0.0,
+          "top2_rate": 0.6086956521739131,
+          "top3_rate": 0.7391304347826086
+        },
+        "AWAY_DRAW": {
+          "n": 17,
+          "top1": 0,
+          "top2": 0,
+          "top3": 0,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.0
+        },
+        "DRAW_AWAY": {
+          "n": 35,
+          "top1": 0,
+          "top2": 12,
+          "top3": 19,
+          "top1_rate": 0.0,
+          "top2_rate": 0.34285714285714286,
+          "top3_rate": 0.5428571428571428
+        },
+        "HOME_DRAW": {
+          "n": 16,
+          "top1": 0,
+          "top2": 0,
+          "top3": 0,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.0
+        },
+        "HOME_AWAY": {
+          "n": 9,
+          "top1": 0,
+          "top2": 0,
+          "top3": 0,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.0
+        },
+        "AWAY_HOME": {
+          "n": 4,
+          "top1": 0,
+          "top2": 0,
+          "top3": 0,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.0
+        }
+      }
+    },
+    "candidate": {
+      "n": 302,
+      "top1_hits": 93,
+      "top1_accuracy": 0.3079470198675497,
+      "top2_hits": 152,
+      "top2_accuracy": 0.5033112582781457,
+      "top3_hits": 195,
+      "top3_accuracy": 0.6456953642384106,
+      "by_actual": {
+        "HOME_HOME": {
+          "n": 77,
+          "top1": 58,
+          "top2": 60,
+          "top3": 63,
+          "top1_rate": 0.7532467532467533,
+          "top2_rate": 0.7792207792207793,
+          "top3_rate": 0.8181818181818182
+        },
+        "AWAY_AWAY": {
+          "n": 53,
+          "top1": 32,
+          "top2": 34,
+          "top3": 38,
+          "top1_rate": 0.6037735849056604,
+          "top2_rate": 0.6415094339622641,
+          "top3_rate": 0.7169811320754716
+        },
+        "DRAW_DRAW": {
+          "n": 45,
+          "top1": 2,
+          "top2": 18,
+          "top3": 42,
+          "top1_rate": 0.044444444444444446,
+          "top2_rate": 0.4,
+          "top3_rate": 0.9333333333333333
+        },
+        "DRAW_HOME": {
+          "n": 46,
+          "top1": 0,
+          "top2": 27,
+          "top3": 34,
+          "top1_rate": 0.0,
+          "top2_rate": 0.5869565217391305,
+          "top3_rate": 0.7391304347826086
+        },
+        "AWAY_DRAW": {
+          "n": 17,
+          "top1": 0,
+          "top2": 0,
+          "top3": 0,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.0
+        },
+        "DRAW_AWAY": {
+          "n": 35,
+          "top1": 1,
+          "top2": 13,
+          "top3": 18,
+          "top1_rate": 0.02857142857142857,
+          "top2_rate": 0.37142857142857144,
+          "top3_rate": 0.5142857142857142
+        },
+        "HOME_DRAW": {
+          "n": 16,
+          "top1": 0,
+          "top2": 0,
+          "top3": 0,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.0
+        },
+        "HOME_AWAY": {
+          "n": 9,
+          "top1": 0,
+          "top2": 0,
+          "top3": 0,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.0
+        },
+        "AWAY_HOME": {
+          "n": 4,
+          "top1": 0,
+          "top2": 0,
+          "top3": 0,
+          "top1_rate": 0.0,
+          "top2_rate": 0.0,
+          "top3_rate": 0.0
+        }
+      }
+    }
+  },
+  "best_locked_third_params": {
+    "shrink": 0.5,
+    "beta_second": 0.0,
+    "beta_late": 3.0,
+    "beta_draw": 0.25,
+    "train_hits": 132,
+    "train_net": 2
+  },
+  "locked_third_train": {
+    "n": 197,
+    "formal_top3_hits": 130,
+    "formal_top3_accuracy": 0.6598984771573604,
+    "candidate_top3_hits": 132,
+    "candidate_top3_accuracy": 0.6700507614213198,
+    "net_hits": 2,
+    "third_distribution": {
+      "DRAW_DRAW": 126,
+      "AWAY_AWAY": 12,
+      "DRAW_AWAY": 22,
+      "HOME_HOME": 15,
+      "DRAW_HOME": 21,
+      "AWAY_HOME": 1
+    },
+    "by_actual": {
+      "HOME_HOME": {
+        "n": 40,
+        "formal": 34,
+        "candidate": 34,
+        "formal_rate": 0.85,
+        "candidate_rate": 0.85
+      },
+      "AWAY_AWAY": {
+        "n": 38,
+        "formal": 27,
+        "candidate": 28,
+        "formal_rate": 0.7105263157894737,
+        "candidate_rate": 0.7368421052631579
+      },
+      "DRAW_DRAW": {
+        "n": 35,
+        "formal": 32,
+        "candidate": 32,
+        "formal_rate": 0.9142857142857143,
+        "candidate_rate": 0.9142857142857143
+      },
+      "DRAW_HOME": {
+        "n": 30,
+        "formal": 23,
+        "candidate": 23,
+        "formal_rate": 0.7666666666666667,
+        "candidate_rate": 0.7666666666666667
+      },
+      "AWAY_DRAW": {
+        "n": 13,
+        "formal": 0,
+        "candidate": 0,
+        "formal_rate": 0.0,
+        "candidate_rate": 0.0
+      },
+      "DRAW_AWAY": {
+        "n": 23,
+        "formal": 14,
+        "candidate": 15,
+        "formal_rate": 0.6086956521739131,
+        "candidate_rate": 0.6521739130434783
+      },
+      "HOME_DRAW": {
+        "n": 9,
+        "formal": 0,
+        "candidate": 0,
+        "formal_rate": 0.0,
+        "candidate_rate": 0.0
+      },
+      "HOME_AWAY": {
+        "n": 8,
+        "formal": 0,
+        "candidate": 0,
+        "formal_rate": 0.0,
+        "candidate_rate": 0.0
+      },
+      "AWAY_HOME": {
+        "n": 1,
+        "formal": 0,
+        "candidate": 0,
+        "formal_rate": 0.0,
+        "candidate_rate": 0.0
+      }
+    }
+  },
+  "locked_third_holdout": {
+    "n": 105,
+    "formal_top3_hits": 65,
+    "formal_top3_accuracy": 0.6190476190476191,
+    "candidate_top3_hits": 62,
+    "candidate_top3_accuracy": 0.5904761904761905,
+    "net_hits": -3,
+    "third_distribution": {
+      "DRAW_DRAW": 70,
+      "HOME_HOME": 7,
+      "AWAY_AWAY": 7,
+      "DRAW_HOME": 12,
+      "DRAW_AWAY": 9
+    },
+    "by_actual": {
+      "AWAY_AWAY": {
+        "n": 15,
+        "formal": 11,
+        "candidate": 10,
+        "formal_rate": 0.7333333333333333,
+        "candidate_rate": 0.6666666666666666
+      },
+      "AWAY_DRAW": {
+        "n": 4,
+        "formal": 0,
+        "candidate": 0,
+        "formal_rate": 0.0,
+        "candidate_rate": 0.0
+      },
+      "HOME_HOME": {
+        "n": 37,
+        "formal": 29,
+        "candidate": 29,
+        "formal_rate": 0.7837837837837838,
+        "candidate_rate": 0.7837837837837838
+      },
+      "DRAW_HOME": {
+        "n": 16,
+        "formal": 11,
+        "candidate": 10,
+        "formal_rate": 0.6875,
+        "candidate_rate": 0.625
+      },
+      "DRAW_DRAW": {
+        "n": 10,
+        "formal": 9,
+        "candidate": 9,
+        "formal_rate": 0.9,
+        "candidate_rate": 0.9
+      },
+      "DRAW_AWAY": {
+        "n": 12,
+        "formal": 5,
+        "candidate": 4,
+        "formal_rate": 0.4166666666666667,
+        "candidate_rate": 0.3333333333333333
+      },
+      "AWAY_HOME": {
+        "n": 3,
+        "formal": 0,
+        "candidate": 0,
+        "formal_rate": 0.0,
+        "candidate_rate": 0.0
+      },
+      "HOME_DRAW": {
+        "n": 7,
+        "formal": 0,
+        "candidate": 0,
+        "formal_rate": 0.0,
+        "candidate_rate": 0.0
+      },
+      "HOME_AWAY": {
+        "n": 1,
+        "formal": 0,
+        "candidate": 0,
+        "formal_rate": 0.0,
+        "candidate_rate": 0.0
+      }
+    }
+  },
+  "locked_third_all": {
+    "n": 302,
+    "formal_top3_hits": 195,
+    "formal_top3_accuracy": 0.6456953642384106,
+    "candidate_top3_hits": 194,
+    "candidate_top3_accuracy": 0.6423841059602649,
+    "net_hits": -1,
+    "third_distribution": {
+      "DRAW_DRAW": 196,
+      "AWAY_AWAY": 19,
+      "DRAW_AWAY": 31,
+      "HOME_HOME": 22,
+      "DRAW_HOME": 33,
+      "AWAY_HOME": 1
+    },
+    "by_actual": {
+      "HOME_HOME": {
+        "n": 77,
+        "formal": 63,
+        "candidate": 63,
+        "formal_rate": 0.8181818181818182,
+        "candidate_rate": 0.8181818181818182
+      },
+      "AWAY_AWAY": {
+        "n": 53,
+        "formal": 38,
+        "candidate": 38,
+        "formal_rate": 0.7169811320754716,
+        "candidate_rate": 0.7169811320754716
+      },
+      "DRAW_DRAW": {
+        "n": 45,
+        "formal": 41,
+        "candidate": 41,
+        "formal_rate": 0.9111111111111111,
+        "candidate_rate": 0.9111111111111111
+      },
+      "DRAW_HOME": {
+        "n": 46,
+        "formal": 34,
+        "candidate": 33,
+        "formal_rate": 0.7391304347826086,
+        "candidate_rate": 0.717391304347826
+      },
+      "AWAY_DRAW": {
+        "n": 17,
+        "formal": 0,
+        "candidate": 0,
+        "formal_rate": 0.0,
+        "candidate_rate": 0.0
+      },
+      "DRAW_AWAY": {
+        "n": 35,
+        "formal": 19,
+        "candidate": 19,
+        "formal_rate": 0.5428571428571428,
+        "candidate_rate": 0.5428571428571428
+      },
+      "HOME_DRAW": {
+        "n": 16,
+        "formal": 0,
+        "candidate": 0,
+        "formal_rate": 0.0,
+        "candidate_rate": 0.0
+      },
+      "HOME_AWAY": {
+        "n": 9,
+        "formal": 0,
+        "candidate": 0,
+        "formal_rate": 0.0,
+        "candidate_rate": 0.0
+      },
+      "AWAY_HOME": {
+        "n": 4,
+        "formal": 0,
+        "candidate": 0,
+        "formal_rate": 0.0,
+        "candidate_rate": 0.0
+      }
+    }
+  },
+  "promotion_status": "RESEARCH_ONLY_NOT_PROMOTED"
+}
