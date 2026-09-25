@@ -119,8 +119,6 @@ def prepare_match(match):
             "TAIL_ALERT": "FT方向存在明显尾部或跨层风险",
             "PASS": "当前结构仅供参考，不作为强方向",
         }.get(effective_tier, "V3.5.1结构输出")
-    if not htft_available:
-        result["reason"] += "；生产链未启用外部分时数据，本场HT/FT按规则PASS"
     return result
 
 
@@ -136,12 +134,11 @@ def build_model_input(matches):
             "away_team": prepared["away_team"], "league": match.get("league"),
             "kickoff": match.get("kickoff"), "market": match.get("market", {}),
             "research_factors": match.get("research_factors", {}),
-            "goal_timing": match.get("goal_timing", {}),
             "analysis": {k: analysis[k] for k in ("probability","decision","calibration","consistency","htft","score")},
             "locked_prediction": {key: prepared[key] for key in (
                 "direction","alternate_direction","state","score1","score2","htft1","htft2","total_goals")},
             "stable_version": "HH520 Stable V3.5.1",
-            "source_contract": "HH520_10027s_PRODUCTION_WITH_OPTIONAL_RESEARCH_TIMING",
+            "source_contract": "HH520_10027s_EXISTING_DATA_HTFT_V3",
             "excluded_source_fields": ["建议下注","是否下注","page_prediction"],
             "gpt_role": "EXPLANATION_ONLY",
         })
