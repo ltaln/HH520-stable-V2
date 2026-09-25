@@ -1,0 +1,52 @@
+name: HTFT Split-Group Followup
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "split-htft-followup-requests/*.json"
+
+permissions:
+  contents: write
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - uses: actions/cache/restore@v4
+        with:
+          path: cache
+          key: hh520-split-htft-followup-${{ github.run_id }}
+          restore-keys: |
+            hh520-collection-v1-
+      - name: Run offline followup
+        env:
+          HH520_SPLIT_HTFT_OFFLINE_ONLY: "1"
+        run: python scripts/htft_split_group_followup.py
+      - name: Publish result
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin split-htft-followup-results || true
+          if git show-ref --verify --quiet refs/remotes/origin/split-htft-followup-results; then
+            git switch --detach origin/split-htft-followup-results
+          else
+            git switch --orphan split-htft-followup-results
+            git rm -rf . || true
+          fi
+          mkdir -p results
+          cp "$GITHUB_WORKSPACE/_htft_split_followup.json" results/latest.json
+          git add results/latest.json
+          git commit -m "research: HTFT split-group followup" || true
+          git push origin HEAD:split-htft-followup-results --force
