@@ -208,7 +208,7 @@ def main():
     for m in matches:
         mid=str(m.get("match_id") or "")
         try:
-            dq=collect_match_analysis(m.get("home_team",""),m.get("away_team",""))
+            dq=collect_match_analysis(args.date,m.get("home_team",""),m.get("away_team",""))
         except Exception as exc:
             dq={"available":False,"reason":f"collector_error:{type(exc).__name__}"}
         m["dongqiudi"]=dq
