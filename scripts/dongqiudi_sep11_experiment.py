@@ -102,6 +102,34 @@ def _candidate_probability(match,groups,strength=1.0):
     return out
 
 
+def _total_anchored_score_pair(score):
+    """Research-only score selector.
+
+    Keep the globally most likely exact score as pick 1. Use the improved
+    total-goals mode as an anchor for pick 2, choosing the highest-probability
+    distinct exact score with that total. This lets Dongqiudi-enhanced goal
+    information reach the score output without direction-locking the score
+    distribution.
+    """
+    rows=list(score.get("all_scores") or [])
+    if not rows:
+        return []
+    first=rows[0]
+    try:
+        goal_pick=int(str(score.get("total_goals_pick") or "").replace("球",""))
+    except Exception:
+        goal_pick=None
+    second=None
+    if goal_pick is not None:
+        second=next(
+            (row for row in rows[1:] if row.get("home",0)+row.get("away",0)==goal_pick),
+            None,
+        )
+    if second is None and len(rows)>1:
+        second=rows[1]
+    return [x for x in (first,second) if x]
+
+
 def _candidate_full_prediction(match,groups,strength=1.0):
     probability=_candidate_probability(match,groups,strength)
     value=value_layer(match,probability)
@@ -122,7 +150,7 @@ def _candidate_full_prediction(match,groups,strength=1.0):
     if primary in {"home","away"} and not authorized:
         direction="均衡"
     ht=consistency.get("htft_top",[])
-    sc=consistency.get("score_top",[])
+    sc=_total_anchored_score_pair(score)
     totals=score.get("top_totals",[])
     return {
         "status":"PREDICTED" if len(sc)>=2 else "PASS",
@@ -133,6 +161,7 @@ def _candidate_full_prediction(match,groups,strength=1.0):
         "confidence":confidence,
         "score1":sc[0]["score"] if len(sc)>0 else None,
         "score2":sc[1]["score"] if len(sc)>1 else None,
+        "score_selection":"POISSON_TOP1_PLUS_TOTAL_GOALS_ANCHOR_TOP2",
         "htft1":ht[0]["selection"] if len(ht)>0 else None,
         "htft2":ht[1]["selection"] if len(ht)>1 else None,
         "total_goals":score.get("total_goals_pick"),
