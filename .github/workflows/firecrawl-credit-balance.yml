@@ -16,6 +16,7 @@ jobs:
         env:
           PRIMARY: ${{ secrets.FIRECRAWL_API_KEY }}
           BACKUP: ${{ secrets.FIRECRAWL_API_KEY_BACKUP }}
+          BACKUP2: ${{ secrets.FIRECRAWL_API_KEY_BACKUP2 }}
         shell: bash
         run: |
           set -euo pipefail
@@ -32,3 +33,4 @@ jobs:
           }
           check PRIMARY "$PRIMARY"
           check BACKUP "$BACKUP"
+          check BACKUP2 "$BACKUP2"
