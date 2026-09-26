@@ -13,6 +13,7 @@ import os
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from . import cache_manager
 from .firecrawl_client import search_web, scrape_json
@@ -639,13 +640,27 @@ def enrich_matches_with_goal_timing(date: str, matches: list[dict]) -> dict:
         if id(match) not in selected_ids:
             reason = "confirmed_skip" if match not in candidates else "daily_lookup_cap"
             match["goal_timing"] = {"available": False, "reason": reason}
-            continue
-        attempted += 1
-        try:
-            timing = collect_goal_timing(date, match)
-        except Exception as exc:
-            timing = {"available": False, "reason": f"collector_error:{type(exc).__name__}"}
-        match["goal_timing"] = timing
+
+    try:
+        workers = max(1, min(6, int(os.getenv("HH520_GOAL_TIMING_WORKERS", "4"))))
+    except ValueError:
+        workers = 4
+
+    attempted = len(selected)
+    future_map = {}
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        for match in selected:
+            future_map[pool.submit(collect_goal_timing, date, match)] = match
+        for future in as_completed(future_map):
+            match = future_map[future]
+            try:
+                timing = future.result()
+            except Exception as exc:
+                timing = {"available": False, "reason": f"collector_error:{type(exc).__name__}"}
+            match["goal_timing"] = timing
+
+    for match in selected:
+        timing = match.get("goal_timing") or {}
         if timing.get("available"):
             available += 1
             six_bin += int(timing.get("timing_mode") == "six_bin")
