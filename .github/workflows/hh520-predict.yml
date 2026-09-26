@@ -67,6 +67,31 @@ jobs:
           set -euo pipefail
           test -n "$FIRECRAWL_API_KEY" || { echo "FIRECRAWL_API_KEY secret is missing"; exit 3; }
           python -c 'import os; from controller.command_router import parse_command; parse_command(os.environ["COMMAND"])'
+      - name: Preflight Firecrawl credits
+        shell: bash
+        run: |
+          set -euo pipefail
+          check() {
+            key="$1"
+            if [ -z "$key" ]; then
+              echo "-999999"
+              return
+            fi
+            body="$(curl -sS -H "Authorization: Bearer $key" https://api.firecrawl.dev/v2/team/credit-usage)"
+            printf '%s' "$body" | jq -r '.data.remainingCredits // .remainingCredits // -999999'
+          }
+          PRIMARY_REMAIN="$(check "$FIRECRAWL_API_KEY")"
+          BACKUP_REMAIN="$(check "$FIRECRAWL_API_KEY_BACKUP")"
+          echo "Firecrawl credits: primary=$PRIMARY_REMAIN backup=$BACKUP_REMAIN"
+          python - "$PRIMARY_REMAIN" "$BACKUP_REMAIN" <<'PY'
+          import sys
+          vals=[]
+          for x in sys.argv[1:]:
+              try: vals.append(float(x))
+              except Exception: pass
+          if not vals or max(vals) <= 0:
+              raise SystemExit("No usable Firecrawl credits remain; top up before prediction")
+          PY
       - name: Restore collection cache
         id: restore
         uses: actions/cache/restore@v4
