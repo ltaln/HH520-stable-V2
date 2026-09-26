@@ -1,0 +1,140 @@
+name: Dongqiudi Sep11 Full Model Experiment
+run-name: "dongqiudi-sep11 - 2026-09-11"
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/dongqiudi-sep11-experiment.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+      FIRECRAWL_API_KEY_BACKUP: ${{ secrets.FIRECRAWL_API_KEY_BACKUP }}
+      FIRECRAWL_API_KEY_BACKUP2: ${{ secrets.FIRECRAWL_API_KEY_BACKUP2 }}
+      PYTHONUTF8: "1"
+      HH520_FRESH_10027_EACH_PREDICTION: "1"
+      HH520_GOAL_TIMING_ENABLED: "1"
+      HH520_GOAL_TIMING_ONLY_UNCERTAIN: "0"
+      HH520_GOAL_TIMING_MAX_MATCHES: "100"
+      HH520_GOAL_TIMING_RETRY_FAILURES: "1"
+      HH520_GOAL_TIMING_WORKERS: "4"
+      FIRECRAWL_MIN_INTERVAL_SECONDS: "2.5"
+      REQUEST_ID: "dongqiudi-20260911-full-v1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+
+      - name: Capture Firecrawl credits before
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, requests
+          names=["FIRECRAWL_API_KEY","FIRECRAWL_API_KEY_BACKUP","FIRECRAWL_API_KEY_BACKUP2"]
+          out={}
+          for name in names:
+              key=os.getenv(name,"").strip()
+              if not key:
+                  out[name]={"configured":False,"remaining":None,"http":None}
+                  continue
+              try:
+                  r=requests.get("https://api.firecrawl.dev/v2/team/credit-usage",
+                                 headers={"Authorization":f"Bearer {key}"},timeout=30)
+                  data=r.json() if r.content else {}
+                  remaining=((data.get("data") or {}).get("remainingCredits")
+                             if isinstance(data,dict) else None)
+                  if remaining is None and isinstance(data,dict):
+                      remaining=data.get("remainingCredits")
+                  out[name]={"configured":True,"remaining":remaining,"http":r.status_code}
+              except Exception as exc:
+                  out[name]={"configured":True,"remaining":None,"http":None,"error":type(exc).__name__}
+          open("/tmp/firecrawl_before.json","w").write(json.dumps(out))
+          print(json.dumps(out))
+          PY
+
+      - name: Run Dongqiudi Sep11 experiment
+        run: |
+          set -euo pipefail
+          mkdir -p _action_out
+          python scripts/dongqiudi_sep11_experiment.py 2026-09-11 --output "_action_out/$REQUEST_ID.json"
+
+      - name: Capture Firecrawl credits after and attach usage
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, requests
+          names=["FIRECRAWL_API_KEY","FIRECRAWL_API_KEY_BACKUP","FIRECRAWL_API_KEY_BACKUP2"]
+          after={}
+          for name in names:
+              key=os.getenv(name,"").strip()
+              if not key:
+                  after[name]={"configured":False,"remaining":None,"http":None}
+                  continue
+              try:
+                  r=requests.get("https://api.firecrawl.dev/v2/team/credit-usage",
+                                 headers={"Authorization":f"Bearer {key}"},timeout=30)
+                  data=r.json() if r.content else {}
+                  remaining=((data.get("data") or {}).get("remainingCredits")
+                             if isinstance(data,dict) else None)
+                  if remaining is None and isinstance(data,dict):
+                      remaining=data.get("remainingCredits")
+                  after[name]={"configured":True,"remaining":remaining,"http":r.status_code}
+              except Exception as exc:
+                  after[name]={"configured":True,"remaining":None,"http":None,"error":type(exc).__name__}
+          before=json.load(open("/tmp/firecrawl_before.json"))
+          usage={}
+          total=0
+          for name in names:
+              b=before.get(name,{}).get("remaining")
+              a=after.get(name,{}).get("remaining")
+              delta=(b-a) if isinstance(b,(int,float)) and isinstance(a,(int,float)) else None
+              usage[name]={"before":b,"after":a,"consumed":delta,
+                           "before_http":before.get(name,{}).get("http"),
+                           "after_http":after.get(name,{}).get("http")}
+              if isinstance(delta,(int,float)) and delta>0:
+                  total+=delta
+          path="_action_out/"+os.environ["REQUEST_ID"]+".json"
+          data=json.load(open(path))
+          data["firecrawl_credit_usage"]={"accounts":usage,"total_positive_consumed":total}
+          data["status"]="READY"
+          open(path,"w").write(json.dumps(data,ensure_ascii=False,indent=2))
+          print(json.dumps(data["firecrawl_credit_usage"],ensure_ascii=False,indent=2))
+          PY
+
+      - name: Print experiment summary
+        run: |
+          python - <<'PY'
+          import json, os
+          p="_action_out/"+os.environ["REQUEST_ID"]+".json"
+          d=json.load(open(p))
+          print(json.dumps({
+            "match_count":d.get("match_count"),
+            "result_labels":d.get("result_labels"),
+            "timing_summary":d.get("timing_summary"),
+            "source_domains":d.get("source_domains"),
+            "dongqiudi_matches":d.get("dongqiudi_matches"),
+            "data_modes":d.get("data_modes"),
+            "group_coverage_matches":d.get("group_coverage_matches"),
+            "baseline_metrics":d.get("baseline_metrics"),
+            "enriched_metrics":d.get("enriched_metrics"),
+            "ft_group_tournament":d.get("ft_group_tournament"),
+            "firecrawl_credit_usage":d.get("firecrawl_credit_usage"),
+          },ensure_ascii=False,indent=2))
+          PY
+
+      - name: Publish research result
+        run: python scripts/publish_action_result.py "_action_out/$REQUEST_ID.json" "research-results" "$REQUEST_ID"
