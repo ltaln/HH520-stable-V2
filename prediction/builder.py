@@ -69,6 +69,9 @@ def prepare_match(match):
         quality_warnings=analysis["quality"].get("warnings", []),
         cross_gate=consistency.get("cross_gate"),
         htft_gate=consistency.get("htft_gate"),
+        data_mode=(analysis.get("data_mode") or {}).get("mode","10027_ONLY"),
+        data_mode_detail=analysis.get("data_mode") or {},
+        full_data_used=(analysis.get("data_mode") or {}).get("mode")=="FULL_DATA",
     )
 
     if not probability.get("valid") or not raw_direction:
