@@ -21,12 +21,18 @@ BINS = ("0-15", "16-30", "31-45", "46-60", "61-75", "76-90")
 PRIORITY = ("soccerstats.com", "footystats.org", "inplaywise.com", "sofascore.com", "365scores.com")
 
 PROFILE_NUMBER_FIELDS = (
-    "xg_for", "xg_against", "shots", "shots_on_target",
+    "xg_for", "xg_against", "shots", "shots_on_target", "shots_off_target",
+    "shot_conversion", "shots_per_goal", "sot_per_goal",
     "scored_per_match", "conceded_per_match",
 )
 PROFILE_RATE_FIELDS = (
     "possession", "clean_sheet_rate", "failed_to_score_rate",
-    "btts_rate", "over_2_5_rate",
+    "wins_rate", "draws_rate", "losses_rate",
+    "btts_rate", "btts_win_rate", "btts_draw_rate",
+    "over_0_5_rate", "over_1_5_rate", "over_2_5_rate", "over_3_5_rate",
+    "scored_1h_rate", "scored_2h_rate",
+    "failed_score_1h_rate", "failed_score_2h_rate",
+    "scored_both_halves_rate", "clean_sheet_1h_rate", "clean_sheet_2h_rate",
 )
 
 TEAM_SEARCH_ALIASES = {
@@ -191,13 +197,32 @@ def _schemas():
                     "xg_against": {"type": "number"},
                     "shots": {"type": "number"},
                     "shots_on_target": {"type": "number"},
+                    "shots_off_target": {"type": "number"},
+                    "shot_conversion": {"type": "number"},
+                    "shots_per_goal": {"type": "number"},
+                    "sot_per_goal": {"type": "number"},
                     "scored_per_match": {"type": "number"},
                     "conceded_per_match": {"type": "number"},
                     "possession": {"type": "number"},
                     "clean_sheet_rate": {"type": "number"},
                     "failed_to_score_rate": {"type": "number"},
+                    "wins_rate": {"type": "number"},
+                    "draws_rate": {"type": "number"},
+                    "losses_rate": {"type": "number"},
                     "btts_rate": {"type": "number"},
+                    "btts_win_rate": {"type": "number"},
+                    "btts_draw_rate": {"type": "number"},
+                    "over_0_5_rate": {"type": "number"},
+                    "over_1_5_rate": {"type": "number"},
                     "over_2_5_rate": {"type": "number"},
+                    "over_3_5_rate": {"type": "number"},
+                    "scored_1h_rate": {"type": "number"},
+                    "scored_2h_rate": {"type": "number"},
+                    "failed_score_1h_rate": {"type": "number"},
+                    "failed_score_2h_rate": {"type": "number"},
+                    "scored_both_halves_rate": {"type": "number"},
+                    "clean_sheet_1h_rate": {"type": "number"},
+                    "clean_sheet_2h_rate": {"type": "number"},
                 },
                 "required": ["goals_for", "goals_against"],
             }
@@ -221,13 +246,32 @@ def _schemas():
                     "xg_against": {"type": "number"},
                     "shots": {"type": "number"},
                     "shots_on_target": {"type": "number"},
+                    "shots_off_target": {"type": "number"},
+                    "shot_conversion": {"type": "number"},
+                    "shots_per_goal": {"type": "number"},
+                    "sot_per_goal": {"type": "number"},
                     "scored_per_match": {"type": "number"},
                     "conceded_per_match": {"type": "number"},
                     "possession": {"type": "number"},
                     "clean_sheet_rate": {"type": "number"},
                     "failed_to_score_rate": {"type": "number"},
+                    "wins_rate": {"type": "number"},
+                    "draws_rate": {"type": "number"},
+                    "losses_rate": {"type": "number"},
                     "btts_rate": {"type": "number"},
+                    "btts_win_rate": {"type": "number"},
+                    "btts_draw_rate": {"type": "number"},
+                    "over_0_5_rate": {"type": "number"},
+                    "over_1_5_rate": {"type": "number"},
                     "over_2_5_rate": {"type": "number"},
+                    "over_3_5_rate": {"type": "number"},
+                    "scored_1h_rate": {"type": "number"},
+                    "scored_2h_rate": {"type": "number"},
+                    "failed_score_1h_rate": {"type": "number"},
+                    "failed_score_2h_rate": {"type": "number"},
+                    "scored_both_halves_rate": {"type": "number"},
+                    "clean_sheet_1h_rate": {"type": "number"},
+                    "clean_sheet_2h_rate": {"type": "number"},
                 },
                 "required": ["first_half_scoring_rate", "first_half_conceding_rate"],
             }
@@ -331,8 +375,9 @@ def _extract_single_team(team, urls):
                     f'Extract PRE-MATCH goal timing statistics for {team}. '
                     'Return scored and conceded values for exactly six bins: '
                     '0-15,16-30,31-45,46-60,61-75,76-90. Also return any visible '
-                    'xG for/against, shots, shots on target, scored/conceded per match, '
-                    'possession, clean-sheet, failed-to-score, BTTS and over-2.5 rates. '
+                    'xG for/against, shots, shots on/off target, conversion, scored/conceded per match, '
+                    'possession, W/D/L rates, clean-sheet, failed-to-score, BTTS, over-goal rates, '
+                    'and first/second-half scoring/clean-sheet rates. '
                     'Do not invent missing data.'
                 ),
             )
@@ -396,8 +441,9 @@ def collect_goal_timing(date: str, match: dict) -> dict:
         f"Extract PRE-MATCH goal scored/conceded timing distributions for {home} and {away}. "
         "Return exactly six bins in this order: 0-15,16-30,31-45,46-60,61-75,76-90. "
         "Numbers may be counts or percentages but must use one scale per row. "
-        "Also return any visible xG for/against, shots, shots on target, scored/conceded per match, "
-        "possession, clean-sheet, failed-to-score, BTTS and over-2.5 rates. "
+        "Also return any visible xG for/against, shots, shots on/off target, conversion, "
+        "scored/conceded per match, possession, W/D/L rates, clean-sheet, failed-to-score, "
+        "BTTS, over-goal rates, and first/second-half scoring/clean-sheet rates. "
         "Use only statistics visible on the page and do not invent missing bins."
     )
     half_prompt = (
