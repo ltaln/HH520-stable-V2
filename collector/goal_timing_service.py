@@ -19,7 +19,7 @@ from . import cache_manager
 from .firecrawl_client import search_web, scrape_json
 
 BINS = ("0-15", "16-30", "31-45", "46-60", "61-75", "76-90")
-PRIORITY = ("soccerstats.com", "footystats.org", "inplaywise.com", "sofascore.com", "365scores.com")
+PRIORITY = ("dongqiudi.com", "soccerstats.com", "footystats.org", "inplaywise.com", "sofascore.com", "365scores.com")
 
 PROFILE_NUMBER_FIELDS = (
     "xg_for", "xg_against", "shots", "shots_on_target", "shots_off_target",
@@ -303,6 +303,7 @@ def _search_name(team):
 def _discover(home, away):
     home_q, away_q = _search_name(home), _search_name(away)
     queries = [
+        f'{home} {away} 懂球帝 比赛 分析 数据',
         f'{home_q} {away_q} FootyStats SoccerSTATS goal timing',
         f'{home_q} {away_q} football goal timing statistics',
         f'{home_q} vs {away_q} sofascore 365scores',
@@ -332,6 +333,8 @@ def _discover(home, away):
 def _discover_team(team):
     name = _search_name(team)
     queries = [
+        f'{team} 懂球帝 数据 射门 射正 进球 失球',
+        f'{team} 懂球帝 比赛数据',
         f'{name} FootyStats goal timing scored conceded',
         f'{name} SoccerSTATS goal times',
         f'{name} football first half second half scoring statistics',
