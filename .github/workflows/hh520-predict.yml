@@ -43,9 +43,11 @@ jobs:
       FIRECRAWL_API_KEY_BACKUP: ${{ secrets.FIRECRAWL_API_KEY_BACKUP }}
       PYTHONUTF8: "1"
       REQUEST_ID: ${{ inputs.request_id }}
-      # Stable V3.5.1 production does not block on external goal-timing enrichment.
-      # The legacy collector remains research-compatible, but is disabled in production.
-      HH520_GOAL_TIMING_ENABLED: "0"
+      # Stable V3.5.1 keeps the version number, but prediction runs now require
+      # best-effort external goal-timing enrichment for every listed match.
+      HH520_GOAL_TIMING_ENABLED: "1"
+      HH520_GOAL_TIMING_ONLY_UNCERTAIN: "0"
+      HH520_GOAL_TIMING_MAX_MATCHES: "100"
     steps:
       - uses: actions/checkout@v4
         with:
