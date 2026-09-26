@@ -38,12 +38,12 @@ def _invalid(reason):
         "valid": False,
         "status": "PASS",
         "reason": reason,
-        "model": MODEL_NAME + ("+COLLECTION1_1" if data_mode(match or {})["full_data"] else ""),
+        "model": MODEL_NAME,
         "top": [],
         "distribution": [],
-        "timing_used": timing_used,
-        "timing_source": ((match or {}).get("goal_timing") or {}).get("source_domain") if timing_used else None,
-        "timing_mode": ((match or {}).get("goal_timing") or {}).get("timing_mode") if timing_used else None,
+        "timing_used": False,
+        "timing_source": None,
+        "timing_mode": None,
         "new_timing_collection_required": False,
         "historical_labels": HISTORICAL_LABELS,
         "ft_core_unchanged": True,
@@ -89,15 +89,16 @@ def htft_layer(probability: dict, match: dict = None, decision: dict = None) -> 
     } for (ht, ft), value in mass.items()]
     rows.sort(key=lambda r: r["probability"], reverse=True)
 
+    full = data_mode(match or {})["full_data"]
     return {
         "valid": True,
         "status": "READY",
-        "model": MODEL_NAME,
+        "model": MODEL_NAME + ("+COLLECTION1_1" if full else ""),
         "top": rows[:3],
         "distribution": rows,
-        "timing_used": False,
-        "timing_source": None,
-        "timing_mode": None,
+        "timing_used": timing_used,
+        "timing_source": ((match or {}).get("goal_timing") or {}).get("source_domain") if timing_used else None,
+        "timing_mode": ((match or {}).get("goal_timing") or {}).get("timing_mode") if timing_used else None,
         "new_timing_collection_required": False,
         "historical_labels": HISTORICAL_LABELS,
         "base_home_half_share": home_share,
