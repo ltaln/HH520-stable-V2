@@ -25,7 +25,8 @@ jobs:
       HH520_GOAL_TIMING_RETRY_FAILURES: "1"
       HH520_GOAL_TIMING_WORKERS: "4"
       FIRECRAWL_MIN_INTERVAL_SECONDS: "2.5"
-      REQUEST_ID: "dongqiudi-20260912-direct-v4"
+      FIRECRAWL_SCRAPE_MAX_AGE_MS: "604800000"
+      REQUEST_ID: "dongqiudi-20260912-cost-match-score-v5"
     steps:
       - uses: actions/checkout@v4
         with:
