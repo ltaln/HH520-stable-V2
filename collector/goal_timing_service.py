@@ -20,6 +20,15 @@ from .firecrawl_client import search_web, scrape_json
 BINS = ("0-15", "16-30", "31-45", "46-60", "61-75", "76-90")
 PRIORITY = ("soccerstats.com", "footystats.org", "inplaywise.com", "sofascore.com", "365scores.com")
 
+PROFILE_NUMBER_FIELDS = (
+    "xg_for", "xg_against", "shots", "shots_on_target",
+    "scored_per_match", "conceded_per_match",
+)
+PROFILE_RATE_FIELDS = (
+    "possession", "clean_sheet_rate", "failed_to_score_rate",
+    "btts_rate", "over_2_5_rate",
+)
+
 TEAM_SEARCH_ALIASES = {
     "日本": "Japan", "乌拉圭": "Uruguay", "韩国": "South Korea", "厄瓜多尔": "Ecuador",
     "科索沃": "Kosovo", "爱尔兰": "Republic of Ireland", "葡萄牙": "Portugal", "威尔士": "Wales",
@@ -87,6 +96,14 @@ def _shares(values):
     return [x / total for x in nums]
 
 
+def _number(value):
+    try:
+        x = float(value)
+    except (TypeError, ValueError):
+        return None
+    return x if x >= 0 else None
+
+
 def _rate(value):
     try:
         x = float(value)
@@ -108,6 +125,15 @@ def _team(raw):
         return None
     first_gf = sum(gf[:3])
     first_ga = sum(ga[:3])
+    profile = {}
+    for key in PROFILE_NUMBER_FIELDS:
+        value = _number(raw.get(key))
+        if value is not None:
+            profile[key] = value
+    for key in PROFILE_RATE_FIELDS:
+        value = _rate(raw.get(key))
+        if value is not None:
+            profile[key] = value
     return {
         "goals_for_share": gf,
         "goals_against_share": ga,
@@ -118,6 +144,7 @@ def _team(raw):
         "first_half_gf_signal": first_gf,
         "first_half_ga_signal": first_ga,
         "scope": raw.get("scope") or "unknown",
+        "profile_stats": profile,
     }
 
 
@@ -150,6 +177,17 @@ def _schemas():
                     "goals_for": {"type": "array", "items": {"type": "number"}, "minItems": 6, "maxItems": 6},
                     "goals_against": {"type": "array", "items": {"type": "number"}, "minItems": 6, "maxItems": 6},
                     "scope": {"type": "string"},
+                    "xg_for": {"type": "number"},
+                    "xg_against": {"type": "number"},
+                    "shots": {"type": "number"},
+                    "shots_on_target": {"type": "number"},
+                    "scored_per_match": {"type": "number"},
+                    "conceded_per_match": {"type": "number"},
+                    "possession": {"type": "number"},
+                    "clean_sheet_rate": {"type": "number"},
+                    "failed_to_score_rate": {"type": "number"},
+                    "btts_rate": {"type": "number"},
+                    "over_2_5_rate": {"type": "number"},
                 },
                 "required": ["goals_for", "goals_against"],
             }
@@ -169,6 +207,17 @@ def _schemas():
                     "second_half_scoring_rate": {"type": "number"},
                     "second_half_conceding_rate": {"type": "number"},
                     "scope": {"type": "string"},
+                    "xg_for": {"type": "number"},
+                    "xg_against": {"type": "number"},
+                    "shots": {"type": "number"},
+                    "shots_on_target": {"type": "number"},
+                    "scored_per_match": {"type": "number"},
+                    "conceded_per_match": {"type": "number"},
+                    "possession": {"type": "number"},
+                    "clean_sheet_rate": {"type": "number"},
+                    "failed_to_score_rate": {"type": "number"},
+                    "btts_rate": {"type": "number"},
+                    "over_2_5_rate": {"type": "number"},
                 },
                 "required": ["first_half_scoring_rate", "first_half_conceding_rate"],
             }
@@ -271,7 +320,10 @@ def _extract_single_team(team, urls):
                 prompt=(
                     f'Extract PRE-MATCH goal timing statistics for {team}. '
                     'Return scored and conceded values for exactly six bins: '
-                    '0-15,16-30,31-45,46-60,61-75,76-90. Do not invent missing data.'
+                    '0-15,16-30,31-45,46-60,61-75,76-90. Also return any visible '
+                    'xG for/against, shots, shots on target, scored/conceded per match, '
+                    'possession, clean-sheet, failed-to-score, BTTS and over-2.5 rates. '
+                    'Do not invent missing data.'
                 ),
             )
             payload = raw.get("data", {}).get("json") if isinstance(raw, dict) else None
@@ -334,6 +386,8 @@ def collect_goal_timing(date: str, match: dict) -> dict:
         f"Extract PRE-MATCH goal scored/conceded timing distributions for {home} and {away}. "
         "Return exactly six bins in this order: 0-15,16-30,31-45,46-60,61-75,76-90. "
         "Numbers may be counts or percentages but must use one scale per row. "
+        "Also return any visible xG for/against, shots, shots on target, scored/conceded per match, "
+        "possession, clean-sheet, failed-to-score, BTTS and over-2.5 rates. "
         "Use only statistics visible on the page and do not invent missing bins."
     )
     half_prompt = (
