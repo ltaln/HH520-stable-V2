@@ -151,6 +151,15 @@ def _team(raw):
 def _team_half_rates(raw):
     if not isinstance(raw, dict):
         return None
+    profile = {}
+    for key in PROFILE_NUMBER_FIELDS:
+        value = _number(raw.get(key))
+        if value is not None:
+            profile[key] = value
+    for key in PROFILE_RATE_FIELDS:
+        value = _rate(raw.get(key))
+        if value is not None:
+            profile[key] = value
     fh_gf = _rate(raw.get("first_half_scoring_rate"))
     fh_ga = _rate(raw.get("first_half_conceding_rate"))
     sh_gf = _rate(raw.get("second_half_scoring_rate"))
@@ -163,6 +172,7 @@ def _team_half_rates(raw):
         "second_half_gf_signal": sh_gf,
         "second_half_ga_signal": sh_ga,
         "scope": raw.get("scope") or "unknown",
+        "profile_stats": profile,
     }
 
 
@@ -523,7 +533,7 @@ def enrich_matches_with_goal_timing(date: str, matches: list[dict]) -> dict:
     candidates = [m for m in matches if _needs_timing(m)]
     selected = candidates[:max(0, max_matches)]
     selected_ids = {id(m) for m in selected}
-    attempted = available = six_bin = half_fallback = 0
+    attempted = available = six_bin = half_fallback = profile_stats_available = 0
 
     for match in matches:
         if id(match) not in selected_ids:
@@ -540,6 +550,9 @@ def enrich_matches_with_goal_timing(date: str, matches: list[dict]) -> dict:
             available += 1
             six_bin += int(timing.get("timing_mode") == "six_bin")
             half_fallback += int(timing.get("timing_mode") == "half_aggregate_fallback")
+            home_stats = ((timing.get("home") or {}).get("profile_stats") or {})
+            away_stats = ((timing.get("away") or {}).get("profile_stats") or {})
+            profile_stats_available += int(bool(home_stats or away_stats))
 
     return {
         "enabled": True,
@@ -547,6 +560,8 @@ def enrich_matches_with_goal_timing(date: str, matches: list[dict]) -> dict:
         "available": available,
         "six_bin": six_bin,
         "half_aggregate_fallback": half_fallback,
+        "profile_stats_available": profile_stats_available,
+        "profile_fields": list(PROFILE_NUMBER_FIELDS + PROFILE_RATE_FIELDS),
         "skipped_confirmed": sum(1 for m in matches if (m.get("goal_timing") or {}).get("reason") == "confirmed_skip"),
         "lookup_capped": max(0, len(candidates) - len(selected)),
     }
