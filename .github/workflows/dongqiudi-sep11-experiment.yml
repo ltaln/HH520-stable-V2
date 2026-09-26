@@ -69,7 +69,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p _action_out
-          python scripts/dongqiudi_sep11_experiment.py 2026-09-11 --output "_action_out/$REQUEST_ID.json"
+          PYTHONPATH=. python scripts/dongqiudi_sep11_experiment.py 2026-09-11 --output "_action_out/$REQUEST_ID.json"
 
       - name: Capture Firecrawl credits after and attach usage
         shell: bash
