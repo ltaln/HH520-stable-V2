@@ -1,5 +1,5 @@
 name: Dongqiudi Historical Full Model Experiment
-run-name: "dongqiudi-historical - 2026-09-12"
+run-name: "dongqiudi-historical - 2026-09-13"
 on:
   workflow_dispatch:
   push:
@@ -14,9 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     env:
-      FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
-      FIRECRAWL_API_KEY_BACKUP: ${{ secrets.FIRECRAWL_API_KEY_BACKUP }}
-      FIRECRAWL_API_KEY_BACKUP2: ${{ secrets.FIRECRAWL_API_KEY_BACKUP2 }}
+      FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY_BACKUP2 }}
       PYTHONUTF8: "1"
       HH520_FRESH_10027_EACH_PREDICTION: "1"
       HH520_GOAL_TIMING_ENABLED: "1"
@@ -26,7 +24,7 @@ jobs:
       HH520_GOAL_TIMING_WORKERS: "4"
       FIRECRAWL_MIN_INTERVAL_SECONDS: "2.5"
       FIRECRAWL_SCRAPE_MAX_AGE_MS: "604800000"
-      REQUEST_ID: "dongqiudi-20260912-cost-match-score-v5"
+      REQUEST_ID: "dongqiudi-20260913-validation-v6"
     steps:
       - uses: actions/checkout@v4
         with:
@@ -70,7 +68,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p _action_out
-          PYTHONPATH=. python scripts/dongqiudi_sep11_experiment.py 2026-09-12 --output "_action_out/$REQUEST_ID.json"
+          PYTHONPATH=. python scripts/dongqiudi_sep11_experiment.py 2026-09-13 --output "_action_out/$REQUEST_ID.json"
 
       - name: Capture Firecrawl credits after and attach usage
         shell: bash
