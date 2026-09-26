@@ -81,7 +81,7 @@ def _num(value):
 def _gap(factors, name):
     home = _num(factors.get("home_" + name))
     away = _num(factors.get("away_" + name))
-    return abs(home - away) if home is not None and away is not None else 0.0
+    return abs(home - away) if home is not None and away is not None else None
 
 
 def _draw_features(match, probability):
@@ -115,7 +115,7 @@ def _draw_features(match, probability):
         "defense_gap": _gap(factors, "defense"),
         "h2h_gap": _gap(factors, "h2h"),
         "form_gap": _gap(factors, "form"),
-        "possession_gap": abs(hp - ap) if hp is not None and ap is not None else 0.0,
+        "possession_gap": abs(hp - ap) if hp is not None and ap is not None else None,
     }
     return values
 
@@ -126,6 +126,9 @@ def _draw_resolver(match, probability):
         return False, {"score": None}
     if values["pmax"] < DRAW_PMAX_MIN or values["pmax"] > DRAW_PMAX_LIMIT:
         return False, {"score": None, **values}
+    missing = [name for name in DRAW_FEATURES if values.get(name) is None]
+    if missing:
+        return False, {"score": None, "missing_features": missing, **values}
 
     z = DRAW_WEIGHTS[0]
     for i, name in enumerate(DRAW_FEATURES):
@@ -188,11 +191,9 @@ def decision_filter(match: dict, probability: dict, value: dict,
     possession_missing = "possession_missing" in warnings
 
     if not hard_invalid and modules_missing and possession_missing:
-        decision = _worse(decision, "PASS")
-        reasons.append("critical_structural_data_missing")
+        reasons.append("optional_structural_data_missing_advisory")
     elif not hard_invalid and (modules_missing or possession_missing):
-        decision = _worse(decision, "BALANCED")
-        reasons.append("structural_data_incomplete")
+        reasons.append("optional_structural_data_incomplete_advisory")
 
     if hard_invalid:
         reasons = ["data_quality_or_probability_invalid"] + quality.get("errors", [])
