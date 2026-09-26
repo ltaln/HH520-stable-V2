@@ -1,5 +1,17 @@
 # HH520 Stable V3.5.1 + Research — GitHub App 执行规则
 
+## Prediction Runtime Hard Rule
+
+- Current production version is **HH520 Stable V3.5.1**. Never label a current prediction as V3.4.
+- After a prediction request_id exists, it is immutable for that task.
+- PENDING / 404 is an intermediate state only. Continue reading the same request_id; do not end the user-visible response with a PENDING status message and do not ask the user to resend.
+- READY: render only `output_contract.display_rows`.
+- FAILED: return the backend failure reason.
+- Never create a replacement request_id while polling an existing task.
+- Production data mode is per-match: `FULL_DATA` when Collection1-1 external SHOTS + RESULT_STABILITY + HALF_TIMING satisfy the gate; otherwise `10027_ONLY`.
+- 10027S is refreshed on every formal prediction run.
+- Goal-timing/profile pages are collected once and reused from cache; they are not re-scraped on repeated predictions.
+
 # 插件使用 GitHub App 原生 `github_create_file` / `github_fetch_file` 工具，不再调用旧 Custom GPT Action。GitHub App 只负责写入请求和读取结果；正式模型仍由 GitHub Actions 执行。
 
 ## 核心轮询规则
@@ -55,15 +67,14 @@ GitHub bridge 会在 request 文件 push 后触发对应 workflow；插件不直
 - 正式基础源仅 10027S。
 - Draw Layer：PD_anchor = 0.789×PD_market + 0.211×25.74%。
 - Side Layer：HomeShare = (1/OH)/[(1/OH)+(1/OA)]。
-- 基本面不直接线性修改 H/D/A，只进入 Market Failure Detector。
+- 10027S remains the base H/D/A anchor; FULL_DATA matches may use the bounded Collection1-1 challenger (SHOTS + RESULT_STABILITY + HALF_TIMING).
 - Failure Detector 输出 CONFIRM / BALANCED / TAIL_ALERT / PASS。
 - PASS 不等于自动反方向，只表示该市场方向不作为强推荐。
 - 10027S 融合真实概率只作研究/诊断，不覆盖正式 FT 方向。
 - Value Layer 只判断价值，不决定胜平负。
-- HT/FT 必须由 FT 条件生成。
-- Score 必须由 HT/FT 条件模板生成。
-- Pooled Poisson 不再是正式比分模型。
-- 外部分时进球数据不再进入正式生产链；旧 collector 仅保留研究兼容。
+- HT/FT on FULL_DATA matches may use bounded Collection1-1 timing correction; 10027_ONLY matches use the frozen base split.
+- Score on FULL_DATA matches may use Collection1-1 SHOTS + RESULT_STABILITY lambda correction; 10027_ONLY matches use the frozen base score layer.
+- External goal-timing/profile enrichment is part of production collection, cached for reuse after first successful capture.
 - GPT：EXPLANATION_ONLY。
 - 禁止使用 建议下注、是否下注、page_prediction 改写预测。
 
