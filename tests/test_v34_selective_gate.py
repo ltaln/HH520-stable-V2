@@ -43,7 +43,7 @@ def test_missing_structural_data_is_advisory_not_hard_pass():
     assert d["decision"] != "PASS" or "optional_structural_data_missing_advisory" in d["reasons"]
     assert d["draw_rule_promoted"] is False
     assert "missing_features" in d["draw_rule_metrics"] or d["draw_rule_metrics"].get("score") is None
-    assert "critical_structural_data_missing" in d["reasons"]
+    assert "optional_structural_data_missing_advisory" in d["reasons"]
 
 
 def test_draw_is_first_class_direction():
