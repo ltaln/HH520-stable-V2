@@ -27,9 +27,15 @@ jobs:
               echo "$label=NOT_CONFIGURED"
               return
             fi
-            body="$(curl -sS -H "Authorization: Bearer $key" https://api.firecrawl.dev/v2/team/credit-usage)"
-            remain="$(printf '%s' "$body" | jq -r '.data.remainingCredits // .remainingCredits // "UNKNOWN"')"
-            echo "$label=$remain"
+            tmp="$(mktemp)"
+            code="$(curl -sS -o "$tmp" -w "%{http_code}" -H "Authorization: Bearer $key" https://api.firecrawl.dev/v2/team/credit-usage)"
+            body="$(cat "$tmp")"
+            rm -f "$tmp"
+            remain="$(printf '%s' "$body" | jq -r '.data.remainingCredits // .remainingCredits // .data.remaining_credits // .remaining_credits // "UNKNOWN"' 2>/dev/null || echo "UNKNOWN")"
+            echo "$label=$remain HTTP=$code"
+            if [ "$remain" = "UNKNOWN" ]; then
+              printf '%s' "$body" | jq -c '{success,code,message,error,top_level_keys:(keys)}' 2>/dev/null || true
+            fi
           }
           check PRIMARY "$PRIMARY"
           check BACKUP "$BACKUP"
