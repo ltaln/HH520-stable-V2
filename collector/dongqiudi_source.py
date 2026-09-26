@@ -10,6 +10,7 @@ Research-safe design:
 from __future__ import annotations
 
 import re
+from difflib import SequenceMatcher
 from urllib.parse import urlparse
 
 from .firecrawl_client import search_web, scrape_markdown
@@ -55,13 +56,62 @@ def _match_id_from_url(url):
     return m.group(1) if m else None
 
 
-def _header_matches(markdown,home,away):
-    header=str(markdown or "")[:500]
-    hp=[header.find(x) for x in _alias_list(home) if x and header.find(x)>=0]
-    ap=[header.find(x) for x in _alias_list(away) if x and header.find(x)>=0]
-    if not hp or not ap:
+def _norm_team_name(value):
+    text=str(value or "").strip().lower()
+    for token in ("足球俱乐部","俱乐部","football club","fc","afc","cf","sc","fk","club","队"):
+        text=text.replace(token,"")
+    text=re.sub(r"[\\s·・\-_/().（）]+","",text)
+    return text
+
+
+def _name_similarity(a,b):
+    aa=_norm_team_name(a); bb=_norm_team_name(b)
+    if not aa or not bb:
+        return 0.0
+    if aa in bb or bb in aa:
+        return min(len(aa),len(bb))/max(len(aa),len(bb))
+    return SequenceMatcher(None,aa,bb).ratio()
+
+
+def _header_team_position(header,team):
+    positions=[]
+    for alias in _alias_list(team):
+        if not alias:
+            continue
+        idx=header.find(alias)
+        if idx>=0:
+            positions.append((idx,1.0,alias))
+    if positions:
+        return min(positions,key=lambda x:x[0])
+
+    # Fuzzy fallback for names that differ between HH520 and Dongqiudi.
+    # Only consider short non-empty lines near the match header and require a
+    # reasonably strong similarity so an unrelated search hit is rejected.
+    for line_no,line in enumerate(header.splitlines()[:30]):
+        value=line.strip(" -*#\t")
+        if not value or len(value)>30 or re.search(r"\\d{1,2}[-:/：]\\d{1,2}",value):
+            continue
+        best=max((_name_similarity(alias,value) for alias in _alias_list(team)),default=0.0)
+        if best>=0.56:
+            positions.append((line_no*50,best,value))
+    return min(positions,key=lambda x:x[0]) if positions else None
+
+
+def _header_matches(markdown,date,home,away):
+    header=str(markdown or "")[:800]
+    hp=_header_team_position(header,home)
+    ap=_header_team_position(header,away)
+    if not hp or not ap or hp[0]>=ap[0]:
         return False
-    return min(hp)<min(ap)
+
+    # Historical replay must bind to the requested day. Dongqiudi headers use
+    # MM-DD, so verify that token when a valid ISO date is supplied.
+    m=re.fullmatch(r"\\d{4}-(\\d{2})-(\\d{2})",str(date or ""))
+    if m:
+        mmdd=f"{m.group(1)}-{m.group(2)}"
+        if mmdd not in header:
+            return False
+    return True
 
 
 def discover_match_details(date,home,away):
@@ -170,7 +220,7 @@ def collect_match_analysis(date,home,away):
         except Exception as exc:
             rejected.append({"match_id":hit["match_id"],"reason":type(exc).__name__})
             continue
-        if not _header_matches(markdown,home,away):
+        if not _header_matches(markdown,date,home,away):
             rejected.append({"match_id":hit["match_id"],"reason":"team_or_home_away_mismatch"})
             continue
         parsed=parse_analysis_markdown(markdown)
