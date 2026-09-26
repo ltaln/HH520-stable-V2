@@ -24,7 +24,7 @@ def _scenario(pred):
 def build_display_row(pred: dict) -> dict:
     get=pred.get
     return {
-        "球队对阵": f"{pred['home_team']} vs {pred['away_team']}",
+        "球队对阵": f"{pred['home_team']} vs {pred['away_team']} [{'全数据' if pred.get('data_mode') == 'FULL_DATA' else '10027'}]",
         "胜平负场景": _scenario(pred),
         "市场概率": _pct(get("market_probability")),
         "比分×2及概率": f"{get('score1') or '未提供'} ({_pct(get('score1_probability'))}) / {get('score2') or '未提供'} ({_pct(get('score2_probability'))})",
@@ -38,7 +38,7 @@ def build_output_contract(predictions: list[dict]) -> dict:
         "version": "HH520-OUTPUT-V3.5.1", "stable_version": "HH520 Stable V3.5.1",
         "strict": True, "required_columns": OUTPUT_COLUMNS,
         "display_rows": [build_display_row(pred) for pred in predictions],
-        "render_rule": "必须按6列完整输出；>=55%的主/客方向保持侧向校准；低置信侧向区允许历史验证的正式平局解析；比分独立于FT硬锁；HT/FT采用已采集历史半/全场标签冻结的独立模型，不采集新的进球时间数据。",
+        "render_rule": "必须按6列完整输出；球队对阵后必须标注[全数据]或[10027]；全数据=双方外部SHOTS+RESULT_STABILITY+HALF_TIMING均满足质量门槛并已进入FT/比分/HTFT；10027=外部数据不完整，完全回退10027基础链路。",
     }
 
 
