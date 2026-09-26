@@ -1,5 +1,5 @@
 name: Dongqiudi Historical Full Model Experiment
-run-name: "dongqiudi-historical - 2026-09-13"
+run-name: "dongqiudi-historical - 2026-09-14"
 on:
   workflow_dispatch:
   push:
@@ -24,7 +24,7 @@ jobs:
       HH520_GOAL_TIMING_WORKERS: "4"
       FIRECRAWL_MIN_INTERVAL_SECONDS: "2.5"
       FIRECRAWL_SCRAPE_MAX_AGE_MS: "604800000"
-      REQUEST_ID: "dongqiudi-20260913-validation-v6"
+      REQUEST_ID: "dongqiudi-20260914-validation-v6"
     steps:
       - uses: actions/checkout@v4
         with:
@@ -68,7 +68,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p _action_out
-          PYTHONPATH=. python scripts/dongqiudi_sep11_experiment.py 2026-09-13 --output "_action_out/$REQUEST_ID.json"
+          PYTHONPATH=. python scripts/dongqiudi_sep11_experiment.py 2026-09-14 --output "_action_out/$REQUEST_ID.json"
 
       - name: Capture Firecrawl credits after and attach usage
         shell: bash
