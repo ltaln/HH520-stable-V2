@@ -61,15 +61,18 @@ def collect_date(date: str, force_refresh: bool = False, source: str = SOURCE):
     if force_refresh:
         raise ValueError("禁止无条件 force_refresh；实时新鲜度由快照时间和显式规则控制")
 
-    payload = load_cache(date, source=SOURCE)
+    fresh_each_run = os.getenv("HH520_FRESH_10027_EACH_PREDICTION", "0").strip() == "1"
+    payload = None if fresh_each_run else load_cache(date, source=SOURCE)
     if payload is None:
         require_key()
-        allow_resume = os.getenv("HH520_ALLOW_INCOMPLETE_REQUEST_RESUME","").strip() == "1"
-        claim_request(date, source=SOURCE, allow_resume_incomplete=allow_resume)
+        if not fresh_each_run:
+            allow_resume = os.getenv("HH520_ALLOW_INCOMPLETE_REQUEST_RESUME","").strip() == "1"
+            claim_request(date, source=SOURCE, allow_resume_incomplete=allow_resume)
         raw = scrape_markdown(cfg["url"])
         payload = {
             "date": date, "url": cfg["url"], "source": SOURCE_NAME,
             "captured_at": datetime.now(timezone.utc).isoformat(), "raw": raw,
+            "snapshot_policy": "FRESH_EACH_PREDICTION" if fresh_each_run else "CACHE_FIRST",
         }
         save_cache(date, payload, source=SOURCE)
 
