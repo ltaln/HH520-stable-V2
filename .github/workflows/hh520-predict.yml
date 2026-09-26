@@ -41,6 +41,7 @@ jobs:
     env:
       FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
       FIRECRAWL_API_KEY_BACKUP: ${{ secrets.FIRECRAWL_API_KEY_BACKUP }}
+      FIRECRAWL_API_KEY_BACKUP2: ${{ secrets.FIRECRAWL_API_KEY_BACKUP2 }}
       PYTHONUTF8: "1"
       REQUEST_ID: ${{ inputs.request_id }}
       HH520_FRESH_10027_EACH_PREDICTION: "1"
@@ -82,8 +83,9 @@ jobs:
           }
           PRIMARY_REMAIN="$(check "$FIRECRAWL_API_KEY")"
           BACKUP_REMAIN="$(check "$FIRECRAWL_API_KEY_BACKUP")"
-          echo "Firecrawl credits: primary=$PRIMARY_REMAIN backup=$BACKUP_REMAIN"
-          python - "$PRIMARY_REMAIN" "$BACKUP_REMAIN" <<'PY'
+          BACKUP2_REMAIN="$(check "$FIRECRAWL_API_KEY_BACKUP2")"
+          echo "Firecrawl credits: primary=$PRIMARY_REMAIN backup1=$BACKUP_REMAIN backup2=$BACKUP2_REMAIN"
+          python - "$PRIMARY_REMAIN" "$BACKUP_REMAIN" "$BACKUP2_REMAIN" <<'PY'
           import sys
           vals=[]
           for x in sys.argv[1:]:
