@@ -32,14 +32,17 @@ def test_close_probability_margin_is_not_confirm():
         assert d["decision"] in {"BALANCED", "TAIL_ALERT", "PASS"}
 
 
-def test_missing_structural_data_cannot_confirm():
+def test_missing_structural_data_is_advisory_not_hard_pass():
     m = _base_match()
     m["possession"] = {}
     m["research_factors"] = {}
     p = probability_layer(m)
     v = value_layer(m, p)
     d = decision_filter(m, p, v)
-    assert d["decision"] == "PASS"
+    assert d["allow_prediction"] is True
+    assert d["decision"] != "PASS" or "optional_structural_data_missing_advisory" in d["reasons"]
+    assert d["draw_rule_promoted"] is False
+    assert "missing_features" in d["draw_rule_metrics"] or d["draw_rule_metrics"].get("score") is None
     assert "critical_structural_data_missing" in d["reasons"]
 
 
