@@ -20,6 +20,7 @@ intensities are split into first/second-half intensities and converted to a
 from __future__ import annotations
 
 from .score_layer import _fit_lambdas, _poisson
+from .full_data_layer import half_share_adjustments, data_mode
 
 ZH = {"HOME": "主", "DRAW": "平", "AWAY": "客"}
 BASE_HOME_HALF_SHARE = 0.36
@@ -37,12 +38,12 @@ def _invalid(reason):
         "valid": False,
         "status": "PASS",
         "reason": reason,
-        "model": MODEL_NAME,
+        "model": MODEL_NAME + ("+COLLECTION1_1" if data_mode(match or {})["full_data"] else ""),
         "top": [],
         "distribution": [],
-        "timing_used": False,
-        "timing_source": None,
-        "timing_mode": None,
+        "timing_used": timing_used,
+        "timing_source": ((match or {}).get("goal_timing") or {}).get("source_domain") if timing_used else None,
+        "timing_mode": ((match or {}).get("goal_timing") or {}).get("timing_mode") if timing_used else None,
         "new_timing_collection_required": False,
         "historical_labels": HISTORICAL_LABELS,
         "ft_core_unchanged": True,
@@ -60,8 +61,9 @@ def htft_layer(probability: dict, match: dict = None, decision: dict = None) -> 
         return _invalid("lambda_fit_failed")
     _, lambda_home, lambda_away = fitted
 
-    home_share = BASE_HOME_HALF_SHARE
-    away_share = BASE_AWAY_HALF_SHARE
+    home_share, away_share, timing_used = half_share_adjustments(
+        match or {}, BASE_HOME_HALF_SHARE, BASE_AWAY_HALF_SHARE
+    )
 
     home_first = _poisson(lambda_home * home_share, 6)
     away_first = _poisson(lambda_away * away_share, 6)
