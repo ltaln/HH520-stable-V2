@@ -1,4 +1,4 @@
-"""Direct Dongqiudi public-analysis experiment for 2026-09-11.
+"""Direct Dongqiudi public-analysis experiment for one historical date.
 
 Research-only. Stable V3.5.1 production files and weights are not changed.
 The experiment deliberately excludes Dongqiudi /situation post-match stats.
@@ -68,7 +68,7 @@ def _gfga_dist(home,away):
     return _norm3((h,0.70*(h*a)**0.5,a))
 
 
-def _candidate_probability(match,groups):
+def _candidate_probability(match,groups,strength=1.0):
     base=probability_layer(match)
     out=copy.deepcopy(base)
     if not base.get("valid"):
@@ -82,11 +82,11 @@ def _candidate_probability(match,groups):
     signals["H2H"]=_wdl_dist(home,away,"h2h_")
     signals["GF_GA"]=_gfga_dist(home,away)
     used=[g for g in groups if signals.get(g)]
-    ext=sum(GROUP_WEIGHTS[g] for g in used)
+    ext=sum(GROUP_WEIGHTS[g]*strength for g in used)
     b=[float(base["probabilities"][k]) for k in OUTCOMES]
     mix=[(1-ext)*b[i] for i in range(3)]
     for g in used:
-        w=GROUP_WEIGHTS[g]; sig=signals[g]
+        w=GROUP_WEIGHTS[g]*strength; sig=signals[g]
         for i in range(3): mix[i]+=w*sig[i]
     mix=_norm3(mix)
     final=dict(zip(OUTCOMES,mix))
@@ -102,8 +102,8 @@ def _candidate_probability(match,groups):
     return out
 
 
-def _candidate_full_prediction(match,groups):
-    probability=_candidate_probability(match,groups)
+def _candidate_full_prediction(match,groups,strength=1.0):
+    probability=_candidate_probability(match,groups,strength)
     value=value_layer(match,probability)
     quality=data_quality_gate(match,probability)
     classification=classify_match(match,probability)
@@ -227,15 +227,21 @@ def main():
 
     tournament={}
     candidate_predictions={}
+    strengths=(0.50,0.75,1.00,1.25,1.50)
     for combo in combos:
-        name="BASE" if not combo else "+".join(combo)
-        preds={str(m.get("match_id")):_candidate_full_prediction(m,combo) for m in matches}
-        candidate_predictions[name]=preds
-        tournament[name]=_metrics(preds,label_map)
-        tournament[name]["matches_with_any_group_used"]=sum(bool(x.get("groups_used")) for x in preds.values())
-        tournament[name]["mean_external_weight"]=(
-            sum(float(x.get("external_weight") or 0) for x in preds.values())/len(preds) if preds else 0
-        )
+        combo_name="BASE" if not combo else "+".join(combo)
+        strength_values=(1.0,) if not combo else strengths
+        for strength in strength_values:
+            name=combo_name if not combo else f"{combo_name}@{strength:.2f}x"
+            preds={str(m.get("match_id")):_candidate_full_prediction(m,combo,strength) for m in matches}
+            candidate_predictions[name]=preds
+            tournament[name]=_metrics(preds,label_map)
+            tournament[name]["groups"]=list(combo)
+            tournament[name]["strength_multiplier"]=strength
+            tournament[name]["matches_with_any_group_used"]=sum(bool(x.get("groups_used")) for x in preds.values())
+            tournament[name]["mean_external_weight"]=(
+                sum(float(x.get("external_weight") or 0) for x in preds.values())/len(preds) if preds else 0
+            )
 
     baseline_metrics=_metrics({
         mid:{
@@ -257,7 +263,7 @@ def main():
 
     result={
         "status":"READY",
-        "experiment":"DONGQIUDI_SEP11_DIRECT_FULL_MODEL_V2",
+        "experiment":"DONGQIUDI_DIRECT_FULL_MODEL_WEIGHT_SWEEP_V3",
         "date":args.date,
         "stable_mutated":False,
         "stable_version":"HH520 Stable V3.5.1",
@@ -277,7 +283,7 @@ def main():
         "combination_tournament":tournament,
         "descriptive_ranking":ranking,
         "best_one_day_combo":ranking[0] if ranking else None,
-        "warning":"Best combo is descriptive for 2026-09-11 only; sample is too small for promotion.",
+        "warning":f"Best combo is descriptive for {args.date} only; sample is too small for promotion.",
         "per_match":[
             {
                 "match_id":str(m.get("match_id")),
