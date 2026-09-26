@@ -1,0 +1,16 @@
+{
+  "status": "PENDING",
+  "kind": "stable",
+  "request_id": "hh520-20260926-4b8d2f6a",
+  "stage": "workflow",
+  "run_id": "36215254865",
+  "run_attempt": "1",
+  "message": "Workflow accepted and is still running.",
+  "_action": {
+    "request_id": "hh520-20260926-4b8d2f6a",
+    "repository": "ltaln/HH520-stable-V2",
+    "run_id": "36215254865",
+    "run_attempt": "1",
+    "source_sha": "8230ae9057ddb941154896543f897e8f9986e07d"
+  }
+}
