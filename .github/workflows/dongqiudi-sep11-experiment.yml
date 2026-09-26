@@ -25,7 +25,7 @@ jobs:
       HH520_GOAL_TIMING_RETRY_FAILURES: "1"
       HH520_GOAL_TIMING_WORKERS: "4"
       FIRECRAWL_MIN_INTERVAL_SECONDS: "2.5"
-      REQUEST_ID: "dongqiudi-20260911-full-v1"
+      REQUEST_ID: "dongqiudi-20260911-direct-v2"
     steps:
       - uses: actions/checkout@v4
         with:
