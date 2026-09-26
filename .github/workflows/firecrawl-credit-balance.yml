@@ -31,10 +31,20 @@ jobs:
             code="$(curl -sS -o "$tmp" -w "%{http_code}" -H "Authorization: Bearer $key" https://api.firecrawl.dev/v2/team/credit-usage)"
             body="$(cat "$tmp")"
             rm -f "$tmp"
-            remain="$(printf '%s' "$body" | jq -r '.data.remainingCredits // .remainingCredits // .data.remaining_credits // .remaining_credits // "UNKNOWN"' 2>/dev/null || echo "UNKNOWN")"
+            remain="$(printf '%s' "$body" | jq -r '
+              .data.availableCredits //
+              .availableCredits //
+              .data.remainingCredits //
+              .remainingCredits //
+              .data.remaining_credits //
+              .remaining_credits //
+              .data.credits //
+              .credits //
+              "UNKNOWN"
+            ' 2>/dev/null || echo "UNKNOWN")"
             echo "$label=$remain HTTP=$code"
             if [ "$remain" = "UNKNOWN" ]; then
-              printf '%s' "$body" | jq -c '{success,code,message,error,top_level_keys:(keys)}' 2>/dev/null || true
+              printf '%s' "$body" | jq -c '{success,code,message,error,data,top_level_keys:(keys)}' 2>/dev/null || true
             fi
           }
           check PRIMARY "$PRIMARY"
