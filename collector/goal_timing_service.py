@@ -351,30 +351,61 @@ def _discover_team(team):
 
 
 def _single_team_schemas():
+    common = {
+        "team": {"type": "string"},
+        "scope": {"type": "string"},
+        "xg_for": {"type": "number"},
+        "xg_against": {"type": "number"},
+        "shots": {"type": "number"},
+        "shots_on_target": {"type": "number"},
+        "shots_off_target": {"type": "number"},
+        "shot_conversion": {"type": "number"},
+        "shots_per_goal": {"type": "number"},
+        "sot_per_goal": {"type": "number"},
+        "scored_per_match": {"type": "number"},
+        "conceded_per_match": {"type": "number"},
+        "possession": {"type": "number"},
+        "clean_sheet_rate": {"type": "number"},
+        "failed_to_score_rate": {"type": "number"},
+        "wins_rate": {"type": "number"},
+        "draws_rate": {"type": "number"},
+        "losses_rate": {"type": "number"},
+        "btts_rate": {"type": "number"},
+        "btts_win_rate": {"type": "number"},
+        "btts_draw_rate": {"type": "number"},
+        "over_0_5_rate": {"type": "number"},
+        "over_1_5_rate": {"type": "number"},
+        "over_2_5_rate": {"type": "number"},
+        "over_3_5_rate": {"type": "number"},
+        "scored_1h_rate": {"type": "number"},
+        "scored_2h_rate": {"type": "number"},
+        "failed_score_1h_rate": {"type": "number"},
+        "failed_score_2h_rate": {"type": "number"},
+        "scored_both_halves_rate": {"type": "number"},
+        "clean_sheet_1h_rate": {"type": "number"},
+        "clean_sheet_2h_rate": {"type": "number"},
+    }
     six = {
         "type": "object",
         "properties": {
-            "team": {"type": "string"},
+            **common,
             "goals_for": {"type": "array", "items": {"type": "number"}, "minItems": 6, "maxItems": 6},
             "goals_against": {"type": "array", "items": {"type": "number"}, "minItems": 6, "maxItems": 6},
-            "scope": {"type": "string"},
         },
         "required": ["goals_for", "goals_against"],
     }
     half = {
         "type": "object",
         "properties": {
-            "team": {"type": "string"},
+            **common,
             "first_half_scoring_rate": {"type": "number"},
             "first_half_conceding_rate": {"type": "number"},
             "second_half_scoring_rate": {"type": "number"},
             "second_half_conceding_rate": {"type": "number"},
-            "scope": {"type": "string"},
         },
         "required": ["first_half_scoring_rate", "first_half_conceding_rate"],
     }
     return six, half
-
 
 def _extract_single_team(team, urls):
     six_schema, half_schema = _single_team_schemas()
@@ -406,7 +437,10 @@ def _extract_single_team(team, urls):
                 schema=half_schema,
                 prompt=(
                     f'Extract PRE-MATCH first-half and second-half scoring/conceding rates for {team}. '
-                    'Return only rates visible on the page; do not infer unrelated statistics.'
+                    'Also return any visible xG, shots, shots on target/off target, conversion, '
+                    'scored/conceded per match, possession, W/D/L, clean-sheet, failed-to-score, '
+                    'BTTS, over-goal and half-scoring rates. Return only values visible on the page; '
+                    'do not infer unrelated statistics.'
                 ),
             )
             payload = raw.get("data", {}).get("json") if isinstance(raw, dict) else None
