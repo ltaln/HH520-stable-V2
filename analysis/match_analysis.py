@@ -10,11 +10,14 @@ from engine.score_layer import score_layer
 from engine.state_engine import build_state
 from engine.consistency_layer import consistency_layer
 from engine.calibration_layer import calibration_layer
+from engine.full_data_layer import enhance_probability, data_mode
 from .confidence import confidence_from_probability
 
 
 def analyze_match(match: dict) -> dict:
-    probability = probability_layer(match)
+    base_probability = probability_layer(match)
+    probability = enhance_probability(match, base_probability)
+    match["_data_mode"] = data_mode(match)
     value = value_layer(match, probability)
     quality = data_quality_gate(match, probability)
     classification = classify_match(match, probability)
@@ -29,6 +32,8 @@ def analyze_match(match: dict) -> dict:
     calibration = calibration_layer(probability, state)
     return {
         "probability": probability,
+        "base_probability": base_probability,
+        "data_mode": match.get("_data_mode"),
         "value": value,
         "quality": quality,
         "classification": classification,
