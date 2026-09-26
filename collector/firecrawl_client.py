@@ -95,11 +95,16 @@ def _post(endpoint: str, payload: dict, timeout: int = 60, *, paced: bool = Fals
 
         raw_body = response.text if isinstance(response.text, str) else ""
         body = raw_body.lower()
+        # A successful Firecrawl response may legitimately contain fields such
+        # as "creditsUsed". Never treat words in a 2xx success payload as a
+        # quota failure, otherwise the same paid request is repeated on backup
+        # keys and credits are charged twice.
         quota_error = (
             response.status_code in (402, 403)
-            or "quota" in body
-            or "credits" in body
-            or "limit" in body
+            or (
+                response.status_code >= 400
+                and ("quota" in body or "credits" in body or "limit" in body)
+            )
         )
         if quota_error and index + 1 < len(keys):
             continue
@@ -112,9 +117,10 @@ def _post(endpoint: str, payload: dict, timeout: int = 60, *, paced: bool = Fals
 
 
 def scrape_markdown(url: str, timeout: int = 60, max_429_retries: int = 4):
+    max_age = int(os.getenv("FIRECRAWL_SCRAPE_MAX_AGE_MS", "0"))
     payload = {
         "url": url, "formats": ["markdown"], "onlyMainContent": True,
-        "proxy": "basic", "storeInCache": True, "maxAge": 0,
+        "proxy": "basic", "storeInCache": True, "maxAge": max(0, max_age),
     }
 
     for attempt in range(max_429_retries + 1):
