@@ -1,10 +1,11 @@
 """Public Dongqiudi match-analysis collector.
 
 Research-safe design:
-- discover a public matchDetail URL with one web search;
+- discover public matchDetail candidates with targeted search;
+- validate home/away order from the match header before accepting a page;
 - scrape only the public /analysis page;
-- parse pre-match comparison blocks locally (no JSON extraction);
-- never use /situation or post-match technical statistics for historical replay.
+- parse pre-match comparison blocks locally;
+- never use /situation post-match technical statistics in historical replay.
 """
 from __future__ import annotations
 
@@ -13,9 +14,27 @@ from urllib.parse import urlparse
 
 from .firecrawl_client import search_web, scrape_markdown
 
-MATCH_RE = re.compile(r"https?://m\.dongqiudi\.com/matchDetail/(\d+)(?:/[^\s\"'<>?]*)?(?:\?[^\s\"'<>]*)?", re.I)
-WDL_RE = re.compile(r"(\d+)胜\s*(\d+)平\s*(\d+)负")
-FLOAT_BALL_RE = re.compile(r"(\d+(?:\.\d+)?)球")
+MATCH_RE=re.compile(r"https?://m\.dongqiudi\.com/matchDetail/(\d+)(?:/[^\s\"'<>?]*)?(?:\?[^\s\"'<>]*)?",re.I)
+
+ALIASES={
+    "京都":("京都","京都不死鸟"),
+    "哈马费萨":("哈马费萨","费萨里哈曼","费萨里"),
+    "马斯特里":("马斯特里","马斯特里赫特"),
+    "雷克斯":("雷克斯","雷克瑟姆","雷克斯汉姆"),
+    "巴伦西亚":("巴伦西亚","瓦伦西亚"),
+    "科里蒂巴":("科里蒂巴","库里蒂巴"),
+    "巴竞技":("巴竞技","巴拉纳竞技","巴拉纳"),
+}
+
+
+def _alias_list(team):
+    team=str(team or "").strip()
+    return ALIASES.get(team,(team,))
+
+
+def _search_name(team):
+    vals=_alias_list(team)
+    return vals[-1] if len(vals)>1 else vals[0]
 
 
 def _urls(value):
@@ -36,37 +55,53 @@ def _match_id_from_url(url):
     return m.group(1) if m else None
 
 
-def discover_match_detail(home, away):
+def _header_matches(markdown,home,away):
+    header=str(markdown or "")[:500]
+    hp=[header.find(x) for x in _alias_list(home) if x and header.find(x)>=0]
+    ap=[header.find(x) for x in _alias_list(away) if x and header.find(x)>=0]
+    if not hp or not ap:
+        return False
+    return min(hp)<min(ap)
+
+
+def discover_match_details(date,home,away):
+    hq,aq=_search_name(home),_search_name(away)
     queries=[
+        f'懂球帝 {hq} {aq} {date} 比赛详情',
+        f'site:m.dongqiudi.com/matchDetail {hq} {aq} 比赛详情',
         f'懂球帝 {home} {away} 比赛详情',
-        f'site:m.dongqiudi.com/matchDetail {home} {away} 比赛详情',
     ]
+    candidates=[]
+    seen=set()
     for query in queries:
         try:
-            raw=search_web(query,limit=5)
+            raw=search_web(query,limit=8)
         except Exception:
             continue
         for url in _urls(raw):
             mid=_match_id_from_url(url)
-            if mid:
-                return {
-                    "match_id":mid,
-                    "analysis_url":f"https://m.dongqiudi.com/matchDetail/{mid}/analysis",
-                    "discovered_from":url,
-                    "query":query,
-                }
-    return None
+            if not mid or mid in seen:
+                continue
+            seen.add(mid)
+            candidates.append({
+                "match_id":mid,
+                "analysis_url":f"https://m.dongqiudi.com/matchDetail/{mid}/analysis",
+                "discovered_from":url,
+                "query":query,
+            })
+        if candidates:
+            # Validation below is authoritative; one query is normally enough.
+            break
+    return candidates
 
 
 def _pair_wdl(text,label):
-    # Dongqiudi renders: home WDL -> label -> away WDL
     p=re.compile(
         rf"(\d+)胜\s*(\d+)平\s*(\d+)负\s*\n+\s*{re.escape(label)}\s*\n+\s*(\d+)胜\s*(\d+)平\s*(\d+)负",
         re.M,
     )
     m=p.search(text)
-    if not m:
-        return None
+    if not m: return None
     nums=[int(x) for x in m.groups()]
     return {"home":nums[:3],"away":nums[3:]}
 
@@ -77,22 +112,15 @@ def _pair_ball(text,label):
         re.M,
     )
     m=p.search(text)
-    if not m:
-        return None
+    if not m: return None
     return {"home":float(m.group(1)),"away":float(m.group(2))}
 
 
 def _rates(wdl):
-    if not wdl:
-        return {}
+    if not wdl: return {}
     s=sum(wdl)
-    if s<=0:
-        return {}
-    return {
-        "wins_rate":wdl[0]/s,
-        "draws_rate":wdl[1]/s,
-        "losses_rate":wdl[2]/s,
-    }
+    if s<=0: return {}
+    return {"wins_rate":wdl[0]/s,"draws_rate":wdl[1]/s,"losses_rate":wdl[2]/s}
 
 
 def parse_analysis_markdown(markdown):
@@ -102,18 +130,12 @@ def parse_analysis_markdown(markdown):
     h2h=_pair_wdl(text,"近6场交锋") or _pair_wdl(text,"近5场交锋")
     gf=_pair_ball(text,"场均进球")
     ga=_pair_ball(text,"场均失球")
-
-    home={}
-    away={}
+    home={}; away={}
     if last10:
-        home.update(_rates(last10["home"]))
-        away.update(_rates(last10["away"]))
-        home["recent10_wins_rate"]=home["wins_rate"]
-        home["recent10_draws_rate"]=home["draws_rate"]
-        home["recent10_losses_rate"]=home["losses_rate"]
-        away["recent10_wins_rate"]=away["wins_rate"]
-        away["recent10_draws_rate"]=away["draws_rate"]
-        away["recent10_losses_rate"]=away["losses_rate"]
+        hr=_rates(last10["home"]); ar=_rates(last10["away"])
+        home.update(hr); away.update(ar)
+        home.update({f"recent10_{k}":v for k,v in hr.items()})
+        away.update({f"recent10_{k}":v for k,v in ar.items()})
     if samevenue:
         hr=_rates(samevenue["home"]); ar=_rates(samevenue["away"])
         home.update({f"venue10_{k}":v for k,v in hr.items()})
@@ -126,10 +148,8 @@ def parse_analysis_markdown(markdown):
         home["scored_per_match"]=gf["home"]; away["scored_per_match"]=gf["away"]
     if ga:
         home["conceded_per_match"]=ga["home"]; away["conceded_per_match"]=ga["away"]
-
     return {
-        "home":home,
-        "away":away,
+        "home":home,"away":away,
         "groups":{
             "RECENT_FORM":bool(last10),
             "VENUE_FORM":bool(samevenue),
@@ -140,22 +160,37 @@ def parse_analysis_markdown(markdown):
     }
 
 
-def collect_match_analysis(home, away):
-    hit=discover_match_detail(home,away)
-    if not hit:
-        return {"available":False,"reason":"dongqiudi_match_not_found"}
-    raw=scrape_markdown(hit["analysis_url"])
-    markdown=((raw.get("data") or {}).get("markdown") if isinstance(raw,dict) else None) or ""
-    parsed=parse_analysis_markdown(markdown)
-    available=any(parsed["groups"].values())
+def collect_match_analysis(date,home,away):
+    candidates=discover_match_details(date,home,away)
+    rejected=[]
+    for hit in candidates[:8]:
+        try:
+            raw=scrape_markdown(hit["analysis_url"])
+            markdown=((raw.get("data") or {}).get("markdown") if isinstance(raw,dict) else None) or ""
+        except Exception as exc:
+            rejected.append({"match_id":hit["match_id"],"reason":type(exc).__name__})
+            continue
+        if not _header_matches(markdown,home,away):
+            rejected.append({"match_id":hit["match_id"],"reason":"team_or_home_away_mismatch"})
+            continue
+        parsed=parse_analysis_markdown(markdown)
+        available=any(parsed["groups"].values())
+        return {
+            "available":available,
+            "reason":None if available else "dongqiudi_analysis_no_features",
+            "source":"DONGQIUDI_PUBLIC_ANALYSIS",
+            "source_domain":urlparse(hit["analysis_url"]).netloc.lower(),
+            "match_detail_id":hit["match_id"],
+            "analysis_url":hit["analysis_url"],
+            "discovered_from":hit["discovered_from"],
+            "query":hit["query"],
+            "validated_header":True,
+            "rejected_candidates":rejected,
+            **parsed,
+        }
     return {
-        "available":available,
-        "reason":None if available else "dongqiudi_analysis_no_features",
-        "source":"DONGQIUDI_PUBLIC_ANALYSIS",
-        "source_domain":urlparse(hit["analysis_url"]).netloc.lower(),
-        "match_detail_id":hit["match_id"],
-        "analysis_url":hit["analysis_url"],
-        "discovered_from":hit["discovered_from"],
-        "query":hit["query"],
-        **parsed,
+        "available":False,
+        "reason":"dongqiudi_match_not_found_or_unvalidated",
+        "rejected_candidates":rejected,
+        "candidate_count":len(candidates),
     }
