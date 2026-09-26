@@ -44,6 +44,19 @@ TEAM_SEARCH_ALIASES = {
 
 
 def _cache_path(date: str, match: dict) -> Path:
+    # Goal-timing/team-profile pages are intentionally treated as reusable
+    # enrichment snapshots. The cache is matchup-based, not prediction-run/date-based,
+    # so repeated predictions never spend credits re-scraping the same page.
+    home = str(match.get("home_team") or "").strip().casefold()
+    away = str(match.get("away_team") or "").strip().casefold()
+    token = f"{home}|{away}"
+    digest = hashlib.sha256(token.encode("utf-8")).hexdigest()[:16]
+    path = cache_manager.CACHE_DIR / "goal_timing"
+    path.mkdir(parents=True, exist_ok=True)
+    return path / f"matchup_{digest}.json"
+
+
+def _legacy_cache_path(date: str, match: dict) -> Path:
     token = f"{date}|{match.get('match_id')}|{match.get('home_team')}|{match.get('away_team')}"
     digest = hashlib.sha256(token.encode("utf-8")).hexdigest()[:16]
     path = cache_manager.CACHE_DIR / "goal_timing"
@@ -412,13 +425,16 @@ def _save(path, result):
 
 def collect_goal_timing(date: str, match: dict) -> dict:
     path = _cache_path(date, match)
-    if path.exists():
+    legacy_path = _legacy_cache_path(date, match)
+    existing_path = path if path.exists() else legacy_path if legacy_path.exists() else None
+    if existing_path is not None:
         try:
-            data = json.loads(path.read_text(encoding="utf-8"))
-            retry_failures = os.getenv("HH520_GOAL_TIMING_RETRY_FAILURES", "0").strip() == "1"
-            if data.get("available") or not retry_failures:
-                data["cache_hit"] = True
-                return data
+            data = json.loads(existing_path.read_text(encoding="utf-8"))
+            data["cache_hit"] = True
+            data["cache_policy"] = "REUSE_ONCE_CAPTURED"
+            if existing_path != path:
+                _save(path, data)
+            return data
         except Exception:
             pass
 
@@ -434,6 +450,7 @@ def collect_goal_timing(date: str, match: dict) -> dict:
             "reason": "no_public_timing_source",
             "captured_at": datetime.now(timezone.utc).isoformat(),
             "cache_hit": False,
+            "cache_policy": "REUSE_ONCE_CAPTURED",
         })
 
     six_schema, half_schema = _schemas()
@@ -471,6 +488,7 @@ def collect_goal_timing(date: str, match: dict) -> dict:
                     "home": h,
                     "away": a,
                     "cache_hit": False,
+                    "cache_policy": "REUSE_ONCE_CAPTURED",
                 })
         except Exception as exc:
             errors.append(f"six_bin:{urlparse(url).netloc}:{type(exc).__name__}")
@@ -491,6 +509,7 @@ def collect_goal_timing(date: str, match: dict) -> dict:
                     "home": h,
                     "away": a,
                     "cache_hit": False,
+                    "cache_policy": "REUSE_ONCE_CAPTURED",
                 })
         except Exception as exc:
             errors.append(f"half:{urlparse(url).netloc}:{type(exc).__name__}")
@@ -527,6 +546,7 @@ def collect_goal_timing(date: str, match: dict) -> dict:
         "away_candidate_count": len(away_urls),
         "errors": errors[-12:],
         "cache_hit": False,
+        "cache_policy": "REUSE_ONCE_CAPTURED",
     })
 
 
