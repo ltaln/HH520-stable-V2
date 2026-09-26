@@ -30,6 +30,7 @@ def _firecrawl_keys():
     keys = [
         os.getenv("FIRECRAWL_API_KEY", "").strip(),
         os.getenv("FIRECRAWL_API_KEY_BACKUP", "").strip(),
+        os.getenv("FIRECRAWL_API_KEY_BACKUP2", "").strip(),
     ]
     return [k for k in keys if k and "REPLACE_ME" not in k]
 
