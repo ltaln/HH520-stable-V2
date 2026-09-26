@@ -1,0 +1,16 @@
+{
+  "status": "READY",
+  "kind": "research_detail_manifest",
+  "request_id": "dongqiudi-20260912-direct-v4",
+  "archive_path": "archive/dongqiudi-20260912-direct-v4.json",
+  "error_attribution": {
+    "item_count": 0,
+    "page_size": 20,
+    "pages": []
+  },
+  "hidden_model_signals": {
+    "item_count": 0,
+    "page_size": 20,
+    "pages": []
+  }
+}
