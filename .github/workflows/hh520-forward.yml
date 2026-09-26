@@ -49,6 +49,7 @@ jobs:
     env:
       FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
       FIRECRAWL_API_KEY_BACKUP: ${{ secrets.FIRECRAWL_API_KEY_BACKUP }}
+      FIRECRAWL_API_KEY_BACKUP2: ${{ secrets.FIRECRAWL_API_KEY_BACKUP2 }}
       PYTHONUTF8: "1"
       REQUEST_ID: ${{ inputs.request_id }}
       SHADOW_REQUEST_ID: ${{ inputs.shadow_request_id }}
