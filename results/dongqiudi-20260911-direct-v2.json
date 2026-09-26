@@ -1,0 +1,54 @@
+{
+  "status": "READY",
+  "kind": "research",
+  "request_id": "dongqiudi-20260911-direct-v2",
+  "system": null,
+  "stable_access": null,
+  "source": null,
+  "window": null,
+  "input_count": null,
+  "clean_count": null,
+  "sanitizer": {
+    "pollution_events": null
+  },
+  "backtest": null,
+  "stable_v34_backtest": null,
+  "v35_research_summary": null,
+  "prediction_coverage": null,
+  "result_collection": null,
+  "prediction_snapshot_layer": null,
+  "result_label_layer": null,
+  "error_attribution": {
+    "summary": null,
+    "detail_pages": 0
+  },
+  "hidden_model_reverse": {
+    "status": null,
+    "stable_access": null,
+    "baseline": null,
+    "min_bucket_sample": null,
+    "top_signals": [],
+    "signal_count": 0,
+    "detail_pages": 0
+  },
+  "league_dna": null,
+  "team_dna": [],
+  "candidate_rule_engine": {
+    "status": null,
+    "candidate_count": null,
+    "thresholds": null,
+    "rejected_signal_count": null
+  },
+  "candidate_rules": null,
+  "promotion_policy": null,
+  "detail_manifest_path": "pages/dongqiudi-20260911-direct-v2/manifest.json",
+  "archive_path": "archive/dongqiudi-20260911-direct-v2.json",
+  "message": "Research READY. This polling payload is compact; use detail_manifest_path for paged details.",
+  "_action": {
+    "request_id": "dongqiudi-20260911-direct-v2",
+    "repository": "ltaln/HH520-stable-V2",
+    "run_id": "36243174431",
+    "run_attempt": "1",
+    "source_sha": "39212844033b8b052b52b7e19d16e2226ba0d646"
+  }
+}
