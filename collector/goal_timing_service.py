@@ -465,11 +465,15 @@ def collect_goal_timing(date: str, match: dict) -> dict:
     if existing_path is not None:
         try:
             data = json.loads(existing_path.read_text(encoding="utf-8"))
-            data["cache_hit"] = True
-            data["cache_policy"] = "REUSE_ONCE_CAPTURED"
-            if existing_path != path:
-                _save(path, data)
-            return data
+            retry_failures = os.getenv("HH520_GOAL_TIMING_RETRY_FAILURES", "1").strip() == "1"
+            if data.get("available") or not retry_failures:
+                data["cache_hit"] = True
+                data["cache_policy"] = "REUSE_SUCCESS_RETRY_FAILURE"
+                if existing_path != path:
+                    _save(path, data)
+                return data
+            # Failed/empty enrichment is not a durable snapshot. Retry now so
+            # newly available credits/sources can populate the reusable cache.
         except Exception:
             pass
 
