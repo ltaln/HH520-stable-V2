@@ -7,6 +7,7 @@ then ranks the full score distribution globally.
 from __future__ import annotations
 
 import math
+from .full_data_layer import score_lambda_multipliers, data_mode
 
 OUTCOME_ZH = {"HOME": "主胜", "DRAW": "平", "AWAY": "客胜"}
 MAX_GOALS = 8
@@ -67,6 +68,9 @@ def score_layer(match: dict, probability: dict, htft: dict = None) -> dict:
         return {"valid": False, "model": "HDA_POISSON_V1", "top_scores": [], "all_scores": []}
 
     fit_error, lh, la = fitted
+    mh, ma = score_lambda_multipliers(match)
+    lh = max(0.15, min(5.5, lh * mh))
+    la = max(0.15, min(5.5, la * ma))
     hp, ap = _poisson(lh), _poisson(la)
     rows, totals = [], {}
     mass_total = 0.0
@@ -97,7 +101,7 @@ def score_layer(match: dict, probability: dict, htft: dict = None) -> dict:
     high = [r for r in rows if r["home"] + r["away"] >= 5 or max(r["home"], r["away"]) >= 3]
     return {
         "valid": True,
-        "model": "HDA_POISSON_V1",
+        "model": "HDA_POISSON_V1_COLLECTION1_1" if data_mode(match)["full_data"] else "HDA_POISSON_V1",
         "top_scores": rows[:5],
         "all_scores": rows,
         "tail_scores": high[:5],
@@ -108,6 +112,12 @@ def score_layer(match: dict, probability: dict, htft: dict = None) -> dict:
         "lambda_home": lh,
         "lambda_away": la,
         "fit_error": fit_error,
-        "feature_snapshot": {"source": "formal_hda_probabilities", "ft_direction_lock": False},
+        "feature_snapshot": {
+            "source": "formal_hda_probabilities+collection1_1" if data_mode(match)["full_data"] else "formal_hda_probabilities",
+            "ft_direction_lock": False,
+            "data_mode": data_mode(match)["mode"],
+            "lambda_multiplier_home": mh,
+            "lambda_multiplier_away": ma,
+        },
         "high_variance_challenger_promoted": False,
     }
