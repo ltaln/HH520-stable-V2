@@ -218,7 +218,7 @@ def score_metrics(P,rows):
     out["log_loss"]=float(np.mean([-math.log(max(float(P[i,y[i]]) if y[i]>=0 else 1e-12,1e-12)) for i in range(len(rows))]))
     totals=np.asarray([h+a for h,a in SCORE_KEYS],float);errs=[];mh=0
     for i,r in enumerate(rows):
-        actual=sum(r["actual_score"]);errs.append(abs(float(np.dot(P[i],totals))-actual);mass=defaultdict(float)
+        actual=sum(r["actual_score"]);errs.append(abs(float(np.dot(P[i],totals))-actual));mass=defaultdict(float)
         for j,t in enumerate(totals):mass[int(t)]+=float(P[i,j])
         mh+=int(max(mass.items(),key=lambda kv:kv[1])[0]==actual)
     out["total_goals_mae"]=float(np.mean(errs));out["total_goals_mode_hits"]=int(mh);out["total_goals_mode_accuracy"]=mh/len(rows)
