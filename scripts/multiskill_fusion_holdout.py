@@ -8,6 +8,9 @@ import json, math, os, re
 from copy import deepcopy
 from pathlib import Path
 from collections import defaultdict
+import sys
+ROOT=Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path: sys.path.insert(0,str(ROOT))
 import numpy as np
 from sklearn.ensemble import HistGradientBoostingRegressor
 from collector.hh520_10027_parser import parse_10027s_markdown
