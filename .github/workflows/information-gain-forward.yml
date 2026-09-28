@@ -59,7 +59,7 @@ jobs:
           test -s _collection1_ablation.json
 
       - name: Run forward information-gain validation
-        run: python scripts/information_gain_forward_validation.py
+        run: python scripts/information_gain_forward_validation_v2.py
 
       - name: Save collection cache
         if: always() && steps.restore.outcome == 'success'
@@ -82,7 +82,7 @@ jobs:
             git rm -rf . || true
           fi
           mkdir -p results
-          cp "$GITHUB_WORKSPACE/_information_gain_forward.json" results/sep26-27-v1.json
-          git add results/sep26-27-v1.json
-          git commit -m "research: Sep26-27 forward information-gain validation" || true
+          cp "$GITHUB_WORKSPACE/_information_gain_forward_v2.json" results/sep26-27-v2.json
+          git add results/sep26-27-v2.json
+          git commit -m "research: Sep26-27 forward information-gain validation v2" || true
           git push origin HEAD:information-gain-results --force
