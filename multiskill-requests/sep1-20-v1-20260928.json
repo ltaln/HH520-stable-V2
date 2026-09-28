@@ -1,0 +1,17 @@
+{
+  "experiment": "HH520_MULTISKILL_FUSION_HOLDOUT_V1",
+  "development": [
+    "2026-05-01",
+    "2026-06-30"
+  ],
+  "validation": [
+    "2026-07-01",
+    "2026-08-31"
+  ],
+  "holdout": [
+    "2026-09-01",
+    "2026-09-20"
+  ],
+  "offline_existing_cache_only": true,
+  "freeze_stable": "3.5.1"
+}
