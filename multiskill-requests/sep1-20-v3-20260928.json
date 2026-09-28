@@ -1,0 +1,6 @@
+{
+  "experiment": "HH520_MULTISKILL_FUSION_HOLDOUT_V1",
+  "retry": 3,
+  "fix": "python_path",
+  "offline_existing_cache_only": true
+}
