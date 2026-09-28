@@ -1,0 +1,6 @@
+{
+  "experiment": "HH520_MULTISKILL_FUSION_HOLDOUT_V1",
+  "retry": 2,
+  "fix": "syntax",
+  "offline_existing_cache_only": true
+}
