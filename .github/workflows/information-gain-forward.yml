@@ -1,0 +1,88 @@
+name: HH520 Information Gain Forward Validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "information-gain-requests/*.json"
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    concurrency:
+      group: hh520-information-gain-forward
+      cancel-in-progress: false
+    env:
+      FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+      FIRECRAWL_API_KEY_BACKUP: ${{ secrets.FIRECRAWL_API_KEY_BACKUP }}
+      FIRECRAWL_API_KEY_BACKUP2: ${{ secrets.FIRECRAWL_API_KEY_BACKUP2 }}
+      PYTHONUTF8: "1"
+      HH520_INFOGAIN_FORWARD_ONLY: "1"
+      HH520_FRESH_10027_EACH_PREDICTION: "0"
+      HH520_ALLOW_INCOMPLETE_REQUEST_RESUME: "1"
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: python -m pip install -r requirements.txt
+
+      - name: Restore HH520 collection cache
+        id: restore
+        uses: actions/cache/restore@v4
+        with:
+          path: cache
+          key: hh520-information-gain-${{ github.run_id }}
+          restore-keys: |
+            hh520-collection-v1-
+
+      - name: Fetch frozen external profile snapshot and prior selection
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin collection1-results:refs/remotes/origin/collection1-results
+          git fetch origin collection1-ablation-results:refs/remotes/origin/collection1-ablation-results
+          git show origin/collection1-results:results/full-profile-sep1-20.json > _collection1_profiles.json
+          git show origin/collection1-ablation-results:results/latest.json > _collection1_ablation.json
+          test -s _collection1_profiles.json
+          test -s _collection1_ablation.json
+
+      - name: Run forward information-gain validation
+        run: python scripts/information_gain_forward_validation.py
+
+      - name: Save collection cache
+        if: always() && steps.restore.outcome == 'success'
+        uses: actions/cache/save@v4
+        with:
+          path: cache
+          key: hh520-collection-v1-${{ github.run_id }}-${{ github.run_attempt }}-infogain
+
+      - name: Publish research result
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin information-gain-results || true
+          if git show-ref --verify --quiet refs/remotes/origin/information-gain-results; then
+            git switch --detach origin/information-gain-results
+          else
+            git switch --orphan information-gain-results
+            git rm -rf . || true
+          fi
+          mkdir -p results
+          cp "$GITHUB_WORKSPACE/_information_gain_forward.json" results/sep26-27-v1.json
+          git add results/sep26-27-v1.json
+          git commit -m "research: Sep26-27 forward information-gain validation" || true
+          git push origin HEAD:information-gain-results --force
