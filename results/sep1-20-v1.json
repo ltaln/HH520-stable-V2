@@ -1,0 +1,1027 @@
+{
+  "status": "READY",
+  "kind": "HH520_MULTISKILL_FUSION_HOLDOUT_V1",
+  "stable_version": "HH520 Stable V3.5.1",
+  "research_only": true,
+  "stable_modified": false,
+  "new_collection": false,
+  "firecrawl_calls": 0,
+  "data_source": "EXISTING_10027S_CACHE_ONLY",
+  "periods": {
+    "development": [
+      "2026-05-01",
+      "2026-06-30"
+    ],
+    "validation": [
+      "2026-07-01",
+      "2026-08-31"
+    ],
+    "holdout": [
+      "2026-09-01",
+      "2026-09-20"
+    ]
+  },
+  "selection_policy": "All choices selected before Sep holdout; Sep1-20 never used for tuning.",
+  "load_summary": {
+    "cache_files_total": 149,
+    "parsed_files_in_window": 143,
+    "invalid_files": [],
+    "rows": {
+      "dev1": 538,
+      "dev2": 592,
+      "stress": 302
+    }
+  },
+  "baseline": {
+    "score": {
+      "n": 302,
+      "top1_hits": 38,
+      "top1_accuracy": 0.12582781,
+      "top2_hits": 67,
+      "top2_accuracy": 0.2218543,
+      "top3_hits": 90,
+      "top3_accuracy": 0.29801325,
+      "log_loss": 3.04131438,
+      "total_goals_mae": 1.43257263,
+      "total_goals_mode_hits": 67,
+      "total_goals_mode_accuracy": 0.2218543
+    },
+    "htft": {
+      "n": 302,
+      "top1_hits": 94,
+      "top1_accuracy": 0.31125828,
+      "top2_hits": 147,
+      "top2_accuracy": 0.48675497,
+      "top3_hits": 195,
+      "top3_accuracy": 0.64569536,
+      "log_loss": 1.89922075
+    },
+    "wdl": {
+      "n": 302,
+      "top1_hits": 158,
+      "top1_accuracy": 0.52317881,
+      "brier": 0.59987481,
+      "log_loss": 1.00627673,
+      "stable_decision_hits": 160,
+      "stable_decision_accuracy": 0.52980132
+    }
+  },
+  "single_models": {
+    "validation_score": {
+      "B0": {
+        "n": 592,
+        "top1_hits": 66,
+        "top1_accuracy": 0.11148649,
+        "top2_hits": 141,
+        "top2_accuracy": 0.23817568,
+        "top3_hits": 196,
+        "top3_accuracy": 0.33108108,
+        "log_loss": 2.95866766,
+        "total_goals_mae": 1.3265371,
+        "total_goals_mode_hits": 141,
+        "total_goals_mode_accuracy": 0.23817568
+      },
+      "S1": {
+        "n": 592,
+        "top1_hits": 53,
+        "top1_accuracy": 0.08952703,
+        "top2_hits": 102,
+        "top2_accuracy": 0.1722973,
+        "top3_hits": 160,
+        "top3_accuracy": 0.27027027,
+        "log_loss": 3.1681473,
+        "total_goals_mae": 1.39538665,
+        "total_goals_mode_hits": 133,
+        "total_goals_mode_accuracy": 0.22466216
+      },
+      "S2": {
+        "n": 592,
+        "top1_hits": 58,
+        "top1_accuracy": 0.09797297,
+        "top2_hits": 112,
+        "top2_accuracy": 0.18918919,
+        "top3_hits": 160,
+        "top3_accuracy": 0.27027027,
+        "log_loss": 3.16703276,
+        "total_goals_mae": 1.39538665,
+        "total_goals_mode_hits": 121,
+        "total_goals_mode_accuracy": 0.20439189
+      },
+      "S3": {
+        "n": 592,
+        "top1_hits": 55,
+        "top1_accuracy": 0.09290541,
+        "top2_hits": 98,
+        "top2_accuracy": 0.16554054,
+        "top3_hits": 158,
+        "top3_accuracy": 0.26689189,
+        "log_loss": 3.20091966,
+        "total_goals_mae": 1.39535277,
+        "total_goals_mode_hits": 120,
+        "total_goals_mode_accuracy": 0.2027027
+      },
+      "S4": {
+        "n": 592,
+        "top1_hits": 54,
+        "top1_accuracy": 0.09121622,
+        "top2_hits": 95,
+        "top2_accuracy": 0.16047297,
+        "top3_hits": 144,
+        "top3_accuracy": 0.24324324,
+        "log_loss": 3.61553556,
+        "total_goals_mae": 1.55985417,
+        "total_goals_mode_hits": 112,
+        "total_goals_mode_accuracy": 0.18918919
+      }
+    },
+    "holdout_score": {
+      "B0": {
+        "n": 302,
+        "top1_hits": 38,
+        "top1_accuracy": 0.12582781,
+        "top2_hits": 67,
+        "top2_accuracy": 0.2218543,
+        "top3_hits": 90,
+        "top3_accuracy": 0.29801325,
+        "log_loss": 3.04131438,
+        "total_goals_mae": 1.43257263,
+        "total_goals_mode_hits": 67,
+        "total_goals_mode_accuracy": 0.2218543
+      },
+      "S1": {
+        "n": 302,
+        "top1_hits": 33,
+        "top1_accuracy": 0.10927152,
+        "top2_hits": 57,
+        "top2_accuracy": 0.18874172,
+        "top3_hits": 88,
+        "top3_accuracy": 0.29139073,
+        "log_loss": 3.14026644,
+        "total_goals_mae": 1.47972219,
+        "total_goals_mode_hits": 67,
+        "total_goals_mode_accuracy": 0.2218543
+      },
+      "S2": {
+        "n": 302,
+        "top1_hits": 37,
+        "top1_accuracy": 0.12251656,
+        "top2_hits": 64,
+        "top2_accuracy": 0.21192053,
+        "top3_hits": 89,
+        "top3_accuracy": 0.29470199,
+        "log_loss": 3.13516,
+        "total_goals_mae": 1.47972219,
+        "total_goals_mode_hits": 66,
+        "total_goals_mode_accuracy": 0.21854305
+      },
+      "S3": {
+        "n": 302,
+        "top1_hits": 33,
+        "top1_accuracy": 0.10927152,
+        "top2_hits": 55,
+        "top2_accuracy": 0.18211921,
+        "top3_hits": 88,
+        "top3_accuracy": 0.29139073,
+        "log_loss": 3.13706066,
+        "total_goals_mae": 1.47970654,
+        "total_goals_mode_hits": 67,
+        "total_goals_mode_accuracy": 0.2218543
+      },
+      "S4": {
+        "n": 302,
+        "top1_hits": 29,
+        "top1_accuracy": 0.09602649,
+        "top2_hits": 52,
+        "top2_accuracy": 0.17218543,
+        "top3_hits": 67,
+        "top3_accuracy": 0.2218543,
+        "log_loss": 3.47765295,
+        "total_goals_mae": 1.64561894,
+        "total_goals_mode_hits": 60,
+        "total_goals_mode_accuracy": 0.1986755
+      }
+    },
+    "validation_htft": {
+      "B0": {
+        "n": 592,
+        "top1_hits": 203,
+        "top1_accuracy": 0.34290541,
+        "top2_hits": 312,
+        "top2_accuracy": 0.52702703,
+        "top3_hits": 398,
+        "top3_accuracy": 0.6722973,
+        "log_loss": 1.82236711
+      },
+      "H1": {
+        "n": 592,
+        "top1_hits": 129,
+        "top1_accuracy": 0.21790541,
+        "top2_hits": 252,
+        "top2_accuracy": 0.42567568,
+        "top3_hits": 342,
+        "top3_accuracy": 0.5777027,
+        "log_loss": 2.04992902
+      },
+      "H2": {
+        "n": 592,
+        "top1_hits": 151,
+        "top1_accuracy": 0.25506757,
+        "top2_hits": 250,
+        "top2_accuracy": 0.4222973,
+        "top3_hits": 340,
+        "top3_accuracy": 0.57432432,
+        "log_loss": 1.94418122
+      }
+    },
+    "holdout_htft": {
+      "B0": {
+        "n": 302,
+        "top1_hits": 94,
+        "top1_accuracy": 0.31125828,
+        "top2_hits": 147,
+        "top2_accuracy": 0.48675497,
+        "top3_hits": 195,
+        "top3_accuracy": 0.64569536,
+        "log_loss": 1.89922075
+      },
+      "H1": {
+        "n": 302,
+        "top1_hits": 66,
+        "top1_accuracy": 0.21854305,
+        "top2_hits": 120,
+        "top2_accuracy": 0.39735099,
+        "top3_hits": 148,
+        "top3_accuracy": 0.49006623,
+        "log_loss": 2.09334217
+      },
+      "H2": {
+        "n": 302,
+        "top1_hits": 77,
+        "top1_accuracy": 0.25496689,
+        "top2_hits": 124,
+        "top2_accuracy": 0.41059603,
+        "top3_hits": 171,
+        "top3_accuracy": 0.56622517,
+        "log_loss": 1.97208273
+      }
+    }
+  },
+  "score_fusions": [
+    {
+      "models": [
+        "B0",
+        "S1"
+      ],
+      "weights": {
+        "B0": 0.9,
+        "S1": 0.1
+      },
+      "validation": {
+        "n": 592,
+        "top1_hits": 71,
+        "top1_accuracy": 0.11993243,
+        "top2_hits": 144,
+        "top2_accuracy": 0.24324324,
+        "top3_hits": 192,
+        "top3_accuracy": 0.32432432,
+        "log_loss": 2.9623717,
+        "total_goals_mae": 1.32723752,
+        "total_goals_mode_hits": 141,
+        "total_goals_mode_accuracy": 0.23817568
+      },
+      "holdout": {
+        "n": 302,
+        "top1_hits": 42,
+        "top1_accuracy": 0.13907285,
+        "top2_hits": 67,
+        "top2_accuracy": 0.2218543,
+        "top3_hits": 94,
+        "top3_accuracy": 0.31125828,
+        "log_loss": 3.03569743,
+        "total_goals_mae": 1.43129066,
+        "total_goals_mode_hits": 67,
+        "total_goals_mode_accuracy": 0.2218543
+      }
+    },
+    {
+      "models": [
+        "B0",
+        "S2"
+      ],
+      "weights": {
+        "B0": 0.9,
+        "S2": 0.1
+      },
+      "validation": {
+        "n": 592,
+        "top1_hits": 71,
+        "top1_accuracy": 0.11993243,
+        "top2_hits": 143,
+        "top2_accuracy": 0.24155405,
+        "top3_hits": 194,
+        "top3_accuracy": 0.3277027,
+        "log_loss": 2.9620914,
+        "total_goals_mae": 1.32723752,
+        "total_goals_mode_hits": 138,
+        "total_goals_mode_accuracy": 0.23310811
+      },
+      "holdout": {
+        "n": 302,
+        "top1_hits": 43,
+        "top1_accuracy": 0.14238411,
+        "top2_hits": 67,
+        "top2_accuracy": 0.2218543,
+        "top3_hits": 95,
+        "top3_accuracy": 0.31456954,
+        "log_loss": 3.03502387,
+        "total_goals_mae": 1.43129066,
+        "total_goals_mode_hits": 66,
+        "total_goals_mode_accuracy": 0.21854305
+      }
+    },
+    {
+      "models": [
+        "B0",
+        "S3"
+      ],
+      "weights": {
+        "B0": 0.9,
+        "S3": 0.1
+      },
+      "validation": {
+        "n": 592,
+        "top1_hits": 70,
+        "top1_accuracy": 0.11824324,
+        "top2_hits": 142,
+        "top2_accuracy": 0.23986486,
+        "top3_hits": 194,
+        "top3_accuracy": 0.3277027,
+        "log_loss": 2.96219951,
+        "total_goals_mae": 1.32724083,
+        "total_goals_mode_hits": 139,
+        "total_goals_mode_accuracy": 0.2347973
+      },
+      "holdout": {
+        "n": 302,
+        "top1_hits": 42,
+        "top1_accuracy": 0.13907285,
+        "top2_hits": 67,
+        "top2_accuracy": 0.2218543,
+        "top3_hits": 94,
+        "top3_accuracy": 0.31125828,
+        "log_loss": 3.03494475,
+        "total_goals_mae": 1.4312913,
+        "total_goals_mode_hits": 67,
+        "total_goals_mode_accuracy": 0.2218543
+      }
+    },
+    {
+      "models": [
+        "B0",
+        "S4"
+      ],
+      "weights": {
+        "B0": 0.9,
+        "S4": 0.1
+      },
+      "validation": {
+        "n": 592,
+        "top1_hits": 72,
+        "top1_accuracy": 0.12162162,
+        "top2_hits": 135,
+        "top2_accuracy": 0.22804054,
+        "top3_hits": 199,
+        "top3_accuracy": 0.33614865,
+        "log_loss": 2.97050957,
+        "total_goals_mae": 1.3305641,
+        "total_goals_mode_hits": 140,
+        "total_goals_mode_accuracy": 0.23648649
+      },
+      "holdout": {
+        "n": 302,
+        "top1_hits": 39,
+        "top1_accuracy": 0.12913907,
+        "top2_hits": 66,
+        "top2_accuracy": 0.21854305,
+        "top3_hits": 94,
+        "top3_accuracy": 0.31125828,
+        "log_loss": 3.04246552,
+        "total_goals_mae": 1.43591676,
+        "total_goals_mode_hits": 66,
+        "total_goals_mode_accuracy": 0.21854305
+      }
+    },
+    {
+      "models": [
+        "B0",
+        "S1",
+        "S2"
+      ],
+      "weights": {
+        "B0": 0.8,
+        "S1": 0.1,
+        "S2": 0.1
+      },
+      "validation": {
+        "n": 592,
+        "top1_hits": 71,
+        "top1_accuracy": 0.11993243,
+        "top2_hits": 143,
+        "top2_accuracy": 0.24155405,
+        "top3_hits": 192,
+        "top3_accuracy": 0.32432432,
+        "log_loss": 2.96994805,
+        "total_goals_mae": 1.32896227,
+        "total_goals_mode_hits": 141,
+        "total_goals_mode_accuracy": 0.23817568
+      },
+      "holdout": {
+        "n": 302,
+        "top1_hits": 41,
+        "top1_accuracy": 0.13576159,
+        "top2_hits": 67,
+        "top2_accuracy": 0.2218543,
+        "top3_hits": 94,
+        "top3_accuracy": 0.31125828,
+        "log_loss": 3.03416851,
+        "total_goals_mae": 1.43149708,
+        "total_goals_mode_hits": 65,
+        "total_goals_mode_accuracy": 0.21523179
+      }
+    },
+    {
+      "models": [
+        "B0",
+        "S2",
+        "S3"
+      ],
+      "weights": {
+        "B0": 0.8,
+        "S2": 0.1,
+        "S3": 0.1
+      },
+      "validation": {
+        "n": 592,
+        "top1_hits": 70,
+        "top1_accuracy": 0.11824324,
+        "top2_hits": 142,
+        "top2_accuracy": 0.23986486,
+        "top3_hits": 194,
+        "top3_accuracy": 0.3277027,
+        "log_loss": 2.96977974,
+        "total_goals_mae": 1.32896505,
+        "total_goals_mode_hits": 139,
+        "total_goals_mode_accuracy": 0.2347973
+      },
+      "holdout": {
+        "n": 302,
+        "top1_hits": 41,
+        "top1_accuracy": 0.13576159,
+        "top2_hits": 67,
+        "top2_accuracy": 0.2218543,
+        "top3_hits": 94,
+        "top3_accuracy": 0.31125828,
+        "log_loss": 3.03346656,
+        "total_goals_mae": 1.43149713,
+        "total_goals_mode_hits": 65,
+        "total_goals_mode_accuracy": 0.21523179
+      }
+    },
+    {
+      "models": [
+        "B0",
+        "S2",
+        "S4"
+      ],
+      "weights": {
+        "B0": 0.7,
+        "S2": 0.2,
+        "S4": 0.1
+      },
+      "validation": {
+        "n": 592,
+        "top1_hits": 66,
+        "top1_accuracy": 0.11148649,
+        "top2_hits": 138,
+        "top2_accuracy": 0.23310811,
+        "top3_hits": 188,
+        "top3_accuracy": 0.31756757,
+        "log_loss": 2.98859397,
+        "total_goals_mae": 1.3373361,
+        "total_goals_mode_hits": 134,
+        "total_goals_mode_accuracy": 0.22635135
+      },
+      "holdout": {
+        "n": 302,
+        "top1_hits": 36,
+        "top1_accuracy": 0.1192053,
+        "top2_hits": 65,
+        "top2_accuracy": 0.21523179,
+        "top3_hits": 92,
+        "top3_accuracy": 0.30463576,
+        "log_loss": 3.04365668,
+        "total_goals_mae": 1.43994262,
+        "total_goals_mode_hits": 68,
+        "total_goals_mode_accuracy": 0.22516556
+      }
+    },
+    {
+      "models": [
+        "B0",
+        "S3",
+        "S4"
+      ],
+      "weights": {
+        "B0": 0.8,
+        "S3": 0.1,
+        "S4": 0.1
+      },
+      "validation": {
+        "n": 592,
+        "top1_hits": 68,
+        "top1_accuracy": 0.11486486,
+        "top2_hits": 137,
+        "top2_accuracy": 0.23141892,
+        "top3_hits": 189,
+        "top3_accuracy": 0.31925676,
+        "log_loss": 2.97802172,
+        "total_goals_mae": 1.33288412,
+        "total_goals_mode_hits": 139,
+        "total_goals_mode_accuracy": 0.2347973
+      },
+      "holdout": {
+        "n": 302,
+        "top1_hits": 39,
+        "top1_accuracy": 0.12913907,
+        "top2_hits": 65,
+        "top2_accuracy": 0.21523179,
+        "top3_hits": 93,
+        "top3_accuracy": 0.30794702,
+        "log_loss": 3.04129816,
+        "total_goals_mae": 1.43737553,
+        "total_goals_mode_hits": 64,
+        "total_goals_mode_accuracy": 0.21192053
+      }
+    },
+    {
+      "models": [
+        "B0",
+        "S2",
+        "S3",
+        "S4"
+      ],
+      "weights": {
+        "B0": 0.7,
+        "S2": 0.1,
+        "S3": 0.1,
+        "S4": 0.1
+      },
+      "validation": {
+        "n": 592,
+        "top1_hits": 65,
+        "top1_accuracy": 0.1097973,
+        "top2_hits": 138,
+        "top2_accuracy": 0.23310811,
+        "top3_hits": 187,
+        "top3_accuracy": 0.31587838,
+        "log_loss": 2.98869573,
+        "total_goals_mae": 1.33733769,
+        "total_goals_mode_hits": 136,
+        "total_goals_mode_accuracy": 0.22972973
+      },
+      "holdout": {
+        "n": 302,
+        "top1_hits": 35,
+        "top1_accuracy": 0.11589404,
+        "top2_hits": 64,
+        "top2_accuracy": 0.21192053,
+        "top3_hits": 91,
+        "top3_accuracy": 0.3013245,
+        "log_loss": 3.04360517,
+        "total_goals_mae": 1.4399424,
+        "total_goals_mode_hits": 67,
+        "total_goals_mode_accuracy": 0.2218543
+      }
+    },
+    {
+      "models": [
+        "B0",
+        "S1",
+        "S2",
+        "S3",
+        "S4"
+      ],
+      "weights": {
+        "B0": 0.6,
+        "S1": 0.1,
+        "S2": 0.1,
+        "S3": 0.1,
+        "S4": 0.1
+      },
+      "validation": {
+        "n": 592,
+        "top1_hits": 63,
+        "top1_accuracy": 0.10641892,
+        "top2_hits": 133,
+        "top2_accuracy": 0.22466216,
+        "top3_hits": 182,
+        "top3_accuracy": 0.30743243,
+        "log_loss": 3.00268653,
+        "total_goals_mae": 1.3425018,
+        "total_goals_mode_hits": 134,
+        "total_goals_mode_accuracy": 0.22635135
+      },
+      "holdout": {
+        "n": 302,
+        "top1_hits": 35,
+        "top1_accuracy": 0.11589404,
+        "top2_hits": 65,
+        "top2_accuracy": 0.21523179,
+        "top3_hits": 88,
+        "top3_accuracy": 0.29139073,
+        "log_loss": 3.04945777,
+        "total_goals_mae": 1.4434767,
+        "total_goals_mode_hits": 68,
+        "total_goals_mode_accuracy": 0.22516556
+      }
+    }
+  ],
+  "htft_fusions": [
+    {
+      "models": [
+        "B0",
+        "H1"
+      ],
+      "weights": {
+        "B0": 0.7,
+        "H1": 0.3
+      },
+      "validation": {
+        "n": 592,
+        "top1_hits": 205,
+        "top1_accuracy": 0.34628378,
+        "top2_hits": 321,
+        "top2_accuracy": 0.54222973,
+        "top3_hits": 404,
+        "top3_accuracy": 0.68243243,
+        "log_loss": 1.84340474
+      },
+      "holdout": {
+        "n": 302,
+        "top1_hits": 95,
+        "top1_accuracy": 0.31456954,
+        "top2_hits": 150,
+        "top2_accuracy": 0.49668874,
+        "top3_hits": 193,
+        "top3_accuracy": 0.63907285,
+        "log_loss": 1.91483578
+      }
+    },
+    {
+      "models": [
+        "B0",
+        "H2"
+      ],
+      "weights": {
+        "B0": 0.8,
+        "H2": 0.2
+      },
+      "validation": {
+        "n": 592,
+        "top1_hits": 201,
+        "top1_accuracy": 0.33952703,
+        "top2_hits": 310,
+        "top2_accuracy": 0.52364865,
+        "top3_hits": 395,
+        "top3_accuracy": 0.66722973,
+        "log_loss": 1.82938155
+      },
+      "holdout": {
+        "n": 302,
+        "top1_hits": 93,
+        "top1_accuracy": 0.30794702,
+        "top2_hits": 149,
+        "top2_accuracy": 0.49337748,
+        "top3_hits": 193,
+        "top3_accuracy": 0.63907285,
+        "log_loss": 1.89641372
+      }
+    },
+    {
+      "models": [
+        "B0",
+        "H1",
+        "H2"
+      ],
+      "weights": {
+        "B0": 0.4,
+        "H1": 0.5,
+        "H2": 0.1
+      },
+      "validation": {
+        "n": 592,
+        "top1_hits": 187,
+        "top1_accuracy": 0.31587838,
+        "top2_hits": 322,
+        "top2_accuracy": 0.54391892,
+        "top3_hits": 394,
+        "top3_accuracy": 0.66554054,
+        "log_loss": 1.88787021
+      },
+      "holdout": {
+        "n": 302,
+        "top1_hits": 85,
+        "top1_accuracy": 0.28145695,
+        "top2_hits": 145,
+        "top2_accuracy": 0.48013245,
+        "top3_hits": 189,
+        "top3_accuracy": 0.62582781,
+        "log_loss": 1.94690727
+      }
+    }
+  ],
+  "selected_score_fusion": {
+    "models": [
+      "B0",
+      "S1"
+    ],
+    "weights": {
+      "B0": 0.9,
+      "S1": 0.1
+    },
+    "validation": {
+      "n": 592,
+      "top1_hits": 71,
+      "top1_accuracy": 0.11993243,
+      "top2_hits": 144,
+      "top2_accuracy": 0.24324324,
+      "top3_hits": 192,
+      "top3_accuracy": 0.32432432,
+      "log_loss": 2.9623717,
+      "total_goals_mae": 1.32723752,
+      "total_goals_mode_hits": 141,
+      "total_goals_mode_accuracy": 0.23817568
+    },
+    "holdout": {
+      "n": 302,
+      "top1_hits": 42,
+      "top1_accuracy": 0.13907285,
+      "top2_hits": 67,
+      "top2_accuracy": 0.2218543,
+      "top3_hits": 94,
+      "top3_accuracy": 0.31125828,
+      "log_loss": 3.03569743,
+      "total_goals_mae": 1.43129066,
+      "total_goals_mode_hits": 67,
+      "total_goals_mode_accuracy": 0.2218543
+    }
+  },
+  "selected_htft_fusion": {
+    "models": [
+      "B0",
+      "H1",
+      "H2"
+    ],
+    "weights": {
+      "B0": 0.4,
+      "H1": 0.5,
+      "H2": 0.1
+    },
+    "validation": {
+      "n": 592,
+      "top1_hits": 187,
+      "top1_accuracy": 0.31587838,
+      "top2_hits": 322,
+      "top2_accuracy": 0.54391892,
+      "top3_hits": 394,
+      "top3_accuracy": 0.66554054,
+      "log_loss": 1.88787021
+    },
+    "holdout": {
+      "n": 302,
+      "top1_hits": 85,
+      "top1_accuracy": 0.28145695,
+      "top2_hits": 145,
+      "top2_accuracy": 0.48013245,
+      "top3_hits": 189,
+      "top3_accuracy": 0.62582781,
+      "log_loss": 1.94690727
+    }
+  },
+  "selected_wdl_blend": {
+    "stable_weight": 1.0,
+    "validation": {
+      "n": 592,
+      "top1_hits": 328,
+      "top1_accuracy": 0.55405405,
+      "brier": 0.57105345,
+      "log_loss": 0.9613607
+    },
+    "holdout": {
+      "n": 302,
+      "top1_hits": 158,
+      "top1_accuracy": 0.52317881,
+      "brier": 0.59987481,
+      "log_loss": 1.00627673
+    }
+  },
+  "selected_gate": {
+    "validation": {
+      "pmax_min": 0,
+      "agree_required": 3,
+      "score_top2_mass_min": 0.24,
+      "coverage": 0.57432432,
+      "objective": 0.43038752,
+      "score": {
+        "n": 340,
+        "top1_hits": 45,
+        "top1_accuracy": 0.13235294,
+        "top2_hits": 95,
+        "top2_accuracy": 0.27941176,
+        "top3_hits": 128,
+        "top3_accuracy": 0.37647059,
+        "log_loss": 2.8138366,
+        "total_goals_mae": 1.23666962,
+        "total_goals_mode_hits": 82,
+        "total_goals_mode_accuracy": 0.24117647
+      },
+      "htft": {
+        "n": 340,
+        "top1_hits": 108,
+        "top1_accuracy": 0.31764706,
+        "top2_hits": 198,
+        "top2_accuracy": 0.58235294,
+        "top3_hits": 244,
+        "top3_accuracy": 0.71764706,
+        "log_loss": 1.82837173
+      },
+      "wdl": {
+        "n": 340,
+        "top1_hits": 199,
+        "top1_accuracy": 0.58529412,
+        "brier": 0.54612916,
+        "log_loss": 0.92487655
+      }
+    },
+    "holdout": {
+      "kept": 141,
+      "passed": 161,
+      "coverage": 0.46688742,
+      "pass_ratio": 0.53311258,
+      "score": {
+        "n": 141,
+        "top1_hits": 21,
+        "top1_accuracy": 0.14893617,
+        "top2_hits": 32,
+        "top2_accuracy": 0.22695035,
+        "top3_hits": 47,
+        "top3_accuracy": 0.33333333,
+        "log_loss": 2.98283466,
+        "total_goals_mae": 1.45479101,
+        "total_goals_mode_hits": 28,
+        "total_goals_mode_accuracy": 0.19858156
+      },
+      "htft": {
+        "n": 141,
+        "top1_hits": 43,
+        "top1_accuracy": 0.30496454,
+        "top2_hits": 71,
+        "top2_accuracy": 0.5035461,
+        "top3_hits": 96,
+        "top3_accuracy": 0.68085106,
+        "log_loss": 1.89736947
+      },
+      "wdl": {
+        "n": 141,
+        "top1_hits": 76,
+        "top1_accuracy": 0.53900709,
+        "brier": 0.58843944,
+        "log_loss": 0.9909051
+      }
+    }
+  },
+  "final_raw_fusion_holdout": {
+    "score": {
+      "n": 302,
+      "top1_hits": 42,
+      "top1_accuracy": 0.13907285,
+      "top2_hits": 67,
+      "top2_accuracy": 0.2218543,
+      "top3_hits": 94,
+      "top3_accuracy": 0.31125828,
+      "log_loss": 3.03569743,
+      "total_goals_mae": 1.43129066,
+      "total_goals_mode_hits": 67,
+      "total_goals_mode_accuracy": 0.2218543
+    },
+    "htft": {
+      "n": 302,
+      "top1_hits": 85,
+      "top1_accuracy": 0.28145695,
+      "top2_hits": 145,
+      "top2_accuracy": 0.48013245,
+      "top3_hits": 189,
+      "top3_accuracy": 0.62582781,
+      "log_loss": 1.94690727
+    },
+    "wdl": {
+      "n": 302,
+      "top1_hits": 158,
+      "top1_accuracy": 0.52317881,
+      "brier": 0.59987481,
+      "log_loss": 1.00627673
+    }
+  },
+  "paired_uncertainty": {
+    "score_top1": {
+      "delta": 0.01324503,
+      "ci95_low": 0.00331126,
+      "ci95_high": 0.02649007
+    },
+    "score_top2": {
+      "delta": 0.0,
+      "ci95_low": -0.01324503,
+      "ci95_high": 0.01324503
+    },
+    "score_top3": {
+      "delta": 0.01324503,
+      "ci95_low": -0.00331126,
+      "ci95_high": 0.03311258
+    },
+    "htft_top1": {
+      "delta": -0.02980132,
+      "ci95_low": -0.06953642,
+      "ci95_high": 0.00993377
+    },
+    "htft_top2": {
+      "delta": -0.00662252,
+      "ci95_low": -0.04304636,
+      "ci95_high": 0.02980132
+    }
+  },
+  "diagnostics": {
+    "validation_score": {
+      "dixon_coles_rho": -0.09,
+      "bivariate_shared_alpha": 0.21521739,
+      "ml_model": "HistGradientBoostingRegressor(loss=poisson)",
+      "ml_feature_count": 29
+    },
+    "holdout_score": {
+      "dixon_coles_rho": -0.08,
+      "bivariate_shared_alpha": 0.05869565,
+      "ml_model": "HistGradientBoostingRegressor(loss=poisson)",
+      "ml_feature_count": 29
+    },
+    "validation_ht": {
+      "transition_matrix": [
+        [
+          0.79329609,
+          0.1396648,
+          0.06703911
+        ],
+        [
+          0.35443038,
+          0.40506329,
+          0.24050633
+        ],
+        [
+          0.07857143,
+          0.24285714,
+          0.67857143
+        ]
+      ],
+      "laplace_prior": 2.0
+    },
+    "holdout_ht": {
+      "transition_matrix": [
+        [
+          0.79347826,
+          0.14945652,
+          0.05706522
+        ],
+        [
+          0.35639413,
+          0.38993711,
+          0.25366876
+        ],
+        [
+          0.09570957,
+          0.19141914,
+          0.71287129
+        ]
+      ],
+      "laplace_prior": 2.0
+    }
+  },
+  "model_definitions": {
+    "B0": "Current Stable 3.5.1",
+    "S1": "Historical team-strength Poisson",
+    "S2": "Dixon-Coles",
+    "S3": "Bivariate Poisson",
+    "S4": "Poisson-loss gradient boosting goal intensity",
+    "H1": "Independent first-half Poisson x Stable FT marginal",
+    "H2": "Independent first-half Poisson x learned HT->FT transition",
+    "F1": "Validation-selected fusion + consistency/PASS gate"
+  },
+  "promotion_status": "RESEARCH_ONLY_NOT_PROMOTED"
+}
