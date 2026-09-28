@@ -1,0 +1,55 @@
+name: Multi-Skill Fusion Sep1-20 Holdout
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "multiskill-requests/*.json"
+
+permissions:
+  contents: write
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - run: python -m pip install "scikit-learn>=1.5,<2"
+      - name: Restore existing collection cache only
+        uses: actions/cache/restore@v4
+        with:
+          path: cache
+          key: hh520-multiskill-readonly-${{ github.run_id }}
+          restore-keys: |
+            hh520-collection-v1-
+      - name: Run multi-skill holdout
+        env:
+          HH520_MULTISKILL_OFFLINE_ONLY: "1"
+        run: python scripts/multiskill_fusion_holdout.py
+      - name: Publish research result
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin multiskill-results || true
+          if git show-ref --verify --quiet refs/remotes/origin/multiskill-results; then
+            git switch --detach origin/multiskill-results
+          else
+            git switch --orphan multiskill-results
+            git rm -rf . || true
+          fi
+          mkdir -p results
+          cp "$GITHUB_WORKSPACE/_multiskill_fusion_holdout.json" results/sep1-20-v1.json
+          git add results/sep1-20-v1.json
+          git commit -m "research: Sep1-20 multi-skill fusion holdout" || true
+          git push origin HEAD:multiskill-results --force
