@@ -1,0 +1,52 @@
+name: HTFT Draw Gate Backtest
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "htft-draw-gate-requests/*.json"
+
+permissions:
+  contents: write
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - uses: actions/cache/restore@v4
+        with:
+          path: cache
+          key: hh520-htft-draw-gate-${{ github.run_id }}
+          restore-keys: |
+            hh520-collection-v1-
+      - name: Run draw-only transition backtest
+        env:
+          HH520_HTFT_DRAW_GATE_OFFLINE_ONLY: "1"
+        run: python scripts/htft_draw_gate_backtest.py
+      - name: Publish result
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin htft-draw-gate-results || true
+          if git show-ref --verify --quiet refs/remotes/origin/htft-draw-gate-results; then
+            git switch --detach origin/htft-draw-gate-results
+          else
+            git switch --orphan htft-draw-gate-results
+            git rm -rf . || true
+          fi
+          mkdir -p results
+          cp "$GITHUB_WORKSPACE/_htft_draw_gate_backtest.json" results/latest.json
+          git add results/latest.json
+          git commit -m "research: HT draw-only transition backtest" || true
+          git push origin HEAD:htft-draw-gate-results --force
