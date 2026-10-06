@@ -1,0 +1,7 @@
+{
+  "request_id": "htft-draw-gate-20261006",
+  "mode": "offline_existing_cache_only",
+  "training_window": ["2026-05-01","2026-08-31"],
+  "holdout_window": ["2026-09-01","2026-09-20"],
+  "stable_frozen": true
+}
