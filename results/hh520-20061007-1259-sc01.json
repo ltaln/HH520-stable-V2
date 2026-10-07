@@ -1,11 +1,8 @@
 {
-  "status": "PENDING",
-  "kind": "stable",
+  "status": "FAILED",
+  "kind": "prediction_contract_error",
   "request_id": "hh520-20061007-1259-sc01",
-  "stage": "workflow",
-  "run_id": "37574096787",
-  "run_attempt": "1",
-  "message": "Workflow accepted and is still running.",
+  "reason": "missing_predictions",
   "_action": {
     "request_id": "hh520-20061007-1259-sc01",
     "repository": "ltaln/HH520-stable-V2",
