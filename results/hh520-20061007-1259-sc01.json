@@ -1,8 +1,11 @@
 {
   "status": "FAILED",
-  "kind": "prediction_contract_error",
+  "kind": "stable",
   "request_id": "hh520-20061007-1259-sc01",
-  "reason": "missing_predictions",
+  "stage": "workflow",
+  "run_id": "37574096787",
+  "run_attempt": "1",
+  "message": "Workflow failed before a final result was published. Check GitHub Actions logs for the failed stage.",
   "_action": {
     "request_id": "hh520-20061007-1259-sc01",
     "repository": "ltaln/HH520-stable-V2",
