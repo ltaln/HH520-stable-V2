@@ -24,6 +24,9 @@ def test_without_gpt_returns_deterministic_prediction():
     assert result["total_goals"]!="未提供"
     assert result["stable_version"]=="HH520 Stable V3.5.1"
     assert result["state"] in {"CONFIRM","BALANCED","TAIL_ALERT","PASS"}
+    assert result["trust_grade"] in {"A","B","C","D"}
+    assert 0 <= result["trust_score"] <= 100
+    assert 0 <= result["upset_risk"] <= 100
 
 
 def test_finished_match_is_skipped():
@@ -37,7 +40,7 @@ def test_model_input_contains_locked_v351_prediction():
     assert payload[0]["gpt_role"]=="EXPLANATION_ONLY"
     assert payload[0]["stable_version"]=="HH520 Stable V3.5.1"
     assert payload[0]["locked_prediction"]["score1"]
-    assert set(payload[0]["analysis"])=={"probability","decision","calibration","consistency","htft","score"}
+    assert set(payload[0]["analysis"])=={"probability","decision","calibration","consistency","reliability","htft","score"}
 
 
 def test_missing_probabilities_pass():
