@@ -72,6 +72,13 @@ def prepare_match(match):
         data_mode=(analysis.get("data_mode") or {}).get("mode","10027_ONLY"),
         data_mode_detail=analysis.get("data_mode") or {},
         full_data_used=(analysis.get("data_mode") or {}).get("mode")=="FULL_DATA",
+        reliability=analysis.get("reliability") or {},
+        trust_score=(analysis.get("reliability") or {}).get("trust_score"),
+        trust_grade=(analysis.get("reliability") or {}).get("trust_grade"),
+        trust_label=(analysis.get("reliability") or {}).get("trust_label"),
+        conflict_score=(analysis.get("reliability") or {}).get("conflict_score"),
+        upset_risk=(analysis.get("reliability") or {}).get("upset_risk"),
+        reliability_action=(analysis.get("reliability") or {}).get("recommended_action"),
     )
 
     if not probability.get("valid") or not raw_direction:
@@ -137,7 +144,7 @@ def build_model_input(matches):
             "away_team": prepared["away_team"], "league": match.get("league"),
             "kickoff": match.get("kickoff"), "market": match.get("market", {}),
             "research_factors": match.get("research_factors", {}),
-            "analysis": {k: analysis[k] for k in ("probability","decision","calibration","consistency","htft","score")},
+            "analysis": {k: analysis[k] for k in ("probability","decision","calibration","consistency","reliability","htft","score")},
             "locked_prediction": {key: prepared[key] for key in (
                 "direction","alternate_direction","state","score1","score2","htft1","htft2","total_goals")},
             "stable_version": "HH520 Stable V3.5.1",
