@@ -11,6 +11,7 @@ from engine.state_engine import build_state
 from engine.consistency_layer import consistency_layer
 from engine.calibration_layer import calibration_layer
 from engine.full_data_layer import enhance_probability, data_mode
+from engine.reliability_gate import reliability_gate
 from .confidence import confidence_from_probability
 
 
@@ -29,6 +30,7 @@ def analyze_match(match: dict) -> dict:
     htft = htft_layer(probability, match, decision)
     score = score_layer(match, probability, htft)
     consistency = consistency_layer(probability, state, htft, score, decision)
+    reliability = reliability_gate(probability, decision, consistency, quality, risk, match.get("_data_mode"))
     calibration = calibration_layer(probability, state)
     return {
         "probability": probability,
@@ -45,5 +47,6 @@ def analyze_match(match: dict) -> dict:
         "htft": htft,
         "score": score,
         "consistency": consistency,
+        "reliability": reliability,
         "calibration": calibration,
     }
