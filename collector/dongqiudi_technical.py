@@ -40,7 +40,7 @@ def _number(value):
     return float(m.group()) if m else None
 
 
-def _get_json(url, timeout=15):
+def _get_json(url, timeout=8):
     r=requests.get(
         url,
         headers={"Accept":"application/json","User-Agent":"HH520-Stable/3.5.1"},
@@ -130,9 +130,9 @@ def _share(values):
 
 def collect_team_history(target_match_id, team_name, target_side, target_kickoff=None, max_matches=None):
     try:
-        max_matches=max_matches or max(1,min(8,int(os.getenv("HH520_DONGQIUDI_HISTORY_MATCHES","5"))))
+        max_matches=max_matches or max(1,min(8,int(os.getenv("HH520_DONGQIUDI_HISTORY_MATCHES","3"))))
     except ValueError:
-        max_matches=5
+        max_matches=3
     lineup=_lineup(target_match_id)
     row=_recent_row(lineup,target_side)
     target_dt=_parse_time(target_kickoff)
