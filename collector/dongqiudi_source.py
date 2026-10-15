@@ -16,6 +16,7 @@ from difflib import SequenceMatcher
 from urllib.parse import urlparse
 
 from .firecrawl_client import search_web, scrape_markdown
+from .dongqiudi_technical import collect_prematch_technical_history
 
 
 DONGQIUDI_INDEX_URL="https://lottery-aggregator.dongqiudi.com/pcWeb/spreadMatch"
@@ -416,6 +417,52 @@ def _timing_profile(text, team):
         "second_half_ga_signal":sum(ga[3:]),
     }
 
+def _merge_technical_history(parsed, match_id, home_team, away_team, kickoff=None):
+    try:
+        technical=collect_prematch_technical_history(match_id,home_team,away_team,kickoff)
+    except Exception as exc:
+        parsed["technical_history"]={"available":False,"reason":f"technical_history_error:{type(exc).__name__}"}
+        return parsed
+
+    min_samples=3
+    for side in ("home","away"):
+        block=(technical.get(side) or {})
+        samples=int(block.get("sample_count") or 0)
+        metrics=block.get("metrics") or {}
+        target=parsed.get(side) or {}
+        target["technical_history_samples"]=samples
+        target["technical_history_match_ids"]=[
+            str(x.get("match_id")) for x in (block.get("observations") or []) if x.get("match_id")
+        ]
+        if samples>=min_samples:
+            for key,value in metrics.items():
+                if key.endswith("_samples"):
+                    target[key]=value
+                elif target.get(key) is None:
+                    target[key]=value
+        parsed[side]=target
+
+    h=parsed.get("home") or {}; a=parsed.get("away") or {}
+    groups=parsed.setdefault("groups",{})
+    groups["SHOTS"]=all(x.get("shots") is not None and x.get("shots_on_target") is not None for x in (h,a))
+    groups["POSSESSION"]=all(x.get("possession") is not None for x in (h,a))
+    groups["DANGEROUS_ATTACKS"]=all(x.get("dangerous_attacks") is not None for x in (h,a))
+    groups["BIG_CHANCES"]=all(x.get("big_chances") is not None for x in (h,a))
+    groups["GOAL_TIMING"]=all(
+        isinstance(x.get(key),(list,tuple)) and len(x.get(key))==6
+        for x in (h,a) for key in ("goals_for_share","goals_against_share")
+    )
+    parsed["technical_history"]={
+        "available":bool((technical.get("home") or {}).get("sample_count") or (technical.get("away") or {}).get("sample_count")),
+        "source":technical.get("source"),
+        "min_samples_for_model":min_samples,
+        "home_samples":(technical.get("home") or {}).get("sample_count",0),
+        "away_samples":(technical.get("away") or {}).get("sample_count",0),
+    }
+    parsed["field_count"]=len(h)+len(a)
+    return parsed
+
+
 def parse_analysis_markdown(markdown, home_team=None, away_team=None):
     text=str(markdown or "").replace("\r","")
     last10=_pair_wdl(text,"近10场战绩")
@@ -506,6 +553,7 @@ def collect_match_analysis(date,home,away,league=None,kickoff=None):
                 markdown=""
             if markdown and _header_matches(markdown,date,home,away):
                 parsed=parse_analysis_markdown(markdown,home,away)
+                parsed=_merge_technical_history(parsed,hit["match_id"],home,away,kickoff)
                 available=any(parsed["groups"].values())
                 return {
                     "available":available,
@@ -554,6 +602,7 @@ def collect_match_analysis(date,home,away,league=None,kickoff=None):
                 rejected.append({"match_id":hit["match_id"],"reason":"team_or_home_away_mismatch"})
                 continue
             parsed=parse_analysis_markdown(markdown,home,away)
+            parsed=_merge_technical_history(parsed,hit["match_id"],home,away,kickoff)
             available=any(parsed["groups"].values())
             return {
                 "available":available,
