@@ -40,10 +40,15 @@ jobs:
           for name,url in {
               "index":"https://api.dongqiudi.com/data/index",
               "important":"https://api.dongqiudi.com/data/tab/important?start=2026-09-13T16:00:00&version=551&init=1",
+              "pc_spread":"https://lottery-aggregator.dongqiudi.com/pcWeb/spreadMatch",
+              "pc_overview":"https://pc.dongqiudi.com/api/data/overview/match/54493236",
+              "pc_detail":"https://pc.dongqiudi.com/magicball/v1/match/app/detail?id=54493236&app=dqd&lang=zh-cn",
+              "pc_lineup":"https://pc.dongqiudi.com/sport-data/soccer/biz/dqd/v1/match/lineup/4493236?app=dqd&lang=zh-cn",
           }.items():
               try:
                   r=requests.get(url,headers={"User-Agent":"Mozilla/5.0","Referer":"https://www.dongqiudi.com/"},timeout=20)
-                  probes[name]={"status":r.status_code,"content_type":r.headers.get("content-type"),"body":r.text[:1200]}
+                  body=r.text[:8000] if name in {"pc_overview","pc_detail","pc_lineup","pc_spread"} else r.text[:1200]
+                  probes[name]={"status":r.status_code,"content_type":r.headers.get("content-type"),"body":body}
               except Exception as exc:
                   probes[name]={"error":type(exc).__name__}
 
