@@ -43,7 +43,18 @@ def _profile(match, side):
 
 
 def _timing_side(match, side):
-    return ((match.get("goal_timing") or {}).get(side) or {})
+    base=dict(((match.get("goal_timing") or {}).get(side) or {}))
+    dq=(match.get("dongqiudi_enrichment") or {})
+    if dq.get("available"):
+        dside=(dq.get(side) or {})
+        for key in (
+            "goals_for_share","goals_against_share",
+            "first_half_gf_signal","first_half_ga_signal",
+            "second_half_gf_signal","second_half_ga_signal",
+        ):
+            if key not in base and dside.get(key) is not None:
+                base[key]=dside.get(key)
+    return base
 
 
 def _count_present(d, keys):
@@ -69,7 +80,10 @@ def data_mode(match: dict) -> dict:
     return {
         "mode":"FULL_DATA" if full else "10027_ONLY",
         "full_data":full,
-        "timing_available":bool(timing.get("available")),
+        "timing_available":bool(timing.get("available")) or all(_f(x) is not None for x in (
+            ht.get("first_half_gf_signal"), ht.get("first_half_ga_signal"),
+            at.get("first_half_gf_signal"), at.get("first_half_ga_signal"),
+        )),
         "dongqiudi_available":bool((match.get("dongqiudi_enrichment") or {}).get("available")),
         "home_profile_fields":sum(1 for v in hp.values() if _f(v) is not None),
         "away_profile_fields":sum(1 for v in ap.values() if _f(v) is not None),
