@@ -71,8 +71,9 @@ def data_mode(match: dict) -> dict:
         ht.get("first_half_gf_signal"), ht.get("first_half_ga_signal"),
         at.get("first_half_gf_signal"), at.get("first_half_ga_signal"),
     ))
+    timing_available=bool(timing.get("available")) or timing_ok
     full=(
-        bool(timing.get("available"))
+        timing_available
         and _count_present(hp,shots)>=1 and _count_present(ap,shots)>=1
         and _count_present(hp,stability)>=2 and _count_present(ap,stability)>=2
         and timing_ok
@@ -80,10 +81,7 @@ def data_mode(match: dict) -> dict:
     return {
         "mode":"FULL_DATA" if full else "10027_ONLY",
         "full_data":full,
-        "timing_available":bool(timing.get("available")) or all(_f(x) is not None for x in (
-            ht.get("first_half_gf_signal"), ht.get("first_half_ga_signal"),
-            at.get("first_half_gf_signal"), at.get("first_half_ga_signal"),
-        )),
+        "timing_available":timing_available,
         "dongqiudi_available":bool((match.get("dongqiudi_enrichment") or {}).get("available")),
         "home_profile_fields":sum(1 for v in hp.values() if _f(v) is not None),
         "away_profile_fields":sum(1 for v in ap.values() if _f(v) is not None),
