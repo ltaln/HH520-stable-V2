@@ -3,6 +3,12 @@ on:
   push:
     paths:
       - ".github/workflows/dongqiudi-live-smoke.yml"
+      - "collector/dongqiudi_source.py"
+      - "collector/dongqiudi_technical.py"
+      - "collector/dongqiudi_runtime.py"
+      - "engine/full_data_layer.py"
+      - "tests/test_dongqiudi_technical.py"
+      - "tests/test_dongqiudi_live_review_contract.py"
   workflow_dispatch:
 
 permissions:
@@ -108,6 +114,7 @@ jobs:
               raise SystemExit("Dongqiudi current formal-path discovery/enrichment unavailable")
           PY
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: dongqiudi-live-smoke
           path: _smoke/dongqiudi-live-smoke.json
