@@ -33,7 +33,13 @@ def _clip(x, lo, hi):
 
 def _profile(match, side):
     timing=(match.get("goal_timing") or {})
-    return (((timing.get(side) or {}).get("profile_stats")) or {})
+    base=dict((((timing.get(side) or {}).get("profile_stats")) or {}))
+    dq=(match.get("dongqiudi_enrichment") or {})
+    if dq.get("available"):
+        for key,value in ((dq.get(side) or {}).items()):
+            if key not in base and _f(value) is not None:
+                base[key]=value
+    return base
 
 
 def _timing_side(match, side):
@@ -64,6 +70,7 @@ def data_mode(match: dict) -> dict:
         "mode":"FULL_DATA" if full else "10027_ONLY",
         "full_data":full,
         "timing_available":bool(timing.get("available")),
+        "dongqiudi_available":bool((match.get("dongqiudi_enrichment") or {}).get("available")),
         "home_profile_fields":sum(1 for v in hp.values() if _f(v) is not None),
         "away_profile_fields":sum(1 for v in ap.values() if _f(v) is not None),
         "groups_used":["SHOTS","RESULT_STABILITY","HALF_TIMING"] if full else [],
