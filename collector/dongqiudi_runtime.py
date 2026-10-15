@@ -63,7 +63,11 @@ def collect_dongqiudi_for_match(date: str, match: dict) -> dict:
         return {"available": False, "reason": "missing_team_names", "cache_hit": False}
 
     try:
-        result = collect_match_analysis(date, home, away)
+        result = collect_match_analysis(
+            date, home, away,
+            league=match.get("league"),
+            kickoff=match.get("kickoff"),
+        )
     except Exception as exc:
         result = {
             "available": False,
