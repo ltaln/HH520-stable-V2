@@ -43,7 +43,7 @@ def test_runtime_caches_formal_dongqiudi_result(tmp_path, monkeypatch):
     monkeypatch.setattr(
         dongqiudi_runtime,
         "collect_match_analysis",
-        lambda date, home, away: {
+        lambda date, home, away, **kwargs: {
             "available": True,
             "home": {"wins_rate": 0.5, "draws_rate": 0.3, "losses_rate": 0.2},
             "away": {"wins_rate": 0.3, "draws_rate": 0.3, "losses_rate": 0.4},
