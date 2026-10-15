@@ -238,12 +238,27 @@ def _timing_values(text, team, kind):
     for i,line in enumerate(lines):
         if not any(alias and alias in line for alias in aliases):
             continue
-        nearby=" ".join(lines[i:i+3])
-        if not any(token in nearby for token in kind_tokens):
-            continue
-        vals=_six_numbers(nearby)
-        if vals:
-            return vals
+
+        # Prefer a complete same-line record. This prevents the six-bin parser
+        # from drifting into the next team's row when compact markdown places
+        # home/away timing rows next to each other.
+        if any(token in line for token in kind_tokens):
+            vals=_six_numbers(line)
+            if vals:
+                return vals
+
+        # Multi-line table fallback: team label -> metric label -> six values.
+        for j in range(i+1,min(len(lines),i+3)):
+            probe=lines[j]
+            if not any(token in probe for token in kind_tokens):
+                continue
+            vals=_six_numbers(probe)
+            if vals:
+                return vals
+            if j+1 < len(lines):
+                vals=_six_numbers(lines[j+1])
+                if vals:
+                    return vals
     return None
 
 def _shares(values):
