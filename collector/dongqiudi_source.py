@@ -10,10 +10,137 @@ Research-safe design:
 from __future__ import annotations
 
 import re
+import requests
+from datetime import datetime, timezone
 from difflib import SequenceMatcher
 from urllib.parse import urlparse
 
 from .firecrawl_client import search_web, scrape_markdown
+
+
+DONGQIUDI_INDEX_URL="https://lottery-aggregator.dongqiudi.com/pcWeb/spreadMatch"
+DONGQIUDI_PC_BASE="https://pc.dongqiudi.com"
+
+def _parse_kickoff(value):
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(str(value).replace("Z","+00:00"))
+    except Exception:
+        return None
+
+def _league_similarity(a,b):
+    aa=_norm_team_name(a); bb=_norm_team_name(b)
+    if not aa or not bb:
+        return 0.0
+    if aa in bb or bb in aa:
+        return 1.0
+    return SequenceMatcher(None,aa,bb).ratio()
+
+def _pc_index_entries(timeout=20):
+    try:
+        r=requests.get(
+            DONGQIUDI_INDEX_URL,
+            headers={"Accept":"application/json","User-Agent":"HH520-Stable/3.5.1"},
+            timeout=timeout,
+        )
+        if r.status_code != 200:
+            return []
+        payload=r.json()
+    except Exception:
+        return []
+    rows=payload.get("data") if isinstance(payload,dict) else None
+    return rows if isinstance(rows,list) else []
+
+def _entry_team(entry, side):
+    if side=="home":
+        return entry.get("home_name") or entry.get("team_A_name") or entry.get("home")
+    return entry.get("guest_name") or entry.get("team_B_name") or entry.get("away")
+
+def _entry_league(entry):
+    return entry.get("match_name") or entry.get("competition_name") or entry.get("league")
+
+def _entry_kickoff(entry):
+    raw=entry.get("match_time") or entry.get("start_play")
+    if not raw:
+        return None
+    s=str(raw).strip()
+    # spreadMatch commonly uses MM/DD HH:MM for Beijing-local fixtures.
+    if re.fullmatch(r"\d{2}/\d{2}\s+\d{2}:\d{2}",s):
+        return s
+    dt=_parse_kickoff(s)
+    return dt
+
+def _entry_match_id(entry):
+    return str(entry.get("match_id") or entry.get("relate_id") or entry.get("id") or "").strip()
+
+def _match_pc_entry(date, home, away, league=None, kickoff=None):
+    rows=_pc_index_entries()
+    if not rows:
+        return None
+    base_h=_alias_list(home); base_a=_alias_list(away)
+    requested_dt=_parse_kickoff(kickoff)
+    candidates=[]
+    for entry in rows:
+        mid=_entry_match_id(entry)
+        if not mid:
+            continue
+        eh=_entry_team(entry,"home"); ea=_entry_team(entry,"away")
+        hs=max((_name_similarity(x,eh) for x in base_h),default=0.0)
+        aas=max((_name_similarity(x,ea) for x in base_a),default=0.0)
+        if hs < 0.56 or aas < 0.56:
+            continue
+        score=hs+aas
+        el=_entry_league(entry)
+        if league and el:
+            ls=_league_similarity(league,el)
+            if ls < 0.45:
+                continue
+            score+=ls
+        ek=_entry_kickoff(entry)
+        if isinstance(ek,str) and re.fullmatch(r"\d{2}/\d{2}\s+\d{2}:\d{2}",ek):
+            mmdd=str(date or "")[5:].replace("-","/")
+            if mmdd and not ek.startswith(mmdd):
+                continue
+            if requested_dt:
+                try:
+                    hhmm=ek.split()[1]
+                    req_hm=requested_dt.strftime("%H:%M")
+                    h1,m1=map(int,hhmm.split(":")); h2,m2=map(int,req_hm.split(":"))
+                    if abs((h1*60+m1)-(h2*60+m2)) > 20:
+                        continue
+                    score+=1.0
+                except Exception:
+                    pass
+        elif requested_dt and isinstance(ek,datetime):
+            try:
+                delta=abs((ek.astimezone(timezone.utc)-requested_dt.astimezone(timezone.utc)).total_seconds())
+                if delta > 20*60:
+                    continue
+                score+=1.0
+            except Exception:
+                pass
+        candidates.append((score,entry))
+    if not candidates:
+        return None
+    candidates.sort(key=lambda x:x[0],reverse=True)
+    if len(candidates)>1 and abs(candidates[0][0]-candidates[1][0])<0.05:
+        return None
+    return candidates[0][1]
+
+def _analysis_hit_from_pc_entry(entry):
+    mid=_entry_match_id(entry)
+    if not mid:
+        return None
+    return {
+        "match_id":mid,
+        "analysis_url":f"https://m.dongqiudi.com/matchDetail/{mid}/analysis",
+        "pc_match_url":f"{DONGQIUDI_PC_BASE}/match/{mid}",
+        "discovered_from":DONGQIUDI_INDEX_URL,
+        "query":"DONGQIUDI_PC_SPREAD_MATCH",
+        "league":_entry_league(entry),
+        "kickoff":entry.get("match_time") or entry.get("start_play"),
+    }
 
 MATCH_RE=re.compile(r"https?://m\.dongqiudi\.com/matchDetail/(\d+)(?:/[^\s\"'<>?]*)?(?:\?[^\s\"'<>]*)?",re.I)
 
@@ -366,7 +493,40 @@ def parse_analysis_markdown(markdown, home_team=None, away_team=None):
     }
 
 
-def collect_match_analysis(date,home,away):
+def collect_match_analysis(date,home,away,league=None,kickoff=None):
+    # Prefer Dongqiudi's own public PC fixture list. Search is only a fallback.
+    pc_entry=_match_pc_entry(date,home,away,league=league,kickoff=kickoff)
+    if pc_entry:
+        hit=_analysis_hit_from_pc_entry(pc_entry)
+        if hit:
+            try:
+                raw=scrape_markdown(hit["analysis_url"])
+                markdown=((raw.get("data") or {}).get("markdown") if isinstance(raw,dict) else None) or ""
+            except Exception:
+                markdown=""
+            if markdown and _header_matches(markdown,date,home,away):
+                parsed=parse_analysis_markdown(markdown,home,away)
+                available=any(parsed["groups"].values())
+                return {
+                    "available":available,
+                    "reason":None if available else "dongqiudi_analysis_no_features",
+                    "source":"DONGQIUDI_PC_FIXTURE_PLUS_PUBLIC_ANALYSIS",
+                    "source_domain":urlparse(hit["analysis_url"]).netloc.lower(),
+                    "match_detail_id":hit["match_id"],
+                    "analysis_url":hit["analysis_url"],
+                    "pc_match_url":hit.get("pc_match_url"),
+                    "discovered_from":hit["discovered_from"],
+                    "query":hit["query"],
+                    "validated_header":True,
+                    "fixture_match":{
+                        "league":hit.get("league"),"kickoff":hit.get("kickoff"),
+                        "home":_entry_team(pc_entry,"home"),"away":_entry_team(pc_entry,"away"),
+                    },
+                    "search_attempts":0,
+                    "rejected_candidates":[],
+                    **parsed,
+                }
+
     # Search progressively. We only pay for fallback searches when every
     # candidate from the cheaper first query fails validation.
     rejected=[]
