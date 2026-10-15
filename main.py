@@ -40,7 +40,7 @@ def main(argv=None):
             args.output.parent.mkdir(parents=True, exist_ok=True)
             report = {
                 key: data[key]
-                for key in ("date", "url", "captured_at", "goal_timing_summary", "predictions", "output_contract", "display_rows")
+                for key in ("date", "url", "captured_at", "dongqiudi_summary", "goal_timing_summary", "predictions", "output_contract", "display_rows")
                 if key in data
             }
             if "gpt_handoff" in data:
