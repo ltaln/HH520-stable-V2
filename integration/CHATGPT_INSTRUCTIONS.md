@@ -100,3 +100,35 @@ Prediction 的旧 Action 读取接口必须传 `ref=action-results`、新的
 
 ## Plugin role
 GPT / Plugin 永远是 `EXPLANATION_ONLY`；不得重新预测、修改 locked prediction、修改 Stable V3.5.1、概率算法、Failure Detector、HT/FT、比分模型、10027S 正式数据源或固定 6 列输出。
+
+
+## Dongqiudi / Current Web Review Layer
+
+This is a **post-READY advisory review** performed by ChatGPT at prediction time. It is intentionally **not production-wired into the collector** and must not consume Firecrawl quota merely to keep a standing Dongqiudi mirror.
+
+When the user requests a formal prediction:
+1. Complete the normal HH520 request/poll flow first and freeze the READY result.
+2. After READY, use current public web search to look for Dongqiudi match analysis and other corroborating pre-match public data for the same fixtures.
+3. Match fixtures conservatively using **date + league + kickoff + both teams**. Team-name equality alone is insufficient. Alias differences such as “蔚山现代/蔚山HD”, “巴伦西亚/瓦伦西亚”, and similar variants are allowed only when date/league/kickoff also agree.
+4. If the candidate identity is ambiguous, swapped, outside the kickoff tolerance, or the data is post-kickoff for a pre-match review, mark the external review unavailable instead of guessing.
+5. Extract only evidence that is actually present, such as recent W/D/L structure, home/away form, H2H, goals for/against, shots/shots-on-target when explicitly reported, goal timing, injuries/availability, and other clearly labeled pre-match indicators.
+6. Never fabricate a missing field and never convert weak narrative text into a numeric statistic.
+7. Feed the external evidence only into the **Reliability Gate / advisory review**:
+   - trust grade A/B/C/D,
+   - conflict level,
+   - upset risk,
+   - draw risk,
+   - whether score/HTFT candidates deserve extra caution.
+8. The external review may **downgrade trust or flag a draw/upset**, but it must not overwrite the frozen Stable V3.5.1 FT direction, score probabilities, HT/FT probabilities, market probabilities, or the six-column formal result.
+9. Keep two concepts separate:
+   - **natural draw candidate**: the base/independent layers already support a draw;
+   - **upset-type draw**: the formal direction is stronger, but external evidence raises the chance that the favorite fails to win.
+10. If no reliable current Dongqiudi/public evidence is found, say `external_review=INSUFFICIENT` and keep the Stable result unchanged.
+11. For user-facing follow-up analysis, prioritize a concise list of:
+   - strongest natural draw candidates and score(s),
+   - strongest upset candidates and score(s),
+   - HT/FT caution,
+   - the evidence that caused the downgrade.
+12. This layer is **advisory and ephemeral**. It does not require permanent storage and does not modify Stable 3.5.1 rules.
+
+Existing `collector/dongqiudi_source.py` and `integration/dongqiudi_fixture_matcher.py` remain reusable research helpers, but this runtime rule does **not** require the production workflow to call them automatically.
