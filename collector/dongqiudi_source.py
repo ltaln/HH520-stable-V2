@@ -213,6 +213,18 @@ def _pair_metric(text, labels):
                 return {"home":float(m.group(1)),"away":float(m.group(2))}
     return None
 
+def _pair_percent_metric(text, labels):
+    for label in labels:
+        patterns=(
+            rf"(?:^|\n)\s*{re.escape(label)}\s*[:：]?\s*(\d+(?:\.\d+)?)\s*%\s*[-:：/|]\s*(\d+(?:\.\d+)?)\s*%",
+            rf"\|\s*{re.escape(label)}\s*\|\s*(\d+(?:\.\d+)?)\s*%\s*\|\s*(\d+(?:\.\d+)?)\s*%\s*\|",
+        )
+        for pattern in patterns:
+            m=re.search(pattern,text,re.I|re.M)
+            if m:
+                return {"home":float(m.group(1))/100.0,"away":float(m.group(2))/100.0}
+    return None
+
 def _six_numbers(line):
     vals=[float(x) for x in re.findall(r"(?<![\d.])\d+(?:\.\d+)?(?![\d.])",line)]
     return vals[-6:] if len(vals)>=6 else None
@@ -248,7 +260,12 @@ def _timing_profile(text, team):
     ga=_shares(_timing_values(text,team,"against"))
     if not gf or not ga:
         return {}
+    raw_gf=_timing_values(text,team,"for")
+    raw_ga=_timing_values(text,team,"against")
     return {
+        "timing_bins":list(TIMING_BINS),
+        "goals_for_bins":raw_gf,
+        "goals_against_bins":raw_ga,
         "goals_for_share":gf,
         "goals_against_share":ga,
         "first_half_gf_signal":sum(gf[:3]),
@@ -266,18 +283,28 @@ def parse_analysis_markdown(markdown, home_team=None, away_team=None):
     ga=_pair_ball(text,"场均失球")
     shots=_pair_metric(text,("射门","场均射门","射门次数"))
     sot=_pair_metric(text,("射正","场均射正","射正次数"))
+    shots_off=_pair_metric(text,("射偏","场均射偏","射偏次数","未射正"))
+    possession=_pair_percent_metric(text,("控球率","控球"))
+    dangerous=_pair_metric(text,("危险进攻","场均危险进攻"))
+    big_chances=_pair_metric(text,("绝佳机会","重大机会","得分机会"))
     home={}; away={}
     if last10:
         hr=_rates(last10["home"]); ar=_rates(last10["away"])
         home.update(hr); away.update(ar)
+        home["recent10_record"]={"wins":last10["home"][0],"draws":last10["home"][1],"losses":last10["home"][2]}
+        away["recent10_record"]={"wins":last10["away"][0],"draws":last10["away"][1],"losses":last10["away"][2]}
         home.update({f"recent10_{k}":v for k,v in hr.items()})
         away.update({f"recent10_{k}":v for k,v in ar.items()})
     if samevenue:
         hr=_rates(samevenue["home"]); ar=_rates(samevenue["away"])
+        home["venue10_record"]={"wins":samevenue["home"][0],"draws":samevenue["home"][1],"losses":samevenue["home"][2]}
+        away["venue10_record"]={"wins":samevenue["away"][0],"draws":samevenue["away"][1],"losses":samevenue["away"][2]}
         home.update({f"venue10_{k}":v for k,v in hr.items()})
         away.update({f"venue10_{k}":v for k,v in ar.items()})
     if h2h:
         hr=_rates(h2h["home"]); ar=_rates(h2h["away"])
+        home["h2h_record"]={"wins":h2h["home"][0],"draws":h2h["home"][1],"losses":h2h["home"][2]}
+        away["h2h_record"]={"wins":h2h["away"][0],"draws":h2h["away"][1],"losses":h2h["away"][2]}
         home.update({f"h2h_{k}":v for k,v in hr.items()})
         away.update({f"h2h_{k}":v for k,v in ar.items()})
     if gf:
@@ -288,10 +315,22 @@ def parse_analysis_markdown(markdown, home_team=None, away_team=None):
         home["shots"]=shots["home"]; away["shots"]=shots["away"]
     if sot:
         home["shots_on_target"]=sot["home"]; away["shots_on_target"]=sot["away"]
+    if shots_off:
+        home["shots_off_target"]=shots_off["home"]; away["shots_off_target"]=shots_off["away"]
+    if possession:
+        home["possession"]=possession["home"]; away["possession"]=possession["away"]
+    if dangerous:
+        home["dangerous_attacks"]=dangerous["home"]; away["dangerous_attacks"]=dangerous["away"]
+    if big_chances:
+        home["big_chances"]=big_chances["home"]; away["big_chances"]=big_chances["away"]
     for side,profile in ((home,_timing_profile(text,home_team)),(away,_timing_profile(text,away_team))):
         side.update(profile)
         if side.get("shots") not in (None,0) and side.get("shots_on_target") is not None:
             side["shot_on_target_rate"]=side["shots_on_target"]/side["shots"]
+            if side.get("shots_off_target") is None and side["shots"] >= side["shots_on_target"]:
+                side["shots_off_target"]=side["shots"]-side["shots_on_target"]
+        if side.get("shots") not in (None,0) and side.get("scored_per_match") is not None:
+            side["shot_conversion"]=side["scored_per_match"]/side["shots"]
     return {
         "home":home,"away":away,
         "groups":{
@@ -299,8 +338,14 @@ def parse_analysis_markdown(markdown, home_team=None, away_team=None):
             "VENUE_FORM":bool(samevenue),
             "H2H":bool(h2h),
             "GF_GA":bool(gf and ga),
-            "SHOTS":bool(shots or sot),
-            "GOAL_TIMING":bool(home.get("goals_for_share") and away.get("goals_for_share")),
+            "SHOTS":bool(shots and sot),
+            "POSSESSION":bool(possession),
+            "DANGEROUS_ATTACKS":bool(dangerous),
+            "BIG_CHANCES":bool(big_chances),
+            "GOAL_TIMING":bool(
+                home.get("goals_for_share") and home.get("goals_against_share")
+                and away.get("goals_for_share") and away.get("goals_against_share")
+            ),
         },
         "field_count":len(home)+len(away),
     }
