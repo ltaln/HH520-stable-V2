@@ -64,25 +64,44 @@ def _count_present(d, keys):
 def data_mode(match: dict) -> dict:
     timing=match.get("goal_timing") or {}
     hp=_profile(match,"home"); ap=_profile(match,"away")
-    shots=("shots","shots_on_target","shot_conversion","shots_off_target")
+    shots=("shots","shots_on_target")
     stability=("wins_rate","draws_rate","losses_rate")
+    gfga=("scored_per_match","conceded_per_match")
     ht=_timing_side(match,"home"); at=_timing_side(match,"away")
     timing_ok=all(_f(x) is not None for x in (
         ht.get("first_half_gf_signal"), ht.get("first_half_ga_signal"),
         at.get("first_half_gf_signal"), at.get("first_half_ga_signal"),
     ))
     timing_available=bool(timing.get("available")) or timing_ok
+    dq=(match.get("dongqiudi_enrichment") or {})
+    dq_timing_complete=True
+    dq_gfga_complete=True
+    if dq.get("available"):
+        dh=(dq.get("home") or {}); da=(dq.get("away") or {})
+        if not bool(timing.get("available")):
+            dq_timing_complete=all(
+                isinstance(v,(list,tuple)) and len(v)==6
+                for v in (
+                    dh.get("goals_for_share"),dh.get("goals_against_share"),
+                    da.get("goals_for_share"),da.get("goals_against_share"),
+                )
+            )
+        dq_gfga_complete=(
+            _count_present(dh,gfga)==2 and _count_present(da,gfga)==2
+        )
     full=(
         timing_available
-        and _count_present(hp,shots)>=1 and _count_present(ap,shots)>=1
-        and _count_present(hp,stability)>=2 and _count_present(ap,stability)>=2
-        and timing_ok
+        and _count_present(hp,shots)==2 and _count_present(ap,shots)==2
+        and _count_present(hp,stability)==3 and _count_present(ap,stability)==3
+        and timing_ok and dq_timing_complete and dq_gfga_complete
     )
     return {
         "mode":"FULL_DATA" if full else "10027_ONLY",
         "full_data":full,
         "timing_available":timing_available,
         "dongqiudi_available":bool((match.get("dongqiudi_enrichment") or {}).get("available")),
+        "dongqiudi_timing_complete":dq_timing_complete,
+        "dongqiudi_gfga_complete":dq_gfga_complete,
         "home_profile_fields":sum(1 for v in hp.values() if _f(v) is not None),
         "away_profile_fields":sum(1 for v in ap.values() if _f(v) is not None),
         "groups_used":["SHOTS","RESULT_STABILITY","HALF_TIMING"] if full else [],
