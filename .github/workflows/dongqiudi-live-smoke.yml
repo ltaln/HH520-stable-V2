@@ -33,6 +33,7 @@ jobs:
           import json
           import requests
           from collector.dongqiudi_source import collect_match_analysis, parse_analysis_markdown
+          from collector.dongqiudi_technical import collect_prematch_technical_history
           from collector.firecrawl_client import scrape_markdown
           from engine.full_data_layer import data_mode
 
@@ -57,23 +58,47 @@ jobs:
           markdown=((raw.get("data") or {}).get("markdown") if isinstance(raw,dict) else None) or ""
           direct=parse_analysis_markdown(markdown,"比利亚雷","贝蒂斯")
           dq=collect_match_analysis("2026-09-14","比利亚雷","贝蒂斯")
+          history=collect_prematch_technical_history(
+              "54493236","比利亚雷亚尔","皇家贝蒂斯","2026-09-14T19:00:00+00:00"
+          )
+          live=collect_match_analysis(
+              "2026-10-16","里昂","水晶宫",league="欧联",kickoff=None
+          )
           match={"goal_timing":{"available":False},"dongqiudi_enrichment":{
               "available":any(direct.get("groups",{}).values()),
               **direct,
           }}
-          out={"probes":probes,"direct_known_id":direct,"discovery":dq,"data_mode":data_mode(match)}
+          out={
+              "probes":probes,"direct_known_id":direct,"discovery":dq,
+              "history":history,"live_formal_path":live,"data_mode":data_mode(match)
+          }
           open("_smoke/dongqiudi-live-smoke.json","w",encoding="utf-8").write(json.dumps(out,ensure_ascii=False,indent=2))
           print(json.dumps({
               "schedule_probes":probes,
               "discovery_available":dq.get("available"),
               "discovery_match_detail_id":dq.get("match_detail_id"),
               "direct_groups":direct.get("groups"),
+              "history_home_samples":(history.get("home") or {}).get("sample_count"),
+              "history_away_samples":(history.get("away") or {}).get("sample_count"),
+              "history_home_metric_keys":sorted(((history.get("home") or {}).get("metrics") or {}).keys()),
+              "history_away_metric_keys":sorted(((history.get("away") or {}).get("metrics") or {}).keys()),
+              "live_available":live.get("available"),
+              "live_match_detail_id":live.get("match_detail_id"),
+              "live_source":live.get("source"),
+              "live_groups":live.get("groups"),
+              "live_home_keys":sorted((live.get("home") or {}).keys()),
+              "live_away_keys":sorted((live.get("away") or {}).keys()),
+              "live_technical_history":live.get("technical_history"),
               "direct_home_keys":sorted((direct.get("home") or {}).keys()),
               "direct_away_keys":sorted((direct.get("away") or {}).keys()),
               "data_mode":out["data_mode"],
           },ensure_ascii=False,indent=2))
           if not any(direct.get("groups",{}).values()):
               raise SystemExit("Dongqiudi direct real-page parsing unavailable")
+          if (history.get("home") or {}).get("sample_count",0) < 1 or (history.get("away") or {}).get("sample_count",0) < 1:
+              raise SystemExit("Dongqiudi prematch technical history unavailable")
+          if not live.get("available") or str(live.get("match_detail_id")) != "54579545":
+              raise SystemExit("Dongqiudi current formal-path discovery/enrichment unavailable")
           PY
       - uses: actions/upload-artifact@v4
         with:
