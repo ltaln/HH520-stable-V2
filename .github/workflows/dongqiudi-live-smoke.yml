@@ -57,6 +57,13 @@ jobs:
           raw=scrape_markdown(known_url)
           markdown=((raw.get("data") or {}).get("markdown") if isinstance(raw,dict) else None) or ""
           direct=parse_analysis_markdown(markdown,"比利亚雷","贝蒂斯")
+          lineup_debug=requests.get(
+              "https://pc.dongqiudi.com/sport-data/soccer/biz/dqd/v1/match/lineup/4493236?app=dqd&lang=zh-cn",
+              headers={"User-Agent":"Mozilla/5.0","Referer":"https://www.dongqiudi.com/"},
+              timeout=20,
+          ).json()
+          print("LINEUP_TOP_KEYS", sorted(lineup_debug.keys()))
+          print("RECENT_MATCH_PERSONS", json.dumps(lineup_debug.get("recent_match_persons"),ensure_ascii=False)[:12000])
           dq=collect_match_analysis("2026-09-14","比利亚雷","贝蒂斯")
           history=collect_prematch_technical_history(
               "54493236","比利亚雷亚尔","皇家贝蒂斯","2026-09-14T19:00:00+00:00"
