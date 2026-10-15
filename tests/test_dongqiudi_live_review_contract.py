@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from collector import dongqiudi_runtime
+from collector.dongqiudi_source import parse_analysis_markdown
 from engine.full_data_layer import data_mode
 
 
@@ -57,3 +58,53 @@ def test_runtime_caches_formal_dongqiudi_result(tmp_path, monkeypatch):
     assert first["available"] is True and first["formal_enrichment"] is True
     assert second["cache_hit"] is True
     assert second["fixture_identity"]["league"] == "TEST"
+
+
+def test_dongqiudi_analysis_parses_shots_and_six_bin_timing():
+    markdown = """
+主队
+客队
+射门 12 - 9
+射正 5 - 3
+6胜 2平 2负
+近10场战绩
+3胜 3平 4负
+1.8球
+场均进球
+1.2球
+1.0球
+场均失球
+1.4球
+主队 进球 2 3 4 5 6 7
+主队 失球 1 2 3 4 5 6
+客队 进球 1 1 2 2 3 3
+客队 失球 3 2 2 1 1 1
+"""
+    parsed = parse_analysis_markdown(markdown, "主队", "客队")
+    assert parsed["home"]["shots"] == 12.0
+    assert parsed["away"]["shots_on_target"] == 3.0
+    assert len(parsed["home"]["goals_for_share"]) == 6
+    assert parsed["groups"]["SHOTS"] is True
+    assert parsed["groups"]["GOAL_TIMING"] is True
+
+
+def test_full_data_can_use_dongqiudi_timing_without_secondary_timing_source():
+    match = {
+        "goal_timing": {"available": False},
+        "dongqiudi_enrichment": {
+            "available": True,
+            "home": {
+                "shots": 12.0, "shots_on_target": 5.0,
+                "wins_rate": 0.6, "draws_rate": 0.2, "losses_rate": 0.2,
+                "first_half_gf_signal": 0.45, "first_half_ga_signal": 0.40,
+            },
+            "away": {
+                "shots": 9.0, "shots_on_target": 3.0,
+                "wins_rate": 0.3, "draws_rate": 0.3, "losses_rate": 0.4,
+                "first_half_gf_signal": 0.38, "first_half_ga_signal": 0.50,
+            },
+        },
+    }
+    result = data_mode(match)
+    assert result["mode"] == "FULL_DATA"
+    assert result["timing_available"] is True
