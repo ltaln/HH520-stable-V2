@@ -198,13 +198,74 @@ def _rates(wdl):
     return {"wins_rate":wdl[0]/s,"draws_rate":wdl[1]/s,"losses_rate":wdl[2]/s}
 
 
-def parse_analysis_markdown(markdown):
+
+TIMING_BINS=("0-15","16-30","31-45","46-60","61-75","76-90")
+
+def _pair_metric(text, labels):
+    for label in labels:
+        patterns=(
+            rf"(?:^|\n)\s*{re.escape(label)}\s*[:：]?\s*(\d+(?:\.\d+)?)\s*[-:：/|]\s*(\d+(?:\.\d+)?)",
+            rf"\|\s*{re.escape(label)}\s*\|\s*(\d+(?:\.\d+)?)\s*\|\s*(\d+(?:\.\d+)?)\s*\|",
+        )
+        for pattern in patterns:
+            m=re.search(pattern,text,re.I|re.M)
+            if m:
+                return {"home":float(m.group(1)),"away":float(m.group(2))}
+    return None
+
+def _six_numbers(line):
+    vals=[float(x) for x in re.findall(r"(?<![\d.])\d+(?:\.\d+)?(?![\d.])",line)]
+    return vals[-6:] if len(vals)>=6 else None
+
+def _timing_values(text, team, kind):
+    if not team:
+        return None
+    aliases=_alias_list(team)
+    lines=text.splitlines()
+    kind_tokens=("进球","得分") if kind=="for" else ("失球","丢球","被进球")
+    for i,line in enumerate(lines):
+        if not any(alias and alias in line for alias in aliases):
+            continue
+        nearby=" ".join(lines[i:i+3])
+        if not any(token in nearby for token in kind_tokens):
+            continue
+        vals=_six_numbers(nearby)
+        if vals:
+            return vals
+    return None
+
+def _shares(values):
+    if not values or len(values)!=6:
+        return None
+    vals=[max(0.0,float(x)) for x in values]
+    total=sum(vals)
+    if total<=0:
+        return None
+    return [x/total for x in vals]
+
+def _timing_profile(text, team):
+    gf=_shares(_timing_values(text,team,"for"))
+    ga=_shares(_timing_values(text,team,"against"))
+    if not gf or not ga:
+        return {}
+    return {
+        "goals_for_share":gf,
+        "goals_against_share":ga,
+        "first_half_gf_signal":sum(gf[:3]),
+        "first_half_ga_signal":sum(ga[:3]),
+        "second_half_gf_signal":sum(gf[3:]),
+        "second_half_ga_signal":sum(ga[3:]),
+    }
+
+def parse_analysis_markdown(markdown, home_team=None, away_team=None):
     text=str(markdown or "").replace("\r","")
     last10=_pair_wdl(text,"近10场战绩")
     samevenue=_pair_wdl(text,"近10场同主客")
     h2h=_pair_wdl(text,"近6场交锋") or _pair_wdl(text,"近5场交锋")
     gf=_pair_ball(text,"场均进球")
     ga=_pair_ball(text,"场均失球")
+    shots=_pair_metric(text,("射门","场均射门","射门次数"))
+    sot=_pair_metric(text,("射正","场均射正","射正次数"))
     home={}; away={}
     if last10:
         hr=_rates(last10["home"]); ar=_rates(last10["away"])
@@ -223,6 +284,14 @@ def parse_analysis_markdown(markdown):
         home["scored_per_match"]=gf["home"]; away["scored_per_match"]=gf["away"]
     if ga:
         home["conceded_per_match"]=ga["home"]; away["conceded_per_match"]=ga["away"]
+    if shots:
+        home["shots"]=shots["home"]; away["shots"]=shots["away"]
+    if sot:
+        home["shots_on_target"]=sot["home"]; away["shots_on_target"]=sot["away"]
+    for side,profile in ((home,_timing_profile(text,home_team)),(away,_timing_profile(text,away_team))):
+        side.update(profile)
+        if side.get("shots") not in (None,0) and side.get("shots_on_target") is not None:
+            side["shot_on_target_rate"]=side["shots_on_target"]/side["shots"]
     return {
         "home":home,"away":away,
         "groups":{
@@ -230,6 +299,8 @@ def parse_analysis_markdown(markdown):
             "VENUE_FORM":bool(samevenue),
             "H2H":bool(h2h),
             "GF_GA":bool(gf and ga),
+            "SHOTS":bool(shots or sot),
+            "GOAL_TIMING":bool(home.get("goals_for_share") and away.get("goals_for_share")),
         },
         "field_count":len(home)+len(away),
     }
@@ -262,7 +333,7 @@ def collect_match_analysis(date,home,away):
             if not _header_matches(markdown,date,home,away):
                 rejected.append({"match_id":hit["match_id"],"reason":"team_or_home_away_mismatch"})
                 continue
-            parsed=parse_analysis_markdown(markdown)
+            parsed=parse_analysis_markdown(markdown,home,away)
             available=any(parsed["groups"].values())
             return {
                 "available":available,
