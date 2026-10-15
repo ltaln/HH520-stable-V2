@@ -77,13 +77,16 @@ jobs:
           live=collect_match_analysis(
               "2026-10-16","里昂","水晶宫",league="欧联",kickoff=None
           )
-          match={"goal_timing":{"available":False},"dongqiudi_enrichment":{
+          direct_match={"goal_timing":{"available":False},"dongqiudi_enrichment":{
               "available":any(direct.get("groups",{}).values()),
               **direct,
           }}
+          live_match={"goal_timing":{"available":False},"dongqiudi_enrichment":live}
           out={
               "probes":probes,"direct_known_id":direct,"discovery":dq,
-              "history":history,"live_formal_path":live,"data_mode":data_mode(match)
+              "history":history,"live_formal_path":live,
+              "direct_data_mode":data_mode(direct_match),
+              "live_data_mode":data_mode(live_match),
           }
           open("_smoke/dongqiudi-live-smoke.json","w",encoding="utf-8").write(json.dumps(out,ensure_ascii=False,indent=2))
           print(json.dumps({
@@ -104,7 +107,8 @@ jobs:
               "live_technical_history":live.get("technical_history"),
               "direct_home_keys":sorted((direct.get("home") or {}).keys()),
               "direct_away_keys":sorted((direct.get("away") or {}).keys()),
-              "data_mode":out["data_mode"],
+              "direct_data_mode":out["direct_data_mode"],
+              "live_data_mode":out["live_data_mode"],
           },ensure_ascii=False,indent=2))
           if not any(direct.get("groups",{}).values()):
               raise SystemExit("Dongqiudi direct real-page parsing unavailable")
@@ -112,6 +116,12 @@ jobs:
               raise SystemExit("Dongqiudi prematch technical history unavailable")
           if not live.get("available") or str(live.get("match_detail_id")) != "54579545":
               raise SystemExit("Dongqiudi current formal-path discovery/enrichment unavailable")
+          required_live_groups=("RECENT_FORM","VENUE_FORM","GF_GA","SHOTS","POSSESSION","DANGEROUS_ATTACKS","BIG_CHANCES","GOAL_TIMING")
+          missing=[name for name in required_live_groups if not (live.get("groups") or {}).get(name)]
+          if missing:
+              raise SystemExit("Dongqiudi live required groups unavailable: "+",".join(missing))
+          if out["live_data_mode"].get("mode") != "FULL_DATA":
+              raise SystemExit("Dongqiudi live enrichment did not satisfy FULL_DATA: "+json.dumps(out["live_data_mode"],ensure_ascii=False))
           PY
       - uses: actions/upload-artifact@v4
         if: always()
