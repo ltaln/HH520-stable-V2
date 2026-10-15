@@ -31,22 +31,44 @@ jobs:
           mkdir -p _smoke
           PYTHONPATH=. python - <<'PY'
           import json
-          from collector.dongqiudi_source import collect_match_analysis
+          import requests
+          from collector.dongqiudi_source import collect_match_analysis, parse_analysis_markdown
+          from collector.firecrawl_client import scrape_markdown
           from engine.full_data_layer import data_mode
+
+          probes={}
+          for name,url in {
+              "index":"https://api.dongqiudi.com/data/index",
+              "important":"https://api.dongqiudi.com/data/tab/important?start=2026-09-13T16:00:00&version=551&init=1",
+          }.items():
+              try:
+                  r=requests.get(url,headers={"User-Agent":"Mozilla/5.0","Referer":"https://www.dongqiudi.com/"},timeout=20)
+                  probes[name]={"status":r.status_code,"content_type":r.headers.get("content-type"),"body":r.text[:1200]}
+              except Exception as exc:
+                  probes[name]={"error":type(exc).__name__}
+
+          known_url="https://m.dongqiudi.com/matchDetail/54493236/analysis"
+          raw=scrape_markdown(known_url)
+          markdown=((raw.get("data") or {}).get("markdown") if isinstance(raw,dict) else None) or ""
+          direct=parse_analysis_markdown(markdown,"比利亚雷","贝蒂斯")
           dq=collect_match_analysis("2026-09-14","比利亚雷","贝蒂斯")
-          match={"goal_timing":{"available":False},"dongqiudi_enrichment":dq}
-          out={"dongqiudi":dq,"data_mode":data_mode(match)}
+          match={"goal_timing":{"available":False},"dongqiudi_enrichment":{
+              "available":any(direct.get("groups",{}).values()),
+              **direct,
+          }}
+          out={"probes":probes,"direct_known_id":direct,"discovery":dq,"data_mode":data_mode(match)}
           open("_smoke/dongqiudi-live-smoke.json","w",encoding="utf-8").write(json.dumps(out,ensure_ascii=False,indent=2))
           print(json.dumps({
-              "available":dq.get("available"),
-              "match_detail_id":dq.get("match_detail_id"),
-              "groups":dq.get("groups"),
-              "home_keys":sorted((dq.get("home") or {}).keys()),
-              "away_keys":sorted((dq.get("away") or {}).keys()),
+              "schedule_probes":probes,
+              "discovery_available":dq.get("available"),
+              "discovery_match_detail_id":dq.get("match_detail_id"),
+              "direct_groups":direct.get("groups"),
+              "direct_home_keys":sorted((direct.get("home") or {}).keys()),
+              "direct_away_keys":sorted((direct.get("away") or {}).keys()),
               "data_mode":out["data_mode"],
           },ensure_ascii=False,indent=2))
-          if not dq.get("available"):
-              raise SystemExit("Dongqiudi real-page collection unavailable")
+          if not any(direct.get("groups",{}).values()):
+              raise SystemExit("Dongqiudi direct real-page parsing unavailable")
           PY
       - uses: actions/upload-artifact@v4
         with:
