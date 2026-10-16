@@ -8,7 +8,7 @@
 - READY: render only `output_contract.display_rows`.
 - FAILED: return the backend failure reason.
 - Never create a replacement request_id while polling an existing task.
-- Production data mode is per-match: `FULL_DATA` when Collection1-1 external SHOTS + RESULT_STABILITY + HALF_TIMING satisfy the gate; otherwise `10027_ONLY`.
+- Production data mode is per-match: `FULL_DATA` when SHOTS + RESULT_STABILITY + HALF_TIMING are all complete; `PARTIAL_DATA` when any validated external enrichment group is available; `10027_ONLY` only when no usable enrichment is available.
 - 10027S is refreshed on every formal prediction run.
 - Goal-timing/profile pages are collected once and reused from cache; they are not re-scraped on repeated predictions.
 
@@ -110,8 +110,8 @@ Dongqiudi is part of the **formal collection/enrichment chain** for predictions.
 - Fixture identity must be conservative. Dongqiudi pages are accepted only after the dedicated source validates the requested date and home/away order. Team aliases are allowed because HH520 and Dongqiudi names may differ.
 - Do not match on team name alone. League/kickoff metadata remains part of the stored fixture identity and ambiguous candidates must fail closed.
 - Dongqiudi enrichment is cached per date/league/kickoff/home/away fixture and successful captures are reused.
-- Missing, ambiguous, blocked, or incomplete Dongqiudi data must **not** fail the whole prediction. That match falls back to the remaining enrichment and ultimately `10027_ONLY` if the FULL_DATA gate is not satisfied.
+- Missing, ambiguous, blocked, or incomplete Dongqiudi data must **not** fail the whole prediction. The match must keep and use every validated enrichment group that is actually available. Only the missing groups are omitted. Use `PARTIAL_DATA` when at least one group is usable; use `10027_ONLY` only when no usable external enrichment remains.
 - Dongqiudi result-stability/profile fields are merged into the FULL_DATA profile. Existing goal-timing sources may provide complementary SHOTS/HALF_TIMING fields. FULL_DATA activates only when the existing SHOTS + RESULT_STABILITY + HALF_TIMING completeness rule is actually satisfied.
-- Stable V3.5.1 model protection remains unchanged: 10027S is the base probability anchor; external data is bounded enrichment and cannot bypass the FULL_DATA gate.
+- Stable V3.5.1 model protection remains unchanged: 10027S is always the base probability anchor; external data is bounded enrichment. A full-data gate is required only for the stronger FULL_DATA mode, not for using validated partial enrichment.
 - Formal prediction output includes a `dongqiudi_summary` audit block with enabled/attempted/available/cache-hit counts.
 - Do not run a second post-READY web-review workflow as a substitute for this collector. Follow-up web research may explain a result, but the production prediction itself must use the formal collector chain above.
