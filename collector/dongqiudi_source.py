@@ -402,7 +402,7 @@ def _discover_query(query):
 
 def discover_match_details(date,home,away):
     # Compatibility helper: keep the cheapest single-search behaviour.
-    for query in _candidate_queries(date,home,away,kickoff):
+    for query in _candidate_queries(date,home,away):
         try:
             candidates=_discover_query(query)
         except Exception:
@@ -696,7 +696,7 @@ def collect_match_analysis(date,home,away,league=None,kickoff=None):
     seen=set()
     candidate_count=0
     search_attempts=0
-    for query in _candidate_queries(date,home,away):
+    for query in _candidate_queries(date,home,away,kickoff):
         try:
             candidates=_discover_query(query)
             search_attempts+=1
