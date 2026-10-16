@@ -269,7 +269,7 @@ def _norm_team_name(value):
     text=str(value or "").strip().lower()
     for token in ("足球俱乐部","俱乐部","football club","fc","afc","cf","sc","fk","club","队"):
         text=text.replace(token,"")
-    text=re.sub(r"[\\s·・\-_/().（）]+","",text)
+    text=re.sub(r"[\s·・\-_/().（）]+","",text)
     return text
 
 
@@ -298,7 +298,7 @@ def _header_team_position(header,team):
     # reasonably strong similarity so an unrelated search hit is rejected.
     for line_no,line in enumerate(header.splitlines()[:30]):
         value=line.strip(" -*#\t")
-        if not value or len(value)>30 or re.search(r"\\d{1,2}[-:/：]\\d{1,2}",value):
+        if not value or len(value)>30 or re.search(r"\d{1,2}[-:/：]\d{1,2}",value):
             continue
         best=max((_name_similarity(alias,value) for alias in _alias_list(team)),default=0.0)
         if best>=0.56:
@@ -315,7 +315,7 @@ def _header_matches(markdown,date,home,away):
 
     # Historical replay must bind to the requested day. Dongqiudi headers use
     # MM-DD, so verify that token when a valid ISO date is supplied.
-    m=re.fullmatch(r"\\d{4}-(\\d{2})-(\\d{2})",str(date or ""))
+    m=re.fullmatch(r"\d{4}-(\d{2})-(\d{2})",str(date or ""))
     if m:
         mmdd=f"{m.group(1)}-{m.group(2)}"
         if mmdd not in header:
@@ -325,7 +325,7 @@ def _header_matches(markdown,date,home,away):
 
 def _candidate_queries(date,home,away):
     hq,aq=_search_name(home),_search_name(away)
-    mmdd=str(date or "")[5:] if re.fullmatch(r"\\d{4}-\\d{2}-\\d{2}",str(date or "")) else date
+    mmdd=str(date or "")[5:] if re.fullmatch(r"\d{4}-\d{2}-\d{2}",str(date or "")) else date
     return [
         f'懂球帝 {hq} {aq} {date} 比赛详情',
         f'site:m.dongqiudi.com/matchDetail "{hq}" "{aq}" {mmdd}',
