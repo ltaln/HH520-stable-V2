@@ -159,6 +159,7 @@ def enhance_probability(match: dict, probability: dict) -> dict:
     has_shots="SHOTS" in ctx["groups_used"]
     challengers=[]
     weights=[]
+    shot=None
     if has_stab:
         challengers.append(stab); weights.append(0.17)
     if has_shots:
@@ -185,16 +186,17 @@ def enhance_probability(match: dict, probability: dict) -> dict:
     out["direction"]=ordered[0][0]
     out["pmax"]=ordered[0][1]
     out["concentration"]=ordered[0][1]-ordered[1][1]
-    out["source"]=probability.get("source","")+"+collection1_1_full_data"
+    out["source"]=probability.get("source","")+"+collection1_1_enrichment"
     out["full_data_probability_used"]=ctx["full_data"]
     out["partial_enrichment_used"]=ctx["partial_data"]
-    out["full_data_components"]={
-        "base_weight":0.78,
-        "result_stability_weight":0.17,
-        "shots_weight":0.05,
-        "result_stability_distribution":dict(zip(OUTCOMES,stab)),
-        "shots_distribution":dict(zip(OUTCOMES,shot)),
-    }
+    components={"base_weight":base_weight}
+    if has_stab:
+        components["result_stability_weight"]=0.17
+        components["result_stability_distribution"]=dict(zip(OUTCOMES,stab))
+    if has_shots:
+        components["shots_weight"]=0.05
+        components["shots_distribution"]=dict(zip(OUTCOMES,shot))
+    out["full_data_components"]=components
     return out
 
 
@@ -216,7 +218,7 @@ def score_lambda_multipliers(match: dict) -> tuple[float,float]:
 
 def half_share_adjustments(match: dict, base_home: float, base_away: float) -> tuple[float,float,bool]:
     ctx=data_mode(match)
-    if "HALF_TIMING" not in ctx["groups_used"]:
+    if not ctx["full_data"]:
         return base_home,base_away,False
     h=_timing_side(match,"home"); a=_timing_side(match,"away")
     hv=[_f(h.get("first_half_gf_signal")),_f(a.get("first_half_ga_signal"))]
