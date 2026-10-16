@@ -89,23 +89,29 @@ def data_mode(match: dict) -> dict:
         dq_gfga_complete=(
             _count_present(dh,gfga)==2 and _count_present(da,gfga)==2
         )
-    full=(
-        timing_available
-        and _count_present(hp,shots)==2 and _count_present(ap,shots)==2
-        and _count_present(hp,stability)==3 and _count_present(ap,stability)==3
-        and timing_ok and dq_timing_complete and dq_gfga_complete
-    )
+    shots_ok=_count_present(hp,shots)==2 and _count_present(ap,shots)==2
+    stability_ok=_count_present(hp,stability)==3 and _count_present(ap,stability)==3
+    timing_group_ok=timing_available and timing_ok and dq_timing_complete
+    gfga_ok=dq_gfga_complete and _count_present(hp,gfga)==2 and _count_present(ap,gfga)==2
+    groups=[]
+    if shots_ok: groups.append("SHOTS")
+    if stability_ok: groups.append("RESULT_STABILITY")
+    if timing_group_ok: groups.append("HALF_TIMING")
+    if gfga_ok: groups.append("GF_GA")
+    full=(set(("SHOTS","RESULT_STABILITY","HALF_TIMING")).issubset(groups))
+    partial=bool(groups)
     return {
-        "mode":"FULL_DATA" if full else "10027_ONLY",
+        "mode":"FULL_DATA" if full else ("PARTIAL_DATA" if partial else "10027_ONLY"),
         "full_data":full,
+        "partial_data":partial,
         "timing_available":timing_available,
         "dongqiudi_available":bool((match.get("dongqiudi_enrichment") or {}).get("available")),
         "dongqiudi_timing_complete":dq_timing_complete,
         "dongqiudi_gfga_complete":dq_gfga_complete,
         "home_profile_fields":sum(1 for v in hp.values() if _f(v) is not None),
         "away_profile_fields":sum(1 for v in ap.values() if _f(v) is not None),
-        "groups_used":["SHOTS","RESULT_STABILITY","HALF_TIMING"] if full else [],
-        "model":MODEL_NAME if full else "BASE_10027S",
+        "groups_used":groups,
+        "model":MODEL_NAME if full else ("BASE_10027S+AVAILABLE_ENRICHMENT" if partial else "BASE_10027S"),
     }
 
 
@@ -142,33 +148,37 @@ def enhance_probability(match: dict, probability: dict) -> dict:
     out["data_mode"]=ctx["mode"]
     out["full_data_context"]=ctx
     out["base_probabilities"]=deepcopy(probability.get("probabilities") or {})
-    if not ctx["full_data"] or not probability.get("valid"):
+    if not probability.get("valid"):
         out["full_data_probability_used"]=False
         return out
 
     base=probability.get("probabilities") or {}
     hp=_profile(match,"home"); ap=_profile(match,"away")
     stab=_stability_distribution(hp,ap)
-    if not stab:
-        out["full_data_probability_used"]=False
-        out["data_mode"]="10027_ONLY"
-        out["full_data_context"]["mode"]="10027_ONLY"
-        out["full_data_context"]["full_data"]=False
-        return out
-
-    ha=_side_attack(hp); aa=_side_attack(ap)
-    diff=_clip(ha-aa,-1.5,1.5)
-    side_home=1.0/(1.0+math.exp(-diff))
-    shot=[0.72*side_home,0.28,0.72*(1.0-side_home)]
-    shot=_norm3(shot)
+    has_stab=stab is not None and "RESULT_STABILITY" in ctx["groups_used"]
+    has_shots="SHOTS" in ctx["groups_used"]
+    challengers=[]
+    weights=[]
+    if has_stab:
+        challengers.append(stab); weights.append(0.17)
+    if has_shots:
+        ha=_side_attack(hp); aa=_side_attack(ap)
+        diff=_clip(ha-aa,-1.5,1.5)
+        side_home=1.0/(1.0+math.exp(-diff))
+        challengers.append(_norm3([0.72*side_home,0.28,0.72*(1.0-side_home)])); weights.append(0.05)
 
     b=[float(base[k]) for k in OUTCOMES]
-    # Bounded challenger: market model remains the dominant anchor.
-    mix=_norm3([
-        0.78*b[0]+0.17*stab[0]+0.05*shot[0],
-        0.78*b[1]+0.17*stab[1]+0.05*shot[1],
-        0.78*b[2]+0.17*stab[2]+0.05*shot[2],
-    ])
+    # Keep 10027S dominant. When only some external groups are available,
+    # renormalize their bounded weights instead of discarding the usable data.
+    used_weight=sum(weights)
+    base_weight=0.78 + (0.22-used_weight)
+    if not challengers:
+        out["full_data_probability_used"]=False
+        return out
+    mix=[base_weight*b[i] for i in range(3)]
+    for ch,w in zip(challengers,weights):
+        for i in range(3): mix[i]+=w*ch[i]
+    mix=_norm3(mix)
     final=dict(zip(OUTCOMES,mix))
     ordered=sorted(final.items(),key=lambda kv:kv[1],reverse=True)
     out["probabilities"]=final
@@ -176,7 +186,8 @@ def enhance_probability(match: dict, probability: dict) -> dict:
     out["pmax"]=ordered[0][1]
     out["concentration"]=ordered[0][1]-ordered[1][1]
     out["source"]=probability.get("source","")+"+collection1_1_full_data"
-    out["full_data_probability_used"]=True
+    out["full_data_probability_used"]=ctx["full_data"]
+    out["partial_enrichment_used"]=ctx["partial_data"]
     out["full_data_components"]={
         "base_weight":0.78,
         "result_stability_weight":0.17,
@@ -189,11 +200,12 @@ def enhance_probability(match: dict, probability: dict) -> dict:
 
 def score_lambda_multipliers(match: dict) -> tuple[float,float]:
     ctx=data_mode(match)
-    if not ctx["full_data"]:
+    if not ctx["partial_data"]:
         return 1.0,1.0
     hp=_profile(match,"home"); ap=_profile(match,"away")
-    ha=_side_attack(hp); aa=_side_attack(ap)
-    stab=_stability_distribution(hp,ap)
+    ha=_side_attack(hp) if "SHOTS" in ctx["groups_used"] else 0.0
+    aa=_side_attack(ap) if "SHOTS" in ctx["groups_used"] else 0.0
+    stab=_stability_distribution(hp,ap) if "RESULT_STABILITY" in ctx["groups_used"] else None
     edge=_clip((ha-aa)/2.0,-0.35,0.35)
     if stab:
         edge+=_clip((stab[0]-stab[2])*0.35,-0.15,0.15)
@@ -204,7 +216,7 @@ def score_lambda_multipliers(match: dict) -> tuple[float,float]:
 
 def half_share_adjustments(match: dict, base_home: float, base_away: float) -> tuple[float,float,bool]:
     ctx=data_mode(match)
-    if not ctx["full_data"]:
+    if "HALF_TIMING" not in ctx["groups_used"]:
         return base_home,base_away,False
     h=_timing_side(match,"home"); a=_timing_side(match,"away")
     hv=[_f(h.get("first_half_gf_signal")),_f(a.get("first_half_ga_signal"))]
