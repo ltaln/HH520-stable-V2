@@ -15,8 +15,17 @@
 # 插件使用 GitHub App 原生 `github_create_file` / `github_fetch_file` 工具，不再调用旧 Custom GPT Action。GitHub App 只负责写入请求和读取结果；正式模型仍由 GitHub Actions 执行。
 
 ## 核心轮询规则
-每个任务只生成一次唯一 request_id，并只写入一次 request 文件。原生 GitHub App 读取时每次调用都必须重新发起 `github_fetch_file`；旧 OpenAPI Action 读取则使用新的 `poll_timestamp`（毫秒时间戳）和 `Accept: application/vnd.github.raw+json`，确保绕过 Contents API 的旧缓存和 base64 包装。PENDING/404 继续读取同一 request_id；READY 立即处理结果；FAILED 停止。禁止因为等待而再次写入 request 或触发 workflow。
+每个任务只生成一次唯一 request_id，并只写入一次 request 文件。**生产运行只允许使用 GitHub App 原生 github_create_file / github_fetch_file。禁止调用旧 Custom GPT/OpenAPI Action。**
 
+Prediction 结果读取必须固定为：
+- repository = ltaln/HH520-stable-V2
+- path = results/<同一个 request_id>.json
+- ref = action-results
+- 每次轮询重新调用 github_fetch_file
+
+不得省略 `ref=action-results`；不得读取 main/default branch；不得把 Contents API 的 404 当作任务失败。PENDING / 404 继续读取同一个 request_id；READY 立即处理结果；FAILED 停止。禁止因为等待而再次写入 request 或触发 workflow。
+
+如果原生 github_fetch_file 按上述固定参数仍返回 404，应先检查 action-results 分支和 workflow 发布状态；禁止降级到 V3.4 或旧 Action。
 ## Native tool request protocol
 
 预测只调用一次 `github_create_file`：repository `ltaln/HH520-stable-V2`、branch `main`、path `plugin-requests/prediction/<request_id>.json`，内容为：
@@ -88,9 +97,7 @@ Research 与 Stable 隔离。V3.5.1 本轮规则来自 2026-09-10 至 2026-09-20
 - 对应固定 ref
 每次轮询重新读取；旧 OpenAPI Action 使用新的 `poll_timestamp`；不得因 404/PENDING 写入新文件。
 
-Prediction 的旧 Action 读取接口必须传 `ref=action-results`、新的
-`poll_timestamp` 和 `Accept: application/vnd.github.raw+json`。返回值应是
-直接 JSON；若仍收到 `content+encoding=base64` 包装，先解码再按同一状态规则解析。
+旧 OpenAPI/Custom GPT Action 已停用，不得作为 Prediction 的读取入口。若历史客户端仍显示“HH520 Stable V3.4”或以旧 Action 返回 404，该客户端视为旧 runtime；不得重新预测或创建新 request_id，必须切换到原生 GitHub App 固定读取协议。
 
 ## ResponseTooLarge 防护
 - prediction READY 只返回紧凑 polling envelope。
