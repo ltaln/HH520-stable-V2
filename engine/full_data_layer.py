@@ -166,7 +166,8 @@ def enhance_probability(match: dict, probability: dict) -> dict:
         ha=_side_attack(hp); aa=_side_attack(ap)
         diff=_clip(ha-aa,-1.5,1.5)
         side_home=1.0/(1.0+math.exp(-diff))
-        challengers.append(_norm3([0.72*side_home,0.28,0.72*(1.0-side_home)])); weights.append(0.05)
+        shot=_norm3([0.72*side_home,0.28,0.72*(1.0-side_home)])
+        challengers.append(shot); weights.append(0.05)
 
     b=[float(base[k]) for k in OUTCOMES]
     # Keep 10027S dominant. When only some external groups are available,
