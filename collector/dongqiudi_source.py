@@ -130,27 +130,42 @@ def _match_pc_entry(date, home, away, league=None, kickoff=None):
     return candidates[0][1]
 
 def _parse_odds_markdown(markdown):
-    """Parse the public Dongqiudi odds tab without treating odds as model output."""
+    """Parse public Dongqiudi European odds and representative live water."""
     text=str(markdown or "").replace("\r","")
-    def triple(label, immediate=False):
-        pattern=rf"{re.escape(label)}\\s+初\\s+(\\d+(?:\\.\\d+)?)\\s+(\\d+(?:\\.\\d+)?)\\s+(\\d+(?:\\.\\d+)?)"
-        m=re.search(pattern,text)
-        if not m:
-            return None
-        first=[float(x) for x in m.groups()]
-        curpat=rf"{re.escape(label)}\\s+初\\s+\\d+(?:\\.\\d+)?\\s+\\d+(?:\\.\\d+)?\\s+\\d+(?:\\.\\d+)?.*?即\\s+(\\d+(?:\\.\\d+)?)\\s+(\\d+(?:\\.\\d+)?)\\s+(\\d+(?:\\.\\d+)?)"
-        cm=re.search(curpat,text,re.S)
-        current=[float(x) for x in cm.groups()] if cm else None
-        return {"initial":first,"current":current}
-    avg=triple("平均值")
-    if not avg:
-        return {}
-    return {
-        "european_odds_initial":avg["initial"],
-        "european_odds_current":avg["current"],
-        "home_draw_away_order":["home","draw","away"],
-        "source":"DONGQIUDI_LOTTERY_ODDS_PUBLIC",
-    }
+    out={}
+
+    m=re.search(
+        r"平均值\s+初\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)",
+        text,
+    )
+    if m:
+        out["european_odds_average_initial"]=[float(x) for x in m.groups()]
+        cm=re.search(
+            r"平均值\s+初\s+\d+(?:\.\d+)?\s+\d+(?:\.\d+)?\s+\d+(?:\.\d+)?.*?"
+            r"即\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)",
+            text,re.S,
+        )
+        if cm:
+            out["european_odds_average_current"]=[float(x) for x in cm.groups()]
+
+    m=re.search(
+        r"竞\s+竞\s+初\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)"
+        r"\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)"
+        r".*?即\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)"
+        r"\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)",
+        text,re.S,
+    )
+    if m:
+        vals=[float(x) for x in m.groups()]
+        out["representative_european_odds_initial"]=vals[:3]
+        out["representative_asian_water_initial"]=vals[3:5]
+        out["representative_european_odds_current"]=vals[5:8]
+        out["representative_asian_water_current"]=vals[8:10]
+
+    if out:
+        out["home_draw_away_order"]=["home","draw","away"]
+        out["source"]="DONGQIUDI_LOTTERY_ODDS_PUBLIC"
+    return out
 
 
 def _merge_odds(parsed, match_id):
