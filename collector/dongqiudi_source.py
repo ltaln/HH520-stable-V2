@@ -355,7 +355,7 @@ def _header_matches(markdown,date,home,away,kickoff=None):
         for fixture_date in _fixture_date_variants(date,kickoff):
             fm=re.fullmatch(r"\d{4}-(\d{2})-(\d{2})",fixture_date)
             if fm:
-                fmm,fdd=fm.group(2),fm.group(3)
+                fmm,fdd=fm.group(1),fm.group(2)
                 tokens.extend((f"{fmm}-{fdd}",f"{fmm}/{fdd}",f"{int(fmm)}月{int(fdd)}日"))
         if tokens and not any(token in header for token in tokens):
             return False
