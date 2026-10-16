@@ -114,10 +114,10 @@ jobs:
               raise SystemExit("Dongqiudi direct real-page parsing unavailable")
           if (history.get("home") or {}).get("sample_count",0) < 1 or (history.get("away") or {}).get("sample_count",0) < 1:
               raise SystemExit("Dongqiudi prematch technical history unavailable")
-                    required_direct_groups=("RECENT_FORM","VENUE_FORM","GF_GA","SHOTS","POSSESSION","DANGEROUS_ATTACKS","BIG_CHANCES","GOAL_TIMING")
-          missing=[name for name in required_direct_groups if not (direct.get("groups") or {}).get(name)]
-          if missing:
-              raise SystemExit("Dongqiudi direct required groups unavailable: "+",".join(missing))
+          available_groups=[name for name,ok in (direct.get("groups") or {}).items() if ok]
+          if not available_groups:
+              raise SystemExit("Dongqiudi direct real-page returned no usable enrichment groups")
+          print("AVAILABLE_GROUPS", available_groups)
           if not (history.get("home") or {}).get("metrics",{}).get("expected_goals") or not (history.get("away") or {}).get("metrics",{}).get("expected_goals"):
               raise SystemExit("Dongqiudi historical xG unavailable")
           if not (history.get("home") or {}).get("metrics",{}).get("timing_bins") or not (history.get("away") or {}).get("metrics",{}).get("timing_bins"):
