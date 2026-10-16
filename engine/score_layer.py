@@ -101,7 +101,11 @@ def score_layer(match: dict, probability: dict, htft: dict = None) -> dict:
     high = [r for r in rows if r["home"] + r["away"] >= 5 or max(r["home"], r["away"]) >= 3]
     return {
         "valid": True,
-        "model": "HDA_POISSON_V1_COLLECTION1_1" if data_mode(match)["full_data"] else "HDA_POISSON_V1",
+        "model": (
+            "HDA_POISSON_V1_COLLECTION1_1"
+            if data_mode(match)["full_data"]
+            else ("HDA_POISSON_V1_COLLECTION1_1_PARTIAL" if data_mode(match)["partial_data"] else "HDA_POISSON_V1")
+        ),
         "top_scores": rows[:5],
         "all_scores": rows,
         "tail_scores": high[:5],
@@ -113,7 +117,11 @@ def score_layer(match: dict, probability: dict, htft: dict = None) -> dict:
         "lambda_away": la,
         "fit_error": fit_error,
         "feature_snapshot": {
-            "source": "formal_hda_probabilities+collection1_1" if data_mode(match)["full_data"] else "formal_hda_probabilities",
+            "source": (
+                "formal_hda_probabilities+collection1_1"
+                if data_mode(match)["full_data"] or data_mode(match)["partial_data"]
+                else "formal_hda_probabilities"
+            ),
             "ft_direction_lock": False,
             "data_mode": data_mode(match)["mode"],
             "lambda_multiplier_home": mh,
