@@ -75,7 +75,7 @@ jobs:
               "54493236","比利亚雷亚尔","皇家贝蒂斯","2026-09-14T19:00:00+00:00"
           )
           live=collect_match_analysis(
-              "2026-10-16","里昂","水晶宫",league="欧联",kickoff=None
+              "2026-10-19","里昂","尼斯",league="法甲",kickoff="2026-10-19T02:45:00+08:00"
           )
           direct_match={"goal_timing":{"available":False},"dongqiudi_enrichment":{
               "available":any(direct.get("groups",{}).values()),
@@ -114,7 +114,7 @@ jobs:
               raise SystemExit("Dongqiudi direct real-page parsing unavailable")
           if (history.get("home") or {}).get("sample_count",0) < 1 or (history.get("away") or {}).get("sample_count",0) < 1:
               raise SystemExit("Dongqiudi prematch technical history unavailable")
-          if not live.get("available") or str(live.get("match_detail_id")) != "54579545":
+          if not live.get("available") or str(live.get("match_detail_id")) != "54473906":
               raise SystemExit("Dongqiudi current formal-path discovery/enrichment unavailable")
           required_live_groups=("RECENT_FORM","VENUE_FORM","GF_GA","SHOTS","POSSESSION","DANGEROUS_ATTACKS","BIG_CHANCES","GOAL_TIMING")
           missing=[name for name in required_live_groups if not (live.get("groups") or {}).get(name)]
