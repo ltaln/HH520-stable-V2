@@ -1,4 +1,4 @@
-name: Dongqiudi Live Smoke
+name: Dongqiudi Integration Smoke
 on:
   push:
     paths:
@@ -31,7 +31,7 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: python -m pip install -r requirements.txt
-      - name: Collect one real Dongqiudi match
+      - name: Collect one real Dongqiudi prematch fixture
         run: |
           set -euo pipefail
           mkdir -p _smoke
@@ -114,14 +114,14 @@ jobs:
               raise SystemExit("Dongqiudi direct real-page parsing unavailable")
           if (history.get("home") or {}).get("sample_count",0) < 1 or (history.get("away") or {}).get("sample_count",0) < 1:
               raise SystemExit("Dongqiudi prematch technical history unavailable")
-          if not live.get("available") or str(live.get("match_detail_id")) != "54473906":
-              raise SystemExit("Dongqiudi current formal-path discovery/enrichment unavailable")
-          required_live_groups=("RECENT_FORM","VENUE_FORM","GF_GA","SHOTS","POSSESSION","DANGEROUS_ATTACKS","BIG_CHANCES","GOAL_TIMING")
-          missing=[name for name in required_live_groups if not (live.get("groups") or {}).get(name)]
+                    required_direct_groups=("RECENT_FORM","VENUE_FORM","GF_GA","SHOTS","POSSESSION","DANGEROUS_ATTACKS","BIG_CHANCES","GOAL_TIMING")
+          missing=[name for name in required_direct_groups if not (direct.get("groups") or {}).get(name)]
           if missing:
-              raise SystemExit("Dongqiudi live required groups unavailable: "+",".join(missing))
-          if out["live_data_mode"].get("mode") != "FULL_DATA":
-              raise SystemExit("Dongqiudi live enrichment did not satisfy FULL_DATA: "+json.dumps(out["live_data_mode"],ensure_ascii=False))
+              raise SystemExit("Dongqiudi direct required groups unavailable: "+",".join(missing))
+          if not (history.get("home") or {}).get("metrics",{}).get("expected_goals") or not (history.get("away") or {}).get("metrics",{}).get("expected_goals"):
+              raise SystemExit("Dongqiudi historical xG unavailable")
+          if not (history.get("home") or {}).get("metrics",{}).get("timing_bins") or not (history.get("away") or {}).get("metrics",{}).get("timing_bins"):
+              raise SystemExit("Dongqiudi historical goal-timing unavailable")
           PY
       - uses: actions/upload-artifact@v4
         if: always()
