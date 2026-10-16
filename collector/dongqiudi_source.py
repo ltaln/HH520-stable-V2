@@ -234,6 +234,17 @@ ALIASES={
     "卡萨皮亚":("卡萨皮亚","卡萨皮亚AC","卡萨皮亚竞技"),
     "波尔图":("波尔图","波图"),
     "里昂":("里昂","里昂奥林匹克"),
+    "拉科":("拉科","拉科鲁尼亚","拉科鲁尼亚体育","拉科鲁尼亚竞技"),
+    "伍尔弗":("伍尔弗","狼队","伍尔弗汉普顿","伍尔弗汉普顿流浪者"),
+    "弗洛西诺":("弗洛西诺","弗罗西诺内","弗洛西诺内","弗罗西诺"),
+    "布鲁马波":("布鲁马波","布洛马波卡纳","布洛马波卡纳足球俱乐部","布鲁马波卡纳"),
+    "佐加顿斯":("佐加顿斯","尤尔加登","佐加顿斯体育"),
+    "SBV精英":("SBV精英","SBV精英队","鹿特丹精英","精英队"),
+    "登博思":("登博思","邓伯什","登博斯","丹博斯"),
+    "奥斯":("奥斯","托普奥斯","TOP奥斯"),
+    "科特布斯":("科特布斯","能源科特布斯","科特布斯能源"),
+    "勒芒":("勒芒","勒芒FC","勒芒足球俱乐部"),
+    "纽伦堡":("纽伦堡","纽伦堡FC"),
 }
 
 
@@ -325,13 +336,20 @@ def _header_matches(markdown,date,home,away):
 
 
 def _candidate_queries(date,home,away):
+    # Prefer aliases common in Dongqiudi titles while retaining HH520 spellings.
+    # One query per variant: mixed aliases in a single exact-match search can
+    # exclude the actual fixture and make valid matches look absent.
     hq,aq=_search_name(home),_search_name(away)
     mmdd=str(date or "")[5:] if re.fullmatch(r"\d{4}-\d{2}-\d{2}",str(date or "")) else date
-    return [
+    queries=[
         f'懂球帝 {hq} {aq} {date} 比赛详情',
         f'site:m.dongqiudi.com/matchDetail "{hq}" "{aq}" {mmdd}',
         f'懂球帝 {home} {away} {mmdd} 比赛详情',
     ]
+    # At most one additional relaxed alias search to limit Firecrawl usage.
+    if (hq,aq)!=(str(home),str(away)):
+        queries.append(f'懂球帝 {hq} {aq} {mmdd} 比赛分析')
+    return list(dict.fromkeys(queries))
 
 
 def _discover_query(query):
