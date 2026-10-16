@@ -169,12 +169,26 @@ def _parse_odds_markdown(markdown):
 
 
 def _merge_odds(parsed, match_id):
+    """Capture odds with direct HTTP first; use Firecrawl only as a parser fallback."""
+    odds={}
+    url=f"https://m.dongqiudi.com/matchDetail/{match_id}/lotteryOddsNew?cmp_type=soccer"
     try:
-        raw=scrape_markdown(f"https://m.dongqiudi.com/matchDetail/{match_id}/lotteryOddsNew?cmp_type=soccer")
-        markdown=((raw.get("data") or {}).get("markdown") if isinstance(raw,dict) else None) or ""
-        odds=_parse_odds_markdown(markdown)
+        response=requests.get(
+            url,
+            headers={"Accept":"text/html","User-Agent":"HH520-Stable/3.5.1"},
+            timeout=10,
+        )
+        if response.status_code == 200:
+            odds=_parse_odds_markdown(response.text)
     except Exception:
-        odds={}
+        pass
+    if not odds:
+        try:
+            raw=scrape_markdown(url)
+            markdown=((raw.get("data") or {}).get("markdown") if isinstance(raw,dict) else None) or ""
+            odds=_parse_odds_markdown(markdown)
+        except Exception:
+            odds={}
     if odds:
         parsed["odds"]=odds
     return parsed
