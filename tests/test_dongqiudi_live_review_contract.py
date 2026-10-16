@@ -145,7 +145,8 @@ def test_full_data_rejects_partial_dongqiudi_core_fields():
         },
     }
     result = data_mode(match)
-    assert result["mode"] == "10027_ONLY"
+    assert result["mode"] == "PARTIAL_DATA"
+    assert "SHOTS" in result["groups_used"] or "RESULT_STABILITY" in result["groups_used"] or "GF_GA" in result["groups_used"]
 
 
 def test_dongqiudi_odds_parser_captures_european_and_live_water():
