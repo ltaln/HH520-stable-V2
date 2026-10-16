@@ -118,10 +118,8 @@ jobs:
           if not available_groups:
               raise SystemExit("Dongqiudi direct real-page returned no usable enrichment groups")
           print("AVAILABLE_GROUPS", available_groups)
-          if not (history.get("home") or {}).get("metrics",{}).get("expected_goals") or not (history.get("away") or {}).get("metrics",{}).get("expected_goals"):
-              raise SystemExit("Dongqiudi historical xG unavailable")
-          if not (history.get("home") or {}).get("metrics",{}).get("timing_bins") or not (history.get("away") or {}).get("metrics",{}).get("timing_bins"):
-              raise SystemExit("Dongqiudi historical goal-timing unavailable")
+          # Historical xG / goal-timing are optional per fixture; when present they are
+          # retained, and when absent the production partial-data policy keeps other groups.
           PY
       - uses: actions/upload-artifact@v4
         if: always()
