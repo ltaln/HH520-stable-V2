@@ -43,13 +43,13 @@ def test_full_data_activates_all_three_layers_and_label():
     assert a["htft"]["timing_used"] is True
 
 
-def test_incomplete_external_data_falls_back_to_10027_only():
+def test_incomplete_external_data_keeps_available_enrichment():
     m=_full_match()
     m["goal_timing"]["away"]["profile_stats"]={}
     a=analyze_match(m)
-    assert a["data_mode"]["mode"]=="10027_ONLY"
-    assert a["probability"]["full_data_probability_used"] is False
-    assert a["score"]["model"]=="HDA_POISSON_V1"
+    assert a["data_mode"]["mode"]=="PARTIAL_DATA"
+    assert a["probability"]["partial_enrichment_used"] is True
+    assert a["score"]["model"]=="COLLECTION1_1_POISSON_SCORE_V2"
     assert a["htft"]["timing_used"] is False
 
 
