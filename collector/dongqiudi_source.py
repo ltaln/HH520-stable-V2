@@ -129,6 +129,42 @@ def _match_pc_entry(date, home, away, league=None, kickoff=None):
         return None
     return candidates[0][1]
 
+def _parse_odds_markdown(markdown):
+    """Parse the public Dongqiudi odds tab without treating odds as model output."""
+    text=str(markdown or "").replace("\r","")
+    def triple(label, immediate=False):
+        pattern=rf"{re.escape(label)}\\s+初\\s+(\\d+(?:\\.\\d+)?)\\s+(\\d+(?:\\.\\d+)?)\\s+(\\d+(?:\\.\\d+)?)"
+        m=re.search(pattern,text)
+        if not m:
+            return None
+        first=[float(x) for x in m.groups()]
+        curpat=rf"{re.escape(label)}\\s+初\\s+\\d+(?:\\.\\d+)?\\s+\\d+(?:\\.\\d+)?\\s+\\d+(?:\\.\\d+)?.*?即\\s+(\\d+(?:\\.\\d+)?)\\s+(\\d+(?:\\.\\d+)?)\\s+(\\d+(?:\\.\\d+)?)"
+        cm=re.search(curpat,text,re.S)
+        current=[float(x) for x in cm.groups()] if cm else None
+        return {"initial":first,"current":current}
+    avg=triple("平均值")
+    if not avg:
+        return {}
+    return {
+        "european_odds_initial":avg["initial"],
+        "european_odds_current":avg["current"],
+        "home_draw_away_order":["home","draw","away"],
+        "source":"DONGQIUDI_LOTTERY_ODDS_PUBLIC",
+    }
+
+
+def _merge_odds(parsed, match_id):
+    try:
+        raw=scrape_markdown(f"https://m.dongqiudi.com/matchDetail/{match_id}/lotteryOddsNew?cmp_type=soccer")
+        markdown=((raw.get("data") or {}).get("markdown") if isinstance(raw,dict) else None) or ""
+        odds=_parse_odds_markdown(markdown)
+    except Exception:
+        odds={}
+    if odds:
+        parsed["odds"]=odds
+    return parsed
+
+
 def _analysis_hit_from_pc_entry(entry):
     mid=_entry_match_id(entry)
     if not mid:
@@ -554,6 +590,7 @@ def collect_match_analysis(date,home,away,league=None,kickoff=None):
             if markdown and _header_matches(markdown,date,home,away):
                 parsed=parse_analysis_markdown(markdown,home,away)
                 parsed=_merge_technical_history(parsed,hit["match_id"],home,away,kickoff)
+                parsed=_merge_odds(parsed,hit["match_id"])
                 available=any(parsed["groups"].values())
                 return {
                     "available":available,
@@ -603,6 +640,7 @@ def collect_match_analysis(date,home,away,league=None,kickoff=None):
                 continue
             parsed=parse_analysis_markdown(markdown,home,away)
             parsed=_merge_technical_history(parsed,hit["match_id"],home,away,kickoff)
+            parsed=_merge_odds(parsed,hit["match_id"])
             available=any(parsed["groups"].values())
             return {
                 "available":available,
