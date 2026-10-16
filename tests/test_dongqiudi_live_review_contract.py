@@ -146,3 +146,20 @@ def test_full_data_rejects_partial_dongqiudi_core_fields():
     }
     result = data_mode(match)
     assert result["mode"] == "10027_ONLY"
+
+
+def test_dongqiudi_odds_parser_captures_european_and_live_water():
+    from collector.dongqiudi_source import _parse_odds_markdown
+    markdown = """
+平均值 初 2.13 3.51 2.97
+即 2.54 3.51 2.50
+竞 竞 初 2.03 3.42 2.90 0.95 0.97
+即 2.20 3.40 2.63 0.87 0.97
+"""
+    odds = _parse_odds_markdown(markdown)
+    assert odds["european_odds_average_initial"] == [2.13, 3.51, 2.97]
+    assert odds["european_odds_average_current"] == [2.54, 3.51, 2.50]
+    assert odds["representative_european_odds_initial"] == [2.03, 3.42, 2.90]
+    assert odds["representative_european_odds_current"] == [2.20, 3.40, 2.63]
+    assert odds["representative_asian_water_initial"] == [0.95, 0.97]
+    assert odds["representative_asian_water_current"] == [0.87, 0.97]
