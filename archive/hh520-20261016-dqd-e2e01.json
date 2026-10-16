@@ -1,15 +1,284 @@
 {
   "date": "2026-10-16",
   "url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-10-16&riqi_end=2026-10-16&threshold=1&bankroll=5000",
-  "captured_at": "2026-10-16T09:02:28.508327+00:00",
+  "captured_at": "2026-10-16T09:20:53.716778+00:00",
   "dongqiudi_summary": {
     "enabled": true,
     "attempted": 11,
     "available": 2,
-    "cache_hits": 0,
+    "cache_hits": 2,
     "lookup_capped": 0,
     "formal_chain": true,
-    "source": "DONGQIUDI_PUBLIC_ANALYSIS"
+    "source": "DONGQIUDI_PUBLIC_ANALYSIS",
+    "fixture_diagnostics": [
+      {
+        "home": "悉尼FC",
+        "away": "西悉尼",
+        "league": "澳超",
+        "kickoff": "17:00",
+        "available": true,
+        "reason": null,
+        "match_detail_id": "54543894",
+        "search_attempts": 2,
+        "candidate_count": null,
+        "rejected_candidates": [],
+        "groups": {
+          "RECENT_FORM": true,
+          "VENUE_FORM": true,
+          "H2H": true,
+          "GF_GA": true,
+          "SHOTS": true,
+          "POSSESSION": true,
+          "DANGEROUS_ATTACKS": true,
+          "BIG_CHANCES": false,
+          "GOAL_TIMING": true
+        }
+      },
+      {
+        "home": "拉科",
+        "away": "莱万特",
+        "league": "西甲",
+        "kickoff": "03:00",
+        "available": false,
+        "reason": "dongqiudi_match_not_found_or_unvalidated",
+        "match_detail_id": null,
+        "search_attempts": 2,
+        "candidate_count": 8,
+        "rejected_candidates": [
+          {
+            "match_id": "54499353",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53625893",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53410018",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "54580312",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "54187604",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "54533181",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53230823",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "54476588",
+            "reason": "team_or_home_away_mismatch"
+          }
+        ],
+        "groups": {}
+      },
+      {
+        "home": "米拉索尔",
+        "away": "巴西国际",
+        "league": "巴甲",
+        "kickoff": "07:00",
+        "available": true,
+        "reason": null,
+        "match_detail_id": "54082774",
+        "search_attempts": 2,
+        "candidate_count": null,
+        "rejected_candidates": [],
+        "groups": {
+          "RECENT_FORM": true,
+          "VENUE_FORM": true,
+          "H2H": false,
+          "GF_GA": true,
+          "SHOTS": false,
+          "POSSESSION": false,
+          "DANGEROUS_ATTACKS": false,
+          "BIG_CHANCES": false,
+          "GOAL_TIMING": false
+        }
+      },
+      {
+        "home": "科特布斯",
+        "away": "纽伦堡",
+        "league": "德乙",
+        "kickoff": "00:30",
+        "available": false,
+        "reason": "dongqiudi_match_not_found_or_unvalidated",
+        "match_detail_id": null,
+        "search_attempts": 3,
+        "candidate_count": 1,
+        "rejected_candidates": [
+          {
+            "match_id": "54494843",
+            "reason": "team_or_home_away_mismatch"
+          }
+        ],
+        "groups": {}
+      },
+      {
+        "home": "布鲁马波",
+        "away": "佐加顿斯",
+        "league": "瑞超",
+        "kickoff": "01:00",
+        "available": false,
+        "reason": "dongqiudi_match_not_found_or_unvalidated",
+        "match_detail_id": null,
+        "search_attempts": 3,
+        "candidate_count": 0,
+        "rejected_candidates": [],
+        "groups": {}
+      },
+      {
+        "home": "海伦芬",
+        "away": "SBV精英",
+        "league": "荷甲",
+        "kickoff": "02:00",
+        "available": false,
+        "reason": "dongqiudi_match_not_found_or_unvalidated",
+        "match_detail_id": null,
+        "search_attempts": 3,
+        "candidate_count": 8,
+        "rejected_candidates": [
+          {
+            "match_id": "53397091",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "54158173",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53397102",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53397095",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "54158219",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53627328",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53397146",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53397147",
+            "reason": "team_or_home_away_mismatch"
+          }
+        ],
+        "groups": {}
+      },
+      {
+        "home": "登博思",
+        "away": "奥斯",
+        "league": "荷乙",
+        "kickoff": "02:00",
+        "available": false,
+        "reason": "dongqiudi_match_not_found_or_unvalidated",
+        "match_detail_id": null,
+        "search_attempts": 3,
+        "candidate_count": 0,
+        "rejected_candidates": [],
+        "groups": {}
+      },
+      {
+        "home": "法兰克福",
+        "away": "科隆",
+        "league": "德甲",
+        "kickoff": "02:30",
+        "available": false,
+        "reason": "dongqiudi_match_not_found_or_unvalidated",
+        "match_detail_id": null,
+        "search_attempts": 3,
+        "candidate_count": 0,
+        "rejected_candidates": [],
+        "groups": {}
+      },
+      {
+        "home": "弗洛西诺",
+        "away": "萨索洛",
+        "league": "意甲",
+        "kickoff": "02:45",
+        "available": false,
+        "reason": "dongqiudi_match_not_found_or_unvalidated",
+        "match_detail_id": null,
+        "search_attempts": 3,
+        "candidate_count": 8,
+        "rejected_candidates": [
+          {
+            "match_id": "54009765",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "54081507",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53700011",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "54557567",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53997223",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53281490",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "52838002",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "54082777",
+            "reason": "team_or_home_away_mismatch"
+          }
+        ],
+        "groups": {}
+      },
+      {
+        "home": "勒芒",
+        "away": "图卢兹",
+        "league": "法甲",
+        "kickoff": "02:45",
+        "available": false,
+        "reason": "dongqiudi_match_not_found_or_unvalidated",
+        "match_detail_id": null,
+        "search_attempts": 2,
+        "candidate_count": 0,
+        "rejected_candidates": [],
+        "groups": {}
+      },
+      {
+        "home": "伯恩利",
+        "away": "伍尔弗",
+        "league": "英冠",
+        "kickoff": "03:00",
+        "available": false,
+        "reason": "dongqiudi_match_not_found_or_unvalidated",
+        "match_detail_id": null,
+        "search_attempts": 0,
+        "candidate_count": 0,
+        "rejected_candidates": [],
+        "groups": {}
+      }
+    ]
   },
   "goal_timing_summary": {
     "enabled": true,
@@ -20060,7 +20329,7 @@
     "request_id": "hh520-20261016-dqd-e2e01",
     "repository": "ltaln/HH520-stable-V2",
     "run_id": "38877607180",
-    "run_attempt": "1",
+    "run_attempt": "2",
     "source_sha": "2ecb01a01349e123133a9ffb481fac23810723e4"
   }
 }
