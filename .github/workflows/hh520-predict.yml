@@ -124,6 +124,29 @@ jobs:
           else
             echo "missing action output"
           fi
+      - name: Verify Dongqiudi formal enrichment reaches Stable
+        if: steps.execute.outcome == 'success'
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os
+          path = "_action_out/" + os.environ["REQUEST_ID"] + ".json"
+          data = json.load(open(path, encoding="utf-8"))
+          summary = data.get("dongqiudi_summary") or {}
+          predictions = data.get("predictions") or []
+          assert summary.get("formal_chain") is True, summary
+          attempted = int(summary.get("attempted") or 0)
+          available = int(summary.get("available") or 0)
+          modes = [str(p.get("data_mode") or "10027_ONLY") for p in predictions]
+          partial_or_full = [m for m in modes if m in {"PARTIAL_DATA", "FULL_DATA"}]
+          print("Dongqiudi formal chain:", {"attempted": attempted, "available": available, "partial_or_full_predictions": len(partial_or_full)})
+          if available > 0:
+              assert partial_or_full, "Dongqiudi returned usable fixtures but none reached Stable data_mode"
+          for p in predictions:
+              mode = str(p.get("data_mode") or "10027_ONLY")
+              if mode in {"PARTIAL_DATA", "FULL_DATA"}:
+                  assert p.get("partial_enrichment_used") is True or mode == "FULL_DATA"
+          PY
       - name: Preserve cache and request ledger even after failure
         if: always() && steps.restore.outcome == 'success'
         uses: actions/cache/save@v4
