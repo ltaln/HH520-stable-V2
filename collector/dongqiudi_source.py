@@ -713,7 +713,7 @@ def collect_match_analysis(date,home,away,league=None,kickoff=None):
             except Exception as exc:
                 rejected.append({"match_id":hit["match_id"],"reason":type(exc).__name__})
                 continue
-            if not _header_matches(markdown,date,home,away):
+            if not _header_matches(markdown,date,home,away,kickoff):
                 rejected.append({"match_id":hit["match_id"],"reason":"team_or_home_away_mismatch"})
                 continue
             parsed=parse_analysis_markdown(markdown,home,away)
