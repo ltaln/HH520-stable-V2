@@ -1,0 +1,16 @@
+{
+  "status": "PENDING",
+  "kind": "stable",
+  "request_id": "hh520-20261016-dqd-rollover-v1",
+  "stage": "workflow",
+  "run_id": "38887765975",
+  "run_attempt": "1",
+  "message": "Workflow accepted and is still running.",
+  "_action": {
+    "request_id": "hh520-20261016-dqd-rollover-v1",
+    "repository": "ltaln/HH520-stable-V2",
+    "run_id": "38887765975",
+    "run_attempt": "1",
+    "source_sha": "67ee22b49948118af2422aabe34fa646165c596c"
+  }
+}
