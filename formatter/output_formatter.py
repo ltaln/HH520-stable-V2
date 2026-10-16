@@ -24,7 +24,7 @@ def _scenario(pred):
 def build_display_row(pred: dict) -> dict:
     get=pred.get
     return {
-        "球队对阵": f"{pred['home_team']} vs {pred['away_team']} [{'全数据' if pred.get('data_mode') == 'FULL_DATA' else '10027'}]",
+        "球队对阵": f"{pred['home_team']} vs {pred['away_team']} [{'全数据' if pred.get('data_mode') == 'FULL_DATA' else ('部分增强' if pred.get('data_mode') == 'PARTIAL_DATA' else '10027')}]",
         "胜平负场景": _scenario(pred),
         "市场概率": _pct(get("market_probability")),
         "比分×2及概率": f"{get('score1') or '未提供'} ({_pct(get('score1_probability'))}) / {get('score2') or '未提供'} ({_pct(get('score2_probability'))})",
@@ -38,7 +38,7 @@ def build_output_contract(predictions: list[dict]) -> dict:
         "version": "HH520-OUTPUT-V3.5.1", "stable_version": "HH520 Stable V3.5.1",
         "strict": True, "required_columns": OUTPUT_COLUMNS,
         "display_rows": [build_display_row(pred) for pred in predictions],
-        "render_rule": "必须按6列完整输出；球队对阵后必须标注[全数据]或[10027]；全数据=双方外部SHOTS+RESULT_STABILITY+HALF_TIMING均满足质量门槛并已进入FT/比分/HTFT；10027=外部数据不完整，完全回退10027基础链路。",
+        "render_rule": "必须按6列完整输出；球队对阵后必须标注[全数据]、[部分增强]或[10027]；全数据=双方外部SHOTS+RESULT_STABILITY+HALF_TIMING均满足质量门槛并进入对应计算；部分增强=至少一个外部增强组满足质量门槛并已进入Stable计算，继续使用10027作为主锚；10027=没有任何可用外部增强数据。",
     }
 
 
