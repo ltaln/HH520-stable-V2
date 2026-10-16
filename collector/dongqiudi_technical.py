@@ -197,6 +197,7 @@ def _observation(row, team_name, team_id=None):
         "dangerous_attacks":(stats.get("危险进攻") or {}).get(side),
         "big_chances":(stats.get("绝佳机会") or stats.get("重大机会") or stats.get("得分机会") or {}).get(side),
         "expected_goals":(stats.get("预期进球(xG)") or stats.get("预期进球") or {}).get(side),
+        "expected_goals_against":(stats.get("预期进球(xG)") or stats.get("预期进球") or {}).get(opp),
         "goals_for_bins":goals[side],
         "goals_against_bins":goals[opp],
     }
@@ -281,7 +282,7 @@ def collect_team_history(target_match_id, team_name, target_side, target_kickoff
     metrics={}
     for key in (
         "shots","shots_on_target","shots_off_target","possession",
-        "dangerous_attacks","big_chances","expected_goals",
+        "dangerous_attacks","big_chances","expected_goals","expected_goals_against",
     ):
         vals=[float(o[key]) for o in observations if o.get(key) is not None]
         if vals:
