@@ -163,3 +163,33 @@ def test_dongqiudi_odds_parser_captures_european_and_live_water():
     assert odds["representative_european_odds_current"] == [2.20, 3.40, 2.63]
     assert odds["representative_asian_water_initial"] == [0.95, 0.97]
     assert odds["representative_asian_water_current"] == [0.87, 0.97]
+
+
+def test_partial_enrichment_does_not_fall_back_to_10027_only():
+    from engine.full_data_layer import data_mode, enhance_probability
+    match = {
+        "goal_timing": {"available": False},
+        "dongqiudi_enrichment": {
+            "available": True,
+            "home": {
+                "shots": 14,
+                "shots_on_target": 6,
+                "wins_rate": 60,
+                "draws_rate": 20,
+                "losses_rate": 20,
+            },
+            "away": {
+                "shots": 10,
+                "shots_on_target": 3,
+            },
+        },
+    }
+    ctx = data_mode(match)
+    assert ctx["mode"] == "PARTIAL_DATA"
+    assert "SHOTS" in ctx["groups_used"]
+    assert "RESULT_STABILITY" not in ctx["groups_used"]
+    base = {"valid": True, "probabilities": {"home": .45, "draw": .28, "away": .27}, "source": "10027S"}
+    out = enhance_probability(match, base)
+    assert out["data_mode"] == "PARTIAL_DATA"
+    assert out["partial_enrichment_used"] is True
+    assert out["probabilities"] != base["probabilities"]
