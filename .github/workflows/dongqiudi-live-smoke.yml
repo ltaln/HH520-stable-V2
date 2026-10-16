@@ -48,8 +48,8 @@ jobs:
               "index":"https://api.dongqiudi.com/data/index",
               "important":"https://api.dongqiudi.com/data/tab/important?start=2026-09-13T16:00:00&version=551&init=1",
               "pc_spread":"https://lottery-aggregator.dongqiudi.com/pcWeb/spreadMatch",
-              "pc_overview":"https://pc.dongqiudi.com/api/data/overview/match/54493236",
-              "pc_detail":"https://pc.dongqiudi.com/magicball/v1/match/app/detail?id=54493236&app=dqd&lang=zh-cn",
+              "pc_overview":"https://pc.dongqiudi.com/api/data/overview/match/54389846",
+              "pc_detail":"https://pc.dongqiudi.com/magicball/v1/match/app/detail?id=54389846&app=dqd&lang=zh-cn",
               "pc_lineup":"https://pc.dongqiudi.com/sport-data/soccer/biz/dqd/v1/match/lineup/4493236?app=dqd&lang=zh-cn",
           }.items():
               try:
@@ -59,10 +59,10 @@ jobs:
               except Exception as exc:
                   probes[name]={"error":type(exc).__name__}
 
-          known_url="https://m.dongqiudi.com/matchDetail/54493236/analysis"
+          known_url="https://m.dongqiudi.com/matchDetail/54389846/analysis"
           raw=scrape_markdown(known_url)
           markdown=((raw.get("data") or {}).get("markdown") if isinstance(raw,dict) else None) or ""
-          direct=parse_analysis_markdown(markdown,"比利亚雷","贝蒂斯")
+          direct=parse_analysis_markdown(markdown,"河南","天津津门虎")
           lineup_debug=requests.get(
               "https://pc.dongqiudi.com/sport-data/soccer/biz/dqd/v1/match/lineup/4493236?app=dqd&lang=zh-cn",
               headers={"User-Agent":"Mozilla/5.0","Referer":"https://www.dongqiudi.com/"},
@@ -70,12 +70,12 @@ jobs:
           ).json()
           print("LINEUP_TOP_KEYS", sorted(lineup_debug.keys()))
           print("RECENT_MATCH_PERSONS", json.dumps(lineup_debug.get("recent_match_persons"),ensure_ascii=False)[:12000])
-          dq=collect_match_analysis("2026-09-14","比利亚雷","贝蒂斯")
+          dq=collect_match_analysis("2026-10-16","河南","天津津门虎",league="中超",kickoff="2026-10-16T19:35:00+08:00")
           history=collect_prematch_technical_history(
-              "54493236","比利亚雷亚尔","皇家贝蒂斯","2026-09-14T19:00:00+00:00"
+              "54389846","河南","天津津门虎","2026-10-16T19:35:00+08:00"
           )
           live=collect_match_analysis(
-              "2026-10-19","里昂","尼斯",league="法甲",kickoff="2026-10-19T02:45:00+08:00"
+              "2026-10-16","河南","天津津门虎",league="中超",kickoff="2026-10-16T19:35:00+08:00"
           )
           direct_match={"goal_timing":{"available":False},"dongqiudi_enrichment":{
               "available":any(direct.get("groups",{}).values()),
