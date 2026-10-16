@@ -317,8 +317,9 @@ def _header_matches(markdown,date,home,away):
     # MM-DD, so verify that token when a valid ISO date is supplied.
     m=re.fullmatch(r"\d{4}-(\d{2})-(\d{2})",str(date or ""))
     if m:
-        mmdd=f"{m.group(1)}-{m.group(2)}"
-        if mmdd not in header:
+        mm, dd = m.group(1), m.group(2)
+        tokens = (f"{mm}-{dd}", f"{mm}/{dd}", f"{int(mm)}月{int(dd)}日")
+        if not any(token in header for token in tokens):
             return False
     return True
 
