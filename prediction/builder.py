@@ -72,6 +72,7 @@ def prepare_match(match):
         data_mode=(analysis.get("data_mode") or {}).get("mode","10027_ONLY"),
         data_mode_detail=analysis.get("data_mode") or {},
         full_data_used=(analysis.get("data_mode") or {}).get("mode")=="FULL_DATA",
+        partial_enrichment_used=(analysis.get("data_mode") or {}).get("mode")=="PARTIAL_DATA",
         reliability=analysis.get("reliability") or {},
         trust_score=(analysis.get("reliability") or {}).get("trust_score"),
         trust_grade=(analysis.get("reliability") or {}).get("trust_grade"),
