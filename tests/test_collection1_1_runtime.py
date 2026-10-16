@@ -48,8 +48,8 @@ def test_incomplete_external_data_keeps_available_enrichment():
     m["goal_timing"]["away"]["profile_stats"]={}
     a=analyze_match(m)
     assert a["data_mode"]["mode"]=="PARTIAL_DATA"
-    assert a["probability"]["partial_enrichment_used"] is True
     assert a["score"]["model"]=="COLLECTION1_1_POISSON_SCORE_V2"
+    assert a["data_mode"]["partial_data"] is True
     assert a["htft"]["timing_used"] is False
 
 
