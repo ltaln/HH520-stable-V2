@@ -75,6 +75,28 @@ def _entry_kickoff(entry):
 def _entry_match_id(entry):
     return str(entry.get("match_id") or entry.get("relate_id") or entry.get("id") or "").strip()
 
+def _kickoff_hhmm(value):
+    s=str(value or "").strip()
+    m=re.search(r"(\d{1,2}):(\d{2})",s)
+    if not m:
+        return None
+    hour,minute=int(m.group(1)),int(m.group(2))
+    return hour*60+minute if hour<=23 and minute<=59 else None
+
+def _fixture_date_variants(date,kickoff):
+    """Allow HH520 after-midnight fixtures to map to Dongqiudi's next calendar day."""
+    value=str(date or "").strip()
+    m=re.fullmatch(r"(\d{4})-(\d{2})-(\d{2})",value)
+    if not m:
+        return [value] if value else []
+    variants=[value]
+    mins=_kickoff_hhmm(kickoff)
+    if mins is not None and mins < 360:
+        from datetime import timedelta
+        dt=datetime(int(m.group(1)),int(m.group(2)),int(m.group(3)))+timedelta(days=1)
+        variants.append(dt.strftime("%Y-%m-%d"))
+    return list(dict.fromkeys(variants))
+
 def _match_pc_entry(date, home, away, league=None, kickoff=None):
     rows=_pc_index_entries()
     if not rows:
@@ -100,8 +122,8 @@ def _match_pc_entry(date, home, away, league=None, kickoff=None):
             score+=ls
         ek=_entry_kickoff(entry)
         if isinstance(ek,str) and re.fullmatch(r"\d{2}/\d{2}\s+\d{2}:\d{2}",ek):
-            mmdd=str(date or "")[5:].replace("-","/")
-            if mmdd and not ek.startswith(mmdd):
+            allowed_mmdd={x[5:].replace("-","/") for x in _fixture_date_variants(date,kickoff)}
+            if allowed_mmdd and not any(ek.startswith(x) for x in allowed_mmdd):
                 continue
             if requested_dt:
                 try:
@@ -317,8 +339,8 @@ def _header_team_position(header,team):
     return min(positions,key=lambda x:x[0]) if positions else None
 
 
-def _header_matches(markdown,date,home,away):
-    header=str(markdown or "")[:800]
+def _header_matches(markdown,date,home,away,kickoff=None):
+    header=str(markdown or "")[:1200]
     hp=_header_team_position(header,home)
     ap=_header_team_position(header,away)
     if not hp or not ap or hp[0]>=ap[0]:
@@ -329,23 +351,31 @@ def _header_matches(markdown,date,home,away):
     m=re.fullmatch(r"\d{4}-(\d{2})-(\d{2})",str(date or ""))
     if m:
         mm, dd = m.group(1), m.group(2)
-        tokens = (f"{mm}-{dd}", f"{mm}/{dd}", f"{int(mm)}月{int(dd)}日")
-        if not any(token in header for token in tokens):
+        tokens=[]
+        for fixture_date in _fixture_date_variants(date,kickoff):
+            fm=re.fullmatch(r"\d{4}-(\d{2})-(\d{2})",fixture_date)
+            if fm:
+                fmm,fdd=fm.group(2),fm.group(3)
+                tokens.extend((f"{fmm}-{fdd}",f"{fmm}/{fdd}",f"{int(fmm)}月{int(fdd)}日"))
+        if tokens and not any(token in header for token in tokens):
             return False
     return True
 
 
-def _candidate_queries(date,home,away):
+def _candidate_queries(date,home,away,kickoff=None):
     # Prefer aliases common in Dongqiudi titles while retaining HH520 spellings.
     # One query per variant: mixed aliases in a single exact-match search can
     # exclude the actual fixture and make valid matches look absent.
     hq,aq=_search_name(home),_search_name(away)
-    mmdd=str(date or "")[5:] if re.fullmatch(r"\d{4}-\d{2}-\d{2}",str(date or "")) else date
-    queries=[
-        f'懂球帝 {hq} {aq} {date} 比赛详情',
-        f'site:m.dongqiudi.com/matchDetail "{hq}" "{aq}" {mmdd}',
-        f'懂球帝 {home} {away} {mmdd} 比赛详情',
-    ]
+    date_variants=_fixture_date_variants(date,kickoff) or [date]
+    queries=[]
+    for fixture_date in date_variants:
+        mmdd=str(fixture_date)[5:] if re.fullmatch(r"\d{4}-\d{2}-\d{2}",str(fixture_date)) else fixture_date
+        queries.extend([
+            f'懂球帝 {hq} {aq} {fixture_date} 比赛详情',
+            f'site:m.dongqiudi.com/matchDetail "{hq}" "{aq}" {mmdd}',
+        ])
+    queries.append(f'懂球帝 {home} {away} {date_variants[-1]} 比赛详情')
     # At most one additional relaxed alias search to limit Firecrawl usage.
     if (hq,aq)!=(str(home),str(away)):
         queries.append(f'懂球帝 {hq} {aq} {mmdd} 比赛分析')
@@ -372,7 +402,7 @@ def _discover_query(query):
 
 def discover_match_details(date,home,away):
     # Compatibility helper: keep the cheapest single-search behaviour.
-    for query in _candidate_queries(date,home,away):
+    for query in _candidate_queries(date,home,away,kickoff):
         try:
             candidates=_discover_query(query)
         except Exception:
@@ -635,7 +665,7 @@ def collect_match_analysis(date,home,away,league=None,kickoff=None):
                 markdown=((raw.get("data") or {}).get("markdown") if isinstance(raw,dict) else None) or ""
             except Exception:
                 markdown=""
-            if markdown and _header_matches(markdown,date,home,away):
+            if markdown and _header_matches(markdown,date,home,away,kickoff):
                 parsed=parse_analysis_markdown(markdown,home,away)
                 parsed=_merge_technical_history(parsed,hit["match_id"],home,away,kickoff)
                 parsed=_merge_odds(parsed,hit["match_id"])
