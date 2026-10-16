@@ -1,6 +1,6 @@
 project:
-  name: HH520 Stable V3.5 Phase 2
-  version: "3.5-p2"
+  name: HH520 Stable V3.5.1
+  version: "3.5.1"
 
 source:
   page: "10027s"
@@ -102,13 +102,13 @@ prediction:
   use_decision_filter: true
   use_consistency_layer: true
   use_calibration_diagnostics: true
-  decision_filter_version: "3.5-p2"
+  decision_filter_version: "3.5.1"
   decision_filter_mode: "ft_calibration_plus_balanced_draw_resolver_plus_mfd"
   allow_pass: true
   gpt_role: "EXPLANATION_ONLY"
 
 output:
-  version: "HH520-OUTPUT-V3.5-P2"
+  version: "HH520-OUTPUT-V3.5.1"
   columns:
     - 球队对阵
     - 胜平负场景
