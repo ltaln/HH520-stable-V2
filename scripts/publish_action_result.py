@@ -115,7 +115,7 @@ PREDICTION_FIELDS = (
     "score1", "score2", "score1_probability", "score2_probability",
     "htft1", "htft2", "htft1_probability", "htft2_probability",
     "total_goals", "total_goals_probability",
-    "timing_used", "timing_source", "quality_warnings", "reason",
+    "timing_used", "timing_source", "data_mode", "quality_warnings", "reason",
 )
 
 
@@ -143,6 +143,7 @@ def _prediction_summary(data, request_id):
         "url": data.get("url"),
         "captured_at": data.get("captured_at"),
         "goal_timing_summary": data.get("goal_timing_summary"),
+        "dongqiudi_summary": data.get("dongqiudi_summary"),
         "predictions": predictions,
         "output_contract": compact_contract,
         "display_rows": display_rows,
