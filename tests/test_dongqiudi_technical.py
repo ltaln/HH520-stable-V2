@@ -92,3 +92,29 @@ def test_goal_bins_counts_penalty_and_own_goal_correctly():
     bins = tech._goal_bins(overview)
     assert bins["team_A"][0] == 1.0
     assert bins["team_B"][3] == 1.0
+
+
+def test_historical_xg_and_xga_are_exposed_separately(monkeypatch):
+    lineup = {
+        "persons": {
+            "team_A": {"team_id": 50001, "team_name": "主队"},
+            "team_B": {"team_id": 50002, "team_name": "客队"},
+        }
+    }
+    schedules = {
+        "50001": [{"match_id":"1","status":"Played","start_play":"2026-09-01 19:00:00",
+                   "team_A_id":"50001","team_B_id":"9","team_A_name":"主队","team_B_name":"对手"}],
+        "50002": [{"match_id":"2","status":"Played","start_play":"2026-09-02 19:00:00",
+                   "team_A_id":"8","team_B_id":"50002","team_A_name":"对手","team_B_name":"客队"}],
+    }
+    overview = _overview(12,8,5,3,55,45,40,30,3,1,{})
+    monkeypatch.setattr(tech, "_lineup", lambda match_id: lineup)
+    monkeypatch.setattr(tech, "_schedule_rows", lambda team_id, target_dt=None: schedules[str(team_id)])
+    monkeypatch.setattr(tech, "_overview", lambda match_id: overview)
+    result = tech.collect_prematch_technical_history(
+        "target", "主队", "客队", "2026-09-10T00:00:00+00:00"
+    )
+    assert result["home"]["metrics"]["expected_goals"] == 1.7
+    assert result["home"]["metrics"]["expected_goals_against"] == 1.1
+    assert result["away"]["metrics"]["expected_goals"] == 1.1
+    assert result["away"]["metrics"]["expected_goals_against"] == 1.7
