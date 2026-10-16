@@ -126,4 +126,20 @@ def enrich_matches_with_dongqiudi(date: str, matches: list[dict]) -> dict:
         "lookup_capped": max(0, len(matches) - len(selected)),
         "formal_chain": True,
         "source": "DONGQIUDI_PUBLIC_ANALYSIS",
+        "fixture_diagnostics": [
+            {
+                "home": str(m.get("home_team") or ""),
+                "away": str(m.get("away_team") or ""),
+                "league": m.get("league"),
+                "kickoff": m.get("kickoff"),
+                "available": bool((m.get("dongqiudi_enrichment") or {}).get("available")),
+                "reason": (m.get("dongqiudi_enrichment") or {}).get("reason"),
+                "match_detail_id": (m.get("dongqiudi_enrichment") or {}).get("match_detail_id"),
+                "search_attempts": (m.get("dongqiudi_enrichment") or {}).get("search_attempts"),
+                "candidate_count": (m.get("dongqiudi_enrichment") or {}).get("candidate_count"),
+                "rejected_candidates": (m.get("dongqiudi_enrichment") or {}).get("rejected_candidates", []),
+                "groups": (m.get("dongqiudi_enrichment") or {}).get("groups", {}),
+            }
+            for m in matches
+        ],
     }
