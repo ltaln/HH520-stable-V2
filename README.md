@@ -1,8 +1,8 @@
-# HH520 Stable V3.4
+# HH520 Stable V3.5.1
 
 ## 目标
 
-Stable V3.4 将 10027S 反推研究正式整理成一条可解释、可验证的预测链：
+Stable V3.5.1 将 10027S 反推研究正式整理成一条可解释、可验证的预测链：
 
 **赔率负责基础概率；基本面负责识别市场失败；FT 决定 HT/FT；HT/FT 决定比分。**
 
@@ -12,7 +12,7 @@ Stable V3.4 将 10027S 反推研究正式整理成一条可解释、可验证的
 
 `预测 YYYY-MM-DD 全部比赛`
 
-## V3.4 完整架构
+## V3.5.1 完整架构
 
 ```text
 ChatGPT / GitHub Actions
@@ -139,11 +139,11 @@ RiskScore >= 5  → PASS
 
 开发样本中，优势方最终赢球时，“半场优势方领先 + 半场平”覆盖绝大多数，半场落后后逆转只占很小比例。
 
-V3.4 正式链不再依赖外部分时数据；10027S 是唯一正式基础源。
+V3.5.1 正式链不再依赖外部分时数据；10027S 是唯一正式基础源。
 
 ## Score Layer
 
-V3.3 的 `POOLED_POISSON` 从正式生产链移出。V3.4 使用 HT/FT 条件比分模板：
+V3.3 的 `POOLED_POISSON` 从正式生产链移出。V3.5.1 使用 HT/FT 条件比分模板：
 
 ```text
 胜/胜 → 2:1 / 2:0
@@ -170,7 +170,7 @@ Value Layer 保留，但职责严格限定为：
 
 ## Confidence / Probability 语义
 
-V3.4 明确区分：
+V3.5.1 明确区分：
 
 - **市场概率**：官方赔率去水概率；
 - **模型概率**：Draw Anchor + Side Layer 后的 H/D/A；
@@ -207,7 +207,7 @@ V3.4 明确区分：
 
 2026-09-10 至 2026-09-20 用于本轮候选规则开发，因此不是 untouched final validation。
 
-当前研究观察到 Failure Detector 能把高可靠与低可靠场次明显分离，但这些数字不能视为未来准确率保证。V3.4 上线后应继续使用未来比赛做 Shadow / Forward 验证，任何阈值调整先进入 Candidate，不自动修改 Stable。
+当前研究观察到 Failure Detector 能把高可靠与低可靠场次明显分离，但这些数字不能视为未来准确率保证。V3.5.1 上线后应继续使用未来比赛做 Shadow / Forward 验证，任何阈值调整先进入 Candidate，不自动修改 Stable。
 
 ## 数据保护
 
