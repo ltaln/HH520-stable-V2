@@ -8,9 +8,13 @@ from publish_action_result import publish
 
 
 def main():
-    if len(sys.argv) != 5:
-        raise SystemExit("usage: publish_action_status.py BRANCH REQUEST_ID STATUS KIND")
-    branch, request_id, status, kind = sys.argv[1:]
+    if len(sys.argv) not in {5, 7}:
+        raise SystemExit(
+            "usage: publish_action_status.py BRANCH REQUEST_ID STATUS KIND [STAGE MESSAGE]"
+        )
+    branch, request_id, status, kind = sys.argv[1:5]
+    stage = sys.argv[5] if len(sys.argv) == 7 else "workflow"
+    message = sys.argv[6] if len(sys.argv) == 7 else ""
     if status not in {"PENDING", "FAILED"}:
         raise SystemExit("invalid status")
 
@@ -18,10 +22,10 @@ def main():
         "status": status,
         "kind": kind,
         "request_id": request_id,
-        "stage": "workflow",
+        "stage": stage,
         "run_id": os.getenv("GITHUB_RUN_ID", ""),
         "run_attempt": os.getenv("GITHUB_RUN_ATTEMPT", ""),
-        "message": (
+        "message": message or (
             "Workflow accepted and is still running."
             if status == "PENDING"
             else "Workflow failed before a final result was published. Check GitHub Actions logs for the failed stage."
