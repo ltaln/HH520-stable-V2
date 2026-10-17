@@ -111,6 +111,8 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p _action_out
+          # Publish an explicit stage before the long-running prediction starts.
+          python scripts/publish_action_status.py action-results "$REQUEST_ID" PENDING stable "stable_prediction" "Stable V3.5.1 has started collection and calculation. The final result has not been published yet." || true
           # Keep the existing request_id and publish a lightweight heartbeat
           # while the single Stable execution is still working.
           python main.py "$COMMAND" --output "_action_out/$REQUEST_ID.json" &
