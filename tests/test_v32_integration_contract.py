@@ -8,9 +8,9 @@ ROOT = Path(__file__).resolve().parents[1]
 def test_v35_phase2_active_prompt_and_config_are_aligned():
     prompt = (ROOT / "prompts" / "HH520_Stable_V3_5_Phase2_Prediction_Prompt.md").read_text(encoding="utf-8")
     config = yaml.safe_load((ROOT / "config" / "stable.yaml").read_text(encoding="utf-8"))
-    assert "HH520 Stable V3.5 Phase 2" in prompt
+    assert "# HH520 Stable V3.5.1 Prediction Prompt" in prompt
     assert "EXPLANATION_ONLY" in prompt
-    assert config["project"]["version"] == "3.5-p2"
+    assert config["project"]["version"] == "3.5.1"
     assert config["prediction"]["gpt_role"] == "EXPLANATION_ONLY"
     assert config["prediction"]["page_probability_for_state"] is False
     assert config["prediction"]["automatic_market_override"] is False
@@ -28,7 +28,7 @@ def test_v351_integration_contract_exposes_locked_predictions():
     assert "EXPLANATION_ONLY" in instructions
 
 
-def test_v34_output_contract_is_six_columns():
+def test_v351_output_contract_is_six_columns():
     from formatter.output_formatter import OUTPUT_COLUMNS, build_output_contract, build_display_row
 
     assert OUTPUT_COLUMNS == [
