@@ -1,11 +1,2272 @@
 {
-  "status": "PENDING",
-  "kind": "stable",
+  "status": "READY",
+  "kind": "prediction",
   "request_id": "hh520-20261017-1402-d8f1",
-  "stage": "workflow",
-  "run_id": "39008420181",
-  "run_attempt": "1",
-  "message": "Workflow accepted and is still running.",
+  "date": "2026-10-17",
+  "url": "https://www.hh520.com/tx/10027s.php?riqi_start=2026-10-17&riqi_end=2026-10-17&threshold=1&bankroll=5000",
+  "captured_at": "2026-10-17T06:02:54.194871+00:00",
+  "goal_timing_summary": {
+    "enabled": true,
+    "attempted": 28,
+    "available": 0,
+    "six_bin": 0,
+    "half_aggregate_fallback": 0,
+    "profile_stats_available": 0,
+    "profile_fields": [
+      "xg_for",
+      "xg_against",
+      "shots",
+      "shots_on_target",
+      "shots_off_target",
+      "shot_conversion",
+      "shots_per_goal",
+      "sot_per_goal",
+      "scored_per_match",
+      "conceded_per_match",
+      "possession",
+      "clean_sheet_rate",
+      "failed_to_score_rate",
+      "wins_rate",
+      "draws_rate",
+      "losses_rate",
+      "btts_rate",
+      "btts_win_rate",
+      "btts_draw_rate",
+      "over_0_5_rate",
+      "over_1_5_rate",
+      "over_2_5_rate",
+      "over_3_5_rate",
+      "scored_1h_rate",
+      "scored_2h_rate",
+      "failed_score_1h_rate",
+      "failed_score_2h_rate",
+      "scored_both_halves_rate",
+      "clean_sheet_1h_rate",
+      "clean_sheet_2h_rate"
+    ],
+    "skipped_confirmed": 0,
+    "lookup_capped": 0,
+    "formal_chain": true,
+    "role": "required_prediction_enrichment"
+  },
+  "dongqiudi_summary": {
+    "enabled": true,
+    "attempted": 28,
+    "available": 22,
+    "cache_hits": 0,
+    "lookup_capped": 0,
+    "formal_chain": true,
+    "source": "DONGQIUDI_PUBLIC_ANALYSIS",
+    "fixture_diagnostics": [
+      {
+        "home": "麦克阿瑟",
+        "away": "珀斯",
+        "league": "澳超",
+        "kickoff": "14:00",
+        "available": true,
+        "reason": null,
+        "match_detail_id": "54522357",
+        "search_attempts": 2,
+        "candidate_count": null,
+        "rejected_candidates": [],
+        "groups": {
+          "RECENT_FORM": true,
+          "VENUE_FORM": true,
+          "H2H": true,
+          "GF_GA": true,
+          "SHOTS": false,
+          "POSSESSION": false,
+          "DANGEROUS_ATTACKS": false,
+          "BIG_CHANCES": false,
+          "GOAL_TIMING": false
+        }
+      },
+      {
+        "home": "威尼斯",
+        "away": "那不勒斯",
+        "league": "意甲",
+        "kickoff": "21:00",
+        "available": true,
+        "reason": null,
+        "match_detail_id": "54470853",
+        "search_attempts": 2,
+        "candidate_count": null,
+        "rejected_candidates": [],
+        "groups": {
+          "RECENT_FORM": false,
+          "VENUE_FORM": false,
+          "H2H": false,
+          "GF_GA": false,
+          "SHOTS": true,
+          "POSSESSION": true,
+          "DANGEROUS_ATTACKS": true,
+          "BIG_CHANCES": true,
+          "GOAL_TIMING": true
+        }
+      },
+      {
+        "home": "赫尔辛基",
+        "away": "赫尔火花",
+        "league": "芬超",
+        "kickoff": "21:00",
+        "available": false,
+        "reason": "dongqiudi_match_not_found_or_unvalidated",
+        "match_detail_id": null,
+        "search_attempts": 2,
+        "candidate_count": 0,
+        "rejected_candidates": [],
+        "groups": {}
+      },
+      {
+        "home": "埃沃斯堡",
+        "away": "奥格斯堡",
+        "league": "德甲",
+        "kickoff": "21:30",
+        "available": true,
+        "reason": null,
+        "match_detail_id": "54494525",
+        "search_attempts": 2,
+        "candidate_count": null,
+        "rejected_candidates": [],
+        "groups": {
+          "RECENT_FORM": true,
+          "VENUE_FORM": true,
+          "H2H": true,
+          "GF_GA": true,
+          "SHOTS": true,
+          "POSSESSION": true,
+          "DANGEROUS_ATTACKS": true,
+          "BIG_CHANCES": true,
+          "GOAL_TIMING": true
+        }
+      },
+      {
+        "home": "不来梅",
+        "away": "帕德博恩",
+        "league": "德甲",
+        "kickoff": "21:30",
+        "available": true,
+        "reason": null,
+        "match_detail_id": "54494519",
+        "search_attempts": 2,
+        "candidate_count": null,
+        "rejected_candidates": [],
+        "groups": {
+          "RECENT_FORM": true,
+          "VENUE_FORM": true,
+          "H2H": true,
+          "GF_GA": true,
+          "SHOTS": true,
+          "POSSESSION": true,
+          "DANGEROUS_ATTACKS": true,
+          "BIG_CHANCES": true,
+          "GOAL_TIMING": true
+        }
+      },
+      {
+        "home": "沙尔克04",
+        "away": "美因茨",
+        "league": "德甲",
+        "kickoff": "21:30",
+        "available": true,
+        "reason": null,
+        "match_detail_id": "54494522",
+        "search_attempts": 2,
+        "candidate_count": null,
+        "rejected_candidates": [],
+        "groups": {
+          "RECENT_FORM": true,
+          "VENUE_FORM": true,
+          "H2H": true,
+          "GF_GA": true,
+          "SHOTS": true,
+          "POSSESSION": true,
+          "DANGEROUS_ATTACKS": true,
+          "BIG_CHANCES": true,
+          "GOAL_TIMING": true
+        }
+      },
+      {
+        "home": "汉堡",
+        "away": "斯图加特",
+        "league": "德甲",
+        "kickoff": "21:30",
+        "available": true,
+        "reason": null,
+        "match_detail_id": "54494516",
+        "search_attempts": 2,
+        "candidate_count": null,
+        "rejected_candidates": [],
+        "groups": {
+          "RECENT_FORM": true,
+          "VENUE_FORM": true,
+          "H2H": true,
+          "GF_GA": true,
+          "SHOTS": true,
+          "POSSESSION": true,
+          "DANGEROUS_ATTACKS": true,
+          "BIG_CHANCES": true,
+          "GOAL_TIMING": true
+        }
+      },
+      {
+        "home": "柏林联合",
+        "away": "多特蒙德",
+        "league": "德甲",
+        "kickoff": "21:30",
+        "available": true,
+        "reason": null,
+        "match_detail_id": "54494513",
+        "search_attempts": 2,
+        "candidate_count": null,
+        "rejected_candidates": [],
+        "groups": {
+          "RECENT_FORM": true,
+          "VENUE_FORM": true,
+          "H2H": true,
+          "GF_GA": true,
+          "SHOTS": true,
+          "POSSESSION": true,
+          "DANGEROUS_ATTACKS": true,
+          "BIG_CHANCES": true,
+          "GOAL_TIMING": true
+        }
+      },
+      {
+        "home": "布伦特",
+        "away": "利物浦",
+        "league": "英超",
+        "kickoff": "22:00",
+        "available": true,
+        "reason": null,
+        "match_detail_id": "54483692",
+        "search_attempts": 2,
+        "candidate_count": null,
+        "rejected_candidates": [],
+        "groups": {
+          "RECENT_FORM": true,
+          "VENUE_FORM": true,
+          "H2H": true,
+          "GF_GA": true,
+          "SHOTS": true,
+          "POSSESSION": true,
+          "DANGEROUS_ATTACKS": true,
+          "BIG_CHANCES": true,
+          "GOAL_TIMING": true
+        }
+      },
+      {
+        "home": "曼城",
+        "away": "伊普斯",
+        "league": "英超",
+        "kickoff": "22:00",
+        "available": true,
+        "reason": null,
+        "match_detail_id": "54483703",
+        "search_attempts": 2,
+        "candidate_count": null,
+        "rejected_candidates": [],
+        "groups": {
+          "RECENT_FORM": true,
+          "VENUE_FORM": true,
+          "H2H": true,
+          "GF_GA": true,
+          "SHOTS": true,
+          "POSSESSION": true,
+          "DANGEROUS_ATTACKS": true,
+          "BIG_CHANCES": true,
+          "GOAL_TIMING": true
+        }
+      },
+      {
+        "home": "鹿岛鹿角",
+        "away": "长崎航海",
+        "league": "日职",
+        "kickoff": "14:00",
+        "available": true,
+        "reason": null,
+        "match_detail_id": "54479867",
+        "search_attempts": 0,
+        "candidate_count": null,
+        "rejected_candidates": [],
+        "groups": {
+          "RECENT_FORM": true,
+          "VENUE_FORM": true,
+          "H2H": true,
+          "GF_GA": true,
+          "SHOTS": true,
+          "POSSESSION": true,
+          "DANGEROUS_ATTACKS": true,
+          "BIG_CHANCES": true,
+          "GOAL_TIMING": true
+        }
+      },
+      {
+        "home": "富勒姆",
+        "away": "赫尔城",
+        "league": "英超",
+        "kickoff": "22:00",
+        "available": true,
+        "reason": null,
+        "match_detail_id": "54483698",
+        "search_attempts": 2,
+        "candidate_count": null,
+        "rejected_candidates": [],
+        "groups": {
+          "RECENT_FORM": false,
+          "VENUE_FORM": false,
+          "H2H": false,
+          "GF_GA": false,
+          "SHOTS": true,
+          "POSSESSION": true,
+          "DANGEROUS_ATTACKS": true,
+          "BIG_CHANCES": true,
+          "GOAL_TIMING": true
+        }
+      },
+      {
+        "home": "比利亚雷",
+        "away": "埃尔切",
+        "league": "西甲",
+        "kickoff": "22:15",
+        "available": true,
+        "reason": null,
+        "match_detail_id": "54493300",
+        "search_attempts": 2,
+        "candidate_count": null,
+        "rejected_candidates": [],
+        "groups": {
+          "RECENT_FORM": true,
+          "VENUE_FORM": true,
+          "H2H": true,
+          "GF_GA": true,
+          "SHOTS": true,
+          "POSSESSION": true,
+          "DANGEROUS_ATTACKS": true,
+          "BIG_CHANCES": true,
+          "GOAL_TIMING": true
+        }
+      },
+      {
+        "home": "斯特拉斯",
+        "away": "巴黎圣曼",
+        "league": "法甲",
+        "kickoff": "23:15",
+        "available": false,
+        "reason": "dongqiudi_match_not_found_or_unvalidated",
+        "match_detail_id": null,
+        "search_attempts": 4,
+        "candidate_count": 2,
+        "rejected_candidates": [
+          {
+            "match_id": "53627775",
+            "reason": "team_or_home_away_mismatch"
+          }
+        ],
+        "groups": {}
+      },
+      {
+        "home": "博洛尼亚",
+        "away": "国际米兰",
+        "league": "意甲",
+        "kickoff": "00:00",
+        "available": true,
+        "reason": null,
+        "match_detail_id": "54470912",
+        "search_attempts": 4,
+        "candidate_count": null,
+        "rejected_candidates": [
+          {
+            "match_id": "53253740",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53253733",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "54498616",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53098811",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53253750",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53637148",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53253764",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53888218",
+            "reason": "team_or_home_away_mismatch"
+          }
+        ],
+        "groups": {
+          "RECENT_FORM": true,
+          "VENUE_FORM": true,
+          "H2H": true,
+          "GF_GA": true,
+          "SHOTS": true,
+          "POSSESSION": true,
+          "DANGEROUS_ATTACKS": true,
+          "BIG_CHANCES": true,
+          "GOAL_TIMING": true
+        }
+      },
+      {
+        "home": "纽卡斯尔",
+        "away": "维拉",
+        "league": "英超",
+        "kickoff": "00:30",
+        "available": true,
+        "reason": null,
+        "match_detail_id": "54483715",
+        "search_attempts": 4,
+        "candidate_count": null,
+        "rejected_candidates": [
+          {
+            "match_id": "53615063",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53226181",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "54523492",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53396679",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53615233",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53226267",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53226230",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53291906",
+            "reason": "team_or_home_away_mismatch"
+          }
+        ],
+        "groups": {
+          "RECENT_FORM": true,
+          "VENUE_FORM": true,
+          "H2H": true,
+          "GF_GA": true,
+          "SHOTS": true,
+          "POSSESSION": true,
+          "DANGEROUS_ATTACKS": true,
+          "BIG_CHANCES": true,
+          "GOAL_TIMING": true
+        }
+      },
+      {
+        "home": "贝蒂斯",
+        "away": "巴萨",
+        "league": "西甲",
+        "kickoff": "00:30",
+        "available": false,
+        "reason": "dongqiudi_match_not_found_or_unvalidated",
+        "match_detail_id": null,
+        "search_attempts": 4,
+        "candidate_count": 10,
+        "rejected_candidates": [
+          {
+            "match_id": "53234575",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53234569",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53299975",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53406423",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53234834",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53234595",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53460899",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53234584",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "54493285",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "54171043",
+            "reason": "team_or_home_away_mismatch"
+          }
+        ],
+        "groups": {}
+      },
+      {
+        "home": "特尔斯达",
+        "away": "费耶诺德",
+        "league": "荷甲",
+        "kickoff": "02:00",
+        "available": true,
+        "reason": null,
+        "match_detail_id": "54475648",
+        "search_attempts": 4,
+        "candidate_count": null,
+        "rejected_candidates": [
+          {
+            "match_id": "53262035",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53232317",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53498763",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53230814",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53408795",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53093602",
+            "reason": "team_or_home_away_mismatch"
+          }
+        ],
+        "groups": {
+          "RECENT_FORM": true,
+          "VENUE_FORM": true,
+          "H2H": false,
+          "GF_GA": true,
+          "SHOTS": true,
+          "POSSESSION": true,
+          "DANGEROUS_ATTACKS": true,
+          "BIG_CHANCES": true,
+          "GOAL_TIMING": true
+        }
+      },
+      {
+        "home": "罗马",
+        "away": "热那亚",
+        "league": "意甲",
+        "kickoff": "02:45",
+        "available": true,
+        "reason": null,
+        "match_detail_id": "54470865",
+        "search_attempts": 4,
+        "candidate_count": null,
+        "rejected_candidates": [
+          {
+            "match_id": "53253782",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53253770",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "54149329",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53997237",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53253787",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53253856",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53253766",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53253780",
+            "reason": "team_or_home_away_mismatch"
+          }
+        ],
+        "groups": {
+          "RECENT_FORM": true,
+          "VENUE_FORM": true,
+          "H2H": true,
+          "GF_GA": true,
+          "SHOTS": true,
+          "POSSESSION": true,
+          "DANGEROUS_ATTACKS": true,
+          "BIG_CHANCES": true,
+          "GOAL_TIMING": true
+        }
+      },
+      {
+        "home": "巴伦西亚",
+        "away": "毕尔巴鄂",
+        "league": "西甲",
+        "kickoff": "03:00",
+        "available": true,
+        "reason": null,
+        "match_detail_id": "54493298",
+        "search_attempts": 4,
+        "candidate_count": null,
+        "rejected_candidates": [
+          {
+            "match_id": "54546843",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53234558",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53097418",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53234567",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53406140",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53234569",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53406211",
+            "reason": "team_or_home_away_mismatch"
+          },
+          {
+            "match_id": "53234577",
+            "reason": "team_or_home_away_mismatch"
+          }
+        ],
+        "groups": {
+          "RECENT_FORM": false,
+          "VENUE_FORM": false,
+          "H2H": false,
+          "GF_GA": false,
+          "SHOTS": true,
+          "POSSESSION": true,
+          "DANGEROUS_ATTACKS": true,
+          "BIG_CHANCES": true,
+          "GOAL_TIMING": true
+        }
+      },
+      {
+        "home": "蔚山现代",
+        "away": "富川FC",
+        "league": "韩职",
+        "kickoff": "15:30",
+        "available": false,
+        "reason": "dongqiudi_match_not_found_or_unvalidated",
+        "match_detail_id": null,
+        "search_attempts": 4,
+        "candidate_count": 0,
+        "rejected_candidates": [],
+        "groups": {}
+      },
+      {
+        "home": "新英格兰",
+        "away": "芝加哥",
+        "league": "美职",
+        "kickoff": "07:30",
+        "available": false,
+        "reason": "dongqiudi_analysis_no_features",
+        "match_detail_id": "53203850",
+        "search_attempts": 2,
+        "candidate_count": null,
+        "rejected_candidates": [],
+        "groups": {
+          "RECENT_FORM": false,
+          "VENUE_FORM": false,
+          "H2H": false,
+          "GF_GA": false,
+          "SHOTS": false,
+          "POSSESSION": false,
+          "DANGEROUS_ATTACKS": false,
+          "BIG_CHANCES": false,
+          "GOAL_TIMING": false
+        }
+      },
+      {
+        "home": "中央海岸",
+        "away": "纽喷气机",
+        "league": "澳超",
+        "kickoff": "16:40",
+        "available": true,
+        "reason": null,
+        "match_detail_id": "54522403",
+        "search_attempts": 0,
+        "candidate_count": null,
+        "rejected_candidates": [],
+        "groups": {
+          "RECENT_FORM": true,
+          "VENUE_FORM": true,
+          "H2H": true,
+          "GF_GA": true,
+          "SHOTS": false,
+          "POSSESSION": true,
+          "DANGEROUS_ATTACKS": false,
+          "BIG_CHANCES": false,
+          "GOAL_TIMING": true
+        }
+      },
+      {
+        "home": "柏太阳神",
+        "away": "名古屋鲸",
+        "league": "日职",
+        "kickoff": "18:00",
+        "available": true,
+        "reason": null,
+        "match_detail_id": "54479927",
+        "search_attempts": 2,
+        "candidate_count": null,
+        "rejected_candidates": [
+          {
+            "match_id": "53166901",
+            "reason": "team_or_home_away_mismatch"
+          }
+        ],
+        "groups": {
+          "RECENT_FORM": true,
+          "VENUE_FORM": true,
+          "H2H": true,
+          "GF_GA": true,
+          "SHOTS": true,
+          "POSSESSION": true,
+          "DANGEROUS_ATTACKS": true,
+          "BIG_CHANCES": true,
+          "GOAL_TIMING": true
+        }
+      },
+      {
+        "home": "宫崎牛鸟",
+        "away": "磐田喜悦",
+        "league": "日乙",
+        "kickoff": "18:00",
+        "available": true,
+        "reason": null,
+        "match_detail_id": "54480296",
+        "search_attempts": 2,
+        "candidate_count": null,
+        "rejected_candidates": [],
+        "groups": {
+          "RECENT_FORM": true,
+          "VENUE_FORM": true,
+          "H2H": true,
+          "GF_GA": true,
+          "SHOTS": true,
+          "POSSESSION": true,
+          "DANGEROUS_ATTACKS": true,
+          "BIG_CHANCES": false,
+          "GOAL_TIMING": true
+        }
+      },
+      {
+        "home": "埃弗顿",
+        "away": "切尔西",
+        "league": "英超",
+        "kickoff": "19:30",
+        "available": true,
+        "reason": null,
+        "match_detail_id": "54483695",
+        "search_attempts": 2,
+        "candidate_count": null,
+        "rejected_candidates": [],
+        "groups": {
+          "RECENT_FORM": true,
+          "VENUE_FORM": true,
+          "H2H": true,
+          "GF_GA": true,
+          "SHOTS": true,
+          "POSSESSION": true,
+          "DANGEROUS_ATTACKS": true,
+          "BIG_CHANCES": true,
+          "GOAL_TIMING": true
+        }
+      },
+      {
+        "home": "米尔沃尔",
+        "away": "林肯城",
+        "league": "英冠",
+        "kickoff": "19:30",
+        "available": true,
+        "reason": null,
+        "match_detail_id": "54490331",
+        "search_attempts": 2,
+        "candidate_count": null,
+        "rejected_candidates": [],
+        "groups": {
+          "RECENT_FORM": true,
+          "VENUE_FORM": true,
+          "H2H": true,
+          "GF_GA": true,
+          "SHOTS": true,
+          "POSSESSION": true,
+          "DANGEROUS_ATTACKS": true,
+          "BIG_CHANCES": true,
+          "GOAL_TIMING": true
+        }
+      },
+      {
+        "home": "西班牙人",
+        "away": "马竞",
+        "league": "西甲",
+        "kickoff": "20:00",
+        "available": false,
+        "reason": "dongqiudi_match_not_found_or_unvalidated",
+        "match_detail_id": null,
+        "search_attempts": 2,
+        "candidate_count": 0,
+        "rejected_candidates": [],
+        "groups": {}
+      }
+    ]
+  },
+  "predictions": [
+    {
+      "match_id": "1",
+      "home_team": "麦克阿瑟",
+      "away_team": "珀斯",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "均衡",
+      "alternate_direction": "客胜",
+      "state": "BALANCED",
+      "base_state": "BALANCED",
+      "market_probability": 0.520944402132521,
+      "page_probability": {
+        "home": 0.5353535353535354,
+        "draw": 0.24242424242424243,
+        "away": 0.2222222222222222
+      },
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "1:1",
+      "score2": "2:1",
+      "score1_probability": 0.11292042648091183,
+      "score2_probability": 0.09481375092767155,
+      "htft1": "主/主",
+      "htft2": "平/主",
+      "htft1_probability": 0.25540876140264157,
+      "htft2_probability": 0.19530437645922347,
+      "total_goals": "2球",
+      "total_goals_probability": 0.2318126566954289,
+      "timing_used": false,
+      "timing_source": null,
+      "data_mode": "PARTIAL_DATA",
+      "quality_warnings": [],
+      "reason": "FT模型概率低于55%，不强制主胜/客胜；比分保持独立输出"
+    },
+    {
+      "match_id": "11",
+      "home_team": "威尼斯",
+      "away_team": "那不勒斯",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "客胜",
+      "alternate_direction": "平",
+      "state": "BALANCED",
+      "base_state": "BALANCED",
+      "market_probability": 0.5675832244331577,
+      "page_probability": {},
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "0:1",
+      "score2": "1:1",
+      "score1_probability": 0.10973409769666267,
+      "score2_probability": 0.10829484494913082,
+      "htft1": "客/客",
+      "htft2": "平/客",
+      "htft1_probability": 0.35873872648596217,
+      "htft2_probability": 0.17925834536299548,
+      "total_goals": "2球",
+      "total_goals_probability": 0.23766605397984214,
+      "timing_used": false,
+      "timing_source": null,
+      "data_mode": "PARTIAL_DATA",
+      "quality_warnings": [
+        "page_probability_missing"
+      ],
+      "reason": "FT保留但可靠度有限，按均衡处理"
+    },
+    {
+      "match_id": "12",
+      "home_team": "赫尔辛基",
+      "away_team": "赫尔火花",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "主胜",
+      "alternate_direction": "平",
+      "state": "CONFIRM",
+      "base_state": "CONFIRM",
+      "market_probability": 0.656891495601173,
+      "page_probability": {
+        "home": 0.6363636363636364,
+        "draw": 0.20202020202020202,
+        "away": 0.16161616161616163
+      },
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "2:0",
+      "score2": "1:0",
+      "score1_probability": 0.10981758018237518,
+      "score2_probability": 0.10458817160226208,
+      "htft1": "主/主",
+      "htft2": "平/主",
+      "htft1_probability": 0.3645270535536953,
+      "htft2_probability": 0.24125290514938788,
+      "total_goals": "2球",
+      "total_goals_probability": 0.22411751057627588,
+      "timing_used": false,
+      "timing_source": null,
+      "data_mode": "10027_ONLY",
+      "quality_warnings": [],
+      "reason": "FT通过可靠性过滤，且未发现需要进一步降级的跨层冲突"
+    },
+    {
+      "match_id": "13",
+      "home_team": "埃沃斯堡",
+      "away_team": "奥格斯堡",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "均衡",
+      "alternate_direction": "客胜",
+      "state": "TAIL_ALERT",
+      "base_state": "TAIL_ALERT",
+      "market_probability": 0.39212199350909177,
+      "page_probability": {
+        "home": 0.336734693877551,
+        "draw": 0.24489795918367346,
+        "away": 0.41836734693877553
+      },
+      "tail_alert": true,
+      "draw_candidate": false,
+      "score1": "1:1",
+      "score2": "1:2",
+      "score1_probability": 0.11562245497762551,
+      "score2_probability": 0.08614937002292951,
+      "htft1": "客/客",
+      "htft2": "主/主",
+      "htft1_probability": 0.2148066640537022,
+      "htft2_probability": 0.18149213472181375,
+      "total_goals": "2球",
+      "total_goals_probability": 0.23142536011746892,
+      "timing_used": true,
+      "timing_source": null,
+      "data_mode": "FULL_DATA",
+      "quality_warnings": [],
+      "reason": "FT模型概率低于55%，不强制主胜/客胜；比分保持独立输出"
+    },
+    {
+      "match_id": "14",
+      "home_team": "不来梅",
+      "away_team": "帕德博恩",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "均衡",
+      "alternate_direction": "客胜",
+      "state": "TAIL_ALERT",
+      "base_state": "TAIL_ALERT",
+      "market_probability": 0.563865017242323,
+      "page_probability": {
+        "home": 0.5353535353535354,
+        "draw": 0.23232323232323232,
+        "away": 0.23232323232323232
+      },
+      "tail_alert": true,
+      "draw_candidate": false,
+      "score1": "1:1",
+      "score2": "2:1",
+      "score1_probability": 0.10692088826506031,
+      "score2_probability": 0.0971567827088165,
+      "htft1": "主/主",
+      "htft2": "平/主",
+      "htft1_probability": 0.24697891374086137,
+      "htft2_probability": 0.21323730349087452,
+      "total_goals": "3球",
+      "total_goals_probability": 0.22406792055648042,
+      "timing_used": true,
+      "timing_source": null,
+      "data_mode": "FULL_DATA",
+      "quality_warnings": [],
+      "reason": "FT模型概率低于55%，不强制主胜/客胜；比分保持独立输出"
+    },
+    {
+      "match_id": "15",
+      "home_team": "沙尔克04",
+      "away_team": "美因茨",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "均衡",
+      "alternate_direction": "主胜",
+      "state": "BALANCED",
+      "base_state": "BALANCED",
+      "market_probability": 0.43224530168150344,
+      "page_probability": {},
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "1:1",
+      "score2": "1:2",
+      "score1_probability": 0.11302674211965724,
+      "score2_probability": 0.09370881310154898,
+      "htft1": "客/客",
+      "htft2": "主/主",
+      "htft1_probability": 0.3013691610820779,
+      "htft2_probability": 0.14492758128271657,
+      "total_goals": "2球",
+      "total_goals_probability": 0.23048313393056433,
+      "timing_used": true,
+      "timing_source": null,
+      "data_mode": "FULL_DATA",
+      "quality_warnings": [
+        "page_probability_missing"
+      ],
+      "reason": "FT模型概率低于55%，不强制主胜/客胜；比分保持独立输出"
+    },
+    {
+      "match_id": "16",
+      "home_team": "汉堡",
+      "away_team": "斯图加特",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "均衡",
+      "alternate_direction": "主胜",
+      "state": "TAIL_ALERT",
+      "base_state": "TAIL_ALERT",
+      "market_probability": 0.5498708523743294,
+      "page_probability": {
+        "home": 0.24489795918367346,
+        "draw": 0.22448979591836735,
+        "away": 0.5306122448979592
+      },
+      "tail_alert": true,
+      "draw_candidate": false,
+      "score1": "1:2",
+      "score2": "1:1",
+      "score1_probability": 0.08660130451627625,
+      "score2_probability": 0.07173644817261614,
+      "htft1": "客/客",
+      "htft2": "平/客",
+      "htft1_probability": 0.34113099088084764,
+      "htft2_probability": 0.15929973736050607,
+      "total_goals": "3球",
+      "total_goals_probability": 0.19850257630515195,
+      "timing_used": true,
+      "timing_source": null,
+      "data_mode": "FULL_DATA",
+      "quality_warnings": [],
+      "reason": "FT模型概率低于55%，不强制主胜/客胜；比分保持独立输出"
+    },
+    {
+      "match_id": "17",
+      "home_team": "柏林联合",
+      "away_team": "多特蒙德",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "客胜",
+      "alternate_direction": "平",
+      "state": "CONFIRM",
+      "base_state": "CONFIRM",
+      "market_probability": 0.6150845253576073,
+      "page_probability": {
+        "home": 0.24242424242424243,
+        "draw": 0.2222222222222222,
+        "away": 0.5353535353535354
+      },
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "1:2",
+      "score2": "0:2",
+      "score1_probability": 0.09918939875353205,
+      "score2_probability": 0.09567329287249617,
+      "htft1": "客/客",
+      "htft2": "平/客",
+      "htft1_probability": 0.34941454499321345,
+      "htft2_probability": 0.20144866562177827,
+      "total_goals": "3球",
+      "total_goals_probability": 0.22321583459536057,
+      "timing_used": true,
+      "timing_source": null,
+      "data_mode": "FULL_DATA",
+      "quality_warnings": [],
+      "reason": "FT通过可靠性过滤，且未发现需要进一步降级的跨层冲突"
+    },
+    {
+      "match_id": "18",
+      "home_team": "布伦特",
+      "away_team": "利物浦",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "均衡",
+      "alternate_direction": "客胜",
+      "state": "BALANCED",
+      "base_state": "BALANCED",
+      "market_probability": 0.40475007052565115,
+      "page_probability": {
+        "home": 0.3838383838383838,
+        "draw": 0.26262626262626265,
+        "away": 0.35353535353535354
+      },
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "1:1",
+      "score2": "1:0",
+      "score1_probability": 0.12797000701924194,
+      "score2_probability": 0.10729685721503233,
+      "htft1": "客/客",
+      "htft2": "平/主",
+      "htft1_probability": 0.19720957379746393,
+      "htft2_probability": 0.18228564302797115,
+      "total_goals": "2球",
+      "total_goals_probability": 0.2564854216893139,
+      "timing_used": true,
+      "timing_source": null,
+      "data_mode": "FULL_DATA",
+      "quality_warnings": [],
+      "reason": "FT模型概率低于55%，不强制主胜/客胜；比分保持独立输出"
+    },
+    {
+      "match_id": "19",
+      "home_team": "曼城",
+      "away_team": "伊普斯",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "主胜",
+      "alternate_direction": "客胜",
+      "state": "CONFIRM",
+      "base_state": "CONFIRM",
+      "market_probability": 0.7910534873056237,
+      "page_probability": {
+        "home": 0.7676767676767676,
+        "draw": 0.15151515151515152,
+        "away": 0.08080808080808081
+      },
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "3:1",
+      "score2": "4:1",
+      "score1_probability": 0.07167462724953158,
+      "score2_probability": 0.0648417566399729,
+      "htft1": "主/主",
+      "htft2": "平/主",
+      "htft1_probability": 0.4552894627637384,
+      "htft2_probability": 0.1929959687592423,
+      "total_goals": "5球",
+      "total_goals_probability": 0.17734951977176128,
+      "timing_used": true,
+      "timing_source": null,
+      "data_mode": "FULL_DATA",
+      "quality_warnings": [],
+      "reason": "FT通过可靠性过滤，且未发现需要进一步降级的跨层冲突"
+    },
+    {
+      "match_id": "2",
+      "home_team": "鹿岛鹿角",
+      "away_team": "长崎航海",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "主胜",
+      "alternate_direction": "平",
+      "state": "CONFIRM",
+      "base_state": "CONFIRM",
+      "market_probability": 0.6284285253307519,
+      "page_probability": {},
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "1:0",
+      "score2": "2:0",
+      "score1_probability": 0.12117451948118162,
+      "score2_probability": 0.11487558324885941,
+      "htft1": "主/主",
+      "htft2": "平/主",
+      "htft1_probability": 0.31182003121385427,
+      "htft2_probability": 0.2368622004731647,
+      "total_goals": "2球",
+      "total_goals_probability": 0.24173655497475835,
+      "timing_used": true,
+      "timing_source": null,
+      "data_mode": "FULL_DATA",
+      "quality_warnings": [
+        "page_probability_missing"
+      ],
+      "reason": "FT通过可靠性过滤，且未发现需要进一步降级的跨层冲突"
+    },
+    {
+      "match_id": "20",
+      "home_team": "富勒姆",
+      "away_team": "赫尔城",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "主胜",
+      "alternate_direction": "平",
+      "state": "CONFIRM",
+      "base_state": "CONFIRM",
+      "market_probability": 0.6061836533441616,
+      "page_probability": {},
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "1:0",
+      "score2": "2:0",
+      "score1_probability": 0.13962637869950803,
+      "score2_probability": 0.1193363899867783,
+      "htft1": "主/主",
+      "htft2": "平/主",
+      "htft1_probability": 0.31257048357255596,
+      "htft2_probability": 0.2410557850016113,
+      "total_goals": "2球",
+      "total_goals_probability": 0.25627825329014736,
+      "timing_used": false,
+      "timing_source": null,
+      "data_mode": "PARTIAL_DATA",
+      "quality_warnings": [
+        "page_probability_missing"
+      ],
+      "reason": "FT通过可靠性过滤，且未发现需要进一步降级的跨层冲突"
+    },
+    {
+      "match_id": "21",
+      "home_team": "比利亚雷",
+      "away_team": "埃尔切",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "主胜",
+      "alternate_direction": "平",
+      "state": "CONFIRM",
+      "base_state": "CONFIRM",
+      "market_probability": 0.6760338460514788,
+      "page_probability": {
+        "home": 0.6363636363636364,
+        "draw": 0.20202020202020202,
+        "away": 0.16161616161616163
+      },
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "1:0",
+      "score2": "2:0",
+      "score1_probability": 0.1211284514934551,
+      "score2_probability": 0.11064639433585889,
+      "htft1": "主/主",
+      "htft2": "平/主",
+      "htft1_probability": 0.3343879772765543,
+      "htft2_probability": 0.21580709789214358,
+      "total_goals": "2球",
+      "total_goals_probability": 0.24412175971320077,
+      "timing_used": true,
+      "timing_source": null,
+      "data_mode": "FULL_DATA",
+      "quality_warnings": [],
+      "reason": "FT通过可靠性过滤，且未发现需要进一步降级的跨层冲突"
+    },
+    {
+      "match_id": "22",
+      "home_team": "斯特拉斯",
+      "away_team": "巴黎圣曼",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "客胜",
+      "alternate_direction": "平",
+      "state": "CONFIRM",
+      "base_state": "CONFIRM",
+      "market_probability": 0.6755702314851463,
+      "page_probability": {},
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "0:2",
+      "score2": "1:2",
+      "score1_probability": 0.09761871749859778,
+      "score2_probability": 0.09761871749859778,
+      "htft1": "客/客",
+      "htft2": "平/客",
+      "htft1_probability": 0.45116209037867333,
+      "htft2_probability": 0.1853616072824449,
+      "total_goals": "3球",
+      "total_goals_probability": 0.22105380281960357,
+      "timing_used": false,
+      "timing_source": null,
+      "data_mode": "10027_ONLY",
+      "quality_warnings": [
+        "page_probability_missing"
+      ],
+      "reason": "FT通过可靠性过滤，且未发现需要进一步降级的跨层冲突"
+    },
+    {
+      "match_id": "23",
+      "home_team": "博洛尼亚",
+      "away_team": "国际米兰",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "客胜",
+      "alternate_direction": "平",
+      "state": "CONFIRM",
+      "base_state": "CONFIRM",
+      "market_probability": 0.6109217492203931,
+      "page_probability": {
+        "home": 0.17346938775510204,
+        "draw": 0.22448979591836735,
+        "away": 0.6020408163265306
+      },
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "0:2",
+      "score2": "0:1",
+      "score1_probability": 0.10985841802850502,
+      "score2_probability": 0.09749004101237174,
+      "htft1": "客/客",
+      "htft2": "平/客",
+      "htft1_probability": 0.36881275431443156,
+      "htft2_probability": 0.20417543382499176,
+      "total_goals": "3球",
+      "total_goals_probability": 0.22344599528174386,
+      "timing_used": true,
+      "timing_source": null,
+      "data_mode": "FULL_DATA",
+      "quality_warnings": [],
+      "reason": "FT通过可靠性过滤，且未发现需要进一步降级的跨层冲突"
+    },
+    {
+      "match_id": "24",
+      "home_team": "纽卡斯尔",
+      "away_team": "维拉",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "均衡",
+      "alternate_direction": "客胜",
+      "state": "PASS",
+      "base_state": "PASS",
+      "market_probability": 0.45006936000411024,
+      "page_probability": {
+        "home": 0.43434343434343436,
+        "draw": 0.25252525252525254,
+        "away": 0.31313131313131315
+      },
+      "tail_alert": true,
+      "draw_candidate": false,
+      "score1": "1:1",
+      "score2": "2:1",
+      "score1_probability": 0.11224793816378821,
+      "score2_probability": 0.08509104865681212,
+      "htft1": "主/主",
+      "htft2": "客/客",
+      "htft1_probability": 0.22995739036775023,
+      "htft2_probability": 0.1927832462138768,
+      "total_goals": "2球",
+      "total_goals_probability": 0.22453335811606667,
+      "timing_used": true,
+      "timing_source": null,
+      "data_mode": "FULL_DATA",
+      "quality_warnings": [],
+      "reason": "FT模型概率低于55%，不强制主胜/客胜；比分保持独立输出"
+    },
+    {
+      "match_id": "26",
+      "home_team": "贝蒂斯",
+      "away_team": "巴萨",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "客胜",
+      "alternate_direction": "平",
+      "state": "CONFIRM",
+      "base_state": "CONFIRM",
+      "market_probability": 0.6915339480301761,
+      "page_probability": {
+        "home": 0.12244897959183673,
+        "draw": 0.17346938775510204,
+        "away": 0.7040816326530612
+      },
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "1:2",
+      "score2": "0:2",
+      "score1_probability": 0.09403274497853231,
+      "score2_probability": 0.08548431361684755,
+      "htft1": "客/客",
+      "htft2": "平/客",
+      "htft1_probability": 0.46859175070909265,
+      "htft2_probability": 0.17863425709257885,
+      "total_goals": "3球",
+      "total_goals_probability": 0.21271232725907413,
+      "timing_used": false,
+      "timing_source": null,
+      "data_mode": "10027_ONLY",
+      "quality_warnings": [],
+      "reason": "FT通过可靠性过滤，且未发现需要进一步降级的跨层冲突"
+    },
+    {
+      "match_id": "27",
+      "home_team": "特尔斯达",
+      "away_team": "费耶诺德",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "客胜",
+      "alternate_direction": "平",
+      "state": "CONFIRM",
+      "base_state": "CONFIRM",
+      "market_probability": 0.7199410075293022,
+      "page_probability": {},
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "0:2",
+      "score2": "0:1",
+      "score1_probability": 0.14326553468005337,
+      "score2_probability": 0.12737987453982855,
+      "htft1": "客/客",
+      "htft2": "平/客",
+      "htft1_probability": 0.4819761945161099,
+      "htft2_probability": 0.17786355505789134,
+      "total_goals": "2球",
+      "total_goals_probability": 0.23351216057863025,
+      "timing_used": true,
+      "timing_source": null,
+      "data_mode": "FULL_DATA",
+      "quality_warnings": [
+        "page_probability_missing"
+      ],
+      "reason": "FT通过可靠性过滤，且未发现需要进一步降级的跨层冲突"
+    },
+    {
+      "match_id": "28",
+      "home_team": "罗马",
+      "away_team": "热那亚",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "主胜",
+      "alternate_direction": "平",
+      "state": "CONFIRM",
+      "base_state": "CONFIRM",
+      "market_probability": 0.6811064718162839,
+      "page_probability": {
+        "home": 0.6326530612244898,
+        "draw": 0.21428571428571427,
+        "away": 0.15306122448979592
+      },
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "1:0",
+      "score2": "2:0",
+      "score1_probability": 0.12697034206019434,
+      "score2_probability": 0.12536276854764403,
+      "htft1": "主/主",
+      "htft2": "平/主",
+      "htft1_probability": 0.3622891025891154,
+      "htft2_probability": 0.23744635084387689,
+      "total_goals": "2球",
+      "total_goals_probability": 0.2421465832449559,
+      "timing_used": true,
+      "timing_source": null,
+      "data_mode": "FULL_DATA",
+      "quality_warnings": [],
+      "reason": "FT通过可靠性过滤，且未发现需要进一步降级的跨层冲突"
+    },
+    {
+      "match_id": "29",
+      "home_team": "巴伦西亚",
+      "away_team": "毕尔巴鄂",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "均衡",
+      "alternate_direction": "主胜",
+      "state": "BALANCED",
+      "base_state": "BALANCED",
+      "market_probability": 0.43683121229468497,
+      "page_probability": {},
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "0:1",
+      "score2": "1:1",
+      "score1_probability": 0.1330729889260608,
+      "score2_probability": 0.12897561189777243,
+      "htft1": "客/客",
+      "htft2": "平/平",
+      "htft1_probability": 0.25813554002826267,
+      "htft2_probability": 0.1858040917267976,
+      "total_goals": "2球",
+      "total_goals_probability": 0.264819210337467,
+      "timing_used": false,
+      "timing_source": null,
+      "data_mode": "PARTIAL_DATA",
+      "quality_warnings": [
+        "page_probability_missing"
+      ],
+      "reason": "FT模型概率低于55%，不强制主胜/客胜；比分保持独立输出"
+    },
+    {
+      "match_id": "3",
+      "home_team": "蔚山现代",
+      "away_team": "富川FC",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "主胜",
+      "alternate_direction": "平",
+      "state": "CONFIRM",
+      "base_state": "CONFIRM",
+      "market_probability": 0.5824563537928098,
+      "page_probability": {},
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "1:0",
+      "score2": "1:1",
+      "score1_probability": 0.12098325784862149,
+      "score2_probability": 0.10888493206375935,
+      "htft1": "主/主",
+      "htft2": "平/主",
+      "htft1_probability": 0.31455408601129387,
+      "htft2_probability": 0.2329020446705063,
+      "total_goals": "2球",
+      "total_goals_probability": 0.24499109714345854,
+      "timing_used": false,
+      "timing_source": null,
+      "data_mode": "10027_ONLY",
+      "quality_warnings": [
+        "page_probability_missing"
+      ],
+      "reason": "FT通过可靠性过滤，且未发现需要进一步降级的跨层冲突"
+    },
+    {
+      "match_id": "30",
+      "home_team": "新英格兰",
+      "away_team": "芝加哥",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "均衡",
+      "alternate_direction": "客胜",
+      "state": "BALANCED",
+      "base_state": "BALANCED",
+      "market_probability": 0.4217990807616546,
+      "page_probability": {
+        "home": 0.3979591836734694,
+        "draw": 0.25510204081632654,
+        "away": 0.3469387755102041
+      },
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "1:1",
+      "score2": "2:1",
+      "score1_probability": 0.11152991052515938,
+      "score2_probability": 0.08922392842012751,
+      "htft1": "主/主",
+      "htft2": "客/客",
+      "htft1_probability": 0.21499771804695444,
+      "htft2_probability": 0.20167206651817715,
+      "total_goals": "2球",
+      "total_goals_probability": 0.22405562382286484,
+      "timing_used": false,
+      "timing_source": null,
+      "data_mode": "10027_ONLY",
+      "quality_warnings": [],
+      "reason": "FT模型概率低于55%，不强制主胜/客胜；比分保持独立输出"
+    },
+    {
+      "match_id": "4",
+      "home_team": "中央海岸",
+      "away_team": "纽喷气机",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "均衡",
+      "alternate_direction": "主胜",
+      "state": "TAIL_ALERT",
+      "base_state": "TAIL_ALERT",
+      "market_probability": 0.5117931923492318,
+      "page_probability": {},
+      "tail_alert": true,
+      "draw_candidate": false,
+      "score1": "1:1",
+      "score2": "1:2",
+      "score1_probability": 0.11117593175590426,
+      "score2_probability": 0.09625202268420717,
+      "htft1": "客/客",
+      "htft2": "平/客",
+      "htft1_probability": 0.3085159851705646,
+      "htft2_probability": 0.15895661656412852,
+      "total_goals": "2球",
+      "total_goals_probability": 0.23069615651336176,
+      "timing_used": false,
+      "timing_source": null,
+      "data_mode": "PARTIAL_DATA",
+      "quality_warnings": [
+        "page_probability_missing"
+      ],
+      "reason": "FT模型概率低于55%，不强制主胜/客胜；比分保持独立输出"
+    },
+    {
+      "match_id": "5",
+      "home_team": "柏太阳神",
+      "away_team": "名古屋鲸",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "主胜",
+      "alternate_direction": "客胜",
+      "state": "CONFIRM",
+      "base_state": "CONFIRM",
+      "market_probability": 0.5944474686989657,
+      "page_probability": {},
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "2:1",
+      "score2": "3:1",
+      "score1_probability": 0.08754465365340755,
+      "score2_probability": 0.07378638086502674,
+      "htft1": "主/主",
+      "htft2": "平/主",
+      "htft1_probability": 0.3423854751015368,
+      "htft2_probability": 0.18219406659392248,
+      "total_goals": "3球",
+      "total_goals_probability": 0.19791632895028344,
+      "timing_used": true,
+      "timing_source": null,
+      "data_mode": "FULL_DATA",
+      "quality_warnings": [
+        "page_probability_missing"
+      ],
+      "reason": "FT通过可靠性过滤，且未发现需要进一步降级的跨层冲突"
+    },
+    {
+      "match_id": "6",
+      "home_team": "宫崎牛鸟",
+      "away_team": "磐田喜悦",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "均衡",
+      "alternate_direction": "客胜",
+      "state": "TAIL_ALERT",
+      "base_state": "TAIL_ALERT",
+      "market_probability": 0.37853342201529766,
+      "page_probability": {
+        "home": 0.3469387755102041,
+        "draw": 0.2755102040816326,
+        "away": 0.37755102040816324
+      },
+      "tail_alert": true,
+      "draw_candidate": false,
+      "score1": "1:1",
+      "score2": "2:1",
+      "score1_probability": 0.11455562039681594,
+      "score2_probability": 0.09034237519568289,
+      "htft1": "客/客",
+      "htft2": "主/主",
+      "htft1_probability": 0.23484677829332792,
+      "htft2_probability": 0.19919851245910902,
+      "total_goals": "2球",
+      "total_goals_probability": 0.2307598015190959,
+      "timing_used": true,
+      "timing_source": null,
+      "data_mode": "FULL_DATA",
+      "quality_warnings": [],
+      "reason": "FT模型概率低于55%，不强制主胜/客胜；比分保持独立输出"
+    },
+    {
+      "match_id": "7",
+      "home_team": "埃弗顿",
+      "away_team": "切尔西",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "均衡",
+      "alternate_direction": "主胜",
+      "state": "TAIL_ALERT",
+      "base_state": "TAIL_ALERT",
+      "market_probability": 0.45166067273111915,
+      "page_probability": {
+        "home": 0.29292929292929293,
+        "draw": 0.26262626262626265,
+        "away": 0.4444444444444444
+      },
+      "tail_alert": true,
+      "draw_candidate": false,
+      "score1": "1:1",
+      "score2": "0:1",
+      "score1_probability": 0.1298029734811136,
+      "score2_probability": 0.11765692689171582,
+      "htft1": "客/客",
+      "htft2": "平/平",
+      "htft1_probability": 0.2208894674944677,
+      "htft2_probability": 0.18122093766575356,
+      "total_goals": "2球",
+      "total_goals_probability": 0.2612957806511829,
+      "timing_used": true,
+      "timing_source": null,
+      "data_mode": "FULL_DATA",
+      "quality_warnings": [],
+      "reason": "FT模型概率低于55%，不强制主胜/客胜；比分保持独立输出"
+    },
+    {
+      "match_id": "8",
+      "home_team": "米尔沃尔",
+      "away_team": "林肯城",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "均衡",
+      "alternate_direction": "平",
+      "state": "BALANCED",
+      "base_state": "BALANCED",
+      "market_probability": 0.5532209012994194,
+      "page_probability": {
+        "home": 0.5306122448979592,
+        "draw": 0.25510204081632654,
+        "away": 0.21428571428571427
+      },
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "1:0",
+      "score2": "1:1",
+      "score1_probability": 0.1200258809108109,
+      "score2_probability": 0.1168137887065083,
+      "htft1": "主/主",
+      "htft2": "平/主",
+      "htft1_probability": 0.2735111002535455,
+      "htft2_probability": 0.20526074203420147,
+      "total_goals": "2球",
+      "total_goals_probability": 0.2500514477358574,
+      "timing_used": true,
+      "timing_source": null,
+      "data_mode": "FULL_DATA",
+      "quality_warnings": [
+        "team_modules_missing_or_zero",
+        "possession_missing"
+      ],
+      "reason": "FT模型概率低于55%，不强制主胜/客胜；比分保持独立输出"
+    },
+    {
+      "match_id": "9",
+      "home_team": "西班牙人",
+      "away_team": "马竞",
+      "status": "PREDICTED",
+      "stable_version": "HH520 Stable V3.5.1",
+      "direction": "客胜",
+      "alternate_direction": "平",
+      "state": "CONFIRM",
+      "base_state": "CONFIRM",
+      "market_probability": 0.5786489551271667,
+      "page_probability": {
+        "home": 0.14285714285714285,
+        "draw": 0.22448979591836735,
+        "away": 0.6326530612244898
+      },
+      "tail_alert": false,
+      "draw_candidate": false,
+      "score1": "0:1",
+      "score2": "1:1",
+      "score1_probability": 0.12098325784862148,
+      "score2_probability": 0.10888493206375933,
+      "htft1": "客/客",
+      "htft2": "平/客",
+      "htft1_probability": 0.3751991242053682,
+      "htft2_probability": 0.18836077489018785,
+      "total_goals": "2球",
+      "total_goals_probability": 0.2449910971434585,
+      "timing_used": false,
+      "timing_source": null,
+      "data_mode": "10027_ONLY",
+      "quality_warnings": [],
+      "reason": "FT通过可靠性过滤，且未发现需要进一步降级的跨层冲突"
+    }
+  ],
+  "output_contract": {
+    "version": "HH520-OUTPUT-V3.5.1",
+    "stable_version": "HH520 Stable V3.5.1",
+    "strict": true,
+    "required_columns": [
+      "球队对阵",
+      "胜平负场景",
+      "市场概率",
+      "比分×2及概率",
+      "半全场×2及概率",
+      "总进球及概率"
+    ],
+    "display_rows": [
+      {
+        "球队对阵": "麦克阿瑟 vs 珀斯 [部分增强]",
+        "胜平负场景": "均衡（不强制方向）",
+        "市场概率": "52.1%",
+        "比分×2及概率": "1:1 (11.3%) / 2:1 (9.5%)",
+        "半全场×2及概率": "主/主 (25.5%) / 平/主 (19.5%)",
+        "总进球及概率": "2球 (23.2%)"
+      },
+      {
+        "球队对阵": "威尼斯 vs 那不勒斯 [部分增强]",
+        "胜平负场景": "客胜（均衡）",
+        "市场概率": "56.8%",
+        "比分×2及概率": "0:1 (11.0%) / 1:1 (10.8%)",
+        "半全场×2及概率": "客/客 (35.9%) / 平/客 (17.9%)",
+        "总进球及概率": "2球 (23.8%)"
+      },
+      {
+        "球队对阵": "赫尔辛基 vs 赫尔火花 [10027]",
+        "胜平负场景": "主胜（确认）",
+        "市场概率": "65.7%",
+        "比分×2及概率": "2:0 (11.0%) / 1:0 (10.5%)",
+        "半全场×2及概率": "主/主 (36.5%) / 平/主 (24.1%)",
+        "总进球及概率": "2球 (22.4%)"
+      },
+      {
+        "球队对阵": "埃沃斯堡 vs 奥格斯堡 [全数据]",
+        "胜平负场景": "均衡（不强制方向）",
+        "市场概率": "39.2%",
+        "比分×2及概率": "1:1 (11.6%) / 1:2 (8.6%)",
+        "半全场×2及概率": "客/客 (21.5%) / 主/主 (18.1%)",
+        "总进球及概率": "2球 (23.1%)"
+      },
+      {
+        "球队对阵": "不来梅 vs 帕德博恩 [全数据]",
+        "胜平负场景": "均衡（不强制方向）",
+        "市场概率": "56.4%",
+        "比分×2及概率": "1:1 (10.7%) / 2:1 (9.7%)",
+        "半全场×2及概率": "主/主 (24.7%) / 平/主 (21.3%)",
+        "总进球及概率": "3球 (22.4%)"
+      },
+      {
+        "球队对阵": "沙尔克04 vs 美因茨 [全数据]",
+        "胜平负场景": "均衡（不强制方向）",
+        "市场概率": "43.2%",
+        "比分×2及概率": "1:1 (11.3%) / 1:2 (9.4%)",
+        "半全场×2及概率": "客/客 (30.1%) / 主/主 (14.5%)",
+        "总进球及概率": "2球 (23.0%)"
+      },
+      {
+        "球队对阵": "汉堡 vs 斯图加特 [全数据]",
+        "胜平负场景": "均衡（不强制方向）",
+        "市场概率": "55.0%",
+        "比分×2及概率": "1:2 (8.7%) / 1:1 (7.2%)",
+        "半全场×2及概率": "客/客 (34.1%) / 平/客 (15.9%)",
+        "总进球及概率": "3球 (19.9%)"
+      },
+      {
+        "球队对阵": "柏林联合 vs 多特蒙德 [全数据]",
+        "胜平负场景": "客胜（确认）",
+        "市场概率": "61.5%",
+        "比分×2及概率": "1:2 (9.9%) / 0:2 (9.6%)",
+        "半全场×2及概率": "客/客 (34.9%) / 平/客 (20.1%)",
+        "总进球及概率": "3球 (22.3%)"
+      },
+      {
+        "球队对阵": "布伦特 vs 利物浦 [全数据]",
+        "胜平负场景": "均衡（不强制方向）",
+        "市场概率": "40.5%",
+        "比分×2及概率": "1:1 (12.8%) / 1:0 (10.7%)",
+        "半全场×2及概率": "客/客 (19.7%) / 平/主 (18.2%)",
+        "总进球及概率": "2球 (25.6%)"
+      },
+      {
+        "球队对阵": "曼城 vs 伊普斯 [全数据]",
+        "胜平负场景": "主胜（确认）",
+        "市场概率": "79.1%",
+        "比分×2及概率": "3:1 (7.2%) / 4:1 (6.5%)",
+        "半全场×2及概率": "主/主 (45.5%) / 平/主 (19.3%)",
+        "总进球及概率": "5球 (17.7%)"
+      },
+      {
+        "球队对阵": "鹿岛鹿角 vs 长崎航海 [全数据]",
+        "胜平负场景": "主胜（确认）",
+        "市场概率": "62.8%",
+        "比分×2及概率": "1:0 (12.1%) / 2:0 (11.5%)",
+        "半全场×2及概率": "主/主 (31.2%) / 平/主 (23.7%)",
+        "总进球及概率": "2球 (24.2%)"
+      },
+      {
+        "球队对阵": "富勒姆 vs 赫尔城 [部分增强]",
+        "胜平负场景": "主胜（确认）",
+        "市场概率": "60.6%",
+        "比分×2及概率": "1:0 (14.0%) / 2:0 (11.9%)",
+        "半全场×2及概率": "主/主 (31.3%) / 平/主 (24.1%)",
+        "总进球及概率": "2球 (25.6%)"
+      },
+      {
+        "球队对阵": "比利亚雷 vs 埃尔切 [全数据]",
+        "胜平负场景": "主胜（确认）",
+        "市场概率": "67.6%",
+        "比分×2及概率": "1:0 (12.1%) / 2:0 (11.1%)",
+        "半全场×2及概率": "主/主 (33.4%) / 平/主 (21.6%)",
+        "总进球及概率": "2球 (24.4%)"
+      },
+      {
+        "球队对阵": "斯特拉斯 vs 巴黎圣曼 [10027]",
+        "胜平负场景": "客胜（确认）",
+        "市场概率": "67.6%",
+        "比分×2及概率": "0:2 (9.8%) / 1:2 (9.8%)",
+        "半全场×2及概率": "客/客 (45.1%) / 平/客 (18.5%)",
+        "总进球及概率": "3球 (22.1%)"
+      },
+      {
+        "球队对阵": "博洛尼亚 vs 国际米兰 [全数据]",
+        "胜平负场景": "客胜（确认）",
+        "市场概率": "61.1%",
+        "比分×2及概率": "0:2 (11.0%) / 0:1 (9.7%)",
+        "半全场×2及概率": "客/客 (36.9%) / 平/客 (20.4%)",
+        "总进球及概率": "3球 (22.3%)"
+      },
+      {
+        "球队对阵": "纽卡斯尔 vs 维拉 [全数据]",
+        "胜平负场景": "均衡（不强制方向）",
+        "市场概率": "45.0%",
+        "比分×2及概率": "1:1 (11.2%) / 2:1 (8.5%)",
+        "半全场×2及概率": "主/主 (23.0%) / 客/客 (19.3%)",
+        "总进球及概率": "2球 (22.5%)"
+      },
+      {
+        "球队对阵": "贝蒂斯 vs 巴萨 [10027]",
+        "胜平负场景": "客胜（确认）",
+        "市场概率": "69.2%",
+        "比分×2及概率": "1:2 (9.4%) / 0:2 (8.5%)",
+        "半全场×2及概率": "客/客 (46.9%) / 平/客 (17.9%)",
+        "总进球及概率": "3球 (21.3%)"
+      },
+      {
+        "球队对阵": "特尔斯达 vs 费耶诺德 [全数据]",
+        "胜平负场景": "客胜（确认）",
+        "市场概率": "72.0%",
+        "比分×2及概率": "0:2 (14.3%) / 0:1 (12.7%)",
+        "半全场×2及概率": "客/客 (48.2%) / 平/客 (17.8%)",
+        "总进球及概率": "2球 (23.4%)"
+      },
+      {
+        "球队对阵": "罗马 vs 热那亚 [全数据]",
+        "胜平负场景": "主胜（确认）",
+        "市场概率": "68.1%",
+        "比分×2及概率": "1:0 (12.7%) / 2:0 (12.5%)",
+        "半全场×2及概率": "主/主 (36.2%) / 平/主 (23.7%)",
+        "总进球及概率": "2球 (24.2%)"
+      },
+      {
+        "球队对阵": "巴伦西亚 vs 毕尔巴鄂 [部分增强]",
+        "胜平负场景": "均衡（不强制方向）",
+        "市场概率": "43.7%",
+        "比分×2及概率": "0:1 (13.3%) / 1:1 (12.9%)",
+        "半全场×2及概率": "客/客 (25.8%) / 平/平 (18.6%)",
+        "总进球及概率": "2球 (26.5%)"
+      },
+      {
+        "球队对阵": "蔚山现代 vs 富川FC [10027]",
+        "胜平负场景": "主胜（确认）",
+        "市场概率": "58.2%",
+        "比分×2及概率": "1:0 (12.1%) / 1:1 (10.9%)",
+        "半全场×2及概率": "主/主 (31.5%) / 平/主 (23.3%)",
+        "总进球及概率": "2球 (24.5%)"
+      },
+      {
+        "球队对阵": "新英格兰 vs 芝加哥 [10027]",
+        "胜平负场景": "均衡（不强制方向）",
+        "市场概率": "42.2%",
+        "比分×2及概率": "1:1 (11.2%) / 2:1 (8.9%)",
+        "半全场×2及概率": "主/主 (21.5%) / 客/客 (20.2%)",
+        "总进球及概率": "2球 (22.4%)"
+      },
+      {
+        "球队对阵": "中央海岸 vs 纽喷气机 [部分增强]",
+        "胜平负场景": "均衡（不强制方向）",
+        "市场概率": "51.2%",
+        "比分×2及概率": "1:1 (11.1%) / 1:2 (9.6%)",
+        "半全场×2及概率": "客/客 (30.9%) / 平/客 (15.9%)",
+        "总进球及概率": "2球 (23.1%)"
+      },
+      {
+        "球队对阵": "柏太阳神 vs 名古屋鲸 [全数据]",
+        "胜平负场景": "主胜（确认）",
+        "市场概率": "59.4%",
+        "比分×2及概率": "2:1 (8.8%) / 3:1 (7.4%)",
+        "半全场×2及概率": "主/主 (34.2%) / 平/主 (18.2%)",
+        "总进球及概率": "3球 (19.8%)"
+      },
+      {
+        "球队对阵": "宫崎牛鸟 vs 磐田喜悦 [全数据]",
+        "胜平负场景": "均衡（不强制方向）",
+        "市场概率": "37.9%",
+        "比分×2及概率": "1:1 (11.5%) / 2:1 (9.0%)",
+        "半全场×2及概率": "客/客 (23.5%) / 主/主 (19.9%)",
+        "总进球及概率": "2球 (23.1%)"
+      },
+      {
+        "球队对阵": "埃弗顿 vs 切尔西 [全数据]",
+        "胜平负场景": "均衡（不强制方向）",
+        "市场概率": "45.2%",
+        "比分×2及概率": "1:1 (13.0%) / 0:1 (11.8%)",
+        "半全场×2及概率": "客/客 (22.1%) / 平/平 (18.1%)",
+        "总进球及概率": "2球 (26.1%)"
+      },
+      {
+        "球队对阵": "米尔沃尔 vs 林肯城 [全数据]",
+        "胜平负场景": "均衡（不强制方向）",
+        "市场概率": "55.3%",
+        "比分×2及概率": "1:0 (12.0%) / 1:1 (11.7%)",
+        "半全场×2及概率": "主/主 (27.4%) / 平/主 (20.5%)",
+        "总进球及概率": "2球 (25.0%)"
+      },
+      {
+        "球队对阵": "西班牙人 vs 马竞 [10027]",
+        "胜平负场景": "客胜（确认）",
+        "市场概率": "57.9%",
+        "比分×2及概率": "0:1 (12.1%) / 1:1 (10.9%)",
+        "半全场×2及概率": "客/客 (37.5%) / 平/客 (18.8%)",
+        "总进球及概率": "2球 (24.5%)"
+      }
+    ],
+    "render_rule": "必须按6列完整输出；球队对阵后必须标注[全数据]、[部分增强]或[10027]；全数据=双方外部SHOTS+RESULT_STABILITY+HALF_TIMING均满足质量门槛并进入对应计算；部分增强=至少一个外部增强组满足质量门槛并已进入Stable计算，继续使用10027作为主锚；10027=没有任何可用外部增强数据。"
+  },
+  "display_rows": [
+    {
+      "球队对阵": "麦克阿瑟 vs 珀斯 [部分增强]",
+      "胜平负场景": "均衡（不强制方向）",
+      "市场概率": "52.1%",
+      "比分×2及概率": "1:1 (11.3%) / 2:1 (9.5%)",
+      "半全场×2及概率": "主/主 (25.5%) / 平/主 (19.5%)",
+      "总进球及概率": "2球 (23.2%)"
+    },
+    {
+      "球队对阵": "威尼斯 vs 那不勒斯 [部分增强]",
+      "胜平负场景": "客胜（均衡）",
+      "市场概率": "56.8%",
+      "比分×2及概率": "0:1 (11.0%) / 1:1 (10.8%)",
+      "半全场×2及概率": "客/客 (35.9%) / 平/客 (17.9%)",
+      "总进球及概率": "2球 (23.8%)"
+    },
+    {
+      "球队对阵": "赫尔辛基 vs 赫尔火花 [10027]",
+      "胜平负场景": "主胜（确认）",
+      "市场概率": "65.7%",
+      "比分×2及概率": "2:0 (11.0%) / 1:0 (10.5%)",
+      "半全场×2及概率": "主/主 (36.5%) / 平/主 (24.1%)",
+      "总进球及概率": "2球 (22.4%)"
+    },
+    {
+      "球队对阵": "埃沃斯堡 vs 奥格斯堡 [全数据]",
+      "胜平负场景": "均衡（不强制方向）",
+      "市场概率": "39.2%",
+      "比分×2及概率": "1:1 (11.6%) / 1:2 (8.6%)",
+      "半全场×2及概率": "客/客 (21.5%) / 主/主 (18.1%)",
+      "总进球及概率": "2球 (23.1%)"
+    },
+    {
+      "球队对阵": "不来梅 vs 帕德博恩 [全数据]",
+      "胜平负场景": "均衡（不强制方向）",
+      "市场概率": "56.4%",
+      "比分×2及概率": "1:1 (10.7%) / 2:1 (9.7%)",
+      "半全场×2及概率": "主/主 (24.7%) / 平/主 (21.3%)",
+      "总进球及概率": "3球 (22.4%)"
+    },
+    {
+      "球队对阵": "沙尔克04 vs 美因茨 [全数据]",
+      "胜平负场景": "均衡（不强制方向）",
+      "市场概率": "43.2%",
+      "比分×2及概率": "1:1 (11.3%) / 1:2 (9.4%)",
+      "半全场×2及概率": "客/客 (30.1%) / 主/主 (14.5%)",
+      "总进球及概率": "2球 (23.0%)"
+    },
+    {
+      "球队对阵": "汉堡 vs 斯图加特 [全数据]",
+      "胜平负场景": "均衡（不强制方向）",
+      "市场概率": "55.0%",
+      "比分×2及概率": "1:2 (8.7%) / 1:1 (7.2%)",
+      "半全场×2及概率": "客/客 (34.1%) / 平/客 (15.9%)",
+      "总进球及概率": "3球 (19.9%)"
+    },
+    {
+      "球队对阵": "柏林联合 vs 多特蒙德 [全数据]",
+      "胜平负场景": "客胜（确认）",
+      "市场概率": "61.5%",
+      "比分×2及概率": "1:2 (9.9%) / 0:2 (9.6%)",
+      "半全场×2及概率": "客/客 (34.9%) / 平/客 (20.1%)",
+      "总进球及概率": "3球 (22.3%)"
+    },
+    {
+      "球队对阵": "布伦特 vs 利物浦 [全数据]",
+      "胜平负场景": "均衡（不强制方向）",
+      "市场概率": "40.5%",
+      "比分×2及概率": "1:1 (12.8%) / 1:0 (10.7%)",
+      "半全场×2及概率": "客/客 (19.7%) / 平/主 (18.2%)",
+      "总进球及概率": "2球 (25.6%)"
+    },
+    {
+      "球队对阵": "曼城 vs 伊普斯 [全数据]",
+      "胜平负场景": "主胜（确认）",
+      "市场概率": "79.1%",
+      "比分×2及概率": "3:1 (7.2%) / 4:1 (6.5%)",
+      "半全场×2及概率": "主/主 (45.5%) / 平/主 (19.3%)",
+      "总进球及概率": "5球 (17.7%)"
+    },
+    {
+      "球队对阵": "鹿岛鹿角 vs 长崎航海 [全数据]",
+      "胜平负场景": "主胜（确认）",
+      "市场概率": "62.8%",
+      "比分×2及概率": "1:0 (12.1%) / 2:0 (11.5%)",
+      "半全场×2及概率": "主/主 (31.2%) / 平/主 (23.7%)",
+      "总进球及概率": "2球 (24.2%)"
+    },
+    {
+      "球队对阵": "富勒姆 vs 赫尔城 [部分增强]",
+      "胜平负场景": "主胜（确认）",
+      "市场概率": "60.6%",
+      "比分×2及概率": "1:0 (14.0%) / 2:0 (11.9%)",
+      "半全场×2及概率": "主/主 (31.3%) / 平/主 (24.1%)",
+      "总进球及概率": "2球 (25.6%)"
+    },
+    {
+      "球队对阵": "比利亚雷 vs 埃尔切 [全数据]",
+      "胜平负场景": "主胜（确认）",
+      "市场概率": "67.6%",
+      "比分×2及概率": "1:0 (12.1%) / 2:0 (11.1%)",
+      "半全场×2及概率": "主/主 (33.4%) / 平/主 (21.6%)",
+      "总进球及概率": "2球 (24.4%)"
+    },
+    {
+      "球队对阵": "斯特拉斯 vs 巴黎圣曼 [10027]",
+      "胜平负场景": "客胜（确认）",
+      "市场概率": "67.6%",
+      "比分×2及概率": "0:2 (9.8%) / 1:2 (9.8%)",
+      "半全场×2及概率": "客/客 (45.1%) / 平/客 (18.5%)",
+      "总进球及概率": "3球 (22.1%)"
+    },
+    {
+      "球队对阵": "博洛尼亚 vs 国际米兰 [全数据]",
+      "胜平负场景": "客胜（确认）",
+      "市场概率": "61.1%",
+      "比分×2及概率": "0:2 (11.0%) / 0:1 (9.7%)",
+      "半全场×2及概率": "客/客 (36.9%) / 平/客 (20.4%)",
+      "总进球及概率": "3球 (22.3%)"
+    },
+    {
+      "球队对阵": "纽卡斯尔 vs 维拉 [全数据]",
+      "胜平负场景": "均衡（不强制方向）",
+      "市场概率": "45.0%",
+      "比分×2及概率": "1:1 (11.2%) / 2:1 (8.5%)",
+      "半全场×2及概率": "主/主 (23.0%) / 客/客 (19.3%)",
+      "总进球及概率": "2球 (22.5%)"
+    },
+    {
+      "球队对阵": "贝蒂斯 vs 巴萨 [10027]",
+      "胜平负场景": "客胜（确认）",
+      "市场概率": "69.2%",
+      "比分×2及概率": "1:2 (9.4%) / 0:2 (8.5%)",
+      "半全场×2及概率": "客/客 (46.9%) / 平/客 (17.9%)",
+      "总进球及概率": "3球 (21.3%)"
+    },
+    {
+      "球队对阵": "特尔斯达 vs 费耶诺德 [全数据]",
+      "胜平负场景": "客胜（确认）",
+      "市场概率": "72.0%",
+      "比分×2及概率": "0:2 (14.3%) / 0:1 (12.7%)",
+      "半全场×2及概率": "客/客 (48.2%) / 平/客 (17.8%)",
+      "总进球及概率": "2球 (23.4%)"
+    },
+    {
+      "球队对阵": "罗马 vs 热那亚 [全数据]",
+      "胜平负场景": "主胜（确认）",
+      "市场概率": "68.1%",
+      "比分×2及概率": "1:0 (12.7%) / 2:0 (12.5%)",
+      "半全场×2及概率": "主/主 (36.2%) / 平/主 (23.7%)",
+      "总进球及概率": "2球 (24.2%)"
+    },
+    {
+      "球队对阵": "巴伦西亚 vs 毕尔巴鄂 [部分增强]",
+      "胜平负场景": "均衡（不强制方向）",
+      "市场概率": "43.7%",
+      "比分×2及概率": "0:1 (13.3%) / 1:1 (12.9%)",
+      "半全场×2及概率": "客/客 (25.8%) / 平/平 (18.6%)",
+      "总进球及概率": "2球 (26.5%)"
+    },
+    {
+      "球队对阵": "蔚山现代 vs 富川FC [10027]",
+      "胜平负场景": "主胜（确认）",
+      "市场概率": "58.2%",
+      "比分×2及概率": "1:0 (12.1%) / 1:1 (10.9%)",
+      "半全场×2及概率": "主/主 (31.5%) / 平/主 (23.3%)",
+      "总进球及概率": "2球 (24.5%)"
+    },
+    {
+      "球队对阵": "新英格兰 vs 芝加哥 [10027]",
+      "胜平负场景": "均衡（不强制方向）",
+      "市场概率": "42.2%",
+      "比分×2及概率": "1:1 (11.2%) / 2:1 (8.9%)",
+      "半全场×2及概率": "主/主 (21.5%) / 客/客 (20.2%)",
+      "总进球及概率": "2球 (22.4%)"
+    },
+    {
+      "球队对阵": "中央海岸 vs 纽喷气机 [部分增强]",
+      "胜平负场景": "均衡（不强制方向）",
+      "市场概率": "51.2%",
+      "比分×2及概率": "1:1 (11.1%) / 1:2 (9.6%)",
+      "半全场×2及概率": "客/客 (30.9%) / 平/客 (15.9%)",
+      "总进球及概率": "2球 (23.1%)"
+    },
+    {
+      "球队对阵": "柏太阳神 vs 名古屋鲸 [全数据]",
+      "胜平负场景": "主胜（确认）",
+      "市场概率": "59.4%",
+      "比分×2及概率": "2:1 (8.8%) / 3:1 (7.4%)",
+      "半全场×2及概率": "主/主 (34.2%) / 平/主 (18.2%)",
+      "总进球及概率": "3球 (19.8%)"
+    },
+    {
+      "球队对阵": "宫崎牛鸟 vs 磐田喜悦 [全数据]",
+      "胜平负场景": "均衡（不强制方向）",
+      "市场概率": "37.9%",
+      "比分×2及概率": "1:1 (11.5%) / 2:1 (9.0%)",
+      "半全场×2及概率": "客/客 (23.5%) / 主/主 (19.9%)",
+      "总进球及概率": "2球 (23.1%)"
+    },
+    {
+      "球队对阵": "埃弗顿 vs 切尔西 [全数据]",
+      "胜平负场景": "均衡（不强制方向）",
+      "市场概率": "45.2%",
+      "比分×2及概率": "1:1 (13.0%) / 0:1 (11.8%)",
+      "半全场×2及概率": "客/客 (22.1%) / 平/平 (18.1%)",
+      "总进球及概率": "2球 (26.1%)"
+    },
+    {
+      "球队对阵": "米尔沃尔 vs 林肯城 [全数据]",
+      "胜平负场景": "均衡（不强制方向）",
+      "市场概率": "55.3%",
+      "比分×2及概率": "1:0 (12.0%) / 1:1 (11.7%)",
+      "半全场×2及概率": "主/主 (27.4%) / 平/主 (20.5%)",
+      "总进球及概率": "2球 (25.0%)"
+    },
+    {
+      "球队对阵": "西班牙人 vs 马竞 [10027]",
+      "胜平负场景": "客胜（确认）",
+      "市场概率": "57.9%",
+      "比分×2及概率": "0:1 (12.1%) / 1:1 (10.9%)",
+      "半全场×2及概率": "客/客 (37.5%) / 平/客 (18.8%)",
+      "总进球及概率": "2球 (24.5%)"
+    }
+  ],
+  "archive_path": "archive/hh520-20261017-1402-d8f1.json",
+  "message": "Prediction READY. Polling payload is compact; render the strict 6-column output_contract.display_rows. Full audit data is in archive_path.",
   "_action": {
     "request_id": "hh520-20261017-1402-d8f1",
     "repository": "ltaln/HH520-stable-V2",
