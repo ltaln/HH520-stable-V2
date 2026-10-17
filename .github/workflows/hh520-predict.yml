@@ -111,7 +111,26 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p _action_out
-          python main.py "$COMMAND" --output "_action_out/$REQUEST_ID.json"
+          # Keep the existing request_id and publish a lightweight heartbeat
+          # while the single Stable execution is still working.
+          python main.py "$COMMAND" --output "_action_out/$REQUEST_ID.json" &
+          prediction_pid=$!
+          (
+            while kill -0 "$prediction_pid" 2>/dev/null; do
+              sleep 180
+              if kill -0 "$prediction_pid" 2>/dev/null; then
+                python scripts/publish_action_status.py action-results "$REQUEST_ID" PENDING stable "stable_prediction" "Stable V3.5.1 is collecting and calculating. The final result has not been published yet." || true
+              fi
+            done
+          ) &
+          heartbeat_pid=$!
+          set +e
+          wait "$prediction_pid"
+          prediction_exit=$?
+          set -e
+          kill "$heartbeat_pid" 2>/dev/null || true
+          wait "$heartbeat_pid" 2>/dev/null || true
+          exit "$prediction_exit"
       - name: Inspect generated output
         if: always()
         run: |
