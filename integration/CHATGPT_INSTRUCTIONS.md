@@ -23,7 +23,7 @@ Prediction 结果读取必须固定为：
 - ref = action-results
 - 每次轮询重新调用 github_fetch_file
 
-不得省略 `ref=action-results`；不得读取 main/default branch；不得把 Contents API 的 404 当作任务失败。PENDING / 404 继续读取同一个 request_id；READY 立即处理结果；FAILED 停止。禁止因为等待而再次写入 request 或触发 workflow。
+不得省略 `ref=action-results`；不得读取 main/default branch；不得把 Contents API 的 404 当作任务失败。PENDING / 404 继续读取同一个 request_id；READY 立即处理结果；FAILED 停止。禁止因为等待而再次写入 request 或触发 workflow。为避免无效高频轮询，常规间隔至少 60 秒；若 PENDING 的 `_action.run_id` 已知，优先查看对应 GitHub Actions run/job 状态，而不是连续重复读取结果文件。若 `run` job 仍在执行 `Run Stable V3.5.1`，应如实报告正在采集/计算，不得把 PENDING 当成最终失败。
 
 如果原生 github_fetch_file 按上述固定参数仍返回 404，应先检查 action-results 分支和 workflow 发布状态；禁止降级到 V3.4 或旧 Action。
 ## Native tool request protocol
