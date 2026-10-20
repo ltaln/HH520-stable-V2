@@ -2,10 +2,10 @@
   "status": "PENDING",
   "kind": "stable",
   "request_id": "hh520-20261020-1050-e6b3c91a",
-  "stage": "workflow",
+  "stage": "stable_prediction",
   "run_id": "39361115348",
   "run_attempt": "1",
-  "message": "Workflow accepted and is still running.",
+  "message": "Stable V3.5.1 has started collection and calculation. The final result has not been published yet.",
   "_action": {
     "request_id": "hh520-20261020-1050-e6b3c91a",
     "repository": "ltaln/HH520-stable-V2",
